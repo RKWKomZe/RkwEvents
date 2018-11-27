@@ -1,0 +1,120 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+
+<table class="tx-rkw-events responsive" >
+
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
+        </td>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.salutation.I.{eventReservation.salutation}" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
+        </td>
+        <td>
+            {eventReservation.firstName}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.lastName" />
+        </td>
+        <td>
+            {eventReservation.lastName}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.company" />
+        </td>
+        <td>
+            {eventReservation.company}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.address" />
+        </td>
+        <td>
+            {eventReservation.address}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.zip" />
+        </td>
+        <td>
+            {eventReservation.zip}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.city" />
+        </td>
+        <td>
+            {eventReservation.city}
+        </td>
+    </tr>
+    <!-- <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.telephone" />
+        </td>
+        <td>
+            {eventReservation.telephone}
+        </td>
+    </tr> -->
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.email" />
+        </td>
+        <td>
+            {eventReservation.email}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />
+        </td>
+        <td>
+            <f:format.html>{eventReservation.remark}</f:format.html>
+        </td>
+    </tr>
+</table>
+
+<f:if condition="{eventReservation.addPerson -> f:count()} > 0">
+    <h3><f:translate key="tx_rkwevents_fluid.partials_eventreservation_properties.additionalParticipants" /></h3>
+    <div id="addedMember">
+        <f:for each="{eventReservation.addPerson}" as="addPerson">
+            <table class="tx-rkw-events-addedMember responsive" >
+                <tr>
+                    <td>
+                        <f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
+                    </td>
+                    <td>
+                        <f:translate key="tx_rkwevents_domain_model_eventreservation.salutation.I.{addPerson.txRkwregistrationGender}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
+                    </td>
+                    <td>
+                        {addPerson.firstName}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <f:translate key="tx_rkwevents_domain_model_eventreservation.lastName" />
+                    </td>
+                    <td>
+                        {addPerson.lastName}
+                    </td>
+                </tr>
+            </table>
+        </f:for>
+    </div>
+</f:if>
+

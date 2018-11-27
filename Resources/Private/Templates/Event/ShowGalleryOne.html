@@ -1,0 +1,16 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="main">
+    <f:if condition="<f:count>{event.gallery1}</f:count>" >
+
+        <h4 class="section-header h2">
+            <f:translate key="tx_rkwevents_fluid.templates_event_showGalleryOne.headline" />
+        </h4>
+
+        <f:render partial="Event/Gallery" arguments="{gallery:event.gallery1, settings:settings}" />
+
+    </f:if>
+
+
+</f:section>

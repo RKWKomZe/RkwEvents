@@ -1,0 +1,7 @@
+
+<f:for each="{event.sheets}" as="slideshare" iteration="iterator">
+	<f:if condition="{slideshare.html}">
+        <h4>{iterator.cycle}. {slideshare.title}</h4>
+        <f:format.raw>{slideshare.html}</f:format.raw>
+    </f:if>
+</f:for>

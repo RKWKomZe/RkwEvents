@@ -1,0 +1,15 @@
+<f:if condition="<f:count>{sortedEventList}</f:count>">
+	<f:then>
+		<div class="boxes-grid" id="tx-rkwevents-grid-section">
+			<f:render partial="Event/List" arguments="{_all}" />
+		</div>
+	</f:then>
+	<f:else>
+		<div class="no-search-results first-letter-normal content content-box">
+			<div class="csc-default csc-element-n1">
+				<h3><strong><f:translate key="tx_rkwevents_fluid.templates_ajax_list_list.noEventHeadline" extensionName="RkwEvents" /></strong></h3>
+				<p><f:translate key="tx_rkwevents_fluid.templates_ajax_list_list.noEventDescription" extensionName="RkwEvents" /></p>
+			</div>
+		</div>
+	</f:else>
+</f:if>

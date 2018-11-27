@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-07-15T15:28:16Z" product-name="rkw_events">
+		<header/>
+		<body>
+
+			<!-- tx_rkwevents_domain_model_event -->
+			<trans-unit id="tx_rkwevents_domain_model_event">
+				<source>RKW Events: Event</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.subtitle">
+				<source>Subtitle</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.start">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.end">
+				<source>End</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.latitude">
+				<source>Latitude</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.distance">
+                <source>Distance</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.testimonials">
+				<source>Testimonials (only for Series)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.target_group">
+				<source>Target Group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.schedule">
+				<source>Schedule as Table</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.partner">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.seats">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_reg">
+				<source>Price Regular (per Person)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_red">
+				<source>Price Reduced (per Person)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_condition">
+				<source>Price Reduced Condition</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax">
+				<source>Taxes</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax.I.0">
+				<source>Tax Excluded</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax.I.1">
+				<source>Tax Included</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax.I.2">
+				<source>No Taxes</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_required">
+				<source>Registration Required</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_end">
+				<source>Registration End</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link">
+				<source>External Registration Link</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.document_types">
+				<source>Document Types</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.department">
+                <source>Department</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.categories">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.series">
+				<source>Series</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.logos">
+				<source>Logos</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.currency">
+				<source>Currency</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.place">
+				<source>Location</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.online_event">
+                <source>Online Event</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.online_event.I.enabled">
+                <source>Event takes place online (no location)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.online_event_access_link">
+                <source>Online Event Access Link</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
+				<source>External Contacts (Display and E-Mail)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
+				<source>Internal Contacts (Display only)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.be_user" approved="yes">
+				<source>Backend User (E-Mail only)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.add_info">
+				<source>Schedule as File</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.presentations">
+				<source>Presentations</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.sheet">
+				<source>SlideShare</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.gallery1" approved="yes">
+				<source>Gallery 1 (public)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.gallery2" approved="yes">
+				<source>Gallery 2 (for registered users only)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.edit">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.add">
+				<source>Add</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reservations">
+				<source>Reservations</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.workshop1" approved="yes">
+				<source>Workshop 1</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.workshop2" approved="yes">
+				<source>Workshop 2</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.workshop3" approved="yes">
+				<source>Workshop 3</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.project">
+                <source>Project</source>
+            </trans-unit>	
+			<trans-unit id="tx_rkwevents_domain_model_event.reminder_mail_tstamp" approved="yes">
+				<source>Reminder mail timestamp</source>
+			</trans-unit>
+		   <trans-unit id="tx_rkwevents_domain_model_event.survey_before" approved="yes">
+				<source>Survey mail timestamp</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.survey_after" approved="yes">
+				<source>Survey before</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.survey_after_mail_tstamp" approved="yes">
+				<source>Survey after</source>
+			</trans-unit>
+
+
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata">
+				<source>Additional data</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_register">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery">
+				<source>Gallery and Sheets</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_reservation">
+				<source>Reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_workshop" approved="yes">
+				<source>Workshop</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_place_contact">
+				<source>Place and contact</source>
+			</trans-unit>
+
+
+
+			<!-- tx_rkwevents_domain_model_eventseries -->
+			<trans-unit id="tx_rkwevents_domain_model_eventseries">
+				<source>RKW Events: Event Series</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.rota">
+				<source>Rota</source>
+			</trans-unit>
+
+
+
+			<!-- tx_rkwevents_domain_model_eventplace -->
+			<trans-unit id="tx_rkwevents_domain_model_eventplace">
+				<source>RKW Events: Event Place</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.short">
+				<source>Short</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.latitude">
+				<source>Latitude</source>
+			</trans-unit>
+
+
+
+			<!-- tx_rkwevents_domain_model_eventcontact -->
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact">
+				<source>RKW Events: External Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.0">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.1">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.99">
+				<source>---</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.company">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.telephone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.fax">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.language">
+				<source>Language</source>
+			</trans-unit>
+
+
+
+			<!-- tx_rkwevents_domain_model_eventorganizer -->
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer">
+				<source>RKW Events: Organizer</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.0">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.1">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.99">
+				<source>---</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.company">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.fax">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.email">
+				<source>Email</source>
+			</trans-unit>			
+
+
+			<!-- tx_rkwevents_domain_model_eventsheet -->
+			<trans-unit id="tx_rkwevents_domain_model_eventsheet">
+				<source>RKW Events: Sheets</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventsheet.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventsheet.html">
+				<source>HTML</source>
+			</trans-unit>
+
+
+
+			<!-- tx_rkwevents_domain_model_eventgallery -->
+			<trans-unit id="tx_rkwevents_domain_model_eventgallery">
+				<source>RKW Events: Gallery</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventgallery.images">
+				<source>Images</source>
+			</trans-unit>
+
+
+			<!-- tx_rkwevents_domain_model_eventreservation-->
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation">
+				<source>RKW Events: Reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.remark">
+				<source>Remark</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.fe_user">
+				<source>Frontend User</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.add_person">
+				<source>Add Person</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.server_host" approved="yes">
+				<source>Domain on registration</source>
+			</trans-unit>
+
+
+			<!-- tx_rkwevents_domain_model_eventreservationaddperson -->
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson">
+				<source>RKW Events: Reservation Add Person</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation">
+				<source>Salutation</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.0" approved="yes">
+                <source>Mr.</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.1" approved="yes">
+                <source>Mrs.</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.99" approved="yes">
+                <source>---</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+
+
+			<!-- tx_rkwevents_domain_model_eventreservationaddress -->
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress" approved="yes">
+				<source>RKW Events: Reservation Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation" approved="yes">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.0" approved="yes">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.1" approved="yes">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.99" approved="yes">
+				<source>---</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.first_name" approved="yes">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.last_name" approved="yes">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.company" approved="yes">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.address" approved="yes">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.zip" approved="yes">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.city" approved="yes">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.phone" approved="yes">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.email" approved="yes">
+				<source>Email</source>
+			</trans-unit>
+
+
+			<!-- tx_rkwevents_domain_model_eventworkshop -->
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop" approved="yes">
+				<source>RKW Events: Event workshop</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.title" approved="yes">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.start" approved="yes">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.end" approved="yes">
+				<source>End</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.description" approved="yes">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.type" approved="yes">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.previous_experience" approved="yes">
+				<source>Previous experience</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.objective" approved="yes">
+				<source>Objective</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.speaker" approved="yes">
+				<source>Speaker</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.available_seats" approved="yes">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.reg_required" approved="yes">
+				<source>Registration Required</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.costs" approved="yes">
+				<source>Price (per Person)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.registered_frontend_users" approved="yes">
+				<source>Registered FrontendUsers</source>
+			</trans-unit>
+
+
+			<!-- fe_users -->
+			<trans-unit id="fe_users.tx_rkwevents_salutation" approved="yes">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_salutation.I.99" approved="yes">
+				<source>--</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_salutation.I.0" approved="yes">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_salutation.I.1" approved="yes">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_firstName" approved="yes">
+                <source>First name</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_lastName" approved="yes">
+                <source>Last name</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_company" approved="yes">
+                <source>Company</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_address" approved="yes">
+                <source>Address</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_zip" approved="yes">
+                <source>ZIP</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_city" approved="yes">
+                <source>city</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_telephone" approved="yes">
+                <source>Phone</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_email" approved="yes">
+                <source>Email</source>
+            </trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_remark" approved="yes">
+                <source>Remarks</source>
+            </trans-unit>
+
+
+            <!-- flexform -->
+			<trans-unit id="flexform.event.general">
+				<source>General settings</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.options">
+				<source>Options</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.archive">
+				<source>Archive</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.detail">
+				<source>Detail view</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.detailAdditional">
+				<source>Detail view additional information</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.detailGallery1">
+				<source>Detail view gallery 1</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.detailGallery2">
+				<source>Detail view gallery 2</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.register">
+				<source>New Registration</source>
+			</trans-unit>
+			<trans-unit id="flexform.event.MyEvents">
+				<source>My events</source>
+			</trans-unit>
+            <trans-unit id="flexform.event.noFilters">
+                <source>Don't show filters</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.project">
+                <source>Project</source>
+            </trans-unit>
+
+
+
+        </body>
+	</file>
+</xliff>

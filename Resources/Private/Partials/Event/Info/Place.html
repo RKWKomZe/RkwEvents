@@ -1,0 +1,23 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+
+<div class="info-table--tr">
+    <div class="info-table--th">
+        <f:translate key="tx_rkwevents_fluid.partials_event_info_place.name" />
+    </div>
+    <div class="info-table--td">
+        {event.place.name}
+
+        <!-- do not change this line. We got some not wanted whitespaces, if you would change here something -->
+        <f:if condition="{event.place.address}"><br>{event.place.address}</f:if><f:if condition="{event.place.zip}">, {event.place.zip}</f:if>
+
+        <f:if condition="{event.place.city}">
+            {event.place.city}
+        </f:if>
+
+        <f:if condition="{event.place.country.uid} != 54">
+            <f:if condition="{event.place.country.shortNameLocal}">
+                , {event.place.country.shortNameLocal}
+            </f:if>
+        </f:if>
+    </div>
+</div>

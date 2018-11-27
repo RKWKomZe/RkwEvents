@@ -1,0 +1,31 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+    <f:flashMessages renderMode="div" />
+
+    <f:render partial="Event/Properties" arguments="{_all}" />
+
+    <!-- Registration link -->
+    <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
+
+    <f:render partial="Event/AdditionalData" arguments="{_all}" />
+    <f:render partial="Event/Schedule" arguments="{_all}" />
+
+    <f:if condition="{event.schedule}">
+        <!-- Registration link -->
+        <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
+    </f:if>
+
+</f:section>

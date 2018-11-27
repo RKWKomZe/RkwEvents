@@ -1,0 +1,43 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+
+
+<f:section name="Main">
+
+    <div class="info-table--tr">
+        <div class="info-table--th">
+            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costs" />:
+        </div>
+        <div class="info-table--td">
+            <f:if condition="{event.costsReg}">
+                <f:then>
+                    {event.costsReg -> f:format.number(decimals:"2", decimalSeparator:"," , thousandsSeparator:'.')} {event.currency.symbolLeft} <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" />
+                    <f:if condition="{event.costsRed}">
+                        <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsRegular" /> / {event.costsRed -> f:format.number(decimals:"2", decimalSeparator:"," , thousandsSeparator:'.')} {event.currency.symbolLeft} <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" />
+                        <f:if condition="{event.costsRedCondition}"><f:then>{event.costsRedCondition}</f:then><f:else><f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsReduced" /></f:else></f:if>
+                    </f:if>
+
+                    <f:render section="Taxes" arguments="{_all}" />
+
+                </f:then>
+                <f:else>
+                    <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsFree" />
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+</f:section>
+
+
+<f:section name="Taxes">
+
+	<f:if condition="{event.costsTax} == 0">
+		(<f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsTaxExclusive" />)
+	</f:if>
+	<f:if condition="{event.costsTax} == 1">
+		(<f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsTaxInclusive" />)
+	</f:if>
+	<f:if condition="{event.costsTax} == 2">
+		(<f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsTaxFree" />)
+	</f:if>
+
+</f:section>

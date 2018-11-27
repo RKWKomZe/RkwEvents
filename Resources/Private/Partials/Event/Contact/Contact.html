@@ -1,0 +1,35 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+{namespace rkwBasics=RKW\RkwBasics\ViewHelpers}
+
+
+<f:if condition="<rkw:Or or1='{event.internalContact}' or2='{event.externalContact}' />">
+
+	<tr>
+		<th>
+			<f:translate key="tx_rkwevents_fluid.partials_event_contact.contact" />
+		</th>
+
+
+		<td>
+			<f:if condition="<rkw:extensionIsLoaded extensionName='rkw_authors' />">
+				<f:if condition="{event.internalContact}">
+					<p>
+						<f:for each="<rkwBasics:objectStorageSort objectStorage='{event.internalContact}' sortBy='lastName' />" as="contact" iteration="iterator">
+							<f:render partial="Event/Contact/ContactSub" section="Internal" arguments="{_all}" />
+						</f:for>
+					</p>
+				</f:if>
+			</f:if>
+
+			<f:if condition="{event.externalContact}">
+				<p>
+					<f:for each="<rkwBasics:objectStorageSort objectStorage='{event.externalContact}' sortBy='lastName' />" as="contact" iteration="iterator">
+						<f:render partial="Event/Contact/ContactSub" section="External" arguments="{_all}" />
+					</f:for>
+				</p>
+			</f:if>
+		</td>
+	</tr>
+</f:if>
+
+

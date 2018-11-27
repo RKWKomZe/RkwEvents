@@ -1,0 +1,24 @@
+<div class="galleria">
+	<f:for each="{gallery}" as="image">
+		<f:image src="{image.uid}" treatIdAsReference="1" title="{image.title}" alt="{image.alternative}" maxWidth="1000" maxHeight="1000" />
+	</f:for>
+</div>
+
+<f:if condition="{settings.includeGallery} == 1">
+	<script>
+		try {
+			document.addEventListener("DOMContentLoaded", function (event) {
+
+				Galleria.loadTheme('<f:uri.resource path="Galleria/themes/classic/galleria.classic.min.js" />');
+				Galleria.configure({
+					imageCrop: true,
+					transition: 'fade'
+				});
+				Galleria.run('.galleria');
+
+			});
+		} catch (err) {
+			// do nothing
+		}
+	</script>
+</f:if>

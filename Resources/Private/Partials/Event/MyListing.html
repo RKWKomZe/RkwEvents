@@ -1,0 +1,35 @@
+
+<!-- upcoming events -->
+<f:if condition="{myReservations}">
+	<f:then>
+		<table class="tx-events-myreservations" >
+			<f:for each="{myReservations}" as="eventReservation">
+				<f:if condition="{eventReservation.event}">
+					<tr>
+						<td>
+							<strong>{eventReservation.event.title}</strong>
+							<br>
+							<f:if condition="{eventReservation.event.onlineEvent}">
+								<f:then>
+									<f:translate key="tx_rkwevents_fluid.partials_event_myListing.webinar" />
+								</f:then>
+								<f:else>
+									{eventReservation.event.place.address},
+									{eventReservation.event.place.zip} {eventReservation.event.place.city}
+								</f:else>
+							</f:if>
+							<br>
+							<f:render partial="Event/Options" arguments="{_all}" />
+						</td>
+					</tr>
+				</f:if>
+			</f:for>
+		</table>
+	</f:then>
+	<f:else>
+		<p class="text-message">
+			<f:translate key="tx_rkwevents_fluid.partials_event_myListing.noEventPlanned" />
+			<br/><f:link.page pageUid="{settings.listPid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_event_myListing.findMore" /></f:link.page>
+		</p>
+	</f:else>
+</f:if>

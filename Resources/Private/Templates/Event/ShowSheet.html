@@ -1,0 +1,36 @@
+{namespace dv=RKW\RkwEvents\ViewHelpers}
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+	<f:flashMessages renderMode="div" />
+
+	<f:render partial="Event/Properties" arguments="{_all}" />
+
+	<p id="slide-share">
+		<f:link.action action="show" pageUid="{settings.showPid}" arguments="{event:event}" class="button secondary">
+			<span><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.back" /></span>
+		</f:link.action>
+	</p>
+
+	<h2><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.headline" /></h2>
+
+
+	<f:render partial="EventSheet/Properties" arguments="{_all}" />
+
+	<p>
+		<f:link.action action="show" pageUid="{settings.showPid}" arguments="{event:event}" class="button secondary">
+			<span><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.back" /></span>
+		</f:link.action>
+	</p>
+</f:section>

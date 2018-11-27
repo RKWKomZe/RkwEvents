@@ -1,0 +1,31 @@
+<!-- show only if one or more events are given -->
+<f:if condition="<f:count>{eventList}</f:count>">
+	<div class="similar-events">
+
+		<!-- alternative header if shown main event lies in the past -->
+		<f:if condition="{givenEvent.start} < <f:format.date date='now'/>">
+			<f:then>
+				<h5>
+					<f:translate key="tx_rkwevents_fluid.template_event_seriesproposal.header_archive" />
+				</h5>
+			</f:then>
+			<f:else>
+				<h5>
+					<f:translate key="tx_rkwevents_fluid.template_event_seriesproposal.header_running" />
+				</h5>
+			</f:else>
+		</f:if>
+
+		<!-- event list without shown main event (filtered by given series of shown event) -->
+		<f:for each="{eventList}" as="event">
+			<f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" class="box {event.department.cssClass} event big" title="{event.title}" target="_blank">
+				<header>
+					<p> {event.title} </p>
+				</header>
+
+				<p class="icon-calendar">{event.documentType.name}</p>
+			</f:link.action>
+		</f:for>
+
+	</div>
+</f:if>

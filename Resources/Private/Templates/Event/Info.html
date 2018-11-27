@@ -1,0 +1,45 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+{namespace rkwBasics=RKW\RkwBasics\ViewHelpers}
+
+
+<!-- Infobox events -->
+<div class="project-details info-box">
+
+
+	<div class="box-content full">
+
+		<!-- Short info -->
+		<div class="project-teaser">
+
+            <div class="info-table">
+
+                <!-- Time -->
+                <f:render partial="Event/Info/Time" arguments="{_all}" />
+
+                <!-- Place -->
+				<f:if condition="{event.onlineEvent} != 1">
+					<f:render partial="Event/Info/Place" arguments="{_all}" />
+				</f:if>
+
+                <!-- Type-->
+                <f:render partial="Event/Info/Type" arguments="{_all}" />
+
+                <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
+
+                    <!-- Costs -->
+                    <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
+
+                    <!-- Seats
+                    <f:render partial="Event/Info/Seats" arguments="{_all}" />
+                    -->
+                </f:if>
+            </div>
+
+		</div>
+
+		<!-- Register -->
+		<div class="buttons-set">
+			<f:render partial="Event/Registration" arguments="{event:event, isReservationPage: isReservationPage, additionalButtonClass:'download-button'}" />
+		</div>
+	</div>
+</div>

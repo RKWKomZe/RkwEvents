@@ -1,0 +1,30 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<f:layout name="Default" />
+
+
+<f:section name="main">
+
+    <f:if condition="<f:count>{event.gallery2}</f:count>" >
+
+        <f:be.security.ifAuthenticated>
+            <f:then>
+                <h4 class="section-header h2">
+                    <f:translate key="tx_rkwevents_fluid.templates_event_showGalleryTwo.headline" />
+                </h4>
+
+                <f:render partial="Event/Gallery" arguments="{gallery:event.gallery2, settings:settings}" />
+            </f:then>
+
+            <f:else>
+                <f:if condition="<rkw:ProofUserRegisterForEvent event='{event}' frontendUser='{frontendUser}' />">
+                    <h4 class="section-header h2">
+                        <f:translate key="tx_rkwevents_fluid.templates_event_showGalleryTwo.headline" />
+                    </h4>
+
+                    <f:render partial="Event/Gallery" arguments="{gallery:event.gallery2, settings:settings}" />
+                </f:if>
+            </f:else>
+        </f:be.security.ifAuthenticated>
+    </f:if>
+
+</f:section>

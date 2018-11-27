@@ -1,0 +1,12 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<f:if condition="{event.series}">
+	<p class="series">
+		<rkw:series series="{event.series}" />
+	</p>
+</f:if>
+<h1>
+	{event.title}
+</h1>
+<h2>
+	{event.subTitle}
+</h2>

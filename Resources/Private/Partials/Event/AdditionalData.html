@@ -1,0 +1,135 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+
+<table >
+
+	<f:if condition="<rkw:notFinishedEvents event='{event}' />">
+		<f:else>
+
+			<f:if condition="{event.presentations}">
+				<!-- Sheets -->
+				<f:if condition="<rkw:Or or1='{event.presentations}' or2='{event.sheets}' />">
+					<tr>
+						<th>
+							<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.presentations" />
+						</th>
+						<td>
+							<f:for each="{event.presentations}" as="presentation">
+								<p>
+									<a class="icon-file" href="{presentation.originalResource.publicUrl}" target="_blank" title="{presentation.originalResource.title}" >
+                                        <f:if condition="{presentation.originalResource.title}">
+                                            <f:then>
+                                                <span>{presentation.originalResource.title}</span>
+                                            </f:then>
+                                            <f:else>
+                                                <span><f:translate key="tx_rkwevents_fluid.partials_events_additionalData.download" /></span>
+                                            </f:else>
+                                        </f:if>
+									</a>
+								</p>
+							</f:for>
+
+							<f:if condition="<rkw:notFinishedEvents event='{event}' />">
+								<f:else>
+									<p>
+										<f:if condition="{event.sheets}">
+											<f:link.action action="showSheet" arguments="{event:event}" pageUid="{settings.sheetsForEventPid}" section="slide-share" class="button secondary">
+												<span><f:translate key="tx_rkwevents_fluid.partials_events_additionalData.slideshare" /></span>
+											</f:link.action>
+										</f:if>
+									</p>
+								</f:else>
+							</f:if>
+						</td>
+					</tr>
+				</f:if>
+			</f:if>
+		</f:else>
+	</f:if>
+
+	<!-- Downloads -->
+	<f:if condition="{event.addInfo}">
+		<tr>
+			<th>
+				<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.schedule" />
+			</th>
+			<td>
+				<f:for each="{event.addInfo}" as="download">
+					<p>
+						<a class="icon-file" href="{download.originalResource.publicUrl}" target="_blank" title="{download.originalResource.title}" >
+							<f:if condition="{download.originalResource.title}">
+                                <f:then>
+                                    <span>{download.originalResource.title}</span>
+                                </f:then>
+                                <f:else>
+                                    <span><f:translate key="tx_rkwevents_fluid.partials_events_additionalData.download" /></span>
+                                </f:else>
+                            </f:if>
+						</a>
+					</p>
+				</f:for>
+			</td>
+		</tr>
+	</f:if>
+
+
+	<f:if condition="<rkw:regTimeEndEvents event='{event}' />">
+		<!-- Target Group-->
+		<f:if condition="{event.targetGroup}">
+			<tr>
+				<th>
+					<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_group" />
+				</th>
+
+				<td>
+					<f:format.htmlentities>{event.targetGroup}</f:format.htmlentities>
+				</td>
+			</tr>
+		</f:if>
+	</f:if>
+
+	<f:if condition="<rkw:notFinishedEvents event='{event}' />">
+		<f:if condition="{event.onlineEvent} != 1">
+			<!-- Direction -->
+			<tr>
+				<th>
+					<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.direction" />
+				</th>
+
+				<td>
+					<f:link.external uri="http://maps.google.com/maps/dir//<f:format.urlencode>{event.place.address}, {event.place.zip} {event.place.city}</f:format.urlencode>" target="_blank" title="<f:translate key='tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps' />" rel="nofollow">
+						<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps" />
+					</f:link.external>
+				</td>
+			</tr>
+		</f:if>
+	</f:if>
+
+	<!-- Contact -->
+	<f:render partial="Event/Contact/Contact" arguments="{_all}" />
+
+
+	<!-- Partner -->
+	<f:if condition="{event.partner}">
+		<tr>
+			<th>
+				<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.partner" />
+			</th>
+
+			<td>
+				<f:format.html>{event.partner}</f:format.html>
+			</td>
+		</tr>
+	</f:if>
+
+</table>
+
+<!-- Partner logos
+<h3><f:translate key="tx_rkwevents_fluid.partials_events_additionalData.partner" /></h3>
+<div class="partner-logos" style="">
+	<f:if condition="<f:count>{event.logos}</f:count>" >
+		<f:for each="{event.logos}" as="image">
+			<f:image src="{image.uid}" treatIdAsReference="1" title="{image.title}" alt="{image.alternative}" maxWidth="130" maxHeight="100" />
+		</f:for>
+	</f:if>
+</div>
+-->

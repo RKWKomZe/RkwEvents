@@ -1,0 +1,1152 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-07-15T15:28:16Z" product-name="rkw_events">
+		<header/>
+		<body>
+
+			<!--tx_rkwevents_domain_model_event -->
+			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.subtitle" approved="yes">
+				<source>Subtitle</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.start" approved="yes">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.end" approved="yes">
+				<source>End</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.longitude" approved="yes">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.latitude" approved="yes">
+				<source>Latitude</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.testimonials" approved="yes">
+				<source>Testimonials</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.description" approved="yes">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.target_group" approved="yes">
+				<source>Target Group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="yes">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.seats" approved="yes">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_reg" approved="yes">
+				<source>Costs Reg</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_red" approved="yes">
+				<source>Costs Red</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax" approved="yes">
+				<source>Tax included</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_required" approved="yes">
+				<source>Registration required</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
+				<source>Regitration End</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link" approved="yes">
+				<source>External Link for Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
+				<source>Event Type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
+				<source>Series</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="yes">
+				<source>Logos</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.currency" approved="yes">
+				<source>Currency</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.place" approved="yes">
+				<source>Place</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
+				<source>External Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
+				<source>Internal Contact</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.add_info" approved="yes">
+				<source>Additional Information</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.sheet" approved="yes">
+				<source>Sheet</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.gallery1" approved="yes">
+				<source>Gallery 1</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.gallery2" approved="yes">
+				<source>Gallery 2</source>
+			</trans-unit>
+
+
+			<!-- tx_rkwevents_domain_model_eventreservation.-->
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation" approved="yes">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.99" approved="yes">
+				<source>-- Please select --</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.0" approved="yes">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.1" approved="yes">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.firstName" approved="yes">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.lastName" approved="yes">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.company" approved="yes">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.address" approved="yes">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.zip" approved="yes">
+				<source>ZIP</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.city" approved="yes">
+				<source>city</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.telephone" approved="yes">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.email" approved="yes">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.remark" approved="yes">
+				<source>Remarks</source>
+				<target><![CDATA[Bemerkungen &amp; Fragen]]></target>
+			</trans-unit>
+
+
+			<!-- ==================================================================================== -->
+
+
+			<!-- EventController -->
+			<trans-unit id="eventController.message.noUserLoggedIn">
+				<source>No user logged in!</source>
+			</trans-unit>
+
+			<trans-unit id="eventController.message.error.notPermitted">
+				<source>Not permitted!</source>
+			</trans-unit>
+
+
+			<!-- EventReservationController -->
+			<trans-unit id="eventReservationController.message.noUserLoggedIn">
+				<source>No user logged in!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.error.notPermitted">
+				<source>Not permitted!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.seats" approved="yes">
+				<source>Unfortunately there are not enough seats left.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.registration_time" approved="yes">
+				<source>Unfortunately a registration is no longer possible.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.somethingWentWrong" approved="yes">
+				<source>Something went wrong with the given event!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.optInDisabled" approved="yes">
+				<source>The OptIn is diabled! Please look for another way for registration</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.exists" approved="yes">
+				<source>Reservation already exists!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.workshop_full" approved="yes">
+				<source>Workshop full!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.hint.reservations" approved="yes">
+				<source>See your reservations %shere%s!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.reservationCreatedEmail">
+				<source>An e-mail has been send to you. Please click the link in the e-mail to confirm your request.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.reservationCreated">
+				<source>Reservation successfully created.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.reservationCanceled">
+				<source>Reservation was canceled.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.reservationError">
+				<source>An error occurred. Please try again.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.acceptTerms">
+				<source>You have to accept our terms and conditions.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.updateSuccess">
+				<source>Update successfull!</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.deleteSuccess">
+				<source>Reservation has been canceled</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.no_valid_email">
+				<source>Please enter a valid username.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.error.email_already_in_use">
+				<source>The given E-mail is already used by another user.</source>
+			</trans-unit>
+
+			<!-- BackendController -->
+			<trans-unit id="backendController.error.noBasicDataGiven">
+				<source>No title and time for event given. Event skipped (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.eventAlreadyExists">
+				<source>Event with title "%s" already exists on given Date/Time (%s). Event skipped (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.moreThanOnePlace">
+				<source>More than one possible match in existing data-sets for given event location found. No event location added to event (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.invalidCountryCode">
+				<source>Invalid country code "%s" given. No country set (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.invalidCurrencyCode">
+				<source>Invalid currency code "%s" given. No currency set (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.noEventLocationGiven">
+				<source>No event location given. Event skipped (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.geoDataApiOffline">
+				<source>Could not fetch Geo-Data. Reason: %s (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.noBackendUserFound">
+				<source>Event seems to be an internal one, but no BE-User for notifications could be set (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.ignoredRow">
+				<source>Ignored invalid row "%s".</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.departmentNotFound">
+				<source>Could not find department/topic with id %s. Nothing set (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.documentTypeNotFound">
+				<source>Could not find documentType with id %s. Nothing set (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.organizerNotFound">
+				<source>Could not find organizer with id %s. Nothing set (CSV-LINE:%s).</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.nothingImported">
+				<source>Nothing found for import.</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.importSuccessfull">
+				<source>Successfully imported %s events, created %s new event locations and %s new external contacts.</source>
+			</trans-unit>
+			<trans-unit id="backendController.error.importCheckSuccessfull">
+				<source>Import-Check successfull.</source>
+			</trans-unit>
+
+
+
+			<!-- ==================================================================================== -->
+
+
+			<!-- Fluid templates general -->
+			<trans-unit id="tx_rkwevents_fluid.label_optional">
+				<source>(optional)</source>
+			</trans-unit>
+
+
+			<!-- ==================================================================================== -->
+
+			<!-- Templates/Ajax/List/List.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_ajax_list_list.noEventHeadline" approved="yes">
+				<source>Sorry, no events found.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_ajax_list_list.noEventDescription" approved="yes">
+				<source>Try changing your search parameters.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/List.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_list.noEvent" approved="yes">
+				<source>Sorry, no events found.</source>
+			</trans-unit>
+
+			<!-- Templates/Event/Archive.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_archive.noEvent" approved="yes">
+				<source>Sorry, no events found.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/ShowGalleryOne.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_showGalleryOne.headline" approved="yes">
+				<source>Public Gallery</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/ShowGalleryTwo.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_showGalleryTwo.headline" approved="yes">
+				<source>Restricted Gallery</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/ShowSheet.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_events_showSheet.headline" approved="yes">
+				<source>Slideshare</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_events_showSheet.back" approved="yes">
+				<source>Back</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/MyEvents.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_myevents">
+				<source>My RKW events</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/Info.html -->
+			<trans-unit id="tx_rkwevents_fluid.template_event_info.type" approved="yes">
+				<source>Type:</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.template_event_info.series" approved="yes">
+				<source>Series:</source>
+			</trans-unit>
+
+
+			<!-- Templates/Event/SeriesProposals.html -->
+			<trans-unit id="tx_rkwevents_fluid.template_event_info.type" approved="yes">
+				<source>Type:</source>
+				<target>Art:</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.template_event_info.series" approved="yes">
+				<source>Series:</source>
+				<target>Reihe:</target>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Filter.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelTopics">
+				<source>Topics</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelTopicsAll">
+                <source>All Topics</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelAll">
+				<source>All</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelDocumentType">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelDocumentTypeAll">
+                <source>All Types</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelCategory">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelCategoryAll">
+                <source>All Categories</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch">
+				<source>Enter ZIP or Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelSearch">
+				<source>Search</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/List.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month01">
+				<source>January</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month02">
+				<source>February</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month03">
+				<source>March</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month04">
+				<source>April</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month05">
+				<source>May</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month06">
+				<source>June</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month07">
+				<source>July</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month08">
+				<source>August</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month09">
+				<source>September</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month10">
+				<source>October</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month11">
+				<source>November</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list.month12">
+				<source>December</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/List/More.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list_more.interesting">
+				<source>Interesting?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_list_more.showMore">
+				<source>Show more</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/MyListing.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_myListing.upcomingEvents">
+				<source>My upcoming events</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_myListing.noEventPlanned">
+				<source>No event planned</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_myListing.findMore">
+				<source>Find some here.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_myListing.startedPast">
+				<source>Started and past events</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_myListing.webinar">
+				<source>Webinar</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.no_events_started_past">
+				<source>No started and past events</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Options.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_options.eventShow">
+				<source>Show event</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_options.reservationShow">
+				<source>Show reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_options.reservationEdit">
+				<source>Edit reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_options.reservationDelete">
+				<source>Delete reservation</source>
+			</trans-unit>
+
+
+
+			<!-- Partials/Event/Info/Time.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_time.time" approved="yes">
+				<source>When:</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_time.time_before" approved="yes">
+				<source>at</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_time.time_after" approved="yes">
+				<source>o'clock</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Info/Place.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_place.name" approved="yes">
+				<source>Where:</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Info/Costs.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costs" approved="yes">
+				<source>Costs</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRegular" approved="yes">
+				<source>Regular</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsReduced" approved="yes">
+				<source>Reduced</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsTaxInclusive" approved="yes">
+				<source>Taxes included</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsTaxExclusive" approved="yes">
+				<source>Taxes excluded</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsTaxFree" approved="yes">
+				<source>Tax-free</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsFree" approved="yes">
+				<source>free</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" approved="yes">
+				<source>p.P.</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Info/Seats.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats" approved="yes">
+				<source>Free seats</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats_available" approved="yes">
+				<source>Available</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats_not_available" approved="yes">
+				<source>Not Available</source>
+			</trans-unit>
+
+
+
+			<!-- Partials/Event/AdditionalData.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.target_group" approved="yes">
+				<source>Target Group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.partner" approved="yes">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.schedule" approved="yes">
+				<source>Schedule</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.testimonials" approved="yes">
+				<source>Testimonials</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.presentations" approved="yes">
+				<source>Presentations</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.slideshare" approved="yes">
+				<source>See all Slideshare-Sheets</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.direction" approved="yes">
+				<source>Route Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps" approved="yes">
+				<source>Open Google Maps</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
+                <source>Download</source>
+            </trans-unit>
+
+
+			<!-- Partials/Event/Schedule.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_schedule.headline" approved="yes">
+				<source>Schedule</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Contact.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contact.contact" approved="yes">
+				<source>Contact</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/ContactSub.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mr" approved="yes">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mrs" approved="yes">
+				<source>Mrs.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.phone" approved="yes">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.fax" approved="yes">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.email" approved="yes">
+				<source>E-Mail</source>
+			</trans-unit>
+
+
+			<!-- Partials/Event/Registration.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.externalLink" approved="yes">
+				<source>Register now (external Website)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.internalLink" approved="yes">
+				<source>Register now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.internalLinkLoggedIn" approved="yes">
+				<source>Register now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noSeats" approved="yes">
+				<source>Unfortunately no free seats left</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.registrationExpired" approved="yes">
+				<source>Registration period is over</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noRegistrationRequired" approved="yes">
+				<source>No Registration required</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventExpired" approved="yes">
+				<source>Event in the past</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" approved="yes">
+                <source>Please register via E-Mail</source>
+            </trans-unit>
+
+
+
+			<!-- Templates/EventReservation/New.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_new.headline" approved="yes">
+				<source>Register</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_new.hint_reservation" approved="yes">
+				<source>Only logged user can register immediately!</source>
+				<target><![CDATA[<strong>Bitte beachten Sie:</strong> Anmeldungen zu Veranstaltungen werden erst nach erfolgter Bestätigung per E-Mail verbindlich vorgenommen. Loggen Sie sich ein, um sich direkt anzumelden.]]></target>
+			</trans-unit>
+
+
+			<!-- Templates/EventReservation/Edit.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_edit.headline" approved="yes">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_edit.introduction">
+				<source>Please find the details of your reservation for the event "%s" below.</source>
+				<target><![CDATA[Bearbeiten Sie hier die Details zu Ihrer Anmeldung für die Veranstaltung "%s".]]></target>
+			</trans-unit>
+
+
+			<!-- Templates/EventReservation/Delete.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.headline">
+				<source>Delete Reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.description">
+				<source>Do you really want to delete your reservation for "%s"?</source>
+				<target><![CDATA[Sind Sie sicher, dass Sie Ihre Anmeldung zur Veranstaltung "%s" löschen möchten?]]></target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.note">
+				<source>Note that all additional participants are deleted, too.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.billing">
+				<source>Note that a cancelation may involve additional costs.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelYes">
+				<source>Yes, do it</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelNo">
+				<source>No, keep it</source>
+			</trans-unit>
+
+
+			<!-- Templates/EventReservation/Show.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.headline">
+				<source>Details of your reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.introduction">
+				<source>Please find the details of your reservation for the event "%s" below.</source>
+				<target><![CDATA[Sehen Sie hier die Details zu Ihrer Anmeldung für die Veranstaltung "%s" ein.]]></target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.backButton">
+				<source>back to list</source>
+			</trans-unit>
+
+
+
+			<!-- Partials/EventReservation/ButtonSet.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back">
+				<source>Back</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.registerLoggedIn">
+				<source>Register now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register">
+				<source>Register now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit">
+				<source>Edit now</source>
+			</trans-unit>
+
+
+			<!-- Partials/EventReservation/FormFieldsMaster.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.phone">
+				<source>e.g. 06196/495-0</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.remark">
+				<source>Additional remarks regarding your reservation.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro">
+				<source>I accept the</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms">
+				<source>terms</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro">
+				<source>and</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2">
+				<source>conditions</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
+				<source>Workshop unit 1</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop2">
+				<source>Workshop unit 2</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3">
+				<source>Workshop unit 3</source>
+			</trans-unit>
+
+
+			<!-- Partials/EventReservation/FormFieldsSub.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headline">
+				<source>Add more Participants?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headlineEdit">
+				<source>Add, Delete or Edit more Participants?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant">
+				<source>Participants</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete">
+				<source>Delete participant</source>
+			</trans-unit>
+
+
+
+			<!-- Partials/EventReservation/Properties.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventreservation_properties.additionalParticipants">
+				<source>More Participants</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant">
+				<source>Participants</source>
+			</trans-unit>
+
+
+			<!-- Partials/EventReservation/Properties.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.headline">
+				<source>CSV Import</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv">
+				<source>CSV Data including Header, Tab-separated</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
+				<source>Really Do Import (Else Just Check Data)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
+				<source>Event Type, overrides CSV Values when set</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
+				<source>Department Type, overrides CSV Values when set</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
+				<source>Organizer, overrides CSV Values when set</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_timeZone">
+				<source>Timezone of CSV Data</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.submit">
+				<source>Start import</source>
+			</trans-unit>
+
+
+			<!-- Partials/EventReservation/Workshop.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventreservation_workshop.full">
+				<source>Workshop is full!</source>
+			</trans-unit>
+
+
+			<!-- ==================================================================================== -->
+
+			<!-- E-Mail subjects -->
+			<trans-unit id="rkwMailService.optInReservationUser.subject" approved="yes">
+				<source>Please confirm your reservation</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.confirmationReservationUser.subject" approved="yes">
+				<source>Thank you for your reservation</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.surveyReservationUser.subject" approved="yes">
+				<source>Survey for event</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.confirmationReservationAdmin.subject" approved="yes">
+				<source>New reservation</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.updateReservationUser.subject" approved="yes">
+				<source>Your reservation has been successfully updated</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.updateReservationAdmin.subject" approved="yes">
+				<source>Update in reservation</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.deleteReservationUser.subject" approved="yes">
+				<source>Your reservation has been canceled</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.deleteReservationAdmin.subject" approved="yes">
+				<source>Reservation has been canceled</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.informUpcomingEventUser.subject" approved="yes">
+				<source>Don't forget: "%s"</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.sendSurveyForPastEvent.subject" approved="yes">
+				<source>Survey after: "%s"</source>
+			</trans-unit>
+
+
+
+			<!-- ==================================================================================== -->
+
+			<!-- Templates/Email/OptInReservationUser.html -->
+			<trans-unit id="templates_email_optInReservationUser.headline">
+				<source>Hello,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.text1">
+				<source>thank you for your interest.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.text2">
+				<source>Please check and confirm your request below.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.textOptIn">
+				<source>Click here to confirm your request:</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.textOptOut">
+				<source>Click here to cancel your request:</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.textOptInLinkLabel">
+				<source>Yes, I want to attend</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.textOptOutLinkLabel">
+				<source>No, thank you</source>
+			</trans-unit>
+			<trans-unit id="templates_email_optInReservationUser.confirmHeadline">
+				<source>Please confirm your registration</source>
+			</trans-unit>
+
+
+			<!-- Partials/Email/EventDetails.html -->
+			<trans-unit id="partials_email_details.eventDetails">
+				<source>Event Details</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventDate">
+				<source>When</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventTimeBefore">
+				<source>at</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventTimeAfter">
+				<source>o'clock</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventPlace">
+				<source>Where</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventCosts">
+				<source>Costs</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventCostsRegular">
+				<source>regular</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventCostsReduced">
+				<source>reduced</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.eventCostsFree">
+				<source>Free</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.reservationDetails">
+				<source>Details Reservation</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.reservationRemarks">
+				<source>Remarks</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.reservationOthers">
+				<source>Further participants</source>
+			</trans-unit>
+            <trans-unit id="partials_email_details.reservationVia">
+                <source>Registration via</source>
+            </trans-unit>
+			<trans-unit id="partials_email_details.costsTaxInclusive">
+				<source>Taxes included</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.costsTaxExclusive">
+				<source>Taxes excluded</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.costsTaxFree">
+				<source>Tax-free</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.costsPerPerson">
+				<source>p.P.</source>
+			</trans-unit>
+            <trans-unit id="partials_email_details.eventAccessLink">
+                <source>Direct Link</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.privacyHint">
+				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
+			</trans-unit>
+
+
+
+			<!-- Templates/Email/ConfirmationReservationUser.html -->
+			<trans-unit id="templates_email_confirmationReservationUser.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.text1">
+				<source>thank you for your reservation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.text2">
+				<source>Please find below the details of your reservation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.billing">
+				<source>You will receive an invoice in a few days.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.changeDeleteHeadline">
+				<source>Change / Delete</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.text3">
+				<source>Login here to change or delete your reservation.</source>
+			</trans-unit>
+            <trans-unit id="templates_email_confirmationReservationUser.onlineEventAccessLink">
+                <source>Login here to change or delete your reservation.</source>
+            </trans-unit>
+
+
+
+			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
+			<trans-unit id="templates_email_confirmationReservationAdmin.headline">
+				<source>Hello %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationAdmin.text1">
+				<source>a reservation has been placed.</source>
+			</trans-unit>
+            <trans-unit id="templates_email_confirmationReservationAdmin.text2">
+                <source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
+            </trans-unit>
+
+
+
+			<!-- Templates/Email/UpdateReservationUser.html -->
+			<trans-unit id="templates_email_updateReservationUser.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_updateReservationUser.text1">
+				<source>thank you for your reservation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_updateReservationUser.text2">
+				<source>Please find below the details of your reservation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_updateReservationUser.changeDeleteHeadline">
+				<source>Change / Delete</source>
+			</trans-unit>
+			<trans-unit id="templates_email_updateReservationUser.text3">
+				<source>Login here to change or delete your reservation.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/UpdateReservationAdmin.html -->
+			<trans-unit id="templates_email_updateReservationAdmin.headline">
+				<source>Hello %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_updateReservationAdmin.text1">
+				<source>a reservation has been changed.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/DeleteReservationUser.html -->
+			<trans-unit id="templates_email_deleteReservationUser.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_deleteReservationUser.text1">
+				<source>sorry to see you go.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_deleteReservationUser.text2">
+				<source>Please find below the details of your canceled reservation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_deleteReservationUser.billing">
+				<source>Please note that a cancelation my involve further costs.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/DeleteReservationAdmin.html -->
+			<trans-unit id="templates_email_deleteReservationAdmin.headline">
+				<source>Hello %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_deleteReservationAdmin.text1">
+				<source>a reservation has been canceled.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/InformUpcomingEventUser.html -->
+			<trans-unit id="templates_email_informUpcomingEventUser.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.text1">
+				<source>we are looking forward to see you in a few days at the event below.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.text2">
+				<source>In order to help you find us, we send you a route description hereby.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.text3">
+				<source>See you soon!</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.direction">
+				<source>Click here for your personal route description</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.googleLink">
+				<source>Open Google Maps</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.changeDeleteHeadline">
+				<source>Change / Delete</source>
+			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.text4">
+				<source>Login here to change or delete your reservation.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/SurveyReservationUser.html -->
+			<trans-unit id="templates_email_surveyReservationUser.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_surveyReservationUser.text1">
+				<source>thank you for your reservation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_surveyReservationUser.text2">
+				<source>Please find below the a survey for the event.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_surveyReservationUser.goToSurvey">
+				<source>Go to survey</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/SendSurveyForPastEvent.html -->
+			<trans-unit id="templates_email_sendSurveyForPastEvent.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_sendSurveyForPastEvent.text1">
+				<source>thank you for your participation.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_sendSurveyForPastEvent.text2">
+				<source>Please find below the a survey for the event.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_sendSurveyForPastEvent.goToSurvey">
+				<source>Go to survey</source>
+			</trans-unit>
+
+
+			<!-- ==================================================================================== -->
+
+
+			<!-- Validator  -->
+			<trans-unit id="tx_rkwevents_validator.not_filled">
+				<source>Please fill out the field '%s'.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.not_filled_question">
+				<source>Please answer the question '%s'.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.workshop_no_places">
+				<source>A choosen workshop does not have longer free seats.</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.remark">
+				<source>Remark</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.salutation">
+				<source>Salutation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.firstName">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.lastName">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.company">
+				<source>Company</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.email">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.telephone">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_0">
+				<source>Salutation (person 2)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_title_0">
+				<source>Title (person 2)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_0">
+				<source>First name (person 2)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_0">
+				<source>Last name (person 2)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_1">
+				<source>Salutation (person 3)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_title_1">
+				<source>Title (person 3)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_1">
+				<source>First name (person 3)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_1">
+				<source>Last name (person 3)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_2">
+				<source>Salutation (person 4)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_title_2">
+				<source>Title (person 4)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_2">
+				<source>First name (person 4)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_2">
+				<source>Last name (person 4)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_3">
+				<source>Salutation (person 5)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_title_3">
+				<source>Title (person 5)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_3">
+				<source>First name (person 5)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_3">
+				<source>Last name (person 5)</source>
+			</trans-unit>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<trans-unit id="tx_rkwevents_fluid.survey">
+				<source>Survey</source>
+			</trans-unit>
+
+
+
+		</body>
+	</file>
+</xliff>

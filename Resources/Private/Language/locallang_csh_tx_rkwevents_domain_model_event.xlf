@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-07-15T15:28:16Z" product-name="rkw_events">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="subtitle.description">
+				<source>subtitle</source>
+			</trans-unit>
+			<trans-unit id="start.description">
+				<source>start</source>
+			</trans-unit>
+			<trans-unit id="end.description">
+				<source>end</source>
+			</trans-unit>
+			<trans-unit id="longitude.description">
+				<source>longitude</source>
+			</trans-unit>
+			<trans-unit id="latitude.description">
+				<source>latitude</source>
+			</trans-unit>
+			<trans-unit id="testimonials.description">
+				<source>testimonials</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="target_group.description">
+				<source>targetGroup</source>
+			</trans-unit>
+			<trans-unit id="partner.description">
+				<source>partner</source>
+			</trans-unit>
+			<trans-unit id="seats.description">
+				<source>seats</source>
+			</trans-unit>
+			<trans-unit id="costs_reg.description">
+				<source>costsReg</source>
+			</trans-unit>
+			<trans-unit id="costs_red.description">
+				<source>costsRed</source>
+			</trans-unit>
+			<trans-unit id="reg_required.description">
+				<source>regRequired</source>
+			</trans-unit>
+			<trans-unit id="reg_end.description">
+				<source>regEnd</source>
+			</trans-unit>
+			<trans-unit id="ext_reg_link.description">
+				<source>extRegLink</source>
+			</trans-unit>
+
+			<trans-unit id="document_type.description">
+				<source>type</source>
+			</trans-unit>
+			<trans-unit id="series.description">
+				<source>A series of events</source>
+			</trans-unit>
+			<trans-unit id="logos.description">
+				<source>A couple of logos</source>
+			</trans-unit>
+			<trans-unit id="currency.description">
+				<source>currency</source>
+			</trans-unit>
+			<trans-unit id="places.description">
+				<source>Holds place</source>
+			</trans-unit>
+			<trans-unit id="contacts.description">
+				<source>Holds contact</source>
+			</trans-unit>
+			<trans-unit id="add_info.description">
+				<source>Holds add info</source>
+			</trans-unit>
+			<trans-unit id="sheet.description">
+				<source>Holds sheets</source>
+			</trans-unit>
+			<trans-unit id="gallery1.description">
+				<source>Holds gallery1</source>
+			</trans-unit>
+			<trans-unit id="gallery2.description">
+				<source>Holds gallery2</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

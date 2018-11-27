@@ -1,0 +1,23 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<label>
+	<f:if condition="<f:count>{workshop.registeredFrontendUsers}</f:count> >= {workshop.availableSeats}">
+		<f:then>
+			<!-- no more available seats: disable checkbox and set hint for user! -->
+			<!-- disable only, if user is not registered yet (for edit) -->
+			<f:form.checkbox checked="<rkw:isRegisteredForWorkshop eventWorkshop='{workshop}' frontendUser='{frontendUser}' />" disabled="<rkw:isNotRegisteredForWorkshop eventWorkshop='{workshop}' frontendUser='{frontendUser}' />" class="feedback-field" value="{workshop.uid}" property="workshopRegister.{workshopUnit}.{workshop.uid}" />
+			<f:translate key="tx_rkwevents_fluid.partials_eventreservation_workshop.full" />
+		</f:then>
+		<f:else>
+			<f:form.checkbox class="feedback-field" value="{workshop.uid}" property="workshopRegister.{workshopUnit}.{workshop.uid}" />
+		</f:else>
+	</f:if>
+
+	<span class="text-smaller">
+		{workshop.title}
+		{workshop.start -> f:format.date(format:"d.m.Y H:m")}
+		<f:if condition="{workshop.end}">
+			- {workshop.end -> f:format.date(format:"d.m.Y H:m")}
+		</f:if>
+		{workshop.description}
+	</span>
+</label>

@@ -1,0 +1,72 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <general>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.options</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.list</numIndex>
+                                        <numIndex index="1">Event->list;Event->myEvents;Event->show;Event->showSheet;EventReservation->show;EventReservation->new;EventReservation->optIn;EventReservation->create;EventReservation->edit;EventReservation->update;EventReservation->delete</numIndex>
+                                    </numIndex>
+                                    <numIndex index="12" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.archive</numIndex>
+                                        <numIndex index="1">Event->archive;Event->show;Event->showSheet</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.detail</numIndex>
+                                        <numIndex index="1">Event->show;Event->showSheet</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.detailAdditional</numIndex>
+                                        <numIndex index="1">Event->showAddInfo</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.detailGallery1</numIndex>
+                                        <numIndex index="1">Event->showGalleryOne</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.detailGallery2</numIndex>
+                                        <numIndex index="1">Event->showGalleryTwo</numIndex>
+                                    </numIndex>
+                                    <numIndex index="6" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.register</numIndex>
+                                        <numIndex index="1">EventReservation->new;EventReservation->create;EventReservation->optIn</numIndex>
+                                    </numIndex>
+                                    <numIndex index="11" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.myEvents</numIndex>
+                                        <numIndex index="1">Event->myEvents;EventReservation->show;EventReservation->edit;EventReservation->update;EventReservation->delete;EventReservation->remove</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
+                    <settings.noFilters>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.noFilters</label>
+                        <displayCond>
+                            <OR>
+                                <numIndex index="0">FIELD:switchableControllerActions:=:Event->list;Event->myEvents;Event->show;Event->showSheet;EventReservation->show;EventReservation->new;EventReservation->optIn;EventReservation->create;EventReservation->edit;EventReservation->update;EventReservation->delete;EventPoll->new;EventPoll->create;EventPoll->show</numIndex>
+                                <numIndex index="1">FIELD:switchableControllerActions:=:Event->archive;Event->show;Event->showSheet</numIndex>
+                            </OR>
+                        </displayCond>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.noFilters>
+                </el>
+            </ROOT>
+        </general>
+    </sheets>
+</T3DataStructure>

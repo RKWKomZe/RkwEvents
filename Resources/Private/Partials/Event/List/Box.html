@@ -1,0 +1,53 @@
+{namespace rkw=RKW\RkwEvents\ViewHelpers}
+
+<div class="box-wrapper">
+	<f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" class="box {event.department.cssClass} event big" title="{event.title}">
+		<header>
+			<p>
+				<f:if condition="{event.series}">
+					<strong><rkw:series series="{event.series}" /></strong><br/><br/>
+				</f:if>
+                {event.title}
+			</p>
+		</header>
+		<div class="box-content">
+			<p class="event-city">
+                <f:if condition="{event.distance}">
+                    <f:format.number decimals="1" decimalSeparator="," thousandsSeparator=".">{event.distance}</f:format.number> km &ndash;
+                </f:if>
+                {event.place.city}</p>
+			<p class="event-date">
+				<f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+					<f:then>
+						({event.start -> f:format.date(format:"d.m.Y")})
+					</f:then>
+					<f:else>
+						<strong>
+							{event.start -> f:format.date(format:"d.m.Y")}
+						</strong>
+					</f:else>
+				</f:if>
+
+				<f:if condition="{event.end}">
+					<f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+						<f:else>
+							<f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+								<f:then>
+                                    &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+								</f:then>
+								<f:else>
+									<strong>
+                                        &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+									</strong>
+								</f:else>
+							</f:if>
+						</f:else>
+					</f:if>
+				</f:if>
+			</p>
+		</div>
+		<footer>
+			<p class="icon-calendar">{event.documentType.name}</p>
+		</footer>
+	</f:link.action>
+</div>

@@ -1,0 +1,19 @@
+.tx-rkwevents-backend textarea {
+	width:100%;
+	height:300px;
+}
+
+.tx-rkwevents-backend label {
+	font-weight:normal;
+	display:block;
+	margin-top:1em;
+}
+.tx-rkwevents-backend label span {
+	font-weight:bold;
+	display:block;
+}
+
+.tx-rkwevents-backend button {
+	margin-top: 3em;
+	display: block;
+}

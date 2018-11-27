@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-07-15T15:28:16Z" product-name="rkw_events">
+		<header/>
+		<body>
+			<trans-unit id="files.description">
+				<source>Holds the files</source>
+			</trans-unit>
+			<trans-unit id="htmls.description">
+				<source>Holds the htmls</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
