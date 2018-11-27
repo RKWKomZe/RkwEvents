@@ -1,10 +1,10 @@
 {
-    "name": "rkw/rkw-ecosystem",
+    "name": "rkw/rkw-events",
     "type": "typo3-cms-extension",
-    "description": "Extension for exploring entrepreneurship ecosystems",
+    "description": "Extension for events and registation",
     "homepage": "https://www.rkw-kompetenzzentrum.de",
     "license": ["GPL-2.0+"],
-    "keywords": ["TYPO3 CMS", "RKW", "Entrepreneurship Ecosystem"],
+    "keywords": ["TYPO3 CMS", "RKW", "Events"],
     "support": {
         "email": "developer@steffenkroggel.de"
     },
@@ -18,25 +18,31 @@
         {
             "name": "Maximilian Fäßler",
             "email": "maximilian@faesslerweb.de",
-            "homepage": "https://faesslerweb.de",
+            "homepage": "https://www.faesslerweb.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Carlos Meyer",
+            "email": "cm@davitec.de",
+            "homepage": "https://www.davitec.de",
             "role": "Developer"
         }
     ],
     "require": {
         "typo3/cms-core": "^7.6.0 || ^8.7.0",
-         "spipu/html2pdf": "^5.0",
-         "rkw/rkw-basics": "~7.6.12", 
-         "rkw/rkw-mailer": "~7.6.10",
-         "rkw/rkw-registration": "~7.6.10"
+        "sjbr/static-info-tables" : "6.2.1",
+        "rkw/rkw-basics": "~7.6.12", 
+        "rkw/rkw-mailer": "~7.6.10",
+        "rkw/survey": "~7.6.0"
     },
     "autoload": {
         "psr-4": {
-            "RKW\\Ecosystem\\": "Classes/"
+            "RKW\\Events\\": "Classes/"
         }
     },
     "extra": {
         "typo3/cms": {
-            "extension-key": "rkw_ecosystem"
+            "extension-key": "rkw_events"
         }
     }
 }
