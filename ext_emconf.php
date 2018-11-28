@@ -27,10 +27,10 @@ $EM_CONF[$_EXTKEY] = array(
             'extbase' => '6.2.0-7.6.99',
             'fluid' => '6.2.0-7.6.99',
             'typo3' => '6.2.0-7.6.99',
-            'static_info_tables' => '6.2.1',
+            'static_info_tables' => '6.5',
             'rkw_basics' => '7.6.10-7.6.99',
             'rkw_mailer' => '7.6.10-7.6.99',
-            'rkw_survey' => '0.1.0-1.9.99'
+            'rkw_survey' => '7.6.2-1.9.99'
         ),
 		'conflicts' => array(
 		),
