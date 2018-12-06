@@ -137,9 +137,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         // send confirmation
         $this->userMail($frontendUser, $eventReservation, 'confirmation', true);
 
-        // send additional mail for survey (is some "surveyBefore" ist set in event)
-        if ($eventReservation->getEvent()->getSurveyBefore()) {
-            $this->userMail($frontendUser, $eventReservation, 'survey');
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+            // send additional mail for survey (is some "surveyBefore" ist set in event)
+            if ($eventReservation->getEvent()->getSurveyBefore()) {
+                $this->userMail($frontendUser, $eventReservation, 'survey');
+            }
         }
     }
 
@@ -347,55 +349,57 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     public function sendSurveyForPastEvent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList)
     {
 
-        // get settings
-        $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $settingsDefault = $this->getSettings();
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+            // get settings
+            $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+            $settingsDefault = $this->getSettings();
 
-        if ($settings['view']['templateRootPath']) {
+            if ($settings['view']['templateRootPath']) {
 
-            /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+                /** @var \RKW\RkwMailer\Service\MailService $mailService */
+                $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
-            if (count($eventReservationList)) {
-                foreach ($eventReservationList as $eventReservation) {
-                    if ($eventReservation->getFeUser()) {
+                if (count($eventReservationList)) {
+                    foreach ($eventReservationList as $eventReservation) {
+                        if ($eventReservation->getFeUser()) {
 
-                        // send new user an email with token
-                        $mailService->setTo($eventReservation->getFeUser(), array(
-                            'marker'  => array(
-                                'reservation'  => $eventReservation,
-                                'event'        => $eventReservation->getEvent(),
-                                'frontendUser' => $eventReservation->getFeUser(),
-                                'sha1Token'    => sha1($eventReservation->getFeUser()->getEmail() . $eventReservation->getFeUser()->getUid() . $eventReservation->getEvent()->getUid()),
-                                'surveyPid'    => intval($settingsDefault['surveyPid']),
-                                'loginPid'     => intval($settingsDefault['loginPid']),
-                                'showPid'      => intval($settingsDefault['showPid']),
-                            ),
-                            'subject' => \RKW\RkwMailer\Helper\FrontendLocalization::translate(
-                                'rkwMailService.sendSurveyForPastEvent.subject',
-                                'rkw_events',
-                                array(0 => $eventReservation->getEvent()->getTitle()),
-                                $eventReservation->getFeUser()->getTxRkwregistrationLanguageKey()
-                            ),
-                        ));
+                            // send new user an email with token
+                            $mailService->setTo($eventReservation->getFeUser(), array(
+                                'marker'  => array(
+                                    'reservation'  => $eventReservation,
+                                    'event'        => $eventReservation->getEvent(),
+                                    'frontendUser' => $eventReservation->getFeUser(),
+                                    'sha1Token'    => sha1($eventReservation->getFeUser()->getEmail() . $eventReservation->getFeUser()->getUid() . $eventReservation->getEvent()->getUid()),
+                                    'surveyPid'    => intval($settingsDefault['surveyPid']),
+                                    'loginPid'     => intval($settingsDefault['loginPid']),
+                                    'showPid'      => intval($settingsDefault['showPid']),
+                                ),
+                                'subject' => \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                                    'rkwMailService.sendSurveyForPastEvent.subject',
+                                    'rkw_events',
+                                    array(0 => $eventReservation->getEvent()->getTitle()),
+                                    $eventReservation->getFeUser()->getTxRkwregistrationLanguageKey()
+                                ),
+                            ));
+                        }
                     }
-                }
 
-                $mailService->getQueueMail()->setSubject(
-                    \RKW\RkwMailer\Helper\FrontendLocalization::translate(
-                        'rkwMailService.sendSurveyForPastEvent.subject',
-                        'rkw_events',
-                        null,
-                        'de'
-                    )
-                );
+                    $mailService->getQueueMail()->setSubject(
+                        \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                            'rkwMailService.sendSurveyForPastEvent.subject',
+                            'rkw_events',
+                            null,
+                            'de'
+                        )
+                    );
 
-                $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/SendSurveyForPastEvent');
-                $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/SendSurveyForPastEvent');
-                $mailService->getQueueMail()->addPartialPath($settings['view']['partialRootPath']);
+                    $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/SendSurveyForPastEvent');
+                    $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/SendSurveyForPastEvent');
+                    $mailService->getQueueMail()->addPartialPath($settings['view']['partialRootPath']);
 
-                if ($mailService->getTo() > 0) {
-                    $mailService->send();
+                    if ($mailService->getTo() > 0) {
+                        $mailService->send();
+                    }
                 }
             }
         }

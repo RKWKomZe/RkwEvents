@@ -152,8 +152,17 @@ config.tx_extbase.persistence {
                 }
             }
         }
-    }
 
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\Survey {
+            mapping {
+                tableName = tx_rkwsurvey_domain_model_survey
+                recordType =
+            }
+        }
+
+    }
 }
 
 
