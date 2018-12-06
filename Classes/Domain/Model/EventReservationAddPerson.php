@@ -71,6 +71,11 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
      */
     protected $deleted;
 
+    /**
+     * @var integer
+     */
+    protected $hidden;
+
 
     /**
      * Returns the eventReservation

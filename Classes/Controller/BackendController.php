@@ -511,7 +511,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 try {
 
                                     /** @var \RKW\RkwGeolocation\Domain\Model\Geolocation $geoData */
-                                    $geoData = $geoLocation->determineGeoData();
+                                    $geoData = $geoLocation->fetchGeoData();
                                     if ($geoData) {
                                         $eventPlace->setLongitude($geoData->getLongitude());
                                         $eventPlace->setLatitude($geoData->getLatitude());

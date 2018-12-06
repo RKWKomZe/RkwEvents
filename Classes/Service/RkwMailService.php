@@ -87,7 +87,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors')) {
                 if (count($registration->getData()->getEvent()->getInternalContact()) > 0) {
 
-                    /** @var \RKW\RkwAuthors\Domain\Model\Authors $contact */
+                    /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
                     foreach ($registration->getData()->getEvent()->getInternalContact() as $contact) {
 
                         if ($contact->getEmail()) {
@@ -450,7 +450,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             // set reply address
             if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
 
-                /** @var \RKW\RkwAuthors\Domain\Model\Authors $contact */
+                /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
                 foreach ($eventReservation->getEvent()->getInternalContact() as $contact) {
 
                     if ($contact->getEmail()) {
