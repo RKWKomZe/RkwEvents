@@ -6,7 +6,7 @@ config.tx_extbase.persistence {
         updateReferenceIndex = 1
 
         // dependeny to rkw_authors is optional - see ext_typoscript_setup.txt in rkw_authors
-
+        // dependeny to rkw_survey is optional - see ext_typoscript_setup.txt in rkw_survey
         #===============================================
 
         RKW\RkwBasics\Domain\Model\Department {
@@ -150,15 +150,6 @@ config.tx_extbase.persistence {
                     tstamp.mapOnProperty = tstamp
                     deleted.mapOnProperty = deleted
                 }
-            }
-        }
-
-        #===============================================
-
-        RKW\RkwEvents\Domain\Model\Survey {
-            mapping {
-                tableName = tx_rkwsurvey_domain_model_survey
-                recordType =
             }
         }
 
