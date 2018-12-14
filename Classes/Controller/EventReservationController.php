@@ -1237,8 +1237,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     protected function getFrontendUser()
     {
-        /** @var \RKW\RkwWepstra\Domain\Repository\FrontendUserRepository $frontendUserRepository */
-        //$frontendUserRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Repository\\FrontendUserRepository');
         $this->frontendUser = $this->frontendUserRepository->findByIdentifier($this->getFrontendUserId());
 
         if ($this->frontendUser instanceof \TYPO3\CMS\Extbase\Domain\Model\FrontendUser) {

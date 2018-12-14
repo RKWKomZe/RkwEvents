@@ -206,14 +206,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Holds surveyBefore
      *
-     * @var \RKW\RkwSurvey\Domain\Model\Survey
+     * @var \RKW\RkwEvents\Domain\Model\Survey
      */
     protected $surveyBefore = null;
 
     /**
      * Holds surveyAfter
      *
-     * @var \RKW\RkwSurvey\Domain\Model\Survey
+     * @var \RKW\RkwEvents\Domain\Model\Survey
      */
     protected $surveyAfter = null;
 
@@ -962,7 +962,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the surveyBefore
      *
-     * @return \RKW\RkwSurvey\Domain\Model\Survey $surveyBefore
+     * @return \RKW\RkwEvents\Domain\Model\Survey $surveyBefore
      */
     public function getSurveyBefore()
     {
@@ -972,10 +972,10 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the surveyBefore
      *
-     * @param \RKW\RkwSurvey\Domain\Model\Survey $surveyBefore
+     * @param \RKW\RkwEvents\Domain\Model\Survey $surveyBefore
      * @return void
      */
-    public function setSurveyBefore(\RKW\RkwSurvey\Domain\Model\Survey $surveyBefore)
+    public function setSurveyBefore(\RKW\RkwEvents\Domain\Model\Survey $surveyBefore)
     {
         $this->surveyBefore = $surveyBefore;
     }
@@ -983,7 +983,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the surveyAfter
      *
-     * @return \RKW\RkwSurvey\Domain\Model\Survey $surveyAfter
+     * @return \RKW\RkwEvents\Domain\Model\Survey $surveyAfter
      */
     public function getSurveyAfter()
     {
@@ -993,10 +993,10 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the surveyAfter
      *
-     * @param \RKW\RkwSurvey\Domain\Model\Survey $surveyAfter
+     * @param \RKW\RkwEvents\Domain\Model\Survey $surveyAfter
      * @return void
      */
-    public function setSurveyAfter(\RKW\RkwSurvey\Domain\Model\Survey $surveyAfter)
+    public function setSurveyAfter(\RKW\RkwEvents\Domain\Model\Survey $surveyAfter)
     {
         $this->surveyAfter = $surveyAfter;
     }

@@ -120,34 +120,36 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
      */
     public function sendSurveyForPastEventCommand($timeFrame = 86400)
     {
-        try {
-            $eventList = $this->eventRepository->findAllByPastEvents($timeFrame);
-            if (count($eventList)) {
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+            try {
+                $eventList = $this->eventRepository->findAllByPastEvents($timeFrame);
+                if (count($eventList)) {
 
-                /** @var \RKW\RkwEvents\Domain\Model\Event $event */
-                foreach ($eventList as $event) {
+                    /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+                    foreach ($eventList as $event) {
 
-                    if ($eventReservationList = $event->getReservation()) {
+                        if ($eventReservationList = $event->getReservation()) {
 
-                        /** @var \RKW\RkwEvents\Service\RkwMailService $mailService */
-                        $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Service\\RkwMailService');
-                        $mailService->sendSurveyForPastEvent($eventReservationList);
+                            /** @var \RKW\RkwEvents\Service\RkwMailService $mailService */
+                            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Service\\RkwMailService');
+                            $mailService->sendSurveyForPastEvent($eventReservationList);
 
-                        $event->setSurveyAfterMailTstamp(time());
-                        $this->eventRepository->update($event);
-                        $this->persistenceManager->persistAll();
+                            $event->setSurveyAfterMailTstamp(time());
+                            $this->eventRepository->update($event);
+                            $this->persistenceManager->persistAll();
 
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully sent %s survey mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
-                    } else {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No reservations found for event %s. No survey mail sent.', $event->getUid()));
+                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully sent %s survey mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
+                        } else {
+                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No reservations found for event %s. No survey mail sent.', $event->getUid()));
+                        }
                     }
+                } else {
+                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No relevant events found for survey mail.'));
                 }
-            } else {
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No relevant events found for survey mail.'));
-            }
 
-        } catch (\Exception $e) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to send an survey mail about a past event. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+            } catch (\Exception $e) {
+                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to send an survey mail about a past event. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+            }
         }
     }
 
