@@ -51,7 +51,8 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
-                gallery1, gallery2, presentations, sheet,
+                //gallery1, gallery2, presentations, sheet,
+                presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
