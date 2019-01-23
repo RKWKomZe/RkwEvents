@@ -37,7 +37,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RKW\\Events\\": "Classes/"
+            "RKW\\RkwEvents\\": "Classes/"
         }
     },
     "extra": {
