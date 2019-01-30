@@ -31,7 +31,7 @@ class AuthorsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * findOneInternalByEmail
      *
      * @param string $email
-     * @return \RKW\RkwAuthors\Domain\Model\Authors
+     * @return \RKW\RkwEvents\Domain\Model\Authors
      */
     public function findOneInternalByEmail($email)
     {

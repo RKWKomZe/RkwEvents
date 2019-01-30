@@ -595,13 +595,28 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Returns storage pid of repository
      *
      * @return array
+     * @throws \Exception
+     * @throws \RuntimeException
      */
     protected function getStoragePid()
     {
-
         $settings = $this->getTsForPage(intval($GLOBALS['TSFE']->id));
+        $storagePidString = $settings['persistence.']['storagePid'];
+        // $settings['persistence.']['storagePid'] can be empty and simply defined as "Record Storage Page" in the plugins content element!
+        if (!$storagePidString) {
+            // find by PID and list_type rkwevents_pi1
+            $mres = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+                'pages',
+                'tt_content',
+                'pid=' . intval($GLOBALS['TSFE']->id) . ' AND list_type="rkwevents_pi1" AND deleted = 0 AND hidden = 0'
+            );
+            while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($mres)) {
+                $storagePidString = $row['pages'];
+            }
+        }
 
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $settings['persistence.']['storagePid']);;
+        // @toDo: Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $storagePidString);
         //===
     }
 
@@ -611,6 +626,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param $pageId
      * @return array
+     * @throws \Exception
+     * @throws \RuntimeException
      */
     private function getTsForPage($pageId)
     {

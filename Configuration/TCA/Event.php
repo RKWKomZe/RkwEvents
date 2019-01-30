@@ -28,7 +28,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ),
-		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,schedule,target_group,partner,seats,costs_reg,costs_red,reg_required,reg_end,ext_reg_link,document_type,department,categories,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,survey_before,survey_after,survey_after_mail_tstamp,',
+		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,schedule,target_group,partner,seats,costs_reg,costs_red,reg_required,reg_end,ext_reg_link,document_type,department,categories,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ),
     'interface' => array(
@@ -51,7 +51,8 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
-                gallery1, gallery2, presentations, sheet,
+                //gallery1, gallery2, presentations, sheet,
+                presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
@@ -855,49 +856,51 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
 				'size'          => 5,
 			),
 		),
+        /* Re-added below, if rkw_survey is active
         'survey_before' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_before',
-			'config' => array(
-				'type' => 'select',
-				'renderType' => 'selectMultipleSideBySide',
-				'foreign_table' => 'tx_rkwsurvey_domain_model_survey',
-				'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwsurvey_domain_model_survey.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwsurvey_domain_model_survey.deleted = 0 AND tx_rkwsurvey_domain_model_survey.hidden = 0',
-				'maxitems'      => 1,
-				'minitems' 		=> 0,
-				'size'          => 5,
-			),
-		),
-		'survey_after' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after',
-			'config' => array(
-				'type' => 'select',
-				'renderType' => 'selectMultipleSideBySide',
-				'foreign_table' => 'tx_rkwsurvey_domain_model_survey',
-				'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwsurvey_domain_model_survey.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwsurvey_domain_model_survey.deleted = 0 AND tx_rkwsurvey_domain_model_survey.hidden = 0',
-				'maxitems'      => 1,
-				'minitems' 		=> 0,
-				'size'          => 5,
-			),
-		),
-		'survey_after_mail_tstamp' => array(
-			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after_mail_tstamp',
-			'config' => array(
-				'type' => 'input',
-				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
-				'checkbox' => 0,
-				'default' => 0,
-				'readOnly' => 1,
-				'range' => array(
-					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),		
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_before',
+            'config' => array(
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rkwsurvey_domain_model_survey',
+                'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwsurvey_domain_model_survey.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwsurvey_domain_model_survey.deleted = 0 AND tx_rkwsurvey_domain_model_survey.hidden = 0',
+                'maxitems'      => 1,
+                'minitems' 		=> 0,
+                'size'          => 5,
+            ),
+        ),
+        'survey_after' => array(
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after',
+            'config' => array(
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rkwsurvey_domain_model_survey',
+                'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwsurvey_domain_model_survey.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwsurvey_domain_model_survey.deleted = 0 AND tx_rkwsurvey_domain_model_survey.hidden = 0',
+                'maxitems'      => 1,
+                'minitems' 		=> 0,
+                'size'          => 5,
+            ),
+        ),
+        'survey_after_mail_tstamp' => array(
+            'exclude' => 1,
+            'l10n_mode' => 'mergeIfNotBlank',
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after_mail_tstamp',
+            'config' => array(
+                'type' => 'input',
+                'size' => 13,
+                'max' => 20,
+                'eval' => 'datetime',
+                'checkbox' => 0,
+                'default' => 0,
+                'readOnly' => 1,
+                'range' => array(
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                ),
+            ),
+        ),
+        */
         'reminder_mail_tstamp' => array(
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
@@ -953,4 +956,57 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
         ),
     );
     $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem'] = str_replace(', department,', ', department, project,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem']);
+}
+
+// Extend TCA when rkw_survey is available
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['columns']['survey_before'] = array(
+        'exclude' => 0,
+        'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_before',
+        'config' => array(
+            'type' => 'select',
+            'renderType' => 'selectMultipleSideBySide',
+            'foreign_table' => 'tx_rkwsurvey_domain_model_survey',
+            'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwsurvey_domain_model_survey.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwsurvey_domain_model_survey.deleted = 0 AND tx_rkwsurvey_domain_model_survey.hidden = 0',
+            'maxitems'      => 1,
+            'minitems' 		=> 0,
+            'size'          => 5,
+        ),
+    );
+
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['columns']['survey_after'] = array(
+        'exclude' => 0,
+        'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after',
+        'config' => array(
+            'type' => 'select',
+            'renderType' => 'selectMultipleSideBySide',
+            'foreign_table' => 'tx_rkwsurvey_domain_model_survey',
+            'foreign_table_where' => 'AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwsurvey_domain_model_survey.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwsurvey_domain_model_survey.deleted = 0 AND tx_rkwsurvey_domain_model_survey.hidden = 0',
+            'maxitems'      => 1,
+            'minitems' 		=> 0,
+            'size'          => 5,
+        ),
+    );
+
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['columns']['survey_after_mail_tstamp'] = array(
+        'exclude' => 1,
+        'l10n_mode' => 'mergeIfNotBlank',
+        'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after_mail_tstamp',
+        'config' => array(
+            'type' => 'input',
+            'size' => 13,
+            'max' => 20,
+            'eval' => 'datetime',
+            'checkbox' => 0,
+            'default' => 0,
+            'readOnly' => 1,
+            'range' => array(
+                'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+            ),
+        ),
+    );
+
+    // @toDo: Not sure if this lines should be shown (was also commented out before in the top of the file)
+    //$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem'] = str_replace(', ext_reg_link,', ', ext_reg_link,survey_before,survey_after,survey_after_mail_tstamp,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem']);
 }

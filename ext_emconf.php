@@ -29,8 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
             'typo3' => '6.2.0-7.6.99',
             'static_info_tables' => '6.3.7',
             'rkw_basics' => '7.6.10-7.6.99',
-            'rkw_mailer' => '7.6.10-7.6.99',
-            'rkw_survey' => '7.6.2-1.9.99'
+            'rkw_mailer' => '7.6.10-7.6.99'
         ),
 		'conflicts' => array(
 		),

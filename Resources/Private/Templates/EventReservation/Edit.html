@@ -13,20 +13,29 @@ in /Configuration/ExtensionBuilder/settings.yaml:
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="main">
-  <h2><f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.headline" /></h2>
-  <p><f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.introduction" arguments="{0: event.title}"/></p>
+    <h2>
+        <f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.headline"/>
+    </h2>
+    <p>
+        <f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.introduction" arguments="{0: event.title}"/>
+    </p>
 
+    <f:flashMessages as="flashMessages">
+        <ul class="myFlashMessages">
+            <f:for each="{flashMessages}" as="flashMessage">
+                <li>{flashMessage.message}</li>
+            </f:for>
+        </ul>
+    </f:flashMessages>
 
-  <f:flashMessages renderMode="div" />
-  <f:render partial="FormErrors" arguments="{object:Event}" />
+    <f:render partial="FormErrors" arguments="{object:Event}" />
 
-  <!-- edit form -->
-  <f:form class="form-fields" enctype="multipart/form-data" action="update" object="{eventReservation}" name="eventReservation" id="eventReservation">
+    <!-- edit form -->
+    <f:form class="form-fields" enctype="multipart/form-data" action="update" object="{eventReservation}" name="eventReservation" id="eventReservation">
 
-      <f:render partial="EventReservation/FormFieldsMaster" arguments="{_all}" />
+        <f:render partial="EventReservation/FormFieldsMaster" arguments="{_all}" />
+        <f:render partial="EventReservation/FormFieldsSub" arguments="{_all}" />
 
-      <f:render partial="EventReservation/FormFieldsSub" arguments="{_all}" />
-
-  </f:form>
+    </f:form>
 
 </f:section>

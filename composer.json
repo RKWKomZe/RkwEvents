@@ -32,8 +32,7 @@
         "typo3/cms-core": "^7.6.0 || ^8.7.0",
         "sjbr/static-info-tables": "^6.3.7@dev",
         "rkw/rkw-basics": "~7.6.12", 
-        "rkw/rkw-mailer": "~7.6.10",
-        "rkw/rkw-survey": "~7.6.2"
+        "rkw/rkw-mailer": "~7.6.10"
     },
     "autoload": {
         "psr-4": {
