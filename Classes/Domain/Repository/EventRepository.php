@@ -595,6 +595,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Returns storage pid of repository
      *
      * @return array
+     * @throws \Exception
+     * @throws \RuntimeException
      */
     protected function getStoragePid()
     {
@@ -614,7 +616,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         // @toDo: Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
-
         return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $storagePidString);
         //===
     }
@@ -625,6 +626,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param $pageId
      * @return array
+     * @throws \Exception
+     * @throws \RuntimeException
      */
     private function getTsForPage($pageId)
     {
