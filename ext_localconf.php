@@ -195,7 +195,7 @@ $signalSlotDispatcher->connect(
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
 
     // Exclude tx_rkwevents_pi1[event] from cHash because TYPO3 does not do that
-    if (!in_array('tx_rkwevents_pi1[event]', $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'])) {
+    if (strpos($GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'],'tx_rkwevents_pi1[event]') === false) {
         $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'] .= ', tx_rkwevents_pi1[event]';
     }
 
