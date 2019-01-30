@@ -31,8 +31,8 @@
     "require": {
         "typo3/cms-core": "^7.6.0 || ^8.7.0",
         "sjbr/static-info-tables": "^6.3.7@dev",
-        "rkw/rkw-basics": "~7.6.12", 
-        "rkw/rkw-mailer": "~7.6.10"
+        "rkw/rkw-basics": "~8.7.0",
+        "rkw/rkw-mailer": "~8.7.0"
     },
     "autoload": {
         "psr-4": {
