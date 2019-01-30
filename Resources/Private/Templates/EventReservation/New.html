@@ -24,8 +24,15 @@ Otherwise your changes will be overwritten the next time you save the extension 
         </f:if>
     </f:comment>
 
-	<f:flashMessages renderMode="div" />
-	<f:render partial="FormErrors" arguments="{object:Event}" />
+    <f:flashMessages as="flashMessages">
+        <ul class="myFlashMessages">
+            <f:for each="{flashMessages}" as="flashMessage">
+                <li>{flashMessage.message}</li>
+            </f:for>
+        </ul>
+    </f:flashMessages>
+
+    <f:render partial="FormErrors" arguments="{object:Event}" />
 
 	<f:form class="form-fields" action="create" enctype="multipart/form-data"  name="newEventReservation" object="{newEventReservation}">
 

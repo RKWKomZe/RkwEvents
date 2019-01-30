@@ -18,9 +18,15 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<h2><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.headline" /></h2>
 	<p><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.introduction" arguments="{0: event.title}"/></p>
 
-	<f:flashMessages renderMode="div" />
+    <f:flashMessages as="flashMessages">
+        <ul class="myFlashMessages">
+            <f:for each="{flashMessages}" as="flashMessage">
+                <li>{flashMessage.message}</li>
+            </f:for>
+        </ul>
+    </f:flashMessages>
 
-	<f:render partial="EventReservation/Properties" arguments="{eventReservation:eventReservation}" />
+    <f:render partial="EventReservation/Properties" arguments="{eventReservation:eventReservation}" />
 
 	<f:link.action action="myEvents" controller="Event" arguments="{event:event}" class="button secondary">
 		<span><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.backButton" /></span>

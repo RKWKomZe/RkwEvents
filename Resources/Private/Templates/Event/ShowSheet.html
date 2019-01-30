@@ -13,7 +13,13 @@ in /Configuration/ExtensionBuilder/settings.yaml:
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="main">
-	<f:flashMessages renderMode="div" />
+    <f:flashMessages as="flashMessages">
+        <ul class="myFlashMessages">
+            <f:for each="{flashMessages}" as="flashMessage">
+                <li>{flashMessage.message}</li>
+            </f:for>
+        </ul>
+    </f:flashMessages>
 
 	<f:render partial="Event/Properties" arguments="{_all}" />
 
