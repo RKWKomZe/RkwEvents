@@ -297,56 +297,6 @@ class DivUtility
     }
 
 
-    /**
-     * convertFilterObjectToArray
-     *
-     * @toDo Eigentlich gibt es dafür eine convert-Funktion in der RkwBasics, mit denen ich bei den Energiegründern gearbeitet
-     *     habe Because we can't transfer a non persistent instance of an object to the view
-     * @author Maximilian Fäßler
-     * @param \RKW\RkwEvents\Domain\Model\Filter $filter
-     * @return array
-     * @deprecated
-     */
-    public static function convertFilterObjectToArray(\RKW\RkwEvents\Domain\Model\Filter $filter)
-    {
-
-        $filterArray = array();
-
-        $filterArray['department'] = $filter->getDepartment();
-        $filterArray['letter'] = $filter->getLetter();
-        $filterArray['address'] = $filter->getAddress();
-        $filterArray['availablePlaces'] = $filter->getAvailablePlaces();
-
-        return $filterArray;
-        //===
-    }
-
-
-    /**
-     * convertArrayToFilterObject
-     *
-     * @toDo Eigentlich gibt es dafür eine convert-Funktion in der RkwBasics, mit denen ich bei den Energiegründern gearbeitet
-     *     habe
-     * @author Maximilian Fäßler
-     * @param array $filterArray
-     * @return \RKW\RkwEvents\Domain\Model\Filter
-     * @deprecated
-     */
-    public static function convertArrayToFilterObject($filterArray)
-    {
-
-        /** @var \RKW\RkwEvents\Domain\Model\Filter $filter */
-        $filter = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("RKW\\RkwEvents\\Domain\\Model\\Filter");
-
-        $filter->setDepartment(intval($filterArray['department']));
-        $filter->setLetter(strval($filterArray['letter']));
-        $filter->setAddress(strval($filterArray['address']));
-        $filter->setAvailablePlaces(strval($filterArray['availablePlaces']));
-
-        return $filter;
-        //===
-    }
-
 
     /**
      * workshopRegistration

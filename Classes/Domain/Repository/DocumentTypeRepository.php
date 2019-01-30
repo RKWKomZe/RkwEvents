@@ -32,7 +32,7 @@ class DocumentTypeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param integer $id
      * @param string $type
-     * @return \RKW\RkwAuthors\Domain\Model\Authors
+     * @return \RKW\RkwEvents\Domain\Model\Authors
      */
     public function findOneByIdAndType($id, $type)
     {
