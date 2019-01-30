@@ -2,8 +2,14 @@
 	<div class="typo3-fullDoc">
 		<div id="typo3-docbody">
 			<div id="typo3-inner-docbody" class="tx-rkwevents-backend">
-				<f:flashMessages renderMode="div" />
-				<f:render section="content" />
+                <f:flashMessages as="flashMessages">
+                    <ul class="myFlashMessages">
+                        <f:for each="{flashMessages}" as="flashMessage">
+                            <li>{flashMessage.message}</li>
+                        </f:for>
+                    </ul>
+                </f:flashMessages>
+                <f:render section="content" />
 			</div>
 		</div>
 	</div>

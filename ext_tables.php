@@ -10,6 +10,13 @@ if (!defined('TYPO3_MODE')) {
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    $_EXTKEY,
+    'Eventtitle',
+    'RKW Events: Title'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+
 	$_EXTKEY,
 	'Eventmaps',
 	'RKW Events: GoogleMaps'
