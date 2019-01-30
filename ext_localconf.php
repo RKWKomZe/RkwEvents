@@ -190,3 +190,48 @@ $signalSlotDispatcher->connect(
 	'deleteReservationAdmin'
 );
 
+
+// additional RealUrl configuration
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
+
+    // Exclude tx_rkwevents_pi1[event] from cHash because TYPO3 does not do that
+    if (!in_array('tx_rkwevents_pi1[event]', $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'])) {
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'] .= ', tx_rkwevents_pi1[event]';
+    }
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT'] = array_merge (
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT'],
+        [
+            //===============================================
+            // Events
+            'tx-rkw-events' => [
+                [
+                    'GETvar'   => 'tx_rkwevents_pi1[controller]',
+                    'valueMap' => [
+                        'event'       => 'Event',
+                        'reservation' => 'EventReservation',
+                    ],
+                ],
+                [
+                    'GETvar' => 'tx_rkwevents_pi1[action]',
+                ],
+
+                // look-up table - param has to be set in cHash-ignore in Install-Tool!
+                [
+                    'GETvar'      => 'tx_rkwevents_pi1[event]',
+                    'lookUpTable' => [
+                        'table'               => 'tx_rkwevents_domain_model_event',
+                        'id_field'            => 'uid',
+                        'alias_field'         => 'CONCAT(title, "-", uid)',
+                        'addWhereClause'      => ' AND NOT deleted AND NOT hidden',
+                        'useUniqueCache'      => 1,
+                        'useUniqueCache_conf' => [
+                            'strtolower'     => 1,
+                            'spaceCharacter' => '-',
+                        ],
+                    ],
+                ],
+            ],
+        ]
+    );
+}
