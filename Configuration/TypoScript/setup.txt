@@ -171,6 +171,10 @@ plugin.tx_rkwevents {
         }
     }
 
+    features {
+        requireCHashArgumentForActionArguments = 0
+    }
+
     settings {
 
 
