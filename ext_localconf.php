@@ -198,7 +198,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
     if (strpos($GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'],'tx_rkwevents_pi1[event]') === false) {
         $GLOBALS['TYPO3_CONF_VARS']['FE']['cHashExcludedParameters'] .= ', tx_rkwevents_pi1[event]';
     }
-    
+
     if (! is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT'])) {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT'] = [];
     }
