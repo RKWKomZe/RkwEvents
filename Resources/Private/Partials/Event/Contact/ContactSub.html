@@ -1,5 +1,4 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-{namespace rkwAuthors=RKW\RkwAuthors\ViewHelpers}
+{namespace rkwEvents=RKW\RkwEvents\ViewHelpers}
 
 <f:section name="Internal">
     <f:if condition="{contact.company}">
@@ -30,7 +29,7 @@
         <f:translate key="tx_rkwevents_fluid.partials_event_contactSub.phone" />:
         <f:if condition="{contact.phone2}">
             <f:then>
-                <rkwAuthors:getFormattedPhoneNumber author="{contact}" />
+                <rkwEvents:getFormattedPhoneNumber author="{contact}" />
             </f:then>
             <f:else>
                 {contact.phone}
@@ -75,7 +74,7 @@
         <f:translate key="tx_rkwevents_fluid.partials_event_contactSub.phone" />:
         <f:if condition="{contact.phone2}">
             <f:then>
-                <rkwAuthors:getFormattedPhoneNumber author="{contact}" />
+                {contact.phone2} / {contact.phone}
             </f:then>
             <f:else>
                 {contact.phone}
