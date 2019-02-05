@@ -15,13 +15,21 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="main">
 	<h2><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.headline" /></h2>
 
-    <f:flashMessages as="flashMessages">
-        <ul class="myFlashMessages">
-            <f:for each="{flashMessages}" as="flashMessage">
-                <li>{flashMessage.message}</li>
-            </f:for>
-        </ul>
-    </f:flashMessages>
+	<f:flashMessages as="flashMessages">
+		<f:for each="{flashMessages}" as="flashMessage">
+			<div class="typo3-messages">
+				<div class="alert alert-{flashMessage.class}">
+					<div class="media">
+						<div class="media-body">
+							<div class="alert-message">
+								{flashMessage.message}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</f:for>
+	</f:flashMessages>
 
     <p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.description" arguments="{0 : event.title}" /></p>
 
