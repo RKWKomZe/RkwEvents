@@ -63,7 +63,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $settingsDefault = $this->getSettings();
 
-        if ($settings['view']['templateRootPath']) {
+        if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
@@ -107,9 +107,12 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     $frontendUser->getTxRkwregistrationLanguageKey()
                 )
             );
-            $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/OptInReservationUser');
-            $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/OptInReservationUser');
-            $mailService->getQueueMail()->addPartialPath($settings['view']['partialRootPath']);
+
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/OptInReservationUser');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/OptInReservationUser');
 
             $mailService->send();
         }
@@ -273,7 +276,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $settingsDefault = $this->getSettings();
 
-        if ($settings['view']['templateRootPath']) {
+        if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
@@ -320,9 +323,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     )
                 );
 
-                $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/InformUpcomingEventUser');
-                $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/InformUpcomingEventUser');
-                $mailService->getQueueMail()->setPartialPath($settings['view']['partialRootPath']);
+                $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+                $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+                $mailService->getQueueMail()->setPlaintextTemplate('Email/InformUpcomingEventUser');
+                $mailService->getQueueMail()->setHtmlTemplate('Email/InformUpcomingEventUser');
 
                 if ($mailService->getTo() > 0) {
                     $mailService->send();
@@ -354,7 +359,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
             $settingsDefault = $this->getSettings();
 
-            if ($settings['view']['templateRootPath']) {
+            if ($settings['view']['templateRootPaths']) {
 
                 /** @var \RKW\RkwMailer\Service\MailService $mailService */
                 $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
@@ -393,9 +398,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                         )
                     );
 
-                    $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/SendSurveyForPastEvent');
-                    $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/SendSurveyForPastEvent');
-                    $mailService->getQueueMail()->addPartialPath($settings['view']['partialRootPath']);
+                    $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+                    $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+                    $mailService->getQueueMail()->setPlaintextTemplate('Email/SendSurveyForPastEvent');
+                    $mailService->getQueueMail()->setHtmlTemplate('Email/SendSurveyForPastEvent');
 
                     if ($mailService->getTo() > 0) {
                         $mailService->send();
@@ -428,7 +435,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $settingsDefault = $this->getSettings();
 
-        if ($settings['view']['templateRootPath']) {
+        if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
@@ -470,16 +477,19 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 )
             );
 
-            $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/' . ucFirst(strtolower($action)) . 'ReservationUser');
-            $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/' . ucFirst(strtolower($action)) . 'ReservationUser');
-            $mailService->getQueueMail()->addPartialPath($settings['view']['partialRootPath']);
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
 
             // Attach calendar event if set
             if (
                 ($sendCalendarMeeting)
                 && ($settings['settings']['attachCalendarEvent'])
             ) {
-                $mailService->getQueueMail()->setCalendarTemplate($settings['view']['templateRootPath'] . 'Email/' . ucFirst(strtolower($action)) . 'ReservationUser');
+                //$mailService->getQueueMail()->setCalendarTemplate($settings['view']['templateRootPaths'] . 'Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+                $mailService->getQueueMail()->setCalendarTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
             }
 
             $mailService->send();
@@ -516,7 +526,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             $recipients[] = $backendUser;
         }
 
-        if ($settings['view']['templateRootPath']) {
+        if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
@@ -582,9 +592,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 )
             );
 
-            $mailService->getQueueMail()->setPlaintextTemplate($settings['view']['templateRootPath'] . 'Email/' . ucFirst(strtolower($action)) . 'ReservationAdmin');
-            $mailService->getQueueMail()->setHtmlTemplate($settings['view']['templateRootPath'] . 'Email/' . ucFirst(strtolower($action)) . 'ReservationAdmin');
-            $mailService->getQueueMail()->addPartialPath($settings['view']['partialRootPath']);
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationAdmin');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationAdmin');
 
             if (count($mailService->getTo())) {
                 $mailService->send();
