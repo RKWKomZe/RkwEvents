@@ -236,8 +236,8 @@ page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/even
 #===============================================================
 # Ajax
 #===============================================================
-tx_rkwevents_ajax = PAGE
-tx_rkwevents_ajax {
+txRkweventsAjax = PAGE
+txRkweventsAjax {
 
 	# also written in partial Listing.html
 	typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}

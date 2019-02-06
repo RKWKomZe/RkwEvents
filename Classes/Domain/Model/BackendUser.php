@@ -24,14 +24,31 @@ namespace RKW\RkwEvents\Domain\Model;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
-    class BackendUser extends \RKW\RkwRegistration\Domain\Model\BackendUser
-    {
+/**
+ * Class BackendUser
+ *
+ * @author Maximilian Fäßler <maximilian@faesslerweb.de>
+ * @author Steffen Kroggel <developer@steffenkroggel.de>
+ * @copyright Rkw Kompetenzzentrum
+ * @package RKW_RkwRegistration
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ */
+class BackendUser extends \TYPO3\CMS\Extbase\Domain\Model\BackendUser
+{
+    /**
+     * @var string
+     */
+    protected $lang = 'en';
 
-    }
-} else {
-    class BackendUser extends \TYPO3\CMS\Extbase\Domain\Model\BackendUser
+    /**
+     * Gets the lang of the user
+     *
+     * @return string
+     */
+    public function getLang()
     {
-
+        return $this->lang;
     }
+
+
 }
