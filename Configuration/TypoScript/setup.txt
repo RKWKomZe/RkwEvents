@@ -158,11 +158,20 @@ config.tx_extbase.persistence {
 
 
 plugin.tx_rkwevents {
-	view {
-		templateRootPath = {$plugin.tx_rkwevents.view.templateRootPath}
-		partialRootPath = {$plugin.tx_rkwevents.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_rkwevents.view.layoutRootPath}
-	}
+    view {
+        layoutRootPaths {
+            0 = EXT:rkw_events/Resources/Private/Layouts/
+            1 = {$plugin.tx_rkwevents.view.layoutRootPath}
+        }
+        templateRootPaths {
+            0 = EXT:rkw_events/Resources/Private/Templates/
+            1 = {$plugin.tx_rkwevents.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:rkw_events/Resources/Private/Partials/
+            1 = {$plugin.tx_rkwevents.view.partialRootPath}
+        }
+    }
 	persistence {
 		storagePid = {$plugin.tx_rkwevents.persistence.storagePid}
         classes {
@@ -227,8 +236,8 @@ page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/even
 #===============================================================
 # Ajax
 #===============================================================
-tx_rkwevents_ajax = PAGE
-tx_rkwevents_ajax {
+txRkweventsAjax = PAGE
+txRkweventsAjax {
 
 	# also written in partial Listing.html
 	typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
