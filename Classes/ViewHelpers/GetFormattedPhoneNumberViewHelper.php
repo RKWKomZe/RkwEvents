@@ -2,6 +2,10 @@
 
 namespace RKW\RkwEvents\ViewHelpers;
 
+use \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
+use \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -26,21 +30,47 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class GetFormattedPhoneNumberViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class GetFormattedPhoneNumberViewHelper extends AbstractViewHelper implements CompilableInterface
 {
     /**
-     * @param \RKW\RkwEvents\Domain\Model\Authors $author
+     * Build a full phone number
+     *
+     * @param \RKW\RkwAuthors\Domain\Model\Authors $author
      * @param integer $phoneExtensionLength
      * @return string
      */
-    public function render(\RKW\RkwEvents\Domain\Model\Authors $author, $phoneExtensionLength = 4)
+    public function render(\RKW\RkwAuthors\Domain\Model\Authors $author, $phoneExtensionLength = 4)
     {
+
+        return static::renderStatic(
+            array(
+                'author'               => $author,
+                'phoneExtensionLength' => $phoneExtensionLength,
+            ),
+            $this->buildRenderChildrenClosure(),
+            $this->renderingContext
+        );
+        //===
+    }
+
+
+    /**
+     * Static rendering
+     *
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     * @return string
+     */
+    static public function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    {
+
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors')) {
             $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
             /** @var \RKW\RkwAuthors\ViewHelpers\GetFormattedPhoneNumberViewHelper $getFormattedPhoneNumberViewHelper */
             $getFormattedPhoneNumberViewHelper = $objectManager->get('RKW\\RkwAuthors\\ViewHelpers\\GetFormattedPhoneNumberViewHelper');
 
-            return $getFormattedPhoneNumberViewHelper->render($author, $phoneExtensionLength);
+            return $getFormattedPhoneNumberViewHelper::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
             //===
         }
 
