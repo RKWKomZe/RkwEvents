@@ -431,7 +431,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'config' => array(
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'Themtx_rkwbasics_domain_model_department',
+                'foreign_table' => 'tx_rkwbasics_domain_model_department',
                 'foreign_table_where' => 'AND tx_rkwbasics_domain_model_department.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwbasics_domain_model_department.name ASC',
                 'maxitems'      => 1,
                 'minitems'      => 1,
