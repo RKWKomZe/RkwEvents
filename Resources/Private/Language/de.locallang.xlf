@@ -189,7 +189,7 @@
 
 			<trans-unit id="eventController.message.error.notPermitted">
 				<source>Not permitted!</source>
-				<target>Zugriff verweigert. Bitte wenden Sie sich an den Support.</target>
+				<target><![CDATA[Zugriff verweigert. Bitte wenden Sie sich an den <a href="mailto:service@rkw.de">Support</a>.]]></target>
 			</trans-unit>
 
 
@@ -201,7 +201,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.error.notPermitted">
 				<source>Not permitted!</source>
-				<target>Zugriff verweigert. Bitte wenden Sie sich an den Support.</target>
+				<target><![CDATA[Zugriff verweigert. Bitte wenden Sie sich an den <a href="mailto:service@rkw.de">Support</a>.]]></target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.error.seats" approved="yes">
 				<source>Unfortunately there are not enough seats left.</source>
@@ -233,7 +233,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreatedEmail">
 				<source>An e-mail has been send to you. Please click the link in the e-mail to confirm your request.</source>
-				<target>Fast geschafft! Eine E-Mail mit einem Bestätigungslink ist auf dem Weg zu Ihnen. Sollten Sie innerhalb der nächsten 2-3 Minuten keine E-Mail von uns erhalten, prüfen Sie Ihren Spam-Filter. Selbstverständlich steht Ihnen aber auch unser Support bei Problemen jederzeit gerne zur Verfügung.</target>
+				<target><![CDATA[Fast geschafft! Eine E-Mail mit einem Bestätigungslink ist auf dem Weg zu Ihnen. Sollten Sie innerhalb der nächsten 2-3 Minuten keine E-Mail von uns erhalten, prüfen Sie Ihren Spam-Filter. Selbstverständlich steht Ihnen aber auch unser <a href="mailto:service@rkw.de">Support</a> bei Problemen jederzeit gerne zur Verfügung.]]></target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreated">
 				<source>Reservation successfully created.</source>
