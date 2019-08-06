@@ -21,6 +21,10 @@
                                         <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.list</numIndex>
                                         <numIndex index="1">Event->list;Event->myEvents;Event->show;Event->showSheet;EventReservation->show;EventReservation->new;EventReservation->optIn;EventReservation->create;EventReservation->edit;EventReservation->update;EventReservation->delete;EventPoll->new;EventPoll->create;EventPoll->show</numIndex>
                                     </numIndex>
+                                    <numIndex index="15" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.listSimple</numIndex>
+                                        <numIndex index="1">Event->listSimple</numIndex>
+                                    </numIndex>
                                     <numIndex index="12" type="array">
                                         <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.archive</numIndex>
                                         <numIndex index="1">Event->archive;Event->show;Event->showSheet</numIndex>
@@ -67,6 +71,7 @@
                             <OR>
                                 <numIndex index="0">FIELD:switchableControllerActions:=:Event->list;Event->myEvents;Event->show;Event->showSheet;EventReservation->show;EventReservation->new;EventReservation->optIn;EventReservation->create;EventReservation->edit;EventReservation->update;EventReservation->delete;EventPoll->new;EventPoll->create;EventPoll->show</numIndex>
                                 <numIndex index="1">FIELD:switchableControllerActions:=:Event->archive;Event->show;Event->showSheet</numIndex>
+                                <numIndex index="15">FIELD:switchableControllerActions:=:Event->listSimple</numIndex>
                             </OR>
                         </displayCond>
                         <config>
@@ -75,11 +80,12 @@
                     </settings.noFilters>
                     <settings.projectUids>
                         <TCEforms>
-                            <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.project</label>
+                            <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.select.projects</label>
                             <displayCond>
                                 <OR>
                                     <numIndex index="0">FIELD:switchableControllerActions:=:Event->list;Event->myEvents;Event->show;Event->showSheet;EventReservation->show;EventReservation->new;EventReservation->optIn;EventReservation->create;EventReservation->edit;EventReservation->update;EventReservation->delete;EventPoll->new;EventPoll->create;EventPoll->show</numIndex>
                                     <numIndex index="1">FIELD:switchableControllerActions:=:Event->archive;Event->show;Event->showSheet</numIndex>
+                                    <numIndex index="15">FIELD:switchableControllerActions:=:Event->listSimple</numIndex>
                                 </OR>
                             </displayCond>
                             <config>
@@ -97,6 +103,31 @@
                             -->
                         </TCEforms>
                     </settings.projectUids>
+                    <settings.eventUids>
+                        <TCEforms>
+                            <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.select.events</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Event->list;Event->myEvents;Event->show;Event->showSheet;EventReservation->show;EventReservation->new;EventReservation->optIn;EventReservation->create;EventReservation->edit;EventReservation->update;EventReservation->delete;EventPoll->new;EventPoll->create;EventPoll->show</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Event->archive;Event->show;Event->showSheet</numIndex>
+                                    <numIndex index="15">FIELD:switchableControllerActions:=:Event->listSimple</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <size>5</size>
+                                <maxitems>5</maxitems>
+                                <minitems>0</minitems>
+                                <type>select</type>
+                                <foreign_table>tx_rkwevents_domain_model_event</foreign_table>
+                                <foreign_table_where>
+                                    AND tx_rkwevents_domain_model_event.deleted = 0 AND tx_rkwevents_domain_model_event.hidden = 0 AND tx_rkwevents_domain_model_event.end > UNIX_TIMESTAMP() ORDER BY tx_rkwevents_domain_model_event.uid
+                                </foreign_table_where>
+                            </config>
+                            <!--
+                            <displayCond>FIELD:settings.flexform.publicationsOnly:=:0</displayCond>
+                            -->
+                        </TCEforms>
+                    </settings.eventUids>
                 </el>
             </ROOT>
         </general>

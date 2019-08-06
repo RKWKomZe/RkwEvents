@@ -7,13 +7,13 @@ if (!defined('TYPO3_MODE')) {
 	'RKW.' . $_EXTKEY,
 	'Pi1',
 	array(
-		'Event' => 'myEvents, archive, list, show, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
+		'Event' => 'myEvents, archive, list, listSimple, show, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
         'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
 		'Ajax' => 'filter, more, moreArchive'
 	),
 	// non-cacheable actions
 	array(
-		'Event' => 'myEvents, show, list, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
+		'Event' => 'myEvents, show, list, listSimple, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
         'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
 		'Ajax' => 'filter, more, moreArchive'
 	)
