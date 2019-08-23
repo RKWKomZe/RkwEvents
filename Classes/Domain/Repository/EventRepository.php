@@ -378,12 +378,19 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $query->logicalNot($query->equals('title', '')),
         );
 
-        if (
-            (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
-            && ($settings['projectUids'])
-            && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
-        ) {
-            $constraints[] = $query->in('project', $projectUids);
+        if ((\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))) {
+            if (
+                ($settings['projectUids'])
+                && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
+            ) {
+                $constraints[] = $query->in('project', $projectUids);
+            }
+            if (
+                ($settings['eventUids'])
+                && ($eventUids = GeneralUtility::trimExplode(',', $settings['eventUids'], true))
+            ) {
+                $constraints[] = $query->in('uid', $eventUids);
+            }
         }
 
         return $query->matching(
