@@ -97,8 +97,8 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $jsonHelper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
         if ($page > 0) {
 
-            // if a distance search is performed we do not group by month
-            if ($filter['address']) {
+            // if a distance search is performed or noGrouping is explicitly set we do not group by month
+            if ($filter['address'] OR $filter['noGrouping']) {
 
                 $replacements['sortedEventList'] = $eventList;
                 $replacements['geosearch'] = true;
@@ -148,8 +148,8 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         } else {
 
-            // if a distance search is performed we do not group by month
-            if ($filter['address']) {
+            // if a distance search is performed or noGrouping is explicitly set we do not group by month
+            if ($filter['address'] OR $filter['noGrouping']) {
 
                 $replacements['sortedEventList'] = $eventList;
                 $replacements['geosearch'] = true;

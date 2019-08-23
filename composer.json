@@ -26,6 +26,12 @@
             "email": "cm@davitec.de",
             "homepage": "https://www.davitec.de",
             "role": "Developer"
+        },
+        {
+            "name": "Christian Dilger",
+            "email": "c.dilger@addorange.de",
+            "homepage": "http://addorange.de",
+            "role": "Developer"
         }
     ],
     "require": {

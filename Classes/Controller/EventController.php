@@ -155,6 +155,50 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         );
     }
 
+    /**
+     * action listSimple
+     *
+     * @return void
+     */
+    public function listSimpleAction()
+    {
+        // 1. get event list
+        $listItemsPerView = (int)$this->settings['itemsPerPage'] ? (int)$this->settings['itemsPerPage'] : 10;
+        $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
+        // 2. proof if we have further results (query with listItemsPerQuery + 1)
+        $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
+        $showMoreLink = (count($eventList) < count($queryResult) ? true : false);
+        // 3. get department and document list (for filter)
+        $departmentList = $this->departmentRepository->findAllByVisibility();
+        $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
+        $categoryList = $this->categoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
+        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+        $noGrouping = true;
+        $this->view->assignMultiple(
+            [
+                'filter'           => [
+                    'project' => $this->settings['projectUids'],
+                    'noGrouping' => $noGrouping,
+                ],
+                'sortedEventList'  => $sortedEventList,
+                'noGrouping'       => $noGrouping,
+                'departmentList'   => $departmentList,
+                'documentTypeList' => $documentTypeList,
+                'categoryList'     => $categoryList,
+                'page'
+            ]
+        );
+        // target template is also used by ajax - so we have to set typoscript settings this way
+        $this->view->assignMultiple(
+            [
+                'ajaxTypeNum'  => (int)$this->settings['ajaxTypeNum'],
+                'showPid'      => (int)$this->settings['showPid'],
+                'pageMore'     => 1,
+                'showMoreLink' => $showMoreLink,
+                'noGrouping'       => true,
+            ]
+        );
+    }
 
     /**
      * action archive
