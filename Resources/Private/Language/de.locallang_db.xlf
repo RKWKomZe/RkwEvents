@@ -703,6 +703,10 @@
 				<source>List</source>
 				<target>Listenansicht</target>
 			</trans-unit>
+            <trans-unit id="flexform.event.listSimple">
+                <source>List (simple)</source>
+                <target>Listenansicht (einfach)</target>
+            </trans-unit>
 			<trans-unit id="flexform.event.archive">
 				<source>Event archive</source>
 				<target>Listenansicht Archiv</target>
@@ -732,6 +736,18 @@
 				<source>My event reservation</source>
 				<target>Mein RKW: Liste Reservierungen</target>
 			</trans-unit>
+            <trans-unit id="flexform.event.noFilters">
+                <source>Don't show filters</source>
+				<target>Filter ausblenden</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.select.projects">
+                <source>Select projects</source>
+                <target>Veranstaltungen aus ausgewählten Projekten anzeigen</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.select.events">
+                <source>Select specific events</source>
+                <target>Einzelne Veranstaltungen zur Anzeige auswählen</target>
+            </trans-unit>
 
 
 		</body>
