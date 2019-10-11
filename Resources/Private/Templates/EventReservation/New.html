@@ -50,7 +50,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 		<f:render partial="EventReservation/FormFieldsMaster" arguments="{_all}"/>
 
-		<f:render partial="EventReservation/FormFieldsSub" arguments="{_all}"/>
+        <f:if condition="{event.regSingle}">
+            <f:then><!-- no further participants to sign up --></f:then>
+            <f:else>
+		        <f:render partial="EventReservation/FormFieldsSub" arguments="{_all}"/>
+            </f:else>
+        </f:if>
 
 	</f:form>
 

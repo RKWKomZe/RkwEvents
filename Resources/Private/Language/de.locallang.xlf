@@ -69,6 +69,10 @@
 				<source>Registration required</source>
 				<target>Anmeldung erforderlich</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_single" approved="yes">
+				<source>Only single reservation</source>
+				<target>Nur Einzelanmeldungen erlauben</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
 				<source>Regitration End</source>
 				<target>Anmeldeschluss</target>

@@ -28,11 +28,11 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ),
-		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,schedule,target_group,partner,seats,costs_reg,costs_red,reg_required,reg_end,ext_reg_link,document_type,department,categories,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,',
+		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,schedule,target_group,partner,seats,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,categories,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ),
     'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, partner, add_info, schedule, testimonials, seats, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, partner, add_info, schedule, testimonials, seats, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3',
     ),
     'types' => array(
         '1' => array(
@@ -45,7 +45,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link,
+                'seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -364,6 +364,14 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'config' => array(
                 'type' => 'check',
                 'default' => 1
+            )
+        ),
+        'reg_single' => array(
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reg_single',
+            'config' => array(
+                'type' => 'check',
+                'default' => 0
             )
         ),
         'reg_end' => array(

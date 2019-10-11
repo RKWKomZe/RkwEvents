@@ -205,6 +205,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if (!$newEventReservation) {
             $newEventReservation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
         }
+
         $newEventReservation->setEvent($event);
 
         $this->view->assign('event', $event);

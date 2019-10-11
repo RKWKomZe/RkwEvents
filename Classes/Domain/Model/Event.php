@@ -148,6 +148,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $regRequired = true;
 
     /**
+     * regSingle
+     *
+     * @var boolean
+     */
+    protected $regSingle = false;
+
+    /**
      * regEnd
      *
      * @var integer
@@ -786,6 +793,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function isRegRequired()
     {
         return $this->regRequired;
+    }
+
+    /**
+     * Returns the regSingle
+     *
+     * @return boolean $regSingle
+     */
+    public function getRegSingle()
+    {
+        return $this->regSingle;
+    }
+
+    /**
+     * Sets the regSingle
+     *
+     * @param boolean $regSingle
+     * @return void
+     */
+    public function setRegSingle($regSingle)
+    {
+        $this->regSingle = $regSingle;
     }
 
     /**
