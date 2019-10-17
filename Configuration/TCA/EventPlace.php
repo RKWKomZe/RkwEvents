@@ -31,7 +31,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventplace'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, address, zip, city, country, short, longitude, latitude',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, address, zip, city, country, short, longitude, latitude'),
+		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, name, address, zip, city, country, short, longitude, latitude'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -43,6 +43,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventplace'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
@@ -58,6 +59,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventplace'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => array(
 					array('', 0),
 				),
@@ -130,6 +132,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventplace'] = array(
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventplace.country',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'static_countries',
                 'default' => 54,
                 'minitems' => 0,
