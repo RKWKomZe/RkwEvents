@@ -35,12 +35,12 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, partner, add_info, schedule, testimonials, seats, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3',
     ),
     'types' => array(
-        '1' => array(
+        '1' => array(           
             'showitem' => '
-                sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, subtitle,  start, end, reg_end, document_type, series, department, organizer,
+                sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle,  start, end, reg_end, document_type, series, department, organizer,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                description;;;richtext:rte_transform[mode=ts_links], target_group, partner;;;richtext:rte_transform[mode=ts_links], add_info, schedule;;;richtext:rte_transform[mode=ts_links], testimonials;;;richtext:rte_transform[mode=ts_links],
+                description, target_group, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
@@ -62,7 +62,24 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
 				// workshop1, workshop2, workshop3,
 
                 '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
-                starttime, endtime'),
+                starttime, endtime',
+                
+                
+            // add RTE
+            'columnsOverrides' => array(
+                'description' => array (
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ),
+                'schedule' => array (
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ),
+                'testimonials' => array (
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ),
+            
+            )           
+            
+        ),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -74,6 +91,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => array(
@@ -89,6 +107,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array(
                     array('', 0),
                 ),
@@ -220,7 +239,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 'eval' => 'trim',
                 'wizards' => array(
                     'RTE' => array(
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords'=> 1,
                         'RTEonly' => 1,
                         'module' => array(
@@ -242,7 +261,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 'eval' => 'trim, required',
                 'wizards' => array(
                     'RTE' => array(
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords'=> 1,
                         'RTEonly' => 1,
                         'module' => array(
@@ -274,7 +293,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 'eval' => 'trim',
                 'wizards' => array(
                     'RTE' => array(
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords'=> 1,
                         'RTEonly' => 1,
                         'module' => array(
@@ -296,7 +315,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 'eval' => 'trim',
                 'wizards' => array(
                     'RTE' => array(
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
                         'notNewRecords'=> 1,
                         'RTEonly' => 1,
                         'module' => array(
@@ -350,6 +369,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.costs_tax',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'default' => 0,
                 'items' => array(
                     array('LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.costs_tax.I.0', 0),
@@ -390,12 +410,9 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                     'link' => array(
                         'type' => 'popup',
                         'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-                        'icon' => 'link_popup.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
                         'module' => array(
-                            'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
-                                'mode' => 'wizard',
-                            )
+                            'name' => 'wizard_link',
                         ),
                         'JSopenParams' => 'height=400,width=550,status=0,menubar=0,scrollbars=1',
                         'params' => Array(
@@ -443,6 +460,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.categories',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'sys_category',
                 'foreign_table_where' => ' AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(sys_category.parent,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
                 'MM' => 'sys_category_record_mm',
@@ -495,6 +513,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.currency',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'static_currencies',
                 'default' => 49,
                 'minitems' => 0,
@@ -578,12 +597,9 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                     'link' => array(
                         'type' => 'popup',
                         'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-                        'icon' => 'link_popup.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
                         'module' => array(
-                            'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
-                                'mode' => 'wizard',
-                            )
+                            'name' => 'wizard_link',
                         ),
                         'JSopenParams' => 'height=400,width=550,status=0,menubar=0,scrollbars=1',
                         'params' => Array(
@@ -615,7 +631,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                     'edit' => array(
                         'type' => 'popup',
                         'title' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact.edit',
-                        'icon' => 'edit2.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
                         'module' => array(
                             'name' => 'wizard_edit',
                         ),
@@ -626,7 +642,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                     'add' => array(
                         'type' => 'script',
                         'title' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact.add',
-                        'icon' => 'add.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
                         'params' => array(
                             'table' => 'tx_rkwevents_domain_model_eventcontact',
                             'pid' => '###CURRENT_PID###',
@@ -674,7 +690,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                     'edit' => array(
                         'type' => 'popup',
                         'title' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.edit',
-                        'icon' => 'edit2.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
                         'module' => array(
                             'name' => 'wizard_edit',
                         ),
@@ -685,7 +701,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_event'] = array(
                 'add' => array(
                         'type' => 'script',
                         'title' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.add',
-                        'icon' => 'add.gif',
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
                         'params' => array(
                             'table' => 'tx_rkwevents_domain_model_eventorganizer',
                             'pid' => '###CURRENT_PID###',

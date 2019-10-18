@@ -34,8 +34,8 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventorganizer'] = array(
 
 	),
 	'types' => array(
-		// '1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, company, first_name, last_name, phone, email'),
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, company'),
+		// '1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, company, first_name, last_name, phone, email'),
+		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, company'),
 
 	),
 	'palettes' => array(
@@ -48,6 +48,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventorganizer'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
@@ -63,6 +64,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventorganizer'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => array(
 					array('', 0),
 				),
@@ -88,6 +90,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventorganizer'] = array(
 			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.salutation',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => array(
 					array('LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.salutation.I.99', 99),
 					array('LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.salutation.I.0', 0),

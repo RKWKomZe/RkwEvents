@@ -28,7 +28,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventseries'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, short, rota',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, short, rota'),
+		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, name, short, rota'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -40,6 +40,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventseries'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
@@ -55,6 +56,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventseries'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => array(
 					array('', 0),
 				),

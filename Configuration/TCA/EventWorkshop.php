@@ -30,7 +30,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventworkshop'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users'),
+		'1' => array('showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -42,6 +42,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventworkshop'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
@@ -57,6 +58,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventworkshop'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => array(
 					array('', 0),
 				),
@@ -153,7 +155,7 @@ $GLOBALS['TCA']['tx_rkwevents_domain_model_eventworkshop'] = array(
 				'eval' => 'trim, required',
 				'wizards' => array(
 					'RTE' => array(
-						'icon' => 'wizard_rte2.gif',
+						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
 						'notNewRecords'=> 1,
 						'RTEonly' => 1,
 						'module' => array(
