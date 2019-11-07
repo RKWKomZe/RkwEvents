@@ -179,7 +179,12 @@ plugin.tx_rkwevents {
             RKW\RkwEvents\Domain\Model\EventReservationAddPerson.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservationAddPerson.newRecordStoragePid}
         }
     }
+    features {
 
+        # see: https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/8.5/Breaking-78002-EnforceCHashArgumentForExtbaseActions.html
+        requireCHashArgumentForActionArguments = 0
+
+    }
     settings {
 
 
