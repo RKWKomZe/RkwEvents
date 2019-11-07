@@ -5,8 +5,8 @@ config.tx_extbase.persistence {
         // make sure ref_index is updated
         updateReferenceIndex = 1
 
-        // dependeny to rkw_authors is optional - see ext_typoscript_setup.txt in rkw_authors
-        // dependeny to rkw_survey is optional - see ext_typoscript_setup.txt in rkw_survey
+        // dependeny to rkw_authors is optional - see configuration in rkw_authors
+        // dependeny to rkw_survey is optional - see configuration in rkw_survey
         #===============================================
 
         RKW\RkwBasics\Domain\Model\Department {
@@ -241,8 +241,8 @@ page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/even
 #===============================================================
 # Ajax
 #===============================================================
-txRkweventsAjax = PAGE
-txRkweventsAjax {
+txRkwEventsAjax = PAGE
+txRkwEventsAjax {
 
 	# also written in partial Listing.html
 	typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
