@@ -5,12 +5,12 @@ return [
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddperson',
 		'label' => 'last_name',
 		'label_alt' => 'first_name',
-		'label_alt_force' => TRUE,
+		'label_alt_force' => true,
         'default_sortby' => 'ORDER BY last_name ASC',
         'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'dividers2tabs' => TRUE,
+		'dividers2tabs' => true,
 
 		'delete' => 'deleted',
 		'enablecolumns' => [

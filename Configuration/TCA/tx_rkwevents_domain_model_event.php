@@ -761,7 +761,7 @@ return [
                 'foreign_table' => 'tx_rkwevents_domain_model_eventsheet',
                 'foreign_field' => 'event',
                 'foreign_sortby' => 'sorting',
-                'show_thumbs' => TRUE,
+                'show_thumbs' => true,
                 'maxitems'      => 9999,
                 'size'          => 5,
                 'appearance' => [

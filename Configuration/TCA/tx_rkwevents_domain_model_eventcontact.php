@@ -4,11 +4,11 @@ return [
 		'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact',
 		'label' => 'last_name',
 		'label_alt' => 'first_name, company, email',
-		'label_alt_force' => TRUE,
+		'label_alt_force' => true,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'dividers2tabs' => TRUE,
+		'dividers2tabs' => true,
 		'requestUpdate' => 'type',
 		'default_sortby' => 'ORDER BY last_name, company, email',
 

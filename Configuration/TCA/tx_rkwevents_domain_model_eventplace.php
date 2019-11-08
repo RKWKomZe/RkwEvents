@@ -4,11 +4,11 @@ return [
 		'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventplace',
 		'label' => 'name',
 		'label_alt' => 'city',
-		'label_alt_force' => TRUE,
+		'label_alt_force' => true,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'dividers2tabs' => TRUE,
+		'dividers2tabs' => true,
 		'default_sortby' => 'ORDER BY name ASC, city ASC',
 
 		'languageField' => 'sys_language_uid',
