@@ -16,3 +16,16 @@ jQuery('a.tx-rkwevents-delete').on( "click", function(event) {
         });
     }
 });
+
+//  function to prevent double click
+jQuery('a.prevent-double-click').on('click', function(event) {
+
+    var $anchor = $(event.target.closest('a'));
+
+    if ($anchor.hasClass('disabled')) {
+        event.preventDefault();
+    }
+
+    $anchor.addClass('disabled');
+
+});
