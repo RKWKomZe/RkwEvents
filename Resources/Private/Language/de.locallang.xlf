@@ -69,6 +69,10 @@
 				<source>Registration required</source>
 				<target>Anmeldung erforderlich</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_single" approved="yes">
+				<source>Only single reservation</source>
+				<target>Nur Einzelanmeldungen erlauben</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
 				<source>Regitration End</source>
 				<target>Anmeldeschluss</target>
@@ -229,7 +233,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.hint.reservations" approved="yes">
 				<source>See your reservations %shere%s!</source>
-				<target>Ihre aktuellen Veranstalungsanmeldungen können Sie %shier%s einsehen.</target>
+				<target>Ihre aktuellen Veranstaltungsanmeldungen können Sie %shier%s einsehen.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreatedEmail">
 				<source>An e-mail has been send to you. Please click the link in the e-mail to confirm your request.</source>

@@ -71,6 +71,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_required">
 				<source>Registration Required</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reg_single">
+				<source>Only single reservation</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end">
 				<source>Registration End</source>
 			</trans-unit>

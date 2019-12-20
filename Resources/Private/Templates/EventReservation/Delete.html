@@ -26,12 +26,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	</f:if>
 
 	<p>
-		<f:link.action action="remove" arguments="{eventReservation : eventReservation}" class="button secondary">
+		<f:link.action action="remove" arguments="{eventReservation : eventReservation}" class="button secondary prevent-double-click">
 			<span><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelYes" /></span>
 		</f:link.action>
 
-		<f:link.action  pageUid="{settings.myEventsPid}" action="myEvents" controller="Event" class="button">
+		<f:link.action pageUid="{settings.myEventsPid}" action="myEvents" controller="Event" class="button">
 			<span><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelNo" /></span>
 		</f:link.action>
+
 	</p>
 </f:section>
