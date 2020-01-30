@@ -1,7 +1,6 @@
 <?php
 
 namespace RKW\RkwEvents\Controller;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * BackendController
@@ -71,13 +70,6 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected $backendUserRepository = null;
 
-    /**
-     * pagesRepository
-     *
-     * @var \RKW\RkwEvents\Domain\Repository\PagesRepository
-     * @inject
-     */
-    protected $pagesRepository = null;
 
     /**
      * Persistence Manager
@@ -139,17 +131,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $timeZone = trim($data['timeZone']);
         }
 
-        // check target PID (even returns NULL if no targetPid is given)
-        // @toDo: Check for doktype? (only folders e.g.?)
-        $targetPages = $this->pagesRepository->findByUid(intval($data['targetPid']));
-        if (!$targetPages) {
-            // fallback for non or not existing PID
-            $data['targetPid'] = 1;
-            // @toDo: Throw error instead fallback PID?
-        } else {
-            // for secure, PID is correct
-            $data['targetPid'] = intval($data['targetPid']);
-        }
+        $data['targetPid'] = intval($data['targetPid']);
 
 
         $allowedRows = array(
