@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Controller;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * BackendController
@@ -71,6 +72,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected $backendUserRepository = null;
 
     /**
+     * pagesRepository
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\PagesRepository
+     * @inject
+     */
+    protected $pagesRepository = null;
+
+    /**
      * Persistence Manager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
@@ -117,6 +126,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function createAction($data)
     {
+
+
+
         $doImport = false;
         if ($data['doImport']) {
             $doImport = true;
@@ -126,6 +138,19 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         if ($data['timeZone']) {
             $timeZone = trim($data['timeZone']);
         }
+
+        // check target PID (even returns NULL if no targetPid is given)
+        // @toDo: Check for doktype? (only folders e.g.?)
+        $targetPages = $this->pagesRepository->findByUid(intval($data['targetPid']));
+        if (!$targetPages) {
+            // fallback for non or not existing PID
+            $data['targetPid'] = 1;
+            // @toDo: Throw error instead fallback PID?
+        } else {
+            // for secure, PID is correct
+            $data['targetPid'] = intval($data['targetPid']);
+        }
+
 
         $allowedRows = array(
             'typeId',
@@ -263,6 +288,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         // set hidden state
                         $event->setHidden($hidden);
+
+                        // set PID
+                        $event->setPid($data['targetPid']);
 
                         // set data
                         if ($tempData['title']) {
@@ -480,6 +508,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 /** @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository */
                                 $countryRepository = $this->objectManager->get('SJBR\\StaticInfoTables\\Domain\\Repository\\CountryRepository');
 
+                                // set PID
+                                $eventPlace->setPid($data['targetPid']);
+
                                 $eventPlace->setName($tempData['placeName']);
                                 $eventPlace->setAddress($tempData['address']);
                                 $eventPlace->setZip($zip);
@@ -591,6 +622,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                                     /** @var \RKW\RkwEvents\Domain\Model\EventContact $eventContact */
                                     $eventContact = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("RKW\\RkwEvents\\Domain\\Model\\EventContact");
+
+                                    // set PID
+                                    $eventContact->setPid($data['targetPid']);
 
                                     if (
                                         ($tempData['contact' . $contactNumber . 'FirstName'])

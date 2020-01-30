@@ -153,6 +153,20 @@ config.tx_extbase.persistence {
             }
         }
 
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\Pages {
+            mapping {
+                tableName = pages
+                columns {
+                    uid.mapOnProperty = uid
+                    pid.mapOnProperty = pid
+                    tstamp.mapOnProperty = tstamp
+                    lastUpdated.mapOnProperty = lastUpdated
+                }
+            }
+        }
+
     }
 }
 
