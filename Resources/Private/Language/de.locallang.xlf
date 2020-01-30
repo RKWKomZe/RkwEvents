@@ -956,6 +956,10 @@
 				<source>Timezone of CSV Data</source>
 				<target>Zeitzone für Datum/Uhrzeit in der CSV</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPid">
+                <source>Target PID for import</source>
+                <target>PID: Speicherort der Datei</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_submit">
 				<source>Start import</source>
 				<target>Import starten</target>
