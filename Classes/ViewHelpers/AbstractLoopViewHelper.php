@@ -28,7 +28,7 @@ abstract class AbstractLoopViewHelper extends AbstractViewHelper
      * Initialize
      *
      * @return void
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
@@ -42,7 +42,7 @@ abstract class AbstractLoopViewHelper extends AbstractViewHelper
      * @param integer $step
      * @param string $iterationArgument
      * @return string
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
+     * @throws \TYPO3Fluid\Fluid\Core\Exception
      */
     protected function renderIteration($i, $from, $to, $step, $iterationArgument)
     {
