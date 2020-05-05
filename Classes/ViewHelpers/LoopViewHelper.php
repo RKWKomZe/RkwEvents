@@ -32,7 +32,7 @@ class LoopViewHelper extends AbstractLoopViewHelper
      * Initialize
      *
      * @return void
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      */
     public function initializeArguments()
     {
@@ -46,7 +46,7 @@ class LoopViewHelper extends AbstractLoopViewHelper
     /**
      *
      * @return string
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
+     * @throws \TYPO3Fluid\Fluid\Core\Exception
      */
     public function render()
     {
