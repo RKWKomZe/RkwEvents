@@ -76,7 +76,7 @@
             <f:if condition="{reservation.event.onlineEventAccessLink}">
                 <p>
                     <strong><rkwMailer:frontend.translate key="partials_email_details.eventAccessLink" languageKey="{language}" extensionName="rkwEvents" /></strong>
-                    <br/><a href='<vh:frontend.typolink parameter="{reservation.event.onlineEventAccessLink}" />'><vh:frontend.typolink parameter="{reservation.event.onlineEventAccessLink}" /></a>
+                    <br/><a href='<rkwMailer:frontend.typolink parameter="{reservation.event.onlineEventAccessLink}" />'><rkwMailer:frontend.typolink parameter="{reservation.event.onlineEventAccessLink}" /></a>
                 </p>
             </f:if>
         </f:if>
