@@ -996,6 +996,9 @@
 			<trans-unit id="templates_email_informUpcomingEventUser.text4">
 				<source>Login here to change or delete your reservation.</source>
 			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.eventAccessLink">
+                <source>Direct Link</source>
+            </trans-unit>
 
 
 			<!-- Templates/Email/SurveyReservationUser.html -->

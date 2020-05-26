@@ -1284,6 +1284,10 @@
 				<source>Login here to change or delete your reservation.</source>
 				<target>Loggen Sie sich hier ein, um Ihre Anmeldung zu löschen oder zu ändern.</target>
 			</trans-unit>
+			<trans-unit id="templates_email_informUpcomingEventUser.eventAccessLink">
+                <source>Direct Link</source>
+                <target>Direktlink für Teilnahme an der Veranstaltung</target>
+            </trans-unit>
 
 
 
