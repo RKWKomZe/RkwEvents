@@ -1158,6 +1158,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         // 2.3 add domain entry
         $newEventReservation->setServerHost(filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
+        $newEventReservation->setShowPid(intval($this->settings['showPid']));
 
         // 3. add it to event
         $event = $newEventReservation->getEvent();

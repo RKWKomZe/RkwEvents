@@ -160,6 +160,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $serverHost = '';
 
+    /**
+     * showPid
+     *
+     * @var integer
+     */
+    protected $showPid = 0;
+
 
     /**
      * __construct
@@ -586,5 +593,26 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getServerHost()
     {
         return $this->serverHost;
+    }
+
+    /**
+     * Sets the showPid value
+     *
+     * @param integer $showPid
+     * @return void
+     */
+    public function setShowPid($showPid)
+    {
+        $this->showPid = $showPid;
+    }
+
+    /**
+     * Returns the showPid value
+     *
+     * @return integer
+     */
+    public function getShowPid()
+    {
+        return $this->showPid;
     }
 }
