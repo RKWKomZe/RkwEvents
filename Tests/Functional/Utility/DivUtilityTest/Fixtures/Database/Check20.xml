@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_rkwevents_domain_model_event>
+        <uid>1</uid>
+        <pid>0</pid>
+        <title>Testveranstaltung</title>
+        <seats>3</seats>
+        <reservation>2</reservation>
+        <testimonials></testimonials>
+        <description></description>
+        <target_group></target_group>
+        <schedule></schedule>
+        <partner></partner>
+    </tx_rkwevents_domain_model_event>
+
+    <tx_rkwevents_domain_model_eventreservation>
+        <uid>1</uid>
+        <event>1</event>
+        <first_name>Erste</first_name>
+        <last_name>Reservierung</last_name>
+        <remark></remark>
+        <deleted>0</deleted>
+    </tx_rkwevents_domain_model_eventreservation>
+    <tx_rkwevents_domain_model_eventreservation>
+        <uid>2</uid>
+        <event>1</event>
+        <first_name>Zweite</first_name>
+        <last_name>Reservierung</last_name>
+        <remark></remark>
+        <deleted>0</deleted>
+    </tx_rkwevents_domain_model_eventreservation>
+</dataset>

@@ -71,6 +71,7 @@ class DivUtility
 
         $countConfirmedReservations = self::countConfirmedReservations($event);
         $countEventReservationsWithAddPersons = self::countEventReservationsWithAddPersons($newEventReservation);
+
         $availableSeats = $event->getSeats() - $countConfirmedReservations;
         if ($availableSeats >= $countEventReservationsWithAddPersons) {
             return true;
@@ -122,7 +123,12 @@ class DivUtility
     {
         $reservations = 1;
         $addPerson = $eventReservation->getAddPerson();
-        $reservations = $reservations + count($addPerson);
+
+        foreach ($addPerson as $person) {
+            if ($person->getFirstName() && $person->getLastName()) {
+                $reservations++;
+            }
+        }
 
         return $reservations;
         //===
