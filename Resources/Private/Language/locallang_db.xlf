@@ -375,6 +375,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.server_host" approved="yes">
 				<source>Domain on registration</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.show_pid" approved="yes">
+                <source>Show Pid of Detailview</source>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventreservationaddperson -->

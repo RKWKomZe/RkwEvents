@@ -282,6 +282,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
             if (count($eventReservationList)) {
+                /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
                 foreach ($eventReservationList as $eventReservation) {
                     if ($eventReservation->getFeUser()) {
 
@@ -301,7 +302,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 'googleMapsLink' => $googleMapsLink,
                                 'pageUid'        => intval($GLOBALS['TSFE']->id),
                                 'loginPid'       => intval($settingsDefault['loginPid']),
-                                'showPid'        => intval($settingsDefault['showPid']),
+                                // a) Problem: We're out of RootPid context here! (function is called via cronjob)
+                                //'showPid'        => intval($settingsDefault['showPid']),
+                                // b) Use manually set showPid of EventReservation instead!
+                                'showPid'        => intval($eventReservation->getShowPid()),
                                 'extRelPath'     => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_events'),
                             ),
                             'subject' => \RKW\RkwMailer\Helper\FrontendLocalization::translate(
