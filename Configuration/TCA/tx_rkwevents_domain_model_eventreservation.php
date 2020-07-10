@@ -15,14 +15,14 @@ return [
 		'delete' => 'deleted',
 		'enablecolumns' => [
 		],
-		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,address,zip,city,phone,email,server_host,',
+		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,address,zip,city,phone,email,server_host,show_pid',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservation.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, email, remark, add_person, server_host,',
+		'showRecordFieldList' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, email, remark, add_person, server_host, show_pid,',
 	],
 	'types' => [
-		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, email, remark, add_person, server_host'],
+		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, email, remark, add_person, server_host, show_pid'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -218,5 +218,15 @@ return [
 				'readOnly' => 1,
 			],
 		],
+        'show_pid' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.show_pid',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'max' => 255,
+                'readOnly' => 1,
+            ],
+        ],
 	],
 ];

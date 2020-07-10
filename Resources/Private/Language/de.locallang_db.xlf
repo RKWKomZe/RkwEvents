@@ -487,6 +487,10 @@
 				<source>Domain on registration</source>
 				<target>Domain bei Registrierung</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.show_pid" approved="yes">
+                <source>Show Pid of Detailview</source>
+                <target>Detail PID</target>
+            </trans-unit>
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->
