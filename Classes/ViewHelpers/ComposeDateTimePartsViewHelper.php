@@ -75,7 +75,7 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
                 date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())
                 || !date("Hi", $event->getEnd())
             ) {
-                $output .= ' ' . \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                $output .= ' ' . \RKW\RkwBasics\Utility\FrontendLocalization::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
             }
         }
 
@@ -88,7 +88,7 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
             }
             if (date("Hi", $event->getEnd())) {
                 $output .= date("H:i", $event->getEnd());
-                $output .= ' ' . \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                $output .= ' ' . \RKW\RkwBasics\Utility\FrontendLocalization::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
             }
         }
 
