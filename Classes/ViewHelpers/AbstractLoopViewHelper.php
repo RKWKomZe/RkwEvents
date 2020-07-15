@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwEvents\ViewHelpers;
 
 /*
@@ -23,6 +22,13 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 abstract class AbstractLoopViewHelper extends AbstractViewHelper
 {
+
+    /**
+     * The output must not be escaped.
+     *
+     * @var bool
+     */
+    protected $escapeOutput = false;
 
     /**
      * Initialize
