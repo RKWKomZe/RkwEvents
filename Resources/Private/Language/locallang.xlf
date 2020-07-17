@@ -136,7 +136,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.remark" approved="yes">
 				<source>Remarks</source>
-				<target><![CDATA[Bemerkungen &amp; Fragen]]></target>
+				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
 
 

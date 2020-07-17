@@ -17,7 +17,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.headline"/>
     </h2>
     <p>
-        <f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.introduction" arguments="{0: event.title}"/>
+        <f:format.raw><f:translate key="tx_rkwevents_fluid.templates_eventReservation_edit.introduction" arguments="{0: event.title}"/></f:format.raw>
     </p>
 
     <f:render partial="FlashMessages" arguments="{_all}" />
