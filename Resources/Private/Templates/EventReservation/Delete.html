@@ -17,12 +17,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 	<f:render partial="FlashMessages" arguments="{_all}" />
 
-    <p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.description" arguments="{0 : event.title}" /></p>
+    <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.description" arguments="{0 : event.title}" /></f:format.raw></p>
 
-	<p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.note" /></p>
+	<p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.note" /></f:format.raw></p>
 
 	<f:if condition="{eventReservation.event.costsReg} > 0">
-		<p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.billing" /></p>
+		<p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.billing" /></f:format.raw></p>
 	</f:if>
 
 	<p>
