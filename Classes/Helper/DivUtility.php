@@ -318,7 +318,10 @@ class DivUtility
         $booleanReturnValue = true;
 
         // 3. check workshop reservation
-        if (count($eventReservation->getWorkshopRegister())) {
+        if (
+            $eventReservation->getWorkshopRegister()
+            && count($eventReservation->getWorkshopRegister())
+        ) {
 
             // (1) filter form array
             foreach ($eventReservation->getWorkshopRegister() as $unitName => $workshopUnit) {
