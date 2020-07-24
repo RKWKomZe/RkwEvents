@@ -241,7 +241,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreated">
 				<source>Reservation successfully created.</source>
-				<target>Woohoo! Die Anmeldung an die Veranstaltung ist nun abgeschlossen. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
+				<target>Wohoo! Die Anmeldung an die Veranstaltung ist nun abgeschlossen. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCanceled">
 				<source>Reservation was canceled.</source>
@@ -257,7 +257,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.updateSuccess">
 				<source>Update successfull!</source>
-				<target>Woohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
+				<target>Wohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.deleteSuccess">
 				<source>Reservation has been canceled</source>
