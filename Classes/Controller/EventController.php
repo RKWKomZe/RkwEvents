@@ -3,6 +3,7 @@
 namespace RKW\RkwEvents\Controller;
 
 use RKW\RkwEvents\Helper\DivUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -244,8 +245,28 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @return void
      * @ignorevalidation $event
      */
-    public function showAction(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+
+            $uri = $this->uriBuilder->reset()
+                ->setTargetPageUid($this->settings['listPid'])
+                ->setCreateAbsoluteUri(true)
+                ->build();
+
+            $this->addFlashMessage(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'eventController.message.error.notAvailable',
+                    'rkw_events',
+                    array(
+                        0 => $uri
+                    )
+                ),
+                '',
+                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+            );
+        }
+
         $this->view->assign('event', $event);
     }
 
