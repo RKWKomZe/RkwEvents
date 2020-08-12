@@ -70,12 +70,11 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) 
 
     $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['columns']['survey_after_mail_tstamp'] = [
         'exclude' => 1,
-        'l10n_mode' => 'mergeIfNotBlank',
         'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.survey_after_mail_tstamp',
         'config' => [
             'type' => 'input',
+            'renderType' => 'inputDateTime',
             'size' => 13,
-            'max' => 20,
             'eval' => 'datetime',
             'checkbox' => 0,
             'default' => 0,
@@ -83,6 +82,9 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) 
             'range' => [
                 'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
             ],
+            'behaviour' => [
+                'allowLanguageSynchronization' => true
+            ]
         ],
     ];
 
