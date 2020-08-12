@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEvents\ViewHelpers;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
