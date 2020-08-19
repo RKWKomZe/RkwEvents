@@ -4,7 +4,7 @@ namespace RKW\RkwEvents\Service;
 
 use \RKW\RkwBasics\Helper\Common;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.

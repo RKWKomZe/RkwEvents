@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEvents\Controller;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*

@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEvents\Validation\Validator;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 use \RKW\RkwBasics\Helper\Common;
 
 /*

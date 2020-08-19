@@ -3,7 +3,7 @@
 namespace RKW\RkwEvents\Controller;
 
 use RKW\RkwBasics\Helper\Common;
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /*
