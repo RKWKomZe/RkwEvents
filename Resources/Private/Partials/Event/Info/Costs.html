@@ -3,11 +3,11 @@
 
 <f:section name="Main">
 
-    <div class="info-table--tr">
-        <div class="info-table--th">
+    <div class="table__item">
+        <div class="table__title">
             <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costs" />:
         </div>
-        <div class="info-table--td">
+        <div class="table__content">
             <f:if condition="{event.costsReg}">
                 <f:then>
                     {event.costsReg -> f:format.number(decimals:"2", decimalSeparator:"," , thousandsSeparator:'.')} {event.currency.symbolLeft} <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" />

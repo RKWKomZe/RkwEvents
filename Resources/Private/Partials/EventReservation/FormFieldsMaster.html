@@ -1,21 +1,20 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-{namespace rkwRegistration=RKW\RkwRegistration\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwRegistration="http://typo3.org/ns/RKW/RkwRegistration/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<!-- Main contact left -->
-<div class="v320-1-of-2">
 
-
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_salutation">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
 			<f:if condition="<rkw:isMandatoryField fieldName='salutation' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
 				<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
 			</f:if>
 		</label>
-		<f:form.select property="salutation" id="tx_rkwevents_pi1_salutation" value="{f:if(condition:'<rkw:or firstIsSalutation=\'true\' or1=\'{newEventReservation.salutation}\' or2=\'{editMode}\' />',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}" options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}" />
+		<f:form.select class="select-field select-field--longer" property="salutation" id="tx_rkwevents_pi1_salutation" value="{f:if(condition:'<rkw:or firstIsSalutation=\'true\' or1=\'{newEventReservation.salutation}\' or2=\'{editMode}\' />',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}" options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}" />
 	</div>
 
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_firstName">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
 			<f:if condition="<rkw:isMandatoryField fieldName='firstName' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -25,7 +24,7 @@
 		<f:form.textfield property="firstName" id="tx_rkwevents_pi1_firstName" value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.firstName}\' or2=\'{editMode}\' />',then:'{newEventReservation.firstName}',else:'{frontendUser.firstName}')}" additionalAttributes="{autocomplete:'fname'}" />
 	</div>
 
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_lastName">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.lastName" />
 			<f:if condition="<rkw:isMandatoryField fieldName='lastName' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -35,7 +34,7 @@
 		<f:form.textfield property="lastName" id="tx_rkwevents_pi1_lastName" value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.lastName}\' or2=\'{editMode}\' />',then:'{newEventReservation.lastName}',else:'{frontendUser.lastName}')}" additionalAttributes="{autocomplete:'lname'}" />
 	</div>
 
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_email">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.email" />
 			<f:if condition="<rkw:isMandatoryField fieldName='email' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -52,13 +51,9 @@
 			</f:else>
 		</f:if>
 	</div>
-</div>
 
 
-<!-- Main contact right -->
-<div class="v320-2-of-2">
-
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_company">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.company" />
 			<f:if condition="<rkw:isMandatoryField fieldName='company' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -69,7 +64,7 @@
 	</div>
 
 
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_address">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.address" />
 			<f:if condition="<rkw:isMandatoryField fieldName='address' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -80,7 +75,7 @@
 	</div>
 
 
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_zip">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.zip" />
 			<f:if condition="<rkw:isMandatoryField fieldName='zip' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -90,7 +85,7 @@
 		<f:form.textfield property="zip" id="tx_rkwevents_pi1_zip" value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.zip}\' or2=\'{editMode}\' />',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}" additionalAttributes="{autocomplete:'zip'}" />
 	</div>
 
-	<div class="v320-1">
+	<div class="form__field width50 width100">
 		<label class="form-label" for="tx_rkwevents_pi1_city">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.city" />
 			<f:if condition="<rkw:isMandatoryField fieldName='city' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
@@ -112,7 +107,6 @@
 	</div>
 	-->
 
-</div>
 
 
 <!-- workshops -->
@@ -158,7 +152,7 @@
 
 
 <!-- remark and questions -->
-<div class="v320-1">
+<div class="form__field">
 	<label class="form-label" for="tx_rkwevents_pi1_remark">
 		<f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />
 		<f:if condition="<rkw:isMandatoryField fieldName='remark' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">

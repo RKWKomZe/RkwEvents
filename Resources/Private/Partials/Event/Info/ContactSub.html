@@ -1,0 +1,121 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:section name="Internal">
+    <div class="table__item">
+        <div class="table__content">
+            <f:if condition="{contact.company}">
+                <f:then>
+                    {contact.company}<br>
+                </f:then>
+                <f:else>
+                    <f:if condition="{contact.internal} == 1">
+                        RKW Kompetenzzentrum<br>
+                    </f:if>
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+    <div class="table__item">
+        <f:comment>
+            <div class="table__title">
+                Name
+            </div>
+        </f:comment>
+        <div class="table__content">
+            {contact.titleBefore} {contact.firstName} {contact.lastName}
+        </div>
+    </div>
+    <div class="table__item">
+        <f:comment>
+            <div class="table__title">
+                <f:translate key="tx_rkwevents_fluid.partials_event_contactSub.phone" />
+            </div>
+        </f:comment>
+        <div class="table__content">
+            <f:if condition="{contact.phone2}">
+                <f:then>
+                    <rkw:getFormattedPhoneNumber author="{contact}" />
+                </f:then>
+                <f:else>
+                    {contact.phone}
+                </f:else>
+            </f:if>
+        </div>
+    </div>
+    <div class="table__item">
+        <f:comment>
+            <div class="table__title">
+                <f:translate key="tx_rkwevents_fluid.partials_event_contactSub.email" />
+            </div>
+        </f:comment>
+        <div class="table__content">
+            <f:link.email email="{contact.email}" />
+        </div>
+    </div>
+
+    <f:if condition="{iterator.isLast}">
+        <f:else>
+            <br>
+        </f:else>
+    </f:if>
+
+</f:section>
+
+<!-- ====================================================================== -->
+
+<f:section name="External">
+
+
+    <f:if condition="{contact.company}">
+        <div class="table__item">
+            <div class="table__content">
+                {contact.company}
+            </div>
+        </div>
+    </f:if>
+
+    <div class="table__item">
+        <f:comment>
+            <div class="table__title">
+                Name
+            </div>
+        </f:comment>
+        <div class="table__content">
+            {contact.titleBefore} {contact.firstName} {contact.lastName}
+        </div>
+    </div>
+
+    <f:if condition="{contact.telephone}">
+        <div class="table__item">
+            <f:comment>
+                <div class="table__title">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_contactSub.phone" />
+                </div>
+            </f:comment>
+            <div class="table__content">
+                {contact.telephone}
+            </div>
+        </div>
+    </f:if>
+
+    <div class="table__item">
+        <f:comment>
+            <div class="table__title">
+                <f:translate key="tx_rkwevents_fluid.partials_event_contactSub.email" />
+            </div>
+        </f:comment>
+        <div class="table__content">
+            <f:link.email email="{contact.email}" />
+        </div>
+    </div>
+
+    <f:if condition="{iterator.isLast}">
+        <f:else>
+            <br>
+        </f:else>
+    </f:if>
+
+</f:section>
+

@@ -1,4 +1,7 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
 <f:layout name="Default" />
 
 This Template is responsible for displaying a single view for a domain object
@@ -24,7 +27,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
             <f:render partial="Event/Properties" arguments="{_all}" />
 
             <!-- Registration link -->
+            <f:comment>
             <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
+            </f:comment>
 
             <f:render partial="Event/AdditionalData" arguments="{_all}" />
             <f:render partial="Event/Schedule" arguments="{_all}" />
@@ -33,6 +38,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
                 <!-- Registration link -->
                 <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
             </f:if>
+
         </f:then>
     </f:if>
 

@@ -1,22 +1,29 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-{namespace rkwGeo=RKW\RkwGeolocation\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwGeo="http://typo3.org/ns/RKW/RkwGeolocation/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:if condition="{event.onlineEvent} == 0">
-    <f:then>
-        <f:if condition="<rkw:and and1='{event.longitude}' and2='{event.latitude}' />">
+<f:comment><!-- @toDo: JUST A DUMMY BECAUSE THE CSS DOES NOT WORK WITH OUR MAP --></f:comment>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d79414.65382585744!2d9.856813797043786!3d51.53691660071883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a4d4b86f98cac7%3A0x425ac6d94ac3e30!2sG%C3%B6ttingen!5e0!3m2!1sde!2sde!4v1590505442793!5m2!1sde!2sde" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
-            <!-- show Google-map if geo-data is set -->
-            <f:then>
-                <picture>
-                    <rkwGeo:maps longitude='{event.longitude}' latitude="{event.latitude}" />
-                </picture>
-            </f:then>
-            <f:else>
-                <rkwGeo:maps address="Germany" zoom="5" noMarker="true"/>
-            </f:else>
-        </f:if>
-    </f:then>
-    <f:else>
-        <rkwGeo:maps address="Germany" zoom="5" noMarker="true"/>
-    </f:else>
-</f:if>
+<f:comment>
+    <f:if condition="{event.onlineEvent} == 0">
+        <f:then>
+            <f:if condition="<rkw:and and1='{event.longitude}' and2='{event.latitude}' />">
+
+                <!-- show Google-map if geo-data is set -->
+                <f:then>
+                    <picture>
+                        <rkwGeo:maps longitude='{event.longitude}' latitude="{event.latitude}" />
+                    </picture>
+                </f:then>
+                <f:else>
+                    <rkwGeo:maps address="Germany" zoom="5" noMarker="true"/>
+                </f:else>
+            </f:if>
+        </f:then>
+        <f:else>
+            <rkwGeo:maps address="Germany" zoom="5" noMarker="true"/>
+        </f:else>
+    </f:if>
+</f:comment>

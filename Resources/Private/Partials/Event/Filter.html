@@ -1,71 +1,60 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
 <f:if condition="{settings.noFilters}">
     <f:else>
         <f:form noCacheHash="true" action="filter" controller="Ajax" extensionName="RkwEvents" pluginName="Pi1" class="ajax" name="filter" >
-            <div class="filter search-filter">
+            <div class="btn-list btn-list--desktop">
 
                 <f:if condition="{departmentList}">
 
-                    <p>
-                        <label for="department-select" class="hide" role="presentation"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelTopics" /></label>
-                        <f:form.select id="department-select" name="filter[department]" options="{departmentList}" optionValueField="uid" optionLabelField="name" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopicsAll' />" prependOptionValue="0" class="secondary ajax" />
-                    </p>
-                    <!--
-                    <div class="break-after">
-                        <fieldset>
-                            <legend class="hide"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelTopics" extensionName="rkwEvents" /></legend>
-                            <ul>
-                                <li class="description"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelTopics" extensionName="rkwEvents" />:</li>
-                                <li>
-                                    <f:form.radio name="filter[department]" id="all-topics" value="0" checked="checked" />
-                                    <label for="all-topics"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelAll" extensionName="rkwEvents" /></label>
-                                </li>
+                    <f:comment>
+                        <p>
+                            <label for="department-select" class="hide" role="presentation"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelTopics" /></label>
+                            <f:form.select id="department-select" name="filter[department]" options="{departmentList}" optionValueField="uid" optionLabelField="name" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopicsAll' />" prependOptionValue="0" class="secondary ajax" />
+                        </p>
+                    </f:comment>
 
-                                <f:for each="{departmentList}" as="department">
-                                    <li>
-                                        <f:form.radio name="filter[department]" id="{department.name}" value="{department.uid}"  />
-                                        <label class="{department.cssClass}" for="{department.name}">{department.name}</label>
-                                    </li>
-                                </f:for>
-                            </ul>
-                        </fieldset>
-                    </div>
-                    -->
+                    <button class="btn btn--outline ajax"><f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopicsAll' /></button>
+                    <f:for each="{departmentList}" as="department">
+                        <button class="btn btn--outline ajax" >{department.name}</button>
+                    </f:for>
+
+
                 </f:if>
 
 
                 <f:if condition="{documentTypeList}">
-                    <p>
-                        <label for="document-type-select" class="hide" role="presentation"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelDocumentType" /></label>
-                        <f:form.select id="document-type-select" name="filter[documentType]" options="{documentTypeList}" optionValueField="uid" optionLabelField="name" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentTypeAll' />" prependOptionValue="0" class="secondary ajax" />
-                    </p>
+                    <f:form.select class="ajax select-field select-field--mobile" name="filter[documentType]" options="{documentTypeList}" optionValueField="uid" optionLabelField="name" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />" prependOptionValue="0" />
+                    <f:form.select class="ajax select-field select-field--longer" name="filter[documentType]" options="{documentTypeList}" optionValueField="uid" optionLabelField="name" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />" prependOptionValue="0" />
                 </f:if>
 
                 <f:if condition="{categoryList}">
-                    <p>
-                        <label for="category-select" class="hide" role="presentation"><f:translate key="tx_rkwevents_fluid.partials_event_filter.labelCategory" /></label>
-                        <f:form.select id="category-select" name="filter[category]" options="{categoryList}" optionValueField="uid" optionLabelField="title" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategoryAll' />" prependOptionValue="0" class="secondary ajax" />
-                    </p>
+                    <f:form.select  class="ajax select-field select-field--mobile" name="filter[category]" options="{categoryList}" optionValueField="uid" optionLabelField="title" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />" prependOptionValue="0" />
+                    <f:form.select  class="ajax select-field select-field--longer" name="filter[category]" options="{categoryList}" optionValueField="uid" optionLabelField="title" prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />" prependOptionValue="0" />
                 </f:if>
 
-                <!--
-                <p>
-                    <label class="button-checked" for="availablePlaces">
-                        <span>
-                            <f:form.checkbox property="availablePlaces" id="availablePlaces" value="1" />
-                        </span>
-                        <f:translate key="tx_rkwevents_fluid.free_places" />
-                    </label>
-                </p>
-         -->
-                <div>
-                    <f:form.textfield name="filter[address]" type="search" placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />" />
-                    <button type="submit" class="button">
-                        <span>
-                            <f:translate key="tx_rkwevents_fluid.partials_event_filter.labelSearch" extensionName="rkwEvents" />
-                        </span>
-                    </button>
-                </div>
+                <f:comment>
+                    <!--
+                    <p>
+                        <label class="button-checked" for="availablePlaces">
+                            <span>
+                                <f:form.checkbox property="availablePlaces" id="availablePlaces" value="1" />
+                            </span>
+                            <f:translate key="tx_rkwevents_fluid.free_places" />
+                        </label>
+                    </p>
+                    -->
+                    <div>
+                        <f:form.textfield name="filter[address]" type="search" placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />" />
+                        <button type="submit" class="button">
+                            <span>
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.labelSearch" extensionName="rkwEvents" />
+                            </span>
+                        </button>
+                    </div>
+                </f:comment>
 
             </div>
 

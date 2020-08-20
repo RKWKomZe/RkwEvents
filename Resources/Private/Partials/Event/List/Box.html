@@ -1,4 +1,6 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
 <div class="box-wrapper">
 	<f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" class="box {event.department.cssClass} event big" title="{event.title}">
