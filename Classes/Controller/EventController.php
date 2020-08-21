@@ -137,13 +137,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->view->assignMultiple(
             array(
                 'filter'           => array('project' => $this->settings['projectUids']),
-                // The "sortedEventList" is not longer necessary. But keep it for compatibility reasons (and as further option)
                 'sortedEventList'  => $sortedEventList,
-                'eventList' => $eventList,
                 'departmentList'   => $departmentList,
                 'documentTypeList' => $documentTypeList,
                 'categoryList'     => $categoryList,
                 'page',
+                'noGrouping' => $this->settings['list']['noGrouping'],
+                'timeArrayList' => DivUtility::createMonthListArray(),
             )
         );
 

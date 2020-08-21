@@ -403,4 +403,28 @@ class DivUtility
         //===
     }
 
+
+
+    /**
+     * createMonthListArray
+     * function which returns the current and upcoming months for filter sorting
+     * returning timestamps (for january the function will return 01.01.; for february 01.02. etc... as timestamp)
+     *
+     * @param integer $monthsToShow how many upcoming months include current
+     * @return array
+     */
+    public static function createMonthListArray($monthsToShow = 6)
+    {
+        $resultArray = [];
+
+        for ($i = 0; $i <= $monthsToShow; $i++) {
+            $month = strtotime(date('Y-m-01', mktime(0, 0, 0, date('m') + $i, 1, date('Y'))));
+            setlocale(LC_TIME, "de_DE.UTF8");
+            $resultArray[$month] = strftime('%B %Y', $month);
+        }
+
+        return $resultArray;
+        //===
+    }
+
 }

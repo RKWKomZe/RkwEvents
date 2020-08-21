@@ -2,22 +2,18 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<p>
+<div class="flex space-start btn-list">
 	<f:if condition="{noBackButton}">
 		<f:else>
 			<f:if condition="{editMode}">
 				<f:then>
-					<f:link.action pageUid="{settings.myEventsPid}" class="button secondary {additionalCss}" action="myEvents" controller="Event">
-						<span>
+					<f:link.action pageUid="{settings.myEventsPid}" class="btn btn--secondary" action="myEvents" controller="Event">
 							<f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
-						</span>
 					</f:link.action>
 				</f:then>
 				<f:else>
-					<f:link.action pageUid="{settings.showPid}" class="button secondary {additionalCss}" action="show" controller="Event" arguments="{event:event}">
-						<span>
+					<f:link.action pageUid="{settings.showPid}" class="btn btn--secondary" action="show" controller="Event" arguments="{event:event}">
 							<f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
-						</span>
 					</f:link.action>
 				</f:else>
 			</f:if>
@@ -25,23 +21,21 @@
 		</f:else>
 	</f:if>
 
-	<button type="submit" class="button {additionalCss}" id="submitEventReservation" >
-		<span>
-			<f:if condition="{editMode}">
-				<f:then>
-					<f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit" />
-				</f:then>
-				<f:else>
-					<f:security.ifAuthenticated>
-						<f:then>
-							<f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.registerLoggedIn" />
-						</f:then>
-						<f:else>
-							<f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register" />
-						</f:else>
-					</f:security.ifAuthenticated>
-				</f:else>
-			</f:if>
-		</span>
+	<button type="submit" class="btn btn--primary" id="submitEventReservation" >
+        <f:if condition="{editMode}">
+            <f:then>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit" />
+            </f:then>
+            <f:else>
+                <f:security.ifAuthenticated>
+                    <f:then>
+                        <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.registerLoggedIn" />
+                    </f:then>
+                    <f:else>
+                        <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register" />
+                    </f:else>
+                </f:security.ifAuthenticated>
+            </f:else>
+        </f:if>
 	</button>
-</p>
+</div>

@@ -209,6 +209,17 @@ plugin.tx_rkwevents {
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
+        list {
+            noGrouping = {$plugin.tx_rkwevents.settings.list.noGrouping}
+            filter {
+                showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
+                showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
+                showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
+                showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
+                showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
+            }
+        }
+
 		mandatoryFields {
 			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
 			eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}

@@ -46,7 +46,12 @@
 					<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
 				</f:if>
 			</label>
-			<f:form.select property="addPerson.{i.index}.salutation" id="tx_rkwevents_pi1_{i.index}_salutation" class="tx-rkwevents-person-{i.cycle}" options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}" />
+			<f:form.select
+                class="tx-rkwevents-person-{i.cycle}"
+                id="tx_rkwevents_pi1_{i.index}_salutation"
+                property="addPerson.{i.index}.salutation"
+                options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}"
+            />
 		</div>
 
 		<div class="v320-1">
@@ -57,7 +62,11 @@
 					<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
 				</f:if>
 			</label>
-			<f:form.textfield property="addPerson.{i.index}.firstName" id="tx_rkwevents_pi1_{i.index}_firstName" class="tx-rkwevents-person-{i.cycle}"/>
+			<f:form.textfield
+                class="tx-rkwevents-person-{i.cycle}"
+                id="tx_rkwevents_pi1_{i.index}_firstName"
+                property="addPerson.{i.index}.firstName"
+            />
 
 		</div>
 		<div class="v320-1">
@@ -67,7 +76,11 @@
 					<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
 				</f:if>
 			</label>
-			<f:form.textfield property="addPerson.{i.index}.lastName" id="tx_rkwevents_pi1_{i.index}_lastName" class="tx-rkwevents-person-{i.cycle}"/>
+			<f:form.textfield
+                class="tx-rkwevents-person-{i.cycle}"
+                id="tx_rkwevents_pi1_{i.index}_lastName"
+                property="addPerson.{i.index}.lastName"
+            />
 		</div>
 
 		<f:if condition="{editMode}">

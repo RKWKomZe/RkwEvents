@@ -463,6 +463,14 @@
                 <source>All Categories</source>
                 <target>Alle Kategorien</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelMonth">
+                <source>Month</source>
+                <target>Monat</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelMonthAll">
+                <source>All months</source>
+                <target>Alle Monate</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch">
 				<source>Enter ZIP or Address</source>
 				<target>PLZ oder Adresse eingeben</target>

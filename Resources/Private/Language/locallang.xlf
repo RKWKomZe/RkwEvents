@@ -362,6 +362,12 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelCategoryAll">
                 <source>All Categories</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelMonth">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelMonthAll">
+                <source>All months</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch">
 				<source>Enter ZIP or Address</source>
 			</trans-unit>
