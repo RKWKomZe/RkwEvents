@@ -89,7 +89,7 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'pageMore'     => $page + 1,
             'showMoreLink' => $showMoreLink,
             'filter'       => $filter,
-            'noGrouping'   => ($filter['address'] ? true : false),
+            'noGrouping'   => ($filter['address'] ? true : $this->settings['list']['noGrouping']),
         );
 
         // get JSON helper
@@ -163,6 +163,7 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
             } else {
                 $replacements['sortedEventList'] = $sortedEventList;
+                $replacements['noGrouping'] = $this->settings['list']['noGrouping'];
                 $jsonHelper->setHtml(
                     'tx-rkwevents-result-section',
                     $replacements,

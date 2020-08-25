@@ -3,17 +3,18 @@
     data-namespace-typo3-fluid="true">
 
 <!-- add further persons -->
-<h2>
-	<f:if condition="{editMode}">
-		<f:then>
-			<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headlineEdit" />
-		</f:then>
-		<f:else>
-			<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headline" />
-		</f:else>
-	</f:if>
-</h2>
-
+<f:comment>
+    <h2>
+        <f:if condition="{editMode}">
+            <f:then>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headlineEdit" />
+            </f:then>
+            <f:else>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headline" />
+            </f:else>
+        </f:if>
+    </h2>
+</f:comment>
 
 <f:if condition="{editMode}">
 	<f:if condition="{eventReservation.event.costsReg} > 0">
@@ -21,87 +22,80 @@
 	</f:if>
 </f:if>
 
-<rkw:loop iteration="i" count="4" minimum="0" maximum="4">
+<div class="form form__enroll flex space-between mt-3">
+    <rkw:loop iteration="i" count="4" minimum="0" maximum="3">
+
+        <div class="form__enroll__fields flex-item flex-basis-4">
+
+            <h3>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant" /> {i.cyclePlus}
+            </h3>
 
 
-	<f:if condition="{i.isOdd}">
-		<f:then>
-			<div class="v320-1-of-2">
-		</f:then>
-		<f:else>
-			<div class="v320-2-of-2">
-		</f:else>
-	</f:if>
+            <div class="form__field width50 width100">
 
-		<h3>
-			<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant" /> {i.cyclePlus}
-		</h3>
+                <label class="form-label" for="tx_rkwevents_pi1_{i.index}_salutation">
+                    <f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
+                    <f:if condition="<rkw:isMandatoryField fieldName='salutation' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
+                        <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+                    </f:if>
+                </label>
+                <f:form.select
+                    class="tx-rkwevents-person-{i.cycle} select-field select-field--longer"
+                    id="tx_rkwevents_pi1_{i.index}_salutation"
+                    property="addPerson.{i.index}.salutation"
+                    options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}"
+                />
+            </div>
 
+            <div class="form__field width50 width100">
 
-		<div class="v320-1">
+                <label class="form-label" for="tx_rkwevents_pi1_{i.index}_firstName">
+                    <f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
+                    <f:if condition="<rkw:isMandatoryField fieldName='firstName' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
+                        <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+                    </f:if>
+                </label>
+                <f:form.textfield
+                    class="tx-rkwevents-person-{i.cycle}"
+                    id="tx_rkwevents_pi1_{i.index}_firstName"
+                    property="addPerson.{i.index}.firstName"
+                />
 
-			<label class="form-label" for="tx_rkwevents_pi1_{i.index}_salutation">
-				<f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
-				<f:if condition="<rkw:isMandatoryField fieldName='salutation' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
-					<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-				</f:if>
-			</label>
-			<f:form.select
-                class="tx-rkwevents-person-{i.cycle}"
-                id="tx_rkwevents_pi1_{i.index}_salutation"
-                property="addPerson.{i.index}.salutation"
-                options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}"
-            />
-		</div>
+            </div>
+            <div class="form__field width50 width100">
+                <label class="form-label" for="tx_rkwevents_pi1_{i.index}_lastName">
+                    <f:translate key="tx_rkwevents_domain_model_eventreservation.lastName" />
+                    <f:if condition="<rkw:isMandatoryField fieldName='lastName' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
+                        <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+                    </f:if>
+                </label>
+                <f:form.textfield
+                    class="tx-rkwevents-person-{i.cycle}"
+                    id="tx_rkwevents_pi1_{i.index}_lastName"
+                    property="addPerson.{i.index}.lastName"
+                />
+            </div>
 
-		<div class="v320-1">
+            <f:if condition="{editMode}">
+                <div class="v320-1">
+                    <a href="#" class="text-smaller tx-rkwevents-delete" data-person="{i.cycle}">
+                        <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete" />
+                    </a>
+                        </div>
+            </f:if>
 
-			<label class="form-label" for="tx_rkwevents_pi1_{i.index}_firstName">
-				<f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
-				<f:if condition="<rkw:isMandatoryField fieldName='firstName' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
-					<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-				</f:if>
-			</label>
-			<f:form.textfield
-                class="tx-rkwevents-person-{i.cycle}"
-                id="tx_rkwevents_pi1_{i.index}_firstName"
-                property="addPerson.{i.index}.firstName"
-            />
-
-		</div>
-		<div class="v320-1">
-			<label class="form-label" for="tx_rkwevents_pi1_{i.index}_lastName">
-				<f:translate key="tx_rkwevents_domain_model_eventreservation.lastName" />
-				<f:if condition="<rkw:isMandatoryField fieldName='lastName' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
-					<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-				</f:if>
-			</label>
-			<f:form.textfield
-                class="tx-rkwevents-person-{i.cycle}"
-                id="tx_rkwevents_pi1_{i.index}_lastName"
-                property="addPerson.{i.index}.lastName"
-            />
-		</div>
-
-		<f:if condition="{editMode}">
-			<div class="v320-1">
-				<a href="#" class="text-smaller tx-rkwevents-delete" data-person="{i.cycle}">
-					<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete" />
-				</a>
-					</div>
-		</f:if>
-
-		<!-- Button Set -->
-		<f:if condition="{i.isEven}">
-			<f:then>
-				<f:render partial="EventReservation/ButtonSet" arguments="{settings: settings, event:event, editMode: editMode, noBackButton : 1, additionalCss : 'tablet-only'}"/>
-			</f:then>
-			<f:else>
-				<f:render partial="EventReservation/ButtonSet" arguments="{settings: settings, event:event, editMode: editMode, noBackButton : 1, additionalCss : ''}"/>
-			</f:else>
-		</f:if>
-	</div>
-</rkw:loop>
-
+            <!-- Button Set -->
+            <f:if condition="{i.isEven}">
+                <f:then>
+                    <f:render partial="EventReservation/ButtonSet" arguments="{settings: settings, event:event, editMode: editMode, noBackButton : 1, additionalCss : 'tablet-only'}"/>
+                </f:then>
+                <f:else>
+                    <f:render partial="EventReservation/ButtonSet" arguments="{settings: settings, event:event, editMode: editMode, noBackButton : 1, additionalCss : ''}"/>
+                </f:else>
+            </f:if>
+        </div>
+    </rkw:loop>
+</div>
 
 
