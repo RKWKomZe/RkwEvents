@@ -2,63 +2,65 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<div class="flex-item flex-basis-3">
-    <div class="tile tile--no-img">
-        <f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" title="{event.title}">
-            <div class="tile__header">
-                <div class="tile__label-wrapper">
-                    <span class="tile__label">
-                        {event.department.name}
-                    </span>
+    <div class="flex-item flex-basis-3">
+        <div class="tile tile--no-img">
+            <f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" title="{event.title}">
+                <div class="tile__header">
+                    <div class="tile__label-wrapper">
+                        <span class="tile__label">
+                            {event.department.name}
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="tile__content">
-                <h3 class="tile__title icon">
-                    <span class="tile__title-icon">
-                        <svg class="icon icon--36"><use xlink:href="#ic-events"></use></svg>
-                    </span>
-                    <span class="tile__title-text">
-                        {event.title}
-                    </span>
-                </h3>
-                <div class="tile__text tile__text--no-img">
-                    <p>
-                        {event.documentType.name}
-                    </p>
+                <div class="tile__content">
+                    <h3 class="tile__title icon">
+                        <span class="tile__title-icon">
+                            <svg class="icon icon--36"><use xlink:href="#ic-events"></use></svg>
+                        </span>
+                        <span class="tile__title-text">
+                            {event.title}
+                        </span>
+                    </h3>
+                    <div class="tile__text tile__text--no-img">
+                        <p>
+                            {event.documentType.name}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="tile__footer tile__contact">
-                <div class="tile__contact-text">
-                    <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
-                    <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
-                        <f:then>
-                            ({event.start -> f:format.date(format:"d.m.Y")})
-                        </f:then>
-                        <f:else>
-                            {event.start -> f:format.date(format:"d.m.Y")}
-                        </f:else>
-                    </f:if>
-
-                    <f:if condition="{event.end}">
-                        <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+                <div class="tile__footer tile__contact">
+                    <div class="tile__contact-text">
+                        <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
+                        <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                            <f:then>
+                                ({event.start -> f:format.date(format:"d.m.Y")})
+                            </f:then>
                             <f:else>
-                                <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
-                                    <f:then>
-                                        &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
-                                    </f:then>
-                                    <f:else>
-                                        &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
-                                    </f:else>
-                                </f:if>
+                                {event.start -> f:format.date(format:"d.m.Y")}
                             </f:else>
                         </f:if>
-                    </f:if>
+
+                        <f:if condition="{event.end}">
+                            <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+                                <f:else>
+                                    <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                        <f:then>
+                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                        </f:then>
+                                        <f:else>
+                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                        </f:else>
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+                        </f:if>
+                    </div>
+                    <div class="tile__contact-location">
+                        <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                        {event.place.city}
+                    </div>
                 </div>
-                <div class="tile__contact-location">
-                    <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
-                    {event.place.city}
-                </div>
-            </div>
-        </f:link.action>
+            </f:link.action>
+        </div>
     </div>
-</div>
+
+</html>

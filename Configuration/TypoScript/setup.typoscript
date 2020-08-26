@@ -186,7 +186,7 @@ plugin.tx_rkwevents {
     }
     settings {
 
-
+        version = {$plugin.tx_rkwevents.settings.version}
         listPid = {$plugin.tx_rkwevents.settings.listPid}
         showPid = {$plugin.tx_rkwevents.settings.showPid}
         loginPid = {$plugin.tx_rkwevents.settings.loginPid}

@@ -2,19 +2,21 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<f:form.validationResults for="{object}">
-	<f:if condition="{validationResults.flattenedErrors}">
-		<div class="typo3-messages" role="alert">
-			<f:for each="{validationResults.flattenedErrors}" key="propertyName" as="errors">
-				<f:for each="{errors}" as="propertyError">
-					<div class="message-error typo3-message">
-						<f:translate
-								key="error.{propertyError.code}"
-								arguments="{0:'{f:translate(key:\"form.error.{propertyName}\")}'}" >{propertyError.message}
-						</f:translate>
-					</div>
-				</f:for>
-			</f:for>
-		</div>
-	</f:if>
-</f:form.validationResults>
+    <f:form.validationResults for="{object}">
+        <f:if condition="{validationResults.flattenedErrors}">
+            <div class="typo3-messages" role="alert">
+                <f:for each="{validationResults.flattenedErrors}" key="propertyName" as="errors">
+                    <f:for each="{errors}" as="propertyError">
+                        <div class="message-error typo3-message">
+                            <f:translate
+                                    key="error.{propertyError.code}"
+                                    arguments="{0:'{f:translate(key:\"form.error.{propertyName}\")}'}" >{propertyError.message}
+                            </f:translate>
+                        </div>
+                    </f:for>
+                </f:for>
+            </div>
+        </f:if>
+    </f:form.validationResults>
+
+</html>

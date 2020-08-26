@@ -2,96 +2,107 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<f:if condition="{settings.noFilters}">
-    <f:else>
-        <f:form noCacheHash="true" action="filter" controller="Ajax" extensionName="RkwEvents" pluginName="Pi1" class="ajax" name="filter" >
-            <div class="btn-list btn-list--desktop">
+    <f:if condition="{settings.noFilters}">
+        <f:else>
+            <f:form
+                noCacheHash="true"
+                action="filter"
+                controller="Ajax"
+                extensionName="RkwEvents"
+                pluginName="Pi1"
+                class="ajax"
+                name="filter"
+                additionalParams="{rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'1\'}'}"
+            >
+                <div class="btn-list btn-list--desktop">
 
-                <f:comment><!-- DEPARTMENT --></f:comment>
-                <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
-                    <f:form.select
-                        class="ajax select-field select-field--longer"
-                        id="department-select"
-                        name="filter[department]"
-                        options="{departmentList}"
-                        optionValueField="uid"
-                        optionLabelField="name"
-                        prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopics' />"
-                        prependOptionValue="0"
-                    />
-                </f:if>
-
-
-                <f:comment><!-- DOCUMENT TYPE --></f:comment>
-                <f:if condition="{documentTypeList} && {settings.list.filter.showDocumentType}">
-                    <f:form.select
-                        class="ajax select-field select-field--longer"
-                        id="document-type-select"
-                        name="filter[documentType]"
-                        options="{documentTypeList}"
-                        optionValueField="uid"
-                        optionLabelField="name"
-                        prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />"
-                        prependOptionValue="0"
-                    />
-                </f:if>
+                    <f:comment><!-- DEPARTMENT --></f:comment>
+                    <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
+                        <f:form.select
+                            class="ajax select-field select-field--longer"
+                            id="department-select"
+                            name="filter[department]"
+                            options="{departmentList}"
+                            optionValueField="uid"
+                            optionLabelField="name"
+                            prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopics' />"
+                            prependOptionValue="0"
+                        />
+                    </f:if>
 
 
-                <f:comment><!-- CATEGORY --></f:comment>
-                <f:if condition="{categoryList} && {settings.list.filter.showCategory}">
-                    <f:form.select
-                        class="ajax select-field select-field--longer"
-                        id="category-select"
-                        name="filter[category]"
-                        options="{categoryList}"
-                        optionValueField="uid"
-                        optionLabelField="title"
-                        prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />"
-                        prependOptionValue="0"
-                    />
-                </f:if>
+                    <f:comment><!-- DOCUMENT TYPE --></f:comment>
+                    <f:if condition="{documentTypeList} && {settings.list.filter.showDocumentType}">
+                        <f:form.select
+                            class="ajax select-field select-field--longer"
+                            id="document-type-select"
+                            name="filter[documentType]"
+                            options="{documentTypeList}"
+                            optionValueField="uid"
+                            optionLabelField="name"
+                            prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />"
+                            prependOptionValue="0"
+                        />
+                    </f:if>
 
 
-                <f:comment><!-- TIME --></f:comment>
-                <f:if condition="{timeArrayList} && {settings.list.filter.showTime}">
-                    <f:form.select
-                        class="ajax select-field select-field--longer"
-                        id="time-select"
-                        name="filter[time]"
-                        options="{timeArrayList}"
-                        optionValueField="uid"
-                        optionLabelField="title"
-                        prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelMonth' />"
-                        prependOptionValue="0"
-                    />
-                </f:if>
+                    <f:comment><!-- CATEGORY --></f:comment>
+                    <f:if condition="{categoryList} && {settings.list.filter.showCategory}">
+                        <f:form.select
+                            class="ajax select-field select-field--longer"
+                            id="category-select"
+                            name="filter[category]"
+                            options="{categoryList}"
+                            optionValueField="uid"
+                            optionLabelField="title"
+                            prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />"
+                            prependOptionValue="0"
+                        />
+                    </f:if>
 
 
-                <f:comment><!-- ADDRESS --></f:comment>
-                <f:if condition="{settings.list.filter.showAddress}">
-                    <f:form.textfield
-                        class="btn-list select-field--longer"
-                        name="filter[address]"
-                        type="text"
-                        placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
-                    />
+                    <f:comment><!-- TIME --></f:comment>
+                    <f:if condition="{timeArrayList} && {settings.list.filter.showTime}">
+                        <f:form.select
+                            class="ajax select-field select-field--longer"
+                            id="time-select"
+                            name="filter[time]"
+                            options="{timeArrayList}"
+                            optionValueField="uid"
+                            optionLabelField="title"
+                            prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelMonth' />"
+                            prependOptionValue="0"
+                        />
+                    </f:if>
 
-                    <button class="btn btn--primary" type="submit">
-                        <span>
-                            <f:translate key="tx_rkwevents_fluid.partials_event_filter.labelSearch" extensionName="rkwEvents" />
-                        </span>
-                    </button>
-                </f:if>
 
-            </div>
+                    <f:comment><!-- ADDRESS --></f:comment>
+                    <f:if condition="{settings.list.filter.showAddress}">
+                        <f:form.textfield
+                            class="btn-list select-field--longer"
+                            name="filter[address]"
+                            type="text"
+                            placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
+                        />
 
-            <!-- Override typeNum for AJAX -->
-            <input type="hidden" name="type" value="{ajaxTypeNum}">
+                        <button class="btn btn--primary" type="submit">
+                            <span>
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.labelSearch" extensionName="rkwEvents" />
+                            </span>
+                        </button>
+                    </f:if>
 
-            <!-- Project filter from Plugin -->
-            <f:form.hidden name="filter[project]" value="{filter.project}" />
-            <f:form.hidden name="filter[noGrouping]" value="{filter.noGrouping}" />
+                </div>
 
-        </f:form>
-    </f:else>
-</f:if>
+                <!-- Override typeNum for AJAX -->
+                <input type="hidden" name="type" value="{ajaxTypeNum}">
+
+                <!-- Project filter from Plugin -->
+                <f:form.hidden name="filter[project]" value="{filter.project}" />
+                <f:form.hidden name="filter[noGrouping]" value="{filter.noGrouping}" />
+
+            </f:form>
+        </f:else>
+    </f:if>
+
+</html>

@@ -157,91 +157,91 @@
 
 
 
-<!-- workshops -->
-<f:if condition="{event.workshop1}">
-	<div class="v320-1">
-		<h5>
-			<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1" />
-		</h5>
-		<f:for each="{event.workshop1}" as="workshop" iteration="iter">
-			<f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop1', frontendUser: frontendUser}"/>
-			<if condition="!{iter.islast}">
-				<br>
-			</if>
-		</f:for>
-	</div>
-</f:if>
-<f:if condition="{event.workshop2}">
-	<div class="v320-1">
-		<h5>
-			<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop2" />
-		</h5>
-		<f:for each="{event.workshop2}" as="workshop" iteration="iter">
-			<f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop2', frontendUser: frontendUser}"/>
-		</f:for>
-		<if condition="!{iter.islast}">
-			<br>
-		</if>
-	</div>
-</f:if>
-<f:if condition="{event.workshop3}">
-	<div class="v320-1">
-		<h5>
-			<f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3" />
-		</h5>
-		<f:for each="{event.workshop3}" as="workshop" iteration="iter">
-			<f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop3', frontendUser: frontendUser}"/>
-		</f:for>
-		<if condition="!{iter.islast}">
-			<br>
-		</if>
-	</div>
-</f:if>
-
-
-<!-- remark and questions -->
-<div class="form__field">
-	<label class="form-label" for="tx_rkwevents_pi1_remark">
-		<f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />
-		<f:if condition="<rkw:isMandatoryField fieldName='remark' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
-			<span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-		</f:if>
-	</label>
-	<f:form.textarea
-        id="tx_rkwevents_pi1_remark"
-        property="remark"
-        rows="3"
-        placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.remark' />"
-    />
-</div>
-
-<f:if condition="{editMode}">
-	<f:else>
-
-        <div class="form__field">
-            <f:form.checkbox class="checkbox" id="terms" name="terms" value="1" />
-            <label for="terms" class="checkbox-label">
-                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro" /> <f:link.page pageUid="{settings.termsPid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms" /></f:link.page>
-                <f:if condition="{settings.terms2Pid}">
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro" /> <f:link.page pageUid="{settings.terms2Pid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2" /></f:link.page>
-                </f:if>
-                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3" />
-            </label>
+    <!-- workshops -->
+    <f:if condition="{event.workshop1}">
+        <div class="v320-1">
+            <h5>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1" />
+            </h5>
+            <f:for each="{event.workshop1}" as="workshop" iteration="iter">
+                <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop1', frontendUser: frontendUser}"/>
+                <if condition="!{iter.islast}">
+                    <br>
+                </if>
+            </f:for>
         </div>
-        <div class="form__field">
-            <f:form.checkbox class="checkbox" id="privacy" name="privacy" value="1" />
-            <label for="privacy" class="checkbox-label">
-                <rkwRegistration:privacyText textVersion="events"/>
-            </label>
+    </f:if>
+    <f:if condition="{event.workshop2}">
+        <div class="v320-1">
+            <h5>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop2" />
+            </h5>
+            <f:for each="{event.workshop2}" as="workshop" iteration="iter">
+                <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop2', frontendUser: frontendUser}"/>
+            </f:for>
+            <if condition="!{iter.islast}">
+                <br>
+            </if>
         </div>
+    </f:if>
+    <f:if condition="{event.workshop3}">
+        <div class="v320-1">
+            <h5>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3" />
+            </h5>
+            <f:for each="{event.workshop3}" as="workshop" iteration="iter">
+                <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop3', frontendUser: frontendUser}"/>
+            </f:for>
+            <if condition="!{iter.islast}">
+                <br>
+            </if>
+        </div>
+    </f:if>
 
-	</f:else>
-</f:if>
+
+    <!-- remark and questions -->
+    <div class="form__field">
+        <label class="form-label" for="tx_rkwevents_pi1_remark">
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />
+            <f:if condition="<rkw:isMandatoryField fieldName='remark' mandatoryFields='{settings.mandatoryFields.eventReservationMainPerson}' />">
+                <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+            </f:if>
+        </label>
+        <f:form.textarea
+            id="tx_rkwevents_pi1_remark"
+            property="remark"
+            rows="3"
+            placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.remark' />"
+        />
+    </div>
+
+    <f:if condition="{editMode}">
+        <f:else>
+
+            <div class="form__field">
+                <f:form.checkbox class="checkbox" id="terms" name="terms" value="1" />
+                <label for="terms" class="checkbox-label">
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro" /> <f:link.page pageUid="{settings.termsPid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms" /></f:link.page>
+                    <f:if condition="{settings.terms2Pid}">
+                        <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro" /> <f:link.page pageUid="{settings.terms2Pid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2" /></f:link.page>
+                    </f:if>
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3" />
+                </label>
+            </div>
+            <div class="form__field">
+                <f:form.checkbox class="checkbox" id="privacy" name="privacy" value="1" />
+                <label for="privacy" class="checkbox-label">
+                    <rkwRegistration:privacyText textVersion="events"/>
+                </label>
+            </div>
+
+        </f:else>
+    </f:if>
 
 
-<!-- Button Set -->
-<f:render partial="EventReservation/ButtonSet" arguments="{_all}"/>
+    <!-- Button Set -->
+    <f:render partial="EventReservation/ButtonSet" arguments="{_all}"/>
 
-
+</html>
 
 

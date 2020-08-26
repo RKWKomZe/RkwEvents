@@ -22,6 +22,9 @@ plugin.tx_rkwevents {
 
     settings {
 
+        # cat=plugin.tx_rkwevents//f; type=integer; label=Version to use (the version is mainly related to the new RkwAjax-API)
+        version = 2
+
         # cat=plugin.tx_rkwevents; type=integer; label=PID for list view
         listPid =
 

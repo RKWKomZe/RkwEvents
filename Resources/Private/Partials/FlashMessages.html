@@ -2,18 +2,20 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<f:flashMessages as="flashMessages">
-    <f:for each="{flashMessages}" as="flashMessage">
-        <div class="typo3-messages">
-            <div class="alert alert-{flashMessage.class}">
-                <div class="media">
-                    <div class="media-body">
-                        <div class="alert-message">
-                            <f:format.raw>{flashMessage.message}</f:format.raw>
+    <f:flashMessages as="flashMessages">
+        <f:for each="{flashMessages}" as="flashMessage">
+            <div class="typo3-messages">
+                <div class="alert alert-{flashMessage.class}">
+                    <div class="media">
+                        <div class="media-body">
+                            <div class="alert-message">
+                                <f:format.raw>{flashMessage.message}</f:format.raw>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </f:for>
-</f:flashMessages>
+        </f:for>
+    </f:flashMessages>
+
+</html>

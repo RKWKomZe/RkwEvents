@@ -2,18 +2,19 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<!-- Description -->
-<f:format.html>{event.description}</f:format.html>
+    <!-- Description -->
+    <f:format.html>{event.description}</f:format.html>
 
 
-<!-- Testimonials -->
-<f:if condition="{event.series}">
-	<f:if condition="{event.testimonials}">
-		<h3>
-			<f:translate key="tx_rkwevents_fluid.partials_events_additionalData.testimonials" />
+    <!-- Testimonials -->
+    <f:if condition="{event.series}">
+        <f:if condition="{event.testimonials}">
+            <h3>
+                <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.testimonials" />
 
-		</h3>
-		<f:format.html>{event.testimonials}</f:format.html>
-	</f:if>
-</f:if>
+            </h3>
+            <f:format.html>{event.testimonials}</f:format.html>
+        </f:if>
+    </f:if>
 
+</html>
