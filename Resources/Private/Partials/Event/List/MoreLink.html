@@ -7,19 +7,20 @@
         <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
             <div class="flex-container flex-basis-12">
                 <f:link.action
-                    action="filter"
-                    controller="Ajax"
-                    pluginName="pi1"
+                    action="list"
+                    controller="Event"
+                    pluginName="Pi1"
                     extensionName="RkwEvents"
-                    class="btn btn--primary btn--centered mt-1 ajax autoload"
-                    additionalParams="{tx_rkwevents_pi1: '{filter: filter, page: pageMore, archive: archive}', type: '{ajaxTypeNum}'}"
-                    additionalAttributes="{data-page-type: '{ajaxTypeNum}'}"
+                    class="btn btn--primary btn--centered mt-1 ajax"
+                    additionalParams="{tx_rkwevents_pi1: '{filter: filter, page: pageMore, archive: archive}', rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'2,3\'}'}"
                 >
                     <f:comment>
-                    <f:translate key="tx_rkwevents_fluid.partials_event_list_more.interesting" extensionName="RkwEvents" />
-                    <br>
+                        <f:translate key="tx_rkwevents_fluid.partials_event_list_more.interesting" extensionName="RkwEvents" />
+                        <br>
                     </f:comment>
+
                     <strong><f:translate key="tx_rkwevents_fluid.partials_event_list_more.showMore" extensionName="RkwEvents" /></strong>
+
                 </f:link.action>
             </div>
         </rkwAjax:ajaxWrapper>

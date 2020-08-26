@@ -64,6 +64,7 @@ plugin.tx_rkwevents {
 		# cat=plugin.tx_rkwevents; type=integer; label=Number of items in list view (default 10)
         itemsPerPage =
 
+        // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
 		# cat=plugin.tx_rkwevents; type=integer; label=PageNum for AJAX-requests
 		ajaxTypeNum = 1472648979
 

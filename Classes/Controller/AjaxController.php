@@ -21,6 +21,9 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  * Class AjaxController
  *
+ * @deprecated With using the new AjaxApi2 this controller is not longer needed. Just a fallback vor AjaxApi1 purpose and old templates
+ * @use EventController->listAction instead
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -171,7 +174,6 @@ class AjaxController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
         /** New version */
         if ($this->settings['version'] == 2) {
-
             $this->view->assignMultiple($replacements);
 
         } else {

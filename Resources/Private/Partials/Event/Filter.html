@@ -6,8 +6,8 @@
         <f:else>
             <f:form
                 noCacheHash="true"
-                action="filter"
-                controller="Ajax"
+                action="list"
+                controller="Event"
                 extensionName="RkwEvents"
                 pluginName="Pi1"
                 class="ajax"
@@ -94,8 +94,11 @@
 
                 </div>
 
-                <!-- Override typeNum for AJAX -->
-                <input type="hidden" name="type" value="{ajaxTypeNum}">
+                <f:comment>
+                    <!-- @toDo: DEPRECATED (only needed for OLD Ajax API) -->
+                    <!-- Override typeNum for AJAX -->
+                    <input type="hidden" name="type" value="{ajaxTypeNum}">
+                </f:comment>
 
                 <!-- Project filter from Plugin -->
                 <f:form.hidden name="filter[project]" value="{filter.project}" />
