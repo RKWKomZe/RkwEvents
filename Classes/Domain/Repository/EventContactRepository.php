@@ -28,5 +28,26 @@ namespace RKW\RkwEvents\Domain\Repository;
 class EventContactRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
+    /**
+     * Return one by email and pid
+     *
+     * @param int $pid
+     * @param string $email
+     * @return \RKW\RkwEvents\Domain\Model\EventContact|null
+     * @api
+     */
+    public function findOneByEmailForImport($pid, $email)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('pid', intval($pid)),
+                $query->equals('email', $email))
+        );
+
+        return $query->execute()->getFirst();
+    }
 
 }

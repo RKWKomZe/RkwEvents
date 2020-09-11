@@ -84,6 +84,21 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description;
 
     /**
+     * description2
+     *
+     * @var string
+     */
+    protected $description2;
+
+    /**
+     * targetLearning
+     *
+     * @var string
+     */
+    protected $targetLearning;
+
+
+    /**
      * targetGroup
      *
      * @var string
@@ -596,6 +611,48 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->description = $description;
     }
 
+    /**
+     * Returns the description2
+     *
+     * @return string $description2
+     */
+    public function getDescription2()
+    {
+        return $this->description2;
+    }
+
+    /**
+     * Sets the description2
+     *
+     * @param string $description2
+     * @return void
+     */
+    public function setDescription2($description2)
+    {
+        $this->description2 = $description2;
+    }
+
+    /**
+     * Returns the targetLearning
+     *
+     * @return string $targetLearning
+     */
+    public function getTargetLearning()
+    {
+        return $this->targetLearning;
+    }
+
+    /**
+     * Sets the targetLearning
+     *
+     * @param string $targetLearning
+     * @return void
+     */
+    public function setTargetLearning($targetLearning)
+    {
+        $this->targetLearning = $targetLearning;
+    }    
+    
     /**
      * Returns the targetGroup
      *

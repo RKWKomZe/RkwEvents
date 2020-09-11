@@ -350,6 +350,53 @@
 
 			<!-- ==================================================================================== -->
 
+			<!-- Templates/Backend/Show.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.headline">
+				<source>CSV Import</source>
+				<target>CSV Import</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv">
+				<source>CSV Data including Header, Tab-separated</source>
+				<target>CSV-Daten inklusive Kopfzeilen, getrennt durch Tabulator</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
+				<source>Really Do Import (Else Just Check Data)</source>
+				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
+				<source>Event Type; overrides CSV Values when set</source>
+				<target>Veranstaltungsart; überschreibt CSV-Werte, wenn gesetzt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
+				<source>Department Type; overrides CSV Values when set</source>
+				<target>Fachbereich/Thema; überschreibt CSV-Werte, wenn gesetzt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
+				<source>Organizer; overrides CSV Values when set</source>
+				<target>Organisator; überschreibt CSV-Werte, wenn gesetzt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_timeZone">
+				<source>Timezone of CSV Data</source>
+				<target>Zeitzone für Datum/Uhrzeit in der CSV</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPid">
+                <source>PID for import; overrides CSV Values when set</source>
+                <target>PID: Speicherort der Datensätze; überschreibt CSV-Werte, wenn gesetzt</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPidAuthors">
+                <source>PID for internal contact; overrides CSV Values when set</source>
+                <target>PID: Speicherort der internen Ansprechpartner; überschreibt CSV-Werte, wenn gesetzt</target>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_submit">
+				<source>Start import</source>
+				<target>Import starten</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_activate">
+				<source>Do not hide imported events on website</source>
+				<target>Neue Datensätze direkt auf Website sichtbar schalten</target>
+			</trans-unit>
+
+
 			<!-- Templates/Ajax/List/List.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_ajax_list_list.noEventHeadline" approved="yes">
 				<source>Sorry, no events found.</source>
@@ -924,49 +971,6 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant">
 				<source>Participants</source>
 				<target>Teilnehmer</target>
-			</trans-unit>
-
-
-			<!-- Partials/EventReservation/Properties.html -->
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.headline">
-				<source>CSV Import</source>
-				<target>CSV Import</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv">
-				<source>CSV Data including Header, Tab-separated</source>
-				<target>CSV-Daten inklusive Kopfzeilen, getrennt durch Tabulator</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
-				<source>Really Do Import (Else Just Check Data)</source>
-				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
-				<source>Event Type, overrides CSV Values when set</source>
-				<target>Veranstaltungsart; überschreibt CSV-Werte, wenn gesetzt</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
-				<source>Department Type, overrides CSV Values when set</source>
-				<target>Fachbereich/Thema; überschreibt CSV-Werte, wenn gesetzt</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
-				<source>Organizer, overrides CSV Values when set</source>
-				<target>Organisator; überschreibt CSV-Werte, wenn gesetzt</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_timeZone">
-				<source>Timezone of CSV Data</source>
-				<target>Zeitzone für Datum/Uhrzeit in der CSV</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPid">
-                <source>Target PID for import</source>
-                <target>PID: Speicherort der Datei</target>
-            </trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_submit">
-				<source>Start import</source>
-				<target>Import starten</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_activate">
-				<source>Do not hide imported events on website</source>
-				<target>Neue Datensätze direkt auf Website sichtbar schalten</target>
 			</trans-unit>
 
 

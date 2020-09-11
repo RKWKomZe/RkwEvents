@@ -22,11 +22,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,schedule,target_group,partner,seats,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,categories,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,',
+		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,categories,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, partner, add_info, schedule, testimonials, seats, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3',
     ],
     'types' => [
         '1' => [
@@ -34,7 +34,7 @@ return [
                 sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle,  start, end, reg_end, document_type, series, department, organizer,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                description, target_group, partner, add_info, schedule, testimonials,
+                description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
@@ -64,6 +64,15 @@ return [
             // add RTE
             'columnsOverrides' => [
                 'description' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'description2' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'partner' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'target_learning' => [
                     'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
                 ],
                 'schedule' => [
@@ -267,6 +276,50 @@ return [
                 ],
             ],
         ],
+        'description2' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.description2',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'wizards' => [
+                    'RTE' => [
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
+                        'notNewRecords'=> 1,
+                        'RTEonly' => 1,
+                        'module' => [
+                            'name' => 'wizard_rte',
+                        ],
+                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
+                        'type' => 'script'
+                    ],
+                ],
+            ],
+        ],
+        'target_learning' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.target_learning',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'wizards' => [
+                    'RTE' => [
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
+                        'notNewRecords'=> 1,
+                        'RTEonly' => 1,
+                        'module' => [
+                            'name' => 'wizard_rte',
+                        ],
+                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
+                        'type' => 'script'
+                    ],
+                ],
+            ],
+        ],
         'target_group' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.target_group',
@@ -438,7 +491,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rkwbasics_domain_model_documenttype',
-                'foreign_table_where' => 'AND tx_rkwbasics_domain_model_documenttype.type = "events" AND tx_rkwbasics_domain_model_documenttype.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwbasics_domain_model_documenttype.name ASC',
+                'foreign_table_where' => ' AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwbasics_domain_model_documenttype.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwbasics_domain_model_documenttype.type = "events" AND tx_rkwbasics_domain_model_documenttype.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwbasics_domain_model_documenttype.name ASC',
                 'maxitems'      => 1,
                 'minitems'      => 1,
                 'size'          => 5,
@@ -458,7 +511,7 @@ return [
             ],
         ],
         'categories' => [
-            'exclude' => 0,
+            'exclude' => 1,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.categories',
             'config' => [
                 'type' => 'select',

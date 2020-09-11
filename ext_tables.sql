@@ -14,6 +14,8 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	latitude varchar(255) DEFAULT '' NOT NULL,
 	testimonials text NOT NULL,
 	description text NOT NULL,
+	description2 text NOT NULL,
+	target_learning text NOT NULL,
 	target_group text NOT NULL,
 	schedule text NOT NULL,
 	partner text NOT NULL,
