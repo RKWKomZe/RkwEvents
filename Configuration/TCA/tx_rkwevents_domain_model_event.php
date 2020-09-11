@@ -58,8 +58,29 @@ return [
 				// workshop1, workshop2, workshop3,
 
                 '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
-                starttime, endtime',
-
+                starttime, endtime
+            ',
+            // add RTE
+            'columnsOverrides' => [
+                'description' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'description2' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'partner' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'target_learning' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'schedule' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'testimonials' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+            ]
         ],
     ],
     'palettes' => [
