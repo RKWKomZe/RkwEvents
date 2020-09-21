@@ -87,6 +87,17 @@
                             </td>
                         </tr>
                     </f:if>
+                    <f:if condition="{event.targetLearning}">
+                        <tr>
+                            <td class="table-title">
+                                <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_learning" />
+                            </td>
+
+                            <td class="table-content">
+                                <f:format.raw>{event.targetLearning}</f:format.raw>
+                            </td>
+                        </tr>
+                    </f:if>
                 </f:if>
 
 

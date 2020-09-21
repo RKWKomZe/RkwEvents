@@ -269,6 +269,10 @@
 			<trans-unit id="tx_rkwevents_fluid.label_optional">
 				<source>(optional)</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.label_required">
+                <source>(Required)</source>
+                <target>(Pflichtfeld)</target>
+            </trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -561,6 +565,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.target_group" approved="yes">
 				<source>Target Group</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.target_learning" approved="yes">
+                <source>Target Learning</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.partner" approved="yes">
 				<source>Partner</source>
 			</trans-unit>

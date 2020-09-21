@@ -36,9 +36,7 @@
 
                     <label class="form-label" for="tx_rkwevents_pi1_{i.index}_salutation">
                         <f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
-                        <f:if condition="<rkw:isMandatoryField fieldName='salutation' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
-                            <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-                        </f:if>
+                        <f:render partial="LabelSuffix" arguments="{field: 'salutation', mandatoryFields: settings.mandatoryFields.eventReservationAdditionalPersons}" />
                     </label>
                     <f:form.select
                         class="tx-rkwevents-person-{i.cycle} select-field select-field--longer"
@@ -52,9 +50,7 @@
 
                     <label class="form-label" for="tx_rkwevents_pi1_{i.index}_firstName">
                         <f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
-                        <f:if condition="<rkw:isMandatoryField fieldName='firstName' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
-                            <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-                        </f:if>
+                        <f:render partial="LabelSuffix" arguments="{field: 'salutation', mandatoryFields: settings.mandatoryFields.eventReservationAdditionalPersons}" />
                     </label>
                     <f:form.textfield
                         class="tx-rkwevents-person-{i.cycle}"
@@ -66,9 +62,7 @@
                 <div class="form__field width50 width100">
                     <label class="form-label" for="tx_rkwevents_pi1_{i.index}_lastName">
                         <f:translate key="tx_rkwevents_domain_model_eventreservation.lastName" />
-                        <f:if condition="<rkw:isMandatoryField fieldName='lastName' mandatoryFields='{settings.mandatoryFields.eventReservationAdditionalPersons}' />">
-                            <span class='optional'>&nbsp;<f:translate key="tx_rkwevents_fluid.label_optional" /></span>
-                        </f:if>
+                        <f:render partial="LabelSuffix" arguments="{field: 'salutation', mandatoryFields: settings.mandatoryFields.eventReservationAdditionalPersons}" />
                     </label>
                     <f:form.textfield
                         class="tx-rkwevents-person-{i.cycle}"
@@ -82,7 +76,7 @@
                         <a href="#" class="text-smaller tx-rkwevents-delete" data-person="{i.cycle}">
                             <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete" />
                         </a>
-                            </div>
+                    </div>
                 </f:if>
 
                 <!-- Button Set -->
