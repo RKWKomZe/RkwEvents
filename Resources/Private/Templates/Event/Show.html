@@ -34,10 +34,13 @@
                 <f:render partial="Event/AdditionalData" arguments="{_all}" />
                 <f:render partial="Event/Schedule" arguments="{_all}" />
 
-                <f:if condition="{event.schedule}">
-                    <!-- Registration link -->
-                    <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
-                </f:if>
+                <f:comment>
+                    <f:comment><!-- has currently no "real" styling (white button on white ground) --></f:comment>
+                    <f:if condition="{event.schedule}">
+                        <!-- Registration link -->
+                        <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
+                    </f:if>
+                </f:comment>
 
             </f:then>
         </f:if>
