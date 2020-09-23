@@ -76,24 +76,25 @@
                         />
                     </f:if>
 
-                    <f:comment><!-- ADDRESS --></f:comment>
-                    <f:if condition="{settings.list.filter.showAddress}">
-                        <div class="search-field search-field--small">
+                    <f:comment><!-- ADDRESS -->
+                        <f:if condition="{settings.list.filter.showAddress}">
+                            <div class="search-field search-field--small">
 
-                            <f:form.textfield
-                                class="single"
-                                name="filter[address]"
-                                type="text"
-                                placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
-                            />
+                                <f:form.textfield
+                                    class="single"
+                                    name="filter[address]"
+                                    type="text"
+                                    placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
+                                />
 
-                            <button type="submit" class="btn btn--secondary search-field__submit"
-                                title="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelSearch' extensionName='rkwEvents' />">
-                                <svg class="icon icon--16">
-                                <use xlink:href="#ic-arrow-primary" /></svg>
-                            </button>
-                        </div>
-                    </f:if>
+                                <button type="submit" class="btn btn--secondary search-field__submit"
+                                    title="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelSearch' extensionName='rkwEvents' />">
+                                    <svg class="icon icon--16">
+                                    <use xlink:href="#ic-arrow-primary" /></svg>
+                                </button>
+                            </div>
+                        </f:if>
+                    </f:comment>
 
                 </div>
 
