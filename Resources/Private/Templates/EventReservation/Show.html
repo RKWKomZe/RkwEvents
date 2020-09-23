@@ -17,7 +17,6 @@
 
     <f:section name="main">
 
-
         <h2><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.headline" /></h2>
         <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.introduction" arguments="{0: event.title}"/></f:format.raw></p>
 
@@ -25,8 +24,8 @@
 
         <f:render partial="EventReservation/Properties" arguments="{eventReservation:eventReservation}" />
 
-        <f:link.action action="myEvents" controller="Event" arguments="{event:event}" class="button secondary">
-            <span><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.backButton" /></span>
+        <f:link.action action="myEvents" controller="Event" arguments="{event:event}" class="btn btn--secondary">
+            <f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.backButton" />
         </f:link.action>
     </f:section>
 

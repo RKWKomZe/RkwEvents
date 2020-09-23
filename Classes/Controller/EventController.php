@@ -119,7 +119,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * @param array $filter
      * @param integer $page
      * @param bool $archive
-     * @return string
+     * @return void
+     * @throws \Exception
      */
     public function listAction($filter = array(), $page = 0, $archive = false)
     {
@@ -149,15 +150,17 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             // 5. sort event list (group by month) - only if no distance search is performed
             $sortedEventList = array();
-            if (
-                ($page > 0)
-                && (!$filter['address'])
-            ) {
-                $sortedEventList = DivUtility::groupEventsByMonthMore($eventList, $lastItem);
+            if (!$this->settings['list']['noGrouping']) {
+                if (
+                    ($page > 0)
+                    && (!$filter['address'])
+                ) {
+                    $sortedEventList = DivUtility::groupEventsByMonthMore($eventList, $lastItem);
 
-            } else {
-                if (!$filter['address']) {
-                    $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+                } else {
+                    if (!$filter['address']){
+                        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+                    }
                 }
             }
 
@@ -174,7 +177,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             if ($page > 0) {
 
                 // if a distance search is performed or noGrouping is explicitly set we do not group by month
-                if ($filter['address'] OR $filter['noGrouping']) {
+                if (
+                    ($filter['address'])
+                    || ($filter['noGrouping'])
+                    || ($this->settings['list']['noGrouping'])
+                ) {
 
                     $replacements['sortedEventList'] = $eventList;
                     $replacements['geosearch'] = true;
@@ -204,8 +211,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             } else {
 
                 // if a distance search is performed or noGrouping is explicitly set we do not group by month
-                if ($filter['address'] OR $filter['noGrouping']) {
-
+                if (
+                    ($filter['address'])
+                    || ($filter['noGrouping'])
+                    || ($this->settings['list']['noGrouping'])
+                ) {
                     $replacements['sortedEventList'] = $eventList;
                     $replacements['geosearch'] = true;
                     $replacements['noGrouping'] = true;
@@ -237,7 +247,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
 
             // 4. sort event list (group by month)
-            $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+            if (!$this->settings['list']['noGrouping']) {
+                $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+            } else {
+                $sortedEventList = $eventList;
+            }
 
             $this->view->assignMultiple(
                 array(
@@ -262,7 +276,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 )
             );
         }
-
 
     }
 

@@ -8,7 +8,7 @@
                 <div class="tile__header">
                     <div class="tile__label-wrapper">
                         <span class="tile__label">
-                            {event.department.name}
+                            {event.documentType.name}
                         </span>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     </h3>
                     <div class="tile__text tile__text--no-img">
                         <p>
-                            {event.documentType.name}
+                            {event.department.name}
                         </p>
                     </div>
                 </div>
@@ -39,20 +39,22 @@
                             </f:else>
                         </f:if>
 
-                        <f:if condition="{event.end}">
-                            <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
-                                <f:else>
-                                    <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
-                                        <f:then>
-                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
-                                        </f:then>
-                                        <f:else>
-                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
-                                        </f:else>
-                                    </f:if>
-                                </f:else>
+                        <f:comment>
+                            <f:if condition="{event.end}">
+                                <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+                                    <f:else>
+                                        <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                            <f:then>
+                                                &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                            </f:then>
+                                            <f:else>
+                                                &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                            </f:else>
+                                        </f:if>
+                                    </f:else>
+                                </f:if>
                             </f:if>
-                        </f:if>
+                        </f:comment>
                     </div>
                     <div class="tile__contact-location">
                         <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>

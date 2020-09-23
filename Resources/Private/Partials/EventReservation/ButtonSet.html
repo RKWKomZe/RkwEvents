@@ -8,12 +8,12 @@
                 <f:if condition="{editMode}">
                     <f:then>
                         <f:link.action pageUid="{settings.myEventsPid}" class="btn btn--secondary" action="myEvents" controller="Event">
-                                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
+                            <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
                         </f:link.action>
                     </f:then>
                     <f:else>
                         <f:link.action pageUid="{settings.showPid}" class="btn btn--secondary" action="show" controller="Event" arguments="{event:event}">
-                                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
+                            <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
                         </f:link.action>
                     </f:else>
                 </f:if>

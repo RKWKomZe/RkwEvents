@@ -4,6 +4,7 @@
 
     <f:if condition="{settings.noFilters}">
         <f:else>
+
             <f:form
                 noCacheHash="true"
                 action="list"
@@ -14,7 +15,7 @@
                 name="filter"
                 additionalParams="{rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'1\'}'}"
             >
-                <div class="btn-list btn-list--desktop">
+                <div class="btn-list">
 
                     <f:comment><!-- DEPARTMENT --></f:comment>
                     <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
@@ -75,21 +76,23 @@
                         />
                     </f:if>
 
-
                     <f:comment><!-- ADDRESS --></f:comment>
                     <f:if condition="{settings.list.filter.showAddress}">
-                        <f:form.textfield
-                            class="btn-list select-field--longer"
-                            name="filter[address]"
-                            type="text"
-                            placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
-                        />
+                        <div class="search-field search-field--small">
 
-                        <button class="btn btn--primary" type="submit">
-                            <span>
-                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.labelSearch" extensionName="rkwEvents" />
-                            </span>
-                        </button>
+                            <f:form.textfield
+                                class="single"
+                                name="filter[address]"
+                                type="text"
+                                placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
+                            />
+
+                            <button type="submit" class="btn btn--secondary search-field__submit"
+                                title="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelSearch' extensionName='rkwEvents' />">
+                                <svg class="icon icon--16">
+                                <use xlink:href="#ic-arrow-primary" /></svg>
+                            </button>
+                        </div>
                     </f:if>
 
                 </div>

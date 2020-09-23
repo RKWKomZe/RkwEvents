@@ -4,7 +4,7 @@
     data-namespace-typo3-fluid="true">
 
 
-	<div class="form__field width50">
+	<div class="form__field width50 break-after">
 		<label class="form-label" for="tx_rkwevents_pi1_salutation">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
             <f:render partial="LabelSuffix" arguments="{field: 'salutation', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
@@ -100,89 +100,94 @@
         />
 	</div>
 
+    <div class="form__field flex width50">
+        <div class="form__field-item  form__field-item--zip">
+            <label class="form-label" for="tx_rkwevents_pi1_zip">
+                <f:translate key="tx_rkwevents_domain_model_eventreservation.zip" />
+                <f:render partial="LabelSuffix" arguments="{field: 'zip', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+            </label>
+            <f:form.textfield
+                id="tx_rkwevents_pi1_zip"
+                property="zip"
+                value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.zip}\' or2=\'{editMode}\' />',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
+                additionalAttributes="{autocomplete:'zip'}"
+            />
+        </div>
 
-	<div class="form__field width50">
-		<label class="form-label" for="tx_rkwevents_pi1_zip">
-			<f:translate key="tx_rkwevents_domain_model_eventreservation.zip" />
-            <f:render partial="LabelSuffix" arguments="{field: 'zip', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
-		</label>
-		<f:form.textfield
-            id="tx_rkwevents_pi1_zip"
-            property="zip"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.zip}\' or2=\'{editMode}\' />',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
-            additionalAttributes="{autocomplete:'zip'}"
-        />
-	</div>
+        <div class="form__field-item  form__field-item--city">
+            <label class="form-label" for="tx_rkwevents_pi1_city">
+                <f:translate key="tx_rkwevents_domain_model_eventreservation.city" />
+                <f:render partial="LabelSuffix" arguments="{field: 'city', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+            </label>
+            <f:form.textfield
+                id="tx_rkwevents_pi1_city"
+                property="city"
+                value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.city}\' or2=\'{editMode}\' />',then:'{newEventReservation.city}',else:'{frontendUser.city}')}"
+                additionalAttributes="{autocomplete:'city'}"
+            />
+        </div>
+    </div>
 
-	<div class="form__field width50">
-		<label class="form-label" for="tx_rkwevents_pi1_city">
-			<f:translate key="tx_rkwevents_domain_model_eventreservation.city" />
-            <f:render partial="LabelSuffix" arguments="{field: 'city', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
-		</label>
-		<f:form.textfield
-            id="tx_rkwevents_pi1_city"
-            property="city"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.city}\' or2=\'{editMode}\' />',then:'{newEventReservation.city}',else:'{frontendUser.city}')}"
-            additionalAttributes="{autocomplete:'city'}"
-        />
-	</div>
-
-	<!--
-	<div class="v320-1">
-		<label class="form-label" for="tx_rkwevents_pi1_phone">
-			<f:translate key="tx_rkwevents_domain_model_eventreservation.telephone" />
-			<f:render partial="LabelSuffix" arguments="{field: 'phone', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
-		</label>
-		<f:form.textfield property="phone" id="tx_rkwevents_pi1_phone" value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.phone}\' or2=\'{editMode}\' />',then:'{newEventReservation.phone}',else:'{frontendUser.telephone}')}" additionalAttributes="{autocomplete:'tel'}" placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.phone' />" />
-	</div>
-	-->
-
+    <f:comment>
+        <!--
+        <div class="v320-1">
+            <label class="form-label" for="tx_rkwevents_pi1_phone">
+                <f:translate key="tx_rkwevents_domain_model_eventreservation.telephone" />
+                <f:render partial="LabelSuffix" arguments="{field: 'phone', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+            </label>
+            <f:form.textfield property="phone" id="tx_rkwevents_pi1_phone" value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.phone}\' or2=\'{editMode}\' />',then:'{newEventReservation.phone}',else:'{frontendUser.telephone}')}" additionalAttributes="{autocomplete:'tel'}" placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.phone' />" />
+        </div>
+        -->
+    </f:comment>
 
 
     <!-- workshops -->
-    <f:if condition="{event.workshop1}">
-        <div class="v320-1">
-            <h5>
-                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1" />
-            </h5>
-            <f:for each="{event.workshop1}" as="workshop" iteration="iter">
-                <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop1', frontendUser: frontendUser}"/>
+    <f:comment>
+
+        <f:if condition="{event.workshop1}">
+            <div class="v320-1">
+                <h5>
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1" />
+                </h5>
+                <f:for each="{event.workshop1}" as="workshop" iteration="iter">
+                    <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop1', frontendUser: frontendUser}"/>
+                    <if condition="!{iter.islast}">
+                        <br>
+                    </if>
+                </f:for>
+            </div>
+        </f:if>
+        <f:if condition="{event.workshop2}">
+            <div class="v320-1">
+                <h5>
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop2" />
+                </h5>
+                <f:for each="{event.workshop2}" as="workshop" iteration="iter">
+                    <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop2', frontendUser: frontendUser}"/>
+                </f:for>
                 <if condition="!{iter.islast}">
                     <br>
                 </if>
-            </f:for>
-        </div>
-    </f:if>
-    <f:if condition="{event.workshop2}">
-        <div class="v320-1">
-            <h5>
-                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop2" />
-            </h5>
-            <f:for each="{event.workshop2}" as="workshop" iteration="iter">
-                <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop2', frontendUser: frontendUser}"/>
-            </f:for>
-            <if condition="!{iter.islast}">
-                <br>
-            </if>
-        </div>
-    </f:if>
-    <f:if condition="{event.workshop3}">
-        <div class="v320-1">
-            <h5>
-                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3" />
-            </h5>
-            <f:for each="{event.workshop3}" as="workshop" iteration="iter">
-                <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop3', frontendUser: frontendUser}"/>
-            </f:for>
-            <if condition="!{iter.islast}">
-                <br>
-            </if>
-        </div>
-    </f:if>
+            </div>
+        </f:if>
+        <f:if condition="{event.workshop3}">
+            <div class="v320-1">
+                <h5>
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3" />
+                </h5>
+                <f:for each="{event.workshop3}" as="workshop" iteration="iter">
+                    <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop3', frontendUser: frontendUser}"/>
+                </f:for>
+                <if condition="!{iter.islast}">
+                    <br>
+                </if>
+            </div>
+        </f:if>
+    </f:comment>
 
 
     <!-- remark and questions -->
-    <div class="form__field">
+    <div class="form__field width100">
         <label class="form-label" for="tx_rkwevents_pi1_remark">
             <f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />
             <f:render partial="LabelSuffix" arguments="{field: 'remark', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
@@ -195,9 +200,9 @@
         />
     </div>
 
+
     <f:if condition="{editMode}">
         <f:else>
-
             <div class="form__field">
                 <f:form.checkbox class="checkbox" id="terms" name="terms" value="1" />
                 <label for="terms" class="checkbox-label">
@@ -208,6 +213,7 @@
                     <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3" />
                 </label>
             </div>
+
             <div class="form__field">
                 <f:form.checkbox class="checkbox" id="privacy" name="privacy" value="1" />
                 <label for="privacy" class="checkbox-label">

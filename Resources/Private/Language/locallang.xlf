@@ -363,22 +363,23 @@
 
 
 			<!-- Templates/Event/Info.html -->
-			<trans-unit id="tx_rkwevents_fluid.template_event_info.type" approved="yes">
-				<source>Type:</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.template_event_info.series" approved="yes">
-				<source>Series:</source>
-			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates.info.labelInfo" approved="yes">
+                <source>Information</source>
+            </trans-unit>
+
+
+            <!-- Templates/Event/Series.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates.title.series" approved="yes">
+                <source>Series:</source>
+            </trans-unit>
 
 
 			<!-- Templates/Event/SeriesProposals.html -->
 			<trans-unit id="tx_rkwevents_fluid.template_event_info.type" approved="yes">
 				<source>Type:</source>
-				<target>Art:</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.template_event_info.series" approved="yes">
 				<source>Series:</source>
-				<target>Reihe:</target>
 			</trans-unit>
 
 
@@ -519,6 +520,12 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_place.name" approved="yes">
 				<source>Where:</source>
 			</trans-unit>
+
+
+			<!-- Partials/Event/Info/Type.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info.type" approved="yes">
+                <source>Type:</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Costs.html -->

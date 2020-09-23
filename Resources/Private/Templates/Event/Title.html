@@ -3,18 +3,17 @@
     data-namespace-typo3-fluid="true">
 
     <div class="siteheader__title siteheader__title--detail-site">
-        <f:if condition="{event.series}">
-            <f:comment><!-- @toDo: Redesign 2020: No style example available --></f:comment>
-            <p class="series">
-                <rkw:series series="{event.series}" />
-            </p>
-        </f:if>
         <h1 class="h1">
             {event.title}
         </h1>
         <h2 class="siteheader__subtitle">
             {event.subTitle}
         </h2>
+        <f:if condition="{event.series}">
+            <p class="siteheader__additional-title">
+                <f:translate key="tx_rkwevents_fluid.templates.title.series" /> <rkw:series series="{event.series}" />
+            </p>
+        </f:if>
     </div>
 
 </html>

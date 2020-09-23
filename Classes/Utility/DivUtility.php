@@ -245,21 +245,24 @@ class DivUtility
      *
      * @author Maximilian Fäßler
      * @param array $eventList
+     * @param array &$updateIds
      * @return array
+     * @throws \Exception
      */
-    public static function groupEventsByMonth($eventList)
+    public static function groupEventsByMonth($eventList, &$updateIds = [])
     {
 
         $sortedEventList = array();
+        $updateIdList = array ();
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         foreach ($eventList as $event) {
 
             $startDate = new \DateTime(date('d-m-Y', $event->getStart()));
             $sortedEventList[$startDate->format("Y")][$startDate->format("m")][] = $event;
+            $updateIdList[$startDate->format("Y"). '-' . $startDate->format("m")] = true;
         }
 
         return $sortedEventList;
-        //===
     }
 
 
@@ -270,6 +273,7 @@ class DivUtility
      * @param array $eventList
      * @param \RKW\RkwEvents\Domain\Model\Event $lastItem
      * @return array
+     * @throws \Exception
      */
     public static function groupEventsByMonthMore($eventList, \RKW\RkwEvents\Domain\Model\Event $lastItem = null)
     {
@@ -296,10 +300,10 @@ class DivUtility
             } else {
                 $sortedEventList['append'][$startDate->format("Y")][$startDate->format("m")][] = $event;
             }
+
         }
 
         return $sortedEventList;
-        //===
     }
 
 
