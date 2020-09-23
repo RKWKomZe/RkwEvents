@@ -1,24 +1,29 @@
-{namespace dv=RKW\RkwEvents\ViewHelpers}
-<f:layout name="Default" />
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-This Template is responsible for creating a table of domain objects.
+    <f:layout name="Default" />
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-Resources:
-Private:
-Templates:
-List.html: keep
+    This Template is responsible for creating a table of domain objects.
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+    If you modify this template, do not forget to change the overwrite settings
+    in /Configuration/ExtensionBuilder/settings.yaml:
+    Resources:
+    Private:
+    Templates:
+    List.html: keep
 
-<f:section name="main">
+    Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
-	<!-- <h2>
-		<f:translate key="tx_rkwevents_fluid.templates_event_myevents" />
-	</h2>-->
+    <f:section name="main">
 
-    <f:render partial="FlashMessages" arguments="{_all}" />
+        <!-- <h2>
+            <f:translate key="tx_rkwevents_fluid.templates_event_myevents" />
+        </h2>-->
 
-    <f:render partial="Event/MyListing" arguments="{_all}" />
-</f:section>
+        <f:render partial="FlashMessages" arguments="{_all}" />
+
+        <f:render partial="Event/MyListing" arguments="{_all}" />
+    </f:section>
+
+</html>

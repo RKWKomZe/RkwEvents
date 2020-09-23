@@ -1,70 +1,82 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-<f:layout name="BackendModule" />
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-This Template is responsible for creating a table of domain objects.
+    <f:layout name="BackendModule" />
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
+	This Template is responsible for creating a table of domain objects.
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+	If you modify this template, do not forget to change the overwrite settings
+	in /Configuration/ExtensionBuilder/settings.yaml:
+	  Resources:
+	    Private:
+	      Templates:
+	        List.html: keep
 
-<f:section name="content">
+	Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
+	<f:section name="content">
 
-	<h1><f:translate key="tx_rkwevents_fluid.templates_backend_show.headline" /></h1>
-	<f:form action="create" name="data">
+		<h1><f:translate key="tx_rkwevents_fluid.templates_backend_show.headline" /></h1>
 
-		<label>
-			<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_csv" /></span>
-			<f:form.textarea property="csv" value="{content}" />
-		</label>
+		<f:render partial="Backend/FlashMessages" arguments="{_all}" />
 
-		<label>
-			<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_typeId" /></span>
-			<f:form.select property="typeId" options="{documentTypes}" optionValueField="uid" optionLabelField="name" prependOptionValue="" prependOptionLabel="---" />
-		</label>
+		<f:form action="create" name="data">
 
-		<label>
-			<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_topicId" /></span>
-			<f:form.select property="topicId" options="{departments}" optionValueField="uid" optionLabelField="name" prependOptionValue="" prependOptionLabel="---" />
-		</label>
+			<label>
+				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_csv" /></span>
+				<f:form.textarea property="csv" value="{content}" />
+			</label>
 
-		<label>
-			<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_organizerId" /></span>
-			<f:form.select property="organizerId" options="{organizers}" optionValueField="uid" optionLabelField="company" prependOptionValue="" prependOptionLabel="---" />
-		</label>
+			<label>
+				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_typeId" /></span>
+				<f:form.select property="typeId" options="{documentTypes}" optionValueField="uid" optionLabelField="name" prependOptionValue="" prependOptionLabel="---" />
+			</label>
 
-		<label>
-			<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_timeZone" /></span>
-			<f:form.textfield property="timeZone" value="GMT+1" />
-		</label>
+			<label>
+				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_topicId" /></span>
+				<f:form.select property="topicId" options="{departments}" optionValueField="uid" optionLabelField="name" prependOptionValue="" prependOptionLabel="---" />
+			</label>
 
-        <label>
-            <span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_targetPid" /></span>
-            <f:form.textfield property="targetPid" value="1" />
-        </label>
+			<label>
+				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_organizerId" /></span>
+				<f:form.select property="organizerId" options="{organizers}" optionValueField="uid" optionLabelField="company" prependOptionValue="" prependOptionLabel="---" />
+			</label>
 
-		<label>
-			<span>
-				<f:form.checkbox property="activate"  value="1" />
-				<f:translate key="tx_rkwevents_fluid.templates_backend_show.label_activate" />
-			</span>
-		</label>
+			<label>
+				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_timeZone" /></span>
+				<f:form.textfield property="timeZone" value="GMT+1" />
+			</label>
 
-		<label>
-			<span>
-				<f:form.checkbox property="doImport"  value="1" />
-				<f:translate key="tx_rkwevents_fluid.templates_backend_show.label_doImport" />
-			</span>
-		</label>
+	        <label>
+	            <span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_targetPid" /></span>
+	            <f:form.textfield property="targetPid" value="" />
+	        </label>
 
-		<f:form.button type="submit">
-			<f:translate key="tx_rkwevents_fluid.templates_backend_show.label_submit" />
-		</f:form.button>
-	</f:form>
+			<label>
+				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_targetPidAuthors" /></span>
+				<f:form.textfield property="targetPidAuthors" value="" />
+			</label>
 
-</f:section>
+			<label>
+				<span>
+					<f:form.checkbox property="activate"  value="1" />
+					<f:translate key="tx_rkwevents_fluid.templates_backend_show.label_activate" />
+				</span>
+			</label>
+
+			<label>
+				<span>
+					<f:form.checkbox property="doImport"  value="1" />
+					<f:translate key="tx_rkwevents_fluid.templates_backend_show.label_doImport" />
+				</span>
+			</label>
+
+			<f:form.button type="submit">
+				<f:translate key="tx_rkwevents_fluid.templates_backend_show.label_submit" />
+			</f:form.button>
+		</f:form>
+
+	</f:section>
+
+</html>

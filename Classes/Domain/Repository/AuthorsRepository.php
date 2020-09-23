@@ -27,13 +27,16 @@ namespace RKW\RkwEvents\Domain\Repository;
 class AuthorsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
+
     /**
-     * findOneInternalByEmail
+     * findOneInternalByEmailForImport
      *
+     * @param int $pid
      * @param string $email
      * @return \RKW\RkwEvents\Domain\Model\Authors
+     * @api
      */
-    public function findOneInternalByEmail($email)
+    public function findOneInternalByEmailForImport($pid, $email)
     {
 
         $query = $this->createQuery();
@@ -41,6 +44,7 @@ class AuthorsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $query->matching(
             $query->logicalAnd(
+                $query->equals('pid', intval($pid)),
                 $query->equals('internal', 1),
                 $query->equals('email', $email)
             )

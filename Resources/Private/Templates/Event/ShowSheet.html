@@ -1,37 +1,42 @@
-{namespace dv=RKW\RkwEvents\ViewHelpers}
-<f:layout name="Default" />
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-This Template is responsible for displaying a single view for a domain object
+    <f:layout name="Default" />
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
+    This Template is responsible for displaying a single view for a domain object
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+    If you modify this template, do not forget to change the overwrite settings
+    in /Configuration/ExtensionBuilder/settings.yaml:
+      Resources:
+        Private:
+          Templates:
+            Show.html: keep
 
-<f:section name="main">
+    Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
-	<f:render partial="FlashMessages" arguments="{_all}" />
+    <f:section name="main">
 
-	<f:render partial="Event/Properties" arguments="{_all}" />
+        <f:render partial="FlashMessages" arguments="{_all}" />
 
-	<p id="slide-share">
-		<f:link.action action="show" pageUid="{settings.showPid}" arguments="{event:event}" class="button secondary">
-			<span><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.back" /></span>
-		</f:link.action>
-	</p>
+        <f:render partial="Event/Properties" arguments="{_all}" />
 
-	<h2><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.headline" /></h2>
+        <p id="slide-share">
+            <f:link.action action="show" pageUid="{settings.showPid}" arguments="{event:event}" class="button secondary">
+                <span><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.back" /></span>
+            </f:link.action>
+        </p>
+
+        <h2><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.headline" /></h2>
 
 
-	<f:render partial="EventSheet/Properties" arguments="{_all}" />
+        <f:render partial="EventSheet/Properties" arguments="{_all}" />
 
-	<p>
-		<f:link.action action="show" pageUid="{settings.showPid}" arguments="{event:event}" class="button secondary">
-			<span><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.back" /></span>
-		</f:link.action>
-	</p>
-</f:section>
+        <p>
+            <f:link.action action="show" pageUid="{settings.showPid}" arguments="{event:event}" class="button secondary">
+                <span><f:translate key="tx_rkwevents_fluid.templates_events_showSheet.back" /></span>
+            </f:link.action>
+        </p>
+    </f:section>
+
+</html>

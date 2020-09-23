@@ -1,10 +1,14 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<div class="info-table--tr">
-    <div class="info-table--th">
-        <f:translate key="tx_rkwevents_fluid.partials_event_info_time.time" />
+    <div class="table__item">
+        <div class="table__title">
+            <f:translate key="tx_rkwevents_fluid.partials_event_info_time.time" />
+        </div>
+        <div class="table__content">
+            <rkw:ComposeDateTimeParts event='{event}' />
+        </div>
     </div>
-    <div class="info-table--td">
-        <rkw:ComposeDateTimeParts event='{event}' />
-    </div>
-</div>
+
+</html>

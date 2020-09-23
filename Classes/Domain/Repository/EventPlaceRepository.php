@@ -39,15 +39,19 @@ class EventPlaceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $zip
      * @param string $city
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @api
      */
-    public function findByAddressZipCity($address, $zip, $city)
+    public function findByAddressZipCityForImport($pid, $address, $zip, $city)
     {
 
 
         $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
         $query->matching(
             $query->logicalOr(
                 $query->logicalAnd(
+                    $query->equals('pid', intval($pid)),
                     $query->equals('address', trim($address)),
                     $query->equals('zip', trim($zip)),
                     $query->equals('city', trim($city))
@@ -56,8 +60,6 @@ class EventPlaceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         return $query->execute();
-        //===
-
     }
 
 

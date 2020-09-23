@@ -2,7 +2,8 @@
 
 namespace RKW\RkwEvents\Controller;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -20,6 +21,9 @@ use RKW\RkwEvents\Helper\DivUtility;
 /**
  * Class AjaxController
  *
+ * @deprecated With using the new AjaxApi2 this controller is not longer needed. Just a fallback vor AjaxApi1 purpose and old templates
+ * @use EventController->listAction instead
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -27,7 +31,7 @@ use RKW\RkwEvents\Helper\DivUtility;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class AjaxController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 {
     /**
      * eventRepository
@@ -67,7 +71,6 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $showMoreLink = count($eventList) < (count($queryResult) - 1) ? true : false;
         }
 
-
         // 5. sort event list (group by month) - only if no distance search is performed
         $sortedEventList = array();
         if (
@@ -89,13 +92,25 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'pageMore'     => $page + 1,
             'showMoreLink' => $showMoreLink,
             'filter'       => $filter,
-            'noGrouping'   => ($filter['address'] ? true : false),
+            'noGrouping'   => ($filter['address'] ? true : $this->settings['list']['noGrouping']),
         );
 
-        // get JSON helper
-        /** @var \RKW\RkwBasics\Helper\Json $jsonHelper */
-        $jsonHelper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
+        if ($this->settings['version'] == 1) {
+            /** @deprecated  */
+            $relatedId = '';
+            $action = '';
+            $template = '';
+        }
+
         if ($page > 0) {
+
+            // set Data for old AjaxApi
+            if ($this->settings['version'] == 1) {
+                /** @deprecated  */
+                $relatedId = 'tx-rkwevents-grid-section';
+                $action = 'append';
+                $template = 'Ajax/List/More.html';
+            }
 
             // if a distance search is performed or noGrouping is explicitly set we do not group by month
             if ($filter['address'] OR $filter['noGrouping']) {
@@ -104,27 +119,12 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $replacements['geosearch'] = true;
                 $replacements['noGrouping'] = true;
 
-                $jsonHelper->setHtml(
-                    'tx-rkwevents-grid-section',
-                    $replacements,
-                    'append',
-                    'Ajax/List/More.html'
-                );
-
             } else {
 
                 // set append list
                 if ($sortedEventList['append']) {
                     $replacements['sortedEventList'] = $sortedEventList['append'];
                 }
-
-                $jsonHelper->setHtml(
-                    'tx-rkwevents-grid-section',
-                    $replacements,
-                    'append',
-                    'Ajax/List/More.html'
-                );
-
 
                 // set insert list
                 if (
@@ -137,16 +137,26 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                     $replacements['noGrouping'] = true;
                     $replacements['showMoreLink'] = false;
 
-                    $jsonHelper->setHtml(
-                        'tx-rkwevents-results-' . $startDateLastItem->format("Y") . '-' . $startDateLastItem->format("m"),
-                        $replacements,
-                        'append',
-                        'Ajax/List/More.html'
-                    );
+                    // set Data for old AjaxApi
+                    if ($this->settings['version'] == 1) {
+                        /** @deprecated  */
+                        // set Data for old AjaxApi
+                        $relatedId = 'tx-rkwevents-results-' . $startDateLastItem->format("Y") . '-' . $startDateLastItem->format("m");
+                    }
+
                 }
             }
 
         } else {
+
+            // set Data for old AjaxApi
+            if ($this->settings['version'] == 1) {
+                /** @deprecated  */
+                // set Data for old AjaxApi
+                $relatedId = 'tx-rkwevents-result-section';
+                $action = 'replace';
+                $template = 'Ajax/List/List.html';
+            }
 
             // if a distance search is performed or noGrouping is explicitly set we do not group by month
             if ($filter['address'] OR $filter['noGrouping']) {
@@ -154,27 +164,34 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $replacements['sortedEventList'] = $eventList;
                 $replacements['geosearch'] = true;
                 $replacements['noGrouping'] = true;
-                $jsonHelper->setHtml(
-                    'tx-rkwevents-result-section',
-                    $replacements,
-                    'replace',
-                    'Ajax/List/List.html'
-                );
 
             } else {
                 $replacements['sortedEventList'] = $sortedEventList;
-                $jsonHelper->setHtml(
-                    'tx-rkwevents-result-section',
-                    $replacements,
-                    'replace',
-                    'Ajax/List/List.html'
-                );
+                $replacements['noGrouping'] = $this->settings['list']['noGrouping'];
             }
-
         }
-        print (string)$jsonHelper;
-        exit();
-        //===
+
+
+        /** New version */
+        if ($this->settings['version'] == 2) {
+            $this->view->assignMultiple($replacements);
+
+        } else {
+
+            /** @deprecated  */
+            // get JSON helper
+            /** @var \RKW\RkwBasics\Helper\Json $jsonHelper */
+            $jsonHelper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
+            $jsonHelper->setHtml(
+                $relatedId,
+                $replacements,
+                $action,
+                $template
+            );
+            print (string)$jsonHelper;
+            exit();
+            //===
+        }
     }
 }
 
