@@ -119,8 +119,6 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function createAction($data)
     {
 
-
-
         $doImport = false;
         if ($data['doImport']) {
             $doImport = true;
@@ -131,16 +129,43 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $timeZone = trim($data['timeZone']);
         }
 
-        $data['targetPid'] = intval($data['targetPid']);
+        $pid = intval($data['targetPid']);
+        $pidAuthors = intval($data['targetPidAuthors']);
+
+        $typeId = 0;
+        if ($data['typeId']) {
+            $typeId = intval($data['typeId']);
+        }
+
+        $topicId = 0;
+        if ($data['topicId']) {
+            $topicId = intval($data['topicId']);
+        }
+
+        $organizerId = 0;
+        if ($data['organizerId']) {
+            $organizerId = intval($data['organizerId']);
+        }
+
+        $hidden = 1;
+        if ($data['activate']) {
+            $hidden = 0;
+        }
+
+        $countryCode = 'DE';
+        $currencyCode = 'EUR';
 
 
         $allowedRows = array(
+            'pid',
+            'pidAuthors',
             'typeId',
             'topicId',
             'organizerId',
             'title',
             'subtitle',
             'description',
+            'description2',
             'partner',
             'start',
             'end',
@@ -160,6 +185,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'city',
             //'country',
             'targetGroup',
+            'targetLearning',
+            'schedule'
         );
 
         foreach (range(1, 10) as $contactNumber) {
@@ -203,15 +230,17 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     } else {
                         $importRows[] = false;
 
-                        $this->addFlashMessage(
-                            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                'backendController.error.ignoredRow',
-                                'rkw_events',
-                                array(trim($row))
-                            ),
-                            '',
-                            \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
-                        );
+                        if (trim($row)) {
+                            $this->addFlashMessage(
+                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                    'backendController.error.ignoredRow',
+                                    'rkw_events',
+                                    array(trim($row))
+                                ),
+                                '',
+                                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                            );
+                        }
                     }
 
                 }
@@ -235,33 +264,31 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                     }
 
-                    $typeId = 0;
-                    if ($data['typeId']) {
-                        $typeId = intval($data['typeId']);
-                    }
-
-                    $topicId = 0;
-                    if ($data['topicId']) {
-                        $topicId = intval($data['topicId']);
-                    }
-
-                    $organizerId = 0;
-                    if ($data['organizerId']) {
-                        $organizerId = intval($data['organizerId']);
-                    }
-
-                    $hidden = 1;
-                    if ($data['activate']) {
-                        $hidden = 0;
-                    }
-
-                    $countryCode = 'DE';
-                    $currencyCode = 'EUR';
-
                     if (
                         $tempData['title']
                         && $tempData['start']
                     ) {
+
+                        if ($tempData['pid']) {
+                            $pid = intval($tempData['pid']);
+                        }
+
+                        if ($tempData['pidAuthors']) {
+                            $pidAuthors = intval($tempData['pidAuthors']);
+                        }
+
+                        if ($tempData['typeId']) {
+                            $typeId = intval($tempData['typeId']);
+                        }
+
+                        if ($tempData['topicId']) {
+                            $topicId = intval($tempData['topicId']);
+                        }
+
+                        if ($tempData['organizerId']) {
+                            $organizerId = intval($tempData['organizerId']);
+                        }
+
 
                         //======================================================================
                         // 1. Create Event and set data
@@ -272,7 +299,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         $event->setHidden($hidden);
 
                         // set PID
-                        $event->setPid($data['targetPid']);
+                        $event->setPid($pid);
 
                         // set data
                         if ($tempData['title']) {
@@ -284,17 +311,20 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         if ($tempData['description']) {
                             $event->setDescription($this->parseHtml($tempData['description']));
                         }
+                        if ($tempData['description2']) {
+                            $event->setDescription2($this->parseHtml($tempData['description2']));
+                        }
                         if ($tempData['partner']) {
-                            if (strip_tags($tempData['partner']) == $tempData['partner']) {
-                                $tempData['partner'] = '<p>' . $tempData['partner'] . '</p>';
-                            }
-                            $event->setPartner($tempData['partner']);
+                            $event->setPartner($this->parseHtml($tempData['partner']));
+                        }
+                        if ($tempData['targetLearning']) {
+                            $event->setTargetLearning($this->parseHtml($tempData['targetLearning']));
                         }
                         if ($tempData['targetGroup']) {
-                            if (strip_tags($tempData['targetGroup']) == $tempData['targetGroup']) {
-                                $tempData['targetGroup'] = '<p>' . $tempData['targetGroup'] . '</p>';
-                            }
                             $event->setTargetGroup($tempData['targetGroup']);
+                        }
+                        if ($tempData['schedule']) {
+                            $event->setSchedule($this->parseHtml($tempData['schedule']));
                         }
                         if ($tempData['regRequired']) {
                             $event->setRegRequired(true);
@@ -457,7 +487,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             $geoLocation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwGeolocation\\Service\\Geolocation');
 
                             // 5.1 check for existing one
-                            $eventPlaces = $this->eventPlaceRepository->findByAddressZipCity($tempData['address'], $zip, $tempData['city']);
+                            $eventPlaces = $this->eventPlaceRepository->findByAddressZipCityForImport($pid, $tempData['address'], $zip, $tempData['city']);
                             if (count($eventPlaces) > 0) {
 
                                 if (count($eventPlaces) == 1) {
@@ -491,7 +521,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 $countryRepository = $this->objectManager->get('SJBR\\StaticInfoTables\\Domain\\Repository\\CountryRepository');
 
                                 // set PID
-                                $eventPlace->setPid($data['targetPid']);
+                                $eventPlace->setPid($pid);
 
                                 $eventPlace->setName($tempData['placeName']);
                                 $eventPlace->setAddress($tempData['address']);
@@ -578,35 +608,38 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                             if ($tempData['contact' . $contactNumber . 'Email']) {
 
-                                // 6.1 check internal contact
-                                if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors')) {
+
+                                // 6.1 check for be-users
+                                /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
+                                if ($beUser = $this->backendUserRepository->findOneByEmail($tempData['contact' . $contactNumber . 'Email'])) {
+                                    $event->addBeUser($beUser);
+
+                                // 6.2 check for internal contact
+                                } else if (
+                                    (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors'))
+
                                     /** @var \RKW\RkwEvents\Domain\Repository\AuthorsRepository $authorsRepository */
-                                    $authorsRepository = $this->objectManager->get('RKW\\RkwEvents\\Domain\\Repository\\AuthorsRepository');
-                                    $internalContact = $authorsRepository->findOneInternalByEmail($tempData['contact' . $contactNumber . 'Email']);
-                                }
-                                /** @var \RKW\RkwEvents\Domain\Model\Authors $internalContact */
-                                if ($internalContact) {
+                                    && ($authorsRepository = $this->objectManager->get('RKW\\RkwEvents\\Domain\\Repository\\AuthorsRepository'))
+
+                                    /** @var \RKW\RkwEvents\Domain\Model\Authors $internalContact */
+                                    && ($internalContact = $authorsRepository->findOneInternalByEmailForImport($pidAuthors, $tempData['contact' . $contactNumber . 'Email']))
+                                ){
                                     $event->addInternalContact($internalContact);
 
-                                    // in this case we also check for BE-Users!
-                                    /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
-                                    if ($beUser = $this->backendUserRepository->findOneByEmail($tempData['contact' . $contactNumber . 'Email'])) {
-                                        $event->addBeUser($beUser);
-                                    }
 
-                                    // 6.2 check for external contact
-                                    /** @var  \RKW\RkwEvents\Domain\Model\EventContact */
-                                } elseif ($externalContact = $this->eventContactRepository->findOneByEmail($tempData['contact' . $contactNumber . 'Email'])) {
+                                // 6.3 check for external contact
+                                /** @var  \RKW\RkwEvents\Domain\Model\EventContact */
+                                } elseif ($externalContact = $this->eventContactRepository->findOneByEmailForImport($pid, $tempData['contact' . $contactNumber . 'Email'])) {
                                     $event->addExternalContact($externalContact);
 
-                                    // 6.3 create new one
+                                // 6.4 create new one
                                 } else {
 
                                     /** @var \RKW\RkwEvents\Domain\Model\EventContact $eventContact */
                                     $eventContact = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("RKW\\RkwEvents\\Domain\\Model\\EventContact");
 
                                     // set PID
-                                    $eventContact->setPid($data['targetPid']);
+                                    $eventContact->setPid($pid);
 
                                     if (
                                         ($tempData['contact' . $contactNumber . 'FirstName'])
@@ -679,17 +712,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         //======================================================================
                         // 7. Check for department
-                        if (
-                            ($tempData['topicId'])
-                            || ($topicId)
-                        ) {
-
-                            if (
-                                ($tempData['topicId'])
-                                && (!$topicId)
-                            ) {
-                                $topicId = intval($tempData['topicId']);
-                            }
+                        if ($topicId) {
 
                             /** @var \RKW\RkwBasics\Domain\Model\Department $department */
                             if ($department = $this->departmentRepository->findByIdentifier(intval($topicId))) {
@@ -710,17 +733,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         //======================================================================
                         // 8. Check for type
-                        if (
-                            ($tempData['typeId'])
-                            || ($typeId)
-                        ) {
-
-                            if (
-                                ($tempData['typeId'])
-                                && (!$typeId)
-                            ) {
-                                $typeId = intval($tempData['typeId']);
-                            }
+                        if ($typeId) {
 
                             /** @var \RKW\RkwBasics\Domain\Model\DocumentType $documentType */
                             if ($documentType = $this->documentTypeRepository->findOneByIdAndType(intval($typeId), 'events')) {
@@ -742,17 +755,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         //======================================================================
                         // 8. Check for organizer
-                        if (
-                            ($tempData['organizerId'])
-                            || ($organizerId)
-                        ) {
-
-                            if (
-                                ($tempData['organizerId'])
-                                && (!$organizerId)
-                            ) {
-                                $organizerId = intval($tempData['organizerId']);
-                            }
+                        if ($organizerId) {
 
                             /** @var \RKW\RkwEvents\Domain\Model\EventOrganizer $organizer */
                             if ($organizer = $this->eventOrganizerRepository->findByIdentifier(intval($organizerId))) {
@@ -847,7 +850,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     {
         // add p-tag-wrap
         if (strip_tags($string) == $string) {
-            $string = '<p>' . $string . '</p>';
+            $string = '<p>' . nl2br($string) . '</p>';
         }
 
         // get replacement for UL-lists

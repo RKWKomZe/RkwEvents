@@ -22,7 +22,7 @@
 	</p>
 	<f:if condition="{reservation.event.costsReg}">
 		<p>
-			<vh:frontend.translate key="templates_email_deleteReservationUser.billing" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
+			<f:format.raw><vh:frontend.translate key="templates_email_deleteReservationUser.billing" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /></f:format.raw>
 		</p>
 	</f:if>
 

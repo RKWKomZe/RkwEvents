@@ -9,7 +9,7 @@ return [
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => true,
-		'requestUpdate' => 'type',
+		//'requestUpdate' => 'type',
 		'default_sortby' => 'ORDER BY last_name, company, email',
 
 		'languageField' => 'sys_language_uid',

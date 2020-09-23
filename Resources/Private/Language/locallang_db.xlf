@@ -35,6 +35,12 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.description2" approved="yes">
+				<source>Description (Additional)</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.target_learning" approved="yes">
+				<source>Target Learning</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.target_group">
 				<source>Target Group</source>
 			</trans-unit>

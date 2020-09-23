@@ -2,7 +2,8 @@
 
 namespace RKW\RkwEvents\Controller;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -27,7 +28,7 @@ use RKW\RkwEvents\Helper\DivUtility;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 {
     /**
      * eventRepository
@@ -113,46 +114,169 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * action list
      *
+     * Hint: The given params ($filter, $page, $archive) are only needed for AJAX purpose
+     *
+     * @param array $filter
+     * @param integer $page
+     * @param bool $archive
      * @return void
+     * @throws \Exception
      */
-    public function listAction()
+    public function listAction($filter = array(), $page = 0, $archive = false)
     {
-        // 1. get event list
-        $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
-        $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
+        if ($filter || $page || $archive) {
 
-        // 2. proof if we have further results (query with listItemsPerQuery + 1)
-        $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
-        $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+            // NEW INTEGRATED AJAX PART (formerly AjaxController->filterAction)
+            // HINT: Following lines are NOT supporting the old AjaxApi. Use old AjaxController for using the old AjaxApi
 
-        // 3. get department and document list (for filter)
-        $departmentList = $this->departmentRepository->findAllByVisibility();
-        $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-        $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+            // 1. filter the filterArray ;-)
+            foreach ($filter as $key => $value) {
+                $filter[$key] = filter_var($value, FILTER_SANITIZE_STRING);
+            }
 
-        // 4. sort event list (group by month)
-        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+            // 2. get event list
+            $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
+            $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, intval($page), boolval($archive));
 
-        $this->view->assignMultiple(
-            array(
-                'filter'           => array('project' => $this->settings['projectUids']),
-                'sortedEventList'  => $sortedEventList,
-                'departmentList'   => $departmentList,
-                'documentTypeList' => $documentTypeList,
-                'categoryList'     => $categoryList,
-                'page',
-            )
-        );
+            // 3. proof if we have further results (query with listItemsPerQuery + 1)
+            $lastItem = null;
+            $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView, intval($page), $lastItem);
 
-        // target template is also used by ajax - so we have to set typoscript settings this way
-        $this->view->assignMultiple(
-            array(
+            // 4. Check if we need to display a more-link
+            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+            if ($page > 0) {
+                $showMoreLink = count($eventList) < (count($queryResult) - 1) ? true : false;
+            }
+
+            // 5. sort event list (group by month) - only if no distance search is performed
+            $sortedEventList = array();
+            if (!$this->settings['list']['noGrouping']) {
+                if (
+                    ($page > 0)
+                    && (!$filter['address'])
+                ) {
+                    $sortedEventList = DivUtility::groupEventsByMonthMore($eventList, $lastItem);
+
+                } else {
+                    if (!$filter['address']){
+                        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+                    }
+                }
+            }
+
+            // get new list
+            $replacements = array(
                 'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
                 'showPid'      => intval($this->settings['showPid']),
-                'pageMore'     => 1,
+                'pageMore'     => $page + 1,
                 'showMoreLink' => $showMoreLink,
-            )
-        );
+                'filter'       => $filter,
+                'noGrouping'   => ($filter['address'] ? true : $this->settings['list']['noGrouping']),
+            );
+
+            if ($page > 0) {
+
+                // if a distance search is performed or noGrouping is explicitly set we do not group by month
+                if (
+                    ($filter['address'])
+                    || ($filter['noGrouping'])
+                    || ($this->settings['list']['noGrouping'])
+                ) {
+
+                    $replacements['sortedEventList'] = $eventList;
+                    $replacements['geosearch'] = true;
+                    $replacements['noGrouping'] = true;
+
+                } else {
+
+                    // set append list
+                    if ($sortedEventList['append']) {
+                        $replacements['sortedEventList'] = $sortedEventList['append'];
+                    }
+
+                    // set insert list
+                    if (
+                        ($lastItem instanceof \RKW\RkwEvents\Domain\Model\Event)
+                        && ($sortedEventList['insert'])
+                    ) {
+
+                        $startDateLastItem = new \DateTime(date('d-m-Y', $lastItem->getStart()));
+                        $replacements['sortedEventList'] = $sortedEventList['insert'];
+                        $replacements['noGrouping'] = true;
+                        $replacements['showMoreLink'] = false;
+
+                    }
+                }
+
+            } else {
+
+                // if a distance search is performed or noGrouping is explicitly set we do not group by month
+                if (
+                    ($filter['address'])
+                    || ($filter['noGrouping'])
+                    || ($this->settings['list']['noGrouping'])
+                ) {
+                    $replacements['sortedEventList'] = $eventList;
+                    $replacements['geosearch'] = true;
+                    $replacements['noGrouping'] = true;
+
+                } else {
+                    $replacements['sortedEventList'] = $sortedEventList;
+                    $replacements['noGrouping'] = $this->settings['list']['noGrouping'];
+                }
+            }
+
+            $this->view->assignMultiple($replacements);
+
+
+        } else {
+
+            // STANDARD LIST VIEW PART
+
+            // 1. get event list
+            $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
+            $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
+
+            // 2. proof if we have further results (query with listItemsPerQuery + 1)
+            $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
+            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+
+            // 3. get department and document list (for filter)
+            $departmentList = $this->departmentRepository->findAllByVisibility();
+            $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
+            $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+
+            // 4. sort event list (group by month)
+            if (!$this->settings['list']['noGrouping']) {
+                $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+            } else {
+                $sortedEventList = $eventList;
+            }
+
+            $this->view->assignMultiple(
+                array(
+                    'filter'           => array('project' => $this->settings['projectUids']),
+                    'sortedEventList'  => $sortedEventList,
+                    'departmentList'   => $departmentList,
+                    'documentTypeList' => $documentTypeList,
+                    'categoryList'     => $categoryList,
+                    'page',
+                    'noGrouping' => $this->settings['list']['noGrouping'],
+                    'timeArrayList' => DivUtility::createMonthListArray(),
+                )
+            );
+
+            // target template is also used by ajax - so we have to set typoscript settings this way
+            $this->view->assignMultiple(
+                array(
+                    'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
+                    'showPid'      => intval($this->settings['showPid']),
+                    'pageMore'     => 1,
+                    'showMoreLink' => $showMoreLink,
+                )
+            );
+        }
+
     }
 
     /**
@@ -244,8 +368,28 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @return void
      * @ignorevalidation $event
      */
-    public function showAction(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+
+            $uri = $this->uriBuilder->reset()
+                ->setTargetPageUid($this->settings['listPid'])
+                ->setCreateAbsoluteUri(true)
+                ->build();
+
+            $this->addFlashMessage(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'eventController.message.error.notAvailable',
+                    'rkw_events',
+                    array(
+                        0 => $uri
+                    )
+                ),
+                '',
+                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+            );
+        }
+
         $this->view->assign('event', $event);
     }
 

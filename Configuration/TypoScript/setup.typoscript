@@ -186,7 +186,7 @@ plugin.tx_rkwevents {
     }
     settings {
 
-
+        version = {$plugin.tx_rkwevents.settings.version}
         listPid = {$plugin.tx_rkwevents.settings.listPid}
         showPid = {$plugin.tx_rkwevents.settings.showPid}
         loginPid = {$plugin.tx_rkwevents.settings.loginPid}
@@ -201,6 +201,7 @@ plugin.tx_rkwevents {
 		surveyPid = {$plugin.tx_rkwevents.settings.surveyPid}
 
         itemsPerPage = {$plugin.tx_rkwevents.settings.itemsPerPage}
+        // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
         ajaxTypeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
         includeJQuery = {$plugin.tx_rkwevents.settings.includeJQuery}
         includeGallery = {$plugin.tx_rkwevents.settings.includeGallery}
@@ -208,6 +209,17 @@ plugin.tx_rkwevents {
         defaultLanguageKey = {$plugin.tx_rkwevents.settings.defaultLanguageKey}
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
+
+        list {
+            noGrouping = {$plugin.tx_rkwevents.settings.list.noGrouping}
+            filter {
+                showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
+                showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
+                showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
+                showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
+                showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
+            }
+        }
 
 		mandatoryFields {
 			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
@@ -234,50 +246,53 @@ plugin.tx_rkwevents {
 [global]
 page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/events.js
 
-
-
-
-#===============================================================
-# Ajax
-#===============================================================
-txRkwEventsAjax = PAGE
-txRkwEventsAjax {
-
-	# also written in partial Listing.html
-	typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
-
-	config {
-		disableAllHeaderCode = 1
-		xhtml_cleaning = 0
-		admPanel = 0
-		additionalHeaders = Content-type: text/plain
-		no_cache = 0
-	}
-
-	10 = USER_INT
-	10 {
-		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-		extensionName = RkwEvents
-		pluginName = Pi1
-		vendorName = RKW
-		switchableControllerActions {
-
-			# Again: Controller-Name and Action
-			Ajax {
-				10 = filter
-				20 = more
-				30 = moreArchive
-			}
-		}
-
-		view < plugin.tx_rkwevents.view
-		persistence < plugin.tx_rkwevents.persistence
-		settings < plugin.tx_rkwevents.settings
-	}
-}
-
-
 # needed for backend context (cronjobs)
 module.tx_rkwevents.settings < plugin.tx_rkwevents.settings
 module.tx_rkwevents.persistence.storagePid < plugin.tx_rkwevents.persistence.storagePid
 module.tx_rkwevents.view < plugin.tx_rkwevents.view
+
+
+
+
+#===============================================================
+# @toDo: DEPRECATED BELOW
+#===============================================================
+
+#===============================================================
+# Ajax (only needed for OLD Ajax API)
+#===============================================================
+txRkwEventsAjax = PAGE
+txRkwEventsAjax {
+
+    # also written in partial Listing.html
+    typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
+
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        additionalHeaders = Content-type: text/plain
+        no_cache = 0
+    }
+
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = RkwEvents
+        pluginName = Pi1
+        vendorName = RKW
+        switchableControllerActions {
+
+            # Again: Controller-Name and Action
+            Ajax {
+                10 = filter
+                20 = more
+                30 = moreArchive
+            }
+        }
+
+        view < plugin.tx_rkwevents.view
+        persistence < plugin.tx_rkwevents.persistence
+        settings < plugin.tx_rkwevents.settings
+    }
+}

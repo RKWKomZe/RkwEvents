@@ -1,7 +1,7 @@
 <?php
 namespace RKW\RkwRegistration\Tests\Functional\Utility;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;

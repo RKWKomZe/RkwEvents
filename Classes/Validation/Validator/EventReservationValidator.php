@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEvents\Validation\Validator;
 
-use RKW\RkwEvents\Helper\DivUtility;
+use RKW\RkwEvents\Utility\DivUtility;
 use \RKW\RkwBasics\Helper\Common;
 
 /*
@@ -158,7 +158,10 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
 
 
         // 3. check workshop reservation
-        if (count($newEventReservation->getWorkshopRegister())) {
+        if (
+            $newEventReservation->getWorkshopRegister()
+            && count($newEventReservation->getWorkshopRegister())
+        ) {
 
             // (1) filter form array
             foreach ($newEventReservation->getWorkshopRegister() as $unitName => $workshopUnit) {

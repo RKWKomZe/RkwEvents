@@ -65,33 +65,6 @@ return [
                         'localize' => false
                     ],
                 ],
-                /*'wizards' => [
-                    '_VERTICAL' => 1,
-                    'edit' => [
-                        'type' => 'popup',
-                        'title' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.edit',
-                        'module' => [
-                            'name' => 'wizard_edit',
-                        ],
-                        'popup_onlyOpenIfSelected' => 1,
-                        'icon' => 'edit2.gif',
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1'
-                    ],
-                    'add' => [
-                        'type' => 'script',
-                        'title' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.add',
-                        'icon' => 'add.gif',
-                        'params' => [
-                            'table' => 'tx_rkwevents_domain_model_eventreservationaddperson',
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend'
-                        ],
-                        'module' => [
-                            'name' => 'wizard_add'
-                        ],
-                    ],
-                ],
-                */
             ],
         ],
 		'fe_user' => [

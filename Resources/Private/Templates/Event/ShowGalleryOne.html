@@ -1,16 +1,21 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-<f:layout name="Default" />
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:section name="main">
-    <f:if condition="<f:count>{event.gallery1}</f:count>" >
+    <f:layout name="Default" />
 
-        <h4 class="section-header h2">
-            <f:translate key="tx_rkwevents_fluid.templates_event_showGalleryOne.headline" />
-        </h4>
+    <f:section name="main">
+        <f:if condition="<f:count>{event.gallery1}</f:count>" >
 
-        <f:render partial="Event/Gallery" arguments="{gallery:event.gallery1, settings:settings}" />
+            <h4 class="section-header h2">
+                <f:translate key="tx_rkwevents_fluid.templates_event_showGalleryOne.headline" />
+            </h4>
 
-    </f:if>
+            <f:render partial="Event/Gallery" arguments="{gallery:event.gallery1, settings:settings}" />
+
+        </f:if>
 
 
-</f:section>
+    </f:section>
+
+</html>

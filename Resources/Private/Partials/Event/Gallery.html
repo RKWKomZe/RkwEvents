@@ -1,24 +1,30 @@
-<div class="galleria">
-	<f:for each="{gallery}" as="image">
-		<f:image src="{image.uid}" treatIdAsReference="1" title="{image.title}" alt="{image.alternative}" maxWidth="1000" maxHeight="1000" />
-	</f:for>
-</div>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:if condition="{settings.includeGallery} == 1">
-	<script>
-		try {
-			document.addEventListener("DOMContentLoaded", function (event) {
+    <div class="galleria">
+        <f:for each="{gallery}" as="image">
+            <f:image src="{image.uid}" treatIdAsReference="1" title="{image.title}" alt="{image.alternative}" maxWidth="1000" maxHeight="1000" />
+        </f:for>
+    </div>
 
-				Galleria.loadTheme('<f:uri.resource path="Galleria/themes/classic/galleria.classic.min.js" />');
-				Galleria.configure({
-					imageCrop: true,
-					transition: 'fade'
-				});
-				Galleria.run('.galleria');
+    <f:if condition="{settings.includeGallery} == 1">
+        <script>
+            try {
+                document.addEventListener("DOMContentLoaded", function (event) {
 
-			});
-		} catch (err) {
-			// do nothing
-		}
-	</script>
-</f:if>
+                    Galleria.loadTheme('<f:uri.resource path="Galleria/themes/classic/galleria.classic.min.js" />');
+                    Galleria.configure({
+                        imageCrop: true,
+                        transition: 'fade'
+                    });
+                    Galleria.run('.galleria');
+
+                });
+            } catch (err) {
+                // do nothing
+            }
+        </script>
+    </f:if>
+
+</html>

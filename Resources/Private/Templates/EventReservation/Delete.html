@@ -1,38 +1,43 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+    <f:layout name="Default" />
 
-This Template is responsible for creating a table of domain objects.
+    This Template is responsible for creating a table of domain objects.
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
+    If you modify this template, do not forget to change the overwrite settings
+    in /Configuration/ExtensionBuilder/settings.yaml:
+      Resources:
+        Private:
+          Templates:
+            List.html: keep
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+    Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
-<f:section name="main">
-	<h2><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.headline" /></h2>
+    <f:section name="main">
+        <h2 class="no-hide"><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.headline" /></h2>
 
-	<f:render partial="FlashMessages" arguments="{_all}" />
+        <f:render partial="FlashMessages" arguments="{_all}" />
 
-    <p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.description" arguments="{0 : event.title}" /></p>
+        <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.description" arguments="{0 : event.title}" /></f:format.raw></p>
 
-	<p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.note" /></p>
+        <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.note" /></f:format.raw></p>
 
-	<f:if condition="{eventReservation.event.costsReg} > 0">
-		<p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.billing" /></p>
-	</f:if>
+        <f:if condition="{eventReservation.event.costsReg} > 0">
+            <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.billing" /></f:format.raw></p>
+        </f:if>
 
-	<p>
-		<f:link.action action="remove" arguments="{eventReservation : eventReservation}" class="button secondary prevent-double-click">
-			<span><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelYes" /></span>
-		</f:link.action>
+        <p>
+            <f:link.action action="remove" arguments="{eventReservation : eventReservation}" class="button secondary prevent-double-click">
+                <span><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelYes" /></span>
+            </f:link.action>
 
-		<f:link.action pageUid="{settings.myEventsPid}" action="myEvents" controller="Event" class="button">
-			<span><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelNo" /></span>
-		</f:link.action>
+            <f:link.action pageUid="{settings.myEventsPid}" action="myEvents" controller="Event" class="button">
+                <span><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelNo" /></span>
+            </f:link.action>
 
-	</p>
-</f:section>
+        </p>
+    </f:section>
+
+</html>

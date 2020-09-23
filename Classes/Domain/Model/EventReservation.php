@@ -511,7 +511,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the workshopRegister
      *
-     * @return string $workshopRegister
+     * @return array $workshopRegister
      */
     public function getWorkshopRegister()
     {
@@ -521,7 +521,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the workshopRegister
      *
-     * @param string $workshopRegister
+     * @param array $workshopRegister
      * @return void
      */
     public function setWorkshopRegister($workshopRegister)
