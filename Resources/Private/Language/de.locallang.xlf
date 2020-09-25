@@ -420,7 +420,7 @@
 			<!-- Templates/Event/List.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_event_list.noEvent" approved="yes">
 				<source>Sorry, no events found.</source>
-				<target>Leider sind derzeit keine Veranstaltungen geplant. Bitte besuchen Sie uns später erneut.</target>
+				<target>Leider konnten wir keine Veranstaltungen für Sie finden.</target>
 			</trans-unit>
 
 			<!-- Templates/Event/Archive.html -->

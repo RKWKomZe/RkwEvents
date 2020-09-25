@@ -90,12 +90,16 @@ plugin.tx_rkwevents {
             filter {
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"
                 showDepartment = 1
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "documentType"
                 showDocumentType = 1
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "category"
                 showCategory = 0
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "time"
                 showTime = 0
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
                 showAddress = 1
             }

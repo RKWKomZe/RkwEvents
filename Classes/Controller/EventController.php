@@ -124,6 +124,12 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function listAction($filter = array(), $page = 0, $archive = false)
     {
+
+        // get department and document list (for filter)
+        $departmentList = $this->departmentRepository->findAllByVisibility();
+        $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
+        $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+
         if ($filter || $page || $archive) {
 
             // NEW INTEGRATED AJAX PART (formerly AjaxController->filterAction)
@@ -166,7 +172,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             // get new list
             $replacements = array(
-                'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
+                'sortedEventList'  => $sortedEventList,
+                'departmentList'   => $departmentList,
+                'documentTypeList' => $documentTypeList,
+                'categoryList'     => $categoryList,
+                'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']), //@deprecated
                 'showPid'      => intval($this->settings['showPid']),
                 'pageMore'     => $page + 1,
                 'showMoreLink' => $showMoreLink,
@@ -240,11 +250,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             // 2. proof if we have further results (query with listItemsPerQuery + 1)
             $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
             $showMoreLink = count($eventList) < count($queryResult) ? true : false;
-
-            // 3. get department and document list (for filter)
-            $departmentList = $this->departmentRepository->findAllByVisibility();
-            $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-            $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
 
             // 4. sort event list (group by month)
             if (!$this->settings['list']['noGrouping']) {

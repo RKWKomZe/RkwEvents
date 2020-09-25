@@ -4,13 +4,13 @@
     data-namespace-typo3-fluid="true">
 
 
-	<div class="form__field width50 break-after">
+	<div class="form__field width25 break-after">
 		<label class="form-label" for="tx_rkwevents_pi1_salutation">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.salutation" />
             <f:render partial="LabelSuffix" arguments="{field: 'salutation', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
 		</label>
 		<f:form.select
-            class="select-field select-field--longer"
+            class="select-field"
             id="tx_rkwevents_pi1_salutation"
             property="salutation"
             value="{f:if(condition:'<rkw:or firstIsSalutation=\'true\' or1=\'{newEventReservation.salutation}\' or2=\'{editMode}\' />',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}"
