@@ -1,44 +1,34 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
     <f:layout name="Default" />
-
-    This Template is responsible for creating a table of domain objects.
-
-    If you modify this template, do not forget to change the overwrite settings
-    in /Configuration/ExtensionBuilder/settings.yaml:
-      Resources:
-        Private:
-          Templates:
-            List.html: keep
-
-    Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
     <f:section name="main">
 
         <f:render partial="FlashMessages" arguments="{_all}" />
 
-        <f:render partial="Event/Filter" arguments="{_all}" />
+        <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
 
-        <div id="tx-rkwevents-result-section" class="search-result-section">
-
-            <f:if condition="<f:count>{sortedEventList}</f:count>">
-                <f:then>
-                    <div class="boxes-grid" id="tx-rkwevents-grid-section">
+            <div class="tiles-wrapper">
+                <f:if condition="<f:count>{sortedEventList}</f:count>">
+                    <f:then>
                         <f:render partial="Event/List" arguments="{_all}" />
-                    </div>
-                </f:then>
-                <f:else>
-                    <div class="no-search-results first-letter-normal content content-box">
-                        <div class="csc-default csc-element-n1">
-                            <h3><strong><f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="RkwEvents" /></strong></h3>
+                    </f:then>
+                    <f:else>
+                        <div class="flex-container flex-basis-12 center-main">
+                            <div class="no-results">
+                                <p class="no-results__headline">
+                                    <f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="RkwEvents" />
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </f:else>
-            </f:if>
-        </div>
+                    </f:else>
+                </f:if>
+            </div>
 
+        </rkwAjax:ajaxWrapper>
 
     </f:section>
 

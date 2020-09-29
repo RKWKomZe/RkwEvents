@@ -62,7 +62,7 @@ plugin.tx_rkwevents {
 		surveyPid =
 
 		# cat=plugin.tx_rkwevents; type=integer; label=Number of items in list view (default 10)
-        itemsPerPage =
+        itemsPerPage = 10
 
         // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
 		# cat=plugin.tx_rkwevents; type=integer; label=PageNum for AJAX-requests
@@ -82,6 +82,9 @@ plugin.tx_rkwevents {
 
         # cat=plugin.tx_rkwevents; type=boolean; label=Disable internal registration
         disableInternalRegistration = 0
+
+        # cat=plugin.tx_rkwevents; type=boolean; label=Hide GoogleMaps
+        hideMap = 0
 
         list {
             # cat=plugin.tx_rkwevents; type=integer; label=Group list result by month or not

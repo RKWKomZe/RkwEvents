@@ -207,6 +207,7 @@ plugin.tx_rkwevents {
         includeGallery = {$plugin.tx_rkwevents.settings.includeGallery}
         attachCalendarEvent = {$plugin.tx_rkwevents.settings.attachCalendarEvent}
         defaultLanguageKey = {$plugin.tx_rkwevents.settings.defaultLanguageKey}
+        hideMap = {$plugin.tx_rkwevents.settings.hideMap}
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
