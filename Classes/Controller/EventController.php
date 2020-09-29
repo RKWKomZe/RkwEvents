@@ -294,14 +294,16 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         // 1. get event list
         $listItemsPerView = (int)$this->settings['itemsPerPage'] ? (int)$this->settings['itemsPerPage'] : 10;
         $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
+
         // 2. proof if we have further results (query with listItemsPerQuery + 1)
         $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
         $showMoreLink = (count($eventList) < count($queryResult) ? true : false);
+
         // 3. get department and document list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
         $categoryList = $this->categoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
-        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
+
         $noGrouping = true;
         $this->view->assignMultiple(
             [
@@ -309,7 +311,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                     'project' => $this->settings['projectUids'],
                     'noGrouping' => $noGrouping,
                 ],
-                'sortedEventList'  => $sortedEventList,
+                'sortedEventList'  => $eventList,
                 'noGrouping'       => $noGrouping,
                 'departmentList'   => $departmentList,
                 'documentTypeList' => $documentTypeList,
