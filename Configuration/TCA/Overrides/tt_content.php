@@ -12,10 +12,18 @@ $extKey = 'rkw_events';
     'RKW Events'
 );
 
+
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     $extKey,
     'Eventtitle',
     'RKW Events: Title'
+);
+
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    $extKey,
+    'Recommendation',
+    'RKW Events: Empfehlung / Einzelauswahl'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
@@ -55,7 +63,7 @@ $extKey = 'rkw_events';
 );
 
 //=================================================================
-// Add Flexform
+// Add Flexforms
 //=================================================================
 $pluginSignature = str_replace('_','',$extKey) . '_pi1';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
@@ -70,3 +78,15 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
     $fileName
 );
 
+$pluginSignature = str_replace('_','',$extKey) . '_recommendation';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+$fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events-recommendation.xml';
+
+// if rkw_projects is installed we have additional options available
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')) {
+    $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events-recommendation-projects.xml';
+}
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
+    $fileName
+);

@@ -304,15 +304,14 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
         $categoryList = $this->categoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
 
-        $noGrouping = true;
         $this->view->assignMultiple(
             [
                 'filter'           => [
                     'project' => $this->settings['projectUids'],
-                    'noGrouping' => $noGrouping,
+                    'noGrouping' => true,
                 ],
                 'sortedEventList'  => $eventList,
-                'noGrouping'       => $noGrouping,
+                'noGrouping'       => true,
                 'departmentList'   => $departmentList,
                 'documentTypeList' => $documentTypeList,
                 'categoryList'     => $categoryList,
@@ -326,7 +325,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 'showPid'      => (int)$this->settings['showPid'],
                 'pageMore'     => 1,
                 'showMoreLink' => $showMoreLink,
-                'noGrouping'       => true,
             ]
         );
     }
