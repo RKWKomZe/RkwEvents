@@ -382,7 +382,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
 
         $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(false);
+        // $query->getQuerySettings()->setRespectStoragePage(false);
 
         $constraints = array(
             $query->greaterThanOrEqual('start', time()),
