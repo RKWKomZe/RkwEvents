@@ -11,7 +11,7 @@
                     <div class="tiles flex-container flex-container--margin">
 
                         <f:for each="{sortedEventList}" as="event">
-                            <f:render partial="Event/List/Box" arguments="{_all}" />
+                            <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                         </f:for>
                     </div>
                 </rkwAjax:ajaxWrapper>
@@ -38,7 +38,7 @@
                                                 </p>
 
                                                 <f:for each="{eventsInMonth}" as="event">
-                                                    <f:render partial="Event/List/Box" arguments="{_all}" />
+                                                    <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                                                 </f:for>
                                             </div>
 
@@ -47,7 +47,7 @@
                                         <f:else>
 
                                             <f:for each="{eventsInMonth}" as="event">
-                                                <f:render partial="Event/List/Box" arguments="{_all}" />
+                                                <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                                             </f:for>
 
                                         </f:else>
@@ -68,7 +68,7 @@
 
                                         <f:comment><!-- further boxes with events --></f:comment>
                                         <f:for each="{eventsInMonth}" as="event">
-                                            <f:render partial="Event/List/Box" arguments="{_all}" />
+                                            <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                                         </f:for>
 
                                     </div>

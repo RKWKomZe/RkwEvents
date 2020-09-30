@@ -382,11 +382,19 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
 
         $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
 
         $constraints = array(
             $query->greaterThanOrEqual('start', time()),
             $query->logicalNot($query->equals('title', '')),
         );
+
+        if (
+            ($settings['eventUids'])
+            && ($eventUids = GeneralUtility::trimExplode(',', $settings['eventUids'], true))
+        ) {
+            $constraints[] = $query->in('uid', $eventUids);
+        }
 
         if ((\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))) {
             if (
@@ -395,12 +403,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             ) {
                 $constraints[] = $query->in('project', $projectUids);
             }
-            if (
-                ($settings['eventUids'])
-                && ($eventUids = GeneralUtility::trimExplode(',', $settings['eventUids'], true))
-            ) {
-                $constraints[] = $query->in('uid', $eventUids);
-            }
+
         }
 
         return $query->matching(
