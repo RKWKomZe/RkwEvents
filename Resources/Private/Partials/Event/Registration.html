@@ -64,18 +64,21 @@
                     </f:if>
                 </f:then>
                 <f:else>
-                    <f:if condition="{event.regRequired}">
+
+                    <f:comment><!-- at this point either the events itself ended already OR only the possibility of registration --></f:comment>
+                    <f:if condition="{f:format.date(date: 'now', format: 'Y-m-d')} > {f:format.date(date:event.start, format:'Y-m-d')}">
                         <f:then>
                             <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.registrationExpired" />
+                                <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventExpired" />
                             </div>
                         </f:then>
                         <f:else>
                             <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventExpired" />
+                                <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.registrationExpired" />
                             </div>
                         </f:else>
                     </f:if>
+
                 </f:else>
             </f:if>
         </f:else>
