@@ -186,7 +186,12 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             //'country',
             'targetGroup',
             'targetLearning',
-            'schedule'
+            'schedule',
+            'code',
+            'trainer',
+            'eligibility',
+            'onlineEvent',
+            'categories'
         );
 
         foreach (range(1, 10) as $contactNumber) {
@@ -339,6 +344,22 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             $event->setExtRegLink($tempData['extRegLink']);
                         } elseif ($event->getSeats() < 1) {
                             $event->setSeats(100000);
+                        }
+                        if ($tempData['eligibility']) {
+                            $event->setEligibility(true);
+                        }
+                        if ($tempData['onlineEvent']) {
+                            $event->setOnlineEvent(true);
+                        }
+                        if ($tempData['code']) {
+                            $event->setCode($tempData['code']);
+                        }
+                        if ($tempData['trainer']) {
+                            $event->setCode($tempData['trainer']);
+                        }
+                        if ($tempData['categories']) {
+                            // @toDo: does the categories comes as comma separated list with correct UIDs?
+                            $event->setCategories($tempData['categories']);
                         }
 
                         //======================================================================

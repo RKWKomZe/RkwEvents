@@ -713,6 +713,10 @@
 				<source>p.P.</source>
 				<target>p.P.</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
+                <source>eligibility</source>
+                <target>förderfähig</target>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -770,6 +774,14 @@
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
                 <target>Download</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.code" approved="yes">
+                <source>Code</source>
+                <target>Kennnummer</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
+                <source>Trainer</source>
+                <target>Trainer/in</target>
             </trans-unit>
 
 

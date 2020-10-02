@@ -188,7 +188,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var bool
      */
-    protected $onlineEvent;
+    protected $onlineEvent = false;
+
+    /**
+     * code
+     *
+     * @var string
+     */
+    protected $code;
+
+    /**
+     * trainer
+     *
+     * @var string
+     */
+    protected $trainer;
+
+    /**
+     * eligibility
+     *
+     * @var bool
+     */
+    protected $eligibility = false;
 
     /**
      * onlineEventAccessLink
@@ -957,6 +978,54 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOnlineEventAccessLink($onlineEventAccessLink)
     {
         $this->onlineEventAccessLink = $onlineEventAccessLink;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrainer()
+    {
+        return $this->trainer;
+    }
+
+    /**
+     * @param string $trainer
+     */
+    public function setTrainer($trainer)
+    {
+        $this->trainer = $trainer;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEligibility()
+    {
+        return $this->eligibility;
+    }
+
+    /**
+     * @param boolean $eligibility
+     */
+    public function setEligibility($eligibility)
+    {
+        $this->eligibility = $eligibility;
     }
 
 

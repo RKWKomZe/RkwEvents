@@ -238,6 +238,18 @@
 				<source>Timestamp survey after</source>
 				<target>Abschluss-Fragebogen versendet am</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.code" approved="yes">
+                <source>Code</source>
+                <target>Kennnummer</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.trainer" approved="yes">
+                <source>Trainer</source>
+                <target>Trainer / Trainerin</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.eligibility" approved="yes">
+                <source>Eligibility</source>
+                <target>Förderfähig</target>
+            </trans-unit>
 
 
 

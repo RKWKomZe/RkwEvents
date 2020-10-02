@@ -553,6 +553,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" approved="yes">
 				<source>p.P.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
+                <source>eligibility</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -598,6 +601,12 @@
 			</trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.code" approved="yes">
+                <source>Code</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
+                <source>Trainer</source>
             </trans-unit>
 
 

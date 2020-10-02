@@ -130,6 +130,33 @@
                 </tr>
             </f:if>
 
+
+            <f:comment><!-- Code --></f:comment>
+            <f:if condition="{event.code}">
+                <tr>
+                    <th>
+                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.code" />
+                    </th>
+
+                    <td>
+                        <f:format.html>{event.code}</f:format.html>
+                    </td>
+                </tr>
+            </f:if>
+
+            <f:comment><!-- Trainer --></f:comment>
+            <f:if condition="{event.trainer}">
+                <tr>
+                    <th>
+                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.trainer" />
+                    </th>
+
+                    <td>
+                        <f:format.html>{event.trainer}</f:format.html>
+                    </td>
+                </tr>
+            </f:if>
+
         </tbody>
     </table>
 

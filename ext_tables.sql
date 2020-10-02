@@ -55,6 +55,9 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	survey_before varchar(255) DEFAULT '' NOT NULL,
 	survey_after varchar(255) DEFAULT '' NOT NULL,
 	survey_after_mail_tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	code varchar(255) DEFAULT '' NOT NULL,
+	trainer varchar(255) DEFAULT '' NOT NULL,
+	eligibility tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
