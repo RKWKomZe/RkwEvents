@@ -852,6 +852,10 @@
 				<source>Event in the past.</source>
 				<target>Die Veranstaltung liegt in der Vergangenheit</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" approved="yes">
+                <source>Event announcement.</source>
+                <target>Eine Anmeldung ist noch nicht möglich</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" approved="yes">
                 <source>Please register via E-Mail</source>
                 <target>Bitte registrieren Sie sich via E-Mail</target>

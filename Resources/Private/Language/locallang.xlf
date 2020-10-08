@@ -662,6 +662,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventExpired" approved="yes">
 				<source>Event in the past</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" approved="yes">
+                <source>Event announcement.</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" approved="yes">
                 <source>Please register via E-Mail</source>
             </trans-unit>

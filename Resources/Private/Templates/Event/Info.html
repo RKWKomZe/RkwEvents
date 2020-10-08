@@ -13,11 +13,15 @@
             <div class="siteheader__overlay-text">
                 <div class="table">
                     <!-- Time -->
-                    <f:render partial="Event/Info/Time" arguments="{_all}" />
+                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventScheduled'">
+                        <f:render partial="Event/Info/Time" arguments="{_all}" />
+                    </f:if>
 
                     <!-- Place -->
                     <f:if condition="{event.onlineEvent} != 1">
-                        <f:render partial="Event/Info/Place" arguments="{_all}" />
+                        <f:if condition="{event.place}">
+                            <f:render partial="Event/Info/Place" arguments="{_all}" />
+                        </f:if>
                     </f:if>
 
                     <!-- Type-->
