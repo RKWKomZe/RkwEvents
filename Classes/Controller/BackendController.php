@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Controller;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * BackendController
@@ -69,6 +70,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @inject
      */
     protected $backendUserRepository = null;
+
+    /**
+     * categoryRepository
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository = null;
 
 
     /**
@@ -355,16 +364,25 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             $event->setCode($tempData['code']);
                         }
                         if ($tempData['trainer']) {
-                            $event->setCode($tempData['trainer']);
+                            $event->setTrainer($tempData['trainer']);
                         }
                         if ($tempData['categories']) {
-                            // @toDo: does the categories comes as comma separated list with correct UIDs?
-                            $event->setCategories($tempData['categories']);
-                        }
-                        // if no time is set, mark event as announcement
-                        if (!$tempData['time']) {
-                            // @toDo: check if we needed double slashes like in ext_tables.sql
-                            $event->setRecordType('\RKW\RkwEvents\Domain\Model\EventAnnouncement');
+
+                            // workaround with objectStorage: Using $event->addCategory leads to "Call to a member function attach() on null"
+                            // even creating event via ObjectManager does not helps here (instead of "makeInstance")
+
+                            $categoryUidList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $tempData['categories']);
+
+                            $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+                            foreach ($categoryUidList as $categoryUid) {
+                                /** @var \TYPO3\CMS\Extbase\Domain\Model\Category $category */
+                                $category = $this->categoryRepository->findByUid($categoryUid);
+                                if ($category instanceof \TYPO3\CMS\Extbase\Domain\Model\Category) {
+                                    $objectStorage->attach($category);
+                                }
+                            }
+
+                            $event->setCategories($objectStorage);
                         }
 
                         //======================================================================
@@ -434,6 +452,11 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 $event->$setter(intval($time));
                             }
 
+                        }
+
+                        // if no start date is set, mark event as announcement
+                        if (!$event->getStart()) {
+                            $event->setRecordType('\RKW\RkwEvents\Domain\Model\EventAnnouncement');
                         }
 
                         //======================================================================
