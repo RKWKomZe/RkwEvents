@@ -101,18 +101,6 @@ config.tx_extbase.persistence {
             }
         }
 
-        #===============================================
-
-        RKW\RkwEvents\Domain\Model\Event {
-            mapping {
-                columns {
-                    crdate.mapOnProperty = crdate
-                    tstamp.mapOnProperty = tstamp
-                    hidden.mapOnProperty = hidden
-                    deleted.mapOnProperty = deleted
-                }
-            }
-        }
 
         #===============================================
 
@@ -150,6 +138,46 @@ config.tx_extbase.persistence {
                     deleted.mapOnProperty = deleted
                 }
             }
+        }
+
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\Event {
+            mapping {
+                columns {
+                    crdate.mapOnProperty = crdate
+                    tstamp.mapOnProperty = tstamp
+                    hidden.mapOnProperty = hidden
+                    deleted.mapOnProperty = deleted
+                }
+            }
+            subclasses {
+                \RKW\RkwEvents\Domain\Model\EventScheduled = RKW\RkwEvents\Domain\Model\EventScheduled
+                \RKW\RkwEvents\Domain\Model\EventAnnouncement = RKW\RkwEvents\Domain\Model\EventAnnouncement
+            }
+        }
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventScheduled {
+            mapping {
+
+                recordType = \RKW\RkwEvents\Domain\Model\EventScheduled
+                tableName = tx_rkwevents_domain_model_event
+            }
+
+        }
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventAnnouncement {
+            mapping {
+
+                recordType = \RKW\RkwEvents\Domain\Model\EventAnnouncement
+                tableName = tx_rkwevents_domain_model_event
+            }
+
         }
 
     }

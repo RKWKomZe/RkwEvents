@@ -31,7 +31,16 @@
                     <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
                     <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
                         <f:then>
-                            ({event.start -> f:format.date(format:"d.m.Y")})
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:then>
+                                    Ankündigung
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkw_events' />
+                                </f:then>
+                                <f:else>
+                                    ({event.start -> f:format.date(format:"d.m.Y")})
+                                </f:else>
+                            </f:if>
+
                         </f:then>
                         <f:else>
                             {event.start -> f:format.date(format:"d.m.Y")}

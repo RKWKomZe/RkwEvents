@@ -361,6 +361,11 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             // @toDo: does the categories comes as comma separated list with correct UIDs?
                             $event->setCategories($tempData['categories']);
                         }
+                        // if no time is set, mark event as announcement
+                        if (!$tempData['time']) {
+                            // @toDo: check if we needed double slashes like in ext_tables.sql
+                            $event->setRecordType('\RKW\RkwEvents\Domain\Model\EventAnnouncement');
+                        }
 
                         //======================================================================
                         // 2. Special case for time

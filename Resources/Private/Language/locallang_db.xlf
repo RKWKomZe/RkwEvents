@@ -8,6 +8,15 @@
 			<trans-unit id="tx_rkwevents_domain_model_event">
 				<source>RKW Events: Event</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
+                <source>Event-Type</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.recordType.default">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.recordType.announcement">
+                <source>Announcement</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.title">
 				<source>Title</source>
 			</trans-unit>

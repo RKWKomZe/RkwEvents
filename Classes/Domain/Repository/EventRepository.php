@@ -4,6 +4,7 @@ namespace RKW\RkwEvents\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -245,6 +246,12 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $constraints = array();
 
+        //always
+        $constraints[] =
+            $query->logicalNot(
+                $query->equals('title', '')
+            );
+
         $geoData = null;
 
         // a) Either: SQL statement
@@ -281,8 +288,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                     $projectFilter = ' AND project IN (' . implode(', ', $projectUids) . ')';
                 }
 
-                // filter by start/end time
-                $timeFilter = ' AND (start >= ' . time() . ')';
+                // filter by start/end time (OR -> includes announcements)
+                $timeFilter = ' AND (start >= ' . time() . ' OR start = 0)';
                 if ($archive) {
                     $timeFilter = ' AND (start < ' . time() . ')';
                 }
@@ -318,12 +325,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 // 1. Sort by end-date
                 $query->setOrderings(
                     array(
+                        'record_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
                         'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
                     )
                 );
 
                 // 2. filter by time
-                $constraints[] = $query->greaterThanOrEqual('start', time());
+                $constraints[] =
+                    $query->logicalOr(
+                        $query->greaterThanOrEqual('start', time()),
+                        // include announcements (without start date)
+                        $query->equals('start', 0)
+                    );
 
             }
 
@@ -380,13 +393,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findNotFinishedOrderAsc($limit, $settings = array())
     {
-
         $query = $this->createQuery();
         // $query->getQuerySettings()->setRespectStoragePage(false);
 
         $constraints = array(
-            $query->greaterThanOrEqual('start', time()),
-            $query->logicalNot($query->equals('title', '')),
+            $query->logicalOr(
+                $query->greaterThanOrEqual('start', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            ),
+            $query->logicalNot(
+                $query->equals('title', '')
+            ),
         );
 
         if (
@@ -411,6 +429,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         )
             ->setOrderings(
                 array(
+                    'record_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
                     'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
                 )
             )

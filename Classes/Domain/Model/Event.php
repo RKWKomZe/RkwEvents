@@ -28,6 +28,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * @var string
+     */
+    protected $recordType;
+
+    /**
      * title
      *
      * @var string
@@ -462,6 +467,30 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->workshop1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop3 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Returns the recordType value
+     *
+     * @return string
+     * @api
+     */
+    public function getRecordType()
+    {
+        return $this->recordType;
+    }
+
+
+    /**
+     * Sets the recordType value
+     *
+     * @param $recordType
+     * @return string
+     * @api
+     */
+    public function setRecordType($recordType)
+    {
+        return $this->recordType = $recordType;
     }
 
     /**
