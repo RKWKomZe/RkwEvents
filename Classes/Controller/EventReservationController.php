@@ -5,6 +5,7 @@ namespace RKW\RkwEvents\Controller;
 use RKW\RkwBasics\Helper\Common;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -159,6 +160,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
     /**
      * action new
+     * Hint: Set default $event-Param to null for possibility to lead users,if event link is not longer available
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation
@@ -168,8 +170,16 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function newAction(\RKW\RkwEvents\Domain\Model\Event $event, \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation = null)
+    public function newAction(\RKW\RkwEvents\Domain\Model\Event $event = null, \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation = null)
     {
+        // catch all people who are trying to visit a dead reservation link
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+            $this->redirect('show', 'Event', null, array(), $this->settings['showPid']);
+            //===
+        }
+
+
+
         // Hinweis falls man sich bereits für diese Veranstaltung angemeldet hat wäre super (nur eingeloggt user)!
         if ($this->getFrontendUser()) {
 
