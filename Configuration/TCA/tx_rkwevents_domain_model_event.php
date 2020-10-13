@@ -31,10 +31,10 @@ return [
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
             'showitem' => '
-                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle,  start, end, reg_end, document_type, series, department, organizer, categories,
+                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, start, end, reg_end, document_type, series, department, organizer, categories,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                description, description2, target_group, target_learning, partner, add_info, schedule, testimonials, code, trainer,
+                trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
@@ -84,10 +84,10 @@ return [
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
-                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, reg_end, document_type, series, department, organizer, categories,
+                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, reg_end, document_type, series, department, organizer, categories,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                description, description2, target_group, target_learning, partner, add_info, schedule, testimonials, code, trainer,
+                trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
