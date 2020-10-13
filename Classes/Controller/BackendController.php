@@ -200,7 +200,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'trainer',
             'eligibility',
             'onlineEvent',
-            'categories'
+            'categories',
+            'isAnnouncement'
         );
 
         foreach (range(1, 10) as $contactNumber) {
@@ -316,6 +317,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         $event->setPid($pid);
 
                         // set data
+                        if ($tempData['isAnnouncement']) {
+                            $event->setRecordType('\RKW\RkwEvents\Domain\Model\EventAnnouncement');
+                        }
                         if ($tempData['title']) {
                             $event->setTitle($tempData['title']);
                         }
@@ -452,11 +456,6 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 $event->$setter(intval($time));
                             }
 
-                        }
-
-                        // if no start date is set, mark event as announcement
-                        if (!$event->getStart()) {
-                            $event->setRecordType('\RKW\RkwEvents\Domain\Model\EventAnnouncement');
                         }
 
                         //======================================================================
