@@ -63,6 +63,13 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
      */
     public function render($event, $languageKey = 'default')
     {
+        // for secure: If an event is hidden or deleted, the following VH content is still callable (and throws errors)
+        // (Uncaught TYPO3 Exception: Call to a member function getStart() on null | Error thrown in file /var/www/rkw-kompetenzzentrum.de/surf/releases/20201006153122/web/typo3conf/ext/rkw_events/Classes/ViewHelpers/ComposeDateTimePartsViewHelper.php in line xyz.)
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+            return false;
+            //===
+        }
+
         // 1. start date & time
         // set always the starting date
         $output = date("d.m.Y", $event->getStart());
