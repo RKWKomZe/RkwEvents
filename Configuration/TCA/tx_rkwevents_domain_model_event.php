@@ -438,6 +438,7 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
             ],
+            'displayCond' => 'FIELD:reg_required:REQ:true',
         ],
         'ext_reg_link' => [
             'exclude' => 0,
