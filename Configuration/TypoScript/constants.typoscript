@@ -69,7 +69,7 @@ plugin.tx_rkwevents {
 		ajaxTypeNum = 1472648979
 
 		# cat=plugin.tx_rkwevents; type=boolean; label=Include Gallery?
-		includeGallery = 1
+		includeGallery = 0
 
 		# cat=plugin.tx_rkwevents; type=boolean; label=Include jQuery?
 		includeJQuery = 0
