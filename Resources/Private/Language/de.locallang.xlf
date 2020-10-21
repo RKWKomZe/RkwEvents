@@ -777,7 +777,7 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.code" approved="yes">
                 <source>Code</source>
-                <target>Kennnummer</target>
+                <target>Veranstaltungs-Nr.</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
                 <source>Trainer</source>
