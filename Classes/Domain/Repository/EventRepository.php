@@ -289,9 +289,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 }
 
                 // filter by start/end time (OR -> includes announcements)
-                $timeFilter = ' AND (start >= ' . time() . ' OR start = 0)';
+                $timeFilter = ' AND (end >= ' . time() . ' OR start = 0)';
                 if ($archive) {
-                    $timeFilter = ' AND (start < ' . time() . ')';
+                    $timeFilter = ' AND (end < ' . time() . ')';
                 }
 
                 $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
@@ -318,7 +318,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 );
 
                 // 2. filter by time
-                $constraints[] = $query->lessThan('start', time());
+                $constraints[] = $query->lessThan('end', time());
 
             } else {
 
@@ -333,7 +333,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 // 2. filter by time
                 $constraints[] =
                     $query->logicalOr(
-                        $query->greaterThanOrEqual('start', time()),
+                        $query->greaterThanOrEqual('end', time()),
                         // include announcements (without start date)
                         $query->equals('start', 0)
                     );
@@ -355,8 +355,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $month = date("M", intval($filter['time']));
                 $lastDayOfMonthTimestamp = strtotime('last day of ' . $month);
                 $constraints[] = $query->logicalAnd(
-                    $query->greaterThanOrEqual('start', intval($filter['time'])),
-                    $query->lessThanOrEqual('start', $lastDayOfMonthTimestamp)
+                    $query->greaterThanOrEqual('end', intval($filter['time'])),
+                    $query->lessThanOrEqual('end', $lastDayOfMonthTimestamp)
                 );
 
             }
@@ -398,7 +398,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $constraints = array(
             $query->logicalOr(
-                $query->greaterThanOrEqual('start', time()),
+                $query->greaterThanOrEqual('end', time()),
                 // include announcements (without start date)
                 $query->equals('start', 0)
             ),
@@ -452,7 +452,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $query = $this->createQuery();
         $constraints = array(
-            $query->lessThan('start', time()),
+            $query->lessThan('end', time()),
             $query->logicalNot($query->equals('title', '')),
         );
 

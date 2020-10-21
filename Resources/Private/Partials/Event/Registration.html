@@ -64,7 +64,7 @@
                 <f:else>
 
                     <f:comment><!-- at this point either the events itself a) ended already OR b) only the possibility of registration OR c) is an announcement --></f:comment>
-                    <f:if condition="{f:format.date(date: 'now', format: 'Y-m-d')} > {f:format.date(date:event.start, format:'Y-m-d')}">
+                    <f:if condition="{f:format.date(date: 'now', format: 'Y-m-d')} > {f:format.date(date:event.end, format:'Y-m-d')}">
                         <f:then>
 
                             <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
