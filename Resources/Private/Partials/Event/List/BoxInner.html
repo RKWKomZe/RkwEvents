@@ -22,7 +22,21 @@
                 </h3>
                 <div class="tile__text tile__text--no-img">
                     <p>
-                        {event.department.name}
+                        <f:if condition="{settings.list.filter.showDepartment}">
+                            <f:then>
+                                {event.department.name}
+                            </f:then>
+                            <f:else>
+                                <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.categories}</f:count>">
+                                    <f:for each="{event.categories}" as="category" iteration="iter">
+                                        <f:if condition="{iter.isFirst}">
+                                            {category.title}
+                                        </f:if>
+                                    </f:for>
+                                </f:if>
+                            </f:else>
+                        </f:if>
+
                     </p>
                 </div>
             </div>
