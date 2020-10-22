@@ -281,7 +281,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                     if (
                         $tempData['title']
-                        && $tempData['start']
+                        // an announcement does not need a start date
+                        && ($tempData['start'] || $tempData['isAnnouncement'])
                     ) {
 
                         if ($tempData['pid']) {
@@ -637,17 +638,22 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         } else {
 
-                            $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                    'backendController.error.noEventLocationGiven',
-                                    'rkw_events',
-                                    array($lineNumber + 1)
-                                ),
-                                '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-                            );
-                            continue;
-                            //===
+                            // throw only an error, if it's NOT an announcement (an announcement does not need a place)
+                            if (!$tempData['isAnnouncement']) {
+                                $this->addFlashMessage(
+                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        'backendController.error.noEventLocationGiven',
+                                        'rkw_events',
+                                        array($lineNumber + 1)
+                                    ),
+                                    '',
+                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                                );
+                                continue;
+                                //===
+                            }
+
+
                         }
 
                         //======================================================================
@@ -814,7 +820,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                     \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                                         'backendController.error.organizerNotFound',
                                         'rkw_events',
-                                        array(intval($tempData['typeId']), $lineNumber + 1)
+                                        array(intval($tempData['organizerId']), $lineNumber + 1)
                                     ),
                                     '',
                                     \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
