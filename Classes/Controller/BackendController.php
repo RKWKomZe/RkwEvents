@@ -352,7 +352,10 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             $event->setSeats(intval($tempData['seats']));
                         }
                         if ($tempData['extRegLink']) {
-                            if (strpos($tempData['extRegLink'], 'http://') === false) {
+                            if (
+                                strpos($tempData['extRegLink'], 'http://') === false
+                                && strpos($tempData['extRegLink'], 'https://') === false
+                            ) {
                                 $tempData['extRegLink'] = 'http://' . $tempData['extRegLink'];
                             }
                             $event->setExtRegLink($tempData['extRegLink']);
