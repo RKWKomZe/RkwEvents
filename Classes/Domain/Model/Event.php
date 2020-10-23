@@ -28,6 +28,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * @var string
+     */
+    protected $recordType;
+
+    /**
      * title
      *
      * @var string
@@ -188,7 +193,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var bool
      */
-    protected $onlineEvent;
+    protected $onlineEvent = false;
+
+    /**
+     * code
+     *
+     * @var string
+     */
+    protected $code;
+
+    /**
+     * trainer
+     *
+     * @var string
+     */
+    protected $trainer;
+
+    /**
+     * eligibility
+     *
+     * @var bool
+     */
+    protected $eligibility = false;
 
     /**
      * onlineEventAccessLink
@@ -441,6 +467,30 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->workshop1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop3 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Returns the recordType value
+     *
+     * @return string
+     * @api
+     */
+    public function getRecordType()
+    {
+        return $this->recordType;
+    }
+
+
+    /**
+     * Sets the recordType value
+     *
+     * @param $recordType
+     * @return string
+     * @api
+     */
+    public function setRecordType($recordType)
+    {
+        return $this->recordType = $recordType;
     }
 
     /**
@@ -957,6 +1007,54 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOnlineEventAccessLink($onlineEventAccessLink)
     {
         $this->onlineEventAccessLink = $onlineEventAccessLink;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrainer()
+    {
+        return $this->trainer;
+    }
+
+    /**
+     * @param string $trainer
+     */
+    public function setTrainer($trainer)
+    {
+        $this->trainer = $trainer;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEligibility()
+    {
+        return $this->eligibility;
+    }
+
+    /**
+     * @param boolean $eligibility
+     */
+    public function setEligibility($eligibility)
+    {
+        $this->eligibility = $eligibility;
     }
 
 

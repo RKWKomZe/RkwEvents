@@ -11,9 +11,7 @@
                         <f:then>
                             <f:if condition="{event.extRegLink}">
                                 <f:then>
-                                    <f:link.external uri="{event.extRegLink}" class="btn btn--contains-icon {additionalCssClass}" target="_blank" rel="nofollow">
-                                        <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.externalLink" />
-                                    </f:link.external>
+                                    <f:render section="extRegLink" arguments="{_all}" />
                                 </f:then>
                                 <f:else>
                                     <f:if condition="{settings.disableInternalRegistration}">
@@ -65,12 +63,29 @@
                 </f:then>
                 <f:else>
 
-                    <f:comment><!-- at this point either the events itself ended already OR only the possibility of registration --></f:comment>
-                    <f:if condition="{f:format.date(date: 'now', format: 'Y-m-d')} > {f:format.date(date:event.start, format:'Y-m-d')}">
+                    <f:comment><!-- at this point either the events itself a) ended already OR b) only the possibility of registration OR c) is an announcement --></f:comment>
+                    <f:if condition="{f:format.date(date: 'now', format: 'Y-m-d')} > {f:format.date(date:event.end, format:'Y-m-d')}">
                         <f:then>
-                            <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventExpired" />
-                            </div>
+
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:then>
+                                    <f:if condition="{event.extRegLink}">
+                                        <f:then>
+                                            <f:render section="extRegLink" arguments="{_all}" />
+                                        </f:then>
+                                        <f:else>
+                                            <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
+                                                <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" />
+                                            </div>
+                                        </f:else>
+                                    </f:if>
+                                </f:then>
+                                <f:else>
+                                    <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
+                                        <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventExpired" />
+                                    </div>
+                                </f:else>
+                            </f:if>
                         </f:then>
                         <f:else>
                             <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
@@ -78,9 +93,16 @@
                             </div>
                         </f:else>
                     </f:if>
-
                 </f:else>
             </f:if>
         </f:else>
     </f:if>
+
+
+<f:section name="extRegLink">
+    <f:link.external uri="{event.extRegLink}" class="btn btn--contains-icon {additionalCssClass}" target="_blank" rel="nofollow">
+        <svg class="icon icon--24"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.externalLink" />
+    </f:link.external>
+</f:section>
+
 </html>

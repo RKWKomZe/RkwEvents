@@ -9,6 +9,18 @@
 				<source>RKW Events: Event</source>
 				<target>RKW Events: Veranstaltung</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
+                <source>Event-Type</source>
+                <target>Veranstaltungs-Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.recordType.default">
+                <source>Default</source>
+                <target>Standard</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.recordType.announcement">
+                <source>Announcement</source>
+                <target>Ankündigung</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
 				<source>Title</source>
 				<target>Titel</target>
@@ -238,6 +250,18 @@
 				<source>Timestamp survey after</source>
 				<target>Abschluss-Fragebogen versendet am</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.code" approved="yes">
+                <source>Code</source>
+                <target>Veranstaltungs-Nr.</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.trainer" approved="yes">
+                <source>Trainer</source>
+                <target>Trainer / Trainerin</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.eligibility" approved="yes">
+                <source>Eligibility</source>
+                <target>Förderfähig</target>
+            </trans-unit>
 
 
 

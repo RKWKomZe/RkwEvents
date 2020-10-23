@@ -6,6 +6,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
+    record_type varchar(255) DEFAULT '\\RKW\\RkwEvents\\Domain\\Model\\EventScheduled' NOT NULL,
 	title varchar(255) DEFAULT '' NOT NULL,
 	subtitle varchar(255) DEFAULT '' NOT NULL,
 	start int(11) unsigned DEFAULT '0' NOT NULL,
@@ -55,6 +56,9 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	survey_before varchar(255) DEFAULT '' NOT NULL,
 	survey_after varchar(255) DEFAULT '' NOT NULL,
 	survey_after_mail_tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	code varchar(255) DEFAULT '' NOT NULL,
+	trainer varchar(255) DEFAULT '' NOT NULL,
+	eligibility tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

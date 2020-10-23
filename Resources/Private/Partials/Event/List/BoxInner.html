@@ -22,7 +22,21 @@
                 </h3>
                 <div class="tile__text tile__text--no-img">
                     <p>
-                        {event.department.name}
+                        <f:if condition="{settings.list.filter.showDepartment}">
+                            <f:then>
+                                {event.department.name}
+                            </f:then>
+                            <f:else>
+                                <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.categories}</f:count>">
+                                    <f:for each="{event.categories}" as="category" iteration="iter">
+                                        <f:if condition="{iter.isFirst}">
+                                            {category.title}
+                                        </f:if>
+                                    </f:for>
+                                </f:if>
+                            </f:else>
+                        </f:if>
+
                     </p>
                 </div>
             </div>
@@ -31,7 +45,15 @@
                     <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
                     <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
                         <f:then>
-                            ({event.start -> f:format.date(format:"d.m.Y")})
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:then>
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkw_events' />
+                                </f:then>
+                                <f:else>
+                                    ({event.start -> f:format.date(format:"d.m.Y")})
+                                </f:else>
+                            </f:if>
+
                         </f:then>
                         <f:else>
                             {event.start -> f:format.date(format:"d.m.Y")}

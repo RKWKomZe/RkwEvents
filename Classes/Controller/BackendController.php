@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Controller;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * BackendController
@@ -69,6 +70,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @inject
      */
     protected $backendUserRepository = null;
+
+    /**
+     * categoryRepository
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository = null;
 
 
     /**
@@ -186,7 +195,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             //'country',
             'targetGroup',
             'targetLearning',
-            'schedule'
+            'schedule',
+            'code',
+            'trainer',
+            'eligibility',
+            'onlineEvent',
+            'categories',
+            'isAnnouncement'
         );
 
         foreach (range(1, 10) as $contactNumber) {
@@ -266,7 +281,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                     if (
                         $tempData['title']
-                        && $tempData['start']
+                        // an announcement does not need a start date
+                        && ($tempData['start'] || $tempData['isAnnouncement'])
                     ) {
 
                         if ($tempData['pid']) {
@@ -302,6 +318,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         $event->setPid($pid);
 
                         // set data
+                        if ($tempData['isAnnouncement']) {
+                            $event->setRecordType('\RKW\RkwEvents\Domain\Model\EventAnnouncement');
+                        }
                         if ($tempData['title']) {
                             $event->setTitle($tempData['title']);
                         }
@@ -333,12 +352,45 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             $event->setSeats(intval($tempData['seats']));
                         }
                         if ($tempData['extRegLink']) {
-                            if (strpos($tempData['extRegLink'], 'http://') === false) {
+                            if (
+                                strpos($tempData['extRegLink'], 'http://') === false
+                                && strpos($tempData['extRegLink'], 'https://') === false
+                            ) {
                                 $tempData['extRegLink'] = 'http://' . $tempData['extRegLink'];
                             }
                             $event->setExtRegLink($tempData['extRegLink']);
                         } elseif ($event->getSeats() < 1) {
                             $event->setSeats(100000);
+                        }
+                        if ($tempData['eligibility']) {
+                            $event->setEligibility(true);
+                        }
+                        if ($tempData['onlineEvent']) {
+                            $event->setOnlineEvent(true);
+                        }
+                        if ($tempData['code']) {
+                            $event->setCode($tempData['code']);
+                        }
+                        if ($tempData['trainer']) {
+                            $event->setTrainer($tempData['trainer']);
+                        }
+                        if ($tempData['categories']) {
+
+                            // workaround with objectStorage: Using $event->addCategory leads to "Call to a member function attach() on null"
+                            // even creating event via ObjectManager does not helps here (instead of "makeInstance")
+
+                            $categoryUidList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $tempData['categories']);
+
+                            $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+                            foreach ($categoryUidList as $categoryUid) {
+                                /** @var \TYPO3\CMS\Extbase\Domain\Model\Category $category */
+                                $category = $this->categoryRepository->findByUid($categoryUid);
+                                if ($category instanceof \TYPO3\CMS\Extbase\Domain\Model\Category) {
+                                    $objectStorage->attach($category);
+                                }
+                            }
+
+                            $event->setCategories($objectStorage);
                         }
 
                         //======================================================================
@@ -589,17 +641,22 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         } else {
 
-                            $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                    'backendController.error.noEventLocationGiven',
-                                    'rkw_events',
-                                    array($lineNumber + 1)
-                                ),
-                                '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-                            );
-                            continue;
-                            //===
+                            // throw only an error, if it's NOT an announcement (an announcement does not need a place)
+                            if (!$tempData['isAnnouncement']) {
+                                $this->addFlashMessage(
+                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        'backendController.error.noEventLocationGiven',
+                                        'rkw_events',
+                                        array($lineNumber + 1)
+                                    ),
+                                    '',
+                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                                );
+                                continue;
+                                //===
+                            }
+
+
                         }
 
                         //======================================================================
@@ -766,7 +823,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                     \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                                         'backendController.error.organizerNotFound',
                                         'rkw_events',
-                                        array(intval($tempData['typeId']), $lineNumber + 1)
+                                        array(intval($tempData['organizerId']), $lineNumber + 1)
                                     ),
                                     '',
                                     \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
