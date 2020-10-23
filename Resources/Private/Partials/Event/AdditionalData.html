@@ -5,6 +5,71 @@
     <table class="flex-basis-12 responsive-table responsive-table--background">
         <tbody>
 
+            <f:comment><!-- Target Group--></f:comment>
+            <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
+                <f:if condition="{event.targetGroup}">
+                    <tr>
+                        <th>
+                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_group" />
+                        </th>
+
+                        <td>
+                            <f:format.htmlentities>{event.targetGroup}</f:format.htmlentities>
+                        </td>
+                    </tr>
+                </f:if>
+                <f:if condition="{event.targetLearning}">
+                    <tr>
+                        <th>
+                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_learning" />
+                        </th>
+
+                        <td>
+                            <f:format.raw>{event.targetLearning}</f:format.raw>
+                        </td>
+                    </tr>
+                </f:if>
+            </f:if>
+
+            <f:comment><!-- Trainer --></f:comment>
+            <f:if condition="{event.trainer}">
+                <tr>
+                    <th>
+                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.trainer" />
+                    </th>
+
+                    <td>
+                        <f:format.html>{event.trainer}</f:format.html>
+                    </td>
+                </tr>
+            </f:if>
+
+            <f:comment><!-- Code --></f:comment>
+            <f:if condition="{event.code}">
+                <tr>
+                    <th>
+                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.code" />
+                    </th>
+
+                    <td>
+                        <f:format.html>{event.code}</f:format.html>
+                    </td>
+                </tr>
+            </f:if>
+
+            <f:comment><!-- Partner --></f:comment>
+            <f:if condition="{event.partner}">
+                <tr>
+                    <th>
+                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.partner" />
+                    </th>
+
+                    <td>
+                        <f:format.html>{event.partner}</f:format.html>
+                    </td>
+                </tr>
+            </f:if>
+
             <f:comment><!-- Sheets --></f:comment>
             <f:if condition="<rkw:notFinishedEvents event='{event}' />">
                 <f:else>
@@ -73,32 +138,6 @@
             </f:if>
 
 
-            <f:comment><!-- Target Group--></f:comment>
-            <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
-                <f:if condition="{event.targetGroup}">
-                    <tr>
-                        <th>
-                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_group" />
-                        </th>
-
-                        <td>
-                            <f:format.htmlentities>{event.targetGroup}</f:format.htmlentities>
-                        </td>
-                    </tr>
-                </f:if>
-                <f:if condition="{event.targetLearning}">
-                    <tr>
-                        <th>
-                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_learning" />
-                        </th>
-
-                        <td>
-                            <f:format.raw>{event.targetLearning}</f:format.raw>
-                        </td>
-                    </tr>
-                </f:if>
-            </f:if>
-
             <f:comment><!-- Direction --></f:comment>
             <f:if condition="<rkw:notFinishedEvents event='{event}' />">
                 <f:if condition="{event.onlineEvent} != 1">
@@ -114,20 +153,6 @@
                         </td>
                     </tr>
                 </f:if>
-            </f:if>
-
-
-            <f:comment><!-- Partner --></f:comment>
-            <f:if condition="{event.partner}">
-                <tr>
-                    <th>
-                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.partner" />
-                    </th>
-
-                    <td>
-                        <f:format.html>{event.partner}</f:format.html>
-                    </td>
-                </tr>
             </f:if>
 
         </tbody>

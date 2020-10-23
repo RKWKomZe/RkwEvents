@@ -104,19 +104,6 @@ config.tx_extbase.persistence {
 
         #===============================================
 
-        RKW\RkwEvents\Domain\Model\Event {
-            mapping {
-                columns {
-                    crdate.mapOnProperty = crdate
-                    tstamp.mapOnProperty = tstamp
-                    hidden.mapOnProperty = hidden
-                    deleted.mapOnProperty = deleted
-                }
-            }
-        }
-
-        #===============================================
-
         RKW\RkwEvents\Domain\Model\EventPlace {
             mapping {
                 columns {
@@ -151,6 +138,46 @@ config.tx_extbase.persistence {
                     deleted.mapOnProperty = deleted
                 }
             }
+        }
+
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\Event {
+            mapping {
+                columns {
+                    crdate.mapOnProperty = crdate
+                    tstamp.mapOnProperty = tstamp
+                    hidden.mapOnProperty = hidden
+                    deleted.mapOnProperty = deleted
+                }
+            }
+            subclasses {
+                \RKW\RkwEvents\Domain\Model\EventScheduled = RKW\RkwEvents\Domain\Model\EventScheduled
+                \RKW\RkwEvents\Domain\Model\EventAnnouncement = RKW\RkwEvents\Domain\Model\EventAnnouncement
+            }
+        }
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventScheduled {
+            mapping {
+
+                recordType = \RKW\RkwEvents\Domain\Model\EventScheduled
+                tableName = tx_rkwevents_domain_model_event
+            }
+
+        }
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventAnnouncement {
+            mapping {
+
+                recordType = \RKW\RkwEvents\Domain\Model\EventAnnouncement
+                tableName = tx_rkwevents_domain_model_event
+            }
+
         }
     }
 }
@@ -237,7 +264,7 @@ plugin.tx_rkwevents {
 
 // Add jQuery
 [globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.includeJQuery}]
-	page.includeJSFooterlibs.txRkwEventsJQuery  = EXT:rkw_events/Resources/Public/Js/jquery-3.1.1.min.js
+	page.includeJSFooterlibs.txRkwEventsJQuery  = EXT:rkw_events/Resources/Public/Js/jquery-3.4.1.min.js
 [global]
 
 // Add Galleria-Gallery
@@ -245,7 +272,6 @@ plugin.tx_rkwevents {
 	page.includeJSFooter.txRkwEventsGallery  = EXT:rkw_events/Resources/Public/Galleria/galleria-1.4.7.min.js
 	page.includeCSS.txRkwEventsGallery = EXT:rkw_events/Resources/Public/Css/Gallery.css
 [global]
-page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/events.js
 
 # needed for backend context (cronjobs)
 module.tx_rkwevents.settings < plugin.tx_rkwevents.settings
@@ -253,47 +279,50 @@ module.tx_rkwevents.persistence.storagePid < plugin.tx_rkwevents.persistence.sto
 module.tx_rkwevents.view < plugin.tx_rkwevents.view
 
 
-
-
 #===============================================================
-# @toDo: DEPRECATED BELOW
+# @deprecated below
 #===============================================================
+[globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.version}]
 
-#===============================================================
-# Ajax (only needed for OLD Ajax API)
-#===============================================================
-txRkwEventsAjax = PAGE
-txRkwEventsAjax {
+    page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/events.js
 
-    # also written in partial Listing.html
-    typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
 
-    config {
-        disableAllHeaderCode = 1
-        xhtml_cleaning = 0
-        admPanel = 0
-        additionalHeaders = Content-type: text/plain
-        no_cache = 0
-    }
+    #===============================================================
+    # Ajax (only needed for OLD Ajax API)
+    #===============================================================
+    txRkwEventsAjax = PAGE
+    txRkwEventsAjax {
 
-    10 = USER_INT
-    10 {
-        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-        extensionName = RkwEvents
-        pluginName = Pi1
-        vendorName = RKW
-        switchableControllerActions {
+        # also written in partial Listing.html
+        typeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
 
-            # Again: Controller-Name and Action
-            Ajax {
-                10 = filter
-                20 = more
-                30 = moreArchive
-            }
+        config {
+            disableAllHeaderCode = 1
+            xhtml_cleaning = 0
+            admPanel = 0
+            additionalHeaders = Content-type: text/plain
+            no_cache = 0
         }
 
-        view < plugin.tx_rkwevents.view
-        persistence < plugin.tx_rkwevents.persistence
-        settings < plugin.tx_rkwevents.settings
+        10 = USER_INT
+        10 {
+            userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+            extensionName = RkwEvents
+            pluginName = Pi1
+            vendorName = RKW
+            switchableControllerActions {
+
+                # Again: Controller-Name and Action
+                Ajax {
+                    10 = filter
+                    20 = more
+                    30 = moreArchive
+                }
+            }
+
+            view < plugin.tx_rkwevents.view
+            persistence < plugin.tx_rkwevents.persistence
+            settings < plugin.tx_rkwevents.settings
+        }
     }
-}
+[global]

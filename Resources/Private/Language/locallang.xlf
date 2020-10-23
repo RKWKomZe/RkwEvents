@@ -553,6 +553,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" approved="yes">
 				<source>p.P.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
+                <source>eligibility</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -598,6 +601,12 @@
 			</trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.code" approved="yes">
+                <source>Code</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
+                <source>Trainer</source>
             </trans-unit>
 
 
@@ -653,8 +662,17 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventExpired" approved="yes">
 				<source>Event in the past</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" approved="yes">
+                <source>Event announcement.</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" approved="yes">
                 <source>Please register via E-Mail</source>
+            </trans-unit>
+
+
+            <!-- Partials/Event/List/BoxInner.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.announcement" approved="yes">
+                <source>Announcement</source>
             </trans-unit>
 
 
