@@ -17,7 +17,8 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors'))
 			'size'          => 5,
 		],
 	];
-	$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem'] = str_replace(', external_contact,', ', internal_contact, external_contact,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem']);
+	$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem'] = str_replace(', external_contact,', ', internal_contact, external_contact,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem']);
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventAnnouncement']['showitem'] = str_replace(', external_contact,', ', internal_contact, external_contact,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventAnnouncement']['showitem']);
 }
 
 // Extend TCA when rkw_projects is available
@@ -35,7 +36,8 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
             'size'          => 5,
         ],
     ];
-    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem'] = str_replace(', department,', ', department, project,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem']);
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem'] = str_replace(', department,', ', department, project,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem']);
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventAnnouncement']['showitem'] = str_replace(', department,', ', department, project,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventAnnouncement']['showitem']);
 }
 
 // Extend TCA when rkw_survey is available
@@ -90,5 +92,5 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) 
     ];
 
     // @toDo: Not sure if this lines should be shown (was also commented out before in the top of the file],
-    //$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem'] = str_replace(', ext_reg_link,', ', ext_reg_link,survey_before,survey_after,survey_after_mail_tstamp,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['1']['showitem']);
+    //$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem'] = str_replace(', ext_reg_link,', ', ext_reg_link,survey_before,survey_after,survey_after_mail_tstamp,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem']);
 }
