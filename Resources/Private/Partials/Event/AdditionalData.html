@@ -7,29 +7,27 @@
             <tbody>
 
                 <f:comment><!-- Target Group--></f:comment>
-                <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
-                    <f:if condition="{event.targetGroup}">
-                        <tr>
-                            <th>
-                                <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_group" />
-                            </th>
+                <f:if condition="{event.targetGroup}">
+                    <tr>
+                        <th>
+                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_group" />
+                        </th>
 
-                            <td>
-                                <f:format.htmlentities>{event.targetGroup}</f:format.htmlentities>
-                            </td>
-                        </tr>
-                    </f:if>
-                    <f:if condition="{event.targetLearning}">
-                        <tr>
-                            <th>
-                                <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_learning" />
-                            </th>
+                        <td>
+                            <f:format.htmlentities>{event.targetGroup}</f:format.htmlentities>
+                        </td>
+                    </tr>
+                </f:if>
+                <f:if condition="{event.targetLearning}">
+                    <tr>
+                        <th>
+                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_learning" />
+                        </th>
 
-                            <td>
-                                <f:format.raw>{event.targetLearning}</f:format.raw>
-                            </td>
-                        </tr>
-                    </f:if>
+                        <td>
+                            <f:format.raw>{event.targetLearning}</f:format.raw>
+                        </td>
+                    </tr>
                 </f:if>
 
                 <f:comment><!-- Trainer --></f:comment>
