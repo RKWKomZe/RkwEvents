@@ -374,25 +374,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
-        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
-
-            $uri = $this->uriBuilder->reset()
-                ->setTargetPageUid($this->settings['listPid'])
-                ->setCreateAbsoluteUri(true)
-                ->build();
-
-            $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                    'eventController.message.error.notAvailable',
-                    'rkw_events',
-                    array(
-                        0 => $uri
-                    )
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
-        }
+        $this->handleContentNotFound($event);
 
         $this->view->assign('event', $event);
     }
@@ -469,6 +451,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
+        $this->handleContentNotFound($event);
+
         $this->view->assign('event', $event);
     }
 
@@ -484,6 +468,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
+
+        $this->handleContentNotFound($event);
 
         $this->view->assign('isReservationPage', 0);
         if (intval($GLOBALS['TSFE']->id) == intval($this->settings['reservationPid'])) {
@@ -506,6 +492,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
+
+        $this->handleContentNotFound($event);
 
         $this->view->assignMultiple(array(
             'event' => $event,
@@ -537,6 +525,40 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         ));
 
     }
+
+
+
+    /**
+     * handleContentNotFound
+     * if event is not given (hidden or deleted) make 404 redirect
+     * Hint: 404 seems not to working yet. Firefox and Chrome are repeating a 302
+     *
+     * @param mixed $event
+     * @return void
+     */
+    protected function handleContentNotFound($event)
+    {
+
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+
+            $uri = $this->uriBuilder->reset()
+                ->setTargetPageUid($this->settings['listPid'])
+                ->setCreateAbsoluteUri(true)
+                ->build();
+
+            $this->addFlashMessage(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'eventController.message.error.notAvailable',
+                    'rkw_events'
+                ),
+                '',
+                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+            );
+
+            $this->redirectToUri($uri, 0, 404);
+        }
+    }
+
 
 
     /**
