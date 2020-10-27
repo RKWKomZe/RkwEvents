@@ -374,7 +374,28 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
-        $this->handleContentNotFound($event);
+        //$this->handleContentNotFound($event);
+
+        // Fallback: Using old "notAvailable" message INSIDE show action
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+
+            $uri = $this->uriBuilder->reset()
+                ->setTargetPageUid($this->settings['listPid'])
+                ->setCreateAbsoluteUri(true)
+                ->build();
+
+            $this->addFlashMessage(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'eventController.message.error.notAvailable',
+                    'rkw_events',
+                    array(
+                        0 => $uri
+                    )
+                ),
+                '',
+                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+            );
+        }
 
         $this->view->assign('event', $event);
     }
@@ -451,7 +472,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
-        $this->handleContentNotFound($event);
+        //$this->handleContentNotFound($event);
 
         $this->view->assign('event', $event);
     }
@@ -469,7 +490,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
-        $this->handleContentNotFound($event);
+        //$this->handleContentNotFound($event);
 
         $this->view->assign('isReservationPage', 0);
         if (intval($GLOBALS['TSFE']->id) == intval($this->settings['reservationPid'])) {
@@ -493,7 +514,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
 
-        $this->handleContentNotFound($event);
+        //$this->handleContentNotFound($event);
 
         $this->view->assignMultiple(array(
             'event' => $event,
@@ -538,7 +559,9 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     protected function handleContentNotFound($event)
     {
+        // throws messages on LIVE even the event is visible
 
+        /*
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
 
             $uri = $this->uriBuilder->reset()
@@ -548,7 +571,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             $this->addFlashMessage(
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                    'eventController.message.error.notAvailable',
+                    'eventController.message.error.notAvailable2',
                     'rkw_events'
                 ),
                 '',
@@ -557,6 +580,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             $this->redirectToUri($uri, 0, 404);
         }
+        */
     }
 
 
