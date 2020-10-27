@@ -156,6 +156,10 @@
                 <source>This event does not exist anymore.</source>
             </trans-unit>
 
+            <trans-unit id="eventController.message.error.notAvailable2">
+                <source>This event does not exist anymore.</source>
+            </trans-unit>
+
 
 			<!-- EventReservationController -->
 			<trans-unit id="eventReservationController.message.noUserLoggedIn">

@@ -198,9 +198,12 @@
 
 			<trans-unit id="eventController.message.error.notAvailable">
                 <source>This event does not exist anymore.</source>
+                <target><![CDATA[Oops! Diese Veranstaltung steht leider nicht mehr zur Verfügung.<br/><a href="%s">Interessante Veranstaltungen gesucht? Klicken Sie hier!</a> ]]></target>
+            </trans-unit>
+            <trans-unit id="eventController.message.error.notAvailable2">
+                <source>This event does not exist anymore.</source>
                 <target>Die gewünschte Veranstaltung ist leider nicht mehr online. Nutzen Sie unsere Veranstaltungssuche, um mögliche Alternativen zu finden.</target>
             </trans-unit>
-
 
 
 			<!-- EventReservationController -->
