@@ -2,36 +2,37 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-    <!-- show event -->
-    <f:link.action pageUid="{settings.showPid}" target="_blank" class="button secondary" controller="Event" action="show" arguments="{event : eventReservation.event}">
-        <span>
-            <f:translate key="tx_rkwevents_fluid.partials_event_options.eventShow" />
-        </span>
-    </f:link.action>
-
-    <!--
-    <f:link.action class="button secondary" controller="EventReservation" action="show" arguments="{eventReservation : eventReservation}">
-        <span>
-            <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationShow" />
-        </span>
-    </f:link.action> -->
-
-    <!-- ViewHelper returns true if reg time for event is still running -->
-    <f:if condition="<rkw:regTimeEndEvents event='{eventReservation.event}' />">
-        <f:link.action class="button secondary" controller="EventReservation" action="edit" arguments="{eventReservation : eventReservation}">
+    <f:if condition="{event}">
+        <!-- show event -->
+        <f:link.action pageUid="{settings.showPid}" target="_blank" class="button secondary" controller="Event" action="show" arguments="{event : eventReservation.event}">
             <span>
-                <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationEdit" />
-            </span>
-        </f:link.action>
-    </f:if>
-
-    <f:if condition="<rkw:notFinishedEvents event='{eventReservation.event}' />">
-        <f:link.action class="button secondary" controller="EventReservation" action="delete" arguments="{eventReservation : eventReservation}">
-            <span>
-                <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationDelete" />
+                <f:translate key="tx_rkwevents_fluid.partials_event_options.eventShow" />
             </span>
         </f:link.action>
 
-    </f:if>
+        <!--
+        <f:link.action class="button secondary" controller="EventReservation" action="show" arguments="{eventReservation : eventReservation}">
+            <span>
+                <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationShow" />
+            </span>
+        </f:link.action> -->
 
+        <!-- ViewHelper returns true if reg time for event is still running -->
+        <f:if condition="<rkw:regTimeEndEvents event='{eventReservation.event}' />">
+            <f:link.action class="button secondary" controller="EventReservation" action="edit" arguments="{eventReservation : eventReservation}">
+                <span>
+                    <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationEdit" />
+                </span>
+            </f:link.action>
+        </f:if>
+
+        <f:if condition="<rkw:notFinishedEvents event='{eventReservation.event}' />">
+            <f:link.action class="button secondary" controller="EventReservation" action="delete" arguments="{eventReservation : eventReservation}">
+                <span>
+                    <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationDelete" />
+                </span>
+            </f:link.action>
+
+        </f:if>
+    </f:if>
 </html>
