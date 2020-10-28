@@ -374,8 +374,9 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
-        //$this->handleContentNotFound($event);
+        $this->handleContentNotFound($event);
 
+        /*
         // Fallback: Using old "notAvailable" message INSIDE show action
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
 
@@ -396,6 +397,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
         }
+        */
 
         $this->view->assign('event', $event);
     }
@@ -561,7 +563,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     {
         // throws messages on LIVE even the event is visible
 
-        /*
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
 
             $uri = $this->uriBuilder->reset()
@@ -580,7 +581,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             $this->redirectToUri($uri, 0, 404);
         }
-        */
     }
 
 
