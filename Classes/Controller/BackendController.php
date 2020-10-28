@@ -666,9 +666,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             if ($tempData['contact' . $contactNumber . 'Email']) {
 
 
-                                // 6.1 check for be-users
+
+                                // 6.1 check for be-users (only if there is no external registration link)
                                 /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
-                                if ($beUser = $this->backendUserRepository->findOneByEmail($tempData['contact' . $contactNumber . 'Email'])) {
+                                $beUser = $this->backendUserRepository->findOneByEmail($tempData['contact' . $contactNumber . 'Email']);
+                                if (
+                                    $beUser
+                                    && !$tempData['extRegLink']
+                                ) {
                                     $event->addBeUser($beUser);
 
                                 // 6.2 check for internal contact
