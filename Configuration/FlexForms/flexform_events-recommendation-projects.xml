@@ -51,7 +51,7 @@
                                 <type>select</type>
                                 <foreign_table>tx_rkwevents_domain_model_event</foreign_table>
                                 <foreign_table_where>
-                                    AND tx_rkwevents_domain_model_event.deleted = 0 AND tx_rkwevents_domain_model_event.hidden = 0 AND tx_rkwevents_domain_model_event.end > UNIX_TIMESTAMP() ORDER BY tx_rkwevents_domain_model_event.uid
+                                    AND tx_rkwevents_domain_model_event.deleted = 0 AND tx_rkwevents_domain_model_event.hidden = 0 AND (tx_rkwevents_domain_model_event.end > UNIX_TIMESTAMP() OR tx_rkwevents_domain_model_event.record_type = '\\RKW\\RkwEvents\\Domain\\Model\\EventAnnouncement') ORDER BY tx_rkwevents_domain_model_event.uid
                                 </foreign_table_where>
                             </config>
                             <!--
