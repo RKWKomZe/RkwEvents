@@ -49,20 +49,7 @@
                     </f:if>
 
 
-                    <f:comment><!-- CATEGORY --></f:comment>
-                    <f:if condition="{categoryList} && {settings.list.filter.showCategory}">
-                        <f:form.select
-                            class="ajax select-field select-field--longer"
-                            id="category-select"
-                            name="filter[category]"
-                            value="{filter.category}"
-                            options="{categoryList}"
-                            optionValueField="uid"
-                            optionLabelField="title"
-                            prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />"
-                            prependOptionValue="0"
-                        />
-                    </f:if>
+                    <f:render section="category" arguments="{_all}" />
 
 
                     <f:comment><!-- TIME --></f:comment>
@@ -118,3 +105,70 @@
     </f:if>
 
 </html>
+
+
+<f:section name="category">
+
+    <f:comment><!-- CATEGORY --></f:comment>
+    <f:if condition="{categoryList} && {settings.list.filter.showCategory}">
+
+        <f:comment>
+            options="{categoryList}"
+            optionValueField="uid"
+            optionLabelField="title"
+        </f:comment>
+
+        <f:form.select
+            class="ajax select-field select-field--longer"
+            id="category-select"
+            name="filter[category]"
+            value="{filter.category}"
+            prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />"
+            prependOptionValue="0"
+        >
+
+            <f:comment><!-- start with parent categories and add any further content recursive --></f:comment>
+            <f:for each="{categoryList.{settings.parentCategoryForFilter}}" as="category">
+                <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
+
+                <f:if condition="{categoryList.{category.uid}}">
+                    <f:render section="subCategory" arguments="{categoryList: categoryList, parentCategory: category}" />
+                </f:if>
+
+            </f:for>
+
+        </f:form.select>
+    </f:if>
+</f:section>
+
+<f:section name="subCategory">
+
+
+    <f:form.select.optgroup label="">
+
+        <f:for each="{categoryList.{parentCategory.uid}}" as="category">
+            <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
+
+            <f:if condition="{categoryList.{category.uid}}">
+                <f:comment><!-- optgroup nesting is not allowed. So we call not this section here itself again --></f:comment>
+                <f:render section="subCategoryWithoutOptGroup" arguments="{categoryList: categoryList, parentCategory: category}" />
+            </f:if>
+
+        </f:for>
+    </f:form.select.optgroup>
+
+</f:section>
+
+<f:section name="subCategoryWithoutOptGroup">
+
+        <f:for each="{categoryList.{parentCategory.uid}}" as="category">
+            <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
+
+            <f:if condition="{categoryList.{category.uid}}">
+                <f:render section="subCategoryWithoutOptGroup" arguments="{categoryList: categoryList, parentId: category.uid}" />
+            </f:if>
+
+        </f:for>
+
+
+</f:section>

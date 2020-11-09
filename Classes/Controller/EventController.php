@@ -47,12 +47,12 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     protected $eventReservationRepository = null;
 
     /**
-     * categoryRepository
+     * sysCategoryRepository
      *
-     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
+     * @var \RKW\RkwEvents\Domain\Repository\SysCategoryRepository
      * @inject
      */
-    protected $categoryRepository = null;
+    protected $sysCategoryRepository = null;
 
     /**
      * departmentRepository
@@ -128,7 +128,15 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         // get department and document list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-        $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+        //$categoryList = $this->sysCategoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+
+        $rkwBasicsCategoryRepository = $this->objectManager->get('RKW\\RkwBasics\\Domain\\Repository\\CategoryRepository');
+        $sysCategory = $rkwBasicsCategoryRepository->findByUid(intval($this->settings['parentCategoryForFilter']));
+        $categoryListRaw = $this->sysCategoryRepository->findOneWithAllRecursiveChildren($sysCategory, null, true)->toArray();
+
+        $categoryList = DivUtility::createCategoryTree($categoryListRaw, $this->settings['parentCategoryForFilter']);
+
+        //DebuggerUtility::var_dump($categoryList); exit;
 
         if ($filter || $page || $archive) {
 
@@ -301,7 +309,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         // 3. get department and document list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-        $categoryList = $this->categoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
+        $categoryList = $this->sysCategoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
 
         $this->view->assignMultiple(
             [

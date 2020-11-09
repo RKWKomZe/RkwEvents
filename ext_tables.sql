@@ -32,6 +32,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	document_type varchar(255) DEFAULT '' NOT NULL,
 	department varchar(255) DEFAULT '' NOT NULL,
     categories varchar(255) DEFAULT '' NOT NULL,
+    sys_category varchar(255) DEFAULT '' NOT NULL,
     project varchar(255) DEFAULT '' NOT NULL,
 	series varchar(255) DEFAULT '' NOT NULL,
 	logos varchar(255) DEFAULT '' NOT NULL,

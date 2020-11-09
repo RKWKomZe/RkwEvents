@@ -15,16 +15,14 @@ namespace RKW\RkwEvents\Domain\Repository;
  */
 
 /**
- * Class CategoryRepository
+ * Class SysCategoryRepository
  *
- * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class SysCategoryRepository extends \RKW\RkwBasics\Domain\Repository\CategoryRepository
 {
 
     /**
@@ -55,9 +53,6 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findChildrenByParent($category = 0, $excludeCategories = array())
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use  RKW\RkwEvents\Domain\Repository\SysCategoryRepository instead.');
-
-
         $constraints = array();
         $query = $this->createQuery();
 

@@ -13,6 +13,7 @@ namespace RKW\RkwEvents\Utility;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * DivUtility
@@ -429,6 +430,35 @@ class DivUtility
 
         return $resultArray;
         //===
+    }
+
+
+
+    /**
+     * createCategoryTree
+     *
+     * @author Maximilian Fäßler
+     * @param array $categoryList List of categories
+     * @param integer $parentCategoryForFilter the initial category
+     * @return array
+     * @throws \Exception
+     */
+    public static function createCategoryTree($categoryList, $parentCategoryForFilter)
+    {
+
+        $sortedCategoryList = [];
+
+        /** @var \RKW\RkwEvents\Domain\Model\SysCategory $category */
+        foreach ($categoryList as $category) {
+
+            //if ($category->getParent())
+            $sortedCategoryList[$category->getParent()->getUid()][] = $category;
+        }
+
+       // DebuggerUtility::var_dump($sortedCategoryList); exit;
+
+
+        return $sortedCategoryList;
     }
 
 }

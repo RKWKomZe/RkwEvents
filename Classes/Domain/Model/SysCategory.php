@@ -16,19 +16,14 @@ namespace RKW\RkwEvents\Domain\Model;
  */
 
 /**
- * Class Category
+ * Class SysCategory
  *
- * @deprecated
- * @use SysCategory instead
- *
- * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
+class SysCategory extends \RKW\RkwBasics\Domain\Model\Category
 {
 
 
