@@ -89,7 +89,6 @@ config.tx_extbase.persistence {
 
         #===============================================
 
-        // !! OLD !!
         RKW\RkwEvents\Domain\Model\Category {
             mapping {
                 tableName = sys_category
@@ -99,20 +98,6 @@ config.tx_extbase.persistence {
         TYPO3\CMS\Extbase\Domain\Model\Category {
             subclasses {
                 Tx_RkwEvents_Category = RKW\RkwEvents\Domain\Model\Category
-
-            }
-        }
-
-        // NEW
-        RKW\RkwEvents\Domain\Model\SysCategory {
-            mapping {
-                tableName = sys_category
-            }
-        }
-
-        TYPO3\CMS\Extbase\Domain\Model\SysCategory {
-            subclasses {
-                Tx_RkwEvents_SysCategory = RKW\RkwEvents\Domain\Model\SysCategory
 
             }
         }

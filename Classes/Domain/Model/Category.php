@@ -18,9 +18,6 @@ namespace RKW\RkwEvents\Domain\Model;
 /**
  * Class Category
  *
- * @deprecated
- * @use SysCategory instead
- *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>

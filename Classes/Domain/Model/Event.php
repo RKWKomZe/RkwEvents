@@ -268,19 +268,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Categories
      *
-     * @deprecated
-     * @use $sysCategory instead
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $categories;
-
-    /**
-     * sysCategory
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\SysCategory>
-     */
-    protected $sysCategory = null;
 
     /**
      * A series of events
@@ -477,7 +467,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->workshop1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop3 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->sysCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -1198,9 +1188,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Category
      *
-     * @deprecated
-     * @use $addSysCategory instead
-     *
      * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
      * @return void
      */
@@ -1211,9 +1198,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Removes a Category
-     *
-     * @deprecated
-     * @use $removeSysCategory instead
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove The Category to be removed
      * @return void
@@ -1226,9 +1210,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the categories
      *
-     * @deprecated
-     * @use $getSysCategory instead
-     *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
      */
     public function getCategories()
@@ -1239,58 +1220,12 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the categories
      *
-     * @deprecated
-     * @use $setSysCategory instead
-     *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
      * @return void
      */
     public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
     {
         $this->categories = $categories;
-    }
-
-    /**
-     * Adds a SysCategory
-     *
-     * @param \RKW\RkwEvents\Domain\Model\SysCategory $sysCategory
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\SysCategory> sysCategory
-     */
-    public function addSysCategory(\RKW\RkwEvents\Domain\Model\SysCategory $sysCategory)
-    {
-        $this->sysCategory->attach($sysCategory);
-    }
-
-    /**
-     * Removes a SysCategory
-     *
-     * @param \RKW\RkwEvents\Domain\Model\SysCategory $sysCategory
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\SysCategory> sysCategory
-     */
-    public function removeSysCategory(\RKW\RkwEvents\Domain\Model\SysCategory $sysCategory)
-    {
-        $this->sysCategory->detach($sysCategory);
-    }
-
-    /**
-     * Returns the sysCategory
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\SysCategory> sysCategory
-     */
-    public function getSysCategory()
-    {
-        return $this->sysCategory;
-    }
-
-    /**
-     * Sets the sysCategory
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\SysCategory> $sysCategory
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\SysCategory> sysCategory
-     */
-    public function setSysCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sysCategory)
-    {
-        $this->sysCategory = $sysCategory;
     }
 
     /**

@@ -448,7 +448,7 @@ class DivUtility
 
         $sortedCategoryList = [];
 
-        /** @var \RKW\RkwEvents\Domain\Model\SysCategory $category */
+        /** @var \RKW\RkwEvents\Domain\Model\Category $category */
         foreach ($categoryList as $category) {
 
             //if ($category->getParent())

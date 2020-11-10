@@ -22,7 +22,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility',
+		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
@@ -31,7 +31,7 @@ return [
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
             'showitem' => '
-                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, start, end, reg_end, document_type, series, department, organizer,
+                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, start, end, reg_end, document_type, series, department, organizer, categories,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
                 trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
@@ -84,7 +84,7 @@ return [
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
-                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, reg_end, document_type, series, department, organizer,
+                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, reg_end, document_type, series, department, organizer, categories,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
                 trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
@@ -569,7 +569,6 @@ return [
                 'autoSizeMax' => 50,
                 'maxitems' => 9999,
                 'minitems'      => 0,
-
             ],
         ],
         */

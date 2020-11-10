@@ -55,9 +55,6 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findChildrenByParent($category = 0, $excludeCategories = array())
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use  RKW\RkwEvents\Domain\Repository\SysCategoryRepository instead.');
-
-
         $constraints = array();
         $query = $this->createQuery();
 
