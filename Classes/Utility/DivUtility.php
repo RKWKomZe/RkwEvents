@@ -437,7 +437,6 @@ class DivUtility
     /**
      * createCategoryTree
      *
-     * @author Maximilian Fäßler
      * @param array $categoryList List of categories
      * @param integer $parentCategoryForFilter the initial category
      * @return array
@@ -445,18 +444,26 @@ class DivUtility
      */
     public static function createCategoryTree($categoryList, $parentCategoryForFilter)
     {
-
         $sortedCategoryList = [];
+
+        // we need to know if there is an entry without parent
+        $categoryUidList = [];
+        foreach ($categoryList as $category) {
+            $categoryUidList[] = $category->getUid();
+        }
 
         /** @var \RKW\RkwEvents\Domain\Model\Category $category */
         foreach ($categoryList as $category) {
 
-            //if ($category->getParent())
-            $sortedCategoryList[$category->getParent()->getUid()][] = $category;
+            // if there is a parent, add it as child content
+            if (in_array($category->getParent()->getUid(), $categoryUidList)) {
+                $sortedCategoryList[$category->getParent()->getUid()][] = $category;
+            } else {
+                // of there is no parent entry, add it to "withoutParent" group
+                $sortedCategoryList['withoutParent'][] = $category;
+            }
+
         }
-
-       // DebuggerUtility::var_dump($sortedCategoryList); exit;
-
 
         return $sortedCategoryList;
     }

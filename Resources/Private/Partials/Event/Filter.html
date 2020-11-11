@@ -127,14 +127,14 @@
             prependOptionValue="0"
         >
 
-            <f:comment><!-- start with parent categories and add any further content recursive --></f:comment>
-            <f:for each="{categoryList.{settings.parentCategoryForFilter}}" as="category">
+
+            <f:comment><!-- add entries without parent nodes --></f:comment>
+            <f:for each="{categoryList.withoutParent}" as="category">
                 <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
 
                 <f:if condition="{categoryList.{category.uid}}">
                     <f:render section="subCategory" arguments="{categoryList: categoryList, parentCategory: category}" />
                 </f:if>
-
             </f:for>
 
         </f:form.select>
@@ -144,7 +144,7 @@
 <f:section name="subCategory">
 
 
-    <f:form.select.optgroup label="">
+    <f:form.select.optgroup label="{parentCategory.title}">
 
         <f:for each="{categoryList.{parentCategory.uid}}" as="category">
             <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
@@ -155,6 +155,8 @@
             </f:if>
 
         </f:for>
+
+
     </f:form.select.optgroup>
 
 </f:section>
@@ -165,7 +167,7 @@
             <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
 
             <f:if condition="{categoryList.{category.uid}}">
-                <f:render section="subCategoryWithoutOptGroup" arguments="{categoryList: categoryList, parentId: category.uid}" />
+                <f:render section="subCategoryWithoutOptGroup" arguments="{categoryList: categoryList, parentCategory: category}" />
             </f:if>
 
         </f:for>
