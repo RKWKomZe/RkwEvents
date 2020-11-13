@@ -21,11 +21,11 @@
 
 		<f:render partial="Backend/FlashMessages" arguments="{_all}" />
 
-		<f:form action="create" name="data">
+		<f:form action="create" name="data" enctype="multipart/form-data">
 
 			<label>
 				<span><f:translate key="tx_rkwevents_fluid.templates_backend_show.label_csv" /></span>
-				<f:form.textarea property="csv" value="{content}" />
+				<f:form.upload property="csv"  />
 			</label>
 
 			<label>

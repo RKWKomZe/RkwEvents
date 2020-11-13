@@ -226,10 +226,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $importCounter = 0;
         $importPlaceCounter = 0;
         $importExternalContactCounter = 0;
+
+
+        //DebuggerUtility::var_dump($data['csv']); exit;
+
         if ($data['csv']) {
 
             // get lines
-            $lines = explode("\r\n", $data['csv']);
+            //$lines = explode("\r\n", $data['csv']);
 
             if (count($lines) > 1) {
 
