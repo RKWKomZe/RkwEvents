@@ -178,9 +178,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             //===
         }
 
-
-
-        // Hinweis falls man sich bereits für diese Veranstaltung angemeldet hat wäre super (nur eingeloggt user)!
         if ($this->getFrontendUser()) {
 
             $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($event, $this->getFrontendUser());
