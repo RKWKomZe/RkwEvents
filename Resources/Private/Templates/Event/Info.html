@@ -36,6 +36,12 @@
                         <f:render partial="Event/Info/Seats" arguments="{_all}" />
                         -->
                     </f:if>
+
+                    <f:comment><!-- show costs also if its an Announcement. We cant change the regTimeEndEvents helper for it without breaking some logic --></f:comment>
+                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                        <!-- Costs -->
+                        <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
+                    </f:if>
                 </div>
             </div>
         </div>
