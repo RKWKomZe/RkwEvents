@@ -28,10 +28,11 @@
                     <f:render partial="Event/Info/Type" arguments="{_all}" />
 
                     <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
-
-                        <!-- Costs -->
-                        <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
-
+                        <f:if condition="{event.recordType} != '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                            <!-- Costs -->
+                            <!-- Costs -->
+                            <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
+                        </f:if>
                         <!-- Seats
                         <f:render partial="Event/Info/Seats" arguments="{_all}" />
                         -->
