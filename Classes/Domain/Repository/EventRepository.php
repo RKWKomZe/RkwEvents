@@ -254,6 +254,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $geoData = null;
 
+        $categoryList = [];
+        if ($filter['category']) {
+            // get category first level childs
+            /** @var \RKW\RkwEvents\Domain\Repository\CategoryRepository $categoryRepository */
+            $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Repository\\CategoryRepository');
+            $categoryList = $categoryRepository->findChildrenByParent(intval($filter['category']))->toArray();
+            // add parent itself as object
+            $categoryList[] = $categoryRepository->findByUid(intval($filter['category']));
+        }
+
         // a) Either: SQL statement
         // if: filter option "address" is filled (for proximity search)
         if ($filter['address']) {
@@ -276,7 +286,13 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
                 $categoryFilter = '';
                 if ($filter['category']) {
-                    $categoryFilter = ' AND uid IN (SELECT uid_foreign FROM sys_category_record_mm WHERE tablenames = "tx_rkwevents_domain_model_event" and fieldname="categories" AND uid_local=' . intval($filter['category']) . ')';
+                    //$categoryFilter = ' AND uid IN (SELECT uid_foreign FROM sys_category_record_mm WHERE tablenames = "tx_rkwevents_domain_model_event" and fieldname="categories" AND uid_local=' . intval($filter['category']) . ')';
+                    $categoryUidList = [];
+                    foreach ($categoryList as $category) {
+                        $categoryUidList[] = $category->getUid();
+                    }
+
+                    $categoryFilter = ' AND uid IN (SELECT uid_foreign FROM sys_category_record_mm WHERE tablenames = "tx_rkwevents_domain_model_event" and fieldname="categories" AND uid_local IN ' . implode(',', $categoryUidList) . ')';
                 }
 
                 $projectFilter = '';
@@ -348,7 +364,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $constraints[] = $query->equals('documentType', intval($filter['documentType']));
             }
             if ($filter['category']) {
-                $constraints[] = $query->contains('categories', intval($filter['category']));
+                $categoryQueries = [];
+                foreach ($categoryList as $category) {
+                    $categoryQueries[] = $query->contains('categories', $category);
+                }
+                $constraints[] = $query->logicalOr($categoryQueries);
             }
             // additional filter options
             if ($filter['time']) {

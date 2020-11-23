@@ -538,6 +538,10 @@
 				<source>Search</source>
 				<target>&gt;</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
+                <source>All</source>
+                <target>Alle</target>
+            </trans-unit>
 
 
 

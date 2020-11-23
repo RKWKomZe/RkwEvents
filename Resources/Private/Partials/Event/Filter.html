@@ -130,10 +130,16 @@
 
             <f:comment><!-- add entries without parent nodes --></f:comment>
             <f:for each="{categoryList.withoutParent}" as="category">
-                <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
 
                 <f:if condition="{categoryList.{category.uid}}">
-                    <f:render section="subCategory" arguments="{categoryList: categoryList, parentCategory: category}" />
+                    <f:then>
+                        <f:comment><!-- if category has children, show category itself as optgroup --></f:comment>
+                        <f:render section="subCategory" arguments="{categoryList: categoryList, parentCategory: category}" />
+                    </f:then>
+                    <f:else>
+                        <f:comment><!-- if category has no children and stands for itself --></f:comment>
+                        <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
+                    </f:else>
                 </f:if>
             </f:for>
 
@@ -143,8 +149,11 @@
 
 <f:section name="subCategory">
 
-
     <f:form.select.optgroup label="{parentCategory.title}">
+
+        <f:form.select.option value="{parentCategory.uid}">
+            <f:translate key='tx_rkwevents_fluid.partials_event_filter.allOfCategory' extensionName='rkwEvents' />
+        </f:form.select.option>
 
         <f:for each="{categoryList.{parentCategory.uid}}" as="category">
             <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
@@ -164,7 +173,7 @@
 <f:section name="subCategoryWithoutOptGroup">
 
         <f:for each="{categoryList.{parentCategory.uid}}" as="category">
-            <f:form.select.option value="{category.uid}">{category.title}</f:form.select.option>
+            <f:form.select.option value="{category.uid},{parentCategory.uid}">{category.title}</f:form.select.option>
 
             <f:if condition="{categoryList.{category.uid}}">
                 <f:render section="subCategoryWithoutOptGroup" arguments="{categoryList: categoryList, parentCategory: category}" />
