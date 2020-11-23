@@ -561,8 +561,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     protected function handleContentNotFound($event)
     {
-        // throws messages on LIVE even the event is visible
-
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
 
             $uri = $this->uriBuilder->reset()

@@ -421,7 +421,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             ) {
                 $constraints[] = $query->in('project', $projectUids);
             }
+        }
 
+        // disable storagePid for some cases
+        if (
+            ($settings['eventUids'])
+            || ($settings['projectUids'])
+        ) {
+            $query->getQuerySettings()->setRespectStoragePage(false);
         }
 
         return $query->matching(
