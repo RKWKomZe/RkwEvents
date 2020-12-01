@@ -10,7 +10,7 @@
             </div>
             <div class="table__content">
 
-                <f:if condition="{event.costsUnknown}">
+                <f:if condition="{event.costsUnknown} && {event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
                     <f:then>
                         <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsUnknown" />
                     </f:then>

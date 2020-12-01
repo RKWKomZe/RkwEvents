@@ -448,7 +448,8 @@ return [
                 'type' => 'check',
                 'default' => 1
             ],
-            'onChange' => 'reload'
+            'onChange' => 'reload',
+            'displayCond' => 'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventAnnouncement',
         ],
         'costs_reg' => [
             'exclude' => 0,
@@ -458,7 +459,15 @@ return [
                 'size' => 30,
                 'eval' => 'trim, double2, required'
             ],
-            'displayCond' => 'FIELD:costs_unknown:REQ:false',
+            // show always if record_type is "EventScheduled"
+            // but hide if record_type is "EventAnnouncement" and "costs_unknown" is true
+            'displayCond' => [
+                'OR' => [
+                    'FIELD:costs_unknown:REQ:false',
+                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                ],
+            ]
+
         ],
         'costs_red' => [
             'exclude' => 0,
@@ -468,7 +477,14 @@ return [
                 'size' => 30,
                 'eval' => 'trim, double2'
             ],
-            'displayCond' => 'FIELD:costs_unknown:REQ:false',
+            // show always if record_type is "EventScheduled"
+            // but hide if record_type is "EventAnnouncement" and "costs_unknown" is true
+            'displayCond' => [
+                'OR' => [
+                    'FIELD:costs_unknown:REQ:false',
+                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                ],
+            ]
         ],
         'costs_red_condition' => [
             'exclude' => 0,
@@ -478,7 +494,14 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
-            'displayCond' => 'FIELD:costs_unknown:REQ:false',
+            // show always if record_type is "EventScheduled"
+            // but hide if record_type is "EventAnnouncement" and "costs_unknown" is true
+            'displayCond' => [
+                'OR' => [
+                    'FIELD:costs_unknown:REQ:false',
+                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                ],
+            ]
         ],
         'costs_tax' => [
             'exclude' => 0,
@@ -493,7 +516,14 @@ return [
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.costs_tax.I.2', 2],
                 ],
             ],
-            'displayCond' => 'FIELD:costs_unknown:REQ:false',
+            // show always if record_type is "EventScheduled"
+            // but hide if record_type is "EventAnnouncement" and "costs_unknown" is true
+            'displayCond' => [
+                'OR' => [
+                    'FIELD:costs_unknown:REQ:false',
+                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                ],
+            ]
         ],
         'reg_required' => [
             'exclude' => 0,

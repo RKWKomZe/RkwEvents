@@ -804,6 +804,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @return boolean
+     */
+    public function getCostsUnknown()
+    {
+        return $this->costsUnknown;
+    }
+
+    /**
      * @param boolean $costsUnknown
      */
     public function setCostsUnknown($costsUnknown)
