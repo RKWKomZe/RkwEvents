@@ -133,6 +133,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $seats;
 
     /**
+     * costsUnknown
+     *
+     * @var boolean
+     */
+    protected $costsUnknown = true;
+
+    /**
      * costsReg
      *
      * @var float
@@ -786,6 +793,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSeats($seats)
     {
         $this->seats = $seats;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCostsUnknown()
+    {
+        return $this->costsUnknown;
+    }
+
+    /**
+     * @param boolean $costsUnknown
+     */
+    public function setCostsUnknown($costsUnknown)
+    {
+        $this->costsUnknown = $costsUnknown;
     }
 
     /**

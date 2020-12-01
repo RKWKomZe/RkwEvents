@@ -81,6 +81,10 @@
 				<source>Seats</source>
 				<target>Verfügbare Plätze</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_unknown" approved="yes">
+                <source>Costs unknown</source>
+                <target>Preis noch nicht festgelegt</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_reg" approved="yes">
 				<source>Price Reg (per Person)</source>
 				<target>Preis regulär (pro Person)</target>

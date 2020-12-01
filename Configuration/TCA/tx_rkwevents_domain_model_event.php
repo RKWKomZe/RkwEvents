@@ -22,11 +22,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories',
+		'searchFields' => 'title,subtitle,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility',
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
@@ -39,7 +39,7 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
+                'seats, costs_unknown, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -92,7 +92,7 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
+                'seats, costs_unknown, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -441,6 +441,15 @@ return [
                 'eval' => 'int, required'
             ],
         ],
+        'costs_unknown' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.costs_unknown',
+            'config' => [
+                'type' => 'check',
+                'default' => 1
+            ],
+            'onChange' => 'reload'
+        ],
         'costs_reg' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.costs_reg',
@@ -449,6 +458,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim, double2, required'
             ],
+            'displayCond' => 'FIELD:costs_unknown:REQ:false',
         ],
         'costs_red' => [
             'exclude' => 0,
@@ -458,6 +468,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim, double2'
             ],
+            'displayCond' => 'FIELD:costs_unknown:REQ:false',
         ],
         'costs_red_condition' => [
             'exclude' => 0,
@@ -467,6 +478,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'displayCond' => 'FIELD:costs_unknown:REQ:false',
         ],
         'costs_tax' => [
             'exclude' => 0,
@@ -481,6 +493,7 @@ return [
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.costs_tax.I.2', 2],
                 ],
             ],
+            'displayCond' => 'FIELD:costs_unknown:REQ:false',
         ],
         'reg_required' => [
             'exclude' => 0,
@@ -614,6 +627,7 @@ return [
                     'showAllLocalizationLink' => 1
                 ],
             ],
+            'displayCond' => 'FIELD:costs_unknown:REQ:false',
         ],
         'place' => [
             'displayCond' => 'FIELD:online_event:REQ:false',
@@ -896,6 +910,7 @@ return [
                 'type' => 'check',
                 'default' => 1
             ],
+            'displayCond' => 'FIELD:costs_unknown:REQ:false',
         ],
     ],
 ];
