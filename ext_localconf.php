@@ -62,6 +62,18 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
+            'Eventdescription',
+            array(
+                'Event' => 'description'
+            ),
+            // non-cacheable actions
+            array(
+                'Event' => 'description'
+            )
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
             'Galleryone',
             array(
                 'Event' => 'showGalleryOne'

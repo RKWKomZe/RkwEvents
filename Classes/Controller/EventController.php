@@ -386,6 +386,66 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     }
 
+    /**
+     * action description
+     * returns description name in view
+     *
+     * @return void
+     */
+    public function descriptionAction()
+    {
+        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+
+        $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
+        $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
+
+        //$this->handleContentNotFound($event);
+        //  <meta name="Description" content="Verfasst von E. I. N. Autor, Illustrationen von V. Gogh, Preis: 17,99 €, Umfang: 784 Seiten">
+
+        //  entnommen aus ComposeDateTimePartsViewHelper, kann das auch anders bewerkstelligt werden?
+        // 1. start date & time
+        // set always the starting date
+        $output = date("d.m.Y", $event->getStart());
+
+        if (date("Hi", $event->getStart())) {
+            $output .= ', ';
+            $output .= date("H:i", $event->getStart());
+            // if startDate != endDate OR no endDate is given, so close here with time_after-string
+            if (
+                date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())
+                || !date("Hi", $event->getEnd())
+            ) {
+                $output .= ' ' . \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+            }
+        }
+
+        // 2. end date & time
+        if ($event->getEnd()) {
+            $output .= ' - ';
+            if (date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())) {
+                $output .= date("d.m.Y", $event->getEnd());
+                $output .= ', ';
+            }
+            if (date("Hi", $event->getEnd())) {
+                $output .= date("H:i", $event->getEnd());
+                $output .= ' ' . \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+            }
+        }
+
+        $output .= ', ' . $event->getDocumentType()->getName() . ': "' . $event->getTitle() . '"';
+
+        $location = ($event->getOnlineEvent()) ? 'online' : vsprintf('%s, %s, %s %s', [
+            $event->getPlace()->getName(),
+            $event->getPlace()->getAddress(),
+            $event->getPlace()->getZip(),
+            $event->getPlace()->getCity()
+        ]);
+
+        $output .= ', ' . $location;
+
+        return $output;
+
+    }
 
     /**
      * action seriesProposals
