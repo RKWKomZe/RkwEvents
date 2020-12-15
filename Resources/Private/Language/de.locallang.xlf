@@ -200,7 +200,10 @@
                 <source>This event does not exist anymore.</source>
                 <target><![CDATA[Oops! Diese Veranstaltung steht leider nicht mehr zur Verfügung.<br/><a href="%s">Interessante Veranstaltungen gesucht? Klicken Sie hier!</a> ]]></target>
             </trans-unit>
-
+            <trans-unit id="eventController.message.error.notAvailable2">
+                <source>This event does not exist anymore.</source>
+                <target>Die gewünschte Veranstaltung ist leider nicht mehr online. Nutzen Sie unsere Veranstaltungssuche, um mögliche Alternativen zu finden.</target>
+            </trans-unit>
 
 
 			<!-- EventReservationController -->
@@ -351,9 +354,60 @@
 				<source>(optional)</source>
 				<target>(optional)</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.label_required">
+                <source>(Required)</source>
+                <target>(Pflichtfeld)</target>
+            </trans-unit>
 
 
 			<!-- ==================================================================================== -->
+
+			<!-- Templates/Backend/Show.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.headline">
+				<source>CSV Import</source>
+				<target>CSV Import</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv">
+				<source>CSV Data including Header, Tab-separated</source>
+				<target>CSV-Daten inklusive Kopfzeilen, getrennt durch Tabulator</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
+				<source>Really Do Import (Else Just Check Data)</source>
+				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
+				<source>Event Type; overrides CSV Values when set</source>
+				<target>Veranstaltungsart; überschreibt CSV-Werte, wenn gesetzt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
+				<source>Department Type; overrides CSV Values when set</source>
+				<target>Fachbereich/Thema; überschreibt CSV-Werte, wenn gesetzt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
+				<source>Organizer; overrides CSV Values when set</source>
+				<target>Organisator; überschreibt CSV-Werte, wenn gesetzt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_timeZone">
+				<source>Timezone of CSV Data</source>
+				<target>Zeitzone für Datum/Uhrzeit in der CSV</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPid">
+                <source>PID for import; overrides CSV Values when set</source>
+                <target>PID: Speicherort der Datensätze; überschreibt CSV-Werte, wenn gesetzt</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPidAuthors">
+                <source>PID for internal contact; overrides CSV Values when set</source>
+                <target>PID: Speicherort der internen Ansprechpartner; überschreibt CSV-Werte, wenn gesetzt</target>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_submit">
+				<source>Start import</source>
+				<target>Import starten</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_activate">
+				<source>Do not hide imported events on website</source>
+				<target>Neue Datensätze direkt auf Website sichtbar schalten</target>
+			</trans-unit>
+
 
 			<!-- Templates/Ajax/List/List.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_ajax_list_list.noEventHeadline" approved="yes">
@@ -369,7 +423,7 @@
 			<!-- Templates/Event/List.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_event_list.noEvent" approved="yes">
 				<source>Sorry, no events found.</source>
-				<target>Leider sind derzeit keine Veranstaltungen geplant. Bitte besuchen Sie uns später erneut.</target>
+				<target>Leider konnten wir keine Veranstaltungen für Sie finden.</target>
 			</trans-unit>
 
 			<!-- Templates/Event/Archive.html -->
@@ -412,14 +466,19 @@
 
 
             <!-- Templates/Event/Info.html -->
-            <trans-unit id="tx_rkwevents_fluid.template_event_info.type" approved="yes">
-                <source>Type:</source>
-                <target>Art:</target>
+            <trans-unit id="tx_rkwevents_fluid.templates.info.labelInfo" approved="yes">
+                <source>Information</source>
+                <target>Informationen</target>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.template_event_info.series" approved="yes">
-				<source>Series:</source>
-				<target>Reihe:</target>
-			</trans-unit>
+
+
+
+            <!-- Templates/Event/Series.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates.title.series" approved="yes">
+                <source>Series:</source>
+                <target>Reihe:</target>
+            </trans-unit>
+
 
 
             <!-- Templates/Event/SeriesProposals.html -->
@@ -462,6 +521,14 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelCategoryAll">
                 <source>All Categories</source>
                 <target>Alle Kategorien</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelMonth">
+                <source>Month</source>
+                <target>Monat</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelMonthAll">
+                <source>All months</source>
+                <target>Alle Monate</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch">
 				<source>Enter ZIP or Address</source>
@@ -532,7 +599,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_list_more.showMore">
 				<source>Show more</source>
-				<target>Jetzt mehr anzeigen</target>
+				<target>Mehr anzeigen</target>
 			</trans-unit>
 
 
@@ -607,6 +674,15 @@
 			</trans-unit>
 
 
+
+			<!-- Partials/Event/Info/Type.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info.type" approved="yes">
+                <source>Type:</source>
+                <target>Art:</target>
+            </trans-unit>
+
+
+
 			<!-- Partials/Event/Info/Costs.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costs" approved="yes">
 				<source>Costs</source>
@@ -640,6 +716,10 @@
 				<source>p.P.</source>
 				<target>p.P.</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
+                <source>eligibility</source>
+                <target>förderfähig</target>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -662,6 +742,10 @@
 				<source>Target Group</source>
 				<target>Zielgruppe</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.target_learning" approved="yes">
+                <source>Target Learning</source>
+                <target>Inhaltliches Ziel</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.partner" approved="yes">
 				<source>Partner</source>
 				<target>Partner</target>
@@ -693,6 +777,14 @@
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
                 <target>Download</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.code" approved="yes">
+                <source>Code</source>
+                <target>Veranstaltungs-Nr.</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
+                <source>Trainer</source>
+                <target>Trainer/in</target>
             </trans-unit>
 
 
@@ -763,11 +855,21 @@
 				<source>Event in the past.</source>
 				<target>Die Veranstaltung liegt in der Vergangenheit</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" approved="yes">
+                <source>Event announcement.</source>
+                <target>Eine Anmeldung ist noch nicht möglich</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" approved="yes">
                 <source>Please register via E-Mail</source>
                 <target>Bitte registrieren Sie sich via E-Mail</target>
             </trans-unit>
 
+
+            <!-- Partials/Event/List/BoxInner.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.announcement" approved="yes">
+                <source>Announcement</source>
+                <target>Ankündigung</target>
+            </trans-unit>
 
 
 			<!-- Templates/EventReservation/New.html -->
@@ -929,49 +1031,6 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant">
 				<source>Participants</source>
 				<target>Teilnehmer</target>
-			</trans-unit>
-
-
-			<!-- Partials/EventReservation/Properties.html -->
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.headline">
-				<source>CSV Import</source>
-				<target>CSV Import</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv">
-				<source>CSV Data including Header, Tab-separated</source>
-				<target>CSV-Daten inklusive Kopfzeilen, getrennt durch Tabulator</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
-				<source>Really Do Import (Else Just Check Data)</source>
-				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
-				<source>Event Type, overrides CSV Values when set</source>
-				<target>Veranstaltungsart; überschreibt CSV-Werte, wenn gesetzt</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
-				<source>Department Type, overrides CSV Values when set</source>
-				<target>Fachbereich/Thema; überschreibt CSV-Werte, wenn gesetzt</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
-				<source>Organizer, overrides CSV Values when set</source>
-				<target>Organisator; überschreibt CSV-Werte, wenn gesetzt</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_timeZone">
-				<source>Timezone of CSV Data</source>
-				<target>Zeitzone für Datum/Uhrzeit in der CSV</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPid">
-                <source>Target PID for import</source>
-                <target>PID: Speicherort der Datei</target>
-            </trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_submit">
-				<source>Start import</source>
-				<target>Import starten</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_activate">
-				<source>Do not hide imported events on website</source>
-				<target>Neue Datensätze direkt auf Website sichtbar schalten</target>
 			</trans-unit>
 
 

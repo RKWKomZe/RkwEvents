@@ -26,6 +26,18 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
+            'Recommendation',
+            array(
+                'Event' => 'listSimple',
+            ),
+            // non-cacheable actions
+            array(
+                'Event' => 'listSimple',
+            )
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
             'Eventmaps',
             array(
                 'Event' => 'maps'

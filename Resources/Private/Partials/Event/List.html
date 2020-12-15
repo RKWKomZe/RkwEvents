@@ -1,72 +1,88 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:if condition="<f:count>{sortedEventList}</f:count>">
-    <f:then>
-        <f:if condition="{geosearch}">
+    <f:if condition="<f:count>{sortedEventList}</f:count>">
+        <f:if condition="{geosearch} == 1 || {noGrouping} == 1">
             <f:then>
-
                 <!-- simple element list without nesting -->
-                <f:for each="{sortedEventList}" as="event">
-                    <f:render partial="Event/List/Box" arguments="{_all}" />
-                </f:for>
+                <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
+                    <div class="tiles flex-container flex-container--margin">
+
+                        <f:for each="{sortedEventList}" as="event">
+                            <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
+                        </f:for>
+                    </div>
+                </rkwAjax:ajaxWrapper>
 
             </f:then>
             <f:else>
-                <f:for each="{sortedEventList}" as="eventsInYear" iteration="year">
-                    <f:for each="{eventsInYear}" as="eventsInMonth" iteration="month">
-                        <f:if condition="{noGrouping}">
-                            <f:then>
 
-                                <!-- further boxes with events -->
-                                <f:for each="{eventsInMonth}" as="event">
-                                    <f:render partial="Event/List/Box" arguments="{_all}" />
-                                </f:for>
+                Not working at the moment
+                <f:comment>
+                    <div class="box-list">
+                        <f:for each="{sortedEventList}" as="eventsInType" iteration="type">
+                            <f:for each="{eventsInType}" as="eventsInYear" iteration="year">
+                                <f:for each="{eventsInYear}" as="eventsInMonth" iteration="month">
 
-                            </f:then>
+                                    <f:if condition="{type} == 'new'">
+                                        <f:then>
 
-                            <f:else>
 
-                                <!-- event group month -->
-                                <div class="box-group" id="tx-rkwevents-results-<rkw:printArrayKey array='{sortedEventList}' index='{year.index}' />-<rkw:printArrayKey array='{eventsInYear}' index='{month.index}' />">
+                                            <!-- event group month -->
+                                            <div class="box-group">
 
-                                    <!-- first box category -->
-                                    <div class="box-wrapper">
-                                        <div class="box category">
-                                            <p>
-                                                <rkw:printArrayKey array="{sortedEventList}" index="{year.index}" /> &ndash; <f:translate key="tx_rkwevents_fluid.partials_event_list.month<rkw:printArrayKey array='{eventsInYear}' index='{month.index}' />" extensionName="RkwEvents" />
-                                            </p>
+                                                <p class="box-group__header">
+                                                    <rkw:printArrayKey array="{eventsInType}" index="{year.index}" /> &ndash; <f:translate key="tx_rkwevents_fluid.partials_event_list.month<rkw:printArrayKey array='{eventsInYear}' index='{month.index}' />" extensionName="RkwEvents" />
+                                                </p>
+
+                                                <f:for each="{eventsInMonth}" as="event">
+                                                    <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
+                                                </f:for>
+                                            </div>
+
+
+                                        </f:then>
+                                        <f:else>
+
+                                            <f:for each="{eventsInMonth}" as="event">
+                                                <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
+                                            </f:for>
+
+                                        </f:else>
+
+                                    </f:if>
+
+                                    <!-- event group month -->
+                                    <div class="box-group">
+
+                                        <!-- first box category -->
+                                        <div class="box-wrapper">
+                                            <div class="box category">
+                                                <p>
+                                                    <rkw:printArrayKey array="{sortedEventList}" index="{year.index}" /> &ndash; <f:translate key="tx_rkwevents_fluid.partials_event_list.month<rkw:printArrayKey array='{eventsInYear}' index='{month.index}' />" extensionName="RkwEvents" />
+                                                </p>
+                                            </div>
                                         </div>
+
+                                        <f:comment><!-- further boxes with events --></f:comment>
+                                        <f:for each="{eventsInMonth}" as="event">
+                                            <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
+                                        </f:for>
+
                                     </div>
 
-                                    <!-- further boxes with events -->
-                                    <f:for each="{eventsInMonth}" as="event">
-                                        <f:render partial="Event/List/Box" arguments="{_all}" />
-                                    </f:for>
-
-                                </div>
-                            </f:else>
-                        </f:if>
-                    </f:for>
-                </f:for>
-
-            </f:else>
-
-        </f:if>
-
-    </f:then>
-
-
-    <f:else>
-
-        <f:if condition="{noGrouping}">
-            <f:else>
-                <div><!-- empty DIV to hide more link via AJAX --></div>
+                                </f:for>
+                            </f:for>
+                        </f:for>
+                    </div>
+                </f:comment>
             </f:else>
         </f:if>
+    </f:if>
 
-    </f:else>
+    <!-- lazy loading / load more box -->
+    <f:render partial="Event/List/MoreLink" arguments="{_all}" />
 
-</f:if>
-
-<!-- lazy loading / load more box -->
-<f:render partial="Event/List/MoreLink" arguments="{_all}" />
+</html>

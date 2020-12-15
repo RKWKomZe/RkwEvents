@@ -1,0 +1,90 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <div class="tile tile--no-img">
+        <f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" title="{event.title}">
+            <div class="tile__header">
+                <div class="tile__label-wrapper">
+                    <span class="tile__label">
+                        {event.documentType.name}
+                    </span>
+                </div>
+            </div>
+            <div class="tile__content">
+                <h3 class="tile__title icon">
+                    <span class="tile__title-icon">
+                        <svg class="icon icon--36"><use xlink:href="#ic-events"></use></svg>
+                    </span>
+                    <span class="tile__title-text">
+                        {event.title}
+                    </span>
+                </h3>
+                <div class="tile__text tile__text--no-img">
+                    <p>
+                        <f:if condition="{settings.list.filter.showDepartment}">
+                            <f:then>
+                                {event.department.name}
+                            </f:then>
+                            <f:else>
+                                <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.categories}</f:count>">
+                                    <f:for each="{event.categories}" as="category" iteration="iter">
+                                        <f:if condition="{iter.isFirst}">
+                                            {category.title}
+                                        </f:if>
+                                    </f:for>
+                                </f:if>
+                            </f:else>
+                        </f:if>
+
+                    </p>
+                </div>
+            </div>
+            <div class="tile__footer tile__contact">
+                <div class="tile__contact-text">
+                    <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
+
+                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                        <f:then>
+                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkw_events' />
+                        </f:then>
+                        <f:else>
+                            <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                <f:then>
+                                    ({event.start -> f:format.date(format:"d.m.Y")})
+                                </f:then>
+                                <f:else>
+                                    {event.start -> f:format.date(format:"d.m.Y")}
+                                </f:else>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+
+                    <f:comment>
+                        <f:if condition="{event.end}">
+                            <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+                                <f:else>
+                                    <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                        <f:then>
+                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                        </f:then>
+                                        <f:else>
+                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                        </f:else>
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+                        </f:if>
+                    </f:comment>
+                </div>
+                <f:if condition="{event.place}">
+                    <div class="tile__contact-location">
+                        <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                        {event.place.city}
+                    </div>
+                </f:if>
+            </div>
+        </f:link.action>
+    </div>
+
+</html>

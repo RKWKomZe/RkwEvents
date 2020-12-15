@@ -1,17 +1,21 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<div class="info-table--tr">
-    <div class="info-table--th">
-        <f:translate key="tx_rkwevents_fluid.partials_event_info_seats.seats" />:
+    <div class="info-table--tr">
+        <div class="info-table--th">
+            <f:translate key="tx_rkwevents_fluid.partials_event_info_seats.seats" />:
+        </div>
+        <div class="info-table--td">
+            <f:if condition="<rkw:FreePlacesAvailable event='{event}' />">
+                <f:then>
+                    <f:translate key="tx_rkwevents_fluid.partials_event_info_seats.seats_available" />
+                </f:then>
+                <f:else>
+                    <f:translate key="tx_rkwevents_fluid.partials_event_info_seats.seats_not_available" />
+                </f:else>
+            </f:if>
+        </div>
     </div>
-    <div class="info-table--td">
-        <f:if condition="<rkw:FreePlacesAvailable event='{event}' />">
-            <f:then>
-                <f:translate key="tx_rkwevents_fluid.partials_event_info_seats.seats_available" />
-            </f:then>
-            <f:else>
-                <f:translate key="tx_rkwevents_fluid.partials_event_info_seats.seats_not_available" />
-            </f:else>
-        </f:if>
-    </div>
-</div>
+
+</html>

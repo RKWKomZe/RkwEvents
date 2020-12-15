@@ -1,17 +1,24 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:if condition="{showMoreLink}">
-
-    <div class="box-wrapper">
-        <f:link.action action="filter" controller="Ajax" pluginName="pi1" extensionName="RkwEvents" class="box small help ajax next-page autoload" additionalParams="{tx_rkwevents_pi1: '{filter: filter, page: pageMore, archive: archive}', type: '{ajaxTypeNum}'}" additionalAttributes="{data-page-type: '{ajaxTypeNum}'}">
-            <header>
-                <p>
-                    <f:translate key="tx_rkwevents_fluid.partials_event_list_more.interesting" extensionName="RkwEvents" />
-                    <br>
+    <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
+        <f:if condition="{showMoreLink}">
+            <div class="flex-container flex-basis-12">
+                <f:link.action
+                    action="list"
+                    controller="Event"
+                    pluginName="Pi1"
+                    extensionName="RkwEvents"
+                    class="btn btn--primary btn--centered mt-1 ajax"
+                    additionalParams="{tx_rkwevents_pi1: '{filter: filter, page: pageMore, archive: archive}', rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'2,3\'}'}"
+                >
                     <strong><f:translate key="tx_rkwevents_fluid.partials_event_list_more.showMore" extensionName="RkwEvents" /></strong>
-                </p>
-            </header>
-        </f:link.action>
-    </div>
 
-</f:if>
+                </f:link.action>
+            </div>
+        </f:if>
+    </rkwAjax:ajaxWrapper>
+
+</html>

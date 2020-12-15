@@ -1,23 +1,26 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<div class="info-table--tr">
-    <div class="info-table--th">
-        <f:translate key="tx_rkwevents_fluid.partials_event_info_place.name" />
-    </div>
-    <div class="info-table--td">
-        {event.place.name}
 
-        <!-- do not change this line. We got some not wanted whitespaces, if you would change here something -->
-        <f:if condition="{event.place.address}"><br>{event.place.address}</f:if><f:if condition="{event.place.zip}">, {event.place.zip}</f:if>
+    <div class="table__item">
+        <div class="table__title">
+            <f:translate key="tx_rkwevents_fluid.partials_event_info_place.name" />
+        </div>
+        <div class="table__content">
+            {event.place.name}
 
-        <f:if condition="{event.place.city}">
-            {event.place.city}
-        </f:if>
+            <!-- do not change this line. We got some not wanted whitespaces, if you would change here something -->
+            <f:if condition="{event.place.address}"><br>{event.place.address}</f:if><f:if condition="{event.place.zip}">, {event.place.zip}</f:if>
 
-        <f:if condition="{event.place.country.uid} != 54">
-            <f:if condition="{event.place.country.shortNameLocal}">
-                , {event.place.country.shortNameLocal}
+            <f:if condition="{event.place.city}">
+                {event.place.city}
             </f:if>
-        </f:if>
+
+            <f:if condition="{event.place.country.uid} != 54">
+                <f:if condition="{event.place.country.shortNameLocal}">
+                    , {event.place.country.shortNameLocal}
+                </f:if>
+            </f:if>
+        </div>
     </div>
-</div>
+</html>

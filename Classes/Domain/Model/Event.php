@@ -28,6 +28,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * @var string
+     */
+    protected $recordType;
+
+    /**
      * title
      *
      * @var string
@@ -82,6 +87,21 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $description;
+
+    /**
+     * description2
+     *
+     * @var string
+     */
+    protected $description2;
+
+    /**
+     * targetLearning
+     *
+     * @var string
+     */
+    protected $targetLearning;
+
 
     /**
      * targetGroup
@@ -173,7 +193,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var bool
      */
-    protected $onlineEvent;
+    protected $onlineEvent = false;
+
+    /**
+     * code
+     *
+     * @var string
+     */
+    protected $code;
+
+    /**
+     * trainer
+     *
+     * @var string
+     */
+    protected $trainer;
+
+    /**
+     * eligibility
+     *
+     * @var bool
+     */
+    protected $eligibility = false;
 
     /**
      * onlineEventAccessLink
@@ -429,6 +470,30 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the recordType value
+     *
+     * @return string
+     * @api
+     */
+    public function getRecordType()
+    {
+        return $this->recordType;
+    }
+
+
+    /**
+     * Sets the recordType value
+     *
+     * @param $recordType
+     * @return string
+     * @api
+     */
+    public function setRecordType($recordType)
+    {
+        return $this->recordType = $recordType;
+    }
+
+    /**
      * Returns the title
      *
      * @return string $title
@@ -596,6 +661,48 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->description = $description;
     }
 
+    /**
+     * Returns the description2
+     *
+     * @return string $description2
+     */
+    public function getDescription2()
+    {
+        return $this->description2;
+    }
+
+    /**
+     * Sets the description2
+     *
+     * @param string $description2
+     * @return void
+     */
+    public function setDescription2($description2)
+    {
+        $this->description2 = $description2;
+    }
+
+    /**
+     * Returns the targetLearning
+     *
+     * @return string $targetLearning
+     */
+    public function getTargetLearning()
+    {
+        return $this->targetLearning;
+    }
+
+    /**
+     * Sets the targetLearning
+     *
+     * @param string $targetLearning
+     * @return void
+     */
+    public function setTargetLearning($targetLearning)
+    {
+        $this->targetLearning = $targetLearning;
+    }    
+    
     /**
      * Returns the targetGroup
      *
@@ -900,6 +1007,54 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOnlineEventAccessLink($onlineEventAccessLink)
     {
         $this->onlineEventAccessLink = $onlineEventAccessLink;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrainer()
+    {
+        return $this->trainer;
+    }
+
+    /**
+     * @param string $trainer
+     */
+    public function setTrainer($trainer)
+    {
+        $this->trainer = $trainer;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEligibility()
+    {
+        return $this->eligibility;
+    }
+
+    /**
+     * @param boolean $eligibility
+     */
+    public function setEligibility($eligibility)
+    {
+        $this->eligibility = $eligibility;
     }
 
 

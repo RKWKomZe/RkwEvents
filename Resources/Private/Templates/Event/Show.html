@@ -1,40 +1,38 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-<f:layout name="Default" />
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-This Template is responsible for displaying a single view for a domain object
+    <f:layout name="Default" />
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
+    This Template is responsible for displaying a single view for a domain object
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+    If you modify this template, do not forget to change the overwrite settings
+    in /Configuration/ExtensionBuilder/settings.yaml:
+      Resources:
+        Private:
+          Templates:
+            Show.html: keep
 
-<f:section name="main">
+    Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
-    <f:render partial="FlashMessages" arguments="{_all}" />
+    <f:section name="main">
 
-    <f:if condition="{event}">
-        <f:else>
-            <!-- do actually nothing -->
-        </f:else>
-        <f:then>
+        <f:render partial="FlashMessages" arguments="{_all}" />
+
+        <f:if condition="{event}">
             <f:render partial="Event/Properties" arguments="{_all}" />
 
-            <!-- Registration link -->
-            <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
-
             <f:render partial="Event/AdditionalData" arguments="{_all}" />
+
+            <f:render partial="Event/Registration" arguments="{event:event, isReservationPage: isReservationPage, additionalCssClass:'btn--primary'}" />
+
             <f:render partial="Event/Schedule" arguments="{_all}" />
 
             <f:if condition="{event.schedule}">
-                <!-- Registration link -->
-                <p><f:render partial="Event/Registration" arguments="{event:event}" /></p>
+                <f:render partial="Event/Registration" arguments="{event:event, isReservationPage: isReservationPage, additionalCssClass:'btn--primary'}" />
             </f:if>
-        </f:then>
-    </f:if>
+        </f:if>
 
+    </f:section>
 
-</f:section>
+</html>

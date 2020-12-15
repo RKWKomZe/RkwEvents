@@ -1,46 +1,60 @@
-{namespace rkw=RKW\RkwEvents\ViewHelpers}
-{namespace rkwBasics=RKW\RkwBasics\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:if condition="{event}">
-    <!-- Infobox events -->
-    <div class="project-details info-box">
+    <f:if condition="{event}">
 
+        <f:comment><!-- LEFT SIDE: Basic data --></f:comment>
+        <div class="flex-item flex-basis-8 full-width-medium infobox-space">
+            <h3 class="siteheader__overlay-title">
+                <f:translate key="tx_rkwevents_fluid.templates.info.labelInfo" />
+            </h3>
 
-        <div class="box-content full">
-
-            <!-- Short info -->
-            <div class="project-teaser">
-
-                <div class="info-table">
-
+            <div class="siteheader__overlay-text">
+                <div class="table">
                     <!-- Time -->
-                    <f:render partial="Event/Info/Time" arguments="{_all}" />
+                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventScheduled'">
+                        <f:render partial="Event/Info/Time" arguments="{_all}" />
+                    </f:if>
 
                     <!-- Place -->
                     <f:if condition="{event.onlineEvent} != 1">
-                        <f:render partial="Event/Info/Place" arguments="{_all}" />
+                        <f:if condition="{event.place}">
+                            <f:render partial="Event/Info/Place" arguments="{_all}" />
+                        </f:if>
                     </f:if>
 
                     <!-- Type-->
                     <f:render partial="Event/Info/Type" arguments="{_all}" />
 
                     <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
-
-                        <!-- Costs -->
-                        <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
-
+                        <f:if condition="{event.recordType} != '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                            <!-- Costs -->
+                            <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
+                        </f:if>
                         <!-- Seats
                         <f:render partial="Event/Info/Seats" arguments="{_all}" />
                         -->
                     </f:if>
+
+                    <f:comment><!-- show costs also if its an Announcement. We cant change the regTimeEndEvents helper for it without breaking some logic --></f:comment>
+                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                        <!-- Costs -->
+                        <f:render partial="Event/Info/Costs" section="Main" arguments="{_all}" />
+                    </f:if>
                 </div>
-
-            </div>
-
-            <!-- Register -->
-            <div class="buttons-set">
-                <f:render partial="Event/Registration" arguments="{event:event, isReservationPage: isReservationPage, additionalButtonClass:'download-button'}" />
             </div>
         </div>
-    </div>
-</f:if>
+
+        <f:comment><!-- RIGHT SIDE: Contact --></f:comment>
+        <div class="flex-item flex-basis-4 full-width-medium">
+        <f:render partial="Event/Info/Contact" arguments="{_all}" />
+        </div>
+
+        <!-- Register -->
+        <div class="siteheader__overlay-btn flex-container flex-basis-12 infobox-space">
+            <f:render partial="Event/Registration" arguments="{event:event, isReservationPage: isReservationPage, additionalCssClass:'btn--white'}" />
+        </div>
+    </f:if>
+
+</html>
