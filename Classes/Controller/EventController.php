@@ -119,10 +119,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * @param array $filter
      * @param integer $page
      * @param bool $archive
+     * @param bool $noEventFound
      * @return void
      * @throws \Exception
      */
-    public function listAction($filter = array(), $page = 0, $archive = false)
+    public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
     {
 
         // get department and document list (for filter)
@@ -267,6 +268,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                     'page',
                     'noGrouping' => $this->settings['list']['noGrouping'],
                     'timeArrayList' => DivUtility::createMonthListArray(),
+                    'eventNotFoundMessage' => $this->eventNotFoundMessage,
+                    'noEventFound' => $noEventFound
                 )
             );
 
@@ -563,9 +566,15 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     {
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
 
+            // Sideeffect: Adds an parameter to the url which always show the "event not available" message
+            $arguments = [
+                'noEventFound' => true,
+            ];
+
             $uri = $this->uriBuilder->reset()
                 ->setTargetPageUid($this->settings['listPid'])
                 ->setCreateAbsoluteUri(true)
+                ->setArguments($arguments)
                 ->build();
 
             $this->addFlashMessage(
@@ -578,6 +587,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             );
 
             $this->redirectToUri($uri, 0, 404);
+
         }
     }
 
