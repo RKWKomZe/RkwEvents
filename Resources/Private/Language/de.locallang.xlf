@@ -538,6 +538,10 @@
 				<source>Search</source>
 				<target>&gt;</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
+                <source>All</source>
+                <target>Alle</target>
+            </trans-unit>
 
 
 
@@ -712,6 +716,10 @@
 				<source>free</source>
 				<target>kostenlos</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsUnknown" approved="yes">
+                <source>Costs unknown</source>
+                <target>Preis noch nicht festgelegt</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" approved="yes">
 				<source>p.P.</source>
 				<target>p.P.</target>

@@ -421,6 +421,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelSearch">
 				<source>Search</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
+                <source>All</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/List.html -->
@@ -554,6 +557,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsFree" approved="yes">
 				<source>free</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsUnknown" approved="yes">
+                <source>Costs unknown</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" approved="yes">
 				<source>p.P.</source>
 			</trans-unit>

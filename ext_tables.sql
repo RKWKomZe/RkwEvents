@@ -21,6 +21,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	schedule text NOT NULL,
 	partner text NOT NULL,
 	seats int(11) DEFAULT '0' NOT NULL,
+	costs_unknown tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	costs_reg varchar(255) DEFAULT '' NOT NULL,
 	costs_red varchar(255) DEFAULT '' NOT NULL,
 	costs_red_condition varchar(255) DEFAULT '' NOT NULL,
