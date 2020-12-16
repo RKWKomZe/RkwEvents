@@ -62,6 +62,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.seats">
 				<source>Seats</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_unknown" approved="yes">
+                <source>Costs unknown</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_reg">
 				<source>Price Regular (per Person)</source>
 			</trans-unit>

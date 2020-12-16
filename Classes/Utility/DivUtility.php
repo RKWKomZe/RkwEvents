@@ -13,6 +13,7 @@ namespace RKW\RkwEvents\Utility;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * DivUtility
@@ -429,6 +430,42 @@ class DivUtility
 
         return $resultArray;
         //===
+    }
+
+
+
+    /**
+     * createCategoryTree
+     *
+     * @param array $categoryList List of categories
+     * @param integer $parentCategoryForFilter the initial category
+     * @return array
+     * @throws \Exception
+     */
+    public static function createCategoryTree($categoryList, $parentCategoryForFilter)
+    {
+        $sortedCategoryList = [];
+
+        // we need to know if there is an entry without parent
+        $categoryUidList = [];
+        foreach ($categoryList as $category) {
+            $categoryUidList[] = $category->getUid();
+        }
+
+        /** @var \RKW\RkwEvents\Domain\Model\Category $category */
+        foreach ($categoryList as $category) {
+
+            // if there is a parent, add it as child content
+            if (in_array($category->getParent()->getUid(), $categoryUidList)) {
+                $sortedCategoryList[$category->getParent()->getUid()][] = $category;
+            } else {
+                // of there is no parent entry, add it to "withoutParent" group
+                $sortedCategoryList['withoutParent'][] = $category;
+            }
+
+        }
+
+        return $sortedCategoryList;
     }
 
 }

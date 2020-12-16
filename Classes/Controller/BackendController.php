@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Controller;
+use League\Csv\Reader;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -184,6 +185,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'extRegLink',
             'currency',
             'seats',
+            'costsUnknown',
             'costsReg',
             'costsRed',
             'costsRedCondition',
@@ -226,15 +228,17 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $importCounter = 0;
         $importPlaceCounter = 0;
         $importExternalContactCounter = 0;
-        if ($data['csv']) {
 
-            // get lines
-            $lines = explode("\r\n", $data['csv']);
+        //load the CSV document from a file path
+        $csv = Reader::createFromPath($data['csv']['tmp_name'], 'r');
+        $csv->setHeaderOffset(0);
 
-            if (count($lines) > 1) {
+        $header = $csv->getHeader(); //returns the CSV header record
+        $records = iterator_to_array($csv->getRecords()); //returns all the CSV records as an Iterator object
 
-                // now get first line - this defines the rows
-                $header = explode("\t", $lines[0]);
+        if ($records) {
+
+            if (count($records) >= 1) {
 
                 // now check the header for allowed rows - other rows will be ignored
                 $importRows = array();
@@ -261,19 +265,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 }
 
                 // now go through each line and import was is to import
-                foreach ($lines as $lineNumber => $line) {
-
-                    if ($lineNumber == 0) {
-                        continue;
-                    }
-                    //===
+                foreach ($records as $lineNumber => $line) {
 
                     // put all data from col into an associative array
-                    $rows = explode("\t", $line);
                     $tempData = array();
-                    foreach ($rows as $rowNumber => $value) {
 
-                        if ($key = $importRows[$rowNumber]) {
+                    foreach ($line as $key => $value) {
+
+                        if (in_array($key, $importRows)) {
                             $tempData[$key] = $this->stringCleanUp($value);
                         }
 
@@ -480,45 +479,56 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         //======================================================================
                         // 4. Handling for prices
-                        $event->setCostsReg(0);
-                        if ($tempData['costsReg']) {
-                            $event->setCostsReg(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsReg']))));
-                        }
-                        if ($tempData['costsRed']) {
-                            $event->setCostsRed(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsRed']))));
 
-                            if ($tempData['costsRedCondition']) {
-                                $event->setCostsRedCondition($tempData['costsRedCondition']);
-                            } else {
-                                if (preg_match('/^[0-9,\.]+[ ]?(Euro|€)(.+)$/', $tempData['costsRed'], $tempMatch)) {
-                                    $event->setCostsRedCondition(trim($tempMatch[2]));
+                        // This is an XOR. Possiblities for event costs:
+                        // 1. Normal price, optional reduced
+                        // 2. Free (the event costs literally nothing and is for free)
+                        // 3. Costs unknown (does will cost money. But not known yet)
+                        if ($tempData['costsUnknown']) {
+                            // Either: Costs completely unknown (option 3)
+                            $event->setCostsUnknown($tempData['costsUnknown']);
+                        } else {
+                            // Or: Free oder has some costs (option 1 or 2)
+                            $event->setCostsReg(0);
+                            if ($tempData['costsReg']) {
+                                $event->setCostsReg(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsReg']))));
+                            }
+                            if ($tempData['costsRed']) {
+                                $event->setCostsRed(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsRed']))));
+
+                                if ($tempData['costsRedCondition']) {
+                                    $event->setCostsRedCondition($tempData['costsRedCondition']);
+                                } else {
+                                    if (preg_match('/^[0-9,\.]+[ ]?(Euro|€)(.+)$/', $tempData['costsRed'], $tempMatch)) {
+                                        $event->setCostsRedCondition(trim($tempMatch[2]));
+                                    }
                                 }
                             }
-                        }
-                        if ($tempData['costsTaxIncluded']) {
-                            $event->setCostsTaxIncluded(true);
-                        }
+                            if ($tempData['costsTaxIncluded']) {
+                                $event->setCostsTaxIncluded(true);
+                            }
 
-                        /** @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository */
-                        $currencyRepository = $this->objectManager->get('SJBR\\StaticInfoTables\\Domain\\Repository\\CurrencyRepository');
-                        if ($tempData['currency']) {
-                            $currencyCode = $tempData['currency'];
-                        }
+                            /** @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository */
+                            $currencyRepository = $this->objectManager->get('SJBR\\StaticInfoTables\\Domain\\Repository\\CurrencyRepository');
+                            if ($tempData['currency']) {
+                                $currencyCode = $tempData['currency'];
+                            }
 
-                        /** @var \SJBR\StaticInfoTables\Domain\Model\Currency $currency */
-                        $currency = $currencyRepository->findOneByIsoCodeA3($currencyCode);
-                        if ($currency) {
-                            $event->setCurrency($currency);
-                        } else {
-                            $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                    'backendController.error.invalidCurrencyCode',
-                                    'rkw_events',
-                                    array($currencyCode, $lineNumber + 1)
-                                ),
-                                '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
-                            );
+                            /** @var \SJBR\StaticInfoTables\Domain\Model\Currency $currency */
+                            $currency = $currencyRepository->findOneByIsoCodeA3($currencyCode);
+                            if ($currency) {
+                                $event->setCurrency($currency);
+                            } else {
+                                $this->addFlashMessage(
+                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        'backendController.error.invalidCurrencyCode',
+                                        'rkw_events',
+                                        array($currencyCode, $lineNumber + 1)
+                                    ),
+                                    '',
+                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                );
+                            }
                         }
 
                         //======================================================================

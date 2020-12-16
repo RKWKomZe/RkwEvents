@@ -1,6 +1,8 @@
 <?php
 
 namespace RKW\RkwEvents\Domain\Repository;
+
+use \RKW\RkwEvents\Domain\Model\Category;
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -66,5 +68,48 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         return $query->execute();
         //===
+    }
+
+
+
+    /**
+     * findAllRestrictedByEvents
+     *
+     * @param integer $storagePid the pid of the event storage
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array|object|void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findAllRestrictedByEvents($storagePid = 0)
+    {
+
+        // get all entries where MM is related to an event (of certain PID) which is currently running
+
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
+        $andWhere = '';
+        if ($storagePid) {
+            $andWhere = ' AND tx_rkwevents_domain_model_event.pid = ' . intval($storagePid) . '';
+        }
+
+        $query->statement(
+            'SELECT sys_category.*
+            FROM sys_category, tx_rkwevents_domain_model_event 
+            INNER JOIN sys_category_record_mm 
+            WHERE sys_category_record_mm.tablenames = "tx_rkwevents_domain_model_event"
+            AND sys_category_record_mm.fieldname = "categories"
+            AND sys_category.uid = sys_category_record_mm.uid_local
+            AND tx_rkwevents_domain_model_event.uid = sys_category_record_mm.uid_foreign
+            AND tx_rkwevents_domain_model_event.hidden = 0
+            AND tx_rkwevents_domain_model_event.deleted = 0
+            AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
+            ' . $andWhere . '
+            ORDER BY sys_category.title ASC
+            '
+        );
+
+        return $query->execute();
+        //===
+
     }
 }
