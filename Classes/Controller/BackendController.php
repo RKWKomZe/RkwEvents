@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Controller;
+use League\Csv\Reader;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -227,15 +228,17 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $importCounter = 0;
         $importPlaceCounter = 0;
         $importExternalContactCounter = 0;
-        if ($data['csv']) {
 
-            // get lines
-            $lines = explode("\r\n", $data['csv']);
+        //load the CSV document from a file path
+        $csv = Reader::createFromPath($data['csv']['tmp_name'], 'r');
+        $csv->setHeaderOffset(0);
 
-            if (count($lines) > 1) {
+        $header = $csv->getHeader(); //returns the CSV header record
+        $records = iterator_to_array($csv->getRecords()); //returns all the CSV records as an Iterator object
 
-                // now get first line - this defines the rows
-                $header = explode("\t", $lines[0]);
+        if ($records) {
+
+            if (count($records) >= 1) {
 
                 // now check the header for allowed rows - other rows will be ignored
                 $importRows = array();
@@ -262,19 +265,14 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 }
 
                 // now go through each line and import was is to import
-                foreach ($lines as $lineNumber => $line) {
-
-                    if ($lineNumber == 0) {
-                        continue;
-                    }
-                    //===
+                foreach ($records as $lineNumber => $line) {
 
                     // put all data from col into an associative array
-                    $rows = explode("\t", $line);
                     $tempData = array();
-                    foreach ($rows as $rowNumber => $value) {
 
-                        if ($key = $importRows[$rowNumber]) {
+                    foreach ($line as $key => $value) {
+
+                        if (in_array($key, $importRows)) {
                             $tempData[$key] = $this->stringCleanUp($value);
                         }
 
