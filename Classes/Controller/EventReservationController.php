@@ -257,9 +257,17 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                 );
 
-                $uri = $this->uriBuilder->reset()
-                    ->setTargetPageUid($this->settings['myEventsPid'])
-                    ->uriFor('myEvents', null, 'Event', null, 'Pi1');
+                if ($this->getFrontendUser()) {
+                    // if user is logged in, set direct link to feusers event list
+                    $uri = $this->uriBuilder->reset()
+                        ->setTargetPageUid($this->settings['myEventsPid'])
+                        ->uriFor('myEvents', null, 'Event', null, 'Pi1');
+                } else {
+                    // else just set a link to myrkw login
+                    $uri = $this->uriBuilder->reset()
+                        ->setTargetPageUid($this->settings['loginPid'])
+                        ->build();
+                }
 
                 $this->addFlashMessage(
                     \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
