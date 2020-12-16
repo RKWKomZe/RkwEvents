@@ -57,7 +57,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     /**
      * departmentRepository
      *
-     * @var \RKW\RkwBasics\Domain\Repository\DepartmentRepository
+     * @var \RKW\RkwEvents\Domain\Repository\DepartmentRepository
      * @inject
      */
     protected $departmentRepository = null;
@@ -65,7 +65,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     /**
      * documentTypeRepository
      *
-     * @var \RKW\RkwBasics\Domain\Repository\DocumentTypeRepository
+     * @var \RKW\RkwEvents\Domain\Repository\DocumentTypeRepository
      * @inject
      */
     protected $documentTypeRepository = null;
@@ -125,11 +125,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
     {
-
         // get department and document list (for filter)
-        $departmentList = $this->departmentRepository->findAllByVisibility();
-        $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-        $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+        $departmentList = $this->departmentRepository->findVisibleAndRestrictedByEvents(intval($this->settings['list']['filter']['eventStoragePid']));
+        $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibilityAndRestrictedByEvents('events', false, intval($this->settings['list']['filter']['eventStoragePid']));
+        $categoryListRaw = $this->categoryRepository->findAllRestrictedByEvents(intval($this->settings['list']['filter']['eventStoragePid']))->toArray();
+        $categoryList = DivUtility::createCategoryTree($categoryListRaw, $this->settings['parentCategoryForFilter']);
 
         if ($filter || $page || $archive) {
 

@@ -71,8 +71,6 @@ call_user_func(
             'tx_rkwevents_domain_model_eventworkshop'
         );
 
-
-
     },
     $_EXTKEY
 );

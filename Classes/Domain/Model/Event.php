@@ -133,6 +133,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $seats;
 
     /**
+     * costsUnknown
+     *
+     * @var boolean
+     */
+    protected $costsUnknown = true;
+
+    /**
      * costsReg
      *
      * @var float
@@ -467,6 +474,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->workshop1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop3 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -701,8 +709,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTargetLearning($targetLearning)
     {
         $this->targetLearning = $targetLearning;
-    }    
-    
+    }
+
     /**
      * Returns the targetGroup
      *
@@ -785,6 +793,30 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSeats($seats)
     {
         $this->seats = $seats;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCostsUnknown()
+    {
+        return $this->costsUnknown;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getCostsUnknown()
+    {
+        return $this->costsUnknown;
+    }
+
+    /**
+     * @param boolean $costsUnknown
+     */
+    public function setCostsUnknown($costsUnknown)
+    {
+        $this->costsUnknown = $costsUnknown;
     }
 
     /**

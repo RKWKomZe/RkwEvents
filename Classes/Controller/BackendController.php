@@ -184,6 +184,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'extRegLink',
             'currency',
             'seats',
+            'costsUnknown',
             'costsReg',
             'costsRed',
             'costsRedCondition',
@@ -480,45 +481,56 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         //======================================================================
                         // 4. Handling for prices
-                        $event->setCostsReg(0);
-                        if ($tempData['costsReg']) {
-                            $event->setCostsReg(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsReg']))));
-                        }
-                        if ($tempData['costsRed']) {
-                            $event->setCostsRed(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsRed']))));
 
-                            if ($tempData['costsRedCondition']) {
-                                $event->setCostsRedCondition($tempData['costsRedCondition']);
-                            } else {
-                                if (preg_match('/^[0-9,\.]+[ ]?(Euro|€)(.+)$/', $tempData['costsRed'], $tempMatch)) {
-                                    $event->setCostsRedCondition(trim($tempMatch[2]));
+                        // This is an XOR. Possiblities for event costs:
+                        // 1. Normal price, optional reduced
+                        // 2. Free (the event costs literally nothing and is for free)
+                        // 3. Costs unknown (does will cost money. But not known yet)
+                        if ($tempData['costsUnknown']) {
+                            // Either: Costs completely unknown (option 3)
+                            $event->setCostsUnknown($tempData['costsUnknown']);
+                        } else {
+                            // Or: Free oder has some costs (option 1 or 2)
+                            $event->setCostsReg(0);
+                            if ($tempData['costsReg']) {
+                                $event->setCostsReg(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsReg']))));
+                            }
+                            if ($tempData['costsRed']) {
+                                $event->setCostsRed(floatval(str_replace(',', '.', str_replace('.', '', $tempData['costsRed']))));
+
+                                if ($tempData['costsRedCondition']) {
+                                    $event->setCostsRedCondition($tempData['costsRedCondition']);
+                                } else {
+                                    if (preg_match('/^[0-9,\.]+[ ]?(Euro|€)(.+)$/', $tempData['costsRed'], $tempMatch)) {
+                                        $event->setCostsRedCondition(trim($tempMatch[2]));
+                                    }
                                 }
                             }
-                        }
-                        if ($tempData['costsTaxIncluded']) {
-                            $event->setCostsTaxIncluded(true);
-                        }
+                            if ($tempData['costsTaxIncluded']) {
+                                $event->setCostsTaxIncluded(true);
+                            }
 
-                        /** @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository */
-                        $currencyRepository = $this->objectManager->get('SJBR\\StaticInfoTables\\Domain\\Repository\\CurrencyRepository');
-                        if ($tempData['currency']) {
-                            $currencyCode = $tempData['currency'];
-                        }
+                            /** @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository */
+                            $currencyRepository = $this->objectManager->get('SJBR\\StaticInfoTables\\Domain\\Repository\\CurrencyRepository');
+                            if ($tempData['currency']) {
+                                $currencyCode = $tempData['currency'];
+                            }
 
-                        /** @var \SJBR\StaticInfoTables\Domain\Model\Currency $currency */
-                        $currency = $currencyRepository->findOneByIsoCodeA3($currencyCode);
-                        if ($currency) {
-                            $event->setCurrency($currency);
-                        } else {
-                            $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                    'backendController.error.invalidCurrencyCode',
-                                    'rkw_events',
-                                    array($currencyCode, $lineNumber + 1)
-                                ),
-                                '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
-                            );
+                            /** @var \SJBR\StaticInfoTables\Domain\Model\Currency $currency */
+                            $currency = $currencyRepository->findOneByIsoCodeA3($currencyCode);
+                            if ($currency) {
+                                $event->setCurrency($currency);
+                            } else {
+                                $this->addFlashMessage(
+                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        'backendController.error.invalidCurrencyCode',
+                                        'rkw_events',
+                                        array($currencyCode, $lineNumber + 1)
+                                    ),
+                                    '',
+                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                );
+                            }
                         }
 
                         //======================================================================
