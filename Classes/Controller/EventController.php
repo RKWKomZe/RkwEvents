@@ -527,6 +527,26 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
     }
 
+    /**
+     * action description
+     * returns structured meta description in view
+     *
+     * @return string
+     */
+    public function descriptionAction()
+    {
+        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+
+        $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
+        $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
+
+        return trim(
+            $this->view->assignMultiple([
+                'event' => $event,
+            ])->render()
+        );
+
+    }
 
     /**
      * action seriesProposals
