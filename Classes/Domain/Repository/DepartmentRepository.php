@@ -57,7 +57,7 @@ class DepartmentRepository extends \RKW\RkwBasics\Domain\Repository\DepartmentRe
 
         $andWhere = '';
         if ($storagePid) {
-            $andWhere = ' AND tx_rkwevents_domain_model_event.pid = ' . intval($storagePid) . '';
+            $andWhere = ' AND tx_rkwevents_domain_model_event.pid IN (' . $storagePid . ')';
         }
 
         $query->statement(

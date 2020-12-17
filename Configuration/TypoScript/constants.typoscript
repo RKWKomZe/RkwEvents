@@ -91,10 +91,6 @@ plugin.tx_rkwevents {
             noGrouping = 0
 
             filter {
-                # cat=plugin.tx_rkwevents; type=integer; label=invididual storage PID of events
-                # Important to get restricted filter options based on this event storage pid (if not set, all events in database are used for it)
-                eventStoragePid =
-
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"
                 showDepartment = 1
 
