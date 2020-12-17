@@ -90,7 +90,7 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
 
         $andWhere = '';
         if ($storagePid) {
-            $andWhere = ' AND tx_rkwevents_domain_model_event.pid = ' . intval($storagePid) . '';
+            $andWhere = ' AND tx_rkwevents_domain_model_event.pid IN (' . $storagePid . ')';
         }
 
         if (!$type) {

@@ -241,7 +241,6 @@ plugin.tx_rkwevents {
         list {
             noGrouping = {$plugin.tx_rkwevents.settings.list.noGrouping}
             filter {
-                eventStoragePid = {$plugin.tx_rkwevents.settings.list.filter.eventStoragePid}
                 showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
                 showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
                 showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}

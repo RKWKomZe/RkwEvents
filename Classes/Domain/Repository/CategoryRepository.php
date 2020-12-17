@@ -89,7 +89,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $andWhere = '';
         if ($storagePid) {
-            $andWhere = ' AND tx_rkwevents_domain_model_event.pid = ' . intval($storagePid) . '';
+            $andWhere = ' AND tx_rkwevents_domain_model_event.pid IN (' . $storagePid . ')';
         }
 
         $query->statement(
