@@ -368,9 +368,17 @@
 				<target>CSV Import</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv">
-				<source>CSV Data including Header, Tab-separated</source>
-				<target>CSV-Daten inklusive Kopfzeilen, getrennt durch Tabulator</target>
+				<source>CSV Data including Header, comma-separated</source>
+				<target>CSV-Daten inklusive Kopfzeilen, getrennt durch Kommata</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv.hint1">
+                <source>(Create your lists first with a common spreadsheet application and convert it to csv for import.)</source>
+                <target>(Hinweis 1: Erstellen Sie Ihre Import-Listen zunächst gewohnt mit ihrem Tabellenprogramm und konvertieren Sie es erst für den Import in das CSV-Format)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_csv.hint2">
+                <source>(Some spreadsheet application can shown it in tabular form)</source>
+                <target>(Hinweis 2: Auch eine kommaseparierte Liste kann durch Programme wie etwa "LibreOffice Calc" tabellarisch dargestellt und im CSV-Format weiterhin bearbeitet werden)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
 				<source>Really Do Import (Else Just Check Data)</source>
 				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
