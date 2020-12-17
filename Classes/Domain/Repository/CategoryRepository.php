@@ -104,6 +104,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
             ' . $andWhere . '
+            GROUP BY sys_category.uid
             ORDER BY sys_category.title ASC
             '
         );
