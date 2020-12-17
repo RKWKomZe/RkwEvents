@@ -9,6 +9,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
     record_type varchar(255) DEFAULT '\\RKW\\RkwEvents\\Domain\\Model\\EventScheduled' NOT NULL,
 	title varchar(255) DEFAULT '' NOT NULL,
 	subtitle varchar(255) DEFAULT '' NOT NULL,
+	keywords text,
 	start int(11) unsigned DEFAULT '0' NOT NULL,
 	end int(11) unsigned DEFAULT '0' NOT NULL,
 	longitude varchar(255) DEFAULT '' NOT NULL,
