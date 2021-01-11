@@ -947,8 +947,7 @@ return [
             'config' => [
                 'type' => 'check',
                 'default' => 1
-            ],
-            'displayCond' => 'FIELD:costs_unknown:REQ:false',
+            ]
         ],
     ],
 ];
