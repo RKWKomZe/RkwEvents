@@ -947,7 +947,7 @@ return [
             'config' => [
                 'type' => 'check',
                 'default' => 1
-            ]
+            ],
         ],
     ],
 ];
