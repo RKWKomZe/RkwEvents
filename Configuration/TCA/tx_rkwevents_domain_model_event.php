@@ -11,7 +11,7 @@ return [
         'default_sortby' => 'ORDER BY start DESC',
         'hideAtCopy' => true,
         'prependAtCopy' => true,
-        'requestUpdate' => 'reg_required, online_event, ext_reg_link',
+        //'requestUpdate' => 'reg_required, online_event, ext_reg_link',
         'type' => 'record_type',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -60,27 +60,6 @@ return [
                 '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
                 starttime, endtime
             ',
-            // add RTE
-            'columnsOverrides' => [
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'description2' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'partner' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'target_learning' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'schedule' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'testimonials' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-            ]
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
@@ -120,25 +99,6 @@ return [
                     'config' => [
                         'minitems' => 0
                     ]
-                ],
-                // add RTE
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'description2' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'partner' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'target_learning' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'schedule' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'testimonials' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
                 ],
             ]
         ],
@@ -247,6 +207,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim, required'
             ],
+            'onChange' => 'reload'
         ],
         'subtitle' => [
             'exclude' => 0,
@@ -356,18 +317,12 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'notNewRecords'=> 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
                     ],
                 ],
+                'enableRichtext' => true,
             ],
         ],
         'target_learning' => [
@@ -378,18 +333,12 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'notNewRecords'=> 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
                     ],
                 ],
+                'enableRichtext' => true,
             ],
         ],
         'target_group' => [
@@ -426,18 +375,12 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'actions-wizard-rte',
-                        'notNewRecords'=> 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
                     ],
                 ],
+                'enableRichtext' => true,
             ],
         ],
         'seats' => [
