@@ -87,8 +87,6 @@ plugin.tx_rkwevents {
         hideMap = 0
 
         list {
-            # cat=plugin.tx_rkwevents; type=integer; label=Group list result by month or not
-            noGrouping = 0
 
             filter {
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"

@@ -152,29 +152,14 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             // 4. Check if we need to display a more-link
             $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+
             if ($page > 0) {
                 $showMoreLink = count($eventList) < (count($queryResult) - 1) ? true : false;
             }
 
-            // 5. sort event list (group by month) - only if no distance search is performed
-            $sortedEventList = array();
-            if (!$this->settings['list']['noGrouping']) {
-                if (
-                    ($page > 0)
-                    && (!$filter['address'])
-                ) {
-                    $sortedEventList = DivUtility::groupEventsByMonthMore($eventList, $lastItem);
-
-                } else {
-                    if (!$filter['address']){
-                        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
-                    }
-                }
-            }
-
             // get new list
             $replacements = array(
-                'sortedEventList'  => $sortedEventList,
+                'sortedEventList'  => $eventList,
                 'departmentList'   => $departmentList,
                 'documentTypeList' => $documentTypeList,
                 'categoryList'     => $categoryList,
@@ -183,63 +168,9 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 'pageMore'     => $page + 1,
                 'showMoreLink' => $showMoreLink,
                 'filter'       => $filter,
-                'noGrouping'   => ($filter['address'] ? true : $this->settings['list']['noGrouping']),
             );
 
-            if ($page > 0) {
-
-                // if a distance search is performed or noGrouping is explicitly set we do not group by month
-                if (
-                    ($filter['address'])
-                    || ($filter['noGrouping'])
-                    || ($this->settings['list']['noGrouping'])
-                ) {
-
-                    $replacements['sortedEventList'] = $eventList;
-                    $replacements['geosearch'] = true;
-                    $replacements['noGrouping'] = true;
-
-                } else {
-
-                    // set append list
-                    if ($sortedEventList['append']) {
-                        $replacements['sortedEventList'] = $sortedEventList['append'];
-                    }
-
-                    // set insert list
-                    if (
-                        ($lastItem instanceof \RKW\RkwEvents\Domain\Model\Event)
-                        && ($sortedEventList['insert'])
-                    ) {
-
-                        $startDateLastItem = new \DateTime(date('d-m-Y', $lastItem->getStart()));
-                        $replacements['sortedEventList'] = $sortedEventList['insert'];
-                        $replacements['noGrouping'] = true;
-                        $replacements['showMoreLink'] = false;
-
-                    }
-                }
-
-            } else {
-
-                // if a distance search is performed or noGrouping is explicitly set we do not group by month
-                if (
-                    ($filter['address'])
-                    || ($filter['noGrouping'])
-                    || ($this->settings['list']['noGrouping'])
-                ) {
-                    $replacements['sortedEventList'] = $eventList;
-                    $replacements['geosearch'] = true;
-                    $replacements['noGrouping'] = true;
-
-                } else {
-                    $replacements['sortedEventList'] = $sortedEventList;
-                    $replacements['noGrouping'] = $this->settings['list']['noGrouping'];
-                }
-            }
-
             $this->view->assignMultiple($replacements);
-
 
         } else {
 
@@ -252,24 +183,15 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
             $showMoreLink = count($eventList) < count($queryResult) ? true : false;
 
-            // 4. sort event list (group by month)
-            if (!$this->settings['list']['noGrouping']) {
-                $sortedEventList = DivUtility::groupEventsByMonth($eventList);
-            } else {
-                $sortedEventList = $eventList;
-            }
-
             $this->view->assignMultiple(
                 array(
                     'filter'           => array('project' => $this->settings['projectUids']),
-                    'sortedEventList'  => $sortedEventList,
+                    'sortedEventList'  => $eventList,
                     'departmentList'   => $departmentList,
                     'documentTypeList' => $documentTypeList,
                     'categoryList'     => $categoryList,
                     'page',
-                    'noGrouping' => $this->settings['list']['noGrouping'],
                     'timeArrayList' => DivUtility::createMonthListArray(),
-                    'eventNotFoundMessage' => $this->eventNotFoundMessage,
                     'noEventFound' => $noEventFound
                 )
             );
@@ -291,6 +213,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * action listSimple
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listSimpleAction()
     {
@@ -311,10 +234,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             [
                 'filter'           => [
                     'project' => $this->settings['projectUids'],
-                    'noGrouping' => true,
                 ],
                 'sortedEventList'  => $eventList,
-                'noGrouping'       => true,
                 'departmentList'   => $departmentList,
                 'documentTypeList' => $documentTypeList,
                 'categoryList'     => $categoryList,
@@ -336,6 +257,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * action archive
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function archiveAction()
     {
@@ -350,13 +272,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         // 3. get department list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
 
-        // 4. sort event list (group by month)
-        $sortedEventList = DivUtility::groupEventsByMonth($eventList);
 
         // archive parameter
         $this->view->assign('archive', 1);
 
-        $this->view->assign('sortedEventList', $sortedEventList);
+        $this->view->assign('sortedEventList', $eventList);
         $this->view->assign('departmentList', $departmentList);
         $this->view->assign('page', 0);
 
@@ -468,7 +388,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
     /**
      * action maps
-     * Added by Maximilian Fäßler | FäßlerWeb
+     * Added by Maximilian Fäßler
      *
      * @return void
      */
@@ -486,7 +406,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
     /**
      * action info
-     * Added by Maximilian Fäßler | FäßlerWeb
+     * Added by Maximilian Fäßler
      *
      * @return void
      */
@@ -651,8 +571,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             return $this->frontendUser;
             //===
         }
-
-
 
         return null;
         //===
