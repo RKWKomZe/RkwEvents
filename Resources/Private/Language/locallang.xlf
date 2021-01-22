@@ -942,7 +942,9 @@
             <trans-unit id="partials_email_details.privacyHint">
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
 			</trans-unit>
-
+            <trans-unit id="partials_email_details.registerAddInformation">
+                <source>Registration additional information</source>
+            </trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationUser.html -->

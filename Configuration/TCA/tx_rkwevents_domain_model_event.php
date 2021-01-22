@@ -11,7 +11,7 @@ return [
         'default_sortby' => 'ORDER BY start DESC',
         'hideAtCopy' => true,
         'prependAtCopy' => true,
-        'requestUpdate' => 'reg_required, online_event, ext_reg_link',
+        //'requestUpdate' => 'reg_required, online_event, ext_reg_link',
         'type' => 'record_type',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -22,11 +22,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,keywords,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,series,logos,currency,place,online_event, online_event_access_link,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories',
+		'searchFields' => 'title,subtitle,keywords,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,ext_reg_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_tax, reg_required, reg_single, reg_end, ext_reg_link, document_type, department, series, currency, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility',
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
@@ -39,7 +39,7 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'seats, costs_unknown, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
+                'seats, costs_unknown, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, register_add_information,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -60,27 +60,6 @@ return [
                 '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
                 starttime, endtime
             ',
-            // add RTE
-            'columnsOverrides' => [
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'description2' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'partner' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'target_learning' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'schedule' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'testimonials' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-            ]
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
@@ -92,7 +71,7 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'seats, costs_unknown, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link,
+                'seats, costs_unknown, costs_reg, costs_red, costs_red_condition, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, register_add_information,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -120,25 +99,6 @@ return [
                     'config' => [
                         'minitems' => 0
                     ]
-                ],
-                // add RTE
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'description2' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'partner' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'target_learning' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'schedule' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
-                ],
-                'testimonials' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
                 ],
             ]
         ],
@@ -247,6 +207,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim, required'
             ],
+            'onChange' => 'reload'
         ],
         'subtitle' => [
             'exclude' => 0,
@@ -356,18 +317,12 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'notNewRecords'=> 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
                     ],
                 ],
+                'enableRichtext' => true,
             ],
         ],
         'target_learning' => [
@@ -378,18 +333,12 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-                        'notNewRecords'=> 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
                     ],
                 ],
+                'enableRichtext' => true,
             ],
         ],
         'target_group' => [
@@ -426,18 +375,12 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'actions-wizard-rte',
-                        'notNewRecords'=> 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
                     ],
                 ],
+                'enableRichtext' => true,
             ],
         ],
         'seats' => [
@@ -705,6 +648,16 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink'
+            ],
+        ],
+        'register_add_information' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.register_add_information',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
         'external_contact' => [
