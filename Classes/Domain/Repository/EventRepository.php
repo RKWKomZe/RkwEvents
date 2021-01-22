@@ -83,13 +83,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                             $query->greaterThanOrEqual('start', time())
                         ),
                         $query->greaterThan('end', time())
-                    ),
-                    $query->logicalOr(
-                        $query->equals('onlineEvent', 0),
-                        $query->logicalAnd(
-                            $query->equals('onlineEvent', 1),
-                            $query->greaterThan('onlineEventAccessLink', 0)
-                        )
                     )
                 ),
                 $query->equals('reminderMailTstamp', 0)

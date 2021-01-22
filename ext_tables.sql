@@ -41,6 +41,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	place varchar(255) DEFAULT '' NOT NULL,
 	online_event tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	online_event_access_link varchar(255) DEFAULT '' NOT NULL,
+    register_add_information text NOT NULL,
 	external_contact varchar(255) DEFAULT '' NOT NULL,
 	internal_contact varchar(255) DEFAULT '' NOT NULL,
 	be_user varchar(255) DEFAULT '' NOT NULL,

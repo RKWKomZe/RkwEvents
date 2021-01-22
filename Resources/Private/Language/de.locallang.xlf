@@ -249,7 +249,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreated">
 				<source>Reservation successfully created.</source>
-				<target>Wohoo! Die Anmeldung an die Veranstaltung ist nun abgeschlossen. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
+				<target>Wohoo! Sie sind nun für die Veranstaltung angemeldet. In Kürze erhalten Sie eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCanceled">
 				<source>Reservation was canceled.</source>
@@ -1217,6 +1217,10 @@
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
 				<target>Aus Gründen des Datenschutzes dürfen wir Ihnen leider keine Details zum Veranstaltungsteilnehmer übermitteln.</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.registerAddInformation">
+                <source>Registration additional information</source>
+                <target>Zusätzliche Informationen zur Anmeldung</target>
+            </trans-unit>
 
 
 

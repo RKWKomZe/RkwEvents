@@ -231,6 +231,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $onlineEventAccessLink;
 
     /**
+     * registerAddInformation
+     *
+     * @var string
+     */
+    protected $registerAddInformation;
+
+    /**
      * Holds place
      *
      * @var \RKW\RkwEvents\Domain\Model\EventPlace
@@ -1039,6 +1046,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOnlineEventAccessLink($onlineEventAccessLink)
     {
         $this->onlineEventAccessLink = $onlineEventAccessLink;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegisterAddInformation(): string
+    {
+        return $this->registerAddInformation;
+    }
+
+    /**
+     * @param string $registerAddInformation
+     */
+    public function setRegisterAddInformation(string $registerAddInformation): void
+    {
+        $this->registerAddInformation = $registerAddInformation;
     }
 
     /**

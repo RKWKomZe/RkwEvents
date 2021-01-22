@@ -128,6 +128,9 @@
             <trans-unit id="tx_rkwevents_domain_model_event.online_event_access_link">
                 <source>Online Event Access Link</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.register_add_information">
+                <source>Registration additional information (added to email)</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
 				<source>External Contacts (Display and E-Mail)</source>
 			</trans-unit>
