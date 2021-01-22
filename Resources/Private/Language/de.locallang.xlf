@@ -1217,6 +1217,10 @@
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
 				<target>Aus Gründen des Datenschutzes dürfen wir Ihnen leider keine Details zum Veranstaltungsteilnehmer übermitteln.</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.registerAddInformation">
+                <source>Registration additional information</source>
+                <target>Zusätzliche Informationen zur Anmeldung</target>
+            </trans-unit>
 
 
 
