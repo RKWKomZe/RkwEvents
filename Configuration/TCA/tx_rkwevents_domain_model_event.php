@@ -654,9 +654,10 @@ return [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.register_add_information',
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
         'external_contact' => [
