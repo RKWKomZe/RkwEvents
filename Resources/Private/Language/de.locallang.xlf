@@ -415,6 +415,18 @@
 				<source>Do not hide imported events on website</source>
 				<target>Neue Datensätze direkt auf Website sichtbar schalten</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help1">
+                <source>Import example download</source>
+                <target>Import Beispiel-Datei mit Erläuterungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help2">
+                <source>here</source>
+                <target>hier</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help3">
+                <source>.</source>
+                <target>herunterladen.</target>
+            </trans-unit>
 
 
 			<!-- Templates/Ajax/List/List.html -->
