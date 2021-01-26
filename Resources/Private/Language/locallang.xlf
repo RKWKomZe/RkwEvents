@@ -316,6 +316,15 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_activate">
 				<source>Do not hide imported events on website</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help1">
+                <source>Import example download</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help2">
+                <source>here</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help3">
+                <source>.</source>
+            </trans-unit>
 
 
 
