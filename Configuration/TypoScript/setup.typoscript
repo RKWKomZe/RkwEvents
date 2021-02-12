@@ -240,6 +240,7 @@ plugin.tx_rkwevents {
 
         list {
             noGrouping = {$plugin.tx_rkwevents.settings.list.noGrouping}
+            detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
             filter {
                 showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
                 showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
