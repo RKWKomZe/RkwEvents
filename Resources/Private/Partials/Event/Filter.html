@@ -17,6 +17,7 @@
             >
                 <div class="btn-list">
 
+
                     <f:comment><!-- DEPARTMENT --></f:comment>
                     <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
                         <f:form.select
@@ -98,7 +99,6 @@
 
                 <!-- Project filter from Plugin -->
                 <f:form.hidden name="filter[project]" value="{filter.project}" />
-                <f:form.hidden name="filter[noGrouping]" value="{filter.noGrouping}" />
 
             </f:form>
         </f:else>

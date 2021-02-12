@@ -242,74 +242,6 @@ class DivUtility
 
 
     /**
-     * groupEventsByMonth
-     *
-     * @author Maximilian Fäßler
-     * @param array $eventList
-     * @param array &$updateIds
-     * @return array
-     * @throws \Exception
-     */
-    public static function groupEventsByMonth($eventList, &$updateIds = [])
-    {
-
-        $sortedEventList = array();
-        $updateIdList = array ();
-        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
-        foreach ($eventList as $event) {
-
-            $startDate = new \DateTime(date('d-m-Y', $event->getStart()));
-            $sortedEventList[$startDate->format("Y")][$startDate->format("m")][] = $event;
-            $updateIdList[$startDate->format("Y"). '-' . $startDate->format("m")] = true;
-        }
-
-        return $sortedEventList;
-    }
-
-
-    /**
-     * groupEventsByMonth
-     *
-     * @author Maximilian Fäßler
-     * @param array $eventList
-     * @param \RKW\RkwEvents\Domain\Model\Event $lastItem
-     * @return array
-     * @throws \Exception
-     */
-    public static function groupEventsByMonthMore($eventList, \RKW\RkwEvents\Domain\Model\Event $lastItem = null)
-    {
-
-        $sortedEventList = array();
-        $startDateLastItem = null;
-        if ($lastItem) {
-            $startDateLastItem = new \DateTime(date('d-m-Y', $lastItem->getStart()));
-        }
-
-        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
-        foreach ($eventList as $event) {
-
-            $startDate = new \DateTime(date('d-m-Y', $event->getStart()));
-
-            // if year and month are identical we have to add this element
-            // to a another HTML-element via JSON
-            if (
-                ($startDateLastItem)
-                && ($startDate->format("Y") == $startDateLastItem->format("Y"))
-                && ($startDate->format("m") == $startDateLastItem->format("m"))
-            ) {
-                $sortedEventList['insert'][$startDate->format("Y")][$startDate->format("m")][] = $event;
-            } else {
-                $sortedEventList['append'][$startDate->format("Y")][$startDate->format("m")][] = $event;
-            }
-
-        }
-
-        return $sortedEventList;
-    }
-
-
-
-    /**
      * workshopRegistration
      * !! returns FALSE, if not every workshop had a place for registration
      *
@@ -459,7 +391,7 @@ class DivUtility
             if (in_array($category->getParent()->getUid(), $categoryUidList)) {
                 $sortedCategoryList[$category->getParent()->getUid()][] = $category;
             } else {
-                // of there is no parent entry, add it to "withoutParent" group
+                // if there is no parent entry, add it to "withoutParent" group
                 $sortedCategoryList['withoutParent'][] = $category;
             }
 
