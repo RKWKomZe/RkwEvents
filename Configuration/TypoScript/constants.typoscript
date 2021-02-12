@@ -90,6 +90,9 @@ plugin.tx_rkwevents {
             # cat=plugin.tx_rkwevents; type=integer; label=Group list result by month or not
             noGrouping = 0
 
+            # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
+            detailLinkTargetBlank = 0
+
             filter {
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"
                 showDepartment = 1

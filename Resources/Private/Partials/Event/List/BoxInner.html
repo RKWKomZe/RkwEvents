@@ -3,7 +3,16 @@
     data-namespace-typo3-fluid="true">
 
     <div class="tile tile--no-img">
-        <f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" title="{event.title}">
+        <f:link.action
+            action="show"
+            controller="Event"
+            pluginName="Pi1"
+            extensionName="RkwEvents"
+            pageUid="{showPid}"
+            arguments="{event : event}"
+            title="{event.title}"
+            target="{f:if(condition: '{settings.list.detailLinkTargetBlank} == 1', then: '_blank')}"
+        >
             <div class="tile__header">
                 <div class="tile__label-wrapper">
                     <span class="tile__label">
