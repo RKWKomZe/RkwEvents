@@ -14,6 +14,8 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
 /**
  * Class EventCommandController
  *
@@ -80,6 +82,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
     {
         try {
             $eventList = $this->eventRepository->findUpcomingEventsForReminder($timeFrame);
+
             if (count($eventList)) {
 
                 /** @var \RKW\RkwEvents\Domain\Model\Event $event */

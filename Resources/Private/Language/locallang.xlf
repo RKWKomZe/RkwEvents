@@ -316,6 +316,15 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_activate">
 				<source>Do not hide imported events on website</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help1">
+                <source>Import example download</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help2">
+                <source>here</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help3">
+                <source>.</source>
+            </trans-unit>
 
 
 
@@ -777,6 +786,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2">
 				<source>conditions</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3">
+				<source>We would like to point out that images, sound and video recordings may be made at this event and published in various media for the purposes of event reporting and general public relations. You will receive further information on this and your rights directly at the start of the event.</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
 				<source>Workshop unit 1</source>
 			</trans-unit>
@@ -942,7 +954,9 @@
             <trans-unit id="partials_email_details.privacyHint">
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
 			</trans-unit>
-
+            <trans-unit id="partials_email_details.registerAddInformation">
+                <source>Registration additional information</source>
+            </trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationUser.html -->

@@ -239,6 +239,7 @@ plugin.tx_rkwevents {
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
         list {
+            detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
             filter {
                 showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
                 showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}

@@ -249,7 +249,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreated">
 				<source>Reservation successfully created.</source>
-				<target>Wohoo! Die Anmeldung an die Veranstaltung ist nun abgeschlossen. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
+				<target>Wohoo! Sie sind nun für die Veranstaltung angemeldet. In Kürze erhalten Sie eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCanceled">
 				<source>Reservation was canceled.</source>
@@ -415,6 +415,18 @@
 				<source>Do not hide imported events on website</source>
 				<target>Neue Datensätze direkt auf Website sichtbar schalten</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help1">
+                <source>Import example download</source>
+                <target>Import Beispiel-Datei mit Erläuterungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help2">
+                <source>here</source>
+                <target>hier</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help3">
+                <source>.</source>
+                <target>herunterladen.</target>
+            </trans-unit>
 
 
 			<!-- Templates/Ajax/List/List.html -->
@@ -999,8 +1011,8 @@
 				<target>AGB.</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3">
-				<source>In particular, I agree that RKW may publish photographs and videos taken during the event in various media for the purposes of event reporting and general public relations work.</source>
-				<target>Insbesondere bin ich damit einverstanden, dass das RKW im Rahmen der Veranstaltung gemachte Foto- und Videoaufnahmen für Zwecke der Veranstaltungsberichterstattung und der allgemeinen Öffentlichkeitsarbeit in verschiedenen Medien veröffentlicht.</target>
+				<source>We would like to point out that images, sound and video recordings may be made at this event and published in various media for the purposes of event reporting and general public relations. You will receive further information on this and your rights directly at the start of the event.</source>
+				<target>Wir weisen darauf hin, dass auf dieser Veranstaltung Bild-, Ton- und Videoaufnahmen erstellt und für Zwecke der Veranstaltungsberichterstattung und der allgemeinen Öffentlichkeitsarbeit in verschiedenen Medien veröffentlicht werden können. Weitere Informationen hierzu und zu ihren Rechten erhalten Sie direkt zu Veranstaltungsbeginn.</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
 				<source>Workshop unit 1</source>
@@ -1217,6 +1229,10 @@
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
 				<target>Aus Gründen des Datenschutzes dürfen wir Ihnen leider keine Details zum Veranstaltungsteilnehmer übermitteln.</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.registerAddInformation">
+                <source>Registration additional information</source>
+                <target>Zusätzliche Informationen zur Anmeldung</target>
+            </trans-unit>
 
 
 

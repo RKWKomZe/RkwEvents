@@ -170,6 +170,10 @@
 				<source>Online Event Access Link</source>
 				<target>Direkt-Link für Teilnahme an Veranstaltung (für z.B. Webinare; wird per E-Mail an Teilnehmer versendet)</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.register_add_information">
+                <source>Registration additional information (added to email)</source>
+                <target>Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
 				<source>External Contact (Display and E-Mail)</source>
 				<target>Externer Ansprechpartner (Anzeige und E-Mailbenachrichtigung)</target>
