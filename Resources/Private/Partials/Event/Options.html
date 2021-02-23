@@ -5,7 +5,7 @@
     <f:if condition="{event}">
         <!-- show event -->
         <f:link.action
-            pageUid="{f:if(condition: '{eventReservation.event.organizer.0.showPid}', then: '{event.organizer.0.showPid}', else: '{settings.showPid}')}"
+            pageUid="{f:if(condition: '{eventReservation.event.organizer.0.showPid}', then: '{eventReservation.event.organizer.0.showPid}', else: '{settings.showPid}')}"
             target="_blank"
             class="button secondary"
             controller="Event"
