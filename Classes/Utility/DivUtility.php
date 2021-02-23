@@ -36,27 +36,13 @@ class DivUtility
      */
     public static function hasRegTimeEnded(\RKW\RkwEvents\Domain\Model\Event $event)
     {
-        // check if reminder-mail has already been sent for online-events
-        if (
-            ($event->getOnlineEvent())
-            && ($event->getOnlineEventAccessLink())
-            && ($event->getReminderMailTstamp())
-        ) {
-            return true;
-            //===
-        }
-
         // check if regEnd-time or start-time is in the past
         $date = $event->getRegEnd() ? $event->getRegEnd() : $event->getStart();
         if ($date < time()) {
             return true;
         }
 
-        //===
-
         return false;
-        //===
-
     }
 
 
