@@ -364,7 +364,10 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.email">
 				<source>Email</source>
-			</trans-unit>			
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.show_pid" approved="yes">
+                <source>Show PID</source>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventsheet -->

@@ -97,6 +97,13 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $email;
 
+    /**
+     * showPid
+     *
+     * @var int
+     */
+    protected $showPid = 0;
+
 
     /**
      * Returns the salutation
@@ -308,4 +315,19 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->email = $email;
     }
 
+    /**
+     * @return int
+     */
+    public function getShowPid(): int
+    {
+        return $this->showPid;
+    }
+
+    /**
+     * @param int $showPid
+     */
+    public function setShowPid(int $showPid): void
+    {
+        $this->showPid = $showPid;
+    }
 }
