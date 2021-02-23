@@ -29,6 +29,7 @@ plugin.tx_rkwevents {
         listPid =
 
         # cat=plugin.tx_rkwevents; type=integer; label=PID for detail view
+        # !!! Hint: Can be overwritten by EventOrganizer "showPid" !!!
         showPid =
 
         # cat=plugin.tx_rkwevents; type=integer; label=PID for login

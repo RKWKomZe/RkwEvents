@@ -476,7 +476,11 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.email" approved="yes">
 				<source>Email</source>
 				<target>E-Mail</target>
-			</trans-unit>			
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.show_pid" approved="yes">
+                <source>Show PID</source>
+                <target>Spezifische Detailseite für Veranstaltungen (überschreibt TypoScript-Konfiguration "showPid" bei Listenansichten)</target>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventsheet -->
