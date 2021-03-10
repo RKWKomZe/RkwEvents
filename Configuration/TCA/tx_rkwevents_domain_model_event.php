@@ -688,7 +688,7 @@ return [
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rkwevents_domain_model_eventorganizer',
                 'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventorganizer.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventorganizer.last_name ASC, tx_rkwevents_domain_model_eventorganizer.company ASC, tx_rkwevents_domain_model_eventorganizer.email ASC',
-                'maxitems'      => 9999,
+                'maxitems'      => 1,
                 'minitems' 		=> 1,
                 'size'          => 5,
                 'fieldControl'  => [

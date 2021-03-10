@@ -78,21 +78,6 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $showMoreLink = count($eventList) < (count($queryResult) - 1) ? true : false;
         }
 
-
-        // 5. sort event list (group by month) - only if no distance search is performed
-        $sortedEventList = array();
-        if (
-            ($page > 0)
-            && (!$filter['address'])
-        ) {
-            $sortedEventList = DivUtility::groupEventsByMonthMore($eventList, $lastItem);
-
-        } else {
-            if (!$filter['address']) {
-                $sortedEventList = DivUtility::groupEventsByMonth($eventList);
-            }
-        }
-
         // get new list
         $replacements = array(
             'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
@@ -100,7 +85,6 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'pageMore'     => $page + 1,
             'showMoreLink' => $showMoreLink,
             'filter'       => $filter,
-            'noGrouping'   => ($filter['address'] ? true : false),
         );
 
         // get JSON helper
@@ -108,12 +92,11 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $jsonHelper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
         if ($page > 0) {
 
-            // if a distance search is performed or noGrouping is explicitly set we do not group by month
-            if ($filter['address'] OR $filter['noGrouping']) {
+            // if a distance search is performed we do not group by month
+            if ($filter['address']) {
 
                 $replacements['sortedEventList'] = $eventList;
                 $replacements['geosearch'] = true;
-                $replacements['noGrouping'] = true;
 
                 $jsonHelper->setHtml(
                     'tx-rkwevents-grid-section',
@@ -145,7 +128,6 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
                     $startDateLastItem = new \DateTime(date('d-m-Y', $lastItem->getStart()));
                     $replacements['sortedEventList'] = $sortedEventList['insert'];
-                    $replacements['noGrouping'] = true;
                     $replacements['showMoreLink'] = false;
 
                     $jsonHelper->setHtml(
@@ -159,12 +141,11 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         } else {
 
-            // if a distance search is performed or noGrouping is explicitly set we do not group by month
-            if ($filter['address'] OR $filter['noGrouping']) {
+            // if a distance search is performed we do not group by month
+            if ($filter['address']) {
 
                 $replacements['sortedEventList'] = $eventList;
                 $replacements['geosearch'] = true;
-                $replacements['noGrouping'] = true;
                 $jsonHelper->setHtml(
                     'tx-rkwevents-result-section',
                     $replacements,

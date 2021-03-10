@@ -29,6 +29,7 @@ plugin.tx_rkwevents {
         listPid =
 
         # cat=plugin.tx_rkwevents; type=integer; label=PID for detail view
+        # !!! Hint: Can be overwritten by EventOrganizer "showPid" !!!
         showPid =
 
         # cat=plugin.tx_rkwevents; type=integer; label=PID for login
@@ -87,8 +88,9 @@ plugin.tx_rkwevents {
         hideMap = 0
 
         list {
-            # cat=plugin.tx_rkwevents; type=integer; label=Group list result by month or not
-            noGrouping = 0
+
+            # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
+            detailLinkTargetBlank = 0
 
             filter {
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"
