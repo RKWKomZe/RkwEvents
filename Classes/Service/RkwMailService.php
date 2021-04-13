@@ -5,6 +5,7 @@ namespace RKW\RkwEvents\Service;
 use \RKW\RkwBasics\Helper\Common;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -286,12 +287,17 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 foreach ($eventReservationList as $eventReservation) {
                     if ($eventReservation->getFeUser()) {
 
-                        // create google link for location
-                        // (1) Google basic link, (2) user address, (3) separator for route from->to, (4) event address
-                        $googleMapsLink = self::GOOGLE_LINK;
-                        $googleMapsLink .= urlencode($eventReservation->getAddress() . ', ' . $eventReservation->getZip() . ' ' . $eventReservation->getCity());
-                        $googleMapsLink .= '/';
-                        $googleMapsLink .= urlencode($eventReservation->getEvent()->getPlace()->getAddress() . ', ' . $eventReservation->getEvent()->getPlace()->getZip() . ' ' . $eventReservation->getEvent()->getPlace()->getCity());
+                        //DebuggerUtility::var_dump($eventReservation->getEvent()->getPlace()); exit;
+                        $googleMapsLink = '';
+                        if ($eventReservation->getEvent()->getPlace() instanceof \RKW\RkwEvents\Domain\Model\EventPlace) {
+
+                            // create google link for location
+                            // (1) Google basic link, (2) user address, (3) separator for route from->to, (4) event address
+                            $googleMapsLink = self::GOOGLE_LINK;
+                            $googleMapsLink .= urlencode($eventReservation->getAddress() . ', ' . $eventReservation->getZip() . ' ' . $eventReservation->getCity());
+                            $googleMapsLink .= '/';
+                            $googleMapsLink .= urlencode($eventReservation->getEvent()->getPlace()->getAddress() . ', ' . $eventReservation->getEvent()->getPlace()->getZip() . ' ' . $eventReservation->getEvent()->getPlace()->getCity());
+                        }
 
                         // send mail to main participant
                         $mailService->setTo($eventReservation->getFeUser(), array(
