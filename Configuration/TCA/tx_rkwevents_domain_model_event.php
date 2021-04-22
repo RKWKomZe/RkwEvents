@@ -1,8 +1,12 @@
 <?php
+
+use RKW\RkwEvents\Utility\TCA;
+
 return [
     'ctrl' => [
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event',
         'label' => 'title',
+        'label_userFunc' => TCA::class . '->eventTitle',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
