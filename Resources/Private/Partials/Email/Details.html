@@ -8,7 +8,7 @@
 =============================================================
 
 <f:format.htmlentitiesDecode>{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}">  ({reservation.event.documentType.name})</f:if></f:format.htmlentitiesDecode>
-<rkwMailer:frontend.link absolute="TRUE" pageUid="{showPid}" action="show" controller="Event" extensionName="rkwEvents" pluginName="pi1" additionalParams="{tx_rkwevents_pi1: {event: reservation.event.uid}}" />
+<f:if condition="{reservation.event.onlineEvent}"><f:else><rkwMailer:frontend.link absolute="true" pageUid="{showPid}" action="show" controller="Event" extensionName="rkwEvents" pluginName="pi1" additionalParams="{tx_rkwevents_pi1: {event: reservation.event.uid}}" /></f:else></f:if>
 
 <rkwMailer:frontend.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" />: <rkwMailer:frontend.composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
 <f:if condition="{reservation.event.onlineEvent}"><f:else><rkwMailer:frontend.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" />: {reservation.event.place.name}, {reservation.event.place.address}, {reservation.event.place.zip} {reservation.event.place.city}
@@ -45,7 +45,14 @@
 
 	<h2><rkwMailer:frontend.translate key="partials_email_details.eventDetails" languageKey="{language}" extensionName="rkwEvents" /></h2>
 	<p>
-		<a href="<rkwMailer:frontend.link absolute='TRUE' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}">  ({reservation.event.documentType.name})</f:if></a>
+		<f:if condition="{reservation.event.onlineEvent}">
+			<f:then>
+				<strong>{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}"> ({reservation.event.documentType.name})</f:if></strong>
+			</f:then>
+			<f:else>
+				<a href="<rkwMailer:frontend.link absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}"> ({reservation.event.documentType.name})</f:if></a>
+			</f:else>
+		</f:if>
 		<br/><strong><rkwMailer:frontend.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" /></strong>: <rkwMailer:frontend.composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
 
         <f:if condition="{reservation.event.onlineEvent}"><f:else><br/><strong><rkwMailer:frontend.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" /></strong>: {reservation.event.place.name}, {reservation.event.place.address}, {reservation.event.place.zip} {reservation.event.place.city}</f:else></f:if>
