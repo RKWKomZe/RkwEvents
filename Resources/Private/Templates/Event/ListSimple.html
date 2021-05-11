@@ -6,26 +6,22 @@
 
     <f:section name="main">
 
-        <div class="content-padding-layoutmax">
+        <f:render partial="FlashMessages" arguments="{_all}" />
 
-            <f:render partial="FlashMessages" arguments="{_all}" />
-
-            <f:if condition="<f:count>{sortedEventList}</f:count>">
-                <f:then>
-                    <f:render partial="Event/ListSimple" arguments="{_all}" />
-                </f:then>
-                <f:else>
-                    <div class="flex-container flex-basis-12 center-main">
-                        <div class="no-results">
-                            <p class="no-results__headline">
-                                <f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="RkwEvents" />
-                            </p>
-                        </div>
+        <f:if condition="<f:count>{sortedEventList}</f:count>">
+            <f:then>
+                <f:render partial="Event/ListSimple" arguments="{_all}" />
+            </f:then>
+            <f:else>
+                <div class="flex-container flex-basis-12 center-main">
+                    <div class="no-results">
+                        <p class="no-results__headline">
+                            <f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="RkwEvents" />
+                        </p>
                     </div>
-                </f:else>
-            </f:if>
-
-        </div>
+                </div>
+            </f:else>
+        </f:if>
 
     </f:section>
 
