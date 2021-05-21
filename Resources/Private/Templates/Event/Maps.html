@@ -5,21 +5,15 @@
 
     <f:if condition="!{settings.hideMap}">
         <f:if condition="{event.onlineEvent} == 0">
-            <f:then>
-                <f:if condition="<rkw:and and1='{event.longitude}' and2='{event.latitude}' />">
-
-                    <!-- show Google-map if geo-data is set -->
-                    <f:then>
-                        <rkwGeo:maps longitude='{event.longitude}' latitude="{event.latitude}" height="415px" />
-                    </f:then>
-                    <f:else>
-                        <rkwGeo:maps zoom="5" noMarker="true" height="415px"/>
-                    </f:else>
-                </f:if>
-            </f:then>
-            <f:else>
-                <rkwGeo:maps zoom="5" noMarker="true" height="415px"/>
-            </f:else>
+            <f:if condition="<rkw:and and1='{event.longitude}' and2='{event.latitude}' />">
+                <!-- show Google-map if geo-data is set -->
+                <f:then>
+                    <rkwGeo:maps longitude='{event.longitude}' latitude="{event.latitude}" height="415px" />
+                </f:then>
+                <f:else>
+                    <rkwGeo:maps zoom="5" noMarker="true" height="415px"/>
+                </f:else>
+            </f:if>
         </f:if>
     </f:if>
 
