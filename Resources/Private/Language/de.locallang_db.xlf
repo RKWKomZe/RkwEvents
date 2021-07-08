@@ -91,7 +91,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red" approved="yes">
 				<source>Price Red (per Person)</source>
-				<target>Preis ermäßigt (pro Person)</target>
+				<target>Preis ermäßigt (pro Person; wird bei einem Wert von 0.00 nur angezeigt, wenn auch gleichzeitig das Feld "Bedingung für reduzierten Preis" ausgefüllt ist)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_condition">
 				<source>Price Red Condition</source>
