@@ -60,10 +60,24 @@
                         <f:else>
                             <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
                                 <f:then>
-                                    ({event.start -> f:format.date(format:"d.m.Y")})
+                                    <f:if condition="{settings.list.filter.showTime}">
+                                        <f:then>
+                                            {event.start -> f:format.date(format:"d.m.Y H:i")}
+                                        </f:then>
+                                        <f:else>
+                                            {event.start -> f:format.date(format:"d.m.Y")}
+                                        </f:else>
+                                    </f:if>
                                 </f:then>
                                 <f:else>
-                                    {event.start -> f:format.date(format:"d.m.Y")}
+                                    <f:if condition="{settings.list.filter.showTime}">
+                                        <f:then>
+                                            {event.start -> f:format.date(format:"d.m.Y H:i")}
+                                        </f:then>
+                                        <f:else>
+                                            {event.start -> f:format.date(format:"d.m.Y")}
+                                        </f:else>
+                                    </f:if>
                                 </f:else>
                             </f:if>
                         </f:else>
