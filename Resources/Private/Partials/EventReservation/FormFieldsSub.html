@@ -69,14 +69,6 @@
                         />
                     </div>
 
-                    <f:if condition="{editMode}">
-                        <div class="v320-1">
-                            <a href="#" class="text-smaller tx-rkwevents-delete" data-person="{i.cycle}">
-                                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete" />
-                            </a>
-                        </div>
-                    </f:if>
-
                     <!-- Button Set -->
                     <f:if condition="{i.isEven}">
                         <f:then>
@@ -86,6 +78,18 @@
                             <f:render partial="EventReservation/ButtonSet" arguments="{settings: settings, event:event, editMode: editMode, noBackButton : 1, additionalCss : ''}"/>
                         </f:else>
                     </f:if>
+
+                    <f:comment>
+                        <!-- toDo: Not fucking working! -->
+                    <f:if condition="{editMode}">
+                        <div class="btn-list btn-list--footer">
+                            <a href="#" class="btn btn--secondary" data-person="{i.cycle}">
+                                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete" />
+                            </a>
+                        </div>
+                    </f:if>
+                    </f:comment>
+
                 </div>
             </rkw:loop>
         </div>
