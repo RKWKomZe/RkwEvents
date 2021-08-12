@@ -383,6 +383,10 @@
 				<source>Really Do Import (Else Just Check Data)</source>
 				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_msexcel">
+                <source>Respect Microsoft Excel characteristics (e.g. ";" as delimiter)</source>
+                <target>Beachte Microsoft Excel Besonderheiten (u.a. ";" als Trenner)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
 				<source>Event Type; overrides CSV Values when set</source>
 				<target>Veranstaltungsart; überschreibt CSV-Werte, wenn gesetzt</target>
