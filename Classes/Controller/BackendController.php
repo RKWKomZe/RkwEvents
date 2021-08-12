@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEvents\Controller;
 use League\Csv\Reader;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -231,9 +232,17 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         //load the CSV document from a file path
         $csv = Reader::createFromPath($data['csv']['tmp_name'], 'r');
+
+        if ($data['excelCsv']) {
+            $csv->setOutputBOM(Reader::BOM_UTF8);
+            $csv->addStreamFilter('convert.iconv.ISO-8859-15/UTF-8');
+            $csv->setDelimiter(';');
+        }
+
         $csv->setHeaderOffset(0);
 
         $header = $csv->getHeader(); //returns the CSV header record
+
         $records = iterator_to_array($csv->getRecords()); //returns all the CSV records as an Iterator object
 
         if ($records) {
