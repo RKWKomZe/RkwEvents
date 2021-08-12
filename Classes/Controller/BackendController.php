@@ -183,6 +183,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'time',
             'regEnd',
             'regRequired',
+            'regSingle',
             'extRegLink',
             'currency',
             'seats',
@@ -355,6 +356,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         }
                         if ($tempData['regRequired']) {
                             $event->setRegRequired(true);
+                        }
+                        if ($tempData['regSingle']) {
+                            $event->setRegSingle(true);
                         }
                         if ($tempData['seats']) {
                             $event->setSeats(intval($tempData['seats']));
