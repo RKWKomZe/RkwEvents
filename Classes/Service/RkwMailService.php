@@ -101,7 +101,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                     'rkwMailService.optInReservationUser.subject',
                     'rkw_events',
                     null,
@@ -314,7 +314,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 'showPid'        => intval($eventReservation->getShowPid()),
                                 'extRelPath'     => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_events'),
                             ),
-                            'subject' => \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                            'subject' => \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                                 'rkwMailService.informUpcomingEventUser.subject',
                                 'rkw_events',
                                 array(0 => $eventReservation->getEvent()->getTitle()),
@@ -325,7 +325,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 }
 
                 $mailService->getQueueMail()->setSubject(
-                    \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                    \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                         'rkwMailService.informUpcomingEventUser.subject',
                         'rkw_events',
                         array(0 => $event->getTitle()),
@@ -389,7 +389,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                     'loginPid'     => intval($settingsDefault['loginPid']),
                                     'showPid'      => intval($settingsDefault['showPid']),
                                 ),
-                                'subject' => \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                                'subject' => \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                                     'rkwMailService.sendSurveyForPastEvent.subject',
                                     'rkw_events',
                                     array(0 => $eventReservation->getEvent()->getTitle()),
@@ -400,7 +400,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     }
 
                     $mailService->getQueueMail()->setSubject(
-                        \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                        \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                             'rkwMailService.sendSurveyForPastEvent.subject',
                             'rkw_events',
                             null,
@@ -479,7 +479,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                     'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
                     'rkw_events',
                     null,
@@ -576,7 +576,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'fullName'     => $name,
                             'language'     => $language,
                         ),
-                        'subject' => \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                        'subject' => \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                             'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                             'rkw_events',
                             null,
@@ -594,7 +594,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                \RKW\RkwMailer\Helper\FrontendLocalization::translate(
+                \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
                     'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                     'rkw_events',
                     null,
