@@ -292,6 +292,9 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_doImport">
 				<source>Really Do Import (Else Just Check Data)</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_msexcel">
+                <source>Respect Microsoft Excel characteristics (e.g. ";" as delimiter)</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
 				<source>Event Type; overrides CSV Values when set</source>
 			</trans-unit>
