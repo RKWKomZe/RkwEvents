@@ -343,6 +343,10 @@
 				<source>Import-Check successfull.</source>
 				<target>Import-Check erfolgreich. Es wurden %s neue Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpartner gefunden.</target>
 			</trans-unit>
+			<trans-unit id="backendController.error.importWrongFiletype">
+                <source>You have to use CSV files.</source>
+                <target>Oops! Offenbar handelt es sich hierbei nicht um eine CSV Datei.</target>
+            </trans-unit>
 
 
 
@@ -384,8 +388,8 @@
 				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_msexcel">
-                <source>Respect Microsoft Excel characteristics (e.g. ";" as delimiter)</source>
-                <target>Beachte Microsoft Excel Besonderheiten (u.a. ";" als Trenner)</target>
+                <source>Semicolin ";" is used as delimiter (instead of comma ",")</source>
+                <target>Semikolon ";" wird in CSV-Datei als Trenner genutzt (anstatt Komma ",") </target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
 				<source>Event Type; overrides CSV Values when set</source>

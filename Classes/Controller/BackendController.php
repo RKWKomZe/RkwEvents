@@ -2,8 +2,10 @@
 
 namespace RKW\RkwEvents\Controller;
 use League\Csv\Reader;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * BackendController
@@ -129,6 +131,20 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function createAction($data)
     {
+        // check file type
+        $fileExplode = GeneralUtility::trimExplode('.', $data['csv']['name']);
+        if (strtolower($fileExplode[1]) != "csv") {
+            $this->addFlashMessage(
+                LocalizationUtility::translate(
+                    'backendController.error.importWrongFiletype',
+                    'rkw_events',
+                ),
+                '',
+                AbstractMessage::ERROR
+            );
+
+            $this->forward('show');
+        }
 
         $doImport = false;
         if ($data['doImport']) {
@@ -205,7 +221,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'eligibility',
             'onlineEvent',
             'categories',
-            'isAnnouncement'
+            'isAnnouncement',
+            'registerAddInformation'
         );
 
         foreach (range(1, 10) as $contactNumber) {
@@ -261,13 +278,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         if (trim($row)) {
                             $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                LocalizationUtility::translate(
                                     'backendController.error.ignoredRow',
                                     'rkw_events',
                                     array(trim($row))
                                 ),
                                 '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                AbstractMessage::WARNING
                             );
                         }
                     }
@@ -386,6 +403,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         if ($tempData['trainer']) {
                             $event->setTrainer($tempData['trainer']);
                         }
+                        if ($tempData['registerAddInformation']) {
+                            $event->setRegisterAddInformation($this->parseHtml($tempData['registerAddInformation']));
+                        }
                         if ($tempData['categories']) {
 
                             // workaround with objectStorage: Using $event->addCategory leads to "Call to a member function attach() on null"
@@ -478,13 +498,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         // check for existing events
                         if ($this->eventRepository->findOneByTitleAndStart($event->getTitle(), $event->getStart())) {
                             $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                LocalizationUtility::translate(
                                     'backendController.error.eventAlreadyExists',
                                     'rkw_events',
                                     array($event->getTitle(), strftime("%Y-%m-%d %H:%M:%S", $event->getStart()), $lineNumber + 1)
                                 ),
                                 '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                                AbstractMessage::ERROR
                             );
                             continue;
                             //===
@@ -533,13 +553,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 $event->setCurrency($currency);
                             } else {
                                 $this->addFlashMessage(
-                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                    LocalizationUtility::translate(
                                         'backendController.error.invalidCurrencyCode',
                                         'rkw_events',
                                         array($currencyCode, $lineNumber + 1)
                                     ),
                                     '',
-                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                    AbstractMessage::WARNING
                                 );
                             }
                         }
@@ -576,13 +596,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                 } else {
 
                                     $this->addFlashMessage(
-                                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        LocalizationUtility::translate(
                                             'backendController.error.moreThanOnePlace',
                                             'rkw_events',
                                             array($lineNumber + 1)
                                         ),
                                         '',
-                                        \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                        AbstractMessage::WARNING
                                     );
                                 }
 
@@ -615,13 +635,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                     $geoLocation->setCountry($country->getShortNameEn());
                                 } else {
                                     $this->addFlashMessage(
-                                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        LocalizationUtility::translate(
                                             'backendController.error.invalidCountryCode',
                                             'rkw_events',
                                             array($countryCode, $lineNumber + 1)
                                         ),
                                         '',
-                                        \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                        AbstractMessage::WARNING
                                     );
                                 }
 
@@ -641,13 +661,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                                 } catch (\Exception $e) {
                                     $this->addFlashMessage(
-                                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                        LocalizationUtility::translate(
                                             'backendController.error.geoDataApiOffline',
                                             'rkw_events',
                                             array($e->getMessage(), $lineNumber + 1)
                                         ),
                                         '',
-                                        \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                        AbstractMessage::WARNING
                                     );
                                 }
 
@@ -667,13 +687,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             // throw only an error, if it's NOT an announcement (an announcement does not need a place)
                             if (!$tempData['isAnnouncement']) {
                                 $this->addFlashMessage(
-                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                    LocalizationUtility::translate(
                                         'backendController.error.noEventLocationGiven',
                                         'rkw_events',
                                         array($lineNumber + 1)
                                     ),
                                     '',
-                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                                    AbstractMessage::ERROR
                                 );
                                 continue;
                                 //===
@@ -785,13 +805,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         ) {
 
                             $this->addFlashMessage(
-                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                LocalizationUtility::translate(
                                     'backendController.error.noBackendUserFound',
                                     'rkw_events',
                                     array($lineNumber + 1)
                                 ),
                                 '',
-                                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                AbstractMessage::WARNING
                             );
                         }
 
@@ -805,13 +825,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                             } else {
                                 $this->addFlashMessage(
-                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                    LocalizationUtility::translate(
                                         'backendController.error.departmentNotFound',
                                         'rkw_events',
                                         array(intval($topicId), $lineNumber + 1)
                                     ),
                                     '',
-                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                    AbstractMessage::WARNING
                                 );
                             }
                         }
@@ -826,13 +846,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                             } else {
                                 $this->addFlashMessage(
-                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                    LocalizationUtility::translate(
                                         'backendController.error.documentTypeNotFound',
                                         'rkw_events',
                                         array(intval($tempData['typeId']), $lineNumber + 1)
                                     ),
                                     '',
-                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                    AbstractMessage::WARNING
                                 );
                             }
                         }
@@ -848,13 +868,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                             } else {
                                 $this->addFlashMessage(
-                                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                    LocalizationUtility::translate(
                                         'backendController.error.organizerNotFound',
                                         'rkw_events',
                                         array(intval($tempData['organizerId']), $lineNumber + 1)
                                     ),
                                     '',
-                                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                                    AbstractMessage::WARNING
                                 );
                             }
                         }
@@ -868,13 +888,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     } elseif (count($tempData)) {
 
                         $this->addFlashMessage(
-                            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                            LocalizationUtility::translate(
                                 'backendController.error.noBasicDataGiven',
                                 'rkw_events',
                                 array($lineNumber + 1)
                             ),
                             '',
-                            \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                            AbstractMessage::ERROR
                         );
                         continue;
                         //===
@@ -887,35 +907,35 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         if ($importCounter < 1) {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'backendController.error.nothingImported',
                     'rkw_events'
                 ),
                 '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                AbstractMessage::WARNING
             );
 
         } else {
 
             if ($doImport) {
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'backendController.error.importSuccessfull',
                         'rkw_events',
                         array($importCounter, $importPlaceCounter, $importExternalContactCounter)
                     ),
                     '',
-                    \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+                    AbstractMessage::OK
                 );
             } else {
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'backendController.error.importCheckSuccessfull',
                         'rkw_events',
                         array($importCounter, $importPlaceCounter, $importExternalContactCounter)
                     ),
                     '',
-                    \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+                    AbstractMessage::OK
                 );
             }
         }
