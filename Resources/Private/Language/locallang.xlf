@@ -263,6 +263,9 @@
 			<trans-unit id="backendController.error.importCheckSuccessfull">
 				<source>Import-Check successfull.</source>
 			</trans-unit>
+			<trans-unit id="backendController.error.importWrongFiletype">
+                <source>You have to use CSV files.</source>
+            </trans-unit>
 
 
 

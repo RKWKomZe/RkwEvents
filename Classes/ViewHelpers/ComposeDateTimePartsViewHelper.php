@@ -14,6 +14,9 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwBasics\Utility\FrontendLocalizationUtility;
+use RKW\RkwEvents\Domain\Model\Event;
+
 /**
  * Class ComposeDateTimePartsViewHelper
  *
@@ -65,9 +68,8 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
     {
         // for secure: If an event is hidden or deleted, the following VH content is still callable (and throws errors)
         // (Uncaught TYPO3 Exception: Call to a member function getStart() on null | Error thrown in file /var/www/rkw-kompetenzzentrum.de/surf/releases/20201006153122/web/typo3conf/ext/rkw_events/Classes/ViewHelpers/ComposeDateTimePartsViewHelper.php in line xyz.)
-        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+        if (!$event instanceof Event) {
             return false;
-            //===
         }
 
         // 1. start date & time
@@ -82,7 +84,7 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
                 date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())
                 || !date("Hi", $event->getEnd())
             ) {
-                $output .= ' ' . \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
             }
         }
 
@@ -95,11 +97,10 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
             }
             if (date("Hi", $event->getEnd())) {
                 $output .= date("H:i", $event->getEnd());
-                $output .= ' ' . \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
             }
         }
 
         return $output;
-        //===
     }
 }
