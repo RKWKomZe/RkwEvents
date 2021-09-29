@@ -16,6 +16,7 @@ namespace RKW\RkwEvents\ViewHelpers;
 
 use RKW\RkwBasics\Utility\FrontendLocalizationUtility;
 use RKW\RkwEvents\Domain\Model\Event;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class ComposeDateTimePartsViewHelper
@@ -84,7 +85,13 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
                 date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())
                 || !date("Hi", $event->getEnd())
             ) {
-                $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                if (TYPO3_MODE == 'BE') {
+                    // for emails send via cron e.g.
+                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                } else {
+                    $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
+                }
+
             }
         }
 
@@ -97,7 +104,12 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
             }
             if (date("Hi", $event->getEnd())) {
                 $output .= date("H:i", $event->getEnd());
-                $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                if (TYPO3_MODE == 'BE') {
+                    // for emails send via cron e.g.
+                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                } else {
+                    $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
+                }
             }
         }
 
