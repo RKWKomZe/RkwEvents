@@ -137,7 +137,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'backendController.error.importWrongFiletype',
-                    'rkw_events',
+                    'rkw_events'
                 ),
                 '',
                 AbstractMessage::ERROR
