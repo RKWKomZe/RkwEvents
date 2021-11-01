@@ -305,7 +305,17 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                     $timeFilter = ' AND (end < ' . time() . ')';
                 }
 
-                $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
+                $freeOfChargeFilter = '';
+                if ($filter['freeOfCharge']) {
+                    $freeOfChargeFilter = ' AND costs_reg = 0.00';
+                }
+
+                $eligibilityFilter = '';
+                if ($filter['eligible']) {
+                    $eligibilityFilter = ' AND eligibility = 1';
+                }
+
+                $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . $freeOfChargeFilter . $eligibilityFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
 
                 $geoLocation->getQueryStatementDistanceSearch($query, 'tx_rkwevents_domain_model_event', $limit, $offset, $andWhere, 'distance ASC, start ASC');
 
@@ -382,6 +392,12 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             ) {
                 $constraints[] = $query->in('project', $projectUids);
             }
+            if ($filter['freeOfCharge']) {
+                $constraints[] = $query->equals('costs_reg', '0.00');
+            }
+            if ($filter['eligible']) {
+                $constraints[] = $query->equals('eligibility', 1);
+            }
 
             // NOW: construct final query!
             $query->matching($query->logicalAnd($constraints));
@@ -393,7 +409,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $result = $query->execute();
 
         return $result;
-        //===
     }
 
 

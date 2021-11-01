@@ -246,6 +246,8 @@ plugin.tx_rkwevents {
                 showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
                 showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
                 showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
+                showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
+                showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}
             }
         }
 

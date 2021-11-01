@@ -107,6 +107,12 @@ plugin.tx_rkwevents {
 
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
                 showAddress = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "freeOfCharge"
+                showFreeOfCharge = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "eligible"
+                showEligible = 0
             }
         }
 

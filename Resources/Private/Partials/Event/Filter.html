@@ -89,6 +89,22 @@
                         </f:if>
                     </f:comment>
 
+                    <f:comment><!-- freeOfCharge --></f:comment>
+                    <f:if condition="{settings.list.filter.showFreeOfCharge}">
+                        <f:form.checkbox class="checkbox" id="freeOfCharge" name="filter[freeOfCharge]" value="1" />
+                        <label for="freeOfCharge" class="checkbox-label">
+                            <f:translate key="tx_rkwevents_fluid.partials_event_filter.freeOfCharge" />
+                        </label>
+                    </f:if>
+
+                    <f:comment><!-- eligible --></f:comment>
+                    <f:if condition="{settings.list.filter.showEligible}">
+                        <f:form.checkbox class="checkbox" id="eligible" name="filter[eligible]" value="1" />
+                        <label for="eligible" class="checkbox-label">
+                            <f:translate key="tx_rkwevents_fluid.partials_event_filter.eligible" />
+                        </label>
+                    </f:if>
+
                 </div>
 
                 <f:comment>

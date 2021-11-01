@@ -439,6 +439,12 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
                 <source>All</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.freeOfCharge">
+                <source>Free</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
+                <source>Eligible</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/List.html -->

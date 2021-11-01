@@ -570,6 +570,14 @@
                 <source>All</source>
                 <target>Alle</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.freeOfCharge">
+                <source>Free</source>
+                <target>Kostenlos</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
+                <source>Eligible</source>
+                <target>Förderfähig</target>
+            </trans-unit>
 
 
 
