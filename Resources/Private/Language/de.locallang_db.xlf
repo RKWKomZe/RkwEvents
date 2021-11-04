@@ -97,6 +97,10 @@
 				<source>Price Red Condition</source>
 				<target>Bedingung für reduzierten Preis</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_link">
+                <source>Price Red hint</source>
+                <target>Hinweis-Link in Bezug auf reduzierten Preis (kann auch allgemein über TypoScript definiert werden)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax">
 				<source>Taxes</source>
 				<target>Steuern</target>
@@ -126,10 +130,18 @@
 				<source>Registration End</source>
 				<target>Anmeldeschluss</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.cancel_end" approved="yes">
+                <source>Cancel End</source>
+                <target>Stornierungsfrist</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link" approved="yes">
 				<source>External Registration Link</source>
 				<target>Externer Anmeldungslink</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
+                <source>External Cancel Link</source>
+                <target>Externer Abmeldungslink (Stornierung)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
 				<source>Document Type</source>
 				<target>Veranstaltungsart</target>
@@ -747,7 +759,7 @@
 				<source>General settings</source>
 				<target>Allgemeine Einstellungen</target>
 			</trans-unit>
-			 <trans-unit id="flexform.event.options">
+			<trans-unit id="flexform.event.options">
 				<source>Options</source>
 				<target>Optionen</target>
 			</trans-unit>
@@ -799,6 +811,44 @@
             <trans-unit id="flexform.event.select.events">
                 <source>Select specific events</source>
                 <target>Einzelne Veranstaltungen zur Anzeige auswählen</target>
+            </trans-unit>
+
+
+            <trans-unit id="flexform.event.filterInfo">
+                <source>Filter info</source>
+                <target>Filterinformationen</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDepartmentInfoLink">
+                <source>Link for department</source>
+                <target>Link zu "Themen"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDepartmentInfo">
+                <source>Info for department</source>
+                <target>Infotext zu "Themen"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfoLink">
+                <source>Link for document type</source>
+                <target>Link zu "Veranstaltungsart"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfo">
+                <source>Info for document type</source>
+                <target>Infotext zu "Veranstaltungsart"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showCategoryInfoLink">
+                <source>Link for category</source>
+                <target>Link zu "Kategorie"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showCategoryInfo">
+                <source>Info for category</source>
+                <target>Infotext zu "Kategorie"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showTimeInfoLink">
+                <source>Link for month</source>
+                <target>Link zu "Monat"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showTimeInfo">
+                <source>Info for month</source>
+                <target>Infotext zu "Monat"</target>
             </trans-unit>
 
 

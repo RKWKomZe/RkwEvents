@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEvents\Domain\Repository;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -42,7 +43,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
     // Order by start date
     protected $defaultOrderings = array(
-        'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+        'start' => QueryInterface::ORDER_ASCENDING,
     );
 
 
@@ -292,7 +293,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
                 $projectFilter = '';
                 if (
-                    (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
+                    (ExtensionManagementUtility::isLoaded('rkw_projects'))
                     && ($filter['project'])
                     && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
                 ) {
@@ -334,7 +335,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 // 1. Sort by end-date
                 $query->setOrderings(
                     array(
-                        'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+                        'start' => QueryInterface::ORDER_DESCENDING,
                     )
                 );
 
@@ -346,8 +347,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 // 1. Sort by end-date
                 $query->setOrderings(
                     array(
-                        'record_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                        'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                        'record_type' => QueryInterface::ORDER_DESCENDING,
+                        'start' => QueryInterface::ORDER_ASCENDING,
                     )
                 );
 
@@ -385,8 +386,19 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 );
 
             }
+            if ($filter['recordType']) {
+                $constraints[] = $query->equals('recordType', $filter['recordType']);
+            }
+
+            if ($filter['onlyStarted']) {
+                $constraints[] = $query->lessThanOrEqual('start', time());
+            }
+
+            if ($filter['onlyUpcoming']) {
+                $constraints[] = $query->greaterThanOrEqual('start', time());
+            }
             if (
-                (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
+                (ExtensionManagementUtility::isLoaded('rkw_projects'))
                 && ($filter['project'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
             ) {
@@ -418,10 +430,13 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param int $limit
      * @param array $settings
+     * @param string $recordType only announcements or scheduled
+     * @param bool $onlyStarted if true only started events are shown
+     * @param bool $onlyUpcoming if true only upcoming (not started) events are shown
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotFinishedOrderAsc($limit, $settings = array())
+    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false)
     {
         $query = $this->createQuery();
         // $query->getQuerySettings()->setRespectStoragePage(false);
@@ -444,7 +459,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $constraints[] = $query->in('uid', $eventUids);
         }
 
-        if ((\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))) {
+        if ((ExtensionManagementUtility::isLoaded('rkw_projects'))) {
             if (
                 ($settings['projectUids'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
@@ -461,13 +476,25 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $query->getQuerySettings()->setRespectStoragePage(false);
         }
 
+        if ($recordType) {
+            $constraints[] = $query->equals('recordType', $recordType);
+        }
+
+        if ($onlyStarted) {
+            $constraints[] = $query->lessThanOrEqual('start', time());
+        }
+
+        if ($onlyUpcoming) {
+            $constraints[] = $query->greaterThanOrEqual('start', time());
+        }
+
         return $query->matching(
             $query->logicalAnd($constraints)
         )
             ->setOrderings(
                 array(
-                    'record_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                    'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                    'record_type' => QueryInterface::ORDER_DESCENDING,
+                    'start' => QueryInterface::ORDER_ASCENDING,
                 )
             )
             ->setLimit($limit)
@@ -494,7 +521,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         if (
-            (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
+            (ExtensionManagementUtility::isLoaded('rkw_projects'))
             && ($settings['projectUids'])
             && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
         ) {
@@ -506,7 +533,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         )
             ->setOrderings(
                 array(
-                    'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+                    'start' => QueryInterface::ORDER_DESCENDING,
                 )
             )
             ->setLimit($limit)

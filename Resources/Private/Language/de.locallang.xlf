@@ -632,6 +632,25 @@
 			</trans-unit>
 
 
+			<!-- Partials/Event/ListSubdivided.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents">
+                <source>Already started events</source>
+                <target>Bereits gestartete Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.upcomingEvents">
+                <source>Upcoming events</source>
+                <target>Bevorstehende Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.plannedEvents">
+                <source>Planned events</source>
+                <target>Geplante Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.showMore">
+                <source>Show more</source>
+                <target>Mehr anzeigen</target>
+            </trans-unit>
+
+
 			<!-- Partials/Event/List/More.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_list_more.interesting">
 				<source>Interesting?</source>
@@ -764,6 +783,14 @@
                 <source>eligibility</source>
                 <target>förderfähig</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
+                <source>Want to be a member? Click here</source>
+                <target>Noch kein Mitglied? Hier informieren</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.link" approved="yes">
+                <source>LINK</source>
+                <target>LINK</target>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -829,6 +856,14 @@
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
                 <source>Trainer</source>
                 <target>Trainer/in</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancellation" approved="yes">
+                <source>Cancellation</source>
+                <target>Stornierung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" approved="yes">
+                <source>Click here</source>
+                <target>Hier klicken</target>
             </trans-unit>
 
 
@@ -913,6 +948,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.announcement" approved="yes">
                 <source>Announcement</source>
                 <target>Ankündigung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.from" approved="yes">
+                <source>from</source>
+                <target>ab</target>
             </trans-unit>
 
 

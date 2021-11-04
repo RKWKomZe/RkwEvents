@@ -161,6 +161,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $costsRedCondition;
 
     /**
+     * costsRedLink
+     *
+     * @var string
+     */
+    protected $costsRedLink;
+
+    /**
      * costsTax
      *
      * @var integer
@@ -189,11 +196,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $regEnd;
 
     /**
+     * cancelEnd
+     *
+     * @var integer
+     */
+    protected $cancelEnd;
+
+    /**
      * extRegLink
      *
      * @var string
      */
     protected $extRegLink;
+
+    /**
+     * extCancelLink
+     *
+     * @var string
+     */
+    protected $extCancelLink;
 
     /**
      * onlineEvent
@@ -890,6 +911,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the costsRedLink
+     *
+     * @return string $costsRedLink
+     */
+    public function getCostsRedLink()
+    {
+        return $this->costsRedLink;
+    }
+
+    /**
+     * Sets the costsRedLink
+     *
+     * @param string $costsRedLink
+     * @return void
+     */
+    public function setCostsRedLink($costsRedLink)
+    {
+        $this->costsRedLink = $costsRedLink;
+    }
+
+    /**
      * Returns the costsTax
      *
      * @return integer $costsTax
@@ -985,6 +1027,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the cancelEnd
+     *
+     * @return integer $cancelEnd
+     */
+    public function getCancelEnd()
+    {
+
+        return $this->cancelEnd;
+    }
+
+    /**
+     * Sets the cancelEnd
+     *
+     * @param integer $cancelEnd
+     * @return void
+     */
+    public function setCancelEnd($cancelEnd)
+    {
+        $this->cancelEnd = $cancelEnd;
+    }
+
+    /**
      * Returns the extRegLink
      *
      * @return string $extRegLink
@@ -1003,6 +1067,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setExtRegLink($extRegLink)
     {
         $this->extRegLink = $extRegLink;
+    }
+
+    /**
+     * Returns the extCancelLink
+     *
+     * @return string $extCancelLink
+     */
+    public function getExtCancelLink()
+    {
+        return $this->extCancelLink;
+    }
+
+    /**
+     * Sets the extCancelLink
+     *
+     * @param string $extCancelLink
+     * @return void
+     */
+    public function setExtCancelLink($extCancelLink)
+    {
+        $this->extCancelLink = $extCancelLink;
     }
 
     /**

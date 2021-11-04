@@ -74,6 +74,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_condition">
 				<source>Price Reduced Condition</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_link">
+                <source>Price Red hint</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax">
 				<source>Taxes</source>
 			</trans-unit>
@@ -95,9 +98,15 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end">
 				<source>Registration End</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.cancel_end" approved="yes">
+                <source>Cancel End</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link">
 				<source>External Registration Link</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
+                <source>External Cancel Link</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.document_types">
 				<source>Document Types</source>
 			</trans-unit>
@@ -185,7 +194,7 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.reminder_mail_tstamp" approved="yes">
 				<source>Reminder mail timestamp</source>
 			</trans-unit>
-		   <trans-unit id="tx_rkwevents_domain_model_event.survey_before" approved="yes">
+		    <trans-unit id="tx_rkwevents_domain_model_event.survey_before" approved="yes">
 				<source>Survey mail timestamp</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.survey_after" approved="yes">
@@ -591,7 +600,7 @@
 			<trans-unit id="flexform.event.register">
 				<source>New Registration</source>
 			</trans-unit>
-			<trans-unit id="flexform.event.MyEvents">
+			<trans-unit id="flexform.event.myEvents">
 				<source>My events</source>
 			</trans-unit>
             <trans-unit id="flexform.event.noFilters">
@@ -599,6 +608,41 @@
             </trans-unit>
             <trans-unit id="flexform.event.project">
                 <source>Project</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.select.projects">
+                <source>Select projects</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.select.events">
+                <source>Select specific events</source>
+            </trans-unit>
+
+
+            <trans-unit id="flexform.event.filterInfo">
+                <source>Filter info</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDepartmentInfoLink">
+                <source>Link for department</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDepartmentInfo">
+                <source>Info for department</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfoLink">
+                <source>Link for document type</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfo">
+                <source>Info for document type</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showCategoryInfoLink">
+                <source>Link for category</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showCategoryInfo">
+                <source>Info for category</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showTimeInfoLink">
+                <source>Link for month</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showTimeInfo">
+                <source>Info for month</source>
             </trans-unit>
 
 

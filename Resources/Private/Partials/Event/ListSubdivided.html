@@ -1,0 +1,66 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <f:if condition="{startedEventList}">
+        <div class="flex center-main py-3">
+            <div class="flex-container introtext">
+                <h3 class="headline headline--underlined">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents" extensionName="RkwEvents" />
+                </h3>
+                <f:render section="listPart" arguments="{eventList: startedEventList, filter: filterStartedEventList}" />
+            </div>
+        </div>
+    </f:if>
+
+    <f:if condition="{upcomingEventList}">
+        <div class="flex center-main py-3">
+            <div class="flex-container introtext">
+                <h3 class="headline headline--underlined">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.upcomingEvents" extensionName="RkwEvents" />
+                </h3>
+                <f:render section="listPart" arguments="{eventList: upcomingEventList, filter: filterUpcomingEventList}" />
+            </div>
+        </div>
+    </f:if>
+
+    <f:if condition="{announcementEventList}">
+        <div class="flex center-main py-3">
+            <div class="flex-container introtext">
+                <h3 class="headline headline--underlined">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.plannedEvents" extensionName="RkwEvents" />
+                </h3>
+                <f:render section="listPart" arguments="{eventList: announcementEventList, filter: filterAnnouncementEventList}" />
+            </div>
+        </div>
+    </f:if>
+
+
+    <!-- Section "listPart" -->
+    <f:section name="listPart">
+        <div class="flex-container">
+            <div class="tiles-wrapper">
+                <div class="tiles flex-container flex-container--margin">
+                    <f:for each="{eventList}" as="event">
+                        <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
+                    </f:for>
+                </div>
+            </div>
+        </div>
+        <div class="flex-container flex-basis-12">
+            <f:link.action
+                action="list"
+                controller="Event"
+                pluginName="Pi1"
+                extensionName="RkwEvents"
+                class="btn btn--primary btn--centered mt-1"
+                additionalParams="{tx_rkwevents_pi1: '{filter: filter}'}"
+                target="_blank"
+            >
+                <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.showMore" extensionName="RkwEvents" />
+            </f:link.action>
+        </div>
+    </f:section>
+
+</html>

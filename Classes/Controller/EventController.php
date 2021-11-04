@@ -125,6 +125,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
     {
+
         // get department and document list (for filter)
         $globalEventSettings = \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('rkwEvents', \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $departmentList = $this->departmentRepository->findVisibleAndRestrictedByEvents(strip_tags($globalEventSettings['persistence']['storagePid']));
@@ -176,17 +177,48 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             // STANDARD LIST VIEW PART
 
-            // 1. get event list
-            $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
-            $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
-            // 2. proof if we have further results (query with listItemsPerQuery + 1)
-            $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
-            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+            // if: use multiple view (three list types)
+            if ($this->settings['list']['multipartView']['enabled']) {
+                $limit = (int) $this->settings['list']['multipartView']['limit'];
+                $this->view->assignMultiple(
+                    array(
+                        'showDividedList' => true,
+                        'startedEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', true),
+                        'filterStartedEventList' => array(
+                            'project' => $this->settings['projectUids'],
+                            'recordType' => '\RKW\RkwEvents\Domain\Model\EventScheduled',
+                            'onlyStarted' => true
+                        ),
+                        'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', false, true),
+                        'filterUpcomingEventList' => array(
+                            'project' => $this->settings['projectUids'],
+                            'recordType' => '\RKW\RkwEvents\Domain\Model\EventScheduled',
+                            'onlyUpcoming' => true
+                        ),
+                        'announcementEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventAnnouncement'),
+                        'filterAnnouncementEventList' => array(
+                            'project' => $this->settings['projectUids'],
+                            'recordType' => '\RKW\RkwEvents\Domain\Model\EventAnnouncement'
+                        )
+                    )
+                );
+            } else {
+                // else: return one list
+
+                // 1. get event list
+                $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
+                $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
+                // 2. proof if we have further results (query with listItemsPerQuery + 1)
+                $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
+                $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+
+                $this->view->assign('sortedEventList', $eventList);
+            }
+
 
             $this->view->assignMultiple(
                 array(
                     'filter'           => array('project' => $this->settings['projectUids']),
-                    'sortedEventList'  => $eventList,
                     'departmentList'   => $departmentList,
                     'documentTypeList' => $documentTypeList,
                     'categoryList'     => $categoryList,

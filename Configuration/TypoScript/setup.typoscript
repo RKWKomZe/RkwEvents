@@ -238,7 +238,25 @@ plugin.tx_rkwevents {
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
+        costsRedLink = {$plugin.tx_rkwevents.settings.costsRedLink}
+
+        costs {
+            red {
+                hint {
+                    # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
+                    enabled = {$plugin.tx_rkwevents.settings.costs.red.hint.enabled}
+                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
+                    # Hint: Can be set and overridden by property event->costsRedLink
+                    link = {$plugin.tx_rkwevents.settings.costs.red.hint.link}
+                }
+            }
+        }
+
         list {
+            multipartView {
+                enabled = {$plugin.tx_rkwevents.settings.list.multipartView.enabled}
+                limit = {$plugin.tx_rkwevents.settings.list.multipartView.limit}
+            }
             detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
             filter {
                 showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}

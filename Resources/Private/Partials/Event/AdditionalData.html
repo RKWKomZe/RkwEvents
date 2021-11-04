@@ -154,6 +154,26 @@
                     </f:if>
                 </f:if>
 
+
+                <f:comment><!-- extCancelLink --></f:comment>
+                <f:if condition="<rkw:notFinishedEvents event='{event}' />">
+                    <f:if condition="{event.extCancelLink}">
+                        <f:if condition="{f:format.date(date: event.cancelEnd, format: 'Y-m-d')} > {f:format.date(date: 'now', format: 'Y-m-d')}">
+                            <tr>
+                                <th>
+                                    <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.cancellation" />
+                                </th>
+
+                                <td>
+                                    <f:link.typolink parameter="{event.extCancelLink}" target="_blank">
+                                        <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" />
+                                    </f:link.typolink>
+                                </td>
+                            </tr>
+                        </f:if>
+                    </f:if>
+                </f:if>
+
             </tbody>
         </table>
 

@@ -587,6 +587,12 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
                 <source>eligibility</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
+                <source>Want to be a member? Click here</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.link" approved="yes">
+                <source>LINK</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -638,6 +644,12 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
                 <source>Trainer</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancellation" approved="yes">
+                <source>Cancellation</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" approved="yes">
+                <source>Click here</source>
             </trans-unit>
 
 
@@ -705,7 +717,9 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.announcement" approved="yes">
                 <source>Announcement</source>
             </trans-unit>
-
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.from" approved="yes">
+                <source>from</source>
+            </trans-unit>
 
 
 			<!-- Templates/EventReservation/New.html -->

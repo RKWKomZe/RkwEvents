@@ -21,7 +21,7 @@
                     <f:comment><!-- DEPARTMENT --></f:comment>
                     <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
                         <f:form.select
-                            class="ajax select-field select-field--longer"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showDepartmentLink} == 1', then: ' select-field--info')}"
                             id="department-select"
                             name="filter[department]"
                             value="{filter.department}"
@@ -31,6 +31,14 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopics' />"
                             prependOptionValue="0"
                         />
+
+                        <f:if condition="{settings.list.filter.showDepartmentLink}">
+                            <f:link.page pageUid="{settings.list.filter.showDepartmentLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDepartmentInfo}">
+                                <svg class="icon icon--32">
+                                    <use xlink:href="#ic-info" />
+                                </svg>
+                            </f:link.page>
+                        </f:if>
                     </f:if>
 
 
@@ -47,6 +55,13 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />"
                             prependOptionValue="0"
                         />
+                        <f:if condition="{settings.list.filter.showDocumentTypeLink}">
+                            <f:link.page pageUid="{settings.list.filter.showDocumentTypeLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDocumentTypeInfo}">
+                                <svg class="icon icon--32">
+                                    <use xlink:href="#ic-info" />
+                                </svg>
+                            </f:link.page>
+                        </f:if>
                     </f:if>
 
 
@@ -66,6 +81,13 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelMonth' />"
                             prependOptionValue="0"
                         />
+                        <f:if condition="{settings.list.filter.showTimeLink}">
+                            <f:link.page pageUid="{settings.list.filter.showTimeLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showTimeInfo}">
+                                <svg class="icon icon--32">
+                                    <use xlink:href="#ic-info" />
+                                </svg>
+                            </f:link.page>
+                        </f:if>
                     </f:if>
 
                     <f:comment><!-- ADDRESS -->
@@ -91,18 +113,22 @@
 
                     <f:comment><!-- freeOfCharge --></f:comment>
                     <f:if condition="{settings.list.filter.showFreeOfCharge}">
-                        <f:form.checkbox class="checkbox" id="freeOfCharge" name="filter[freeOfCharge]" value="1" />
-                        <label for="freeOfCharge" class="checkbox-label">
-                            <f:translate key="tx_rkwevents_fluid.partials_event_filter.freeOfCharge" />
-                        </label>
+                        <div class="checkbox-field">
+                            <f:form.checkbox class="checkbox" id="freeOfCharge" name="filter[freeOfCharge]" value="1" />
+                            <label for="freeOfCharge" class="checkbox-label">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.freeOfCharge" />
+                            </label>
+                        </div>
                     </f:if>
 
                     <f:comment><!-- eligible --></f:comment>
                     <f:if condition="{settings.list.filter.showEligible}">
-                        <f:form.checkbox class="checkbox" id="eligible" name="filter[eligible]" value="1" />
-                        <label for="eligible" class="checkbox-label">
-                            <f:translate key="tx_rkwevents_fluid.partials_event_filter.eligible" />
-                        </label>
+                        <div class="checkbox-field">
+                            <f:form.checkbox class="checkbox" id="eligible" name="filter[eligible]" value="1" />
+                            <label for="eligible" class="checkbox-label">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.eligible" />
+                            </label>
+                        </div>
                     </f:if>
 
                 </div>

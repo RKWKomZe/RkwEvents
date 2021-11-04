@@ -87,7 +87,26 @@ plugin.tx_rkwevents {
         # cat=plugin.tx_rkwevents; type=boolean; label=Hide GoogleMaps
         hideMap = 0
 
+        costs {
+            red {
+                hint {
+                    # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
+                    enabled = 0
+                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
+                    # Hint: Can be overridden by property event->costsRedLink
+                    link =
+                }
+            }
+        }
+
         list {
+
+            multipartView {
+                # cat=plugin.tx_rkwevents; type=bool; label=Use multipart view for list
+                enabled = 0
+                # cat=plugin.tx_rkwevents; type=integer; label=shown items of each part
+                limit = 4
+            }
 
             # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
             detailLinkTargetBlank = 0
