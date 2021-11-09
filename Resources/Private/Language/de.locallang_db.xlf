@@ -629,6 +629,10 @@
 				<source>Phone</source>
 				<target>Telefon</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.mobile" approved="yes">
+                <source>Mobile</source>
+                <target>Mobil</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.email" approved="yes">
 				<source>Email</source>
 				<target>Email</target>

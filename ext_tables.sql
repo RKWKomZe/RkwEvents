@@ -274,6 +274,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation (
 	zip varchar(255) DEFAULT '' NOT NULL,
 	city varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
+    mobile varchar(255) DEFAULT '' NOT NULL,
 	fax varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	server_host varchar(255) DEFAULT '' NOT NULL,

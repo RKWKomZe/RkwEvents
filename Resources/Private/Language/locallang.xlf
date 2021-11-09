@@ -119,6 +119,12 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.company" approved="yes">
 				<source>Company</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.phone" approved="yes">
+                <source>Phone</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.mobile" approved="yes">
+                <source>Mobile</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.address" approved="yes">
 				<source>Address</source>
 			</trans-unit>

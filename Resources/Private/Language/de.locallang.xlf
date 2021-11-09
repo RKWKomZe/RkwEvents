@@ -156,6 +156,14 @@
 				<source>Company</source>
 				<target>Firma</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.phone" approved="yes">
+                <source>Phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.mobile" approved="yes">
+                <source>Mobile</source>
+                <target>Mobil</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.address" approved="yes">
 				<source>Address</source>
 				<target>Adresse</target>

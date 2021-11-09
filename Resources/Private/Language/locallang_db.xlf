@@ -483,6 +483,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.phone" approved="yes">
 				<source>Phone</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.mobile" approved="yes">
+                <source>Mobile</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.email" approved="yes">
 				<source>Email</source>
 			</trans-unit>
