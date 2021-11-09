@@ -454,6 +454,12 @@
 				<target>Leider konnten wir keine Veranstaltungen für Sie finden.</target>
 			</trans-unit>
 
+			<!-- Templates/Event/Similar.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.similarEvents" approved="yes">
+                <source>Similar events</source>
+                <target>Ähnliche Veranstaltungen</target>
+            </trans-unit>
+
 			<!-- Templates/Event/Archive.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_event_archive.noEvent" approved="yes">
 				<source>Sorry, no events found.</source>

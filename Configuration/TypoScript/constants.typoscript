@@ -135,6 +135,27 @@ plugin.tx_rkwevents {
             }
         }
 
+        listSimilar {
+            # cat=plugin.tx_rkwevents; type=integer; label=Number of items in list similar view
+            itemsPerPage = 6
+
+            # cat=plugin.tx_rkwevents; type=bool; label=Show more link
+            showMoreLink = 1
+
+            # define which similarities between events should be used for the searchQuery for a logical OR
+            # hint: If nothing is set here, absolutely nothing will be found by the query
+            searchQuery {
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by department
+                byDepartment = 1
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by documentType
+                byDocumentType = 1
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by categories
+                byCategories = 1
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by project
+                byProject = 1
+            }
+        }
+
 		mandatoryFields {
 
 			# cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of main person. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)

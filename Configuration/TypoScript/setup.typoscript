@@ -269,6 +269,17 @@ plugin.tx_rkwevents {
             }
         }
 
+        listSimilar {
+            itemsPerPage = {$plugin.tx_rkwevents.settings.listSimilar.itemsPerPage}
+            showMoreLink = {$plugin.tx_rkwevents.settings.listSimilar.showMoreLink}
+            searchQuery {
+                byDepartment = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDepartment}
+                byDocumentType = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDocumentType}
+                byCategories = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byCategories}
+                byProject = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byProject}
+            }
+        }
+
 		mandatoryFields {
 			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
 			eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}

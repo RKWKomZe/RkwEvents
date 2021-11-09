@@ -4,34 +4,34 @@
     data-namespace-typo3-fluid="true">
 
     <f:if condition="{startedEventList}">
-        <div class="flex center-main py-3">
+        <div class="flex center-main mt-3">
             <div class="flex-container introtext">
-                <h3 class="headline headline--underlined">
+                <h3 class="section__headline h3">
                     <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents" extensionName="RkwEvents" />
                 </h3>
-                <f:render section="listPart" arguments="{eventList: startedEventList, filter: filterStartedEventList}" />
+                <f:render section="listPart" arguments="{eventList: startedEventList, filter: filterStartedEventList, showPid: showPid}" />
             </div>
         </div>
     </f:if>
 
     <f:if condition="{upcomingEventList}">
-        <div class="flex center-main py-3">
+        <div class="flex center-main mt-3">
             <div class="flex-container introtext">
-                <h3 class="headline headline--underlined">
+                <h3 class="section__headline h3">
                     <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.upcomingEvents" extensionName="RkwEvents" />
                 </h3>
-                <f:render section="listPart" arguments="{eventList: upcomingEventList, filter: filterUpcomingEventList}" />
+                <f:render section="listPart" arguments="{eventList: upcomingEventList, filter: filterUpcomingEventList, showPid: showPid}" />
             </div>
         </div>
     </f:if>
 
     <f:if condition="{announcementEventList}">
-        <div class="flex center-main py-3">
+        <div class="flex center-main mt-3">
             <div class="flex-container introtext">
-                <h3 class="headline headline--underlined">
+                <h3 class="section__headline h3">
                     <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.plannedEvents" extensionName="RkwEvents" />
                 </h3>
-                <f:render section="listPart" arguments="{eventList: announcementEventList, filter: filterAnnouncementEventList}" />
+                <f:render section="listPart" arguments="{eventList: announcementEventList, filter: filterAnnouncementEventList, showPid: showPid}" />
             </div>
         </div>
     </f:if>
@@ -56,7 +56,6 @@
                 extensionName="RkwEvents"
                 class="btn btn--primary btn--centered mt-1"
                 additionalParams="{tx_rkwevents_pi1: '{filter: filter}'}"
-                target="_blank"
             >
                 <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.showMore" extensionName="RkwEvents" />
             </f:link.action>

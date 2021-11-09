@@ -253,8 +253,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $categoryList = [];
         if ($filter['category']) {
             // get category first level childs
-            /** @var \RKW\RkwEvents\Domain\Repository\CategoryRepository $categoryRepository */
-            $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Repository\\CategoryRepository');
+            /** @var CategoryRepository $categoryRepository */
+            $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
             $categoryList = $categoryRepository->findChildrenByParent(intval($filter['category']))->toArray();
             // add parent itself as object
             $categoryList[] = $categoryRepository->findByUid(intval($filter['category']));
@@ -265,7 +265,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($filter['address']) {
 
             /** @var \RKW\RkwGeolocation\Service\Geolocation $geoLocation */
-            $geoLocation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwGeolocation\\Service\\Geolocation');
+            $geoLocation = GeneralUtility::makeInstance('RKW\\RkwGeolocation\\Service\\Geolocation');
             $geoLocation->setAddress(filter_var($filter['address'], FILTER_SANITIZE_STRING));
 
             try {
@@ -636,6 +636,105 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
+     * findByFilterOptions
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @param int $limit
+     * @param int $page
+     * @param array $settings
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findSimilar($event, $limit, $page, $settings)
+    {
+        // results between 'from' and 'till' (with additional proof item to check, if there are more results -> +1)
+        $offset = $page * $limit;
+        $limit = $limit + 1;
+
+        // if we are on a page > 1, we also fetch none item twice
+        // we need this to figure out which date was the last for grouping!
+        if ($page > 0) {
+            $offset--;
+            $limit++;
+        }
+
+        $query = $this->createQuery();
+
+        // query basics as "AND" query
+        $constraints = array(
+            $query->logicalOr(
+                $query->greaterThanOrEqual('end', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            ),
+            $query->logicalNot(
+                $query->equals('title', '')
+            ),
+        );
+
+        $query->setOrderings(
+            array(
+                'record_type' => QueryInterface::ORDER_DESCENDING,
+                'start' => QueryInterface::ORDER_ASCENDING,
+            )
+        );
+
+        // exclude given event
+        $constraints[] = $query->logicalNot(
+            $query->equals('uid', $event)
+        );
+
+        // for all options which could be part of the "similar query"
+        // START: SubQuery
+        $constraintsSubQueryOr = array();
+
+        if (
+            $settings['listSimilar']['searchQuery']['byDepartment']
+            && $event->getDepartment()
+        ) {
+            $constraintsSubQueryOr[] = $query->equals('department', $event->getDepartment());
+        }
+         if (
+             $settings['listSimilar']['searchQuery']['byDocumentType']
+             && $event->getDocumentType())
+         {
+             $constraintsSubQueryOr[] = $query->equals('documentType', $event->getDocumentType());
+         }
+         if (
+             $settings['listSimilar']['searchQuery']['byCategories']
+             && $event->getCategories()->count())
+         {
+             $categoryQueries[] = $query->in('categories', $event->getCategories());
+             $constraintsSubQueryOr[] = $query->logicalOr($categoryQueries);
+         }
+         if (
+             ExtensionManagementUtility::isLoaded('rkw_projects')
+             && $settings['listSimilar']['searchQuery']['byProject']
+             && $event->getProject()
+         ) {
+             $constraintsSubQueryOr[] = $query->equals('project', $event->getProject());
+         }
+
+         // fallback, if nothing is set
+         // avoid error: "There must be at least one constraint or a non-empty array of constraints given. "
+         if (!$constraintsSubQueryOr) {
+             // give something in
+             $constraintsSubQueryOr[] = $query->equals('uid', 0);
+         }
+        // END: SubQuery
+
+        // add OR elements as subQuery
+        $constraints[] = $query->logicalOr($constraintsSubQueryOr);
+
+        // NOW: construct final query!
+        $query->matching($query->logicalAnd($constraints));
+        $query->setOffset($offset);
+        $query->setLimit($limit);
+
+        return $query->execute();
+    }
+
+    /**
      * Returns logger instance
      *
      * @return \TYPO3\CMS\Core\Log\Logger
@@ -644,7 +743,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
         }
 
         return $this->logger;
@@ -719,7 +818,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         // @toDo: Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $storagePidString);
+        return GeneralUtility::trimExplode(',', $storagePidString);
         //===
     }
 
@@ -735,17 +834,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     private function getTsForPage($pageId)
     {
         /** @var \TYPO3\CMS\Core\TypoScript\TemplateService $template */
-        $template = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
+        $template = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
         $template->tt_track = 0;
         $template->init();
 
         /** @var \TYPO3\CMS\Frontend\Page\PageRepository $sysPage */
-        $sysPage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
+        $sysPage = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
         $rootLine = $sysPage->getRootLine(intval($pageId));
         $template->runThroughTemplates($rootLine, 0);
         $template->generateConfig();
 
         return $template->setup['plugin.']['tx_rkwevents.'];
-        //===
     }
 }

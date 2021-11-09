@@ -1,4 +1,7 @@
 <?php
+
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3_MODE') || die('Access denied.');
 
 $extKey = 'rkw_events';
@@ -6,61 +9,66 @@ $extKey = 'rkw_events';
 //=================================================================
 // Register Plugins
 //=================================================================
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Pi1',
     'RKW Events'
 );
 
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Eventtitle',
     'RKW Events: Title'
 );
 
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Recommendation',
     'RKW Events: Empfehlung / Einzelauswahl'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
+    $extKey,
+    'Similar',
+    'RKW Events: Ähnlichen Veranstaltung (Detailseite)'
+);
+
+ExtensionUtility::registerPlugin(
     $extKey,
     'Eventmaps',
     'RKW Events: GoogleMaps'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Eventinfo',
     'RKW Events: Kurzinfo'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Galleryone',
     'RKW Events: Gallery 1'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Gallerytwo',
     'RKW Events: Gallery 2'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Myeventreservation',
     'RKW Events: Meine RKW Veranstaltungen'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     $extKey,
     'Seriesproposals',
     'RKW Events: Vorschläge zu einer Veranstaltung'
 );
+
 
 //=================================================================
 // Add Flexforms

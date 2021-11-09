@@ -2,7 +2,9 @@
 
 namespace RKW\RkwEvents\Controller;
 
+use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
@@ -285,6 +287,49 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         );
     }
 
+
+    /**
+     * action listSimilar
+     * returns similar events for a detail view page
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event Needed for ajax request e.g.
+     * @param integer                           $page
+     * @return void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listSimilarAction($event = null, $page = 0)
+    {
+        if (!$event instanceof Event) {
+            $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
+            $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
+            /** @var Event $event */
+            $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
+        }
+
+        $listItemsPerView = intval($this->settings['listSimilar']['itemsPerPage']) ? intval($this->settings['listSimilar']['itemsPerPage']) : 6;
+        $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, intval($page), $this->settings);
+        $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
+        if ($this->settings['listSimilar']['showMoreLink']) {
+            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+        } else {
+            $showMoreLink = false;
+        }
+
+        // target template is also used by ajax - so we have to set typoscript settings this way
+        $this->view->assignMultiple(
+            array(
+                'sortedEventList'  => $eventList,
+                'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
+                'showPid'      => intval($this->settings['showPid']),
+                'pageMore'     => $page + 1,
+                'showMoreLink' => $showMoreLink,
+                'currentEvent' => $event
+            )
+        );
+
+    }
+
+
     /**
      * action archive
      *
@@ -392,7 +437,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function showGalleryOneAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
@@ -408,7 +453,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function showGalleryTwoAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
@@ -426,7 +471,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function mapsAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
@@ -444,7 +489,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function infoAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByUid($eventUid);
 
@@ -467,7 +512,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function titleAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
 
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
@@ -488,7 +533,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function descriptionAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
 
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
@@ -509,7 +554,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function seriesProposalsAction()
     {
-        $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_rkwevents_pi1');
+        $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
 
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
@@ -524,6 +569,8 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         ));
 
     }
+
+
 
 
 
