@@ -1302,7 +1302,14 @@
                 <source>Registration additional information</source>
                 <target>Zusätzliche Informationen zur Anmeldung</target>
             </trans-unit>
-
+            <trans-unit id="partials_email_details.phone">
+                <source>Phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.mobile">
+                <source>Mobile</source>
+                <target>Mobil</target>
+            </trans-unit>
 
 
             <!-- Templates/Email/ConfirmationReservationUser.html -->

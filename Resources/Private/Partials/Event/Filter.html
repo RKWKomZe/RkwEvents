@@ -139,8 +139,15 @@
                     <input type="hidden" name="type" value="{ajaxTypeNum}">
                 </f:comment>
 
-                <!-- Project filter from Plugin -->
+                <f:comment><!-- Project filter from Plugin --></f:comment>
                 <f:form.hidden name="filter[project]" value="{filter.project}" />
+
+                <f:comment><!-- additional hidden filter options (if subdivided list is used) --></f:comment>
+                <f:if condition="{settings.list.multipartView.enabled}">
+                    <f:form.hidden name="filter[recordType]" value="{filter.recordType}" />
+                    <f:form.hidden name="filter[onlyStarted]" value="{filter.onlyStarted}" />
+                    <f:form.hidden name="filter[onlyUpcoming]" value="{filter.onlyUpcoming}" />
+                </f:if>
 
             </f:form>
         </f:else>
