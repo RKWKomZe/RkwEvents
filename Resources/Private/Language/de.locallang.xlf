@@ -213,7 +213,6 @@
                 <target>Die gewünschte Veranstaltung ist leider nicht mehr online. Nutzen Sie unsere Veranstaltungssuche, um mögliche Alternativen zu finden.</target>
             </trans-unit>
 
-
 			<!-- EventReservationController -->
 			<trans-unit id="eventReservationController.message.noUserLoggedIn">
 				<source>No user logged in!</source>
@@ -461,6 +460,10 @@
 				<source>Sorry, no events found.</source>
 				<target>Leider konnten wir keine Veranstaltungen für Sie finden.</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_list.backToList" approved="yes">
+                <source>Back to list</source>
+                <target>Zurück zur Übersicht</target>
+            </trans-unit>
 
 			<!-- Templates/Event/Similar.html -->
             <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.similarEvents" approved="yes">
@@ -649,7 +652,7 @@
 			<!-- Partials/Event/ListSubdivided.html -->
             <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents">
                 <source>Already started events</source>
-                <target>Bereits gestartete Veranstaltungen</target>
+                <target>Laufende Veranstaltungen</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.upcomingEvents">
                 <source>Upcoming events</source>

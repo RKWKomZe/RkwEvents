@@ -353,6 +353,9 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_event_list.noEvent" approved="yes">
 				<source>Sorry, no events found.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_list.backToList" approved="yes">
+                <source>Back to list</source>
+            </trans-unit>
 
 			<!-- Templates/Event/Similar.html -->
             <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.similarEvents" approved="yes">

@@ -188,19 +188,19 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                         'startedEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', true),
                         'filterStartedEventList' => array(
                             'project' => $this->settings['projectUids'],
-                            'recordType' => '\RKW\RkwEvents\Domain\Model\EventScheduled',
+                            'recordType' => 'EventScheduled',
                             'onlyStarted' => true
                         ),
                         'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', false, true),
                         'filterUpcomingEventList' => array(
                             'project' => $this->settings['projectUids'],
-                            'recordType' => '\RKW\RkwEvents\Domain\Model\EventScheduled',
+                            'recordType' => 'EventScheduled',
                             'onlyUpcoming' => true
                         ),
                         'announcementEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventAnnouncement'),
                         'filterAnnouncementEventList' => array(
                             'project' => $this->settings['projectUids'],
-                            'recordType' => '\RKW\RkwEvents\Domain\Model\EventAnnouncement'
+                            'recordType' => 'EventAnnouncement'
                         )
                     )
                 );

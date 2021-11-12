@@ -198,6 +198,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'end',
             'time',
             'regEnd',
+            'cancelEnd',
+            'extCancelLink',
             'regRequired',
             'regSingle',
             'extRegLink',
@@ -207,6 +209,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'costsReg',
             'costsRed',
             'costsRedCondition',
+            'costsRedLink',
             'costsTaxIncluded',
             'placeName',
             'address',
@@ -406,6 +409,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         if ($tempData['registerAddInformation']) {
                             $event->setRegisterAddInformation($this->parseHtml($tempData['registerAddInformation']));
                         }
+                        if ($tempData['extCancelLink']) {
+                            $event->setExtCancelLink($tempData['extCancelLink']);
+                        }
                         if ($tempData['categories']) {
 
                             // workaround with objectStorage: Using $event->addCategory leads to "Call to a member function attach() on null"
@@ -431,6 +437,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                             'start'  => '0',
                             'end'    => '0',
                             'regEnd' => '0',
+                            'cancelEnd' => '0'
                         );
 
                         if ($tempData['time']) {
@@ -450,7 +457,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                         //======================================================================
                         // 3. Set date and time
-                        foreach (array('start', 'end', 'regEnd') as $timeLabel) {
+                        foreach (array('start', 'end', 'regEnd', 'cancelEnd') as $timeLabel) {
                             $time = 0;
 
                             // fix for missing end-time
@@ -562,6 +569,11 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                                     AbstractMessage::WARNING
                                 );
                             }
+                        }
+
+                        if ($tempData['costsRedLink']) {
+                            // Either: Costs completely unknown (option 3)
+                            $event->setCostsRedLink($tempData['costsRedLink']);
                         }
 
                         //======================================================================

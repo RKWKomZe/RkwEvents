@@ -25,6 +25,20 @@
             </f:then>
             <f:else>
 
+                <f:comment><!-- show back button (if ListSubdivided is used) --></f:comment>
+                <f:if condition="{settings.list.multipartView.enabled}">
+                    <p>
+                        <f:link.action action="list" class="btn btn--icon">
+                            <svg class="icon icon--16">
+                                <use xlink:href="#ic-circle-arrow" />
+                            </svg>
+                            <span>
+                                <f:translate key="tx_rkwevents_fluid.templates_event_list.backToList" extensionName="RkwEvents" />
+                            </span>
+                        </f:link.action>
+                    </p>
+                </f:if>
+
                 <f:render partial="Event/Filter" arguments="{_all}" />
 
                 <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">

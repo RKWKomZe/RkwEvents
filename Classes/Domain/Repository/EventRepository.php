@@ -387,7 +387,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
             }
             if ($filter['recordType']) {
-                $constraints[] = $query->equals('recordType', $filter['recordType']);
+                $constraints[] = $query->equals('recordType', '\RKW\RkwEvents\Domain\Model\\' . $filter['recordType']);
             }
 
             if ($filter['onlyStarted']) {

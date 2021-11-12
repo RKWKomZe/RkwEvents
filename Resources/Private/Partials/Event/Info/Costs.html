@@ -60,11 +60,11 @@
         </f:if>
         <br/>
         <f:if condition="{event.eligibility}">
-            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibility" />
+            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibility" /><br/>
         </f:if>
         <f:if condition="{settings.costs.red.hint.enabled}">
             <f:if condition="{settings.costs.red.hint.link} || {event.costsRedLink}">
-                <br/>
+
                 <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" />
                 <f:if condition="{event.costsRedLink}">
                     <f:then>

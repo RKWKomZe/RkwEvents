@@ -7,7 +7,6 @@
         <!-- simple element list without nesting -->
         <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
             <div class="tiles flex-container flex-container--margin">
-
                 <f:for each="{sortedEventList}" as="event">
                     <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                 </f:for>

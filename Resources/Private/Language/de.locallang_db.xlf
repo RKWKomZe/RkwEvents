@@ -99,7 +99,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_link">
                 <source>Price Red hint</source>
-                <target>Hinweis-Link in Bezug auf reduzierten Preis (kann auch allgemein über TypoScript definiert werden)</target>
+                <target>Hinweis-Link in Bezug auf reduzierten Preis (kann auch allgemein über TypoScript definiert werden "costs.red.hint")</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax">
 				<source>Taxes</source>

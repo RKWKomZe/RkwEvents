@@ -21,7 +21,7 @@
                     <f:comment><!-- DEPARTMENT --></f:comment>
                     <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
                         <f:form.select
-                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showDepartmentLink} == 1', then: ' select-field--info')}"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showDepartmentLink}', then: ' select-field--info')}"
                             id="department-select"
                             name="filter[department]"
                             value="{filter.department}"
@@ -31,7 +31,6 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopics' />"
                             prependOptionValue="0"
                         />
-
                         <f:if condition="{settings.list.filter.showDepartmentLink}">
                             <f:link.page pageUid="{settings.list.filter.showDepartmentLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDepartmentInfo}">
                                 <svg class="icon icon--32">
@@ -45,7 +44,7 @@
                     <f:comment><!-- DOCUMENT TYPE --></f:comment>
                     <f:if condition="{documentTypeList} && {settings.list.filter.showDocumentType}">
                         <f:form.select
-                            class="ajax select-field select-field--longer"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showDocumentTypeLink}', then: ' select-field--info')}"
                             id="document-type-select"
                             name="filter[documentType]"
                             value="{filter.documentType}"
@@ -71,7 +70,7 @@
                     <f:comment><!-- TIME --></f:comment>
                     <f:if condition="{timeArrayList} && {settings.list.filter.showTime}">
                         <f:form.select
-                            class="ajax select-field select-field--longer"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showTimeLink}', then: ' select-field--info')}"
                             id="time-select"
                             name="filter[time]"
                             value="{filter.time}"
