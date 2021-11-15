@@ -32,7 +32,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
     reg_single tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_end int(11) unsigned DEFAULT '0' NOT NULL,
     cancel_end int(11) unsigned DEFAULT '0' NOT NULL,
-	ext_reg_link varchar(255) DEFAULT '' NOT NULL,
+	ext_reg_link text NOT NULL,
     ext_cancel_link varchar(255) DEFAULT '' NOT NULL,
 	document_type varchar(255) DEFAULT '' NOT NULL,
 	department varchar(255) DEFAULT '' NOT NULL,

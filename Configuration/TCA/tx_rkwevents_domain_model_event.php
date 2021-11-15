@@ -549,11 +549,16 @@ return [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.ext_cancel_link',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
-                'size' => 30,
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
                 'eval' => 'trim',
-                'softref' => 'typolink'
+                'fieldControl'  => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'enableRichtext' => true,
             ],
         ],
         'document_type' => [
