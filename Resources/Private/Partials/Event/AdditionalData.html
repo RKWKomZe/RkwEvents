@@ -165,9 +165,19 @@
                                 </th>
 
                                 <td>
-                                    <f:format.raw>
-                                        {event.extCancelLink}
-                                    </f:format.raw>
+                                    <f:if condition="{event.extCancelInfo}">
+                                        <f:then>
+                                            {event.extCancelInfo}
+                                            <f:link.typolink parameter="{event.extCancelLink}" target="_blank">
+                                                <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" />
+                                            </f:link.typolink>
+                                        </f:then>
+                                        <f:else>
+                                            <f:link.typolink parameter="{event.extCancelLink}" target="_blank">
+                                                <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" />
+                                            </f:link.typolink>
+                                        </f:else>
+                                    </f:if>
                                 </td>
                             </tr>
                         </f:if>

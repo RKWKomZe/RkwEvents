@@ -199,6 +199,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'time',
             'regEnd',
             'cancelEnd',
+            'extCancelInfo',
             'extCancelLink',
             'regRequired',
             'regSingle',
@@ -408,6 +409,9 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                         }
                         if ($tempData['registerAddInformation']) {
                             $event->setRegisterAddInformation($this->parseHtml($tempData['registerAddInformation']));
+                        }
+                        if ($tempData['extCancelInfo']) {
+                            $event->setExtCancelInfo($tempData['extCancelInfo']);
                         }
                         if ($tempData['extCancelLink']) {
                             $event->setExtCancelLink($tempData['extCancelLink']);

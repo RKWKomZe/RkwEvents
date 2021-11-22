@@ -210,6 +210,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $extRegLink;
 
     /**
+     * extCancelInfo
+     *
+     * @var string
+     */
+    protected $extCancelInfo;
+
+    /**
      * extCancelLink
      *
      * @var string
@@ -1067,6 +1074,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setExtRegLink($extRegLink)
     {
         $this->extRegLink = $extRegLink;
+    }
+
+    /**
+     * Returns the extCancelInfo
+     *
+     * @return string $extCancelInfo
+     */
+    public function getExtCancelInfo()
+    {
+        return $this->extCancelInfo;
+    }
+
+    /**
+     * Sets the extCancelInfo
+     *
+     * @param string $extCancelInfo
+     * @return void
+     */
+    public function setExtCancelInfo($extCancelInfo)
+    {
+        $this->extCancelInfo = $extCancelInfo;
     }
 
     /**
