@@ -549,9 +549,11 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
     /**
      * action seriesProposals
-     * returns running events of a certain series
+     * returns manually selected events ("RecommendedEvents") or as fallback running events of a certain series
      *
-     * @return void
+     * Hint: Used as sidebar plugin since nov 2021
+     *
+     * @return void|string
      */
     public function seriesProposalsAction()
     {
@@ -561,12 +563,19 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
 
-        $eventList = $this->eventRepository->findRunningBySeries($event);
+        if ($event->getRecommendedEvents()->count()) {
+            $eventList = $event->getRecommendedEvents();
+        } else {
+            // fallback
+            if ($event->getSeries()->count()) {
+                $eventList = $this->eventRepository->findRunningBySeries($event);
+            }
+        }
 
-        // !! Die Variable $event darf nicht als "event" übergeben werden, sonst haben wir duplizierte Paramter !!
         $this->view->assignMultiple(array(
-            'givenEvent' => $event,
-            'eventList'  => $eventList,
+            //'givenEvent' => $event,
+            'sortedEventList'  => $eventList,
+            'showPid' => intval($this->settings['showPid'])
         ));
 
     }

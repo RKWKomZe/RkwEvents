@@ -431,6 +431,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $workshop3 = null;
 
     /**
+     * Holds recommendedEvents
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event>
+     */
+    protected $recommendedEvents = null;
+
+    /**
      * reminderMailTstamp
      *
      * @var integer
@@ -2063,6 +2070,49 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setWorkshop3(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $workshop)
     {
         $this->workshop3 = $workshop;
+    }
+
+    /**
+     * Adds a RecommendedEvents
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $recommendedEvents
+     * @return void
+     */
+    public function addRecommendedEvents(\RKW\RkwEvents\Domain\Model\Event $recommendedEvents)
+    {
+        $this->recommendedEvents->attach($recommendedEvents);
+    }
+
+    /**
+     * Removes a EventWorkshop
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $recommendedEvents
+     * @return void
+     */
+    public function removeRecommendedEvents(\RKW\RkwEvents\Domain\Model\Event $recommendedEvents)
+    {
+        $this->recommendedEvents->detach($recommendedEvents);
+    }
+
+    /**
+     * Returns the EventWorkshop
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $recommendedEvents
+     */
+    public function getRecommendedEvents()
+    {
+        return $this->recommendedEvents;
+    }
+
+    /**
+     * Sets the EventWorkshop
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $recommendedEvents
+     * @return void
+     */
+    public function setRecommendedEvents(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $recommendedEvents)
+    {
+        $this->recommendedEvents = $recommendedEvents;
     }
 
     /**

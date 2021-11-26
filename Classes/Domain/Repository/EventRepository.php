@@ -578,13 +578,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->matching(
             $query->logicalAnd(
                 $query->equals('series', $event->getSeries()),
-                $query->greaterThanOrEqual('start', time()),
+                $query->logicalOr(
+                    $query->greaterThanOrEqual('end', time()),
+                    // include announcements (without start date)
+                    $query->equals('start', 0)
+                ),
                 $query->logicalNot(
                     $query->equals('uid', $event)
                 )
             )
         )->execute();
-        //===
     }
 
     /**
@@ -683,6 +686,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraints[] = $query->logicalNot(
             $query->equals('uid', $event)
         );
+
+        // exclude given event series
+        $constraints[] = $query->logicalNot(
+            $query->equals('series', $event->getSeries())
+        );
+
+        // exclude manually set recommendations (returned through other plugin "seriesProposals")
+        if ($event->getRecommendedEvents()->count()) {
+            $constraints[] = $query->logicalNot(
+                $query->in('uid', $event->getRecommendedEvents())
+            );
+        }
 
         // for all options which could be part of the "similar query"
         // START: SubQuery

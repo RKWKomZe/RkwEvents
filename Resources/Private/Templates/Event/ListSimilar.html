@@ -7,12 +7,21 @@
 
     <f:section name="main">
 
+        <h5 class="asideinner__title content-padding-smalldesk">
+            <f:translate key="tx_rkwevents_fluid.templates_event_listsimilar.header" />
+        </h5>
+
         <f:if condition="<f:count>{sortedEventList}</f:count>">
-            <ul class="iconlist">
-                <f:for each="{sortedEventList}" as="event" iteration="iterator">
-                    <f:render partial="Event/List/Reduced" arguments="{_all}" />
-                </f:for>
-            </ul>
+            <f:then>
+                <ul class="iconlist">
+                    <f:for each="{sortedEventList}" as="event" iteration="iterator">
+                        <f:render partial="Event/List/Reduced" arguments="{_all}" />
+                    </f:for>
+                </ul>
+            </f:then>
+            <f:else>
+                <f:translate key="tx_rkwevents_fluid.templates_event_listsimilar.noResults" />
+            </f:else>
         </f:if>
         
         <!-- Version for big boxes below - NOT USED -->
