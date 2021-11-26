@@ -27,6 +27,8 @@
 </f:if>{reservation.firstName} {reservation.lastName} <f:if condition="{frontendUser}">({frontendUser.username})</f:if>
 {reservation.address}
 {reservation.zip} {reservation.city}
+<f:if condition="{reservation.phone}"><rkwMailer:frontend.translate key="partials_email_details.phone" languageKey="{language}" extensionName="rkwEvents" />: {reservation.phone}</f:if>
+<f:if condition="{reservation.mobile}"><rkwMailer:frontend.translate key="partials_email_details.mobile" languageKey="{language}" extensionName="rkwEvents" />: {reservation.mobile}</f:if>
 <f:if condition="{reservation.remark}">
 <rkwMailer:frontend.translate key="partials_email_details.reservationRemarks" languageKey="{language}" extensionName="rkwEvents" />:
 {reservation.remark}</f:if><f:if condition="<rkwEvents:ifAddPersonExists eventReservation='{reservation}' />">
@@ -111,6 +113,14 @@
 				{reservation.address}<br/>
 				{reservation.zip} {reservation.city}<br/>
 			</p>
+            <f:if condition="{reservation.phone}">
+                <strong><rkwMailer:frontend.translate key="partials_email_details.phone" languageKey="{language}" extensionName="rkwEvents" /></strong>: {reservation.phone}
+                <br/>
+            </f:if>
+            <f:if condition="{reservation.mobile}">
+                <strong><rkwMailer:frontend.translate key="partials_email_details.mobile" languageKey="{language}" extensionName="rkwEvents" /></strong>: {reservation.mobile}
+                <br/>
+            </f:if>
 			<f:if condition="{reservation.remark}">
 				<p>
 					<strong><rkwMailer:frontend.translate key="partials_email_details.reservationRemarks" languageKey="{language}" extensionName="rkwEvents" /></strong>:

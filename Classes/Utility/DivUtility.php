@@ -374,7 +374,10 @@ class DivUtility
         foreach ($categoryList as $category) {
 
             // if there is a parent, add it as child content
-            if (in_array($category->getParent()->getUid(), $categoryUidList)) {
+            if (
+                $category->getParent()
+                && in_array($category->getParent()->getUid(), $categoryUidList)
+            ) {
                 $sortedCategoryList[$category->getParent()->getUid()][] = $category;
             } else {
                 // if there is no parent entry, add it to "withoutParent" group

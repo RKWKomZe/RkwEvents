@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <li class="iconlist__item public">
+        <f:link.action
+            action="show"
+            controller="Event"
+            pluginName="Pi1"
+            extensionName="RkwEvents"
+            pageUid="{f:if(condition: '{event.organizer.0.showPid}', then: '{event.organizer.0.showPid}', else: '{showPid}')}"
+            arguments="{event : event}"
+            title="{event.title}"
+            target="{f:if(condition: '{settings.list.detailLinkTargetBlank} == 1', then: '_blank')}"
+        >
+            {event.title}
+        </f:link.action>
+    </li>        
+
+</html>

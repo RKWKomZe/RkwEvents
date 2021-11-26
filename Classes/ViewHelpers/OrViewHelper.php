@@ -42,18 +42,15 @@ class OrViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 
             if ($or1 != 99 || $or2) {
                 return true;
-                //===
             }
 
         } else {
 
             if ($or1 || $or2) {
                 return true;
-                //===
             }
         }
 
         return false;
-        //===
     }
 }

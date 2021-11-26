@@ -1,5 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwBasics="http://typo3.org/ns/RKW/RkwBasics/ViewHelpers"
+    xmlns:rkwEvents="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
     <f:section name="Internal">
@@ -36,7 +37,7 @@
             <div class="table__content">
                 <f:if condition="{contact.phone2}">
                     <f:then>
-                        <rkw:getFormattedPhoneNumber author="{contact}" />
+                        <rkwEvents:getFormattedPhoneNumber author="{contact}" />
                     </f:then>
                     <f:else>
                         {contact.phone}
@@ -51,7 +52,9 @@
                 </div>
             </f:comment>
             <div class="table__content">
-                <f:link.email email="{contact.email}" />
+                <f:link.email email="{contact.email}" >
+                    <rkwBasics:uri.typolink.plainEmail email="{contact.email}" />
+                </f:link.email>
             </div>
         </div>
 
@@ -107,7 +110,9 @@
                 </div>
             </f:comment>
             <div class="table__content">
-                <f:link.email email="{contact.email}" />
+                <f:link.email email="{contact.email}" >
+                    <rkwBasics:uri.typolink.plainEmail email="{contact.email}" />
+                </f:link.email>
             </div>
         </div>
 

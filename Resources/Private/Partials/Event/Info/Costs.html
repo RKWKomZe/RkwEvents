@@ -60,7 +60,29 @@
         </f:if>
         <br/>
         <f:if condition="{event.eligibility}">
-            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibility" />
+            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibility" /><br/>
+        </f:if>
+        <f:if condition="{settings.costs.red.hint.enabled}">
+            <f:if condition="{settings.costs.red.hint.link} || {event.costsRedLink}">
+
+                <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" />
+                <f:if condition="{event.costsRedLink}">
+                    <f:then>
+                        <b>
+                            <f:link.typolink parameter="{event.costsRedLink}">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.link" />
+                            </f:link.typolink>
+                        </b>
+                    </f:then>
+                    <f:else>
+                        <b>
+                            <f:link.typolink parameter="{settings.costs.red.hint.link}">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.link" />
+                            </f:link.typolink>
+                        </b>
+                    </f:else>
+                </f:if>
+            </f:if>
         </f:if>
     </f:section>
 
