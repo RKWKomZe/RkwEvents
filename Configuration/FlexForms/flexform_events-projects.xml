@@ -131,5 +131,113 @@
                 </el>
             </ROOT>
         </general>
+        <info>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+
+                    <settings.list.filter.showDepartmentLink>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showDepartmentInfoLink</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showDepartmentLink>
+                    <settings.list.filter.showDepartmentInfo>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showDepartmentInfo</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <max>100</max>
+                            <eval>trim</eval>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showDepartmentInfo>
+
+                    <settings.list.filter.showDocumentTypeLink>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showDocumentTypeInfoLink</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showDocumentTypeLink>
+                    <settings.list.filter.showDocumentTypeInfo>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showDocumentTypeInfo</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <max>100</max>
+                            <eval>trim</eval>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showDocumentTypeInfo>
+
+                    <settings.list.filter.showCategoryLink>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showCategoryInfoLink</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showCategoryLink>
+                    <settings.list.filter.showCategoryInfo>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showCategoryInfo</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <max>100</max>
+                            <eval>trim</eval>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showCategoryInfo>
+
+                    <settings.list.filter.showTimeLink>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showTimeInfoLink</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showTimeLink>
+                    <settings.list.filter.showTimeInfo>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showTimeInfo</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <max>100</max>
+                            <eval>trim</eval>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showTimeInfo>
+
+
+                </el>
+            </ROOT>
+        </info>
     </sheets>
 </T3DataStructure>

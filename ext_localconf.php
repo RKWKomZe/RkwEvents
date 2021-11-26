@@ -38,6 +38,18 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
+            'Similar',
+            array(
+                'Event' => 'listSimilar'
+            ),
+            // non-cacheable actions
+            array(
+                'Event' => 'listSimilar'
+            )
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
             'Eventmaps',
             array(
                 'Event' => 'maps'
@@ -120,9 +132,10 @@ call_user_func(
             ),
             // non-cacheable actions
             array(
-                'Event' => 'seriesProposals'
+                //'Event' => 'seriesProposals'
             )
         );
+
 
 
         //=================================================================

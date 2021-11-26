@@ -43,11 +43,9 @@ class IsMandatoryFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
         if (!in_array($fieldName, $mandatoryFieldsArray)) {
 
             return true;
-            //===
         }
 
         return false;
-        //===
     }
 
 
