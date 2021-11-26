@@ -688,9 +688,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         // exclude given event series
-        $constraints[] = $query->logicalNot(
-            $query->equals('series', $event->getSeries())
-        );
+        if ($event->getSeries()->count()) {
+            $constraints[] = $query->logicalNot(
+                $query->equals('series', $event->getSeries())
+            );
+        }
 
         // exclude manually set recommendations (returned through other plugin "seriesProposals")
         if ($event->getRecommendedEvents()->count()) {
