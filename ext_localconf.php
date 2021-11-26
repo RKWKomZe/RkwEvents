@@ -132,7 +132,7 @@ call_user_func(
             ),
             // non-cacheable actions
             array(
-                //'Event' => 'seriesProposals'
+                'Event' => 'seriesProposals'
             )
         );
 
