@@ -307,27 +307,28 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
         }
 
-        $listItemsPerView = intval($this->settings['listSimilar']['itemsPerPage']) ? intval($this->settings['listSimilar']['itemsPerPage']) : 6;
-        $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, intval($page), $this->settings);
-        $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
-        if ($this->settings['listSimilar']['showMoreLink']) {
-            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
-        } else {
-            $showMoreLink = false;
+        if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+            $listItemsPerView = intval($this->settings['listSimilar']['itemsPerPage']) ? intval($this->settings['listSimilar']['itemsPerPage']) : 6;
+            $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, intval($page), $this->settings);
+            $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
+            if ($this->settings['listSimilar']['showMoreLink']) {
+                $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+            } else {
+                $showMoreLink = false;
+            }
+
+            // target template is also used by ajax - so we have to set typoscript settings this way
+            $this->view->assignMultiple(
+                array(
+                    'sortedEventList' => $eventList,
+                    'ajaxTypeNum'     => intval($this->settings['ajaxTypeNum']),
+                    'showPid'         => intval($this->settings['showPid']),
+                    'pageMore'        => $page + 1,
+                    'showMoreLink'    => $showMoreLink,
+                    'currentEvent'    => $event
+                )
+            );
         }
-
-        // target template is also used by ajax - so we have to set typoscript settings this way
-        $this->view->assignMultiple(
-            array(
-                'sortedEventList'  => $eventList,
-                'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
-                'showPid'      => intval($this->settings['showPid']),
-                'pageMore'     => $page + 1,
-                'showMoreLink' => $showMoreLink,
-                'currentEvent' => $event
-            )
-        );
-
     }
 
 
@@ -563,20 +564,21 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
 
-        if ($event->getRecommendedEvents()->count()) {
-            $eventList = $event->getRecommendedEvents();
-        } else {
-            // fallback
-            if ($event->getSeries()->count()) {
-                $eventList = $this->eventRepository->findRunningBySeries($event);
+        if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+            if ($event->getRecommendedEvents()->count()) {
+                $eventList = $event->getRecommendedEvents();
+            } else {
+                // fallback
+                if ($event->getSeries()->count()) {
+                    $eventList = $this->eventRepository->findRunningBySeries($event);
+                }
             }
-        }
 
-        $this->view->assignMultiple(array(
-            //'givenEvent' => $event,
-            'sortedEventList'  => $eventList,
-            'showPid' => intval($this->settings['showPid'])
-        ));
+            $this->view->assignMultiple(array(
+                'sortedEventList'  => $eventList,
+                'showPid' => intval($this->settings['showPid'])
+            ));
+        }
 
     }
 
