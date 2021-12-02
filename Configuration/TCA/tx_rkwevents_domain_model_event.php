@@ -535,7 +535,8 @@ return [
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-            ]
+            ],
+            'onChange' => 'reload'
         ],
         'ext_reg_link' => [
             'exclude' => 0,
@@ -558,6 +559,7 @@ return [
                 'rows' => 5,
                 'eval' => 'trim',
             ],
+            'displayCond' => 'FIELD:cancel_end:!=:0'
         ],
         'ext_cancel_link' => [
             'exclude' => 0,
@@ -567,6 +569,7 @@ return [
                 'renderType' => 'inputLink',
                 'size' => 30,
             ],
+            'displayCond' => 'FIELD:cancel_end:!=:0'
         ],
         'document_type' => [
             'exclude' => 0,
