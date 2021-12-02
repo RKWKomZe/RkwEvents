@@ -664,9 +664,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
 
         // query basics as "AND" query
+        // !! do NOT show already running events !!
         $constraints = array(
             $query->logicalOr(
-                $query->greaterThanOrEqual('end', time()),
+                $query->greaterThanOrEqual('start', time()),
                 // include announcements (without start date)
                 $query->equals('start', 0)
             ),

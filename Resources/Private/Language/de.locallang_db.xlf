@@ -144,11 +144,11 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_info" approved="yes">
                 <source>External Cancel Info</source>
-                <target>Info zu externer Abmeldung (Stornierung)</target>
+                <target>Info zu externer Abmeldung (Stornierungsfrist beachten!)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
                 <source>External Cancel Link</source>
-                <target>Link zu externer Abmeldung (Stornierung)</target>
+                <target>Link zu externer Abmeldung (Stornierungsfrist beachten!)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
 				<source>Document Type</source>
