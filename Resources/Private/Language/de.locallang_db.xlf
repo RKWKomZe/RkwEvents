@@ -132,7 +132,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.cancel_end" approved="yes">
                 <source>Cancel End</source>
-                <target>Stornierungsfrist</target>
+                <target>Stornierungsfrist (muss gesetzt UND gespeichert sein, um weitere Stornierungsinformationen setzen zu können)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link" approved="yes">
 				<source>External Registration Link</source>

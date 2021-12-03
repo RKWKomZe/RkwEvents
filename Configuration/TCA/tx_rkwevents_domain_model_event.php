@@ -43,7 +43,7 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, ext_cancel_info, ext_cancel_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'reg_end, cancel_end, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, --palette--;;externalCancel, register_add_information,
+                'reg_end, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, cancel_end, --palette--;;externalCancel, register_add_information,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -75,7 +75,7 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 ' .
                 // seats, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, ext_cancel_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'reg_end, cancel_end, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, --palette--;;externalCancel, register_add_information,
+                'reg_end, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, cancel_end, --palette--;;externalCancel, register_add_information,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 place, be_user, external_contact, longitude, latitude,
@@ -535,7 +535,8 @@ return [
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-            ]
+            ],
+            'onChange' => 'reload'
         ],
         'ext_reg_link' => [
             'exclude' => 0,
@@ -558,6 +559,7 @@ return [
                 'rows' => 5,
                 'eval' => 'trim',
             ],
+            'displayCond' => 'FIELD:cancel_end:!=:0'
         ],
         'ext_cancel_link' => [
             'exclude' => 0,
@@ -567,6 +569,7 @@ return [
                 'renderType' => 'inputLink',
                 'size' => 30,
             ],
+            'displayCond' => 'FIELD:cancel_end:!=:0'
         ],
         'document_type' => [
             'exclude' => 0,
