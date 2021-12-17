@@ -130,8 +130,8 @@ class TceMainHooks
 
                 $eventRaw = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord('tx_rkwevents_domain_model_event', intval($id));
 
-                // $fieldArray: Current date before saving (not the whole dataset)
-                // $eventRaw: The record from DB. This is only needed to change already wrong saved events on any change
+                // $fieldArray: Current data before saving (not the complete dataset)
+                // $eventRaw: The complete record from DB. This is only needed to correct already wrong saved events
 
                 // REMOVE PLACE ON SAVING AN ONLINE EVENT
                 if (
@@ -151,7 +151,7 @@ class TceMainHooks
                 }
             }
         } catch (\Exception $e) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Could not delete place of an online event. Reason: %s.', $e->getMessage()));
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Could not delete interfering data of an event record. Reason: %s.', $e->getMessage()));
         }
 
     }
