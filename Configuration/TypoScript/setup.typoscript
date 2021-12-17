@@ -238,8 +238,6 @@ plugin.tx_rkwevents {
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
-        costsRedLink = {$plugin.tx_rkwevents.settings.costsRedLink}
-
         costs {
             red {
                 hint {

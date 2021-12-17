@@ -229,9 +229,15 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_register">
 				<source>Registration</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_cancel" approved="yes">
+                <source>Cancel</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery">
 				<source>Gallery and Sheets</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_other" approved="yes">
+                <source>Other</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_reservation">
 				<source>Reservation</source>
 			</trans-unit>

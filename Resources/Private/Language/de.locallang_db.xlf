@@ -95,11 +95,11 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_condition">
 				<source>Price Red Condition</source>
-				<target>Bedingung für reduzierten Preis</target>
+				<target>Bedingung für reduzierten Preis (z.B. "für Mitglieder")</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_link">
                 <source>Price Red hint</source>
-                <target>Hinweis-Link in Bezug auf reduzierten Preis (kann auch allgemein über TypoScript definiert werden "costs.red.hint")</target>
+                <target>Hinweis-Link in Bezug auf reduzierten Preis (oder per Typoscript: "costs.red.hint.link")</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax">
 				<source>Taxes</source>
@@ -124,7 +124,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_single" approved="yes">
 				<source>Only single reservation</source>
-				<target>Nur Einzelanmeldungen erlauben</target>
+				<target>Nur Einzelanmeldungen erlauben (nur für interne Anmeldung relevant)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
 				<source>Registration End</source>
@@ -132,11 +132,11 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.cancel_end" approved="yes">
                 <source>Cancel End</source>
-                <target>Stornierungsfrist (muss gesetzt UND gespeichert sein, um weitere Stornierungsinformationen setzen zu können)</target>
+                <target>Stornierungsfrist (1x speichern notwendig, um weitere Eingabefelder sichtbar zu machen)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link" approved="yes">
 				<source>External Registration Link</source>
-				<target>Externer Anmeldungslink</target>
+				<target>Externer Anmeldungslink (Hinweis: Ersetzt interne Anmeldungsfunktion)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.externalCancel" approved="yes">
                 <source>External Cancel Palette</source>
@@ -144,11 +144,11 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_info" approved="yes">
                 <source>External Cancel Info</source>
-                <target>Info zu externer Abmeldung (Stornierung)</target>
+                <target>Info zu externer Stornierung</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
                 <source>External Cancel Link</source>
-                <target>Link zu externer Abmeldung (Stornierung)</target>
+                <target>Link zu externer Stornierung</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
 				<source>Document Type</source>
@@ -192,7 +192,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.register_add_information">
                 <source>Registration additional information (added to email)</source>
-                <target>Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
+                <target>E-Mail: Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
 				<source>External Contact (Display and E-Mail)</source>
@@ -288,11 +288,11 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility" approved="yes">
                 <source>Eligibility</source>
-                <target>Förderfähig</target>
+                <target>Förderfähig (setzt entsprechenden Hinweis "förderfähig" unter den Preis. Ansonsten ohne weitere Funktion)</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
                 <source>Recommended Events</source>
-                <target>Veranstaltungsempfehlungen (Sidebar; Marginalspalte; Fallback: Veranstaltungsreihe)</target>
+                <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
             </trans-unit>
 
 
@@ -304,10 +304,18 @@
 				<source>Registration</source>
 				<target>Anmeldung</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_cancel" approved="yes">
+                <source>Cancel</source>
+                <target>Stornierung</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery" approved="yes">
 				<source>Gallery und Sheets</source>
 				<target>Galerie und Folien</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_other" approved="yes">
+                <source>Other</source>
+                <target>Sonstiges</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_reservation" approved="yes">
 				<source>Reservation</source>
 				<target>Reservierungen</target>
