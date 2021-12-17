@@ -15,6 +15,8 @@ namespace RKW\RkwEvents\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
 /**
  * Class TceMainHooks
  *
@@ -118,6 +120,40 @@ class TceMainHooks
                 $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Could not set geodata for event. Reason: %s.', $e->getMessage()));
             }
         }
+
+
+
+
+
+        try {
+            if ($table == 'tx_rkwevents_domain_model_event') {
+
+                $eventRaw = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord('tx_rkwevents_domain_model_event', intval($id));
+
+                // $fieldArray: Current date before saving (not the whole dataset)
+                // $eventRaw: The record from DB. This is only needed to change already wrong saved events on any change
+
+                // REMOVE PLACE ON SAVING AN ONLINE EVENT
+                if (
+                    $fieldArray['online_event']
+                    || $eventRaw['online_event']
+                ) {
+                    $fieldArray['place'] = '';
+                }
+
+                // REMOVE START & END IF TYPE IS "EventAnnouncement"
+                if (
+                    $fieldArray['record_type'] == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'
+                    || $eventRaw['record_type'] == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'
+                ) {
+                    $fieldArray['start'] = 0;
+                    $fieldArray['end'] = 0;
+                }
+            }
+        } catch (\Exception $e) {
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Could not delete place of an online event. Reason: %s.', $e->getMessage()));
+        }
+
     }
 
 
@@ -190,6 +226,7 @@ class TceMainHooks
         } catch (\Exception $e) {
             $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Could not delete reservations of copied event. Reason: %s.', $e->getMessage()));
         }
+
     }
 
     /**

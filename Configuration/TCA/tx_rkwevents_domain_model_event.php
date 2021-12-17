@@ -35,66 +35,60 @@ return [
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
             'showitem' => '
-                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, start, end, document_type, series, department, organizer, categories, recommended_events,
+                record_type,--palette--;;1, --palette--;;startEnd, title, subtitle, document_type, series, department, organizer, categories, 
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                trainer, keywords, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
+                code, trainer, keywords, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
-                ' .
-                // seats, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, ext_cancel_info, ext_cancel_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'reg_end, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, cancel_end, --palette--;;externalCancel, register_add_information,
+                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, ext_reg_link,
+                
+                --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
+                cancel_end, --palette--;;externalCancel, 
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
-                place, be_user, external_contact, longitude, latitude,
+                online_event, online_event_access_link, place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
-                ' .
-                // gallery1, gallery2, presentations, sheet,
-                '
                 presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
-				
-				' .
-                //--div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_workshop,
-				// workshop1, workshop2, workshop3,
-
-                '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
-                starttime, endtime
+                
+                --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
+                register_add_information, recommended_events, 
+		
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+                --palette--;;dataFields, --palette--;;systemFields,
             ',
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
-                record_type, sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, subtitle, code, document_type, series, department, organizer, categories, recommended_events,
+                record_type,--palette--;;1, title, subtitle, document_type, series, department, organizer, categories,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
+                code, trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
-                ' .
-                // seats, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, reg_required, online_event, online_event_access_link, ext_reg_link, ext_cancel_link, survey_before, survey_after, survey_after_mail_tstamp,
-                'reg_end, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, currency, costs_tax, eligibility, reg_required, reg_single, online_event, online_event_access_link, ext_reg_link, cancel_end, --palette--;;externalCancel, register_add_information,
+                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, ext_reg_link,
+                
+                --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
+                cancel_end, --palette--;;externalCancel, 
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
-                place, be_user, external_contact, longitude, latitude,
+                online_event, online_event_access_link, place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
-                ' .
-                // gallery1, gallery2, presentations, sheet,
-                '
                 presentations, sheet,
-
+                
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
-				
-				' .
-                //--div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_workshop,
-                // workshop1, workshop2, workshop3,
+                
+                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
+                register_add_information, recommended_events, 
 
-                '--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,
-                starttime, endtime
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+                --palette--;;dataFields, --palette--;;systemFields, 
             ',
 
             'columnsOverrides' => [
@@ -109,9 +103,25 @@ return [
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
+        'dataFields' => [
+            'showitem' => 'hidden, sys_language_uid, l10n_parent, l10n_diffsource',
+        ],
+        'startEnd' => [
+            'showitem' => 'start, end',
+        ],
+        'registrationRequired' => [
+            'showitem' => 'reg_required, reg_single',
+        ],
+        'costsReduced' => [
+            'showitem' => 'costs_red, costs_red_condition',
+        ],
         'externalCancel' => [
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.externalCancel',
             'showitem' => 'ext_cancel_info, ext_cancel_link',
+        ],
+        'systemFields' => [
+            'showitem' => 'starttime, endtime',
+            'isHiddenPalette' => true,
         ],
     ],
     'columns' => [
@@ -472,6 +482,7 @@ return [
                 'eval' => 'trim',
                 'softref' => 'typolink'
             ],
+            'displayCond' => 'USER:RKW\\RkwEvents\\UserFunctions\\DisplayCond->showCostsRedLink',
         ],
         'costs_tax' => [
             'exclude' => 0,
