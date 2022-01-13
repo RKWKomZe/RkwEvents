@@ -253,7 +253,8 @@ plugin.tx_rkwevents {
         list {
             multipartView {
                 enabled = {$plugin.tx_rkwevents.settings.list.multipartView.enabled}
-                limit = {$plugin.tx_rkwevents.settings.list.multipartView.limit}
+                limitStarted = {$plugin.tx_rkwevents.settings.list.multipartView.limitStarted}
+                limitUpcoming = {$plugin.tx_rkwevents.settings.list.multipartView.limitUpcoming}
             }
             detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
             filter {
