@@ -181,27 +181,32 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
 
             // if: use multiple view (three list types)
             if ($this->settings['list']['multipartView']['enabled']) {
-                $limit = (int) $this->settings['list']['multipartView']['limit'];
+                $limitStarted = (int) $this->settings['list']['multipartView']['limitStarted'];
+                $limitUpcoming = (int) $this->settings['list']['multipartView']['limitUpcoming'];
+
                 $this->view->assignMultiple(
                     array(
                         'showDividedList' => true,
-                        'startedEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', true),
+                        'startedEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitStarted, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', true),
                         'filterStartedEventList' => array(
                             'project' => $this->settings['projectUids'],
                             'recordType' => 'EventScheduled',
                             'onlyStarted' => true
                         ),
-                        'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', false, true),
+                        // Change: Announcements are now also part of "upcoming"
+                        'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitUpcoming, $this->settings, '', false, true),
                         'filterUpcomingEventList' => array(
                             'project' => $this->settings['projectUids'],
                             'recordType' => 'EventScheduled',
                             'onlyUpcoming' => true
                         ),
+                        /*
                         'announcementEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventAnnouncement'),
                         'filterAnnouncementEventList' => array(
                             'project' => $this->settings['projectUids'],
                             'recordType' => 'EventAnnouncement'
                         )
+                        */
                     )
                 );
             } else {

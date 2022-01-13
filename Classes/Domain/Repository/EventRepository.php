@@ -485,7 +485,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         if ($onlyUpcoming) {
-            $constraints[] = $query->greaterThanOrEqual('start', time());
+            $constraints[] =  $query->logicalOr(
+                $query->greaterThanOrEqual('start', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            );
         }
 
         return $query->matching(
@@ -495,6 +499,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 array(
                     'record_type' => QueryInterface::ORDER_DESCENDING,
                     'start' => QueryInterface::ORDER_ASCENDING,
+                    // this is a "fix" for unequal list behavior between the multipart view and the standard list view
+                    'tstamp' => QueryInterface::ORDER_ASCENDING,
                 )
             )
             ->setLimit($limit)
