@@ -197,7 +197,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                         'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitUpcoming, $this->settings, '', false, true),
                         'filterUpcomingEventList' => array(
                             'project' => $this->settings['projectUids'],
-                            'recordType' => 'EventScheduled',
+                            //'recordType' => 'EventScheduled',
                             'onlyUpcoming' => true
                         ),
                         /*
