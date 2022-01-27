@@ -395,7 +395,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
 
             if ($filter['onlyUpcoming']) {
-                $constraints[] = $query->greaterThanOrEqual('start', time());
+                $constraints[] = $query->logicalOr(
+                    $query->greaterThanOrEqual('start', time()),
+                    // include announcements (without start date)
+                    $query->equals('start', 0)
+                );
             }
             if (
                 (ExtensionManagementUtility::isLoaded('rkw_projects'))
