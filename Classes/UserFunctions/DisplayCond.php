@@ -61,19 +61,6 @@ class DisplayCond
     }
 
 
-    /**
-     * showCostsRedLink
-     * just returns if function is activated via TS
-     *
-     * @param array $flexForm
-     * @return bool
-     */
-    public function showCostsRedLink($params)
-    {
-        $settings = $this->getSettings();
-        return $settings['costs']['red']['hint']['enabled'];
-    }
-
 
     /**
      * Returns TYPO3 settings
