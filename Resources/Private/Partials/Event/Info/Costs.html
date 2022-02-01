@@ -34,6 +34,8 @@
 
                                 <f:render section="Taxes" arguments="{_all}" />
 
+                                <f:render section="CostsRedHint" arguments="{_all}" />
+
                             </f:then>
                             <f:else>
                                 <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsFree" />
@@ -44,6 +46,18 @@
 
             </div>
         </div>
+
+        <f:if condition="{event.eligibility}">
+            <div class="table__item">
+                <div class="table__title">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibility" />:
+                </div>
+                <div class="table__content">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibilityPossible" />
+                </div>
+            </div>
+        </f:if>
+
     </f:section>
 
 
@@ -58,9 +72,14 @@
         <f:if condition="{event.costsTax} == 2">
             (<f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsTaxFree" />)
         </f:if>
-        <br/>
-        <f:if condition="{settings.costs.red.hint.link} || {event.costsRedLink}">
 
+    </f:section>
+
+
+    <f:section name="CostsRedHint">
+
+        <f:if condition="{settings.costs.red.hint.link} || {event.costsRedLink}">
+            <br />
             <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" />
             <f:if condition="{event.costsRedLink}">
                 <f:then>
@@ -79,10 +98,7 @@
                 </f:else>
             </f:if>
         </f:if>
-        <br/>
-        <f:if condition="{event.eligibility}">
-            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibility" /><br/>
-        </f:if>
+
     </f:section>
 
 </html>
