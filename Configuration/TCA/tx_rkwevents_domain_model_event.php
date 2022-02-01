@@ -482,7 +482,6 @@ return [
                 'eval' => 'trim',
                 'softref' => 'typolink'
             ],
-            'displayCond' => 'USER:RKW\\RkwEvents\\UserFunctions\\DisplayCond->showCostsRedLink',
         ],
         'costs_tax' => [
             'exclude' => 0,

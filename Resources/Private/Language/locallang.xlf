@@ -613,6 +613,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
                 <source>eligibility</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityPossible" approved="yes">
+                <source>possible</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member?</source>
             </trans-unit>
