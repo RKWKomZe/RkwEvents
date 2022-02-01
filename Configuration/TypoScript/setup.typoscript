@@ -241,8 +241,6 @@ plugin.tx_rkwevents {
         costs {
             red {
                 hint {
-                    # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
-                    enabled = {$plugin.tx_rkwevents.settings.costs.red.hint.enabled}
                     # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
                     # Hint: Can be set and overridden by property event->costsRedLink
                     link = {$plugin.tx_rkwevents.settings.costs.red.hint.link}
