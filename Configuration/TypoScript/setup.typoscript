@@ -260,6 +260,7 @@ plugin.tx_rkwevents {
                 showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
                 showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
                 showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
+                showTimeNumberOfMonths = {$plugin.tx_rkwevents.settings.list.filter.showTimeNumberOfMonths}
                 showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
                 showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
                 showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}

@@ -231,7 +231,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                     'documentTypeList' => $documentTypeList,
                     'categoryList'     => $categoryList,
                     'page',
-                    'timeArrayList' => DivUtility::createMonthListArray(),
+                    'timeArrayList' => DivUtility::createMonthListArray($this->settings['list']['filter']['showTimeNumberOfMonths']),
                     'noEventFound' => $noEventFound
                 )
             );
