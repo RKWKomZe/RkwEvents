@@ -126,6 +126,10 @@ plugin.tx_rkwevents {
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "time"
                 showTime = 0
 
+                # cat=plugin.tx_rkwevents; type=integer; label=number of months which are shown in filter "time"
+                # hint: use value "11" for the maximum amount of months!
+                showTimeNumberOfMonths = 6
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
                 showAddress = 1
 
