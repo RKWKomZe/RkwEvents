@@ -1,7 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-07-15T15:28:16Z" product-name="rkw_events">
-		<header/>
+	<file original="messages" source-language="en" datatype="plaintext" date="2015-07-15T15:28:16Z" product-name="rkw_events" target-language="de">
+		<header>
+      <phase-group>
+        <phase phase-name="approval-1" contact-email="berberich@rkw.de" date="2022-02-08" process-name="approval" contact-name="Melanie" tool-id="lokalize-22.03.70"/>
+      </phase-group>
+      <tool tool-version="22.03.70" tool-id="lokalize-22.03.70" tool-name="Lokalize"/>
+    </header>
 		<body>
 			
 			<!-- tx_rkwevents_domain_model_event -->
@@ -49,9 +54,9 @@
                 <source>Distance</source>
                 <target>Distanz</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.testimonials" approved="yes">
+            <trans-unit id="tx_rkwevents_domain_model_event.testimonials" approved="no">
 				<source>Testimonials  (only for Series)</source>
-				<target>Meinungen von Teilnehmern (nur für Veranstaltungsreihen)</target>
+				<target phase-name="approval-1" state="final">Meinungen von Teilnehmenden (nur für Veranstaltungsreihen)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.description" approved="yes">
 				<source>Description</source>
@@ -73,9 +78,9 @@
 				<source>Schedule as Table</source>
 				<target>Programm als Tabelle</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="no">
 				<source>Partner</source>
-				<target>Partner</target>
+				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.seats" approved="yes">
 				<source>Seats</source>
@@ -166,9 +171,9 @@
 				<source>Series</source>
 				<target>Veranstaltungsreihen</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="no">
 				<source>Logos</source>
-				<target>Partner Logos</target>
+				<target phase-name="approval-1" state="final">Logos Kooperationsbeteiligte</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.currency" approved="yes">
 				<source>Currency</source>
@@ -194,13 +199,13 @@
                 <source>Registration additional information (added to email)</source>
                 <target>E-Mail: Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="no">
 				<source>External Contact (Display and E-Mail)</source>
-				<target>Externer Ansprechpartner (Anzeige und E-Mailbenachrichtigung)</target>
+				<target phase-name="approval-1" state="final">Externe Ansprechperson (Anzeige und E-Mailbenachrichtigung)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="no">
 				<source>Internal Contact (Display only)</source>
-				<target>Interner Ansprechpartner (nur Anzeige)</target>
+				<target phase-name="approval-1" state="final">Interne Ansprechperson (nur Anzeige)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
 				<source>Organizer</source>
@@ -226,9 +231,9 @@
 				<source>Gallery 1 (public)</source>
 				<target>Galerie 1 (öffentlich)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.gallery2" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.gallery2" approved="no">
 				<source>Gallery 2 (for registered users only)</source>
-				<target>Galerie 2 (nur für Teilnehmer)</target>
+				<target phase-name="approval-1" state="final">Galerie 2 (nur für Teilnehmende)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.edit" approved="yes">
 				<source>Edit</source>
@@ -282,9 +287,9 @@
                 <source>Code</source>
                 <target>Veranstaltungs-Nr.</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.trainer" approved="yes">
+            <trans-unit id="tx_rkwevents_domain_model_event.trainer" approved="no">
                 <source>Trainer</source>
-                <target>Trainer / Trainerin</target>
+                <target phase-name="approval-1" state="final">Unterrichtende</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility" approved="yes">
                 <source>Eligibility</source>
@@ -389,9 +394,9 @@
 
 
 			<!-- tx_rkwevents_domain_model_eventcontact -->
-			<trans-unit id="tx_rkwevents_domain_model_eventcontact" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact" approved="no">
 				<source>RKW Events: External Contact</source>
-				<target>RKW Events: Externer Ansprechpartner</target>
+				<target phase-name="approval-1" state="final">RKW Events: Externe Ansprechperson</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation" approved="yes">
 				<source>Salutation</source>
@@ -452,9 +457,9 @@
 
 
 			<!-- tx_rkwevents_domain_model_eventorganizer -->
-			<trans-unit id="tx_rkwevents_domain_model_eventorganizer" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer" approved="no">
 				<source>RKW Events: Organizer</source>
-				<target>RKW Events: Organisator</target>
+				<target phase-name="approval-1" state="final">RKW Events: Organisierende</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation" approved="yes">
 				<source>Salutation</source>
@@ -554,9 +559,9 @@
 				<source>Frontend User</source>
 				<target>Frontend User</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventreservation.add_person" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.add_person" approved="no">
 				<source>Add Person</source>
-				<target>Zugehörige Teilnehmer</target>
+				<target phase-name="approval-1" state="final">Zugehörige Teilnehmende</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.server_host" approved="yes">
 				<source>Domain on registration</source>
@@ -569,9 +574,9 @@
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->
-			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson" approved="no">
 				<source>RKW Events: Reservation Add Person</source>
-				<target>RKW Events: Reservierung - Zugehörige Teilnehmer</target>
+				<target phase-name="approval-1" state="final">RKW Events: Reservierung - Zugehörige Teilnehmende</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation" approved="yes">
 				<source>Salutation</source>
@@ -700,9 +705,9 @@
 				<source>Objective</source>
 				<target>Zielsetzung des Workshops</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.speaker" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.speaker" approved="no">
 				<source>Speaker</source>
-				<target>Sprecher oder Moderator(en) des Workshops</target>
+				<target phase-name="approval-1" state="final">Sprechende oder Moderierende des Workshops</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.available_seats" approved="yes">
 				<source>Seats</source>
