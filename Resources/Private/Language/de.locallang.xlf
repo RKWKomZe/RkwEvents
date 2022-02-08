@@ -103,11 +103,11 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
 				<source>External Contact</source>
-				<target>Externer Ansprechpartner</target>
+				<target>Externer Ansprechperson</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
 				<source>Internal Contact</source>
-				<target>Interner Ansprechpartner</target>
+				<target>Interner Ansprechperson</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.add_info" approved="yes">
 				<source>Additional Information</source>
