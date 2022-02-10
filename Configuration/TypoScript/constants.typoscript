@@ -87,7 +87,29 @@ plugin.tx_rkwevents {
         # cat=plugin.tx_rkwevents; type=boolean; label=Hide GoogleMaps
         hideMap = 0
 
+        costs {
+            red {
+                hint {
+                    
+                    # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
+                    enabled = 0
+                    
+                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
+                    # Hint: Can be overridden by property event->costsRedLink
+                    link =
+                }
+            }
+        }
+
         list {
+
+            multipartView {
+                # cat=plugin.tx_rkwevents; type=bool; label=Use multipart view for list
+                enabled = 0
+                
+                # cat=plugin.tx_rkwevents; type=integer; label=shown items of each part
+                limit = 4
+            }
 
             # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
             detailLinkTargetBlank = 0
@@ -107,6 +129,37 @@ plugin.tx_rkwevents {
 
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
                 showAddress = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "freeOfCharge"
+                showFreeOfCharge = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "eligible"
+                showEligible = 0
+            }
+        }
+
+        listSimilar {
+            # cat=plugin.tx_rkwevents; type=integer; label=Number of items in list similar view
+            itemsPerPage = 6
+
+            # cat=plugin.tx_rkwevents; type=bool; label=Show more link
+            showMoreLink = 1
+
+            # define which similarities between events should be used for the searchQuery for a logical OR
+            # hint: If nothing is set here, absolutely nothing will be found by the query
+            searchQuery {
+            
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by department
+                byDepartment = 1
+                
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by documentType
+                byDocumentType = 1
+                
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by categories
+                byCategories = 1
+                
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by project
+                byProject = 1
             }
         }
 
