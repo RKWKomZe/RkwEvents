@@ -238,14 +238,43 @@ plugin.tx_rkwevents {
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
+        costs {
+            red {
+                hint {
+                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
+                    # Hint: Can be set and overridden by property event->costsRedLink
+                    link = {$plugin.tx_rkwevents.settings.costs.red.hint.link}
+                }
+            }
+        }
+
         list {
+            multipartView {
+                enabled = {$plugin.tx_rkwevents.settings.list.multipartView.enabled}
+                limitStarted = {$plugin.tx_rkwevents.settings.list.multipartView.limitStarted}
+                limitUpcoming = {$plugin.tx_rkwevents.settings.list.multipartView.limitUpcoming}
+            }
             detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
             filter {
                 showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
                 showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
                 showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
                 showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
+                showTimeNumberOfMonths = {$plugin.tx_rkwevents.settings.list.filter.showTimeNumberOfMonths}
                 showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
+                showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
+                showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}
+            }
+        }
+
+        listSimilar {
+            itemsPerPage = {$plugin.tx_rkwevents.settings.listSimilar.itemsPerPage}
+            showMoreLink = {$plugin.tx_rkwevents.settings.listSimilar.showMoreLink}
+            searchQuery {
+                byDepartment = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDepartment}
+                byDocumentType = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDocumentType}
+                byCategories = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byCategories}
+                byProject = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byProject}
             }
         }
 

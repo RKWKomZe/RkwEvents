@@ -156,6 +156,14 @@
 				<source>Company</source>
 				<target>Firma</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.phone" approved="yes">
+                <source>Phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.mobile" approved="yes">
+                <source>Mobile</source>
+                <target>Mobil</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.address" approved="yes">
 				<source>Address</source>
 				<target>Adresse</target>
@@ -204,7 +212,6 @@
                 <source>This event does not exist anymore.</source>
                 <target>Die gewünschte Veranstaltung ist leider nicht mehr online. Nutzen Sie unsere Veranstaltungssuche, um mögliche Alternativen zu finden.</target>
             </trans-unit>
-
 
 			<!-- EventReservationController -->
 			<trans-unit id="eventReservationController.message.noUserLoggedIn">
@@ -453,6 +460,25 @@
 				<source>Sorry, no events found.</source>
 				<target>Leider konnten wir keine Veranstaltungen für Sie finden.</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_list.backToList" approved="yes">
+                <source>Back to list</source>
+                <target>Zurück zur Übersicht</target>
+            </trans-unit>
+
+			<!-- Templates/Event/Similar.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.similarEvents" approved="yes">
+                <source>Similar events</source>
+                <target>Ähnliche Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.header" approved="yes">
+                <source>Also interesting</source>
+                <target>Auch interessant</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.noResults" approved="yes">
+                <source>No results</source>
+                <target>Keine passenden Veranstaltungen</target>
+            </trans-unit>
+
 
 			<!-- Templates/Event/Archive.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_event_archive.noEvent" approved="yes">
@@ -518,6 +544,14 @@
 				<source>The shown event lies in the past</source>
 				<target>Das jetzt im Augenblick betrachtete Event befindet sich in der Vergangenheit</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.template_event_seriesproposal.header" approved="yes">
+                <source>Matching</source>
+                <target>Passend dazu</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.template_event_seriesproposal.noResults" approved="yes">
+                <source>No results</source>
+                <target>Keine passenden Veranstaltungen</target>
+            </trans-unit>
 
 
 
@@ -569,6 +603,14 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
                 <source>All</source>
                 <target>Alle</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.freeOfCharge">
+                <source>Free</source>
+                <target>Kostenlos</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
+                <source>Eligible</source>
+                <target>Förderfähig</target>
             </trans-unit>
 
 
@@ -622,6 +664,25 @@
 				<source>December</source>
 				<target>Dezember</target>
 			</trans-unit>
+
+
+			<!-- Partials/Event/ListSubdivided.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents">
+                <source>Already started events</source>
+                <target>Laufende Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.upcomingEvents">
+                <source>Upcoming events</source>
+                <target>Bevorstehende Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.plannedEvents">
+                <source>Planned events</source>
+                <target>Geplante Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_listsubdivided.showMore">
+                <source>Show more</source>
+                <target>Mehr anzeigen</target>
+            </trans-unit>
 
 
 			<!-- Partials/Event/List/More.html -->
@@ -754,7 +815,19 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
                 <source>eligibility</source>
-                <target>förderfähig</target>
+                <target>Förderung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityPossible" approved="yes">
+                <source>possible</source>
+                <target>möglich</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
+                <source>Want to be a member? </source>
+                <target>Noch kein Mitglied? </target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.link" approved="yes">
+                <source>Click here</source>
+                <target>Hier informieren</target>
             </trans-unit>
 
 
@@ -821,6 +894,14 @@
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
                 <source>Trainer</source>
                 <target>Trainer/in</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancellation" approved="yes">
+                <source>Cancellation</source>
+                <target>Stornierung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" approved="yes">
+                <source>Click here</source>
+                <target>Hier klicken</target>
             </trans-unit>
 
 
@@ -905,6 +986,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.announcement" approved="yes">
                 <source>Announcement</source>
                 <target>Ankündigung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.from" approved="yes">
+                <source>from</source>
+                <target>ab</target>
             </trans-unit>
 
 
@@ -1241,7 +1326,14 @@
                 <source>Registration additional information</source>
                 <target>Zusätzliche Informationen zur Anmeldung</target>
             </trans-unit>
-
+            <trans-unit id="partials_email_details.phone">
+                <source>Phone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.mobile">
+                <source>Mobile</source>
+                <target>Mobil</target>
+            </trans-unit>
 
 
             <!-- Templates/Email/ConfirmationReservationUser.html -->

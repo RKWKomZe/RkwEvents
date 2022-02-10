@@ -87,6 +87,32 @@
 	</div>
 
 
+    <div class="form__field width50">
+        <label class="form-label" for="tx_rkwevents_pi1_phone">
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.phone" />
+            <f:render partial="LabelSuffix" arguments="{field: 'phone', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+        </label>
+        <f:form.textfield
+            id="tx_rkwevents_pi1_phone"
+            property="phone"
+            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.phone}\' or2=\'{editMode}\' />',then:'{newEventReservation.phone}',else:'{frontendUser.phone}')}"
+        />
+    </div>
+
+
+    <div class="form__field width50">
+        <label class="form-label" for="tx_rkwevents_pi1_mobile">
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.mobile" />
+            <f:render partial="LabelSuffix" arguments="{field: 'mobile', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+        </label>
+        <f:form.textfield
+            id="tx_rkwevents_pi1_mobile"
+            property="mobile"
+            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.mobile}\' or2=\'{editMode}\' />',then:'{newEventReservation.mobile}',else:'{frontendUser.mobile}')}"
+        />
+    </div>
+
+
 	<div class="form__field width50">
 		<label class="form-label" for="tx_rkwevents_pi1_address">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.address" />

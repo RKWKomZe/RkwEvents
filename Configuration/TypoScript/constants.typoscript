@@ -90,7 +90,7 @@ plugin.tx_rkwevents {
         costs {
             red {
                 hint {
-                    
+
                     # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
                     enabled = 0
                     
@@ -107,8 +107,11 @@ plugin.tx_rkwevents {
                 # cat=plugin.tx_rkwevents; type=bool; label=Use multipart view for list
                 enabled = 0
                 
-                # cat=plugin.tx_rkwevents; type=integer; label=shown items of each part
-                limit = 4
+                # cat=plugin.tx_rkwevents; type=integer; label=shown items of started events
+                limitStarted = 4
+
+                # cat=plugin.tx_rkwevents; type=integer; label=shown items of upcoming events
+                limitUpcoming = 8
             }
 
             # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
@@ -126,6 +129,10 @@ plugin.tx_rkwevents {
 
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "time"
                 showTime = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=number of months which are shown in filter "time"
+                # hint: use value "11" for the maximum amount of months!
+                showTimeNumberOfMonths = 6
 
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
                 showAddress = 1

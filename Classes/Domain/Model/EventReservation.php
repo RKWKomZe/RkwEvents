@@ -107,6 +107,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $phone;
 
     /**
+     * mobile
+     *
+     * @var string
+     */
+    protected $mobile;
+
+    /**
      * fax
      *
      * @var string
@@ -463,6 +470,27 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * Returns the mobile
+     *
+     * @return string $mobile
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * Sets the mobile
+     *
+     * @param string $mobile
+     * @return void
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
     }
 
     /**

@@ -95,8 +95,12 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_condition">
 				<source>Price Red Condition</source>
-				<target>Bedingung für reduzierten Preis</target>
+				<target>Bedingung für reduzierten Preis (z.B. "für Mitglieder")</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.costs_red_link">
+                <source>Price Red hint</source>
+                <target>Hinweis-Link in Bezug auf reduzierten Preis (oder per Typoscript: "costs.red.hint.link")</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_tax">
 				<source>Taxes</source>
 				<target>Steuern</target>
@@ -120,16 +124,32 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_single" approved="yes">
 				<source>Only single reservation</source>
-				<target>Nur Einzelanmeldungen erlauben</target>
+				<target>Nur Einzelanmeldungen erlauben (nur für interne Anmeldung relevant)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
 				<source>Registration End</source>
 				<target>Anmeldeschluss</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.cancel_end" approved="yes">
+                <source>Cancel End</source>
+                <target>Stornierungsfrist (1x speichern notwendig, um weitere Eingabefelder sichtbar zu machen)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_reg_link" approved="yes">
 				<source>External Registration Link</source>
-				<target>Externer Anmeldungslink</target>
+				<target>Externer Anmeldungslink (Hinweis: Ersetzt interne Anmeldungsfunktion)</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.externalCancel" approved="yes">
+                <source>External Cancel Palette</source>
+                <target>Infos zur externen Stornierung (Link ist Pflicht; Text ist optional)</target>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_info" approved="yes">
+                <source>External Cancel Info</source>
+                <target>Info zu externer Stornierung</target>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
+                <source>External Cancel Link</source>
+                <target>Link zu externer Stornierung</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
 				<source>Document Type</source>
 				<target>Veranstaltungsart</target>
@@ -172,7 +192,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.register_add_information">
                 <source>Registration additional information (added to email)</source>
-                <target>Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
+                <target>E-Mail: Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
 				<source>External Contact (Display and E-Mail)</source>
@@ -268,9 +288,12 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility" approved="yes">
                 <source>Eligibility</source>
-                <target>Förderfähig</target>
+                <target>Förderfähig (setzt entsprechenden Hinweis "förderfähig" unter den Preis. Ansonsten ohne weitere Funktion)</target>
             </trans-unit>
-
+            <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
+                <source>Recommended Events</source>
+                <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
+            </trans-unit>
 
 
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata" approved="yes">
@@ -281,10 +304,18 @@
 				<source>Registration</source>
 				<target>Anmeldung</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_cancel" approved="yes">
+                <source>Cancel</source>
+                <target>Stornierung</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery" approved="yes">
 				<source>Gallery und Sheets</source>
 				<target>Galerie und Folien</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_other" approved="yes">
+                <source>Other</source>
+                <target>Sonstiges</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_reservation" approved="yes">
 				<source>Reservation</source>
 				<target>Reservierungen</target>
@@ -617,6 +648,10 @@
 				<source>Phone</source>
 				<target>Telefon</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.mobile" approved="yes">
+                <source>Mobile</source>
+                <target>Mobil</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.email" approved="yes">
 				<source>Email</source>
 				<target>Email</target>
@@ -747,7 +782,7 @@
 				<source>General settings</source>
 				<target>Allgemeine Einstellungen</target>
 			</trans-unit>
-			 <trans-unit id="flexform.event.options">
+			<trans-unit id="flexform.event.options">
 				<source>Options</source>
 				<target>Optionen</target>
 			</trans-unit>
@@ -799,6 +834,44 @@
             <trans-unit id="flexform.event.select.events">
                 <source>Select specific events</source>
                 <target>Einzelne Veranstaltungen zur Anzeige auswählen</target>
+            </trans-unit>
+
+
+            <trans-unit id="flexform.event.filterInfo">
+                <source>Filter info</source>
+                <target>Filterinformationen</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDepartmentInfoLink">
+                <source>Link for department</source>
+                <target>Link zu "Themen"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDepartmentInfo">
+                <source>Info for department</source>
+                <target>Infotext zu "Themen"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfoLink">
+                <source>Link for document type</source>
+                <target>Link zu "Veranstaltungsart"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfo">
+                <source>Info for document type</source>
+                <target>Infotext zu "Veranstaltungsart"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showCategoryInfoLink">
+                <source>Link for category</source>
+                <target>Link zu "Kategorie"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showCategoryInfo">
+                <source>Info for category</source>
+                <target>Infotext zu "Kategorie"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showTimeInfoLink">
+                <source>Link for month</source>
+                <target>Link zu "Monat"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showTimeInfo">
+                <source>Info for month</source>
+                <target>Infotext zu "Monat"</target>
             </trans-unit>
 
 

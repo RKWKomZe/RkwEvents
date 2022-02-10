@@ -119,6 +119,12 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.company" approved="yes">
 				<source>Company</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.phone" approved="yes">
+                <source>Phone</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.mobile" approved="yes">
+                <source>Mobile</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.address" approved="yes">
 				<source>Address</source>
 			</trans-unit>
@@ -347,6 +353,20 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_event_list.noEvent" approved="yes">
 				<source>Sorry, no events found.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_list.backToList" approved="yes">
+                <source>Back to list</source>
+            </trans-unit>
+
+			<!-- Templates/Event/Similar.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.similarEvents" approved="yes">
+                <source>Similar events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.header" approved="yes">
+                <source>Also interesting</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listsimilar.noResults" approved="yes">
+                <source>No results</source>
+            </trans-unit>
 
 			<!-- Templates/Event/Archive.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_event_archive.noEvent" approved="yes">
@@ -400,6 +420,12 @@
 			<trans-unit id="tx_rkwevents_fluid.template_event_info.series" approved="yes">
 				<source>Series:</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.template_event_seriesproposal.header" approved="yes">
+                <source>Matching</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.template_event_seriesproposal.noResults" approved="yes">
+                <source>No results</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Filter.html -->
@@ -438,6 +464,12 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
                 <source>All</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.freeOfCharge">
+                <source>Free</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
+                <source>Eligible</source>
             </trans-unit>
 
 
@@ -581,6 +613,15 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibility" approved="yes">
                 <source>eligibility</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityPossible" approved="yes">
+                <source>possible</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
+                <source>Want to be a member?</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.link" approved="yes">
+                <source>Click here</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -632,6 +673,12 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
                 <source>Trainer</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancellation" approved="yes">
+                <source>Cancellation</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancelClick" approved="yes">
+                <source>Click here</source>
             </trans-unit>
 
 
@@ -699,7 +746,9 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.announcement" approved="yes">
                 <source>Announcement</source>
             </trans-unit>
-
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.from" approved="yes">
+                <source>from</source>
+            </trans-unit>
 
 
 			<!-- Templates/EventReservation/New.html -->
@@ -962,6 +1011,12 @@
 			</trans-unit>
             <trans-unit id="partials_email_details.registerAddInformation">
                 <source>Registration additional information</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.phone">
+                <source>Phone</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.mobile">
+                <source>Mobile</source>
             </trans-unit>
 
 

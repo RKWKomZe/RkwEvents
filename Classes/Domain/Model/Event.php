@@ -161,6 +161,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $costsRedCondition;
 
     /**
+     * costsRedLink
+     *
+     * @var string
+     */
+    protected $costsRedLink;
+
+    /**
      * costsTax
      *
      * @var integer
@@ -189,11 +196,32 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $regEnd;
 
     /**
+     * cancelEnd
+     *
+     * @var integer
+     */
+    protected $cancelEnd;
+
+    /**
      * extRegLink
      *
      * @var string
      */
     protected $extRegLink;
+
+    /**
+     * extCancelInfo
+     *
+     * @var string
+     */
+    protected $extCancelInfo;
+
+    /**
+     * extCancelLink
+     *
+     * @var string
+     */
+    protected $extCancelLink;
 
     /**
      * onlineEvent
@@ -401,6 +429,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop>
      */
     protected $workshop3 = null;
+
+    /**
+     * Holds recommendedEvents
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event>
+     */
+    protected $recommendedEvents = null;
 
     /**
      * reminderMailTstamp
@@ -890,6 +925,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the costsRedLink
+     *
+     * @return string $costsRedLink
+     */
+    public function getCostsRedLink()
+    {
+        return $this->costsRedLink;
+    }
+
+    /**
+     * Sets the costsRedLink
+     *
+     * @param string $costsRedLink
+     * @return void
+     */
+    public function setCostsRedLink($costsRedLink)
+    {
+        $this->costsRedLink = $costsRedLink;
+    }
+
+    /**
      * Returns the costsTax
      *
      * @return integer $costsTax
@@ -985,6 +1041,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the cancelEnd
+     *
+     * @return integer $cancelEnd
+     */
+    public function getCancelEnd()
+    {
+
+        return $this->cancelEnd;
+    }
+
+    /**
+     * Sets the cancelEnd
+     *
+     * @param integer $cancelEnd
+     * @return void
+     */
+    public function setCancelEnd($cancelEnd)
+    {
+        $this->cancelEnd = $cancelEnd;
+    }
+
+    /**
      * Returns the extRegLink
      *
      * @return string $extRegLink
@@ -1003,6 +1081,48 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setExtRegLink($extRegLink)
     {
         $this->extRegLink = $extRegLink;
+    }
+
+    /**
+     * Returns the extCancelInfo
+     *
+     * @return string $extCancelInfo
+     */
+    public function getExtCancelInfo()
+    {
+        return $this->extCancelInfo;
+    }
+
+    /**
+     * Sets the extCancelInfo
+     *
+     * @param string $extCancelInfo
+     * @return void
+     */
+    public function setExtCancelInfo($extCancelInfo)
+    {
+        $this->extCancelInfo = $extCancelInfo;
+    }
+
+    /**
+     * Returns the extCancelLink
+     *
+     * @return string $extCancelLink
+     */
+    public function getExtCancelLink()
+    {
+        return $this->extCancelLink;
+    }
+
+    /**
+     * Sets the extCancelLink
+     *
+     * @param string $extCancelLink
+     * @return void
+     */
+    public function setExtCancelLink($extCancelLink)
+    {
+        $this->extCancelLink = $extCancelLink;
     }
 
     /**
@@ -1950,6 +2070,49 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setWorkshop3(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $workshop)
     {
         $this->workshop3 = $workshop;
+    }
+
+    /**
+     * Adds a RecommendedEvents
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $recommendedEvents
+     * @return void
+     */
+    public function addRecommendedEvents(\RKW\RkwEvents\Domain\Model\Event $recommendedEvents)
+    {
+        $this->recommendedEvents->attach($recommendedEvents);
+    }
+
+    /**
+     * Removes a EventWorkshop
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $recommendedEvents
+     * @return void
+     */
+    public function removeRecommendedEvents(\RKW\RkwEvents\Domain\Model\Event $recommendedEvents)
+    {
+        $this->recommendedEvents->detach($recommendedEvents);
+    }
+
+    /**
+     * Returns the EventWorkshop
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $recommendedEvents
+     */
+    public function getRecommendedEvents()
+    {
+        return $this->recommendedEvents;
+    }
+
+    /**
+     * Sets the EventWorkshop
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $recommendedEvents
+     * @return void
+     */
+    public function setRecommendedEvents(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $recommendedEvents)
+    {
+        $this->recommendedEvents = $recommendedEvents;
     }
 
     /**
