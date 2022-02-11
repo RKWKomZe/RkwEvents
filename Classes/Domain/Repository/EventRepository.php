@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEvents\Domain\Repository;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -42,7 +43,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
     // Order by start date
     protected $defaultOrderings = array(
-        'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+        'start' => QueryInterface::ORDER_ASCENDING,
     );
 
 
@@ -252,8 +253,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $categoryList = [];
         if ($filter['category']) {
             // get category first level childs
-            /** @var \RKW\RkwEvents\Domain\Repository\CategoryRepository $categoryRepository */
-            $categoryRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Repository\\CategoryRepository');
+            /** @var CategoryRepository $categoryRepository */
+            $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
             $categoryList = $categoryRepository->findChildrenByParent(intval($filter['category']))->toArray();
             // add parent itself as object
             $categoryList[] = $categoryRepository->findByUid(intval($filter['category']));
@@ -264,7 +265,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if ($filter['address']) {
 
             /** @var \RKW\RkwGeolocation\Service\Geolocation $geoLocation */
-            $geoLocation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwGeolocation\\Service\\Geolocation');
+            $geoLocation = GeneralUtility::makeInstance('RKW\\RkwGeolocation\\Service\\Geolocation');
             $geoLocation->setAddress(filter_var($filter['address'], FILTER_SANITIZE_STRING));
 
             try {
@@ -292,7 +293,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
                 $projectFilter = '';
                 if (
-                    (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
+                    (ExtensionManagementUtility::isLoaded('rkw_projects'))
                     && ($filter['project'])
                     && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
                 ) {
@@ -305,7 +306,17 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                     $timeFilter = ' AND (end < ' . time() . ')';
                 }
 
-                $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
+                $freeOfChargeFilter = '';
+                if ($filter['freeOfCharge']) {
+                    $freeOfChargeFilter = ' AND costs_reg = 0.00';
+                }
+
+                $eligibilityFilter = '';
+                if ($filter['eligible']) {
+                    $eligibilityFilter = ' AND eligibility = 1';
+                }
+
+                $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . $freeOfChargeFilter . $eligibilityFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
 
                 $geoLocation->getQueryStatementDistanceSearch($query, 'tx_rkwevents_domain_model_event', $limit, $offset, $andWhere, 'distance ASC, start ASC');
 
@@ -324,7 +335,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 // 1. Sort by end-date
                 $query->setOrderings(
                     array(
-                        'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+                        'start' => QueryInterface::ORDER_DESCENDING,
                     )
                 );
 
@@ -336,8 +347,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 // 1. Sort by end-date
                 $query->setOrderings(
                     array(
-                        'record_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                        'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                        'record_type' => QueryInterface::ORDER_DESCENDING,
+                        'start' => QueryInterface::ORDER_ASCENDING,
                     )
                 );
 
@@ -375,12 +386,33 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 );
 
             }
+            if ($filter['recordType']) {
+                $constraints[] = $query->equals('recordType', '\RKW\RkwEvents\Domain\Model\\' . $filter['recordType']);
+            }
+
+            if ($filter['onlyStarted']) {
+                $constraints[] = $query->lessThanOrEqual('start', time());
+            }
+
+            if ($filter['onlyUpcoming']) {
+                $constraints[] = $query->logicalOr(
+                    $query->greaterThanOrEqual('start', time()),
+                    // include announcements (without start date)
+                    $query->equals('start', 0)
+                );
+            }
             if (
-                (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
+                (ExtensionManagementUtility::isLoaded('rkw_projects'))
                 && ($filter['project'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
             ) {
                 $constraints[] = $query->in('project', $projectUids);
+            }
+            if ($filter['freeOfCharge']) {
+                $constraints[] = $query->equals('costs_reg', '0.00');
+            }
+            if ($filter['eligible']) {
+                $constraints[] = $query->equals('eligibility', 1);
             }
 
             // NOW: construct final query!
@@ -393,7 +425,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $result = $query->execute();
 
         return $result;
-        //===
     }
 
 
@@ -403,10 +434,13 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param int $limit
      * @param array $settings
+     * @param string $recordType only announcements or scheduled
+     * @param bool $onlyStarted if true only started events are shown
+     * @param bool $onlyUpcoming if true only upcoming (not started) events are shown
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotFinishedOrderAsc($limit, $settings = array())
+    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false)
     {
         $query = $this->createQuery();
         // $query->getQuerySettings()->setRespectStoragePage(false);
@@ -429,7 +463,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $constraints[] = $query->in('uid', $eventUids);
         }
 
-        if ((\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))) {
+        if ((ExtensionManagementUtility::isLoaded('rkw_projects'))) {
             if (
                 ($settings['projectUids'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
@@ -446,13 +480,31 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $query->getQuerySettings()->setRespectStoragePage(false);
         }
 
+        if ($recordType) {
+            $constraints[] = $query->equals('recordType', $recordType);
+        }
+
+        if ($onlyStarted) {
+            $constraints[] = $query->lessThanOrEqual('start', time());
+        }
+
+        if ($onlyUpcoming) {
+            $constraints[] =  $query->logicalOr(
+                $query->greaterThanOrEqual('start', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            );
+        }
+
         return $query->matching(
             $query->logicalAnd($constraints)
         )
             ->setOrderings(
                 array(
-                    'record_type' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                    'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                    'record_type' => QueryInterface::ORDER_DESCENDING,
+                    'start' => QueryInterface::ORDER_ASCENDING,
+                    // this is a "fix" for unequal list behavior between the multipart view and the standard list view
+                    'tstamp' => QueryInterface::ORDER_ASCENDING,
                 )
             )
             ->setLimit($limit)
@@ -479,7 +531,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         if (
-            (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects'))
+            (ExtensionManagementUtility::isLoaded('rkw_projects'))
             && ($settings['projectUids'])
             && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
         ) {
@@ -491,7 +543,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         )
             ->setOrderings(
                 array(
-                    'start' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+                    'start' => QueryInterface::ORDER_DESCENDING,
                 )
             )
             ->setLimit($limit)
@@ -536,13 +588,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->matching(
             $query->logicalAnd(
                 $query->equals('series', $event->getSeries()),
-                $query->greaterThanOrEqual('start', time()),
+                $query->logicalOr(
+                    $query->greaterThanOrEqual('end', time()),
+                    // include announcements (without start date)
+                    $query->equals('start', 0)
+                ),
                 $query->logicalNot(
                     $query->equals('uid', $event)
                 )
             )
         )->execute();
-        //===
     }
 
     /**
@@ -594,6 +649,120 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
+     * findByFilterOptions
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @param int $limit
+     * @param int $page
+     * @param array $settings
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findSimilar($event, $limit, $page, $settings)
+    {
+        // results between 'from' and 'till' (with additional proof item to check, if there are more results -> +1)
+        $offset = $page * $limit;
+        $limit = $limit + 1;
+
+        // if we are on a page > 1, we also fetch none item twice
+        // we need this to figure out which date was the last for grouping!
+        if ($page > 0) {
+            $offset--;
+            $limit++;
+        }
+
+        $query = $this->createQuery();
+
+        // query basics as "AND" query
+        // !! do NOT show already running events !!
+        $constraints = array(
+            $query->logicalOr(
+                $query->greaterThanOrEqual('start', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            ),
+            $query->logicalNot(
+                $query->equals('title', '')
+            ),
+        );
+
+        $query->setOrderings(
+            array(
+                'record_type' => QueryInterface::ORDER_DESCENDING,
+                'start' => QueryInterface::ORDER_ASCENDING,
+            )
+        );
+
+        // exclude given event
+        $constraints[] = $query->logicalNot(
+            $query->equals('uid', $event)
+        );
+
+        // exclude given event series
+        if ($event->getSeries()->count()) {
+            $constraints[] = $query->logicalNot(
+                $query->equals('series', $event->getSeries())
+            );
+        }
+
+        // exclude manually set recommendations (returned through other plugin "seriesProposals")
+        if ($event->getRecommendedEvents()->count()) {
+            $constraints[] = $query->logicalNot(
+                $query->in('uid', $event->getRecommendedEvents())
+            );
+        }
+
+        // for all options which could be part of the "similar query"
+        // START: SubQuery
+        $constraintsSubQueryOr = array();
+
+        if (
+            $settings['listSimilar']['searchQuery']['byDepartment']
+            && $event->getDepartment()
+        ) {
+            $constraintsSubQueryOr[] = $query->equals('department', $event->getDepartment());
+        }
+         if (
+             $settings['listSimilar']['searchQuery']['byDocumentType']
+             && $event->getDocumentType())
+         {
+             $constraintsSubQueryOr[] = $query->equals('documentType', $event->getDocumentType());
+         }
+         if (
+             $settings['listSimilar']['searchQuery']['byCategories']
+             && $event->getCategories()->count())
+         {
+             $categoryQueries[] = $query->in('categories', $event->getCategories());
+             $constraintsSubQueryOr[] = $query->logicalOr($categoryQueries);
+         }
+         if (
+             ExtensionManagementUtility::isLoaded('rkw_projects')
+             && $settings['listSimilar']['searchQuery']['byProject']
+             && $event->getProject()
+         ) {
+             $constraintsSubQueryOr[] = $query->equals('project', $event->getProject());
+         }
+
+         // fallback, if nothing is set
+         // avoid error: "There must be at least one constraint or a non-empty array of constraints given. "
+         if (!$constraintsSubQueryOr) {
+             // give something in
+             $constraintsSubQueryOr[] = $query->equals('uid', 0);
+         }
+        // END: SubQuery
+
+        // add OR elements as subQuery
+        $constraints[] = $query->logicalOr($constraintsSubQueryOr);
+
+        // NOW: construct final query!
+        $query->matching($query->logicalAnd($constraints));
+        $query->setOffset($offset);
+        $query->setLimit($limit);
+
+        return $query->execute();
+    }
+
+    /**
      * Returns logger instance
      *
      * @return \TYPO3\CMS\Core\Log\Logger
@@ -602,7 +771,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
         }
 
         return $this->logger;
@@ -677,7 +846,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         // @toDo: Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $storagePidString);
+        return GeneralUtility::trimExplode(',', $storagePidString);
         //===
     }
 
@@ -693,17 +862,16 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     private function getTsForPage($pageId)
     {
         /** @var \TYPO3\CMS\Core\TypoScript\TemplateService $template */
-        $template = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
+        $template = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
         $template->tt_track = 0;
         $template->init();
 
         /** @var \TYPO3\CMS\Frontend\Page\PageRepository $sysPage */
-        $sysPage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
+        $sysPage = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
         $rootLine = $sysPage->getRootLine(intval($pageId));
         $template->runThroughTemplates($rootLine, 0);
         $template->generateConfig();
 
         return $template->setup['plugin.']['tx_rkwevents.'];
-        //===
     }
 }

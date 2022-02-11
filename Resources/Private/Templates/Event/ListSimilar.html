@@ -1,0 +1,102 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <f:layout name="Default" />
+
+    <f:section name="main">
+
+        <h5 class="asideinner__title">
+            <f:translate key="tx_rkwevents_fluid.templates_event_listsimilar.header" />
+        </h5>
+
+        <f:if condition="<f:count>{sortedEventList}</f:count>">
+            <f:then>
+                <ul class="iconlist">
+                    <f:for each="{sortedEventList}" as="event" iteration="iterator">
+                        <f:render partial="Event/List/Reduced" arguments="{_all}" />
+                    </f:for>
+                </ul>
+            </f:then>
+            <f:else>
+                <f:translate key="tx_rkwevents_fluid.templates_event_listsimilar.noResults" />
+            </f:else>
+        </f:if>
+        
+        <!-- Version for big boxes below - NOT USED -->
+        <f:comment>
+            <f:render partial="FlashMessages" arguments="{_all}" />
+    
+            <f:if condition="{noEventFound}">
+                <f:comment><!-- If redirected from showAction after no event was found --></f:comment>
+                <div class="system-message system-message--scroll" role="alert">
+                    <div class="system-message__item system-message__item--alert-danger">
+                        <f:translate key="eventController.message.error.notAvailable2" extensionName="RkwEvents" />
+                    </div>
+                </div>
+            </f:if>
+            
+            <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
+    
+                <div class="tiles-wrapper">
+                    <div class="flex center-main mt-3">
+                        <div class="flex-container introtext">
+                            <h3 class="section__headline h3">
+                                <f:translate key="tx_rkwevents_fluid.templates_event_listsimilar.similarEvents" extensionName="RkwEvents" />
+                            </h3>
+                        </div>
+                    </div>
+    
+                    <f:if condition="<f:count>{sortedEventList}</f:count>">
+                        <f:then>
+                            <!-- simple element list without nesting -->
+                            <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
+                                <div class="tiles flex-container flex-container--margin">
+    
+                                    <f:for each="{sortedEventList}" as="event">
+                                        <f:render partial="Event/List/Box" section="flex-4" arguments="{_all}" />
+                                    </f:for>
+                                </div>
+                            </rkwAjax:ajaxWrapper>
+    
+                            <!-- lazy loading / load more box -->
+                            <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
+                                <f:if condition="{showMoreLink}">
+                                    <div class="flex-container flex-basis-12">
+                                        <f:comment><!-- Important: Provide also pi1 param for detail view. Otherwise the ajax request will fail --></f:comment>
+                                        <f:link.action
+                                            action="listSimilar"
+                                            controller="Event"
+                                            pluginName="similar"
+                                            extensionName="RkwEvents"
+                                            class="btn btn--primary btn--centered mt-1 ajax"
+                                            additionalParams="{tx_rkwevents_pi1: '{event: currentEvent}', tx_rkwevents_similar: '{event: currentEvent, page: pageMore}', rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'2,3\'}'}"
+                                        >
+                                        <strong><f:translate key="tx_rkwevents_fluid.partials_event_list_more.showMore" extensionName="RkwEvents" /></strong>
+    
+                                        </f:link.action>
+                                    </div>
+                                </f:if>
+                            </rkwAjax:ajaxWrapper>
+    
+                        </f:then>
+                        <f:else>
+                            <div class="flex-container flex-basis-12 center-main">
+                                <div class="no-results">
+                                    <p class="no-results__headline">
+                                        <f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="RkwEvents" />
+                                    </p>
+                                </div>
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
+    
+            </rkwAjax:ajaxWrapper>
+            
+        </f:comment>
+
+    </f:section>
+
+</html>

@@ -21,7 +21,7 @@
                     <f:comment><!-- DEPARTMENT --></f:comment>
                     <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
                         <f:form.select
-                            class="ajax select-field select-field--longer"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showDepartmentLink}', then: ' select-field--info')}"
                             id="department-select"
                             name="filter[department]"
                             value="{filter.department}"
@@ -31,13 +31,20 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopics' />"
                             prependOptionValue="0"
                         />
+                        <f:if condition="{settings.list.filter.showDepartmentLink}">
+                            <f:link.page pageUid="{settings.list.filter.showDepartmentLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDepartmentInfo}">
+                                <svg class="icon icon--32">
+                                    <use xlink:href="#ic-info" />
+                                </svg>
+                            </f:link.page>
+                        </f:if>
                     </f:if>
 
 
                     <f:comment><!-- DOCUMENT TYPE --></f:comment>
                     <f:if condition="{documentTypeList} && {settings.list.filter.showDocumentType}">
                         <f:form.select
-                            class="ajax select-field select-field--longer"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showDocumentTypeLink}', then: ' select-field--info')}"
                             id="document-type-select"
                             name="filter[documentType]"
                             value="{filter.documentType}"
@@ -47,6 +54,13 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />"
                             prependOptionValue="0"
                         />
+                        <f:if condition="{settings.list.filter.showDocumentTypeLink}">
+                            <f:link.page pageUid="{settings.list.filter.showDocumentTypeLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDocumentTypeInfo}">
+                                <svg class="icon icon--32">
+                                    <use xlink:href="#ic-info" />
+                                </svg>
+                            </f:link.page>
+                        </f:if>
                     </f:if>
 
 
@@ -56,7 +70,7 @@
                     <f:comment><!-- TIME --></f:comment>
                     <f:if condition="{timeArrayList} && {settings.list.filter.showTime}">
                         <f:form.select
-                            class="ajax select-field select-field--longer"
+                            class="ajax select-field select-field--longer{f:if(condition: '{settings.list.filter.showTimeLink}', then: ' select-field--info')}"
                             id="time-select"
                             name="filter[time]"
                             value="{filter.time}"
@@ -66,6 +80,13 @@
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelMonth' />"
                             prependOptionValue="0"
                         />
+                        <f:if condition="{settings.list.filter.showTimeLink}">
+                            <f:link.page pageUid="{settings.list.filter.showTimeLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showTimeInfo}">
+                                <svg class="icon icon--32">
+                                    <use xlink:href="#ic-info" />
+                                </svg>
+                            </f:link.page>
+                        </f:if>
                     </f:if>
 
                     <f:comment><!-- ADDRESS -->
@@ -89,6 +110,26 @@
                         </f:if>
                     </f:comment>
 
+                    <f:comment><!-- freeOfCharge --></f:comment>
+                    <f:if condition="{settings.list.filter.showFreeOfCharge}">
+                        <div class="checkbox-field">
+                            <f:form.checkbox class="checkbox" id="freeOfCharge" name="filter[freeOfCharge]" value="1" />
+                            <label for="freeOfCharge" class="checkbox-label">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.freeOfCharge" />
+                            </label>
+                        </div>
+                    </f:if>
+
+                    <f:comment><!-- eligible --></f:comment>
+                    <f:if condition="{settings.list.filter.showEligible}">
+                        <div class="checkbox-field">
+                            <f:form.checkbox class="checkbox" id="eligible" name="filter[eligible]" value="1" />
+                            <label for="eligible" class="checkbox-label">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.eligible" />
+                            </label>
+                        </div>
+                    </f:if>
+
                 </div>
 
                 <f:comment>
@@ -97,8 +138,15 @@
                     <input type="hidden" name="type" value="{ajaxTypeNum}">
                 </f:comment>
 
-                <!-- Project filter from Plugin -->
+                <f:comment><!-- Project filter from Plugin --></f:comment>
                 <f:form.hidden name="filter[project]" value="{filter.project}" />
+
+                <f:comment><!-- additional hidden filter options (if subdivided list is used) --></f:comment>
+                <f:if condition="{settings.list.multipartView.enabled}">
+                    <f:form.hidden name="filter[recordType]" value="{filter.recordType}" />
+                    <f:form.hidden name="filter[onlyStarted]" value="{filter.onlyStarted}" />
+                    <f:form.hidden name="filter[onlyUpcoming]" value="{filter.onlyUpcoming}" />
+                </f:if>
 
             </f:form>
         </f:else>

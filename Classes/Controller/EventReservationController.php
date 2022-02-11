@@ -3,9 +3,13 @@
 namespace RKW\RkwEvents\Controller;
 
 use RKW\RkwBasics\Helper\Common;
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -162,20 +166,19 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action new
      * Hint: Set default $event-Param to null for possibility to lead users,if event link is not longer available
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation
+     * @param Event $event
+     * @param EventReservation $newEventReservation
      * @ignorevalidation $event
      * @ignorevalidation $newEventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function newAction(\RKW\RkwEvents\Domain\Model\Event $event = null, \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation = null)
+    public function newAction(Event $event = null, EventReservation $newEventReservation = null)
     {
         // catch all people who are trying to visit a dead reservation link
-        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+        if (!$event instanceof Event) {
             $this->redirect('show', 'Event', null, array(), $this->settings['showPid']);
-            //===
         }
 
         if ($this->getFrontendUser()) {
@@ -185,7 +188,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
                 // already registered!
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events')
+                    LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events')
                 );
 
                 $uri = $this->uriBuilder->reset()
@@ -193,7 +196,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     ->uriFor('myEvents', null, 'Event', null, 'Pi1');
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.hint.reservations',
                         'rkw_events',
                         array(
@@ -205,12 +208,11 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
                 // already registered
                 $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-                //===
             }
         }
 
         if (!$newEventReservation) {
-            $newEventReservation = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
+            $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
         }
 
         $newEventReservation->setEvent($event);
@@ -226,7 +228,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action create
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation
+     * @param EventReservation $newEventReservation
      * @param integer $terms
      * @param integer $privacy
      * @validate $newEventReservation \RKW\RkwEvents\Validation\Validator\EventReservationValidator
@@ -239,7 +241,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function createAction(\RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation, $terms = null, $privacy = null)
+    public function createAction(EventReservation $newEventReservation, $terms = null, $privacy = null)
     {
         // 1. Check for existing reservations based on email.
         $frontendUser = $this->frontendUserRepository->findByUsername($newEventReservation->getEmail());
@@ -250,7 +252,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
                 // already registered!
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.error.exists', 'rkw_events'
                     ),
                     '',
@@ -270,7 +272,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 }
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.hint.reservations',
                         'rkw_events',
                         array(
@@ -290,7 +292,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if (!DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation)) {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.error.seats', 'rkw_events'
                 ),
                 '',
@@ -304,7 +306,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if (DivUtility::hasRegTimeEnded($newEventReservation->getEvent())) {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.error.registration_time', 'rkw_events'
                 ),
                 '',
@@ -320,7 +322,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if (!$terms) {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.error.acceptTerms', 'rkw_events'
                 ),
                 '',
@@ -335,7 +337,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // 5. check if email is valid
         if (!\RKW\RkwRegistration\Tools\Registration::validEmail($newEventReservation->getEmail())) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.error.no_valid_email', 'rkw_events'
                 ),
                 '',
@@ -350,7 +352,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // 6. privacy
         if (!$privacy) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'registrationController.error.accept_privacy', 'rkw_registration'
                 ),
                 '',
@@ -373,7 +375,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             \RKW\RkwRegistration\Tools\Privacy::addPrivacyData($this->request, $this->getFrontendUser(), $newEventReservation, 'new event reservation');
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.message.reservationCreated', 'rkw_events'),
+                LocalizationUtility::translate('eventReservationController.message.reservationCreated', 'rkw_events'),
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
             );
@@ -387,7 +389,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             ) {
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.error.email_already_in_use', 'rkw_events'
                     ),
                     '',
@@ -400,7 +402,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
             // register new user or simply send opt-in to existing user
             /** @var \RKW\RkwRegistration\Tools\Registration $registration */
-            $registration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwRegistration\\Tools\\Registration');
+            $registration = GeneralUtility::makeInstance('RKW\\RkwRegistration\\Tools\\Registration');
             $registration->register(
                 array(
                     'tx_rkwregistration_gender' => $newEventReservation->getSalutation(),
@@ -420,7 +422,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.reservationCreatedEmail', 'rkw_events',
                     '',
                     \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
@@ -441,7 +443,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * -> Benefit: We can set more helpful error messages for frontend users
      * Added by Maximilian Fäßler | FäßlerWeb
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @param Event $event
      * @ignorevalidation $event
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -453,15 +455,15 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\TooDirtyException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    public function optInAction(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function optInAction(Event $event)
     {
         // General error:
         if (
-            !$event instanceof \RKW\RkwEvents\Domain\Model\Event
+            !$event instanceof Event
             || $event->_isDirty()
         ) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.error.somethingWentWrong', 'rkw_events'),
+                LocalizationUtility::translate('eventReservationController.error.somethingWentWrong', 'rkw_events'),
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
@@ -475,7 +477,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             || !$event->getRegRequired()
         ) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.error.optInDisabled', 'rkw_events'),
+                LocalizationUtility::translate('eventReservationController.error.optInDisabled', 'rkw_events'),
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
@@ -488,7 +490,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $userSha1 = preg_replace('/[^a-zA-Z0-9]/', '', $this->request->getArgument('user'));
 
         /** @var \RKW\RkwRegistration\Tools\Registration $register */
-        $register = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwRegistration\\Tools\\Registration');
+        $register = GeneralUtility::makeInstance('RKW\\RkwRegistration\\Tools\\Registration');
         $check = $register->checkTokens($tokenYes, $tokenNo, $userSha1, $this->request, $data);
 
         if ($check == 1) {
@@ -499,14 +501,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 && ($registration = $data['registration'])
                 && ($registration instanceof \RKW\RkwRegistration\Domain\Model\Registration)
                 && ($newEventReservation = $registration->getData())
-                && ($newEventReservation instanceof \RKW\RkwEvents\Domain\Model\EventReservation)
+                && ($newEventReservation instanceof EventReservation)
                 && ($data['frontendUser'])
                 && ($feUser = $data['frontendUser'])
                 && ($feUser instanceof \RKW\RkwRegistration\Domain\Model\FrontendUser)
             ) {
 
                 // 1. we need to re-fetch the event here, since the number of available seats or the dates may have been changed
-                /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+                /** @var Event $event */
                 $event = $this->eventRepository->findByIdentifier($newEventReservation->getEvent()->getUid());
                 $newEventReservation->setEvent($event);
 
@@ -515,7 +517,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 if (count($eventReservationResult)) {
 
                     $this->addFlashMessage(
-                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events'),
+                        LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events'),
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
@@ -525,7 +527,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                         ->build();
 
                     $this->addFlashMessage(
-                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        LocalizationUtility::translate(
                             'eventReservationController.hint.reservations',
                             'rkw_events',
                             array(
@@ -543,7 +545,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 if (!DivUtility::hasFreeSeats($event, $newEventReservation)) {
 
                     $this->addFlashMessage(
-                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.error.seats', 'rkw_events'),
+                        LocalizationUtility::translate('eventReservationController.error.seats', 'rkw_events'),
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
@@ -556,7 +558,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 if (DivUtility::hasRegTimeEnded($event)) {
 
                     $this->addFlashMessage(
-                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('eventReservationController.error.registration_time', 'rkw_events'),
+                        LocalizationUtility::translate('eventReservationController.error.registration_time', 'rkw_events'),
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
@@ -570,7 +572,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 $this->finalSaveReservation($newEventReservation, $feUser, $registration);
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.message.reservationCreated', 'rkw_events'
                     )
                 );
@@ -584,7 +586,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         } elseif ($check == 2) {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.reservationCanceled', 'rkw_events'
                 )
             );
@@ -596,7 +598,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
 
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+            LocalizationUtility::translate(
                 'eventReservationController.error.reservationError', 'rkw_events'
             ),
             '',
@@ -611,7 +613,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action show
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param EventReservation $eventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
@@ -624,7 +626,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             if ($eventReservation->getFeUser() != $this->getFrontendUser()) {
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.message.error.notPermitted', 'rkw_events'
                     ),
                     '',
@@ -642,7 +644,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         } else {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.noUserLoggedIn', 'rkw_events'
                 ),
                 '',
@@ -658,13 +660,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action edit
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param EventReservation $eventReservation
      * @ignorevalidation $eventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function editAction(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function editAction(EventReservation $eventReservation)
     {
         if ($this->getFrontendUser()) {
 
@@ -672,7 +674,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             if ($eventReservation->getFeUser() != $this->getFrontendUser()) {
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.message.error.notPermitted', 'rkw_events'
                     ),
                     '',
@@ -692,7 +694,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         } else {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.noUserLoggedIn', 'rkw_events'
                 ),
                 '',
@@ -709,7 +711,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action update
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param EventReservation $eventReservation
      * @validate $eventReservation \RKW\RkwEvents\Validation\Validator\EventReservationValidator
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -719,14 +721,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function updateAction(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function updateAction(EventReservation $eventReservation)
     {
         if ($feUser = $this->getFrontendUser()) {
 
             // 1. security check
             if ($eventReservation->getFeUser() != $feUser) {
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.message.error.notPermitted', 'rkw_events'
                     ),
                     '',
@@ -740,7 +742,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
             // 2. only add additional persons that have at least one relevant field set
             /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+            $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
             /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tempObjectStorage */
             $tempObjectStorage = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 
@@ -762,7 +764,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             // if there is no longer place in a workshop, set message. Don't break reservation! Just an info.
             if (!$workshopResult) {
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.error.workshop_full', 'rkw_events'
                     ),
                     '',
@@ -775,7 +777,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 DivUtility::mergeFeUsers($eventReservation, $feUser);
 
                 /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-                $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+                $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
                 /** @var \RKW\RkwRegistration\Domain\Repository\FrontendUserRepository $frontendUserRepository */
                 $frontendUserRepository = $objectManager->get('RKW\\RkwRegistration\\Domain\\Repository\\FrontendUserRepository');
@@ -786,7 +788,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->eventReservationRepository->update($eventReservation);
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.updateSuccess', 'rkw_events'
                 ),
                 '',
@@ -818,7 +820,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
 
             // 8. send information mail to admins from TypoScript
-            $adminUidList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
+            $adminUidList = GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
             if ($adminUidList) {
                 foreach ($adminUidList as $adminUid) {
 
@@ -840,7 +842,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         } else {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.noUserLoggedIn', 'rkw_events'
                 ),
                 '',
@@ -856,13 +858,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action delete
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param EventReservation $eventReservation
      * @ignorevalidation $eventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function deleteAction(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function deleteAction(EventReservation $eventReservation)
     {
         if ($this->getFrontendUser()) {
 
@@ -870,7 +872,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             if ($eventReservation->getFeUser() != $this->getFrontendUser()) {
 
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.message.error.notPermitted', 'rkw_events'
                     ),
                     '',
@@ -887,7 +889,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         } else {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.noUserLoggedIn', 'rkw_events'
                 ),
                 '',
@@ -904,7 +906,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * Removes an reservation
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param EventReservation $eventReservation
      * @ignorevalidation $eventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -913,14 +915,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
-    public function removeAction(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function removeAction(EventReservation $eventReservation)
     {
         if ($this->getFrontendUser()) {
 
             // 1. security check
             if ($eventReservation->getFeUser() != $this->frontendUser) {
                 $this->addFlashMessage(
-                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'eventReservationController.message.error.notPermitted', 'rkw_events'
                     ),
                     '',
@@ -938,7 +940,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->eventReservationRepository->remove($eventReservation);
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.deleteSuccess', 'rkw_events'
                 ),
                 '',
@@ -987,7 +989,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
 
             // 6. send information mail to admins from TypoScript
-            $adminUidList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
+            $adminUidList = GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
             if ($adminUidList) {
                 foreach ($adminUidList as $adminUid) {
 
@@ -1009,7 +1011,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         } else {
 
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.message.noUserLoggedIn', 'rkw_events'
                 ),
                 '',
@@ -1038,7 +1040,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
             if ($eventReservations) {
 
-                /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
+                /** @var EventReservation $eventReservation */
                 foreach ($eventReservations as $eventReservation) {
 
                     // 1. only cancel events that are about to come
@@ -1078,7 +1080,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     }
 
                     // 6. send information mail to admins from TypoScript
-                    $adminUidList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
+                    $adminUidList = GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
                     if ($adminUidList) {
                         foreach ($adminUidList as $adminUid) {
 
@@ -1110,7 +1112,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * This function is used by "createOptInReservationAction" and "create"-function
      * Added by Maximilian Fäßler | FäßlerWeb
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation
+     * @param EventReservation $newEventReservation
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser
      * @param \RKW\RkwRegistration\Domain\Model\Registration $registration
      * @return void
@@ -1119,14 +1121,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    protected function finalSaveReservation(\RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation, \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser, \RKW\RkwRegistration\Domain\Model\Registration $registration = null)
+    protected function finalSaveReservation(EventReservation $newEventReservation, \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser, \RKW\RkwRegistration\Domain\Model\Registration $registration = null)
     {
         // optional service: Merge form data (eventReservation) in frontendUser, if some field is empty
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
             DivUtility::mergeFeUsers($newEventReservation, $feUser);
 
             /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+            $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
             /** @var \RKW\RkwRegistration\Domain\Repository\FrontendUserRepository $frontendUserRepository */
             $frontendUserRepository = $objectManager->get('RKW\\RkwRegistration\\Domain\\Repository\\FrontendUserRepository');
@@ -1139,7 +1141,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // 2. save reservation
         // only add additional persons that have at least one relevant field set
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tempObjectStorage */
         $tempObjectStorage = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 
@@ -1160,7 +1162,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // if there is no longer place in a workshop, set message. Don't break reservation! Just an info.
         if (!$workshopResult) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'eventReservationController.error.workshop_full', 'rkw_events'
                 ),
                 '',
@@ -1206,7 +1208,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         }
 
         // 7. send information mail to admins from TypoScript
-        $adminUidList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
+        $adminUidList = GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
         if ($adminUidList) {
             foreach ($adminUidList as $adminUid) {
 
@@ -1275,7 +1277,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected function getSignalSlotDispatcher()
     {
         if (!$this->signalSlotDispatcher) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+            $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
             $this->signalSlotDispatcher = $objectManager->get('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
         }
 
@@ -1318,7 +1320,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected function getLogger()
     {
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
         }
 
         return $this->logger;
