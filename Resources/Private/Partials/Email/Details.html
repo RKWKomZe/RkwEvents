@@ -13,6 +13,7 @@
 <rkwMailer:frontend.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" />: <rkwEvents:composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
 <f:if condition="{reservation.event.onlineEvent}"><f:else><rkwMailer:frontend.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" />: {reservation.event.place.name}, {reservation.event.place.address}, {reservation.event.place.zip} {reservation.event.place.city}
 </f:else></f:if><rkwMailer:frontend.translate key="partials_email_details.eventCosts" languageKey="{language}" extensionName="rkwEvents" />: <f:if condition="{reservation.event.costsReg}"><f:then>{reservation.event.costsReg -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <rkwMailer:frontend.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /><f:if condition="{reservation.event.costsRed}"> <rkwMailer:frontend.translate key="partials_email_details.eventCostsRegular" languageKey="{language}" extensionName="rkwEvents" /> / {reservation.event.costsRed -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <rkwMailer:frontend.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /> <rkwMailer:frontend.translate key="partials_email_details.eventCostsReduced" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="{reservation.event.costsTax} == 0"> (<rkwMailer:frontend.translate key="partials_email_details.costsTaxExclusive" languageKey="{language}" extensionName="rkwEvents"/>)</f:if><f:if condition="{reservation.event.costsTax} == 1"> (<rkwMailer:frontend.translate key="partials_email_details.costsTaxInclusive" languageKey="{language}" extensionName="rkwEvents"/>)</f:if><f:if condition="{reservation.event.costsTax} == 2"> (<rkwMailer:frontend.translate key="partials_email_details.costsTaxFree" languageKey="{language}" extensionName="rkwEvents"/>)</f:if></f:then><f:else><rkwMailer:frontend.translate key="partials_email_details.eventCostsFree" languageKey="{language}" extensionName="rkwEvents" /></f:else></f:if>
+<f:if condition="{reservation.event.code}"><rkwMailer:frontend.translate key="partials_email_details.code" languageKey="{language}" extensionName="rkwEvents" />: {reservation.event.code}</f:if>
 <f:if condition="{isRegistered}"><f:if condition="{reservation.event.registerAddInformation}"><rkwMailer:frontend.translate key="partials_email_details.registerAddInformation" languageKey="{language}" extensionName="rkwEvents" />: <f:format.stripTags><f:format.nl2br>{reservation.event.registerAddInformation}</f:format.nl2br></f:format.stripTags></f:if>
 <f:if condition="{reservation.event.onlineEvent}"><f:if condition="{reservation.event.onlineEventAccessLink}">
 <rkwMailer:frontend.translate key="partials_email_details.eventAccessLink" languageKey="{language}" extensionName="rkwEvents" />
@@ -80,6 +81,10 @@
 				<rkwMailer:frontend.translate key="partials_email_details.eventCostsFree" languageKey="{language}" extensionName="rkwEvents" />
 			</f:else>
 		</f:if>
+        <f:if condition="{reservation.event.code}">
+            <br/><strong><rkwMailer:frontend.translate key="partials_email_details.code" languageKey="{language}" extensionName="rkwEvents" /></strong>:
+            {reservation.event.code}
+        </f:if>
 	</p>
     <f:if condition="{isRegistered}">
         <f:if condition="{reservation.event.registerAddInformation}">
