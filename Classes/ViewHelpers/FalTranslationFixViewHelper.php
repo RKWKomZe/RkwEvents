@@ -8,12 +8,16 @@ namespace RKW\RkwEvents\ViewHelpers;
  * LICENSE.md file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
- * Abstract class with basic functionality for loop view helpers.
+ * To fix FAL issue for translated records
+ *
+ * !! SHOULD BE DEPRECATED WITH TYPO3 v9 !!
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @copyright Rkw Kompetenzzentrum
@@ -40,19 +44,22 @@ class FalTranslationFixViewHelper extends AbstractViewHelper
         $this->registerArgument('fieldName', 'mixed', 'The property field name of the wanted FAL items');
     }
 
+
     /**
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
-     * @return string
+     * @return array
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-        $GLOBALS['TSFE']->sys_language_uid;
 
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        /** @var \RKW\RkwEvents\Domain\Repository\FileReferenceRepository $fileReferenceRepository */
+        $fileReferenceRepository = $objectManager->get(\RKW\RkwEvents\Domain\Repository\FileReferenceRepository::class);
 
-        $falItem = $arguments['falItem'];
-        var_dump($falItem); exit;
+        return $fileReferenceRepository->findAllByRecordFieldnameAndSysLangUid($arguments['parentRecord'], $arguments['fieldName'], $GLOBALS['TSFE']->sys_language_uid);
     }
 
 

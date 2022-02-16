@@ -120,7 +120,7 @@
                             <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.schedule" />
                         </th>
                         <td>
-                            <f:for each="{event.addInfo}" as="download">
+                            <f:for each="<rkw:falTranslationFix parentRecord='{event}' fieldName='add_info' />" as="download">
                                 <a href="{download.originalResource.publicUrl}" target="_blank" title="{download.originalResource.title}" >
                                     <f:if condition="{download.originalResource.title}">
                                         <f:then>
