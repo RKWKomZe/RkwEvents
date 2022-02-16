@@ -26,5 +26,27 @@ namespace RKW\RkwEvents\Domain\Repository;
  */
 class FileReferenceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    /**
+     * Return all by record, fieldname and sysLanguageUid
+     *
+     * @return mixed
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
 
+    public function findNotFinished()
+    {
+        $query = $this->createQuery();
+
+        $dataMapper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class);
+        $tableName = $dataMapper->getDataMap($className)->getTableName();
+
+        return $query->matching(
+            $query->logicalAnd(
+                $query->equals('sysLanguageUid', $sysLanguageUid),
+                $query->equals('uidForeign', $record->getUid()),
+                $query->equals('tablenames', $getTableOfRecordFunction),
+                $query->equals('fieldName', $fieldName)
+
+            )
+            ->execute();
+    }*/
 }
