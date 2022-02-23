@@ -438,6 +438,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $recommendedEvents = null;
 
     /**
+     * headerImage
+     *
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     */
+    protected $headerImage = null;
+
+    /**
      * reminderMailTstamp
      *
      * @var integer
@@ -2155,6 +2162,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSurveyAfterMailTstamp($surveyAfterMailTstamp)
     {
         $this->surveyAfterMailTstamp = $surveyAfterMailTstamp;
+    }
+
+    /**
+     * Returns the headerImage
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $headerImage
+     */
+    public function getHeaderImage()
+    {
+        return $this->headerImage;
+    }
+
+    /**
+     * Sets the headerImage
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $headerImage
+     * @return void
+     */
+    public function setHeaderImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $headerImage)
+    {
+        $this->headerImage = $headerImage;
     }
 
 
