@@ -26,11 +26,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,keywords,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories, recommended_events',
+		'searchFields' => 'title,subtitle,keywords,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, categories, recommended_events, header_image',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility, recommended_events',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility, recommended_events, header_image',
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
@@ -56,7 +56,7 @@ return [
                 reservation,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                register_add_information, recommended_events, 
+                header_image, register_add_information, recommended_events, 
 		
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -85,7 +85,7 @@ return [
                 reservation,
                 
                  --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                register_add_information, recommended_events, 
+                header_image, register_add_information, recommended_events, 
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields, 
@@ -976,6 +976,26 @@ return [
                 'maxitems'      => 99,
                 'size'          => 5,
             ],
+        ],
+        'header_image' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.header_image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'maxitems' => 1,
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                        --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                        --palette--;;filePalette'
+                            ],
+                        ],
+                    ],
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
         ],
     ],
 ];
