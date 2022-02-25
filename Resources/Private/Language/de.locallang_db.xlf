@@ -300,7 +300,7 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.backend_user_exclusive" approved="yes">
                 <source>Backend User exclusive</source>
-                <target>Exklusiv (im Frontend nur sichtbar, wenn man gleichzeit im Backend eingeloggt ist)</target>
+                <target>Nur mit Direktlink erreichbar (außer für im Backend angemeldete Nutzende)</target>
             </trans-unit>
 
 
