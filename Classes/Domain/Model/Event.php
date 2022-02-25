@@ -252,6 +252,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $eligibility = false;
 
     /**
+     * backendUserExclusive
+     *
+     * @var bool
+     */
+    protected $backendUserExclusive = false;
+
+    /**
      * onlineEventAccessLink
      *
      * @var string
@@ -1239,6 +1246,21 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->eligibility = $eligibility;
     }
 
+    /**
+     * @return bool
+     */
+    public function isBackendUserExclusive(): bool
+    {
+        return $this->backendUserExclusive;
+    }
+
+    /**
+     * @param bool $backendUserExclusive
+     */
+    public function setBackendUserExclusive(bool $backendUserExclusive): void
+    {
+        $this->backendUserExclusive = $backendUserExclusive;
+    }
 
     /**
      * Returns the place

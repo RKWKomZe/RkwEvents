@@ -46,9 +46,24 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         'start' => QueryInterface::ORDER_ASCENDING,
     );
 
+    /**
+     *
+     */
+    protected function constraintBackendUserExclusive()
+    {
+        $query = $this->createQuery();
+
+        // if no backend user is logged in, exclude events with property backendUserExclusive = 1
+        if (!$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication) {
+            return $query->logicalNot($query->equals('backendUserExclusive', 1));
+        }
+    }
+
 
     /**
      * Return not finished events
+     *
+     * @deprecated Seems not to be used at the moment
      *
      * @return mixed
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
@@ -60,6 +75,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->matching(
             $query->greaterThanOrEqual('end', time()))
             ->execute();
+
     }
 
 
@@ -92,7 +108,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             )
 
         )->execute();
-        //===
     }
 
 
@@ -120,7 +135,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 )
             )
         )->execute();
-        //===
     }
 
 
@@ -157,7 +171,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         return $query->execute();
-        //===
     }
 
 
@@ -183,7 +196,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('reservation.feUser', $feUser)
             )
         )->execute();
-        //===
     }
 
 
@@ -211,7 +223,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('reservation.feUser', $feUser)
             )
         )->execute();
-        //===
     }
 
 
@@ -240,13 +251,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         $query = $this->createQuery();
-        $constraints = array();
 
         //always
         $constraints[] =
             $query->logicalNot(
                 $query->equals('title', '')
             );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
 
         $geoData = null;
 
@@ -416,7 +428,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
 
             // NOW: construct final query!
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(array_filter($constraints)));
             $query->setOffset($offset);
             $query->setLimit($limit);
         }
@@ -443,18 +455,19 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false)
     {
         $query = $this->createQuery();
-        // $query->getQuerySettings()->setRespectStoragePage(false);
 
-        $constraints = array(
+        $constraints[] =
             $query->logicalOr(
                 $query->greaterThanOrEqual('end', time()),
                 // include announcements (without start date)
                 $query->equals('start', 0)
-            ),
+            );
+        $constraints[] =
             $query->logicalNot(
                 $query->equals('title', '')
-            ),
-        );
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
 
         if (
             ($settings['eventUids'])
@@ -497,7 +510,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         return $query->matching(
-            $query->logicalAnd($constraints)
+            $query->logicalAnd(array_filter($constraints))
         )
             ->setOrderings(
                 array(
@@ -525,10 +538,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
 
         $query = $this->createQuery();
-        $constraints = array(
-            $query->lessThan('end', time()),
-            $query->logicalNot($query->equals('title', '')),
-        );
+        $constraints[] = $query->lessThan('end', time());
+        $constraints[] = $query->logicalNot($query->equals('title', ''));
+
+        $constraints[] = $this->constraintBackendUserExclusive();
 
         if (
             (ExtensionManagementUtility::isLoaded('rkw_projects'))
@@ -539,7 +552,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         return $query->matching(
-            $query->logicalAnd($constraints)
+            $query->logicalAnd(array_filter($constraints))
         )
             ->setOrderings(
                 array(
@@ -569,7 +582,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('start', intval($start))
             )
         )->execute()->getFirst();
-        //===
     }
 
 
@@ -585,7 +597,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
 
-        return $query->matching(
+        // @toDo: If the given $event has no series, all events without series are retrieved. Is this okay as a kind of fallback?
+
+        $constraints[] =
             $query->logicalAnd(
                 $query->equals('series', $event->getSeries()),
                 $query->logicalOr(
@@ -596,8 +610,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->logicalNot(
                     $query->equals('uid', $event)
                 )
-            )
-        )->execute();
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
+
+        return $query->matching($query->logicalAnd(array_filter($constraints)))->execute();
     }
 
     /**
@@ -619,7 +636,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->matching(
             $query->equals('uid', $event)
         )->execute()->getFirst();
-        //===
     }
 
 
@@ -645,7 +661,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
 
         return $query->execute();
-        //===
     }
 
     /**
@@ -675,16 +690,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // query basics as "AND" query
         // !! do NOT show already running events !!
-        $constraints = array(
+        $constraints[] =
             $query->logicalOr(
                 $query->greaterThanOrEqual('start', time()),
                 // include announcements (without start date)
                 $query->equals('start', 0)
-            ),
+            );
+        $constraints[] =
             $query->logicalNot(
                 $query->equals('title', '')
-            ),
-        );
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
 
         $query->setOrderings(
             array(
@@ -755,7 +772,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraints[] = $query->logicalOr($constraintsSubQueryOr);
 
         // NOW: construct final query!
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(array_filter($constraints)));
         $query->setOffset($offset);
         $query->setLimit($limit);
 
@@ -775,7 +792,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         return $this->logger;
-        //===
     }
 
 
@@ -802,7 +818,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $result = $angle * $earthRadius;
 
         return $result < 10 ? round($result, 1) : round($result);
-        //===
     }
 
 
@@ -815,9 +830,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function radians($x)
     {
-
         return $x * pi() / 180;
-        //===
     }
 
 
@@ -847,7 +860,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // @toDo: Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
         return GeneralUtility::trimExplode(',', $storagePidString);
-        //===
     }
 
 
