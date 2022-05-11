@@ -1,7 +1,7 @@
 <?php
 return [
 	'ctrl' => [
-        'adminOnly' => 1,
+        'adminOnly' => 0,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddperson',
 		'label' => 'last_name',
 		'label_alt' => 'first_name',

@@ -127,7 +127,6 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      */
     public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
     {
-
         // get department and document list (for filter)
         $globalEventSettings = \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('rkwEvents', \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $departmentList = $this->departmentRepository->findVisibleAndRestrictedByEvents(strip_tags($globalEventSettings['persistence']['storagePid']));

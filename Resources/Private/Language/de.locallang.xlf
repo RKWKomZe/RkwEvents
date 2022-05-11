@@ -1286,6 +1286,10 @@
 				<source>Free</source>
 				<target>Kostenlos</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.code">
+                <source>Code</source>
+                <target>Veranstaltungs-Nr.</target>
+            </trans-unit>
 			<trans-unit id="partials_email_details.reservationDetails">
 				<source>Details Reservation</source>
 				<target>Details zur Anmeldung</target>

@@ -69,6 +69,8 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	eligibility_link varchar(255) DEFAULT '' NOT NULL,
 
     recommended_events varchar(255) DEFAULT '' NOT NULL,
+    header_image int(11) unsigned DEFAULT '0',
+    backend_user_exclusive tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

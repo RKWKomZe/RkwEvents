@@ -4,17 +4,35 @@
     data-namespace-typo3-fluid="true">
 
     <f:if condition="!{settings.hideMap}">
-        <f:if condition="{event.onlineEvent} == 0">
-            <f:if condition="<rkw:and and1='{event.longitude}' and2='{event.latitude}' />">
-                <!-- show Google-map if geo-data is set -->
-                <f:then>
-                    <rkwGeo:maps longitude='{event.longitude}' latitude="{event.latitude}" height="415px" />
-                </f:then>
-                <f:else>
-                    <rkwGeo:maps zoom="5" noMarker="true" height="415px"/>
-                </f:else>
-            </f:if>
+
+        <f:if condition="{event.headerImage}">
+            <f:then>
+                <picture>
+                    <!-- maxWidth: 1095, breakPoint: 768 -->
+                    <source srcset="{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', width:'1095',height:'768m',cropVariant:'articleDesktop')}" media="(min-width: 768px)">
+                    <!-- maxWidth: 768, breakPoint: 601 -->
+                    <source srcset="{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', width:'768',height:'601m',cropVariant:'articleDesktop')}" media="(min-width: 601px)">
+                    <!-- maxWidth: 601, breakPoint: 321 -->
+                    <source srcset="{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', width:'601',height:'321m',cropVariant:'articleDesktop')}" media="(min-width: 321px)">
+                    <!-- maxWidth: 321, breakPoint: 0 -->
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{event.title}" />
+                </picture>
+            </f:then>
+            <f:else>
+                <f:if condition="{event.onlineEvent} == 0">
+                    <f:if condition="<rkw:and and1='{event.longitude}' and2='{event.latitude}' />">
+                        <!-- show Google-map if geo-data is set -->
+                        <f:then>
+                            <rkwGeo:maps longitude='{event.longitude}' latitude="{event.latitude}" height="415px" />
+                        </f:then>
+                        <f:else>
+                            <rkwGeo:maps zoom="5" noMarker="true" height="415px"/>
+                        </f:else>
+                    </f:if>
+                </f:if>
+            </f:else>
         </f:if>
+
     </f:if>
 
 </html>

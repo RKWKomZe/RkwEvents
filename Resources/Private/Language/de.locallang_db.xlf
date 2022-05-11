@@ -298,6 +298,14 @@
                 <source>Recommended Events</source>
                 <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.header_image" approved="yes">
+                <source>Header image</source>
+                <target>Header Bild (Hinweis: Ersetzt Kartenausschnitt auf Detailseite, wenn gesetzt)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.backend_user_exclusive" approved="yes">
+                <source>Backend User exclusive</source>
+                <target>Exklusiv (im Frontend nur sichtbar, wenn man gleichzeit im Backend eingeloggt ist)</target>
+            </trans-unit>
 
 
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata" approved="yes">
