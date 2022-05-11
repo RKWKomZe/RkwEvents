@@ -252,6 +252,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $eligibility = false;
 
     /**
+     * eligibilityLink
+     *
+     * @var string
+     */
+    protected $eligibilityLink = '';
+
+    /**
+     * backendUserExclusive
+     *
+     * @var bool
+     */
+    protected $backendUserExclusive = false;
+
+    /**
      * onlineEventAccessLink
      *
      * @var string
@@ -1230,6 +1244,44 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEligibility($eligibility)
     {
         $this->eligibility = $eligibility;
+    }
+
+    /**
+     * Returns the eligibilityLink
+     *
+     * @return string $eligibilityLink
+     */
+    public function getEligibilityLink(): string
+    {
+        return $this->eligibilityLink;
+    }
+
+    /**
+     * Sets the eligibilityLink
+     *
+     * @param string $eligibilityLink
+     * @return void
+     */
+    public function setEligibilityLink(string $eligibilityLink): void
+    {
+        $this->eligibilityLink = $eligibilityLink;
+    }
+    
+
+    /**
+     * @return bool
+     */
+    public function isBackendUserExclusive(): bool
+    {
+        return $this->backendUserExclusive;
+    }
+
+    /**
+     * @param bool $backendUserExclusive
+     */
+    public function setBackendUserExclusive(bool $backendUserExclusive): void
+    {
+        $this->backendUserExclusive = $backendUserExclusive;
     }
 
 

@@ -218,6 +218,9 @@
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility" approved="yes">
                 <source>Eligibility</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.eligibility_link" approved="yes">
+                <source>Link to site with information about eligibility</source>
+            </trans-unit>                
             <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
                 <source>Recommended Events</source>
             </trans-unit>
