@@ -43,7 +43,6 @@
                         </f:if>
                     </f:else>
                 </f:if>
-
             </div>
         </div>
 
@@ -54,12 +53,14 @@
                 </div>
                 <div class="table__content">
                     <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibilityPossible" />
+                    <f:render section="EligibilityHint" arguments="{_all}" />
                 </div>
             </div>
         </f:if>
 
     </f:section>
 
+    <f:comment><!-- ===================================================================== --></f:comment>
 
     <f:section name="Taxes">
 
@@ -75,10 +76,11 @@
 
     </f:section>
 
+    <f:comment><!-- ===================================================================== --></f:comment>
 
     <f:section name="CostsRedHint">
 
-        <f:if condition="{settings.costs.red.hint.link} || {event.costsRedLink}">
+        <f:if condition="{settings.costs.red.hint.enabled} && ({settings.costs.red.hint.link} || {event.costsRedLink})">
             <br />
             <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" />
             <f:if condition="{event.costsRedLink}">
@@ -93,6 +95,33 @@
                     <b>
                         <f:link.typolink parameter="{settings.costs.red.hint.link}">
                             <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.link" />
+                        </f:link.typolink>
+                    </b>
+                </f:else>
+            </f:if>
+        </f:if>
+
+    </f:section>
+
+
+    <f:comment><!-- ===================================================================== --></f:comment>
+
+    <f:section name="EligibilityHint">
+
+        <f:if condition="{settings.eligibility.hint.enabled} && ({settings.eligibility.hint.link} || {event.eligibilityLink})">
+            <br />
+            <f:if condition="{event.eligibilityLink}">
+                <f:then>
+                    <b>
+                        <f:link.typolink parameter="{event.eligibilityLink}">
+                            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" />
+                        </f:link.typolink>
+                    </b>
+                </f:then>
+                <f:else>
+                    <b>
+                        <f:link.typolink parameter="{settings.eligibility.hint.link}">
+                            <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" />
                         </f:link.typolink>
                     </b>
                 </f:else>

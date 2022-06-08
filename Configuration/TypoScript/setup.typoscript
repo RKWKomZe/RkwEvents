@@ -241,10 +241,15 @@ plugin.tx_rkwevents {
         costs {
             red {
                 hint {
-                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
-                    # Hint: Can be set and overridden by property event->costsRedLink
+                    enabled = {$plugin.tx_rkwevents.settings.costs.red.hint.enabled}
                     link = {$plugin.tx_rkwevents.settings.costs.red.hint.link}
                 }
+            }
+        }
+        eligibility {
+            hint {
+                enabled = {$plugin.tx_rkwevents.settings.eligibility.hint.enabled}
+                link = {$plugin.tx_rkwevents.settings.eligibility.hint.link}
             }
         }
 
