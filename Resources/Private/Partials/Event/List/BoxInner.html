@@ -109,12 +109,17 @@
                         </f:if>
                     </f:comment>
                 </div>
-                <f:if condition="{event.place}">
-                    <div class="tile__contact-location">
-                        <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
-                        {event.place.city}
-                    </div>
-                </f:if>
+                <div class="tile__contact-location">
+                    <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                    <f:if condition="{event.place}">
+                        <f:then>
+                            {event.place.city}
+                        </f:then>
+                        <f:else>
+                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkw_events' />
+                        </f:else>
+                    </f:if>
+                </div>
             </div>
         </f:link.action>
     </div>

@@ -318,6 +318,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                     $timeFilter = ' AND (end < ' . time() . ')';
                 }
 
+                $onlyOnlineEvents = '';
+                if ($filter['onlyOnlineEvents']) {
+                    $onlyOnlineEvents = ' AND online_event = 1 AND place = ""';
+                }
+
                 $freeOfChargeFilter = '';
                 if ($filter['freeOfCharge']) {
                     $freeOfChargeFilter = ' AND costs_reg = 0.00';
@@ -328,7 +333,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                     $eligibilityFilter = ' AND eligibility = 1';
                 }
 
-                $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . $freeOfChargeFilter . $eligibilityFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
+                $andWhere = $departmentFilter . $documentTypeFilter . $categoryFilter . $projectFilter . $timeFilter . $onlyOnlineEvents . $freeOfChargeFilter . $eligibilityFilter . ' AND pid IN (' . implode(', ', $this->getStoragePid()) . ')';
 
                 $geoLocation->getQueryStatementDistanceSearch($query, 'tx_rkwevents_domain_model_event', $limit, $offset, $andWhere, 'distance ASC, start ASC');
 
@@ -419,6 +424,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
             ) {
                 $constraints[] = $query->in('project', $projectUids);
+            }
+            if ($filter['onlyOnlineEvents']) {
+                $constraints[] = $query->equals('online_event', 1);
+                // for secure, if an event has both information. Then place has priority (Event with place is no online event)
+                $constraints[] = $query->equals('place', '');
             }
             if ($filter['freeOfCharge']) {
                 $constraints[] = $query->equals('costs_reg', '0.00');

@@ -17,12 +17,10 @@
                         <f:render partial="Event/Info/Time" arguments="{_all}" />
                     </f:if>
 
+
                     <!-- Place -->
-                    <f:if condition="{event.onlineEvent} != 1">
-                        <f:if condition="{event.place}">
-                            <f:render partial="Event/Info/Place" arguments="{_all}" />
-                        </f:if>
-                    </f:if>
+                    <f:render partial="Event/Info/Place" arguments="{_all}" />
+
 
                     <!-- Type-->
                     <f:render partial="Event/Info/Type" arguments="{_all}" />
