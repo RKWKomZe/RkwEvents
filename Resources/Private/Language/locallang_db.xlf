@@ -122,6 +122,9 @@
             <trans-unit id="tx_rkwevents_domain_model_event.categories">
                 <source>Category</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.categories_displayed" approved="yes">
+                <source>Category displayed</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.series">
 				<source>Series</source>
 			</trans-unit>

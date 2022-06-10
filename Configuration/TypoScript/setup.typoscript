@@ -267,6 +267,7 @@ plugin.tx_rkwevents {
                 showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
                 showTimeNumberOfMonths = {$plugin.tx_rkwevents.settings.list.filter.showTimeNumberOfMonths}
                 showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
+                showOnlyOnlineEvents = {$plugin.tx_rkwevents.settings.list.filter.showOnlyOnlineEvents}
                 showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
                 showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}
             }

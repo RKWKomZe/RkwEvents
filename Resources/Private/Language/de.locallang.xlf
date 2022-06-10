@@ -526,7 +526,6 @@
             </trans-unit>
 
 
-
             <!-- Templates/Event/Series.html -->
             <trans-unit id="tx_rkwevents_fluid.templates.title.series" approved="yes">
                 <source>Series:</source>
@@ -603,6 +602,10 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
                 <source>All</source>
                 <target>Alle</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.onlyOnlineEvents">
+                <source>Online</source>
+                <target>Online</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.freeOfCharge">
                 <source>Free</source>
@@ -765,6 +768,10 @@
 				<source>Where:</source>
 				<target>Wo:</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_place.online" approved="yes">
+                <source>Online</source>
+                <target>Online</target>
+            </trans-unit>
 
 
 
@@ -994,6 +1001,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.from" approved="yes">
                 <source>from</source>
                 <target>ab</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.online" approved="yes">
+                <source>Online</source>
+                <target>Online</target>
             </trans-unit>
 
 
