@@ -110,6 +110,16 @@
                         </f:if>
                     </f:comment>
 
+                    <f:comment><!-- showOnlyOnlineEvents --></f:comment>
+                    <f:if condition="{settings.list.filter.showOnlyOnlineEvents}">
+                        <div class="checkbox-field">
+                            <f:form.checkbox class="checkbox" id="onlyOnlineEvents" name="filter[onlyOnlineEvents]" value="1" />
+                            <label for="onlyOnlineEvents" class="checkbox-label">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.onlyOnlineEvents" />
+                            </label>
+                        </div>
+                    </f:if>
+
                     <f:comment><!-- freeOfCharge --></f:comment>
                     <f:if condition="{settings.list.filter.showFreeOfCharge}">
                         <div class="checkbox-field">

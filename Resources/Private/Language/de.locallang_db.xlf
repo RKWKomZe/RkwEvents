@@ -167,6 +167,10 @@
                 <source>Category</source>
                 <target>Kategorie</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.categories_displayed" approved="yes">
+                <source>Category displayed</source>
+                <target>Optional: Ausgewählte Kategorie (vorrangige Anzeige im Frontend)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
 				<source>Series</source>
 				<target>Veranstaltungsreihen</target>

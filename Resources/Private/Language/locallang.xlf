@@ -465,6 +465,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
                 <source>All</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.onlyOnlineEvents">
+                <source>Online</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.freeOfCharge">
                 <source>Free</source>
             </trans-unit>
@@ -574,6 +577,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_place.name" approved="yes">
 				<source>Where:</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_info_place.online" approved="yes">
+                <source>Online</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Type.html -->
@@ -752,6 +758,10 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.from" approved="yes">
                 <source>from</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.online" approved="yes">
+                <source>Online</source>
+                <target>Online</target>
             </trans-unit>
 
 

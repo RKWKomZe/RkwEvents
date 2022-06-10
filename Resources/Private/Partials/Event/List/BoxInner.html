@@ -37,11 +37,22 @@
                             </f:then>
                             <f:else>
                                 <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.categories}</f:count>">
-                                    <f:for each="{event.categories}" as="category" iteration="iter">
-                                        <f:if condition="{iter.isFirst}">
-                                            {category.title}
-                                        </f:if>
-                                    </f:for>
+                                    <f:if condition="{event.categoriesDisplayed}">
+                                        <f:then>
+                                            <f:for each="{event.categoriesDisplayed}" as="category" iteration="iter">
+                                                <f:if condition="{iter.isFirst}">
+                                                    {category.title}
+                                                </f:if>
+                                            </f:for>
+                                        </f:then>
+                                        <f:else>
+                                            <f:for each="{event.categories}" as="category" iteration="iter">
+                                                <f:if condition="{iter.isFirst}">
+                                                    {category.title}
+                                                </f:if>
+                                            </f:for>
+                                        </f:else>
+                                    </f:if>
                                 </f:if>
                             </f:else>
                         </f:if>
@@ -109,12 +120,17 @@
                         </f:if>
                     </f:comment>
                 </div>
-                <f:if condition="{event.place}">
-                    <div class="tile__contact-location">
-                        <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
-                        {event.place.city}
-                    </div>
-                </f:if>
+                <div class="tile__contact-location">
+                    <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                    <f:if condition="{event.place}">
+                        <f:then>
+                            {event.place.city}
+                        </f:then>
+                        <f:else>
+                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkw_events' />
+                        </f:else>
+                    </f:if>
+                </div>
             </div>
         </f:link.action>
     </div>
