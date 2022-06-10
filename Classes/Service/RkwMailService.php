@@ -3,6 +3,9 @@
 namespace RKW\RkwEvents\Service;
 
 use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwMailer\Utility\FrontendLocalizationUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -57,7 +60,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function optInRequest(\RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser, \RKW\RkwRegistration\Domain\Model\Registration $registration, $signalInformation)
+    public function optInRequest(
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \RKW\RkwRegistration\Domain\Model\Registration $registration,
+        $signalInformation
+    )
     {
 
         // get settings
@@ -67,7 +74,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
@@ -85,7 +92,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
 
             // set reply address
-            if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors')) {
+            if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
                 if (count($registration->getData()->getEvent()->getInternalContact()) > 0) {
 
                     /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
@@ -94,14 +101,13 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                         if ($contact->getEmail()) {
                             $mailService->getQueueMail()->setReplyAddress($contact->getEmail());
                             break;
-                            //===
                         }
                     }
                 }
             }
 
             $mailService->getQueueMail()->setSubject(
-                \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                FrontendLocalizationUtility::translate(
                     'rkwMailService.optInReservationUser.subject',
                     'rkw_events',
                     null,
@@ -136,12 +142,15 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function confirmReservationUser(\RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function confirmReservationUser(
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+    )
     {
         // send confirmation
         $this->userMail($frontendUser, $eventReservation, 'confirmation', true);
 
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+        if (ExtensionManagementUtility::isLoaded('rkw_survey')) {
             // send additional mail for survey (is some "surveyBefore" ist set in event)
             if ($eventReservation->getEvent()->getSurveyBefore()) {
                 $this->userMail($frontendUser, $eventReservation, 'survey');
@@ -165,7 +174,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function confirmReservationAdmin($backendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function confirmReservationAdmin(
+        $backendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+    )
     {
         $this->adminMail($backendUser, $eventReservation, 'confirmation');
     }
@@ -185,7 +197,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function updateReservationUser(\RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function updateReservationUser(
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+    )
     {
         $this->userMail($frontendUser, $eventReservation, 'update');
     }
@@ -206,7 +221,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function updateReservationAdmin($backendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function updateReservationAdmin(
+        $backendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+    )
     {
         $this->adminMail($backendUser, $eventReservation, 'update');
     }
@@ -227,7 +245,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function deleteReservationUser(\RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function deleteReservationUser(
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+    )
     {
         $this->userMail($frontendUser, $eventReservation, 'delete');
     }
@@ -249,7 +270,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function deleteReservationAdmin($backendUser, \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function deleteReservationAdmin(
+        $backendUser,
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+    )
     {
         $this->adminMail($backendUser, $eventReservation, 'delete', $frontendUser);
     }
@@ -270,7 +295,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function informUpcomingEventUser(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList, \RKW\RkwEvents\Domain\Model\Event $event)
+    public function informUpcomingEventUser(
+        \TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList,
+        \RKW\RkwEvents\Domain\Model\Event $event
+    )
     {
 
         // get settings
@@ -280,7 +308,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
             if (count($eventReservationList)) {
                 /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
@@ -312,9 +340,9 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 //'showPid'        => intval($settingsDefault['showPid']),
                                 // b) Use manually set showPid of EventReservation instead!
                                 'showPid'        => intval($eventReservation->getShowPid()),
-                                'extRelPath'     => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_events'),
+                                'extRelPath'     => ExtensionManagementUtility::extRelPath('rkw_events'),
                             ),
-                            'subject' => \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                            'subject' => FrontendLocalizationUtility::translate(
                                 'rkwMailService.informUpcomingEventUser.subject',
                                 'rkw_events',
                                 array(0 => $eventReservation->getEvent()->getTitle()),
@@ -325,7 +353,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 }
 
                 $mailService->getQueueMail()->setSubject(
-                    \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                    FrontendLocalizationUtility::translate(
                         'rkwMailService.informUpcomingEventUser.subject',
                         'rkw_events',
                         array(0 => $event->getTitle()),
@@ -364,7 +392,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     public function sendSurveyForPastEvent(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList)
     {
 
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+        if (ExtensionManagementUtility::isLoaded('rkw_survey')) {
             // get settings
             $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
             $settingsDefault = $this->getSettings();
@@ -372,7 +400,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             if ($settings['view']['templateRootPaths']) {
 
                 /** @var \RKW\RkwMailer\Service\MailService $mailService */
-                $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+                $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
                 if (count($eventReservationList)) {
                     foreach ($eventReservationList as $eventReservation) {
@@ -389,7 +417,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                     'loginPid'     => intval($settingsDefault['loginPid']),
                                     'showPid'      => intval($settingsDefault['showPid']),
                                 ),
-                                'subject' => \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                                'subject' => FrontendLocalizationUtility::translate(
                                     'rkwMailService.sendSurveyForPastEvent.subject',
                                     'rkw_events',
                                     array(0 => $eventReservation->getEvent()->getTitle()),
@@ -400,7 +428,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     }
 
                     $mailService->getQueueMail()->setSubject(
-                        \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                        FrontendLocalizationUtility::translate(
                             'rkwMailService.sendSurveyForPastEvent.subject',
                             'rkw_events',
                             null,
@@ -439,7 +467,12 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    protected function userMail(\RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation, $action = 'confirmation', $sendCalendarMeeting = false)
+    protected function userMail(
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation,
+        $action = 'confirmation',
+        $sendCalendarMeeting = false
+    )
     {
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
@@ -448,7 +481,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
@@ -473,13 +506,12 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     if ($contact->getEmail()) {
                         $mailService->getQueueMail()->setReplyAddress($contact->getEmail());
                         break;
-                        //===
                     }
                 }
             }
 
             $mailService->getQueueMail()->setSubject(
-                \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                FrontendLocalizationUtility::translate(
                     'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
                     'rkw_events',
                     null,
@@ -523,7 +555,12 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    protected function adminMail($backendUser, \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation, $action = 'confirmation', \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser = null)
+    protected function adminMail(
+        $backendUser,
+        \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation,
+        $action = 'confirmation',
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser = null
+    )
     {
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
@@ -539,7 +576,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
 
             foreach ($recipients as $recipient) {
 
@@ -576,7 +613,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'fullName'     => $name,
                             'language'     => $language,
                         ),
-                        'subject' => \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                        'subject' => FrontendLocalizationUtility::translate(
                             'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                             'rkw_events',
                             null,
@@ -594,7 +631,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                \RKW\RkwMailer\Utility\FrontendLocalizationUtility::translate(
+                FrontendLocalizationUtility::translate(
                     'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                     'rkw_events',
                     null,
@@ -625,6 +662,5 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
         return Common::getTyposcriptConfiguration('Rkwevents', $which);
-        //===
     }
 }

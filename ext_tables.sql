@@ -6,7 +6,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-    record_type varchar(255) DEFAULT '\\RKW\\RkwEvents\\Domain\\Model\\EventScheduled' NOT NULL,
+  record_type varchar(255) DEFAULT '\\RKW\\RkwEvents\\Domain\\Model\\EventScheduled' NOT NULL,
 	title varchar(255) DEFAULT '' NOT NULL,
 	subtitle varchar(255) DEFAULT '' NOT NULL,
 	keywords text,
@@ -26,26 +26,27 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	costs_reg varchar(255) DEFAULT '' NOT NULL,
 	costs_red varchar(255) DEFAULT '' NOT NULL,
 	costs_red_condition varchar(255) DEFAULT '' NOT NULL,
-    costs_red_link varchar(255) DEFAULT '' NOT NULL,
+  costs_red_link varchar(255) DEFAULT '' NOT NULL,
 	costs_tax tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_required tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    reg_single tinyint(1) unsigned DEFAULT '0' NOT NULL,
+  reg_single tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_end int(11) unsigned DEFAULT '0' NOT NULL,
-    cancel_end int(11) unsigned DEFAULT '0' NOT NULL,
+  cancel_end int(11) unsigned DEFAULT '0' NOT NULL,
 	ext_reg_link varchar(255) DEFAULT '' NOT NULL,
-    ext_cancel_info varchar(255) DEFAULT '' NOT NULL,
-    ext_cancel_link varchar(255) DEFAULT '' NOT NULL,
+  ext_cancel_info varchar(255) DEFAULT '' NOT NULL,
+  ext_cancel_link varchar(255) DEFAULT '' NOT NULL,
 	document_type varchar(255) DEFAULT '' NOT NULL,
 	department varchar(255) DEFAULT '' NOT NULL,
-    categories varchar(255) DEFAULT '' NOT NULL,
-    project varchar(255) DEFAULT '' NOT NULL,
+  categories varchar(255) DEFAULT '' NOT NULL,
+  categories_displayed varchar(255) DEFAULT '' NOT NULL,
+  project varchar(255) DEFAULT '' NOT NULL,
 	series varchar(255) DEFAULT '' NOT NULL,
 	logos varchar(255) DEFAULT '' NOT NULL,
 	currency int(11) unsigned DEFAULT '0',
 	place varchar(255) DEFAULT '' NOT NULL,
 	online_event tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	online_event_access_link varchar(255) DEFAULT '' NOT NULL,
-    register_add_information text NOT NULL,
+  register_add_information text NOT NULL,
 	external_contact varchar(255) DEFAULT '' NOT NULL,
 	internal_contact varchar(255) DEFAULT '' NOT NULL,
 	be_user varchar(255) DEFAULT '' NOT NULL,
@@ -55,10 +56,10 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	sheet varchar(255) DEFAULT '' NOT NULL,
 	gallery1 int(11) unsigned DEFAULT '0',
 	gallery2 int(11) unsigned DEFAULT '0',
-    reservation varchar(255) DEFAULT '' NOT NULL,
-    workshop1 varchar(255) DEFAULT '' NOT NULL,
-    workshop2 varchar(255) DEFAULT '' NOT NULL,
-    workshop3 varchar(255) DEFAULT '' NOT NULL,
+  reservation varchar(255) DEFAULT '' NOT NULL,
+  workshop1 varchar(255) DEFAULT '' NOT NULL,
+  workshop2 varchar(255) DEFAULT '' NOT NULL,
+  workshop3 varchar(255) DEFAULT '' NOT NULL,
 	reminder_mail_tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	survey_before varchar(255) DEFAULT '' NOT NULL,
 	survey_after varchar(255) DEFAULT '' NOT NULL,
@@ -68,9 +69,9 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	eligibility tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	eligibility_link varchar(255) DEFAULT '' NOT NULL,
 
-    recommended_events varchar(255) DEFAULT '' NOT NULL,
-    header_image int(11) unsigned DEFAULT '0',
-    backend_user_exclusive tinyint(1) unsigned DEFAULT '0' NOT NULL,
+  recommended_events varchar(255) DEFAULT '' NOT NULL,
+  header_image int(11) unsigned DEFAULT '0',
+  backend_user_exclusive tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -151,7 +152,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventplace (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-    KEY language (l10n_parent,sys_language_uid)
+  KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -187,7 +188,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventcontact (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-    KEY language (l10n_parent,sys_language_uid)
+  KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -211,7 +212,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventorganizer (
 	phone varchar(255) DEFAULT '' NOT NULL,
 	fax varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
-    show_pid int(11) DEFAULT '0' NOT NULL,
+  show_pid int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -225,7 +226,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventorganizer (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-    KEY language (l10n_parent,sys_language_uid)
+  KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -254,7 +255,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventsheet (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-    KEY language (l10n_parent,sys_language_uid)
+  KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -263,16 +264,16 @@ CREATE TABLE tx_rkwevents_domain_model_eventsheet (
 #
 CREATE TABLE tx_rkwevents_domain_model_eventreservation (
 
-  	uid int(11) NOT NULL auto_increment,
-  	pid int(11) DEFAULT '0' NOT NULL,
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) DEFAULT '0' NOT NULL,
 
-  	event int(11) unsigned DEFAULT '0' NOT NULL,
+  event int(11) unsigned DEFAULT '0' NOT NULL,
 
-  	remark text NOT NULL,
-  	valid_until int(11) unsigned DEFAULT '0' NOT NULL,
-  	add_person varchar(255) DEFAULT '' NOT NULL,
-  	fe_user varchar(255) DEFAULT '' NOT NULL,
-  	salutation int(11) DEFAULT '99' NOT NULL,
+  remark text NOT NULL,
+  valid_until int(11) unsigned DEFAULT '0' NOT NULL,
+  add_person varchar(255) DEFAULT '' NOT NULL,
+  fe_user varchar(255) DEFAULT '' NOT NULL,
+  salutation int(11) DEFAULT '99' NOT NULL,
 	first_name varchar(255) DEFAULT '' NOT NULL,
 	last_name varchar(255) DEFAULT '' NOT NULL,
 	company varchar(255) DEFAULT '' NOT NULL,
@@ -280,19 +281,19 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation (
 	zip varchar(255) DEFAULT '' NOT NULL,
 	city varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
-    mobile varchar(255) DEFAULT '' NOT NULL,
+  mobile varchar(255) DEFAULT '' NOT NULL,
 	fax varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	server_host varchar(255) DEFAULT '' NOT NULL,
 	show_pid int(11) unsigned DEFAULT '0' NOT NULL,
 
-  	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-  	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-  	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-  	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+  tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+  crdate int(11) unsigned DEFAULT '0' NOT NULL,
+  cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+  deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-  	PRIMARY KEY (uid),
-  	KEY parent (pid),
+  PRIMARY KEY (uid),
+  KEY parent (pid),
 
 );
 
@@ -301,22 +302,22 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation (
 #
 CREATE TABLE tx_rkwevents_domain_model_eventreservationaddperson (
 
-  	uid int(11) NOT NULL auto_increment,
-  	pid int(11) DEFAULT '0' NOT NULL,
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) DEFAULT '0' NOT NULL,
 
-  	event_reservation int(11) unsigned DEFAULT '0' NOT NULL,
+  event_reservation int(11) unsigned DEFAULT '0' NOT NULL,
 
-  	salutation int(11) DEFAULT '99' NOT NULL,
-  	first_name varchar(255) DEFAULT '' NOT NULL,
-  	last_name varchar(255) DEFAULT '' NOT NULL,
+  salutation int(11) DEFAULT '99' NOT NULL,
+  first_name varchar(255) DEFAULT '' NOT NULL,
+  last_name varchar(255) DEFAULT '' NOT NULL,
 
-  	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-  	crdate int(11) unsigned DEFAULT '0' NOT NULL,
-  	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-  	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+  tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+  crdate int(11) unsigned DEFAULT '0' NOT NULL,
+  cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+  deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-  	PRIMARY KEY (uid),
-  	KEY parent (pid),
+  PRIMARY KEY (uid),
+  KEY parent (pid),
 
 );
 
@@ -355,7 +356,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventworkshop (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
-    KEY language (l10n_parent,sys_language_uid)
+  KEY language (l10n_parent,sys_language_uid)
 
 );
 

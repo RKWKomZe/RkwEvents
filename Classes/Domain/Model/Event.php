@@ -329,6 +329,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $categories;
 
     /**
+     * CategoriesDisplayed
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     */
+    protected $categoriesDisplayed;
+
+    /**
      * A series of events
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSeries>
@@ -538,6 +545,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->workshop2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop3 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->categoriesDisplayed = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -1458,6 +1466,49 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
     {
         $this->categories = $categories;
+    }
+
+    /**
+     * Adds a CategoryDisplayed
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayed
+     * @return void
+     */
+    public function addCategoryDisplayed(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayed)
+    {
+        $this->categoriesDisplayed->attach($categoryDisplayed);
+    }
+
+    /**
+     * Removes a CategoryDisplayed
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayedToRemove The CategoryDisplayed to be removed
+     * @return void
+     */
+    public function removeCategoryDisplayed(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayedToRemove)
+    {
+        $this->categoriesDisplayed->detach($categoryDisplayedToRemove);
+    }
+
+    /**
+     * Returns the categoriesDisplayed
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categoriesDisplayed
+     */
+    public function getCategoriesDisplayed()
+    {
+        return $this->categoriesDisplayed;
+    }
+
+    /**
+     * Sets the categoriesDisplayed
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categoriesDisplayed
+     * @return void
+     */
+    public function setCategoriesDisplayed(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categoriesDisplayed)
+    {
+        $this->categoriesDisplayed = $categoriesDisplayed;
     }
 
     /**

@@ -26,7 +26,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,keywords,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, eligibility_link categories, recommended_events, header_image, backend_user_exclusive',
+		'searchFields' => 'title,subtitle,keywords,start,end,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, eligibility_link, categories, categories_displayed, recommended_events, header_image, backend_user_exclusive',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
@@ -35,7 +35,7 @@ return [
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
             'showitem' => '
-                record_type,--palette--;;1, --palette--;;startEnd, title, subtitle, document_type, series, department, organizer, categories, 
+                record_type,--palette--;;1, --palette--;;startEnd, title, subtitle, document_type, series, department, organizer, categories, categories_displayed, 
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
                 code, trainer, keywords, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
@@ -64,7 +64,7 @@ return [
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
-                record_type,--palette--;;1, title, subtitle, document_type, series, department, organizer, categories,
+                record_type,--palette--;;1, title, subtitle, document_type, series, department, organizer, categories, categories_displayed,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
                 code, trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
@@ -629,6 +629,18 @@ return [
             ],
         ],
         */
+        'categories_displayed' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.categories_displayed',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'itemsProcFunc' => 'RKW\\RkwEvents\\UserFunctions\\TcaProcFunc->getSelectedCategories',
+                'maxitems'      => 1,
+                'size'          => 5,
+
+            ],
+        ],
         'series' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
