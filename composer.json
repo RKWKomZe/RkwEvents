@@ -35,12 +35,12 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
-        "typo3/cms-core": "~7.6.0 || ~8.7.0",
+        "php": ">=7.4",
+        "typo3/cms-core": "~9.5.0",
         "sjbr/static-info-tables": "^6.8.0",
-        "rkw/rkw-basics": "~8.7.22",
-        "rkw/rkw-mailer": "~8.7.35 || ~9.5.0",
-        "rkw/rkw-ajax": "~8.7.6",
+        "rkw/rkw-basics": "~9.5.0 || dev-feature/upgrade9.5",
+        "rkw/rkw-mailer": "~9.5.0",
+        "rkw/rkw-ajax": "~9.5.0 || dev-feature/upgrade9.5",
         "league/csv": "^9.5"
     },
     "autoload": {
