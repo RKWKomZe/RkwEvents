@@ -302,6 +302,10 @@
                 <source>Recommended Events</source>
                 <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.recommended_links" approved="yes">
+                <source>Recommended Links</source>
+                <target>Marginalspalte: Weitere Empfehlungen</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.header_image" approved="yes">
                 <source>Header image</source>
                 <target>Header Bild (Hinweis: Ersetzt Kartenausschnitt auf Detailseite, wenn gesetzt)</target>

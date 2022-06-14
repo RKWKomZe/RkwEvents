@@ -227,6 +227,9 @@
             <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
                 <source>Recommended Events</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.recommended_links" approved="yes">
+                <source>Recommended Links</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.header_image" approved="yes">
                 <source>Header image</source>
             </trans-unit>
