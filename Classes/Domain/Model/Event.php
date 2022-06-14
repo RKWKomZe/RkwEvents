@@ -459,6 +459,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $recommendedEvents = null;
 
     /**
+     * Holds recommendedLinks
+     *
+     * @var string
+     */
+    protected $recommendedLinks = '';
+
+    /**
      * headerImage
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
@@ -2222,6 +2229,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRecommendedEvents(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $recommendedEvents)
     {
         $this->recommendedEvents = $recommendedEvents;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRecommendedLinks(): string
+    {
+        return $this->recommendedLinks;
+    }
+
+    /**
+     * @param string $recommendedLinks
+     */
+    public function setRecommendedLinks(string $recommendedLinks): void
+    {
+        $this->recommendedLinks = $recommendedLinks;
     }
 
     /**
