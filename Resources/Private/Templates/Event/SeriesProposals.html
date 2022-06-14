@@ -6,11 +6,20 @@
         <f:translate key="tx_rkwevents_fluid.template_event_seriesproposal.header" />
     </h5>
 
-    <f:if condition="<f:count>{sortedEventList}</f:count>">
+
+    <f:if condition="<f:count>{sortedEventList}</f:count> || {eventMain.recommendedLinks}">
         <f:then>
             <ul class="iconlist">
+                <f:comment><!-- standard recommendations --></f:comment>
                 <f:for each="{sortedEventList}" as="event" iteration="iterator">
                     <f:render partial="Event/List/Reduced" arguments="{_all}" />
+                </f:for>
+
+                <f:comment><!-- additional links --></f:comment>
+                <f:for each="<rkw:explode delimiter=',' string='{eventMain.recommendedLinks}' />" as="pageUid" iteration="iterator">
+                    <li class="iconlist__item public">
+                        <f:link.page pageUid="{pageUid}"><rkw:pageProperty pageUid='{pageUid}' field='title' /></f:link.page>
+                    </li>
                 </f:for>
             </ul>
         </f:then>

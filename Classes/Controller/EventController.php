@@ -579,6 +579,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
             }
 
             $this->view->assignMultiple(array(
+                'eventMain' => $event,
                 'sortedEventList'  => $eventList,
                 'showPid' => intval($this->settings['showPid'])
             ));
