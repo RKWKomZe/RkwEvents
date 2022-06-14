@@ -15,6 +15,9 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /**
  * Class ExplodeViewHelper
  *
@@ -25,7 +28,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class ExplodeViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -38,13 +41,11 @@ class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
      */
     public function render($delimiter, $string, $optionAsValue = false)
     {
-
-        $dividedOptions = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode("$delimiter", $string);
+        $dividedOptions = GeneralUtility::trimExplode("$delimiter", $string);
 
         // Either: return values as indicated array
         if (!$optionAsValue) {
             return $dividedOptions;
-            //===
         }
 
         // Or: return values as associative array
@@ -54,7 +55,6 @@ class ExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
         }
 
         return $valueArray;
-        //===
     }
 
 
