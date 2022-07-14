@@ -17,7 +17,7 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class PrintArrayKeyViewHelper
  *
- * @deprecated By MF July 2022: Seems no longer used
+ * Hint: ViewHelper still used in RkwTemplate
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
