@@ -37,6 +37,10 @@
 				<source>End</source>
 				<target>Ende Veranstaltung</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.show_time">
+                <source>Show time</source>
+                <target>Zeige Uhrzeit an</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.longitude" approved="yes">
 				<source>Longitude</source>
 				<target>Längengrad</target>
