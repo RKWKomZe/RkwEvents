@@ -17,6 +17,8 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class IsOddViewHelper
  *
+ * @deprecated By MF July 2022: Seems no longer used
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -26,22 +28,28 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class IsOddViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('value', 'mixed', 'The value');
+    }
 
     /**
      * are both values are set
      *
-     * @param mixed $value
      * @return boolean
      */
-    public function render($value)
+    public function render()
     {
-
-        if (($value % 2) == 1) {
+        if (($this->arguments['value'] % 2) == 1) {
             return true;
-            //===
         }
 
         return false;
-        //===
     }
 }

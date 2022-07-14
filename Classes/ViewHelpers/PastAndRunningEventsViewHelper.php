@@ -17,6 +17,8 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class PastAndRunningEventsViewHelper
  *
+ * @deprecated By MF July 2022: Seems no longer used
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -26,25 +28,33 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class PastAndRunningEventsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+    }
+
 
     /**
      * Returns true if event is in the past or running
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $event
      * @return bool
      */
-    public function render(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function render()
     {
-
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+        $event = $this->arguments['event'];
+
         if ($event->getStart() < time()) {
             return true;
-            //===
         } else {
             return false;
-            //===
         }
     }
 }
 
-?>

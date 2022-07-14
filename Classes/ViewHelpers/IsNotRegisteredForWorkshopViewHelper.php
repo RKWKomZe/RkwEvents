@@ -26,25 +26,33 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class IsNotRegisteredForWorkshopViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('eventWorkshop', '\RKW\RkwEvents\Domain\Model\EventWorkshop', 'The event workshop');
+        $this->registerArgument('frontendUser', '\RKW\RkwEvents\Domain\Model\FrontendUser', 'The frontendUser');
+    }
 
     /**
      * check if user is registered for workshop
      * Used for disable a checkbox (or disable not, if user is registered and may want to edit ;-))
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $eventWorkshop
-     * @param \RKW\RkwEvents\Domain\Model\FrontendUser $frontendUser
      * @return boolean
      */
-    public function render($eventWorkshop, $frontendUser)
+    public function render()
     {
+        $eventWorkshop = $this->arguments['eventWorkshop'];
+        $frontendUser = $this->arguments['frontendUser'];
 
         if ($eventWorkshop->getRegisteredFrontendUsers()->offsetExists($frontendUser)) {
             return '';
-            //===
         }
 
         return true;
-        //===
-
     }
 }

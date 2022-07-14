@@ -17,6 +17,8 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class FreePlacesViewHelper
  *
+ * @deprecated By MF July 2022: Seems no longer used
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -28,14 +30,25 @@ class FreePlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 {
 
     /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+    }
+
+    /**
      * Returns status
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
-     * @return string status status of free places
-     * @author Carlos Meyer <cm@davitec.de>
+     * @return string status of free places
      */
-    public function render(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function render()
     {
+        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+        $event = $this->arguments['event'];
 
         $status = array('green', 'yellow', 'red');
 
@@ -53,24 +66,19 @@ class FreePlacesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 
             if ($confirmedReservations <= $fiftyPercent) {
                 return $status[0];
-                //===
             }
             if ($confirmedReservations > $fiftyPercent && $confirmedReservations < $event->getSeats()) {
                 return $status[1];
-                //===
             }
             if ($confirmedReservations >= $event->getSeats()) {
                 return $status[2];
-                //===
             }
 
         } else {
             if ($event->getSeats() > 0) {
                 return $status[0];
-                //===
             } else {
                 return $status[2];
-                //===
             }
         }
     }

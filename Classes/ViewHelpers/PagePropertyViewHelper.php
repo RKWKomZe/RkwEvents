@@ -83,5 +83,5 @@ class PagePropertyViewHelper extends AbstractViewHelper
 
     }
 
-
 }
+

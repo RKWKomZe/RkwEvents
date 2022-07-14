@@ -16,7 +16,10 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Class ExplodeViewHelper
@@ -32,19 +35,31 @@ class ExplodeViewHelper extends AbstractViewHelper
 {
 
     /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('delimiter', 'string', 'The delimiter');
+        $this->registerArgument('string', 'string', 'String to explode');
+        $this->registerArgument('optionAsValue', 'boolean', 'Optional: return values as indicated array', false, false);
+    }
+
+    /**
      * php explode
      *
-     * @param string $delimiter
-     * @param string $string
-     * @param boolean $optionAsValue
      * @return array
      */
-    public function render($delimiter, $string, $optionAsValue = false)
+    public function render(): array
     {
-        $dividedOptions = GeneralUtility::trimExplode("$delimiter", $string);
+        $delimiter = $this->arguments['delimiter'];
+
+        $dividedOptions = GeneralUtility::trimExplode("$delimiter", $this->arguments['string']);
 
         // Either: return values as indicated array
-        if (!$optionAsValue) {
+        if (!$this->arguments['optionAsValue']) {
             return $dividedOptions;
         }
 

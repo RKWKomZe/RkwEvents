@@ -14,6 +14,8 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /**
  * Class ExtensionIsLoadedViewHelper
  *
@@ -28,19 +30,27 @@ class ExtensionIsLoadedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
 {
 
     /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('extensionName', 'string', 'The extension name');
+    }
+
+    /**
      * check if given extension is loaded
      *
-     * @param string $extensionName
      * @return boolean
      */
-    public function render($extensionName)
+    public function render()
     {
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded($extensionName)) {
+        if (ExtensionManagementUtility::isLoaded($this->arguments['extensionName'])) {
             return true;
-            //===
-        } else {
-            return false;
-            //===
         }
+
+        return false;
     }
 }

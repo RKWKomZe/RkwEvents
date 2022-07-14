@@ -29,18 +29,25 @@ use RKW\RkwEvents\Utility\DivUtility;
  */
 class RegTimeEndEventsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+    }
 
     /**
      * Returns true if reg time for event is still running
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return bool
      * @author Carlos Meyer <cm@davitec.de>
      */
-    public function render(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function render()
     {
-
-        return !DivUtility::hasRegTimeEnded($event);
-        //===
+        return !DivUtility::hasRegTimeEnded($this->arguments['event']);
     }
 }

@@ -26,29 +26,35 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class NotFinishedEventsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+    }
 
     /**
      * Returns true if event is still running
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return bool
-     * @author Carlos Meyer <cm@davitec.de>
      */
-    public function render(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function render()
     {
+        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+        $event = $this->arguments['event'];
 
         // by Fäßler: Use startdate, if there is no end date set
         $date = $event->getEnd() ? $event->getEnd() : $event->getStart();
 
-        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         if ($date >= time()) {
             return true;
-            //===
         } else {
             return false;
-            //===
         }
     }
 }
 
-?>

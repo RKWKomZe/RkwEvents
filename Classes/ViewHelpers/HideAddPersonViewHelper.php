@@ -17,6 +17,8 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class HideAddPersonViewHelper
  *
+ * @deprecated By MF July 2022: Seems no longer used
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -26,25 +28,35 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class HideAddPersonViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('addPerson', '\TYPO3\CMS\Extbase\Persistence\ObjectStorage', 'The event');
+        $this->registerArgument('cssClassName', 'string', 'The event');
+        $this->registerArgument('index', 'integer', 'The event');
+    }
 
     /**
      * Returns class or nothing
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationAddPerson $addPerson>
-     * @param string $cssClassName
-     * @param integer $index
      * @return string series names comma separated
      */
     public function render($addPerson, $cssClassName, $index)
     {
+        $addPerson = $this->arguments['addPerson'];
+        $cssClassName = $this->arguments['cssClassName'];
+        $index = $this->arguments['index'];
 
         if ($addPerson->toArray()[$index]) {
             return '';
-            //===
         }
         else {
             return $cssClassName;
-            //===
         }
     }
 }

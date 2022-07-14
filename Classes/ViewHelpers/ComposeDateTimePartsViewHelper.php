@@ -17,6 +17,8 @@ namespace RKW\RkwEvents\ViewHelpers;
 use RKW\RkwBasics\Utility\FrontendLocalizationUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Class ComposeDateTimePartsViewHelper
@@ -30,6 +32,21 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+
+    use CompileWithContentArgumentAndRenderStatic;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event', true);
+        $this->registerArgument('languageKey', 'string', 'Optional language key', false, 'default');
+    }
+
     /**
      * Managed datetime output for detail view and email templates
      * -----------------------------------
@@ -61,12 +78,15 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
      * </f:if>
      * -----------------------------------
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
-     * @param string $languageKey
-     * @return boolean
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @return string
      */
-    public function render($event, $languageKey = 'default')
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
+        $event = $arguments['event'];
+
         // for secure: If an event is hidden or deleted, the following VH content is still callable (and throws errors)
         // (Uncaught TYPO3 Exception: Call to a member function getStart() on null | Error thrown in file /var/www/rkw-kompetenzzentrum.de/surf/releases/20201006153122/web/typo3conf/ext/rkw_events/Classes/ViewHelpers/ComposeDateTimePartsViewHelper.php in line xyz.)
         if (!$event instanceof Event) {
@@ -87,7 +107,7 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
             ) {
                 if (TYPO3_MODE == 'BE') {
                     // for emails send via cron e.g.
-                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $arguments['languageKey']);
                 } else {
                     $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
                 }
@@ -106,7 +126,7 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
                 $output .= date("H:i", $event->getEnd());
                 if (TYPO3_MODE == 'BE') {
                     // for emails send via cron e.g.
-                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
+                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $arguments['languageKey']);
                 } else {
                     $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
                 }

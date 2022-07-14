@@ -26,28 +26,37 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class ProofUserRegisterForEventViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+        $this->registerArgument('frontendUser', '\RKW\RkwEvents\Domain\Model\FrontendUser', 'The frontendUser');
+    }
 
     /**
      * return TRUE, if given frontendUser are registered (for given event)
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
-     * @param \RKW\RkwEvents\Domain\Model\FrontendUser $frontendUser
      * @return bool
      */
-    public function render($event, $frontendUser)
+    public function render()
     {
+        $event = $this->arguments['event'];
+        $frontendUser = $this->arguments['frontendUser'];
 
         /** @var \RKW\RkwEvents\Domain\Model\EventReservation $reservation */
         foreach ($event->getReservation() as $reservation) {
 
             if ($reservation->getFeUser()->getUid() == $frontendUser->getUid()) {
                 return true;
-                //===
             }
         }
 
         return false;
-        //===
     }
 
 }

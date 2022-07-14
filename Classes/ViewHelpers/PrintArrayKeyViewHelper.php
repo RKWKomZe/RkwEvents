@@ -15,7 +15,9 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 
 /**
- * Class AndViewHelper
+ * Class PrintArrayKeyViewHelper
+ *
+ * @deprecated By MF July 2022: Seems no longer used
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
@@ -26,23 +28,32 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class PrintArrayKeyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('array', 'array', 'The array');
+        $this->registerArgument('index', 'int', 'The index');
+    }
 
     /**
      * are both values are set
      *
-     * @param array $array
-     * @param int $index
      * @return string|bool
      */
-    public function render($array, $index)
+    public function render()
     {
+        $array = $this->arguments['array'];
+        $index = $this->arguments['index'];
 
         if ($arrayKeys = array_keys($array)) {
             return $arrayKeys[$index];
-            //===
         }
 
         return false;
-        //===
     }
 }

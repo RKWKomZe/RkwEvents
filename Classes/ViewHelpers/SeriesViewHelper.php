@@ -26,16 +26,25 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class SeriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('series', '\TYPO3\CMS\Extbase\Persistence\ObjectStorage', 'An ObjectStorage With eventSeries');
+    }
 
     /**
      * Returns series names
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSeries> $series
      * @return string series names comma separated
-     * @author Carlos Meyer <cm@davitec.de>
      */
-    public function render(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $series)
+    public function render()
     {
+        $series = $this->arguments['series'];
 
         $names = [];
         /** @var \RKW\RkwEvents\Domain\Model\EventSeries $serie */
@@ -44,6 +53,5 @@ class SeriesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelp
         }
 
         return implode(', ', $names);
-        //===
     }
 }

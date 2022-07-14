@@ -26,17 +26,30 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class OrViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize
+     *
+     * @return void
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('or1', 'mixed', 'The first OR option', true);
+        $this->registerArgument('or2', 'mixed', 'The second OR option', true);
+        $this->registerArgument('firstIsSalutation', 'boolean', 'Special case handling if the first OR option is a saluation');
+    }
 
     /**
      * simple or
      *
-     * @param mixed $or1
-     * @param mixed $or2
-     * @param boolean $firstIsSalutation
      * @return boolean
      */
-    public function render($or1, $or2, $firstIsSalutation = false)
+    public function render()
     {
+        $or1 = intval($this->arguments['or1']);
+        $or2 = intval($this->arguments['or2']);
+        $firstIsSalutation = intval($this->arguments['firstIsSalutation']);
 
         if ($firstIsSalutation) {
 

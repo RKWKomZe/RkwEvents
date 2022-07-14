@@ -17,6 +17,8 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class ExternSignUpViewHelper
  *
+ * @deprecated By MF July 2022: Seems no longer used
+ *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -28,24 +30,32 @@ class ExternSignUpViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 {
 
     /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+    }
+
+    /**
      * Returns true if external sign up
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return bool external sign up
      * @author Carlos Meyer <cm@davitec.de>
      */
-    public function render(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function render()
     {
-
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+        $event = $this->arguments['event'];
+
         if (strlen($event->getExtRegLink()) > 0) {
             return true;
-            //===
-        } else {
-            return false;
-            //===
         }
+
+        return false;
     }
 }
 
-?>

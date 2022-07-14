@@ -36,7 +36,6 @@ class LoopViewHelper extends AbstractLoopViewHelper
      */
     public function initializeArguments()
     {
-
         parent::initializeArguments();
         $this->registerArgument('count', 'integer', 'Number of times to render child content', true);
         $this->registerArgument('minimum', 'integer', 'Minimum number of loops before stopping', false, 0);
@@ -78,7 +77,6 @@ class LoopViewHelper extends AbstractLoopViewHelper
         }
 
         return $content;
-        //===
     }
 
 
@@ -92,6 +90,5 @@ class LoopViewHelper extends AbstractLoopViewHelper
     protected function isLast($i, $from, $to, $step)
     {
         return ($i + $step >= $to);
-        //===
     }
 }

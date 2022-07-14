@@ -15,6 +15,9 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+
 /**
  * Class CalendarGmtDateViewHelper
  *
@@ -28,18 +31,31 @@ namespace RKW\RkwEvents\ViewHelpers;
 class CalendarGmtDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
+    use CompileWithContentArgumentAndRenderStatic;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('date', 'string', 'The date');
+        $this->registerArgument('format', 'string', 'Convert line-breaks to \n. DEPRECATED.', false, 'Ymd\THis');
+    }
+
     /**
      * Return the GMT-converted string for iCalendar
      *
-     * @param string $date
-     * @param string $format
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
      * @return string
      */
-    public function render($date, $format = 'Ymd\THis')
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-
-        return gmdate($format, $date);
-        //===
+        return gmdate($arguments['format'], $arguments['date']);
     }
 
 

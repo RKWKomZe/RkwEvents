@@ -17,7 +17,7 @@ namespace RKW\RkwEvents\ViewHelpers;
 /**
  * Class IfAddPersonExistsViewHelper
  *
- * Problem fluid: We can't check <f:if condition="<f:count>{reservation.addPerson}</f:count>"> because the objects are existing
+ * Problem fluid: We can't check <f:if condition="<f:count>{reservation.addPerson}</f:count>" because the objects are existing
  * even they're empty. This ViewHelper helps to detect, if at least one additional person exists
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
@@ -27,15 +27,27 @@ namespace RKW\RkwEvents\ViewHelpers;
  */
 class IfAddPersonExistsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('eventReservation', '\RKW\RkwEvents\Domain\Model\EventReservation', 'The eventReservation');
+    }
 
     /**
      * returns true, if minimum one additional person is set
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return boolean
      */
-    public function render(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    public function render()
     {
+        /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
+        $eventReservation = $this->arguments['eventReservation'];
+
         /** @var \RKW\RkwEvents\Domain\Model\EventReservationAddPerson $addPerson */
         foreach ($eventReservation->getAddPerson() as $addPerson) {
             if ($addPerson->getFirstName() || $addPerson->getLastName()) {
@@ -44,6 +56,5 @@ class IfAddPersonExistsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
         }
 
         return false;
-        //===
     }
 }

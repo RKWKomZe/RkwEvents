@@ -14,8 +14,13 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+
 /**
  * Class DocumentTypesViewHelper
+ *
+ * @deprecated By MF July 2022: Seems no longer used
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
@@ -27,23 +32,38 @@ namespace RKW\RkwEvents\ViewHelpers;
 class DocumentTypesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
+    use CompileWithContentArgumentAndRenderStatic;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('documentTypes', '\TYPO3\CMS\Extbase\Persistence\ObjectStorage', 'document types names comma separated');
+    }
+
+
     /**
      * Returns document types names
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwBasics\Domain\Model\DocumentType> $documentTypes
-     * @return string document types names comma separated
-     * @author Carlos Meyer <cm@davitec.de>
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @return string
      */
-    public function render(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $documentTypes)
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
         $names = [];
-        foreach ($documentTypes as $documentType) {
+        foreach ($arguments['documentTypes'] as $documentType) {
             $names[] = $documentType->getName();
         }
 
         return implode(',', $names);
-        //===
     }
+
 }
 
 ?>
