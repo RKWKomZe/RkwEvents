@@ -867,6 +867,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3">
 				<source>Workshop unit 3</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateDinner">
+                <source>Participate in dinner</source>
+            </trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1034,6 +1037,12 @@
             </trans-unit>
             <trans-unit id="partials_email_details.mobile">
                 <source>Mobile</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner">
+                <source>Participate in dinner</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner.yes">
+                <source>Yes</source>
             </trans-unit>
 
 

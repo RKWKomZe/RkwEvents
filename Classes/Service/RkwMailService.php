@@ -66,6 +66,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $signalInformation
     )
     {
+        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        $isStandaloneRegisterPlugin = (bool)$request;
+
 
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
@@ -79,14 +83,16 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
                 'marker' => array(
-                    'tokenYes'     => $registration->getTokenYes(),
-                    'tokenNo'      => $registration->getTokenNo(),
-                    'userSha1'     => $registration->getUserSha1(),
-                    'frontendUser' => $frontendUser,
-                    'registration' => $registration,
-                    'pageUid'      => intval($GLOBALS['TSFE']->id),
-                    'loginPid'     => intval($settingsDefault['loginPid']),
-                    'showPid'      => intval($settingsDefault['showPid']),
+                    'tokenYes'                      => $registration->getTokenYes(),
+                    'tokenNo'                       => $registration->getTokenNo(),
+                    'userSha1'                      => $registration->getUserSha1(),
+                    'frontendUser'                  => $frontendUser,
+                    'registration'                  => $registration,
+                    'pageUid'                       => intval($GLOBALS['TSFE']->id),
+                    'loginPid'                      => intval($settingsDefault['loginPid']),
+                    'showPid'                       => intval($settingsDefault['showPid']),
+                    'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin,
+                    'standaloneRegisterPid'         => intval($GLOBALS['TSFE']->id)
                 ),
             ));
 
