@@ -226,6 +226,15 @@
         />
     </div>
 
+    <f:if condition="{settings.showParticipateDinnerCheckbox}">
+        <div class="form__field">
+            <f:form.checkbox class="checkbox" id="participate_dinner" property="participateDinner" value="1" />
+            <label for="participate_dinner" class="checkbox-label">
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateDinner" />
+            </label>
+        </div>
+    </f:if>
+
 
     <f:if condition="{editMode}">
         <f:else>

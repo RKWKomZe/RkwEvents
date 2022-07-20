@@ -223,7 +223,7 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility_link" approved="yes">
                 <source>Link to site with information about eligibility</source>
-            </trans-unit>                
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
                 <source>Recommended Events</source>
             </trans-unit>
@@ -449,6 +449,9 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.show_pid" approved="yes">
                 <source>Show Pid of Detailview</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.participate_dinner" approved="yes">
+                <source>Participate in dinner</source>
             </trans-unit>
 
 
@@ -679,6 +682,12 @@
             </trans-unit>
 
 
+            <trans-unit id="flexform.event.eventSelect">
+                <source>Select event</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.showParticipateDinner">
+                <source>Select participate in dinner checkbox</source>
+            </trans-unit>
 
         </body>
 	</file>

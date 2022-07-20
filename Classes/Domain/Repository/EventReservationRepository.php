@@ -99,6 +99,7 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
     public function findByEventAndFeUser($event, $feUser)
     {
         $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
 
         return $query->matching(
             $query->logicalAnd(
@@ -106,7 +107,6 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
                 $query->equals('event', $event)
             )
         )->execute();
-        //===
     }
 
 
