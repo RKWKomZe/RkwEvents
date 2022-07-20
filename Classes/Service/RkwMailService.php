@@ -321,7 +321,6 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 foreach ($eventReservationList as $eventReservation) {
                     if ($eventReservation->getFeUser()) {
 
-                        //DebuggerUtility::var_dump($eventReservation->getEvent()->getPlace()); exit;
                         $googleMapsLink = '';
                         if ($eventReservation->getEvent()->getPlace() instanceof \RKW\RkwEvents\Domain\Model\EventPlace) {
 

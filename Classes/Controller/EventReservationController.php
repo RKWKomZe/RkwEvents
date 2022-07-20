@@ -291,48 +291,48 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         }
 
         // 1. Check for existing reservations based on email.
-        if ($this->request->getPluginName() != 'Standaloneregister') {
-            $frontendUser = $this->frontendUserRepository->findByUsername($newEventReservation->getEmail());
-            if (count($frontendUser)) {
+        $frontendUser = $this->frontendUserRepository->findByUsername($newEventReservation->getEmail());
+        if (count($frontendUser)) {
+            $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($newEventReservation->getEvent(), $frontendUser);
+            if (count($eventReservationResult)) {
 
-                $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($newEventReservation->getEvent(), $frontendUser);
-                if (count($eventReservationResult)) {
+                // already registered!
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'eventReservationController.error.exists', 'rkw_events'
+                    ),
+                    '',
+                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                );
 
-                    // already registered!
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate(
-                            'eventReservationController.error.exists', 'rkw_events'
-                        ),
-                        '',
-                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-                    );
-
-                    if ($this->getFrontendUser()) {
-                        // if user is logged in, set direct link to feusers event list
-                        $uri = $this->uriBuilder->reset()
-                            ->setTargetPageUid($this->settings['myEventsPid'])
-                            ->uriFor('myEvents', null, 'Event', null, 'Pi1');
-                    } else {
-                        // else just set a link to myrkw login
-                        $uri = $this->uriBuilder->reset()
-                            ->setTargetPageUid($this->settings['loginPid'])
-                            ->build();
-                    }
-
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate(
-                            'eventReservationController.hint.reservations',
-                            'rkw_events',
-                            array(
-                                0 => "<a href='" . $uri . "'>",
-                                1 => "</a>",
-                            )
-                        )
-                    );
-
-                    // already registered
-                    $this->redirect($showAction, $controller, null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
+                if ($this->getFrontendUser()) {
+                    // if user is logged in, set direct link to feusers event list
+                    $uri = $this->uriBuilder->reset()
+                        ->setTargetPageUid($this->settings['myEventsPid'])
+                        ->uriFor('myEvents', null, 'Event', null, 'Pi1');
+                } else {
+                    // else just set a link to myrkw login
+                    $uri = $this->uriBuilder->reset()
+                        ->setTargetPageUid($this->settings['loginPid'])
+                        ->build();
                 }
+
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'eventReservationController.hint.reservations',
+                        'rkw_events',
+                        array(
+                            0 => "<a href='" . $uri . "'>",
+                            1 => "</a>",
+                        )
+                    )
+                );
+
+                // already registered
+                if ($this->request->getPluginName() == 'Standaloneregister') {
+                    $this->forward($showAction, $controller, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
+                }
+                $this->redirect($showAction, $controller, null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
             }
         }
 
