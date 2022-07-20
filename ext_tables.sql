@@ -12,6 +12,7 @@ CREATE TABLE tx_rkwevents_domain_model_event (
 	keywords text,
 	start int(11) unsigned DEFAULT '0' NOT NULL,
 	end int(11) unsigned DEFAULT '0' NOT NULL,
+  show_time tinyint(1) unsigned DEFAULT '1' NOT NULL,
 	longitude varchar(255) DEFAULT '' NOT NULL,
 	latitude varchar(255) DEFAULT '' NOT NULL,
 	testimonials text NOT NULL,
