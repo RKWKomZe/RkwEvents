@@ -1,0 +1,56 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <f:layout name="Default" />
+
+    This template displays a NEW form for the current domain object.
+
+    If you modify this template, do not forget to change the overwrite settings
+    in /Configuration/ExtensionBuilder/settings.yaml:
+      Resources:
+        Private:
+          Templates:
+            New.html: keep
+
+    Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+    <f:section name="main">
+        <h3 class="no-hide" id="tx-rkwevents-reservation">
+            <f:translate key="tx_rkwevents_fluid.templates_eventReservation_new.headline" />
+        </h3>
+
+        <f:comment>
+            <f:if condition="{frontendUser}">
+                <f:else>
+                    <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_eventReservation_new.hint_reservation" /></f:format.raw></p>
+                </f:else>
+            </f:if>
+        </f:comment>
+
+        <f:render partial="FlashMessages" arguments="{_all}" />
+        <f:render partial="FormErrors" arguments="{object:Event}" />
+
+        <f:form action="create" enctype="multipart/form-data" name="newEventReservation" object="{newEventReservation}">
+
+            <div class="flex-container">
+                <div class="form flex flex-basis-8 full-width-medium space-between">
+
+                    <!-- We need both versions here -->
+                    <f:form.hidden name="event" value="{event.uid}" />
+                    <f:form.hidden property="event" />
+
+                    <f:render partial="EventReservation/FormFieldsMaster" arguments="{_all}"/>
+                </div>
+            </div>
+
+            <f:if condition="{event.regSingle}">
+                <f:else>
+                    <f:render partial="EventReservation/FormFieldsSub" arguments="{_all}"/>
+                </f:else>
+            </f:if>
+
+        </f:form>
+    </f:section>
+
+</html>

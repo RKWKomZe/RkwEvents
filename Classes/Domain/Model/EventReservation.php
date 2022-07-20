@@ -134,7 +134,6 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $remark;
 
-
     /**
      * workshopRegister
      *
@@ -142,18 +141,15 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $workshopRegister;
 
-
     /**
      * @var integer
      */
     protected $crdate;
 
-
     /**
      * @var integer
      */
     protected $tstamp;
-
 
     /**
      * @var integer
@@ -173,6 +169,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var integer
      */
     protected $showPid = 0;
+
+    /**
+     * participateDinner
+     *
+     * @var integer
+     */
+    protected $participateDinner = 0;
 
 
     /**
@@ -642,5 +645,21 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getShowPid()
     {
         return $this->showPid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParticipateDinner()
+    {
+        return $this->participateDinner;
+    }
+
+    /**
+     * @param int $participateDinner
+     */
+    public function setParticipateDinner($participateDinner)
+    {
+        $this->participateDinner = $participateDinner;
     }
 }

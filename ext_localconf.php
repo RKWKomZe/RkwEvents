@@ -136,6 +136,21 @@ call_user_func(
             )
         );
 
+        //=================================================================
+        // Configure Plugins
+        //=================================================================
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
+            'Standaloneregister',
+            array(
+                'EventReservation' => 'newStandalone, create, optIn',
+            ),
+            // non-cacheable actions
+            array(
+                'EventReservation' => 'newStandalone, create, optIn',
+            )
+        );
+
 
 
         //=================================================================

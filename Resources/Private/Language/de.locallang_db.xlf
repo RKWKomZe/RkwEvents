@@ -302,7 +302,7 @@
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility_link" approved="yes">
                 <source>Link to site with information about eligibility</source>
                 <target>Hinweis-Link in Bezug auf Förderfähigkeit (oder per Typoscript: "eligibility.hint.link")</target>
-            </trans-unit>            
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
                 <source>Recommended Events</source>
                 <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
@@ -590,6 +590,10 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.show_pid" approved="yes">
                 <source>Show Pid of Detailview</source>
                 <target>Detail PID</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.participate_dinner" approved="yes">
+                <source>Participate in dinner</source>
+                <target>Ich nehme am Imbiss teil</target>
             </trans-unit>
 
 
@@ -899,6 +903,15 @@
                 <target>Infotext zu "Monat"</target>
             </trans-unit>
 
+
+            <trans-unit id="flexform.event.eventSelect">
+                <source>Select event</source>
+                <target>Veranstaltung auswählen</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.showParticipateDinner">
+                <source>Select participate in dinner checkbox</source>
+                <target>Checkbox zur Teilnahme an Mahlzeit anzeigen</target>
+            </trans-unit>
 
 		</body>
 	</file>
