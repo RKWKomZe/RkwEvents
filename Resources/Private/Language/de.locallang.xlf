@@ -1134,6 +1134,10 @@
 				<source>Workshop unit 3</source>
 				<target>Workshop Block 3</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateDinner">
+                <source>Participate in dinner</source>
+                <target>Ich nehme am Imbiss teil</target>
+            </trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1352,6 +1356,14 @@
             <trans-unit id="partials_email_details.mobile">
                 <source>Mobile</source>
                 <target>Mobil</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner">
+                <source>Participate in dinner</source>
+                <target>Teilnahme am Imbiss</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner.yes">
+                <source>Yes</source>
+                <target>Ja</target>
             </trans-unit>
 
 

@@ -15,14 +15,14 @@ return [
 		'delete' => 'deleted',
 		'enablecolumns' => [
 		],
-		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,address,zip,city,phone,mobile,email,server_host,show_pid',
+		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservation.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid,',
+		'showRecordFieldList' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner,',
 	],
 	'types' => [
-		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid'],
+		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -208,6 +208,14 @@ return [
                 'size' => 30,
                 'max' => 255,
                 'readOnly' => 1,
+            ],
+        ],
+        'participate_dinner' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.participate_dinner',
+            'config' => [
+                'type' => 'check',
+                'default' => 0
             ],
         ],
 	],
