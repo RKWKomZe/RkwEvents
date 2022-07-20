@@ -29,6 +29,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.end">
 				<source>End</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.show_time">
+                <source>Show time</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.longitude">
 				<source>Longitude</source>
 			</trans-unit>
