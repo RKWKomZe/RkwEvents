@@ -1,6 +1,6 @@
 <?php
 
-namespace RKW\RkwEvents\Domain\Repository;
+namespace RKW\RkwEvents\Domain\Model;
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,25 +14,16 @@ namespace RKW\RkwEvents\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwEvents\Domain\Model\BackendUser;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-
 /**
- * Class BackendUserRepository
+ * Class BackendUserGroup
  *
- * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class BackendUserGroup extends \TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup
 {
-
-
-
 
 
 }

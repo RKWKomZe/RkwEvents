@@ -21,7 +21,7 @@ call_user_func(
                 'eventsImport',	// Submodule key
                 '',						// Position
                 array(
-                    'Backend' => 'show,create',
+                    'Backend' => 'csvExport, createCsv, show, create',
                 ),
                 array(
                     'access' => 'user,group',
