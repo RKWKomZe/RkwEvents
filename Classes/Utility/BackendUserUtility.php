@@ -48,10 +48,8 @@ class BackendUserUtility
             if ($backendUserGroup->getDatabaseMounts()) {
                 foreach (GeneralUtility::trimExplode(',', $backendUserGroup->getDatabaseMounts(), true) as $initialRootPid) {
 
-                    $pidListWithChilds = $initialRootPid;
-                    // @toDo: does we need the childs of a mountpoint?
-                    //$queryGenerator = GeneralUtility::makeInstance(QueryGenerator::class);
-                    //$pidListWithChilds = $queryGenerator->getTreeList($initialRootPid, 999, 0, 1);
+                    $queryGenerator = GeneralUtility::makeInstance(QueryGenerator::class);
+                    $pidListWithChilds = $queryGenerator->getTreeList($initialRootPid, 999, 0, 1);
 
                     foreach (GeneralUtility::trimExplode(',', $pidListWithChilds, true) as $singlePid) {
                         $allowedPidList[] = (int)$singlePid;
