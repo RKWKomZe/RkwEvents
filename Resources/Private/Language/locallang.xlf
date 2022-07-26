@@ -339,6 +339,48 @@
             </trans-unit>
 
 
+            <!-- Templates/Backend/CsvExport.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.headline">
+                <source>CSV export for reservations</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents">
+                <source>Running events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.pastEvents">
+                <source>Past events</source>
+            </trans-unit>
+
+
+            <!-- Partials/Backend/CsvExportEventList.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.startend">
+                <source>Start / end</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.idPid">
+                <source>ID (PID)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.place">
+                <source>Place</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation">
+                <source>Reservation</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
+                <source>Export (CSV)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.announcement">
+                <source>Announcement</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.online">
+                <source>Online</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export">
+                <source>export</source>
+            </trans-unit>
+
+
 
 			<!-- Templates/Ajax/List/List.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_ajax_list_list.noEventHeadline" approved="yes">

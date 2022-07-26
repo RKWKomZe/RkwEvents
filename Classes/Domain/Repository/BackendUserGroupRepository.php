@@ -19,19 +19,31 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 
 /**
- * Class BackendUserRepository
+ * Class BackendUserGroupRepository
  *
- * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class BackendUserGroupRepository extends \TYPO3\CMS\Extbase\Domain\Repository\BackendUserGroupRepository
 {
 
+    /**
+     * initializeObject
+     *
+     * @return void
+     */
+    public function initializeObject()
+    {
+        /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
 
+        // don't add the pid constraint
+        $querySettings->setRespectStoragePage(false);
+
+        $this->setDefaultQuerySettings($querySettings);
+    }
 
 
 

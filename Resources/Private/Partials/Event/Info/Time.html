@@ -6,9 +6,34 @@
         <div class="table__title">
             <f:translate key="tx_rkwevents_fluid.partials_event_info_time.time" />
         </div>
-        <div class="table__content">
-            <rkw:ComposeDateTimeParts event='{event}' />
-        </div>
+        <f:comment><!-- check if the event has more than one day --></f:comment>
+        <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+            <f:then>
+                <f:comment><!-- one day event --></f:comment>
+                <div class="table__content">
+                    <f:if condition="{event.showTime}">
+                        <f:then>
+                            <rkw:ComposeDateTimeParts event='{event}' />
+                        </f:then>
+                        <f:else>
+                            <rkw:ComposeDateTimeParts event='{event}' onlyDate="1" />
+                        </f:else>
+                    </f:if>
+
+                </div>
+            </f:then>
+            <f:else>
+                <f:comment><!-- multiple days --></f:comment>
+                <div class="table__content">
+                    <rkw:ComposeDateTimeParts event='{event}' onlyDate="1" />
+                </div>
+                <f:if condition="{event.showTime}">
+                    <div class="table__content">
+                        <rkw:ComposeDateTimeParts event='{event}' onlyTime="1" />
+                    </div>
+                </f:if>
+            </f:else>
+        </f:if>
     </div>
 
 </html>

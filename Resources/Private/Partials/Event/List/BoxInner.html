@@ -121,13 +121,21 @@
                     </f:comment>
                 </div>
                 <div class="tile__contact-location">
-                    <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                        <f:else>
+                            <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                        </f:else>
+                    </f:if>
                     <f:if condition="{event.place}">
                         <f:then>
                             {event.place.city}
                         </f:then>
                         <f:else>
-                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkw_events' />
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:else>
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkw_events' />
+                                </f:else>
+                            </f:if>
                         </f:else>
                     </f:if>
                 </div>

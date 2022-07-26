@@ -16,11 +16,11 @@
     Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
     <f:section name="main">
-        <h3 class="no-hide" id="tx-rkwevents-reservation">
-            <f:translate key="tx_rkwevents_fluid.templates_eventReservation_new.headline" />
-        </h3>
 
         <f:comment>
+            <h3 class="no-hide" id="tx-rkwevents-reservation">
+                <f:translate key="tx_rkwevents_fluid.templates_eventReservation_new.headline" />
+            </h3>
             <f:if condition="{frontendUser}">
                 <f:else>
                     <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_eventReservation_new.hint_reservation" /></f:format.raw></p>
