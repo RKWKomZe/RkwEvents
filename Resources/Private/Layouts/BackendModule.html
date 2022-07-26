@@ -1,5 +1,32 @@
-<f:be.container includeCssFiles="{1 :\"{f:uri.resource(path:'Css/Backend.css')}\"}">
+<f:be.container
+    includeCssFiles="{1 :\"{f:uri.resource(path:'Css/Backend.css')}\"}"
+>
+
 	<div class="typo3-fullDoc">
+        <div id="typo3-docheader">
+            <div class="typo3-docheader-functions">
+                <div class="left">
+                    <f:be.buttons.csh />
+                    <f:be.menus.actionMenu>
+                        <f:be.menus.actionMenuItem label="Import" action="show" controller="Backend" />
+                        <f:be.menus.actionMenuItem label="Export" action="csvExport" controller="Backend" />
+                    </f:be.menus.actionMenu>
+                </div>
+                <div class="right">
+                    <f:be.pagePath />
+                    <f:be.pageInfo />
+                </div>
+            </div>
+            <div class="typo3-docheader-buttons">
+                <div class="left">
+
+                </div>
+                <div class="right">
+                    <f:be.buttons.shortcut />
+                </div>
+            </div>
+
+        </div>
 		<div id="typo3-docbody">
 			<div id="typo3-inner-docbody" class="tx-rkwevents-backend">
                 <f:render partial="FlashMessages" arguments="{_all}" />

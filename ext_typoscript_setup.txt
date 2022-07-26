@@ -53,7 +53,6 @@ config.tx_extbase.persistence {
         TYPO3\CMS\Extbase\Domain\Model\BackendUser {
             subclasses {
                 Tx_RkwEvents_BackendUser = RKW\RkwEvents\Domain\Model\BackendUser
-
             }
         }
 
@@ -63,6 +62,21 @@ config.tx_extbase.persistence {
                 columns {
                     usergroup.mapOnProperty = backendUserGroups
                 }
+            }
+        }
+
+
+        #===============================================
+
+        TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup {
+            subclasses {
+                Tx_RkwEvents_BackendUserGroup = RKW\RkwEvents\Domain\Model\BackendUserGroup
+            }
+        }
+
+        RKW\RkwEvents\Domain\Model\BackendUserGroup {
+            mapping {
+                tableName = be_groups
             }
         }
 
