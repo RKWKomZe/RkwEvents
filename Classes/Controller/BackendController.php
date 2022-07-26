@@ -112,8 +112,6 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function csvExportAction()
     {
-        // $GLOBALS['BE_USER']->isAdmin();
-
         /** @var BackendUser $currentBackendUser */
         $currentBackendUser = $this->backendUserRepository->findByUid(intval($GLOBALS['BE_USER']->user['uid']));
 

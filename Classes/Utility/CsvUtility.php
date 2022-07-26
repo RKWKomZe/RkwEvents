@@ -32,14 +32,16 @@ class CsvUtility
 {
 
     /**
-     * action csv
-     * because extbase makes some trouble if some survey has a starttime in future, ist disabled or something, just give the uid
+     * createCsv - creates a CSV file with all reservation data of an event.
+     * Includes additional "EventReservationAddPerson" (maximum: 3)
      *
-     * @param Event $event
+     * @param Event $event The event itself
+     * @param string $separator The CSV file separator. Default is ";"
+     * @param int $maxAddPersons Number of additional persons are printed to the CSV file. Default is "3"
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public static function createCsv(Event $event, $separator = ';')
+    public static function createCsv(Event $event, $separator = ';', $maxAddPersons = 3)
     {
         $reservationAllowedColumns = [
             'salutation',
@@ -57,6 +59,7 @@ class CsvUtility
         ];
 
         $headings = [];
+        // create CSV columns
         foreach ($event->getReservation() as $reservation) {
             foreach ((array)$reservation as $name => $property) {
                 // remove starting sign "*"
@@ -64,10 +67,11 @@ class CsvUtility
                     $headings[] = substr(trim($name), 2);
                 }
             }
+            break;
         }
 
         // extended headings for up to 3 additional persons
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= $maxAddPersons; $i++) {
             $headings[] = 'salutation_' . 'addPerson' . $i;
             $headings[] = 'firstName_' . 'addPerson' . $i;
             $headings[] = 'lastName_' . 'addPerson' . $i;
@@ -88,20 +92,27 @@ class CsvUtility
         foreach ($event->getReservation() as $reservation) {
 
             $row = [];
+
+            // add all reservation values
             foreach ($headings as $property) {
-
                 $getter = 'get' . ucfirst($property);
-
                 if (method_exists($reservation, $getter)) {
                     $row[] = self::propertyValueConverter($property, $reservation->$getter());
                 }
             }
 
+            // add additional persons reservation values
             /** @var EventReservationAddPerson $addPerson */
+            $i = 0;
             foreach ($reservation->getAddPerson() as $addPerson) {
                 $row[] = self::propertyValueConverter('salutation', $addPerson->getSalutation());
                 $row[] = $addPerson->getFirstName();
                 $row[] = $addPerson->getLastName();
+
+                $i++;
+                if ($i == $maxAddPersons) {
+                    break;
+                }
             }
 
             fputcsv($csv, $row, $separator);
@@ -131,3 +142,4 @@ class CsvUtility
     }
 
 }
+
