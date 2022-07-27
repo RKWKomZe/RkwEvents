@@ -170,6 +170,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 'pageMore'     => $page + 1,
                 'showMoreLink' => $showMoreLink,
                 'filter'       => $filter,
+                'timeArrayList' => DivUtility::createMonthListArray($this->settings['list']['filter']['showTimeNumberOfMonths']),
             );
 
             $this->view->assignMultiple($replacements);
@@ -214,7 +215,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
                 // 1. get event list
                 $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
                 $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
-                
+
                 // 2. proof if we have further results (query with listItemsPerQuery + 1)
                 $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
                 $showMoreLink = count($eventList) < count($queryResult) ? true : false;
