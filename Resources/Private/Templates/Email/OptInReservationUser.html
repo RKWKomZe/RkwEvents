@@ -9,7 +9,7 @@
 <vh:frontend.translate key="templates_email_optInReservationUser.text1" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"  />
 <vh:frontend.translate key="templates_email_optInReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"  />
 
-<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:registration.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin, standaloneRegisterPid: standaloneRegisterPid}"/>
+<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:registration.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
 =============================================================
 <vh:frontend.translate key="templates_email_optInReservationUser.confirmHeadline" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/>
@@ -31,7 +31,7 @@
 		<strong><vh:frontend.translate key="templates_email_optInReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /></strong>
 	</p>
 
-	<f:render partial="Email/Details" section="Html" arguments="{reservation:registration.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin, standaloneRegisterPid: standaloneRegisterPid}"/>
+	<f:render partial="Email/Details" section="Html" arguments="{reservation:registration.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
 	<h2><vh:frontend.translate key="templates_email_optInReservationUser.confirmHeadline" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/></h2>
 	<p>
