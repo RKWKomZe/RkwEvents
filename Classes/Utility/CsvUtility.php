@@ -5,6 +5,7 @@ namespace RKW\RkwEvents\Utility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -30,18 +31,52 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class CsvUtility
 {
+    /**
+     * @var resource $csv
+     */
+    private static $csv;
 
     /**
      * createCsv - creates a CSV file with all reservation data of an event.
      * Includes additional "EventReservationAddPerson" (maximum: 3)
      *
-     * @param Event $event The event itself
+     * @param Event  $event The event itself
      * @param string $separator The CSV file separator. Default is ";"
-     * @param int $maxAddPersons Number of additional persons are printed to the CSV file. Default is "3"
+     * @param int    $maxAddPersons Number of additional persons are printed to the CSV file. Default is "3"
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public static function createCsv(Event $event, $separator = ';', $maxAddPersons = 3)
+    public static function createCsv(Event $event, string $separator = ';', int $maxAddPersons = 3)
+    {
+
+        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . str_replace(' ', '_', strtolower($event->getTitle())) . '.csv';
+
+        self::$csv = fopen('php://output', 'w');
+
+        header("Content-type: text/csv");
+        header("Content-Disposition: attachment; filename=$attachmentName");
+        header("Pragma: no-cache");
+
+        // add reservation data
+        self::addReservationDataToCsv($event, $separator, $maxAddPersons);
+
+        // add event data
+        self::addEventDataToCsv($event, $separator);
+
+        fclose(self::$csv);
+    }
+
+
+
+    /**
+     * addReservationDataToCsv
+     *
+     * @param Event   $event
+     * @param string  $separator
+     * @param integer $maxAddPersons
+     * @return void
+     */
+    protected static function addReservationDataToCsv(Event $event, string $separator, int $maxAddPersons)
     {
         $reservationAllowedColumns = [
             'salutation',
@@ -77,16 +112,8 @@ class CsvUtility
             $headings[] = 'lastName_' . 'addPerson' . $i;
         }
 
-        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . str_replace(' ', '_', strtolower($event->getTitle())) . '.csv';
-
-        $csv = fopen('php://output', 'w');
-
-        header("Content-type: text/csv");
-        header("Content-Disposition: attachment; filename=$attachmentName");
-        header("Pragma: no-cache");
-
         // set headings
-        fputcsv($csv, $headings, $separator);
+        fputcsv(self::$csv, $headings, $separator);
 
         /** @var EventReservation $reservation */
         foreach ($event->getReservation() as $reservation) {
@@ -115,11 +142,58 @@ class CsvUtility
                 }
             }
 
-            fputcsv($csv, $row, $separator);
+            fputcsv(self::$csv, $row, $separator);
         }
-
-        fclose($csv);
     }
+
+
+
+    /**
+     * addEventDataToCsv
+     *
+     * @param Event  $event
+     * @param string $separator
+     * @return void
+     */
+    protected static function addEventDataToCsv(Event $event, string $separator)
+    {
+        // add empty rows
+        fputcsv(self::$csv, [], $separator);
+        fputcsv(self::$csv, [], $separator);
+
+        $eventAllowedColumns = [
+            'title',
+            'start',
+            'end',
+            'place',
+            'costs (reduced)',
+            'trainer',
+        ];
+
+        // 1. event headings
+        $headings = [];
+        foreach ($eventAllowedColumns as $column) {
+            $headings[] = $column;
+        }
+        fputcsv(self::$csv, $headings, $separator);
+
+        // 2. event content
+        $row = [];
+        // add all reservation values
+        $row[] = $event->getTitle();
+        $row[] = date('d.m.Y', $event->getStart());
+        $row[] = date('d.m.Y', $event->getEnd());
+        $row[] = $event->getPlace()->getName();
+        if ($event->getCostsRed()) {
+            $row[] = $event->getCostsReg() . '€ (' . $event->getCostsRed() . '€)';
+        } else {
+            $row[] = $event->getCostsReg() . '€';
+        }
+        $row[] = $event->getTrainer();
+
+        fputcsv(self::$csv, $row, $separator);
+    }
+
 
 
     /**
@@ -127,9 +201,8 @@ class CsvUtility
      * @param string $value
      * @return string
      */
-    protected static function propertyValueConverter($key, $value)
+    protected static function propertyValueConverter(string $key, string $value)
     {
-
         if ($key === "salutation") {
             // override
             $value = LocalizationUtility::translate(
@@ -137,7 +210,6 @@ class CsvUtility
                 'RkwEvents'
             );
         }
-
         return $value;
     }
 
