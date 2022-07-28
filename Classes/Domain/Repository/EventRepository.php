@@ -46,15 +46,20 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         'start' => QueryInterface::ORDER_ASCENDING,
     );
 
+
     /**
+     * constraintBackendUserExclusive
      *
+     * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\NotInterface
      */
     protected function constraintBackendUserExclusive()
     {
         $query = $this->createQuery();
-
         // if no backend user is logged in, exclude events with property backendUserExclusive = 1
-        if (!$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication) {
+        if (
+            !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication
+            && !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+        ) {
             return $query->logicalNot($query->equals('backendUserExclusive', 1));
         }
     }
@@ -477,6 +482,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('title', '')
             );
 
+        // backendUser special case
         $constraints[] = $this->constraintBackendUserExclusive();
 
         if (
