@@ -16,11 +16,13 @@
                 </f:for>
 
                 <f:comment><!-- additional links --></f:comment>
-                <f:for each="<rkw:explode delimiter=',' string='{eventMain.recommendedLinks}' />" as="pageUid" iteration="iterator">
-                    <li class="iconlist__item public">
-                        <f:link.page pageUid="{pageUid}"><rkw:pageProperty pageUid='{pageUid}' field='title' /></f:link.page>
-                    </li>
-                </f:for>
+                <f:if condition="{eventMain.recommendedLinks}">
+                    <f:for each="<rkw:explode delimiter=',' string='{eventMain.recommendedLinks}' />" as="pageUid" iteration="iterator">
+                        <li class="iconlist__item public">
+                            <f:link.page pageUid="{pageUid}"><rkw:pageProperty pageUid='{pageUid}' field='title' /></f:link.page>
+                        </li>
+                    </f:for>
+                </f:if>
             </ul>
         </f:then>
         <f:else>
