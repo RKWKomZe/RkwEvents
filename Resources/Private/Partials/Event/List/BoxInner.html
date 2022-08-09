@@ -80,24 +80,12 @@
                                     </f:if>
                                 </f:then>
                                 <f:else>
-                                    <f:if condition="{settings.list.filter.showTime}">
-                                        <f:then>
-                                            <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
-                                                <f:else>
-                                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkw_events' />
-                                                </f:else>
-                                            </f:if>
-                                            {event.start -> f:format.date(format:"d.m.Y H:i")}
-                                        </f:then>
+                                    <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
                                         <f:else>
-                                            <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
-                                                <f:else>
-                                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkw_events' />
-                                                </f:else>
-                                            </f:if>
-                                            {event.start -> f:format.date(format:"d.m.Y")}
+                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkw_events' />
                                         </f:else>
                                     </f:if>
+                                    {event.start -> f:format.date(format:"d.m.Y")}
                                 </f:else>
                             </f:if>
                         </f:else>
