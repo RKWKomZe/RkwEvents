@@ -402,11 +402,17 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             if ($filter['time']) {
                 $month = date("M", intval($filter['time']));
                 $year = date("Y", intval($filter['time']));
-                $lastDayOfMonthTimestamp = strtotime('last day of ' . $year . '-' . $month);
+                $lastDayOfMonthTimestamp = strtotime('last day of ' . $year . '-' . $month . '-01T23:59:59');
 
-                $constraints[] = $query->logicalAnd(
-                    $query->greaterThanOrEqual('end', intval($filter['time'])),
-                    $query->lessThanOrEqual('end', $lastDayOfMonthTimestamp)
+                $constraints[] = $query->logicalOr(
+                    $query->logicalAnd(
+                        $query->greaterThanOrEqual('start', intval($filter['time'])),
+                        $query->lessThanOrEqual('start', $lastDayOfMonthTimestamp)
+                    )/*,
+                    $query->logicalAnd(
+                        $query->greaterThanOrEqual('end', intval($filter['time'])),
+                        $query->lessThanOrEqual('end', $lastDayOfMonthTimestamp)
+                    )*/
                 );
 
             }
