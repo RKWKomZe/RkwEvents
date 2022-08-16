@@ -472,10 +472,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $recordType only announcements or scheduled
      * @param bool $onlyStarted if true only started events are shown
      * @param bool $onlyUpcoming if true only upcoming (not started) events are shown
+     * @param bool $ignoreBeUserExclusive if true also show events where the "backendUserExclusive" flag is set
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false)
+    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false, $ignoreBeUserExclusive = false)
     {
         $query = $this->createQuery();
 
@@ -491,7 +492,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             );
 
         // backendUser special case
-        $constraints[] = $this->constraintBackendUserExclusive();
+        if (!$ignoreBeUserExclusive) {
+            $constraints[] = $this->constraintBackendUserExclusive();
+        }
 
         if (
             ($settings['eventUids'])
