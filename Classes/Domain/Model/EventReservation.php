@@ -177,6 +177,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $participateDinner = 0;
 
+    /**
+     * participateMeeting
+     *
+     * @var integer
+     */
+    protected $participateMeeting = 0;
+
 
     /**
      * __construct
@@ -661,5 +668,21 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setParticipateDinner($participateDinner)
     {
         $this->participateDinner = $participateDinner;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParticipateMeeting()
+    {
+        return $this->participateMeeting;
+    }
+
+    /**
+     * @param int $participateMeeting
+     */
+    public function setParticipateMeeting($participateMeeting)
+    {
+        $this->participateMeeting = $participateMeeting;
     }
 }
