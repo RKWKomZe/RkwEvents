@@ -33,6 +33,12 @@
                             <type>check</type>
                         </config>
                     </settings.showParticipateDinnerCheckbox>
+                    <settings.showParticipateMeetingCheckbox>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.showParticipateMeeting</label>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.showParticipateMeetingCheckbox>
                 </el>
             </ROOT>
         </general>

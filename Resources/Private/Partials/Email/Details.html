@@ -33,7 +33,8 @@
 <f:if condition="{reservation.remark}">
 <rkwMailer:frontend.translate key="partials_email_details.reservationRemarks" languageKey="{language}" extensionName="rkwEvents" />:
 {reservation.remark}</f:if>
-<f:if condition="{reservation.participateDinner}"><rkwMailer:frontend.translate key="partials_email_details.participateDinner" languageKey="{language}" extensionName="rkwEvents" />: <rkwMailer:frontend.translate key="partials_email_details.participateDinner.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="<rkwEvents:ifAddPersonExists eventReservation='{reservation}' />">
+<f:if condition="{reservation.participateDinner}"><rkwMailer:frontend.translate key="partials_email_details.participateDinner" languageKey="{language}" extensionName="rkwEvents" />: <rkwMailer:frontend.translate key="partials_email_details.participateDinner.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if>
+<f:if condition="{reservation.participateMeeting}"><rkwMailer:frontend.translate key="partials_email_details.participateMeeting" languageKey="{language}" extensionName="rkwEvents" />: <rkwMailer:frontend.translate key="partials_email_details.participateMeeting.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="<rkwEvents:ifAddPersonExists eventReservation='{reservation}' />">
 
 <rkwMailer:frontend.translate key="partials_email_details.reservationOthers" languageKey="{language}" extensionName="rkwEvents" />:
 <f:for each="{reservation.addPerson}" as="person" iteration="iterator"><f:if condition="{person.lastName}">{person.firstName} {person.lastName}<f:if condition="{iterator.isLast}"><f:else>
@@ -143,6 +144,11 @@
             <f:if condition="{reservation.participateDinner}">
                 <p>
                     <strong><rkwMailer:frontend.translate key="partials_email_details.participateDinner" languageKey="{language}" extensionName="rkwEvents" /></strong>: <rkwMailer:frontend.translate key="partials_email_details.participateDinner.yes" languageKey="{language}" extensionName="rkwEvents" />
+                </p>
+            </f:if>
+            <f:if condition="{reservation.participateMeeting}">
+                <p>
+                    <strong><rkwMailer:frontend.translate key="partials_email_details.participateMeeting" languageKey="{language}" extensionName="rkwEvents" /></strong>: <rkwMailer:frontend.translate key="partials_email_details.participateMeeting.yes" languageKey="{language}" extensionName="rkwEvents" />
                 </p>
             </f:if>
 
