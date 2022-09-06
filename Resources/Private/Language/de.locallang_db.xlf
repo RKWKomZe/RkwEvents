@@ -594,6 +594,10 @@
                 <source>Participate in dinner</source>
                 <target>Ich nehme am Imbiss teil</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.participate_meeting" approved="yes">
+                <source>Participate in meeting</source>
+                <target>Ich nehme an der Mitgliederversammlung teil</target>
+            </trans-unit>
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->
@@ -910,6 +914,10 @@
             <trans-unit id="flexform.event.showParticipateDinner">
                 <source>Select participate in dinner checkbox</source>
                 <target>Checkbox zur Teilnahme an Mahlzeit anzeigen</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.showParticipateMeeting">
+                <source>Select participate in meeting checkbox</source>
+                <target>Checkbox zur Teilnahme an (Mitglieder-)Versammlung anzeigen</target>
             </trans-unit>
 
 		</body>
