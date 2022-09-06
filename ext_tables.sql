@@ -289,6 +289,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation (
 	server_host varchar(255) DEFAULT '' NOT NULL,
 	show_pid int(11) unsigned DEFAULT '0' NOT NULL,
   participate_dinner tinyint(1) unsigned DEFAULT '0' NOT NULL,
+  participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
   tstamp int(11) unsigned DEFAULT '0' NOT NULL,
   crdate int(11) unsigned DEFAULT '0' NOT NULL,
