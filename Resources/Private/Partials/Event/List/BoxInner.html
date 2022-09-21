@@ -65,7 +65,7 @@
                     <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
                         <f:then>
                             <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
-                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkw_events' />
+                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkwEvents' />
                         </f:then>
                         <f:else>
                             <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
@@ -82,7 +82,7 @@
                                 <f:else>
                                     <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
                                         <f:else>
-                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkw_events' />
+                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkwEvents' />
                                         </f:else>
                                     </f:if>
                                     {event.start -> f:format.date(format:"d.m.Y")}
@@ -121,7 +121,7 @@
                         <f:else>
                             <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
                                 <f:else>
-                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkw_events' />
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkwEvents' />
                                 </f:else>
                             </f:if>
                         </f:else>
