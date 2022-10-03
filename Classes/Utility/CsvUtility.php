@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEvents\Utility;
 
+use RKW\RkwBasics\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
@@ -48,8 +49,7 @@ class CsvUtility
      */
     public static function createCsv(Event $event, string $separator = ';', int $maxAddPersons = 3)
     {
-
-        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . str_replace(' ', '_', strtolower($event->getTitle())) . '.csv';
+        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getTitle()) . '.csv';
 
         self::$csv = fopen('php://output', 'w');
 
