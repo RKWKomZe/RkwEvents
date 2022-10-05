@@ -4,6 +4,7 @@ namespace RKW\RkwEvents\Utility;
 
 use RKW\RkwBasics\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventPlace;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -183,7 +184,11 @@ class CsvUtility
         $row[] = $event->getTitle();
         $row[] = date('d.m.Y', $event->getStart());
         $row[] = date('d.m.Y', $event->getEnd());
-        $row[] = $event->getPlace()->getName();
+        if ($event->getPlace() instanceof EventPlace) {
+            $row[] = $event->getPlace()->getName();
+        } else {
+            $row[] = 'online';
+        }
         if ($event->getCostsRed()) {
             $row[] = $event->getCostsReg() . '€ (' . $event->getCostsRed() . '€)';
         } else {
