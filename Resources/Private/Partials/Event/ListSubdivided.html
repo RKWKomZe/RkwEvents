@@ -3,21 +3,21 @@
     xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-    <f:if condition="{startedEventList}">
-        <div class="section content">
-            <h3 class="section__headline h3">
-                <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents" extensionName="rkwEvents" />
-            </h3>
-            <f:render section="listPart" arguments="{eventList: startedEventList, filter: filterStartedEventList, showPid: showPid}" />
-        </div>
-    </f:if>
-
     <f:if condition="{upcomingEventList}">
         <div class="section content">
             <h3 class="section__headline h3">
                 <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.upcomingEvents" extensionName="rkwEvents" />
             </h3>
             <f:render section="listPart" arguments="{eventList: upcomingEventList, filter: filterUpcomingEventList, showPid: showPid}" />
+        </div>
+    </f:if>
+
+    <f:if condition="{startedEventList}">
+        <div class="section content">
+            <h3 class="section__headline h3">
+                <f:translate key="tx_rkwevents_fluid.partials_event_listsubdivided.startedEvents" extensionName="rkwEvents" />
+            </h3>
+            <f:render section="listPart" arguments="{eventList: startedEventList, filter: filterStartedEventList, showPid: showPid}" />
         </div>
     </f:if>
 
