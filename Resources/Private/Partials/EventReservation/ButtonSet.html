@@ -3,6 +3,7 @@
     data-namespace-typo3-fluid="true">
 
     <div class="btn-list btn-list--footer">
+
         <f:if condition="{noBackButton}">
             <f:else>
                 <f:if condition="{editMode}">
@@ -12,6 +13,7 @@
                         </f:link.action>
                     </f:then>
                     <f:else>
+                        <f:render partial="EventReservation/CaptchaElement" />
                         <f:link.action pageUid="{settings.showPid}" class="btn btn--secondary" action="show" controller="Event" arguments="{event:event}">
                             <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
                         </f:link.action>
