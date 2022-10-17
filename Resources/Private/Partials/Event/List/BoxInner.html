@@ -18,6 +18,11 @@
                     <span class="tile__label">
                         {event.documentType.name}
                     </span>
+                    <f:if condition="{event.additionalTileFlag}">
+                        <span class="tile__label--primary">
+                            {event.additionalTileFlag}
+                        </span>
+                    </f:if>
                 </div>
             </div>
             <div class="tile__content">

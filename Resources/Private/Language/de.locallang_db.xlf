@@ -302,6 +302,10 @@
                 <source>Link to site with information about eligibility</source>
                 <target>Hinweis-Link in Bezug auf Förderfähigkeit (oder per Typoscript: "eligibility.hint.link")</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
+                <source>Additional tile flag</source>
+                <target>Zusätzliches Kachel-Label (Störer)</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
                 <source>Recommended Events</source>
                 <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
