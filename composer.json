@@ -41,7 +41,8 @@
         "rkw/rkw-basics": "~8.7.22",
         "rkw/rkw-mailer": "~8.7.35 || ~9.5.0",
         "rkw/rkw-ajax": "~8.7.6",
-        "league/csv": "^9.5"
+        "league/csv": "^9.5",
+        "sjbr/sr-freecap": "~2.4"
     },
     "autoload": {
         "psr-4": {

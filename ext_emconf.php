@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = [
 	'uploadfolder' => '1',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '8.7.99',
+	'version' => '8.7.100',
 	'constraints' => [
         'depends' => [
             'typo3' => '7.6.0-8.7.99',
@@ -29,6 +29,7 @@ $EM_CONF[$_EXTKEY] = [
             'rkw_basics' => '8.7.82-8.7.99',
             'rkw_mailer' => '8.7.0-9.5.99',
             'rkw_ajax' => '8.7.6-8.7.99',
+            'sr_freecap' => '2.4.6-2.4.99'
         ],
 		'conflicts' => [
 		],
