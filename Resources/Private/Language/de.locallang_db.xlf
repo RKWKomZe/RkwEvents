@@ -160,7 +160,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.department" approved="yes">
 				<source>Department</source>
-				<target>Themenart</target>
+				<target>Schwerpunkt</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.categories" approved="yes">
                 <source>Category</source>
@@ -875,11 +875,11 @@
             </trans-unit>
             <trans-unit id="flexform.event.filterInfo.showDepartmentInfoLink">
                 <source>Link for department</source>
-                <target>Link zu "Themen"</target>
+                <target>Link zu "Schwerpunkte"</target>
             </trans-unit>
             <trans-unit id="flexform.event.filterInfo.showDepartmentInfo">
                 <source>Info for department</source>
-                <target>Infotext zu "Themen"</target>
+                <target>Infotext zu "Schwerpunkte"</target>
             </trans-unit>
             <trans-unit id="flexform.event.filterInfo.showDocumentTypeInfoLink">
                 <source>Link for document type</source>

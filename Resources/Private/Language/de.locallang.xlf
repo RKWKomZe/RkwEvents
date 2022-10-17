@@ -328,7 +328,7 @@
 			</trans-unit>
 			<trans-unit id="backendController.error.departmentNotFound">
 				<source>Could not find department/topic with id %s. Nothing set (CSV-LINE:%s).</source>
-				<target>Fachbereich/Thema mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
+				<target>Fachbereich/Schwerpunkt mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.documentTypeNotFound">
 				<source>Could not find documentType with id %s. Nothing set (CSV-LINE:%s).</source>
@@ -404,7 +404,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
 				<source>Department Type; overrides CSV Values when set</source>
-				<target>Fachbereich/Thema; überschreibt CSV-Werte, wenn gesetzt</target>
+				<target>Fachbereich/Schwerpunkt; überschreibt CSV-Werte, wenn gesetzt</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
 				<source>Organizer; overrides CSV Values when set</source>
@@ -613,11 +613,11 @@
 			<!-- Partials/Event/Filter.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelTopics">
 				<source>Topics</source>
-				<target>Themen</target>
+				<target>Schwerpunkte</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelTopicsAll">
                 <source>All Topics</source>
-                <target>Alle Themen</target>
+                <target>Alle Schwerpunkte</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelAll">
 				<source>All</source>
