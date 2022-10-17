@@ -266,6 +266,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $eligibilityLink = '';
 
     /**
+     * additionalTileFlag
+     *
+     * @var string
+     */
+    protected $additionalTileFlag = '';
+
+    /**
      * backendUserExclusive
      *
      * @var bool
@@ -1319,7 +1326,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->eligibilityLink = $eligibilityLink;
     }
-    
+
+    /**
+     * @return string
+     */
+    public function getAdditionalTileFlag(): string
+    {
+        return $this->additionalTileFlag;
+    }
+
+    /**
+     * @param string $additionalTileFlag
+     */
+    public function setAdditionalTileFlag(string $additionalTileFlag): void
+    {
+        $this->additionalTileFlag = $additionalTileFlag;
+    }
 
     /**
      * @return bool

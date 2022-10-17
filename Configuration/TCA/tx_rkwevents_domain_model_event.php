@@ -26,11 +26,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,keywords,start,end,show_time,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, eligibility_link, categories, categories_displayed, recommended_events, recommended_links, header_image, backend_user_exclusive',
+		'searchFields' => 'title,subtitle,keywords,start,end,show_time,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, eligibility_link, additional_tile_flag, categories, categories_displayed, recommended_events, recommended_links, header_image, backend_user_exclusive',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, show_time, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility, eligibility_link, recommended_events, recommended_links, header_image, backend_user_exclusive',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, show_time, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility, eligibility_link, additional_tile_flag, recommended_events, recommended_links, header_image, backend_user_exclusive',
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
@@ -56,7 +56,7 @@ return [
                 reservation,
                 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
+                header_image, additional_tile_flag, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
 		
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -85,7 +85,7 @@ return [
                 reservation,
                 
                  --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
+                header_image, additional_tile_flag, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields, 
@@ -994,6 +994,15 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'softref' => 'typolink'
+            ],
+        ],
+        'additional_tile_flag' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.additional_tile_flag',
+            'config' => [
+                'type' => 'input',
+                'size' => 5,
+                'eval' => 'trim'
             ],
         ],
         'recommended_events' => [

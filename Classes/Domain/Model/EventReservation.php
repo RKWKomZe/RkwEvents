@@ -26,8 +26,6 @@ namespace RKW\RkwEvents\Domain\Model;
  */
 class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
-
     /**
      * event
      *
@@ -73,7 +71,6 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * company
-     *
      * @var string
      */
     protected $company;
@@ -184,6 +181,11 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $participateMeeting = 0;
 
+    /**
+     * @var string
+     * @validate \SJBR\SrFreecap\Validation\Validator\CaptchaValidator
+     */
+    protected $captchaResponse;
 
     /**
      * __construct
@@ -205,6 +207,25 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->addPerson = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Sets the captchaResponse
+     *
+     * @param string $captchaResponse
+     * @return void
+     */
+    public function setCaptchaResponse($captchaResponse) {
+        $this->captchaResponse = $captchaResponse;
+    }
+
+    /**
+     * Getter for captchaResponse
+     *
+     * @return string
+     */
+    public function getCaptchaResponse() {
+        return $this->captchaResponse;
     }
 
     /**
