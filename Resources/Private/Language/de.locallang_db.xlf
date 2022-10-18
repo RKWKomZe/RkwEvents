@@ -433,6 +433,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.2" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.99" approved="yes">
 				<source>---</source>
 				<target>---</target>
@@ -496,6 +500,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.2" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.99" approved="yes">
 				<source>---</source>
 				<target>---</target>
@@ -621,6 +629,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.2" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.99" approved="yes">
 				<source>---</source>
 				<target>---</target>
@@ -652,6 +664,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.2" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.99" approved="yes">
 				<source>---</source>
 				<target>---</target>
@@ -775,6 +791,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_salutation.I.2" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="fe_users.tx_rkwevents_firstName" approved="yes">
                 <source>First name</source>
                 <target>Vorname</target>

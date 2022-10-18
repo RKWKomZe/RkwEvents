@@ -46,6 +46,7 @@ return [
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.99', 99],
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.0', 0],
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.1', 1],
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.2', 2],
                 ],
                 'size' => 1,
                 'maxitems' => 1,

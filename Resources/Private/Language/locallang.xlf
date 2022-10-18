@@ -110,6 +110,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.1" approved="yes">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.firstName" approved="yes">
 				<source>First name</source>
 			</trans-unit>
@@ -753,6 +756,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mrs" approved="yes">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mx" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.phone" approved="yes">
 				<source>Phone</source>
 			</trans-unit>

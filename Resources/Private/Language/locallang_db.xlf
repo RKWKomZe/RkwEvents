@@ -331,6 +331,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.1">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.salutation.I.99">
 				<source>---</source>
 			</trans-unit>
@@ -380,6 +383,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.1">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventorganizer.salutation.I.99">
 				<source>---</source>
 			</trans-unit>
@@ -478,6 +484,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.1" approved="yes">
                 <source>Mrs.</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservationaddperson.salutation.I.99" approved="yes">
                 <source>---</source>
             </trans-unit>
@@ -502,6 +511,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.1" approved="yes">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.salutation.I.99" approved="yes">
 				<source>---</source>
 			</trans-unit>
@@ -589,6 +601,9 @@
 			<trans-unit id="fe_users.tx_rkwevents_salutation.I.1" approved="yes">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="fe_users.tx_rkwevents_salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="fe_users.tx_rkwevents_firstName" approved="yes">
                 <source>First name</source>
             </trans-unit>
