@@ -8,10 +8,7 @@ use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator;
-use TYPO3\CMS\Extbase\Validation\Validator\GenericObjectValidator;
 
 /*
  * This file is part of the TYPO3 CMS project.
