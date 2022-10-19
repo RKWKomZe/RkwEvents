@@ -13,7 +13,9 @@
                         </f:link.action>
                     </f:then>
                     <f:else>
-                        <f:render partial="EventReservation/CaptchaElement" />
+                        <f:if condition="{settings.mandatoryFields.captcha}">
+                            <f:render partial="EventReservation/CaptchaElement" />
+                        </f:if>
                         <f:link.action pageUid="{settings.showPid}" class="btn btn--secondary" action="show" controller="Event" arguments="{event:event}">
                             <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back" />
                         </f:link.action>

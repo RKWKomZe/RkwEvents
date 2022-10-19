@@ -211,114 +211,115 @@ plugin.tx_rkwevents {
             1 = {$plugin.tx_rkwevents.view.partialRootPath}
         }
     }
-	persistence {
-		storagePid = {$plugin.tx_rkwevents.persistence.storagePid}
-        classes {
-            RKW\RkwEvents\Domain\Model\EventReservation.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservation.newRecordStoragePid}
-            RKW\RkwEvents\Domain\Model\EventReservationAddPerson.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservationAddPerson.newRecordStoragePid}
+    persistence {
+        storagePid = {$plugin.tx_rkwevents.persistence.storagePid}
+            classes {
+                RKW\RkwEvents\Domain\Model\EventReservation.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservation.newRecordStoragePid}
+                RKW\RkwEvents\Domain\Model\EventReservationAddPerson.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservationAddPerson.newRecordStoragePid}
+            }
         }
-    }
-    features {
+        features {
 
-        # see: https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/8.5/Breaking-78002-EnforceCHashArgumentForExtbaseActions.html
-        requireCHashArgumentForActionArguments = 0
+            # see: https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/8.5/Breaking-78002-EnforceCHashArgumentForExtbaseActions.html
+            requireCHashArgumentForActionArguments = 0
 
-    }
-    settings {
+        }
+        settings {
 
-        version = {$plugin.tx_rkwevents.settings.version}
-        listPid = {$plugin.tx_rkwevents.settings.listPid}
-        showPid = {$plugin.tx_rkwevents.settings.showPid}
-        loginPid = {$plugin.tx_rkwevents.settings.loginPid}
-        reservationPid = {$plugin.tx_rkwevents.settings.reservationPid}
-        termsPid = {$plugin.tx_rkwevents.settings.termsPid}
-        terms2Pid = {$plugin.tx_rkwevents.settings.terms2Pid}
-        myEventsPid =  {$plugin.tx_rkwevents.settings.myEventsPid}
-        parentCategoryForFilter =  {$plugin.tx_rkwevents.settings.parentCategoryForFilter}
+            version = {$plugin.tx_rkwevents.settings.version}
+            listPid = {$plugin.tx_rkwevents.settings.listPid}
+            showPid = {$plugin.tx_rkwevents.settings.showPid}
+            loginPid = {$plugin.tx_rkwevents.settings.loginPid}
+            reservationPid = {$plugin.tx_rkwevents.settings.reservationPid}
+            termsPid = {$plugin.tx_rkwevents.settings.termsPid}
+            terms2Pid = {$plugin.tx_rkwevents.settings.terms2Pid}
+            myEventsPid =  {$plugin.tx_rkwevents.settings.myEventsPid}
+            parentCategoryForFilter =  {$plugin.tx_rkwevents.settings.parentCategoryForFilter}
 
-        sheetsForEventPid = {$plugin.tx_rkwevents.settings.sheetsForEventPid}
-        archivePid = {$plugin.tx_rkwevents.settings.archivePid}
-		surveyPid = {$plugin.tx_rkwevents.settings.surveyPid}
+            sheetsForEventPid = {$plugin.tx_rkwevents.settings.sheetsForEventPid}
+            archivePid = {$plugin.tx_rkwevents.settings.archivePid}
+        surveyPid = {$plugin.tx_rkwevents.settings.surveyPid}
 
-        itemsPerPage = {$plugin.tx_rkwevents.settings.itemsPerPage}
-        // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
-        ajaxTypeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
-        includeJQuery = {$plugin.tx_rkwevents.settings.includeJQuery}
-        includeGallery = {$plugin.tx_rkwevents.settings.includeGallery}
-        attachCalendarEvent = {$plugin.tx_rkwevents.settings.attachCalendarEvent}
-        defaultLanguageKey = {$plugin.tx_rkwevents.settings.defaultLanguageKey}
-        hideMap = {$plugin.tx_rkwevents.settings.hideMap}
+            itemsPerPage = {$plugin.tx_rkwevents.settings.itemsPerPage}
+            // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
+            ajaxTypeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
+            includeJQuery = {$plugin.tx_rkwevents.settings.includeJQuery}
+            includeGallery = {$plugin.tx_rkwevents.settings.includeGallery}
+            attachCalendarEvent = {$plugin.tx_rkwevents.settings.attachCalendarEvent}
+            defaultLanguageKey = {$plugin.tx_rkwevents.settings.defaultLanguageKey}
+            hideMap = {$plugin.tx_rkwevents.settings.hideMap}
 
-        disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
+            disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 
-        costs {
-            red {
-                hint {
-                    enabled = {$plugin.tx_rkwevents.settings.costs.red.hint.enabled}
-                    link = {$plugin.tx_rkwevents.settings.costs.red.hint.link}
+            costs {
+                red {
+                    hint {
+                        enabled = {$plugin.tx_rkwevents.settings.costs.red.hint.enabled}
+                        link = {$plugin.tx_rkwevents.settings.costs.red.hint.link}
+                    }
                 }
             }
-        }
-        eligibility {
-            hint {
-                enabled = {$plugin.tx_rkwevents.settings.eligibility.hint.enabled}
-                link = {$plugin.tx_rkwevents.settings.eligibility.hint.link}
+            eligibility {
+                hint {
+                    enabled = {$plugin.tx_rkwevents.settings.eligibility.hint.enabled}
+                    link = {$plugin.tx_rkwevents.settings.eligibility.hint.link}
+                }
             }
+
+            list {
+                multipartView {
+                    enabled = {$plugin.tx_rkwevents.settings.list.multipartView.enabled}
+                    limitStarted = {$plugin.tx_rkwevents.settings.list.multipartView.limitStarted}
+                    limitUpcoming = {$plugin.tx_rkwevents.settings.list.multipartView.limitUpcoming}
+                }
+                detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
+                filter {
+                    showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
+                    showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
+                    showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
+                    showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
+                    showTimeNumberOfMonths = {$plugin.tx_rkwevents.settings.list.filter.showTimeNumberOfMonths}
+                    showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
+                    showOnlyOnlineEvents = {$plugin.tx_rkwevents.settings.list.filter.showOnlyOnlineEvents}
+                    showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
+                    showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}
+                }
+            }
+
+            listSimilar {
+                itemsPerPage = {$plugin.tx_rkwevents.settings.listSimilar.itemsPerPage}
+                showMoreLink = {$plugin.tx_rkwevents.settings.listSimilar.showMoreLink}
+                searchQuery {
+                    byDepartment = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDepartment}
+                    byDocumentType = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDocumentType}
+                    byCategories = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byCategories}
+                    byProject = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byProject}
+                }
+            }
+
+        mandatoryFields {
+            # comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
+            eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}
+            eventReservationAdditionalPersons = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationAdditionalPersons}
+            captcha = {$plugin.tx_rkwevents.settings.mandatoryFields.captcha}
         }
 
-        list {
-            multipartView {
-                enabled = {$plugin.tx_rkwevents.settings.list.multipartView.enabled}
-                limitStarted = {$plugin.tx_rkwevents.settings.list.multipartView.limitStarted}
-                limitUpcoming = {$plugin.tx_rkwevents.settings.list.multipartView.limitUpcoming}
-            }
-            detailLinkTargetBlank = {$plugin.tx_rkwevents.settings.list.detailLinkTargetBlank}
-            filter {
-                showDepartment = {$plugin.tx_rkwevents.settings.list.filter.showDepartment}
-                showDocumentType = {$plugin.tx_rkwevents.settings.list.filter.showDocumentType}
-                showCategory = {$plugin.tx_rkwevents.settings.list.filter.showCategory}
-                showTime = {$plugin.tx_rkwevents.settings.list.filter.showTime}
-                showTimeNumberOfMonths = {$plugin.tx_rkwevents.settings.list.filter.showTimeNumberOfMonths}
-                showAddress = {$plugin.tx_rkwevents.settings.list.filter.showAddress}
-                showOnlyOnlineEvents = {$plugin.tx_rkwevents.settings.list.filter.showOnlyOnlineEvents}
-                showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
-                showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}
-            }
+        mail {
+            # comma seperated list with UID's of be_users
+            backendUser = {$plugin.tx_rkwevents.settings.mail.backendUser}
         }
-
-        listSimilar {
-            itemsPerPage = {$plugin.tx_rkwevents.settings.listSimilar.itemsPerPage}
-            showMoreLink = {$plugin.tx_rkwevents.settings.listSimilar.showMoreLink}
-            searchQuery {
-                byDepartment = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDepartment}
-                byDocumentType = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byDocumentType}
-                byCategories = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byCategories}
-                byProject = {$plugin.tx_rkwevents.settings.listSimilar.searchQuery.byProject}
-            }
-        }
-
-		mandatoryFields {
-			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
-			eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}
-			eventReservationAdditionalPersons = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationAdditionalPersons}
-		}
-
-		mail {
-			# comma seperated list with UID's of be_users
-			backendUser = {$plugin.tx_rkwevents.settings.mail.backendUser}
-		}
-	}
+    }
 }
 
 // Add jQuery
 [globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.includeJQuery}]
-	page.includeJSFooterlibs.txRkwEventsJQuery  = EXT:rkw_events/Resources/Public/Js/jquery-3.4.1.min.js
+	  page.includeJSFooterlibs.txRkwEventsJQuery  = EXT:rkw_events/Resources/Public/Js/jquery-3.4.1.min.js
 [global]
 
 // Add Galleria-Gallery
 [globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.includeGallery}]
-	page.includeJSFooter.txRkwEventsGallery  = EXT:rkw_events/Resources/Public/Galleria/galleria-1.4.7.min.js
-	page.includeCSS.txRkwEventsGallery = EXT:rkw_events/Resources/Public/Css/Gallery.css
+	  page.includeJSFooter.txRkwEventsGallery  = EXT:rkw_events/Resources/Public/Galleria/galleria-1.4.7.min.js
+	  page.includeCSS.txRkwEventsGallery = EXT:rkw_events/Resources/Public/Css/Gallery.css
 [global]
 
 # needed for backend context (cronjobs)
