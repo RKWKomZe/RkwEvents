@@ -183,7 +183,6 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var string
-     * @validate \SJBR\SrFreecap\Validation\Validator\CaptchaValidator
      */
     protected $captchaResponse;
 
