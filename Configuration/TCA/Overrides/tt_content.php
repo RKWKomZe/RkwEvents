@@ -69,14 +69,21 @@ ExtensionUtility::registerPlugin(
     'RKW Events: Vorschläge zu einer Veranstaltung'
 );
 
+ExtensionUtility::registerPlugin(
+    $extKey,
+    'Standaloneregister',
+    'RKW Events: Registrierung (standalone)'
+);
+
 
 //=================================================================
 // Add Flexforms
 //=================================================================
+
+// PI1
 $pluginSignature = str_replace('_','',$extKey) . '_pi1';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events.xml';
-
 // if rkw_projects is installed we have additional options available
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')) {
     $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events-projects.xml';
@@ -86,14 +93,23 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
     $fileName
 );
 
+// Recommendation
 $pluginSignature = str_replace('_','',$extKey) . '_recommendation';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events-recommendation.xml';
-
 // if rkw_projects is installed we have additional options available
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')) {
     $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events-recommendation-projects.xml';
 }
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
+    $fileName
+);
+
+// Standaloneregister
+$pluginSignature = str_replace('_','',$extKey) . '_standaloneregister';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+$fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_standaloneregister.xml';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
     $fileName

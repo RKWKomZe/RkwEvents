@@ -17,3 +17,67 @@
 	margin-top: 3em;
 	display: block;
 }
+
+#typo3-docbody form {
+    margin-bottom: 0;
+}
+
+.tx-rkwevents-description {
+    font-size: 1.2em;
+    font-weight:bold;
+}
+
+
+table.tx-rkwevents-list {
+    border-collapse: collapse;
+    width: 80%;
+    border: 0;
+    margin-bottom:2em;
+}
+
+table.tx-rkwevents-list th,
+table.tx-rkwevents-list td {
+    text-align: left;
+    padding: 8px;
+    border: 0;
+}
+table.tx-rkwevents-list input {
+    width:350px;
+}
+
+table.tx-rkwevents-list table.tx-rkwevents-list__inner {
+    width:100%;
+}
+
+table.tx-rkwevents-list table.tx-rkwevents-list__inner td,
+table.tx-rkwevents-list table.tx-rkwevents-list__inner th {
+    padding-bottom:0;
+    padding-left:0;
+    padding-right:16px;
+}
+table.tx-rkwevents-list table.tx-rkwevents-list__inner td {
+    padding-top:0;
+}
+
+table.tx-rkwevents-list tr:nth-child(even){
+    background-color: #f2f2f2
+}
+table.tx-rkwevents-list table.tx-rkwevents-list__inner tr {
+    background-color:transparent;
+}
+
+table.tx-rkwevents-list th {
+    background-color: #e64415;
+    color: #fff;
+}
+
+table.tx-rkwevents-list table.tx-rkwevents-list__inner th {
+    background-color: transparent;
+    color:#000;
+}
+
+table.tx-rkwevents-list a,
+table.tx-rkwevents-list a:link,
+table.tx-rkwevents-list a:visited {
+    color:#e64415;
+}

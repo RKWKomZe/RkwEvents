@@ -174,6 +174,24 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $showPid = 0;
 
+    /**
+     * participateDinner
+     *
+     * @var integer
+     */
+    protected $participateDinner = 0;
+
+    /**
+     * participateMeeting
+     *
+     * @var integer
+     */
+    protected $participateMeeting = 0;
+
+    /**
+     * @var string
+     */
+    protected $captchaResponse;
 
     /**
      * __construct
@@ -195,6 +213,25 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->addPerson = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Sets the captchaResponse
+     *
+     * @param string $captchaResponse
+     * @return void
+     */
+    public function setCaptchaResponse($captchaResponse) {
+        $this->captchaResponse = $captchaResponse;
+    }
+
+    /**
+     * Getter for captchaResponse
+     *
+     * @return string
+     */
+    public function getCaptchaResponse() {
+        return $this->captchaResponse;
     }
 
     /**
@@ -642,5 +679,37 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getShowPid()
     {
         return $this->showPid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParticipateDinner()
+    {
+        return $this->participateDinner;
+    }
+
+    /**
+     * @param int $participateDinner
+     */
+    public function setParticipateDinner($participateDinner)
+    {
+        $this->participateDinner = $participateDinner;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParticipateMeeting()
+    {
+        return $this->participateMeeting;
+    }
+
+    /**
+     * @param int $participateMeeting
+     */
+    public function setParticipateMeeting($participateMeeting)
+    {
+        $this->participateMeeting = $participateMeeting;
     }
 }

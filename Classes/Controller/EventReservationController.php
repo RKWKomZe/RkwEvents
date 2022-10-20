@@ -223,7 +223,40 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->view->assign('event', $event);
         $this->view->assign('newEventReservation', $newEventReservation);
         $this->view->assign('frontendUser', $this->getFrontendUser());
-        $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($this->getFrontendUser()));
+        $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
+
+    }
+
+
+    /**
+     * action new
+     *
+     * @param Event $event
+     * @param EventReservation $newEventReservation
+     * @ignorevalidation $event
+     * @ignorevalidation $newEventReservation
+     * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     */
+    public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null)
+    {
+        if (intval($this->settings['eventRegisterStandalone'])) {
+            /** @var Event $event */
+            $event = $this->eventRepository->findByUid(intval($this->settings['eventRegisterStandalone']));
+
+            if (!$newEventReservation) {
+                $newEventReservation = GeneralUtility::makeInstance(\RKW\RkwEvents\Domain\Model\EventReservation::class);
+            }
+
+            $newEventReservation->setEvent($event);
+
+            $this->view->assign('event', $event);
+            $this->view->assign('newEventReservation', $newEventReservation);
+            $this->view->assign('frontendUser', $this->getFrontendUser());
+            $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
+            $this->view->assign('noBackButton', true);
+        }
 
     }
 
@@ -250,6 +283,21 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     public function createAction(EventReservation $newEventReservation, $terms = null, $privacy = null)
     {
+        // standard behavior
+        $showAction = 'show';
+        $newAction = 'new';
+        $controller = 'Event';
+
+        // if we're in registerstandalone plugin, always use "newStandalone" as forward action
+        if ($this->request->getPluginName() == 'Standaloneregister') {
+            // override showPid. Use current PID instead
+           // $this->settings['showPid'] = intval($GLOBALS['TSFE']->id);
+            // set different action and controller name
+            $showAction = 'newStandalone';
+            $newAction = 'newStandalone';
+            $controller = 'EventReservation';
+        }
+
         // 1. Check for existing reservations based on email.
         $frontendUser = $this->frontendUserRepository->findByUsername($newEventReservation->getEmail());
         if (count($frontendUser)) {
@@ -290,8 +338,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 );
 
                 // already registered
-                $this->redirect('show', 'Event', null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
-                //===
+                if ($this->request->getPluginName() == 'Standaloneregister') {
+                    $this->forward($showAction, $controller, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
+                }
+                $this->redirect($showAction, $controller, null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
             }
         }
 
@@ -305,8 +355,11 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
-            $this->redirect('show', 'Event', null, array('event' => $newEventReservation->getEvent()), $this->settings['showPid']);
-            //===
+
+            if ($this->request->getPluginName() == 'Standaloneregister') {
+                $this->forward($showAction, $controller, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
+            }
+            $this->redirect($showAction, $controller, null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
         }
 
         // 3. Check if registration-time is over since the user may have been waiting too long
@@ -320,8 +373,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
 
-            $this->redirect('show', 'Event', null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
-            //===
+            if ($this->request->getPluginName() == 'Standaloneregister') {
+                $this->forward($showAction, $controller, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
+            }
+            $this->redirect($showAction, $controller, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
         }
 
 
@@ -336,8 +391,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
 
-            $this->forward('new', null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
-            //===
+            $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
         }
 
 
@@ -351,8 +405,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
 
-            $this->forward('new', null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
-            //===
+            $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
         }
 
 
@@ -365,8 +418,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
-            $this->forward('new', null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
-            //===
+            $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
         }
 
 
@@ -403,8 +455,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                 );
 
-                $this->forward('new', null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
-                //===
+                $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
             }
 
             // register new user or simply send opt-in to existing user
@@ -435,9 +486,11 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
         }
 
+        if ($this->request->getPluginName() == 'Standaloneregister') {
+            $this->forward($showAction, $controller, null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
+        }
 
-        $this->redirect('show', 'Event', null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
-        //===
+        $this->redirect($showAction, $controller, null, array('event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
     }
 
 
@@ -468,6 +521,16 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     public function optInAction(Event $event, string $tokenUser, string $token)
     {
+        // standard behavior
+        $showAction = 'show';
+        $controller = 'Event';
+
+        // if we're in registerstandalone plugin, always use "newStandalone" as forward action
+        if ($this->request->getPluginName() == 'Standaloneregister') {
+            $showAction = 'newStandalone';
+            $controller = 'EventReservation';
+        }
+
         // General error:
         if (
             !$event instanceof Event
@@ -478,8 +541,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
-            $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-            //===
+            if ($this->request->getPluginName() == 'Standaloneregister') {
+                $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+            }
+            $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
         }
 
         // Check if the event is still open for internal registration
@@ -492,8 +557,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
-            $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-            //===
+            if ($this->request->getPluginName() == 'Standaloneregister') {
+                $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+            }
+            $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
         }
 
         /** @var \RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration $registration */
@@ -542,9 +609,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                             )
                         )
                     );
-
-                    $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-                    //===
+                    if ($this->request->getPluginName() == 'Standaloneregister') {
+                        $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+                    }
+                    $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
                 }
 
                 // 3. Check available places
@@ -555,9 +623,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
-
-                    $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-                    //====
+                    if ($this->request->getPluginName() == 'Standaloneregister') {
+                        $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+                    }
+                    $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
                 }
 
                 // 4. Check if registration-time is over since the user may have been waiting too long
@@ -568,38 +637,41 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
-
-                    $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-                    //====
+                    if ($this->request->getPluginName() == 'Standaloneregister') {
+                        $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+                    }
+                    $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
                 }
 
+
                 // 5. Create reservation!
-                $this->finalSaveReservation($newEventReservation, $feUser, $optIn);
+                $this->finalSaveReservation($newEventReservation, $feUser, $registration);
+
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'eventReservationController.message.reservationCreated', 'rkw_events'
+                    )
+                );
+                if ($this->request->getPluginName() == 'Standaloneregister') {
+                    $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+                }
+                $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
             }
 
-            $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'eventReservationController.message.reservationCreated', 'rkw_events'
-                )
-            );
 
-            $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-            //====
-
-
-        } elseif ($result >= 300 && $result < 400) {
+        } elseif ($check == 2) {
 
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'eventReservationController.message.reservationCanceled', 'rkw_events'
                 )
             );
-
-            $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-            //====
-
-
+            if ($this->request->getPluginName() == 'Standaloneregister') {
+                $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+            }
+            $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
         }
+
 
         $this->addFlashMessage(
             LocalizationUtility::translate(
@@ -608,9 +680,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             '',
             \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
         );
-
-        $this->redirect('show', 'Event', null, array('event' => $event), intval($this->settings['showPid']));
-        //====
+        if ($this->request->getPluginName() == 'Standaloneregister') {
+            $this->forward($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
+        }
+        $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
     }
 
 

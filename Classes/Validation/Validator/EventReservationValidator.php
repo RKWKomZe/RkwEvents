@@ -4,6 +4,10 @@ namespace RKW\RkwEvents\Validation\Validator;
 
 use RKW\RkwEvents\Utility\DivUtility;
 use RKW\RkwBasics\Utility\GeneralUtility as Common;
+use SJBR\SrFreecap\Domain\Repository\WordRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -105,7 +109,6 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
 
             foreach ($mandatoryFieldsAdditionalPersons as $field) {
 
-
                 $getter = 'get' . ucfirst($field);
                 $i = 0;
                 foreach ($newEventReservation->getAddPerson() as $additionalPerson) {
@@ -205,9 +208,47 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
             }
         }
 
+        if (
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sr_freecap')
+            && method_exists($newEventReservation, 'getCaptchaResponse')
+            && $this->settings['mandatoryFields']['captcha']
+        ) {
+            $isValid = false;
+            $word = $newEventReservation->getCaptchaResponse();
+            if (is_object($GLOBALS ['TSFE']) && isset($GLOBALS ['TSFE']->fe_user)) {
+                // Get session data
+                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+                $wordRepository = $objectManager->get(WordRepository::class);
+                $wordObject = $wordRepository->getWord();
+                $wordHash = $wordObject->getWordHash();
+                // Check the word hash against the stored hash value
+                if (!empty($wordHash) && !empty($word)) {
+                    if ($wordObject->getHashFunction() == 'md5') {
+                        // All freeCap words are lowercase.
+                        // font #4 looks uppercase, but trust me, it's not...
+                        if (md5(strtolower(utf8_decode($word))) == $wordHash) {
+                            // Reset freeCap session vars
+                            // Cannot stress enough how important it is to do this
+                            // Defeats re-use of known image with spoofed session id
+                            $wordRepository->cleanUpWord();
+                            $isValid = true;
+                        }
+                    }
+                }
+            }
+            if (!$isValid) {
+                $this->result->forProperty('captchaResponse')->addError(
+                    new \TYPO3\CMS\Extbase\Error\Error(
+                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                            '9221561048',
+                            'srfreecap'
+                        ), 1666038470
+                    )
+                );
+            }
+        }
 
         return $isValid;
-        //===
     }
 
 

@@ -1,0 +1,47 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <general>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.eventRegisterStandalone>
+                        <TCEforms>
+                            <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.eventSelect</label>
+                            <config>
+                                <size>5</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                                <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <enableMultiSelectFilterTextfield>1</enableMultiSelectFilterTextfield>
+                                <foreign_table>tx_rkwevents_domain_model_event</foreign_table>
+                                <foreign_table_where>
+                                    AND tx_rkwevents_domain_model_event.deleted = 0 AND tx_rkwevents_domain_model_event.hidden = 0 ORDER BY tx_rkwevents_domain_model_event.start DESC
+                                </foreign_table_where>
+                            </config>
+                        </TCEforms>
+                    </settings.eventRegisterStandalone>
+                    <settings.showParticipateDinnerCheckbox>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.showParticipateDinner</label>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.showParticipateDinnerCheckbox>
+                    <settings.showParticipateMeetingCheckbox>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.showParticipateMeeting</label>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.showParticipateMeetingCheckbox>
+                </el>
+            </ROOT>
+        </general>
+
+    </sheets>
+</T3DataStructure>

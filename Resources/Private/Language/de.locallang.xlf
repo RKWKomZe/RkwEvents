@@ -149,6 +149,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.2" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.firstName" approved="yes">
 				<source>First name</source>
 				<target>Vorname</target>
@@ -333,7 +337,7 @@
 			</trans-unit>
 			<trans-unit id="backendController.error.departmentNotFound">
 				<source>Could not find department/topic with id %s. Nothing set (CSV-LINE:%s).</source>
-				<target>Fachbereich/Thema mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
+				<target>Fachbereich/Schwerpunkt mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.documentTypeNotFound">
 				<source>Could not find documentType with id %s. Nothing set (CSV-LINE:%s).</source>
@@ -409,7 +413,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_topicId">
 				<source>Department Type; overrides CSV Values when set</source>
-				<target>Fachbereich/Thema; überschreibt CSV-Werte, wenn gesetzt</target>
+				<target>Fachbereich/Schwerpunkt; überschreibt CSV-Werte, wenn gesetzt</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId" approved="no">
 				<source>Organizer; overrides CSV Values when set</source>
@@ -447,6 +451,62 @@
                 <source>.</source>
                 <target>herunterladen.</target>
             </trans-unit>
+
+
+            <!-- Templates/Backend/CsvExport.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.headline">
+                <source>CSV export for reservations</source>
+                <target>CSV Export für Reservierungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents">
+                <source>Running events</source>
+                <target>Laufende und zukünftige Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.pastEvents">
+                <source>Past events</source>
+                <target>Vergangene Veranstaltungen</target>
+            </trans-unit>
+
+
+            <!-- Partials/Backend/CsvExportEventList.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.startend">
+                <source>Start / end</source>
+                <target>Start / Ende</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.idPid">
+                <source>ID (PID)</source>
+                <target>ID (PID)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.place">
+                <source>Place</source>
+                <target>Ort</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation">
+                <source>Reservation</source>
+                <target>Reservierungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
+                <source>Export (CSV)</source>
+                <target>Export (CSV)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.announcement">
+                <source>Announcement</source>
+                <target>Ankündigung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.online">
+                <source>Online</source>
+                <target>Online</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export">
+                <source>export</source>
+                <target>exportieren</target>
+            </trans-unit>
+
+
 
 
 			<!-- Templates/Ajax/List/List.html -->
@@ -562,11 +622,11 @@
 			<!-- Partials/Event/Filter.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelTopics">
 				<source>Topics</source>
-				<target>Themen</target>
+				<target>Schwerpunkte</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelTopicsAll">
                 <source>All Topics</source>
-                <target>Alle Themen</target>
+                <target>Alle Schwerpunkte</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelAll">
 				<source>All</source>
@@ -945,6 +1005,10 @@
 				<source>Mrs.</source>
 				<target>Frau</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mx" approved="yes">
+                <source>Mx</source>
+                <target>Divers</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.phone" approved="yes">
 				<source>Phone</source>
 				<target>Tel.</target>
@@ -1139,6 +1203,14 @@
 				<source>Workshop unit 3</source>
 				<target>Workshop Block 3</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateDinner">
+                <source>Participate in dinner</source>
+                <target>Ich nehme am Imbiss teil</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateMeeting">
+                <source>Participate in meeting</source>
+                <target>Ich nehme an der Mitgliederversammlung teil</target>
+            </trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1357,6 +1429,22 @@
             <trans-unit id="partials_email_details.mobile">
                 <source>Mobile</source>
                 <target>Mobil</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner">
+                <source>Participate in dinner</source>
+                <target>Teilnahme am Imbiss</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner.yes">
+                <source>Yes</source>
+                <target>Ja</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateMeeting">
+                <source>Participate in meeting</source>
+                <target>Teilnahme an Mitgliederversammlung</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateMeeting.yes">
+                <source>Yes</source>
+                <target>Ja</target>
             </trans-unit>
 
 

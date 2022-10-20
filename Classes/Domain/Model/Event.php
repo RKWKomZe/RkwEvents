@@ -61,6 +61,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $end;
 
     /**
+     * showTime
+     *
+     * @var boolean
+     */
+    protected $showTime = true;
+
+    /**
      * longitude
      *
      * @var string
@@ -257,6 +264,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $eligibilityLink = '';
+
+    /**
+     * additionalTileFlag
+     *
+     * @var string
+     */
+    protected $additionalTileFlag = '';
 
     /**
      * backendUserExclusive
@@ -661,6 +675,30 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEnd($end)
     {
         $this->end = $end;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isShowTime()
+    {
+        return $this->showTime;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getShowTime()
+    {
+        return $this->showTime;
+    }
+
+    /**
+     * @param boolean $showTime
+     */
+    public function setShowTime($showTime)
+    {
+        $this->showTime = $showTime;
     }
 
     /**
@@ -1288,7 +1326,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->eligibilityLink = $eligibilityLink;
     }
-    
+
+    /**
+     * @return string
+     */
+    public function getAdditionalTileFlag(): string
+    {
+        return $this->additionalTileFlag;
+    }
+
+    /**
+     * @param string $additionalTileFlag
+     */
+    public function setAdditionalTileFlag(string $additionalTileFlag): void
+    {
+        $this->additionalTileFlag = $additionalTileFlag;
+    }
 
     /**
      * @return bool

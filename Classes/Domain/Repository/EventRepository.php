@@ -47,15 +47,20 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         'start' => QueryInterface::ORDER_ASCENDING,
     );
 
+
     /**
+     * constraintBackendUserExclusive
      *
+     * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\NotInterface
      */
     protected function constraintBackendUserExclusive()
     {
         $query = $this->createQuery();
-
         // if no backend user is logged in, exclude events with property backendUserExclusive = 1
-        if (!$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication) {
+        if (
+            !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication
+            && !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+        ) {
             return $query->logicalNot($query->equals('backendUserExclusive', 1));
         }
     }
@@ -402,10 +407,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             // additional filter options
             if ($filter['time']) {
                 $month = date("M", intval($filter['time']));
-                $lastDayOfMonthTimestamp = strtotime('last day of ' . $month);
-                $constraints[] = $query->logicalAnd(
-                    $query->greaterThanOrEqual('end', intval($filter['time'])),
-                    $query->lessThanOrEqual('end', $lastDayOfMonthTimestamp)
+                $year = date("Y", intval($filter['time']));
+                $lastDayOfMonthTimestamp = strtotime('last day of ' . $year . '-' . $month . '-01T23:59:59');
+
+                $constraints[] = $query->logicalOr(
+                    $query->logicalAnd(
+                        $query->greaterThanOrEqual('start', intval($filter['time'])),
+                        $query->lessThanOrEqual('start', $lastDayOfMonthTimestamp)
+                    )/*,
+                    $query->logicalAnd(
+                        $query->greaterThanOrEqual('end', intval($filter['time'])),
+                        $query->lessThanOrEqual('end', $lastDayOfMonthTimestamp)
+                    )*/
                 );
 
             }
@@ -465,10 +478,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $recordType only announcements or scheduled
      * @param bool $onlyStarted if true only started events are shown
      * @param bool $onlyUpcoming if true only upcoming (not started) events are shown
+     * @param bool $ignoreBeUserExclusive if true also show events where the "backendUserExclusive" flag is set
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false)
+    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false, $ignoreBeUserExclusive = false)
     {
         $query = $this->createQuery();
 
@@ -483,7 +497,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('title', '')
             );
 
-        $constraints[] = $this->constraintBackendUserExclusive();
+        // backendUser special case
+        if (!$ignoreBeUserExclusive) {
+            $constraints[] = $this->constraintBackendUserExclusive();
+        }
 
         if (
             ($settings['eventUids'])

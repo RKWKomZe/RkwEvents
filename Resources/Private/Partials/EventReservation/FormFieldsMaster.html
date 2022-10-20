@@ -14,7 +14,7 @@
             id="tx_rkwevents_pi1_salutation"
             property="salutation"
             value="{f:if(condition:'(\'{newEventReservation.salutation}\' == 99 || {editMode}',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}"
-            options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}'}"
+            options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}', 2: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.2\')}'}"
         />
 	</div>
 
@@ -225,6 +225,28 @@
             placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.remark' />"
         />
     </div>
+
+    <f:if condition="{settings.showParticipateDinnerCheckbox}">
+        <div class="form__field width100">
+            <div class="form__field">
+                <f:form.checkbox class="checkbox" id="participate_dinner" property="participateDinner" value="1" />
+                <label for="participate_dinner" class="checkbox-label">
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateDinner" />
+                </label>
+            </div>
+        </div>
+    </f:if>
+
+    <f:if condition="{settings.showParticipateMeetingCheckbox}">
+        <div class="form__field width100">
+            <div class="form__field">
+                <f:form.checkbox class="checkbox" id="participate_meeting" property="participateMeeting" value="1" />
+                <label for="participate_meeting" class="checkbox-label">
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateMeeting" />
+                </label>
+            </div>
+        </div>
+    </f:if>
 
 
     <f:if condition="{editMode}">

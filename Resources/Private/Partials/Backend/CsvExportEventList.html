@@ -1,0 +1,67 @@
+
+<table class="tx-rkwevents-list">
+    <tr>
+        <th></th>
+        <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.startend" />
+        </th>
+        <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.idPid" />
+        </th>
+        <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.title" />
+        </th>
+        <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.place" />
+        </th>
+        <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation" />
+        </th>
+        <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv" />
+        </th>
+    </tr>
+
+
+    <f:for each="{eventList}" as="event" iteration="iter">
+        <f:comment><!-- do not show events with external registration link --></f:comment>
+        <f:if condition="{event.extRegLink}">
+            <f:else>
+                <tr>
+                    <td>({iter.cycle})</td>
+                    <td>
+                        <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                            <f:then>
+                                <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.announcement" />
+                            </f:then>
+                            <f:else>
+                                <f:format.date format="d.m.Y H:i">{event.start}</f:format.date>
+                                <f:if condition="{event.end}">
+                                    - <f:format.date format="d.m.Y H:i">{event.end}</f:format.date>
+                                </f:if>
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>{event.uid} ({event.pid})</td>
+                    <td>{event.title}</td>
+                    <td>
+                        <f:if condition="{event.onlineEvent}">
+                            <f:then>
+                                <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.online" />
+                            </f:then>
+                            <f:else>
+                                {event.place.name}
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td><f:count>{event.reservation}</f:count></td>
+                    <td>
+                        <f:link.action action="createCsv" target="_blank" arguments="{event:event}">
+                            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export" />
+                        </f:link.action>
+                    </td>
+                </tr>
+            </f:else>
+        </f:if>
+    </f:for>
+</table>

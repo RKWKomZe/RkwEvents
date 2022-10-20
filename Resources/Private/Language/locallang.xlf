@@ -110,6 +110,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.1" approved="yes">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation.I.2" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.firstName" approved="yes">
 				<source>First name</source>
 			</trans-unit>
@@ -336,6 +339,48 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.templates_backend_show.import_help3">
                 <source>.</source>
+            </trans-unit>
+
+
+            <!-- Templates/Backend/CsvExport.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.headline">
+                <source>CSV export for reservations</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents">
+                <source>Running events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.pastEvents">
+                <source>Past events</source>
+            </trans-unit>
+
+
+            <!-- Partials/Backend/CsvExportEventList.html -->
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.startend">
+                <source>Start / end</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.idPid">
+                <source>ID (PID)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.place">
+                <source>Place</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation">
+                <source>Reservation</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
+                <source>Export (CSV)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.announcement">
+                <source>Announcement</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.online">
+                <source>Online</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export">
+                <source>export</source>
             </trans-unit>
 
 
@@ -711,6 +756,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mrs" approved="yes">
 				<source>Mrs.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.salutation_mx" approved="yes">
+                <source>Mx</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_contactSub.phone" approved="yes">
 				<source>Phone</source>
 			</trans-unit>
@@ -867,6 +915,12 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3">
 				<source>Workshop unit 3</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateDinner">
+                <source>Participate in dinner</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateMeeting">
+                <source>Participate in meeting</source>
+            </trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1034,6 +1088,18 @@
             </trans-unit>
             <trans-unit id="partials_email_details.mobile">
                 <source>Mobile</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner">
+                <source>Participate in dinner</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateDinner.yes">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateMeeting">
+                <source>Participate in meeting</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.participateMeeting.yes">
+                <source>Yes</source>
             </trans-unit>
 
 

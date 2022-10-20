@@ -3,8 +3,11 @@
 namespace RKW\RkwEvents\Service;
 
 use RKW\RkwBasics\Utility\GeneralUtility as Common;
+use RKW\RkwEvents\Domain\Model\BackendUser;
+use RKW\RkwEvents\Domain\Model\EventContact;
 use RKW\RkwMailer\Service\MailService;
 use RKW\RkwMailer\Utility\FrontendLocalizationUtility;
+use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -67,10 +70,18 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $signalInformation
     )
     {
-
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $settingsDefault = $this->getSettings();
+        $showPid = intval($settingsDefault['showPid']);
+
+        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        $isStandaloneRegisterPlugin = (bool)$request;
+        if ($isStandaloneRegisterPlugin) {
+            // if standalone reservation form plugin: Override showPid!
+            $showPid = intval($GLOBALS['TSFE']->id);
+        }
 
         if ($settings['view']['templateRootPaths']) {
 
@@ -85,6 +96,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
                     'showPid'      => intval($settingsDefault['showPid']),
+                    'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                 ),
             ));
 
@@ -160,7 +172,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Handles confirm mail for admin
      *
-     * @param \RKW\RkwEvents\Domain\Model\BackendUser|array $backendUser
+     * @param BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
      * @throws \RKW\RkwMailer\Exception
@@ -207,7 +219,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Handles update mail for admin
      *
-     * @param \RKW\RkwEvents\Domain\Model\BackendUser|array $backendUser
+     * @param BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
      * @throws \RKW\RkwMailer\Exception
@@ -255,7 +267,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Handles delete mail for admin
      *
-     * @param \RKW\RkwEvents\Domain\Model\BackendUser|array $backendUser
+     * @param BackendUser|array $backendUser
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
@@ -305,15 +317,14 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            /** @var MailService $mailService */
+            $mailService = GeneralUtility::makeInstance(MailService::class);
 
             if (count($eventReservationList)) {
                 /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
                 foreach ($eventReservationList as $eventReservation) {
                     if ($eventReservation->getFeUser()) {
 
-                        //DebuggerUtility::var_dump($eventReservation->getEvent()->getPlace()); exit;
                         $googleMapsLink = '';
                         if ($eventReservation->getEvent()->getPlace() instanceof \RKW\RkwEvents\Domain\Model\EventPlace) {
 
@@ -397,8 +408,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
             if ($settings['view']['templateRootPaths']) {
 
-                /** @var \RKW\RkwMailer\Service\MailService $mailService */
-                $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+                /** @var MailService $mailService */
+                $mailService = GeneralUtility::makeInstance(MailService::class);
 
                 if (count($eventReservationList)) {
                     foreach ($eventReservationList as $eventReservation) {
@@ -475,11 +486,20 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $settingsDefault = $this->getSettings();
+        $showPid = intval($settingsDefault['showPid']);
+
+        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        $isStandaloneRegisterPlugin = (bool)$request;
+        if ($isStandaloneRegisterPlugin) {
+            // if standalone reservation form plugin: Override showPid!
+            $showPid = intval($GLOBALS['TSFE']->id);
+        }
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            /** @var MailService $mailService */
+            $mailService = GeneralUtility::makeInstance(MailService::class);
 
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
@@ -488,10 +508,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'frontendUser' => $frontendUser,
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
-                    'showPid'      => intval($settingsDefault['showPid']),
+                    'showPid'      => intval($showPid),
                     'uniqueKey'    => uniqid(),
                     'currentTime'  => time(),
                     'surveyPid'    => intval($settingsDefault['surveyPid']),
+                    'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                 ),
             ));
 
@@ -540,7 +561,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Sends an E-Mail to an Admin
      *
-     * @param \RKW\RkwEvents\Domain\Model\BackendUser|array $backendUser
+     * @param BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @param string $action
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
@@ -563,6 +584,15 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $settingsDefault = $this->getSettings();
+        $showPid = intval($settingsDefault['showPid']);
+
+        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        $isStandaloneRegisterPlugin = (bool)$request;
+        if ($isStandaloneRegisterPlugin) {
+            // if standalone reservation form plugin: Override showPid!
+            $showPid = intval($GLOBALS['TSFE']->id);
+        }
 
         $recipients = array();
         if (is_array($backendUser)) {
@@ -573,29 +603,29 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            /** @var MailService $mailService */
+            $mailService = GeneralUtility::makeInstance(MailService::class);
 
             foreach ($recipients as $recipient) {
 
                 if (
                     (
-                        ($recipient instanceof \RKW\RkwEvents\Domain\Model\BackendUser)
-                        || ($recipient instanceof \RKW\RkwEvents\Domain\Model\EventContact)
+                        ($recipient instanceof BackendUser)
+                        || ($recipient instanceof EventContact)
                     )
                     && ($recipient->getEmail())
                 ) {
 
                     $language = $recipient->getLang();
-                    if ($language instanceof \SJBR\StaticInfoTables\Domain\Model\Language) {
+                    if ($language instanceof Language) {
                         $language = $language->getTypo3Code();
                     }
 
                     $name = '';
-                    if ($recipient instanceof \RKW\RkwEvents\Domain\Model\BackendUser) {
+                    if ($recipient instanceof BackendUser) {
                         $name = $recipient->getRealName();
                     }
-                    if ($recipient instanceof \RKW\RkwEvents\Domain\Model\EventContact) {
+                    if ($recipient instanceof EventContact) {
                         $name = $recipient->getFirstName() . ' ' . $recipient->getLastName();
                     }
 
@@ -607,9 +637,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'frontendUser' => $frontendUser,
                             'pageUid'      => intval($GLOBALS['TSFE']->id),
                             'loginPid'     => intval($settingsDefault['loginPid']),
-                            'showPid'      => intval($settingsDefault['showPid']),
+                            'showPid'      => intval($showPid),
                             'fullName'     => $name,
                             'language'     => $language,
+                            'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                         ),
                         'subject' => FrontendLocalizationUtility::translate(
                             'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',

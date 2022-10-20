@@ -85,6 +85,7 @@ return [
 					['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact.salutation.I.99', 99],
 					['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact.salutation.I.0', 0],
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact.salutation.I.1', 1],
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventcontact.salutation.I.2', 2],
 				],
 				'default' => 99,
 				'size' => 1,

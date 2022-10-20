@@ -32,7 +32,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  */
 class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     use CompileWithContentArgumentAndRenderStatic;
 
     /**
@@ -45,6 +44,8 @@ class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\A
         parent::initializeArguments();
         $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event', true);
         $this->registerArgument('languageKey', 'string', 'Optional language key', false, 'default');
+        $this->registerArgument('onlyTime', 'bool', 'Show only time');
+        $this->registerArgument('onlyDate', 'bool', 'Show only date');
     }
 
     /**
@@ -89,6 +90,9 @@ class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\A
         RenderingContextInterface $renderingContext
     ) {
         $event = $arguments['event'];
+        $languageKey = $arguments['languageKey'];
+        $onlyTime = $arguments['onlyTime'];
+        $onlyDate = $arguments['onlyDate'];
 
         // for secure: If an event is hidden or deleted, the following VH content is still callable (and throws errors)
         // (Uncaught TYPO3 Exception: Call to a member function getStart() on null | Error thrown in file /var/www/rkw-kompetenzzentrum.de/surf/releases/20201006153122/web/typo3conf/ext/rkw_events/Classes/ViewHelpers/ComposeDateTimePartsViewHelper.php in line xyz.)
@@ -98,10 +102,17 @@ class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\A
 
         // 1. start date & time
         // set always the starting date
-        $output = date("d.m.Y", $event->getStart());
+        if (!$onlyTime) {
+            $output = date("d.m.Y", $event->getStart());
+        }
 
-        if (date("Hi", $event->getStart())) {
-            $output .= ', ';
+        if (
+            !$onlyDate
+            && date("Hi", $event->getStart())
+        ) {
+            if (!$onlyTime) {
+                $output .= ', ';
+            }
             $output .= date("H:i", $event->getStart());
             // if startDate != endDate OR no endDate is given, so close here with time_after-string
             if (
@@ -110,9 +121,14 @@ class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\A
             ) {
                 if (TYPO3_MODE == 'BE') {
                     // for emails send via cron e.g.
-                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $arguments['languageKey']);
+                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
                 } else {
-                    $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
+                    if (
+                        !$onlyTime
+                        && date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())
+                    ) {
+                        $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
+                    }
                 }
 
             }
@@ -120,16 +136,24 @@ class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\A
 
         // 2. end date & time
         if ($event->getEnd()) {
-            $output .= ' - ';
-            if (date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())) {
+            if (
+                !$onlyTime
+                && date("d.m.Y", $event->getStart()) != date("d.m.Y", $event->getEnd())
+            ) {
+                $output .= ' - ';
                 $output .= date("d.m.Y", $event->getEnd());
-                $output .= ', ';
+                //$output .= ', ';
             }
-            if (date("Hi", $event->getEnd())) {
+
+            if (
+                !$onlyDate
+                && date("Hi", $event->getEnd())
+            ) {
+                $output .= ' - ';
                 $output .= date("H:i", $event->getEnd());
                 if (TYPO3_MODE == 'BE') {
                     // for emails send via cron e.g.
-                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $arguments['languageKey']);
+                    $output .= ' ' . FrontendLocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null, $languageKey);
                 } else {
                     $output .= ' ' . LocalizationUtility::translate('tx_rkwevents_fluid.partials_event_info_time.time_after', 'rkw_events', null);
                 }

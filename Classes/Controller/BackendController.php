@@ -2,9 +2,12 @@
 
 namespace RKW\RkwEvents\Controller;
 use League\Csv\Reader;
+use RKW\RkwEvents\Domain\Model\BackendUser;
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Utility\BackendUserUtility;
+use RKW\RkwEvents\Utility\CsvUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -99,6 +102,48 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $objectManager;
+
+
+
+    /**
+     * csvExport
+     *
+     * @return void
+     */
+    public function csvExportAction()
+    {
+        /** @var BackendUser $currentBackendUser */
+        $currentBackendUser = $this->backendUserRepository->findByUid(intval($GLOBALS['BE_USER']->user['uid']));
+
+        // if user is not an admin, set specific page uids which are related to the users groups
+        $querySettings = $this->eventRepository->createQuery()->getQuerySettings();
+        if ($currentBackendUser->getIsAdministrator()) {
+            // let see admin everything
+            $querySettings->setRespectStoragePage(false);
+        } else {
+            // restrict other user to it's allowed content
+            $allowedPidsOfCurrentBackendUser = BackendUserUtility::getMountpointsOfAllGroups($currentBackendUser);
+            $querySettings->setStoragePageIds($allowedPidsOfCurrentBackendUser);
+        }
+        $this->eventRepository->setDefaultQuerySettings($querySettings);
+
+        $this->view->assign('eventListNotFinished', $this->eventRepository->findNotFinishedOrderAsc(100));
+
+        $this->view->assign('eventListFinished', $this->eventRepository->findFinishedOrderAsc(100));
+    }
+
+
+    /**
+     * createCsv
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function createCsvAction(Event $event)
+    {
+        CsvUtility::createCsv($event);
+        exit;
+    }
 
 
     /**

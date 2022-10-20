@@ -67,6 +67,20 @@ config.tx_extbase.persistence {
             }
         }
 
+        #===============================================
+
+        TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup {
+            subclasses {
+                Tx_RkwEvents_BackendUserGroup = RKW\RkwEvents\Domain\Model\BackendUserGroup
+            }
+        }
+
+        RKW\RkwEvents\Domain\Model\BackendUserGroup {
+            mapping {
+                tableName = be_groups
+            }
+        }
+
 
         #===============================================
 
@@ -288,6 +302,7 @@ plugin.tx_rkwevents {
 			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
 			eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}
 			eventReservationAdditionalPersons = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationAdditionalPersons}
+           captcha = {$plugin.tx_rkwevents.settings.mandatoryFields.captcha}
 		}
 
 		mail {
