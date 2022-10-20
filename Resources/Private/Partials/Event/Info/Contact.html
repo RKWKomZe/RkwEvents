@@ -3,7 +3,7 @@
     xmlns:rkwBasics="http://typo3.org/ns/RKW/RkwBasics/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-    <f:if condition="<rkw:Or or1='{event.internalContact}' or2='{event.externalContact}' />">
+    <f:if condition="{event.internalContact} || {event.externalContact}">
 
 
             <h3 class="siteheader__overlay-title">

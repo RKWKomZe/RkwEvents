@@ -10,7 +10,7 @@
 <vh:frontend.translate key="templates_email_surveyReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 
 <vh:frontend.translate key="templates_email_surveyReservationUser.goToSurvey" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
-<vh:frontend.link absolute="TRUE" pageUid='{surveyPid}' arguments='{survey: reservation.event.surveyBefore}' />
+<vh:frontend.link absolute="true" pageUid='{surveyPid}' arguments='{survey: reservation.event.surveyBefore}' />
 </f:section>
 
 <!-- HTML -->
@@ -21,6 +21,6 @@
 		<vh:frontend.translate key="templates_email_surveyReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 	</p>
 	<p>
-		<a href="<vh:frontend.link absolute='TRUE' pageUid='{surveyPid}' action='start' controller='Survey' extensionName='RkwSurvey' pluginName='Survey' arguments='{survey: reservation.event.surveyBefore.uid}' />" target="_blank"><vh:frontend.translate key="templates_email_surveyReservationUser.goToSurvey" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /></a>
+		<a href="<vh:frontend.link absolute='true' pageUid='{surveyPid}' action='start' controller='Survey' extensionName='RkwSurvey' pluginName='Survey' arguments='{survey: reservation.event.surveyBefore.uid}' />" target="_blank"><vh:frontend.translate key="templates_email_surveyReservationUser.goToSurvey" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /></a>
 	</p>
 </f:section>

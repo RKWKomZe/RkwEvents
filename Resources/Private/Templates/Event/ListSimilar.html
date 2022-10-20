@@ -23,22 +23,22 @@
                 <f:translate key="tx_rkwevents_fluid.templates_event_listsimilar.noResults" />
             </f:else>
         </f:if>
-        
+
         <!-- Version for big boxes below - NOT USED -->
         <f:comment>
             <f:render partial="FlashMessages" arguments="{_all}" />
-    
+
             <f:if condition="{noEventFound}">
                 <f:comment><!-- If redirected from showAction after no event was found --></f:comment>
                 <div class="system-message system-message--scroll" role="alert">
-                    <div class="system-message__item system-message__item--alert-danger">
+                    <div class="system-message__item system-message__item--severity1">
                         <f:translate key="eventController.message.error.notAvailable2" extensionName="RkwEvents" />
                     </div>
                 </div>
             </f:if>
-            
+
             <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
-    
+
                 <div class="tiles-wrapper">
                     <div class="flex center-main mt-3">
                         <div class="flex-container introtext">
@@ -47,19 +47,19 @@
                             </h3>
                         </div>
                     </div>
-    
+
                     <f:if condition="<f:count>{sortedEventList}</f:count>">
                         <f:then>
                             <!-- simple element list without nesting -->
                             <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
                                 <div class="tiles flex-container flex-container--margin">
-    
+
                                     <f:for each="{sortedEventList}" as="event">
                                         <f:render partial="Event/List/Box" section="flex-4" arguments="{_all}" />
                                     </f:for>
                                 </div>
                             </rkwAjax:ajaxWrapper>
-    
+
                             <!-- lazy loading / load more box -->
                             <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
                                 <f:if condition="{showMoreLink}">
@@ -74,12 +74,12 @@
                                             additionalParams="{tx_rkwevents_pi1: '{event: currentEvent}', tx_rkwevents_similar: '{event: currentEvent, page: pageMore}', rkw_ajax : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'2,3\'}'}"
                                         >
                                         <strong><f:translate key="tx_rkwevents_fluid.partials_event_list_more.showMore" extensionName="RkwEvents" /></strong>
-    
+
                                         </f:link.action>
                                     </div>
                                 </f:if>
                             </rkwAjax:ajaxWrapper>
-    
+
                         </f:then>
                         <f:else>
                             <div class="flex-container flex-basis-12 center-main">
@@ -92,9 +92,9 @@
                         </f:else>
                     </f:if>
                 </div>
-    
+
             </rkwAjax:ajaxWrapper>
-            
+
         </f:comment>
 
     </f:section>

@@ -228,7 +228,7 @@ plugin.tx_rkwevents {
 		surveyPid = {$plugin.tx_rkwevents.settings.surveyPid}
 
         itemsPerPage = {$plugin.tx_rkwevents.settings.itemsPerPage}
-        // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
+        // @todo @deprecated (typeNum is only needed for OLD Ajax API)
         ajaxTypeNum = {$plugin.tx_rkwevents.settings.ajaxTypeNum}
         includeJQuery = {$plugin.tx_rkwevents.settings.includeJQuery}
         includeGallery = {$plugin.tx_rkwevents.settings.includeGallery}

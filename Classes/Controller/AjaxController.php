@@ -37,14 +37,14 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function __construct()
     {
         parent::__construct();
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' will be removed soon. Do not use it any more.');
+        trigger_error(__CLASS__ . ' will be removed soon. Do not use it any more.', E_USER_DEPRECATED);
     }
 
     /**
      * eventRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventRepository = null;
 
@@ -88,7 +88,7 @@ class AjaxController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         );
 
         // get JSON helper
-        /** @var \RKW\RkwBasics\Helper\Json $jsonHelper */
+        /** @var \RKW\RkwAjax\Encoder\JsonTemplateEncoder $jsonHelper */
         $jsonHelper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwBasics\\Helper\\Json');
         if ($page > 0) {
 

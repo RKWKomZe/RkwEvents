@@ -3,7 +3,7 @@
 namespace RKW\RkwEvents\Validation\Validator;
 
 use RKW\RkwEvents\Utility\DivUtility;
-use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 
 /*
  * This file is part of the TYPO3 CMS project.

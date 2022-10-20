@@ -261,7 +261,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreated">
 				<source>Reservation successfully created.</source>
-				<target>Wohoo! Sie sind nun für die Veranstaltung angemeldet. In Kürze erhalten Sie eine Bestätigung per E-Mail.</target>
+				<target>Woohoo! Sie sind nun für die Veranstaltung angemeldet. In Kürze erhalten Sie eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCanceled">
 				<source>Reservation was canceled.</source>
@@ -277,7 +277,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.updateSuccess">
 				<source>Update successfull!</source>
-				<target>Wohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
+				<target>Woohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.deleteSuccess">
 				<source>Reservation has been canceled</source>
@@ -836,7 +836,7 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" approved="yes">
                 <source>Inform here</source>
                 <target>Hier informieren</target>
-            </trans-unit>            
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member? </source>
                 <target>Noch kein Mitglied? </target>
@@ -845,7 +845,7 @@
                 <source>Inform here</source>
                 <target>Hier informieren</target>
             </trans-unit>
-            
+
 
 			<!-- Partials/Event/Info/Seats.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats" approved="yes">

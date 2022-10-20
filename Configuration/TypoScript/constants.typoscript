@@ -58,14 +58,14 @@ plugin.tx_rkwevents {
 
 		# cat=plugin.tx_rkwevents; type=integer; label=PID for archive list
 		archivePid =
-		
+
 		# cat=plugin.tx_rkwevents; type=integer; label=PID for survey
 		surveyPid =
 
 		# cat=plugin.tx_rkwevents; type=integer; label=Number of items in list view (default 10)
         itemsPerPage = 10
 
-        // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
+        // @todo @deprecated (typeNum is only needed for OLD Ajax API)
 		# cat=plugin.tx_rkwevents; type=integer; label=PageNum for AJAX-requests
 		ajaxTypeNum = 1472648979
 
@@ -93,33 +93,33 @@ plugin.tx_rkwevents {
 
                     # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
                     enabled = 0
-                    
+
                     # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
                     # Hint: Can be overridden by property event->costsRedLink
                     link =
                 }
             }
         }
-        
+
         eligibility {
             hint {
 
                 # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
                 enabled = 0
-                
+
                 # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to eligibility
                 # Hint: Can be overridden by property event->eligibilityLink
                 link =
             }
         }
-        
+
 
         list {
 
             multipartView {
                 # cat=plugin.tx_rkwevents; type=bool; label=Use multipart view for list
                 enabled = 0
-                
+
                 # cat=plugin.tx_rkwevents; type=integer; label=shown items of started events
                 limitStarted = 4
 
@@ -171,16 +171,16 @@ plugin.tx_rkwevents {
             # define which similarities between events should be used for the searchQuery for a logical OR
             # hint: If nothing is set here, absolutely nothing will be found by the query
             searchQuery {
-            
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Search by department
                 byDepartment = 1
-                
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Search by documentType
                 byDocumentType = 1
-                
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Search by categories
                 byCategories = 1
-                
+
                 # cat=plugin.tx_rkwevents; type=integer; label=Search by project
                 byProject = 1
             }

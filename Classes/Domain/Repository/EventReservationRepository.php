@@ -36,7 +36,7 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
      * Persistence Manager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 

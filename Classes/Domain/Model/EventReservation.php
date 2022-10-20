@@ -39,7 +39,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * addPerson
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationAddPerson>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $addPerson = null;
 

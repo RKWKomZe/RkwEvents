@@ -35,17 +35,17 @@ return [
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
             'showitem' => '
-                record_type,--palette--;;1, --palette--;;startEnd, title, subtitle, document_type, series, department, organizer, categories, categories_displayed, 
+                record_type,--palette--;;1, --palette--;;startEnd, title, subtitle, document_type, series, department, organizer, categories, categories_displayed,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
                 code, trainer, keywords, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link,
-                
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
-                cancel_end, --palette--;;externalCancel, 
-                
+                cancel_end, --palette--;;externalCancel,
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 online_event, online_event_access_link, place, be_user, external_contact, longitude, latitude,
 
@@ -54,10 +54,10 @@ return [
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
-                
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 header_image, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
-		
+
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
             ',
@@ -71,24 +71,24 @@ return [
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link,
-                
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
-                cancel_end, --palette--;;externalCancel, 
-                
+                cancel_end, --palette--;;externalCancel,
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
                 online_event, online_event_access_link, place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
                 presentations, sheet,
-                
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
-                
+
                  --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 header_image, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                --palette--;;dataFields, --palette--;;systemFields, 
+                --palette--;;dataFields, --palette--;;systemFields,
             ',
 
             'columnsOverrides' => [
@@ -141,15 +141,15 @@ return [
 
         'sys_language_uid' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items' => [
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0],
+                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1],
+                    ['LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value', 0],
                 ],
                 'default' => 0
             ],
@@ -157,7 +157,7 @@ return [
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -176,14 +176,14 @@ return [
 
         'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'starttime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
@@ -201,7 +201,7 @@ return [
         ],
         'endtime' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',

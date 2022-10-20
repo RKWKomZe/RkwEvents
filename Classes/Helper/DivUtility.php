@@ -33,7 +33,7 @@ class DivUtility extends \RKW\RkwEvents\Utility\DivUtility
     public function __construct()
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use  RKW\RkwEvents\Utility\DivUtility instead.');
+        trigger_error(__CLASS__ . ' is deprecated and will be removed soon. Use  RKW\RkwEvents\Utility\DivUtility instead.');
     }
 
 }

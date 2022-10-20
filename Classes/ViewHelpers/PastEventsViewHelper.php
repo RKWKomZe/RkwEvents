@@ -24,7 +24,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PastEventsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class PastEventsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
      * Initialize arguments.

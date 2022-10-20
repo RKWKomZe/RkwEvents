@@ -2,7 +2,8 @@
 
 namespace RKW\RkwEvents\Service;
 
-use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
+use RKW\RkwMailer\Service\MailService;
 use RKW\RkwMailer\Utility\FrontendLocalizationUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -48,10 +49,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * Handles opt-in event
      *
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
-     * @param \RKW\RkwRegistration\Domain\Model\Registration $registration
+     * @param \RKW\RkwRegistration\Domain\Model\OptIn $optIn
      * @param mixed $signalInformation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -62,7 +63,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function optInRequest(
         \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
-        \RKW\RkwRegistration\Domain\Model\Registration $registration,
+        \RKW\RkwRegistration\Domain\Model\OptIn $optIn,
         $signalInformation
     )
     {
@@ -74,16 +75,13 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         if ($settings['view']['templateRootPaths']) {
 
             /** @var \RKW\RkwMailer\Service\MailService $mailService */
-            $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+            $mailService = GeneralUtility::makeInstance(MailService::class);
 
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
                 'marker' => array(
-                    'tokenYes'     => $registration->getTokenYes(),
-                    'tokenNo'      => $registration->getTokenNo(),
-                    'userSha1'     => $registration->getUserSha1(),
                     'frontendUser' => $frontendUser,
-                    'registration' => $registration,
+                    'optIn'        => $optIn,
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
                     'showPid'      => intval($settingsDefault['showPid']),
@@ -93,13 +91,13 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
             // set reply address
             if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
-                if (count($registration->getData()->getEvent()->getInternalContact()) > 0) {
+                if (count($optIn->getData()->getEvent()->getInternalContact()) > 0) {
 
                     /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
-                    foreach ($registration->getData()->getEvent()->getInternalContact() as $contact) {
+                    foreach ($optIn->getData()->getEvent()->getInternalContact() as $contact) {
 
                         if ($contact->getEmail()) {
-                            $mailService->getQueueMail()->setReplyAddress($contact->getEmail());
+                            $mailService->getQueueMail()->setReplyToAddress($contact->getEmail());
                             break;
                         }
                     }
@@ -133,7 +131,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -165,7 +163,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwEvents\Domain\Model\BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -188,7 +186,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -212,7 +210,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwEvents\Domain\Model\BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -236,7 +234,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -261,7 +259,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -286,7 +284,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -340,7 +338,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 //'showPid'        => intval($settingsDefault['showPid']),
                                 // b) Use manually set showPid of EventReservation instead!
                                 'showPid'        => intval($eventReservation->getShowPid()),
-                                'extRelPath'     => ExtensionManagementUtility::extRelPath('rkw_events'),
+                                'extRelPath'     => PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('rkw_events')),
                             ),
                             'subject' => FrontendLocalizationUtility::translate(
                                 'rkwMailService.informUpcomingEventUser.subject',
@@ -380,7 +378,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList
      * @return void
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -458,7 +456,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @param boolean $sendCalendarMeeting
      * @param string $action
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -546,7 +544,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @param string $action
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
-     * @throws \RKW\RkwMailer\Service\MailException
+     * @throws \RKW\RkwMailer\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException

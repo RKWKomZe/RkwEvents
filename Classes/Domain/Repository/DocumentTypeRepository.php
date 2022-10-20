@@ -81,7 +81,6 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
      * @param boolean $includeDefault
      * @param integer $storagePid the pid of the event storage
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
-     * @A
      */
     public function findAllByTypeAndVisibilityAndRestrictedByEvents($type = null, $includeDefault = true, $storagePid = 0)
     {
@@ -98,19 +97,19 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         }
 
         if ($includeDefault) {
-            $andWhere .= ' 
-            AND 
-            (tx_rkwbasics_domain_model_documenttype.visibility = 1 
-                AND 
+            $andWhere .= '
+            AND
+            (tx_rkwbasics_domain_model_documenttype.visibility = 1
+                AND
                 (tx_rkwbasics_domain_model_documenttype.type = "' . $type . '"
                 OR tx_rkwbasics_domain_model_documenttype.type = "default"
                 )
             )';
         } else {
-            $andWhere .= ' 
-            AND 
-            (tx_rkwbasics_domain_model_documenttype.visibility = 1 
-            AND tx_rkwbasics_domain_model_documenttype.type = "' . $type . '" 
+            $andWhere .= '
+            AND
+            (tx_rkwbasics_domain_model_documenttype.visibility = 1
+            AND tx_rkwbasics_domain_model_documenttype.type = "' . $type . '"
             )';
 
         }
@@ -119,7 +118,7 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
             'SELECT tx_rkwbasics_domain_model_documenttype.*
             FROM tx_rkwbasics_domain_model_documenttype
             LEFT JOIN tx_rkwevents_domain_model_event
-            ON tx_rkwbasics_domain_model_documenttype.uid = tx_rkwevents_domain_model_event.document_type 
+            ON tx_rkwbasics_domain_model_documenttype.uid = tx_rkwevents_domain_model_event.document_type
             WHERE tx_rkwbasics_domain_model_documenttype.uid IN (tx_rkwevents_domain_model_event.document_type)
             AND tx_rkwevents_domain_model_event.hidden = 0
             AND tx_rkwevents_domain_model_event.deleted = 0
