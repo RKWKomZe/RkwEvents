@@ -2,12 +2,16 @@
 
 namespace RKW\RkwEvents\Controller;
 
-use RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Utility\DivUtility;
+use RKW\RkwRegistration\Domain\Model\FrontendUser;
+use RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -81,7 +85,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * eventRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventRepository = null;
 
@@ -89,7 +93,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * eventReservationRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventReservationRepository = null;
 
@@ -97,7 +101,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * eventReservationAddPersonRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventReservationAddPersonRepository = null;
 
@@ -105,13 +109,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * BackendUserRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\BackendUserRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $backendUserRepository;
 
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $objectManager;
 
@@ -119,7 +123,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Persistence Manager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 
@@ -128,7 +132,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * frontendUserRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $frontendUserRepository = null;
 
@@ -155,7 +159,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     {
         if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
             $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Error while initializing EventReservationController: Required extension RkwRegistration is not loaded!'));
-            trigger_error('Error: Operation not allowed.', E_USER_ERROR);
+            trigger_error('Error: Operation not allowed.', E_USER_ERROR, E_USER_DEPRECATED);
             exit;
         }
     }
@@ -167,8 +171,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param Event $event
      * @param EventReservation $newEventReservation
-     * @ignorevalidation $event
-     * @ignorevalidation $newEventReservation
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
@@ -261,17 +265,21 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action create
      *
      * @param EventReservation $newEventReservation
-     * @param integer $terms
-     * @param integer $privacy
-     * @validate $newEventReservation \RKW\RkwEvents\Validation\Validator\EventReservationValidator
+     * @param null $terms
+     * @param null $privacy
      * @return void
      * @throws \RKW\RkwRegistration\Exception
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\NotImplementedException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="newEventReservation")
      */
     public function createAction(EventReservation $newEventReservation, $terms = null, $privacy = null)
     {
@@ -293,6 +301,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // 1. Check for existing reservations based on email.
         $frontendUser = $this->frontendUserRepository->findByUsername($newEventReservation->getEmail());
         if (count($frontendUser)) {
+
             $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($newEventReservation->getEvent(), $frontendUser);
             if (count($eventReservationResult)) {
 
@@ -387,7 +396,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
 
         // 5. check if email is valid
-        if (!\RKW\RkwRegistration\Tools\Registration::validEmail($newEventReservation->getEmail())) {
+        if (!\RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($newEventReservation->getEmail())) {
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'eventReservationController.error.no_valid_email', 'rkw_events'
@@ -416,13 +425,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // if user is logged in and has a valid email, create the reservation now!
         if (
             ($this->getFrontendUser())
-            && (\RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()))
+            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($this->getFrontendUser()))
         ) {
             // for standardization for reservation creation (also possible with optin)
             $this->finalSaveReservation($newEventReservation, $this->getFrontendUser());
 
             // add privacy info
-            \RKW\RkwRegistration\Tools\Privacy::addPrivacyData($this->request, $this->getFrontendUser(), $newEventReservation, 'new event reservation');
+            \RKW\RkwRegistration\DataProtection\PrivacyHandler::addPrivacyData($this->request, $this->getFrontendUser(), $newEventReservation, 'new event reservation');
 
             $this->addFlashMessage(
                 LocalizationUtility::translate('eventReservationController.message.reservationCreated', 'rkw_events'),
@@ -432,10 +441,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         } else {
 
-            // check if email is not already used - relevant for logged-in users with no email-address (e.g. via Facebook or Twitter)
+            // check if email is not already used - relevant for logged in users with no email-address (e.g. via Facebook or Twitter)
             if (
                 ($this->getFrontendUser())
-                && (!\RKW\RkwRegistration\Tools\Registration::validEmailUnique($newEventReservation->getEmail(), $this->getFrontendUser()))
+                && (!\RKW\RkwRegistration\Utility\FrontendUserUtility::uniqueEmail($newEventReservation->getEmail()))
             ) {
 
                 $this->addFlashMessage(
@@ -450,25 +459,23 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
 
             // register new user or simply send opt-in to existing user
-            /** @var \RKW\RkwRegistration\Tools\Registration $registration */
-            $registration = GeneralUtility::makeInstance('RKW\\RkwRegistration\\Tools\\Registration');
-            $registration->register(
-                array(
-                    'tx_rkwregistration_gender' => $newEventReservation->getSalutation(),
-                    'first_name'                => $newEventReservation->getFirstName(),
-                    'last_name'                 => $newEventReservation->getLastName(),
-                    'company'                   => $newEventReservation->getCompany(),
-                    'address'                   => $newEventReservation->getAddress(),
-                    'zip'                       => $newEventReservation->getZip(),
-                    'city'                      => $newEventReservation->getCity(),
-                    'email'                     => $newEventReservation->getEmail(),
-                    'username'                  => ($this->getFrontendUser() ? $this->getFrontendUser()->getUsername() : $newEventReservation->getEmail()),
-                ),
-                false,
-                $newEventReservation,
-                'rkwEvents',
-                $this->request
-            );
+            /** @var \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser */
+            $frontendUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(FrontendUser::class);
+            $frontendUser->setTxRkwregistrationGender($newEventReservation->getSalutation());
+            $frontendUser->setFirstName($newEventReservation->getFirstName());
+            $frontendUser->setLastName($newEventReservation->getLastName());
+            $frontendUser->setCompany($newEventReservation->getCompany());
+            $frontendUser->setAddress($newEventReservation->getAddress());
+            $frontendUser->setZip($newEventReservation->getZip());
+            $frontendUser->setEmail($newEventReservation->getEmail());
+
+            /** @var \RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration $registration */
+            $registration = $this->objectManager->get(FrontendUserRegistration::class);
+            $registration->setFrontendUser($frontendUser)
+                ->setData($newEventReservation)
+                ->setCategory('rkwEvents')
+                ->setRequest($this->request)
+                ->startRegistration();
 
             $this->addFlashMessage(
                 LocalizationUtility::translate(
@@ -490,23 +497,29 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action optIn
      * Comment by Maximilian Fäßler: We get tricky validation issues here (https://rkwticket.rkw.de/issues/2803)
-     * -> So we ignore the validation itself and checking with interal alias "instanceof" for trustful data
+     * -> So we ignore the validation itself and checking with internal alias "instanceof" for trustful data
      * -> Benefit: We can set more helpful error messages for frontend users
      * Added by Maximilian Fäßler | FäßlerWeb
      *
      * @param Event $event
-     * @ignorevalidation $event
+     * @param string $tokenUser
+     * @param string $token
      * @return void
+     * @throws \RKW\RkwRegistration\Exception
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\NotImplementedException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\TooDirtyException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\TooDirtyException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function optInAction(Event $event)
+    public function optInAction(Event $event, string $tokenUser, string $token)
     {
         // standard behavior
         $showAction = 'show';
@@ -550,29 +563,24 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
         }
 
-        $tokenYes = preg_replace('/[^a-zA-Z0-9]/', '', ($this->request->hasArgument('token_yes') ? $this->request->getArgument('token_yes') : ''));
-        $tokenNo = preg_replace('/[^a-zA-Z0-9]/', '', ($this->request->hasArgument('token_no') ? $this->request->getArgument('token_no') : ''));
-        $userSha1 = preg_replace('/[^a-zA-Z0-9]/', '', $this->request->getArgument('user'));
+        /** @var \RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration $registration */
+        $registration = $this->objectManager->get(FrontendUserRegistration::class);
+        $result = $registration->setFrontendUserToken($tokenUser)
+            ->setCategory('rkwEvents')
+            ->setRequest($this->request)
+            ->validateOptIn($token);
 
-        /** @var \RKW\RkwRegistration\Tools\Registration $register */
-        $register = GeneralUtility::makeInstance('RKW\\RkwRegistration\\Tools\\Registration');
-        $check = $register->checkTokens($tokenYes, $tokenNo, $userSha1, $this->request, $data);
+        if (
+            ($result >= 200 && $result < 300)
+            && ($optIn = $registration->getOptInPersisted())
+            && ($newEventReservation = $optIn->getData())
+            && ($newEventReservation instanceof EventReservation)
+            && ($feUser = $registration->getFrontendUserPersisted())
+        ) {
 
-        if ($check == 1) {
+            // 1. we need to re-fetch the event here, since the number of available seats or the dates may have been changed
+            if ($result == 200) {
 
-            // 1. get reservation from registration and save it
-            if (
-                ($data['registration'])
-                && ($registration = $data['registration'])
-                && ($registration instanceof \RKW\RkwRegistration\Domain\Model\Registration)
-                && ($newEventReservation = $registration->getData())
-                && ($newEventReservation instanceof EventReservation)
-                && ($data['frontendUser'])
-                && ($feUser = $data['frontendUser'])
-                && ($feUser instanceof \RKW\RkwRegistration\Domain\Model\FrontendUser)
-            ) {
-
-                // 1. we need to re-fetch the event here, since the number of available seats or the dates may have been changed
                 /** @var Event $event */
                 $event = $this->eventRepository->findByIdentifier($newEventReservation->getEvent()->getUid());
                 $newEventReservation->setEvent($event);
@@ -703,6 +711,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 );
 
                 $this->redirect('list', 'Event', null, array(), $this->settings['listPid']);
+                //===
             }
 
             $event = $eventReservation->getEvent();
@@ -720,6 +729,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
 
             $this->redirect('list', 'Event', null, array(), $this->settings['listPid']);
+            //===
         }
     }
 
@@ -728,7 +738,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action edit
      *
      * @param EventReservation $eventReservation
-     * @ignorevalidation $eventReservation
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("eventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
@@ -779,8 +789,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action update
      *
      * @param EventReservation $eventReservation
-     * @validate $eventReservation \RKW\RkwEvents\Validation\Validator\EventReservationValidator
      * @return void
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="eventReservation")
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
@@ -926,7 +936,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action delete
      *
      * @param EventReservation $eventReservation
-     * @ignorevalidation $eventReservation
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("eventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
@@ -974,7 +984,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Removes an reservation
      *
      * @param EventReservation $eventReservation
-     * @ignorevalidation $eventReservation
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("eventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
@@ -1181,14 +1191,17 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param EventReservation $newEventReservation
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser
-     * @param \RKW\RkwRegistration\Domain\Model\Registration $registration
+     * @param \RKW\RkwRegistration\Domain\Model\OptIn $optIn
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    protected function finalSaveReservation(EventReservation $newEventReservation, \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser, \RKW\RkwRegistration\Domain\Model\Registration $registration = null)
+    protected function finalSaveReservation(
+        EventReservation $newEventReservation,
+        \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser,
+        \RKW\RkwRegistration\Domain\Model\OptIn $optIn = null)
     {
         // optional service: Merge form data (eventReservation) in frontendUser, if some field is empty
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
@@ -1299,20 +1312,18 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @return integer
      */
-    protected function getFrontendUserId()
+    protected function getFrontendUserId(): int
     {
-        // is $GLOBALS set?
+        // is user logged in
+        $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
         if (
-            ($GLOBALS['TSFE'])
-            && ($GLOBALS['TSFE']->loginUser)
-            && ($GLOBALS['TSFE']->fe_user->user['uid'])
-        ) {
-            return intval($GLOBALS['TSFE']->fe_user->user['uid']);
-            //===
+            ($context->getPropertyFromAspect('frontend.user', 'isLoggedIn'))
+            && ($frontendUserId = $context->getPropertyFromAspect('frontend.user', 'id'))
+        ){
+            return intval($frontendUserId);
         }
 
-        return false;
-        //===
+        return 0;
     }
 
 

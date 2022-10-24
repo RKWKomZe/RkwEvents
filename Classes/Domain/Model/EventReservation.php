@@ -26,6 +26,8 @@ namespace RKW\RkwEvents\Domain\Model;
  */
 class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
+
     /**
      * event
      *
@@ -37,7 +39,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * addPerson
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationAddPerson>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $addPerson = null;
 
@@ -71,6 +73,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * company
+     *
      * @var string
      */
     protected $company;
@@ -131,6 +134,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $remark;
 
+
     /**
      * workshopRegister
      *
@@ -138,15 +142,18 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $workshopRegister;
 
+
     /**
      * @var integer
      */
     protected $crdate;
 
+
     /**
      * @var integer
      */
     protected $tstamp;
+
 
     /**
      * @var integer

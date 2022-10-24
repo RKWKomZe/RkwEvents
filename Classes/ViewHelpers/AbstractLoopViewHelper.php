@@ -8,7 +8,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * LICENSE.md file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Abstract class with basic functionality for loop view helpers.
@@ -38,6 +38,7 @@ abstract class AbstractLoopViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
         $this->registerArgument('iteration', 'string', 'Variable name to insert result into, suppresses output');
     }
 

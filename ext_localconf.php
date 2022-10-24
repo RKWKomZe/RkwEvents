@@ -175,22 +175,15 @@ call_user_func(
 
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
             $signalSlotDispatcher->connect(
-                'RKW\\RkwRegistration\\Tools\\Registration',
-                \RKW\RkwRegistration\Tools\Registration::SIGNAL_AFTER_CREATING_OPTIN_EXISTING_USER . 'RkwEvents',
+                \RKW\RkwRegistration\Registration\FrontendUser\AbstractRegistration::class,
+                \RKW\RkwRegistration\Registration\FrontendUser\AbstractRegistration::SIGNAL_AFTER_CREATING_OPTIN . 'RkwEvents',
                 'RKW\\RkwEvents\\Service\\RkwMailService',
                 'optInRequest'
             );
 
             $signalSlotDispatcher->connect(
-                'RKW\\RkwRegistration\\Tools\\Registration',
-                \RKW\RkwRegistration\Tools\Registration::SIGNAL_AFTER_CREATING_OPTIN_USER . 'RkwEvents',
-                'RKW\\RkwEvents\\Service\\RkwMailService',
-                'optInRequest'
-            );
-
-            $signalSlotDispatcher->connect(
-                'RKW\\RkwRegistration\\Tools\\Registration',
-                \RKW\RkwRegistration\Tools\Registration::SIGNAL_AFTER_DELETING_USER,
+                \RKW\RkwRegistration\Registration\FrontendUser\AbstractRegistration::class,
+                \RKW\RkwRegistration\Registration\FrontendUser\AbstractRegistration::SIGNAL_AFTER_REGISTRATION_ENDED,
                 'RKW\\RkwEvents\\Controller\\EventReservationController',
                 'removeAllOfUserSignalSlot'
             );

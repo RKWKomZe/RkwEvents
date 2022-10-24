@@ -3,7 +3,7 @@
 namespace RKW\RkwEvents\Validation\Validator;
 
 use RKW\RkwEvents\Utility\DivUtility;
-use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;

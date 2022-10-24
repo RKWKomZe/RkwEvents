@@ -36,7 +36,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * eventRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventRepository = null;
 
@@ -44,7 +44,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * eventReservationRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventReservationRepository = null;
 
@@ -52,7 +52,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * categoryRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $categoryRepository = null;
 
@@ -60,7 +60,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * departmentRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\DepartmentRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $departmentRepository = null;
 
@@ -68,7 +68,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * documentTypeRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\DocumentTypeRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $documentTypeRepository = null;
 
@@ -76,7 +76,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      * frontendUserRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $frontendUserRepository = null;
 
@@ -378,7 +378,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return void
-     * @ignorevalidation $event
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
@@ -416,7 +416,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return void
-     * @ignorevalidation $event
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
     public function showAddInfoAction(\RKW\RkwEvents\Domain\Model\Event $event)
     {
@@ -429,7 +429,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return void
-     * @ignorevalidation $event
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
     public function showSheetAction(\RKW\RkwEvents\Domain\Model\Event $event)
     {
@@ -636,20 +636,18 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
      *
      * @return integer
      */
-    protected function getFrontendUserId()
+    protected function getFrontendUserId(): int
     {
-        // is $GLOBALS set?
+        // is user logged in
+        $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
         if (
-            ($GLOBALS['TSFE'])
-            && ($GLOBALS['TSFE']->loginUser)
-            && ($GLOBALS['TSFE']->fe_user->user['uid'])
-        ) {
-            return intval($GLOBALS['TSFE']->fe_user->user['uid']);
-            //===
+            ($context->getPropertyFromAspect('frontend.user', 'isLoggedIn'))
+            && ($frontendUserId = $context->getPropertyFromAspect('frontend.user', 'id'))
+        ){
+            return intval($frontendUserId);
         }
 
-        return false;
-        //===
+        return 0;
     }
 
 

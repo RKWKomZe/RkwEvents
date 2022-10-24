@@ -4,6 +4,7 @@ namespace RKW\RkwEvents\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -279,9 +280,13 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         // a) Either: SQL statement
         // if: filter option "address" is filled (for proximity search)
+        /**
+         * @todo: not used and not migrated to TYPO3 v9.x
+         */
+        /*
         if ($filter['address']) {
 
-            /** @var \RKW\RkwGeolocation\Service\Geolocation $geoLocation */
+            /** @var \RKW\RkwGeolocation\Service\Geolocation $geoLocation
             $geoLocation = GeneralUtility::makeInstance('RKW\\RkwGeolocation\\Service\\Geolocation');
             $geoLocation->setAddress(filter_var($filter['address'], FILTER_SANITIZE_STRING));
 
@@ -351,6 +356,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             // b) OR: query constraints (THIS PART IS IN PRINCIPLE DEPRECATED WITH THE STATEMENT ABOVE.
             // BUT: WE NOT ALWAYS NEED A RADIUS SEARCH! (performance))
         } else {
+        */
 
             if ($archive) {
 
@@ -454,7 +460,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $query->matching($query->logicalAnd(array_filter($constraints)));
             $query->setOffset($offset);
             $query->setLimit($limit);
-        }
+        //}
 
         // Hint: if no query is added, this dataset is equal to findAll() with sort & date restriction
         $result = $query->execute();
@@ -624,7 +630,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
 
-        // @toDo: If the given $event has no series, all events without series are retrieved. Is this okay as a kind of fallback?
+        // @todo If the given $event has no series, all events without series are retrieved. Is this okay as a kind of fallback?
 
         $constraints[] =
             $query->logicalAnd(
@@ -867,7 +873,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @return array
      * @throws \Exception
      * @throws \RuntimeException
-     */
+     * @deprecated because of usage of $GLOBALS['TYPO3_DB']
+
     protected function getStoragePid()
     {
         $settings = $this->getTsForPage(intval($GLOBALS['TSFE']->id));
@@ -885,9 +892,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
         }
 
-        // @toDo: Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
+        // @todo Set fallback PID 1, to avoid any error? (could be confusing on problems while development)
         return GeneralUtility::trimExplode(',', $storagePidString);
     }
+     */
 
 
     /**
@@ -905,9 +913,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $template->tt_track = 0;
         $template->init();
 
-        /** @var \TYPO3\CMS\Frontend\Page\PageRepository $sysPage */
-        $sysPage = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
-        $rootLine = $sysPage->getRootLine(intval($pageId));
+        /** @var array $rootlineLine */
+        $rootLine = GeneralUtility::makeInstance(RootlineUtility::class,$pageId)->get();
         $template->runThroughTemplates($rootLine, 0);
         $template->generateConfig();
 
