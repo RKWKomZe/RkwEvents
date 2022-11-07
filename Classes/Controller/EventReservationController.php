@@ -223,8 +223,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->view->assign('event', $event);
         $this->view->assign('newEventReservation', $newEventReservation);
         $this->view->assign('frontendUser', $this->getFrontendUser());
-        $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
-
+        if ($this->getFrontendUser()) {
+            $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
+        }
     }
 
 
@@ -254,8 +255,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->view->assign('event', $event);
             $this->view->assign('newEventReservation', $newEventReservation);
             $this->view->assign('frontendUser', $this->getFrontendUser());
-            $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
             $this->view->assign('noBackButton', true);
+            if ($this->getFrontendUser()) {
+                $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
+            }
         }
 
     }
@@ -265,8 +268,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action create
      *
      * @param EventReservation $newEventReservation
-     * @param null $terms
-     * @param null $privacy
+     * @param int $terms
+     * @param int $privacy
      * @return void
      * @throws \RKW\RkwRegistration\Exception
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
@@ -281,7 +284,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="newEventReservation")
      */
-    public function createAction(EventReservation $newEventReservation, $terms = null, $privacy = null)
+    public function createAction(EventReservation $newEventReservation, int $terms = 0, int $privacy = 0)
     {
         // standard behavior
         $showAction = 'show';
@@ -396,7 +399,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
 
         // 5. check if email is valid
-        if (!\RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($newEventReservation->getEmail())) {
+        if (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($newEventReservation->getEmail())) {
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'eventReservationController.error.no_valid_email', 'rkw_events'
@@ -425,7 +428,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // if user is logged in and has a valid email, create the reservation now!
         if (
             ($this->getFrontendUser())
-            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($this->getFrontendUser()))
+            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()))
         ) {
             // for standardization for reservation creation (also possible with optin)
             $this->finalSaveReservation($newEventReservation, $this->getFrontendUser());
@@ -444,7 +447,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             // check if email is not already used - relevant for logged in users with no email-address (e.g. via Facebook or Twitter)
             if (
                 ($this->getFrontendUser())
-                && (!\RKW\RkwRegistration\Utility\FrontendUserUtility::uniqueEmail($newEventReservation->getEmail()))
+                && (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isUsernameUnique($newEventReservation->getEmail()))
             ) {
 
                 $this->addFlashMessage(
@@ -480,9 +483,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'eventReservationController.message.reservationCreatedEmail', 'rkw_events',
-                    '',
-                    \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
-                )
+                ),
+                '',
+                \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
             );
         }
 
@@ -645,7 +648,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
 
                 // 5. Create reservation!
-                $this->finalSaveReservation($newEventReservation, $feUser, $registration);
+                $this->finalSaveReservation($newEventReservation, $feUser, $optIn);
 
                 $this->addFlashMessage(
                     LocalizationUtility::translate(
@@ -659,7 +662,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
 
 
-        } elseif ($check == 2) {
+        } elseif ($result >= 300 && $result < 400) {
 
             $this->addFlashMessage(
                 LocalizationUtility::translate(

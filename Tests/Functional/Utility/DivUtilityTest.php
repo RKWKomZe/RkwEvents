@@ -113,8 +113,8 @@ class DivUtilityTest extends FunctionalTestCase
         /** @var Event $event */
         $event = $this->eventRepository->findByUid(1);
 
-        static::assertCount(1, $event->getReservation());
-        static::assertEquals(1, DivUtility::countConfirmedReservations($event));
+        self::assertCount(1, $event->getReservation());
+        self::assertEquals(1, DivUtility::countConfirmedReservations($event));
 
     }
 
@@ -149,8 +149,8 @@ class DivUtilityTest extends FunctionalTestCase
             $newEventReservation->addAddPerson($person);
         }
 
-        static::assertCount(2, $event->getReservation());
-        static::assertTrue(DivUtility::hasFreeSeats($event, $newEventReservation));
+        self::assertCount(2, $event->getReservation());
+        self::assertTrue(DivUtility::hasFreeSeats($event, $newEventReservation));
 
     }
 
@@ -186,10 +186,10 @@ class DivUtilityTest extends FunctionalTestCase
             $newEventReservation->addAddPerson($person);
         }
 
-        static::assertEquals(1, DivUtility::countEventReservationsWithAddPersons($newEventReservation));
+        self::assertEquals(1, DivUtility::countEventReservationsWithAddPersons($newEventReservation));
 
-        static::assertCount(2, $event->getReservation());
-        static::assertTrue(DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation));
+        self::assertCount(2, $event->getReservation());
+        self::assertTrue(DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation));
 
     }
 
@@ -231,10 +231,10 @@ class DivUtilityTest extends FunctionalTestCase
             $newEventReservation->addAddPerson($person);
         }
 
-        static::assertEquals(2, DivUtility::countEventReservationsWithAddPersons($newEventReservation));
+        self::assertEquals(2, DivUtility::countEventReservationsWithAddPersons($newEventReservation));
 
-        static::assertCount(2, $event->getReservation());
-        static::assertFalse(DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation));
+        self::assertCount(2, $event->getReservation());
+        self::assertFalse(DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation));
 
     }
 

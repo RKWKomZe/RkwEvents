@@ -45,7 +45,7 @@ class ExtensionIsLoadedViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
      *
      * @return boolean
      */
-    public function render()
+    public function render(): bool
     {
         if (ExtensionManagementUtility::isLoaded($this->arguments['extensionName'])) {
             return true;

@@ -155,8 +155,8 @@ class DivUtility
         }
 
         if (
-            (!\RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($frontendUser->getEmail()))
-            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::validateEmail($eventReservation->getEmail()))
+            (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($frontendUser->getEmail()))
+            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($eventReservation->getEmail()))
         ) {
             $frontendUser->setEmail($eventReservation->getEmail());
         }
