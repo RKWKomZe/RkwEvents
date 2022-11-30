@@ -275,10 +275,6 @@
 				<source>An error occurred. Please try again.</source>
 				<target>Upps, da ist wohl etwas schief gelaufen. Haben Sie die Anmeldung möglicherweise bereits bestätigt?</target>
 			</trans-unit>
-			<trans-unit id="eventReservationController.error.acceptTerms">
-				<source>You have to accept our terms and conditions.</source>
-				<target>Das muss leider sein: Bitte akzeptieren Sie unsere allgemeinen Nutzungs- und Geschäftsbedingungen, um sich anmelden zu können.</target>
-			</trans-unit>
 			<trans-unit id="eventReservationController.message.updateSuccess">
 				<source>Update successfull!</source>
 				<target>Woohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
@@ -1170,26 +1166,6 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.remark">
 				<source>Additional remarks regarding your reservation.</source>
 				<target>Machen Sie hier ergänzende Angaben zu Ihrer Reservierung.</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro">
-				<source>I accept the</source>
-				<target>Ich akzeptiere die</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms">
-				<source>terms</source>
-				<target>Nutzungsbedingungen</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro">
-				<source>and</source>
-				<target>und</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2">
-				<source>conditions</source>
-				<target>AGB.</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3">
-				<source>We would like to point out that images, sound and video recordings may be made at this event and published in various media for the purposes of event reporting and general public relations. You will receive further information on this and your rights directly at the start of the event.</source>
-				<target>Wir weisen darauf hin, dass auf dieser Veranstaltung Bild-, Ton- und Videoaufnahmen erstellt und für Zwecke der Veranstaltungsberichterstattung und der allgemeinen Öffentlichkeitsarbeit in verschiedenen Medien veröffentlicht werden können. Weitere Informationen hierzu und zu ihren Rechten erhalten Sie direkt zu Veranstaltungsbeginn.</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
 				<source>Workshop unit 1</source>

@@ -9,7 +9,7 @@
 <vh:frontend.translate key="templates_email_optInReservationUser.text1" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"  />
 <vh:frontend.translate key="templates_email_optInReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"  />
 
-<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:registration.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
+<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
 =============================================================
 <vh:frontend.translate key="templates_email_optInReservationUser.confirmHeadline" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/>
@@ -18,20 +18,20 @@
 <vh:frontend.translate key="templates_email_optInReservationUser.textOptIn" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 <f:if condition="{isStandaloneRegisterPlugin}">
     <f:then>
-        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standaloneregister: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}" section="rkw-order" />
+        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standaloneregister: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data}}" section="rkw-order" />
     </f:then>
     <f:else>
-        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="TRUE" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}" section="rkw-order" />
+        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data}}" section="rkw-order" />
     </f:else>
 </f:if>
 
 <vh:frontend.translate key="templates_email_optInReservationUser.textOptOut" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 <f:if condition="{isStandaloneRegisterPlugin}">
     <f:then>
-        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standaloneregister: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}" section="rkw-order" />
+        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standaloneregister: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data}}" section="rkw-order" />
     </f:then>
     <f:else>
-        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="TRUE" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenNo, event: registration.data.event.uid}}" section="rkw-order" />
+        <vh:frontend.link action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenNo, event: optIn.data}}" section="rkw-order" />
     </f:else>
 </f:if></f:section>
 
@@ -44,19 +44,19 @@
 		<strong><vh:frontend.translate key="templates_email_optInReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /></strong>
 	</p>
 
-	<f:render partial="Email/Details" section="Html" arguments="{reservation:registration.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
+	<f:render partial="Email/Details" section="Html" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
 	<h2><vh:frontend.translate key="templates_email_optInReservationUser.confirmHeadline" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/></h2>
 	<p>
 		<vh:frontend.translate key="templates_email_optInReservationUser.textOptIn" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/><br>
         <f:if condition="{isStandaloneRegisterPlugin}">
             <f:then>
-                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' absolute='TRUE' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standaloneregister: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}' section='rkw-events' />">
+                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standaloneregister: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data}}' section='rkw-events' />">
                     <vh:frontend.translate key="templates_email_optInReservationUser.textOptInLinkLabel" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/>
                 </a>
             </f:then>
             <f:else>
-                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='TRUE' pageUid='{pageUid}' additionalParams='{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}' section='rkw-events' />">
+                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data}}' section='rkw-events' />">
                     <vh:frontend.translate key="templates_email_optInReservationUser.textOptInLinkLabel" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/>
                 </a>
             </f:else>
@@ -67,12 +67,12 @@
 		<vh:frontend.translate key="templates_email_optInReservationUser.textOptOut" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /><br>
         <f:if condition="{isStandaloneRegisterPlugin}">
             <f:then>
-                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' absolute='TRUE' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standaloneregister: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}' section='rkw-events' />">
+                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standaloneregister: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data}}' section='rkw-events' />">
                     <vh:frontend.translate key="templates_email_optInReservationUser.textOptOutLinkLabel" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/>
                 </a>
             </f:then>
             <f:else>
-                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='TRUE' pageUid='{pageUid}' additionalParams='{tx_rkwevents_pi1: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: registration.data.event.uid}}' section='rkw-events' />">
+                <a href="<vh:frontend.link action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_pi1: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data}}' section='rkw-events' />">
                     <vh:frontend.translate key="templates_email_optInReservationUser.textOptOutLinkLabel" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents"/>
                 </a>
             </f:else>

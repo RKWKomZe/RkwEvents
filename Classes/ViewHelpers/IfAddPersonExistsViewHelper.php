@@ -21,7 +21,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * even they're empty. This ViewHelper helps to detect, if at least one additional person exists
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */

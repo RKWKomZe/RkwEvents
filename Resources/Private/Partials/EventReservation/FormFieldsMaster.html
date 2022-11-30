@@ -251,24 +251,9 @@
 
     <f:if condition="{editMode}">
         <f:else>
-            <div class="form__field">
-                <f:form.checkbox class="checkbox" id="terms" name="terms" value="1" />
-                <label for="terms" class="checkbox-label">
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro" /> <f:link.page pageUid="{settings.termsPid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms" /></f:link.page>
-                    <f:if condition="{settings.terms2Pid}">
-                        <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro" /> <f:link.page pageUid="{settings.terms2Pid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2" /></f:link.page>
-                    </f:if>
-                    <br><br><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3" />
-                </label>
-            </div>
-
-            <div class="form__field">
-                <f:form.checkbox class="checkbox" id="privacy" name="privacy" value="1" />
-                <label for="privacy" class="checkbox-label">
-                    <rkwRegistration:privacyText textVersion="events"/>
-                </label>
-            </div>
-
+            <rkwRegistration:consent type="terms" key="events" />
+            <rkwRegistration:consent type="privacy" key="events" />
+            <rkwRegistration:consent type="marketing" />
         </f:else>
     </f:if>
 

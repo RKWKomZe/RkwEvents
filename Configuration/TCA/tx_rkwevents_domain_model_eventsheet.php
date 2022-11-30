@@ -7,7 +7,7 @@ return [
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'dividers2tabs' => TRUE,
+		'dividers2tabs' => true,
 		'sortby' => 'sorting',
 		'default_sortby' => 'ORDER BY title,sorting DESC',
 

@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -64,7 +64,7 @@ class DepartmentRepository extends \RKW\RkwBasics\Domain\Repository\DepartmentRe
             'SELECT tx_rkwbasics_domain_model_department.*
             FROM tx_rkwbasics_domain_model_department
             LEFT JOIN tx_rkwevents_domain_model_event
-            ON tx_rkwbasics_domain_model_department.uid = tx_rkwevents_domain_model_event.department 
+            ON tx_rkwbasics_domain_model_department.uid = tx_rkwevents_domain_model_event.department
             WHERE tx_rkwbasics_domain_model_department.visibility = 1
             AND tx_rkwbasics_domain_model_department.uid IN (tx_rkwevents_domain_model_event.department)
             AND tx_rkwevents_domain_model_event.hidden = 0

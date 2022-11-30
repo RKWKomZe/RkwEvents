@@ -22,7 +22,7 @@ use RKW\RkwEvents\Domain\Model\EventContact;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -40,7 +40,7 @@ class IsExternalContactViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
     }
 
     /**
-     * return TRUE, if the given contact is an external contact
+     * return true, if the given contact is an external contact
      *
      * @param mixed $contact
      * @return bool

@@ -7,7 +7,7 @@ use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Utility\DivUtility;
 use RKW\RkwRegistration\Domain\Model\FrontendUser;
-use RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration;
+use RKW\RkwRegistration\Registration\FrontendUserRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -268,8 +268,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action create
      *
      * @param EventReservation $newEventReservation
-     * @param int $terms
-     * @param int $privacy
      * @return void
      * @throws \RKW\RkwRegistration\Exception
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
@@ -282,9 +280,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\NotImplementedException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwRegistration\Validation\Consent\TermsValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwRegistration\Validation\Consent\PrivacyValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwRegistration\Validation\Consent\MarketingValidator", param="newEventReservation")
      */
-    public function createAction(EventReservation $newEventReservation, int $terms = 0, int $privacy = 0)
+    public function createAction(EventReservation $newEventReservation)
     {
         // standard behavior
         $showAction = 'show';
@@ -382,22 +384,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->redirect($showAction, $controller, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()), intval($this->settings['showPid']));
         }
 
-
-        // 4. Check for terms
-        if (!$terms) {
-
-            $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'eventReservationController.error.acceptTerms', 'rkw_events'
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
-
-            $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
-        }
-
-
         // 5. check if email is valid
         if (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($newEventReservation->getEmail())) {
             $this->addFlashMessage(
@@ -411,20 +397,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
         }
 
-
-        // 6. privacy
-        if (!$privacy) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'registrationController.error.accept_privacy', 'rkw_registration'
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
-            $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
-        }
-
-
         // if user is logged in and has a valid email, create the reservation now!
         if (
             ($this->getFrontendUser())
@@ -434,7 +406,12 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->finalSaveReservation($newEventReservation, $this->getFrontendUser());
 
             // add privacy info
-            \RKW\RkwRegistration\DataProtection\PrivacyHandler::addPrivacyData($this->request, $this->getFrontendUser(), $newEventReservation, 'new event reservation');
+            \RKW\RkwRegistration\DataProtection\ConsentHandler::add(
+                $this->request,
+                $this->getFrontendUser(),
+                $newEventReservation,
+                'new event reservation'
+            );
 
             $this->addFlashMessage(
                 LocalizationUtility::translate('eventReservationController.message.reservationCreated', 'rkw_events'),
@@ -472,7 +449,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $frontendUser->setZip($newEventReservation->getZip());
             $frontendUser->setEmail($newEventReservation->getEmail());
 
-            /** @var \RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration $registration */
+            /** @var \RKW\RkwRegistration\Registration\FrontendUserRegistration $registration */
             $registration = $this->objectManager->get(FrontendUserRegistration::class);
             $registration->setFrontendUser($frontendUser)
                 ->setData($newEventReservation)
@@ -566,7 +543,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
         }
 
-        /** @var \RKW\RkwRegistration\Registration\FrontendUser\FrontendUserRegistration $registration */
+        /** @var \RKW\RkwRegistration\Registration\FrontendUserRegistration $registration */
         $registration = $this->objectManager->get(FrontendUserRegistration::class);
         $result = $registration->setFrontendUserToken($tokenUser)
             ->setCategory('rkwEvents')
@@ -1359,7 +1336,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     {
         if (!$this->signalSlotDispatcher) {
             $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $this->signalSlotDispatcher = $objectManager->get('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+            $this->signalSlotDispatcher = $objectManager->get(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
         }
 
         return $this->signalSlotDispatcher;

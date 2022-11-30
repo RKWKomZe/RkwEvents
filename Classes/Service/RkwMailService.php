@@ -10,6 +10,7 @@ use RKW\RkwMailer\Utility\FrontendLocalizationUtility;
 use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -33,7 +34,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -95,7 +96,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'optIn'        => $optIn,
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
-                    'showPid'      => intval($settingsDefault['showPid']),
+                    'showPid'      => $showPid,
                     'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                 ),
             ));

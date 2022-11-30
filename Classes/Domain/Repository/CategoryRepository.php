@@ -22,7 +22,7 @@ use \RKW\RkwEvents\Domain\Model\Category;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -94,8 +94,8 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $query->statement(
             'SELECT sys_category.*
-            FROM sys_category, tx_rkwevents_domain_model_event 
-            INNER JOIN sys_category_record_mm 
+            FROM sys_category, tx_rkwevents_domain_model_event
+            INNER JOIN sys_category_record_mm
             WHERE sys_category_record_mm.tablenames = "tx_rkwevents_domain_model_event"
             AND sys_category_record_mm.fieldname = "categories"
             AND sys_category.uid = sys_category_record_mm.uid_local

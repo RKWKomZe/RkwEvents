@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -39,8 +39,8 @@ class IsMandatoryFieldViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstr
     }
 
     /**
-     * return TRUE, if the given fieldName is NOT in given mandatoryFields (string-list from TypoScript)
-     * TRUE if optional
+     * return true, if the given fieldName is NOT in given mandatoryFields (string-list from TypoScript)
+     * true if optional
      *
      * @return bool
      */
