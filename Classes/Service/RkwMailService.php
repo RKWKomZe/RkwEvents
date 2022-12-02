@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEvents\Service;
 
-use RKW\RkwBasics\Utility\GeneralUtility as Common;
+use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\EventContact;
 use RKW\RkwMailer\Service\MailService;
@@ -691,6 +691,6 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-        return Common::getTyposcriptConfiguration('Rkwevents', $which);
+        return Common::getTypoScriptConfiguration('Rkwevents', $which);
     }
 }

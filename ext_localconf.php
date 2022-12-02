@@ -14,13 +14,11 @@ call_user_func(
             array(
                 'Event' => 'myEvents, archive, list, listSimple, show, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
                 'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
-                'Ajax' => 'filter, more, moreArchive'
             ),
             // non-cacheable actions
             array(
                 'Event' => 'myEvents, show, list, listSimple, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
                 'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
-                'Ajax' => 'filter, more, moreArchive'
             )
         );
 

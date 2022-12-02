@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
-    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    xmlns:ajaxApi="http://typo3.org/ns/Madj2k/AjaxApi/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
     <f:layout name="Default" />
@@ -41,7 +41,7 @@
 
                 <f:render partial="Event/Filter" arguments="{_all}" />
 
-                <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
+                <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
 
                     <div class="tiles-wrapper">
                         <f:if condition="<f:count>{sortedEventList}</f:count>">
@@ -60,7 +60,7 @@
                         </f:if>
                     </div>
 
-                </rkwAjax:ajaxWrapper>
+                </ajaxApi:ajaxWrapper>
             </f:else>
         </f:if>
 

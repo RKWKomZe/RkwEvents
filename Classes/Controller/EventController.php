@@ -30,7 +30,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
+class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 {
     /**
      * eventRepository
@@ -128,7 +128,7 @@ class EventController extends \RKW\RkwAjax\Controller\AjaxAbstractController
     public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
     {
         // get department and document list (for filter)
-        $globalEventSettings = \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('rkwEvents', \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $globalEventSettings = \Madj2k\CoreExtended\Utility\GeneralUtility::getTypoScriptConfiguration('rkwEvents', \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $departmentList = $this->departmentRepository->findVisibleAndRestrictedByEvents(strip_tags($globalEventSettings['persistence']['storagePid']));
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibilityAndRestrictedByEvents('events', false, strip_tags($globalEventSettings['persistence']['storagePid']));
         $categoryListRaw = $this->categoryRepository->findAllRestrictedByEvents(strip_tags($globalEventSettings['persistence']['storagePid']))->toArray();

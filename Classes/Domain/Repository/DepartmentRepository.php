@@ -71,7 +71,7 @@ class DepartmentRepository extends \RKW\RkwBasics\Domain\Repository\DepartmentRe
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
             ' . $andWhere . '
-            ' . \RKW\RkwBasics\Helper\QueryTypo3::getWhereClauseForEnableFields('tx_rkwbasics_domain_model_department') . '
+            ' . \Madj2k\CoreExtended\Utility\QueryUtility::getWhereClauseEnabled('tx_rkwbasics_domain_model_department') . '
             GROUP BY tx_rkwbasics_domain_model_department.uid
             ORDER BY tx_rkwbasics_domain_model_department.name ASC
             '

@@ -3,7 +3,7 @@
 namespace RKW\RkwEvents\Validation\Validator;
 
 use RKW\RkwEvents\Utility\DivUtility;
-use RKW\RkwBasics\Utility\GeneralUtility as Common;
+use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -262,7 +262,7 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
     {
 
         if (!$this->settings) {
-            $this->settings = Common::getTyposcriptConfiguration('Rkwevents');
+            $this->settings = Common::getTypoScriptConfiguration('Rkwevents');
         }
 
         if (!$this->settings) {

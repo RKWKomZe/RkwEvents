@@ -14,11 +14,11 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwBasics\Utility\FrontendLocalizationUtility;
-use RKW\RkwEvents\Domain\Model\Event;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility as FrontendLocalizationUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+use RKW\RkwEvents\Domain\Model\Event;
 
 /**
  * Class ComposeDateTimePartsViewHelper

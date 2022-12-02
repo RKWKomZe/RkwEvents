@@ -124,7 +124,7 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
             ' . $andWhere . '
-            ' . \RKW\RkwBasics\Helper\QueryTypo3::getWhereClauseForEnableFields('tx_rkwbasics_domain_model_documenttype') . '
+            ' . \Madj2k\CoreExtended\Utility\QueryUtility::getWhereClauseEnabled('tx_rkwbasics_domain_model_documenttype') . '
             GROUP BY tx_rkwbasics_domain_model_documenttype.uid
             ORDER BY tx_rkwbasics_domain_model_documenttype.name ASC
             '
