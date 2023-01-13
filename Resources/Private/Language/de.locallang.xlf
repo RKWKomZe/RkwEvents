@@ -1461,10 +1461,6 @@
 				<source>Please find below the details of your reservation.</source>
 				<target>Untenstehend finden Sie die Details Ihrer Anmeldung. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
 			</trans-unit>
-			<trans-unit id="templates_email_confirmationReservationUser.billing">
-				<source>You will receive an invoice in a few days.</source>
-				<target>In Kürze erhalten Sie von uns eine Rechnung.</target>
-			</trans-unit>
 			<trans-unit id="templates_email_confirmationReservationUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 				<target>Löschen / Ändern</target>

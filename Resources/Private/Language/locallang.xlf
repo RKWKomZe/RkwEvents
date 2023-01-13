@@ -1113,9 +1113,6 @@
 			<trans-unit id="templates_email_confirmationReservationUser.text2">
 				<source>Please find below the details of your reservation.</source>
 			</trans-unit>
-			<trans-unit id="templates_email_confirmationReservationUser.billing">
-				<source>You will receive an invoice in a few days.</source>
-			</trans-unit>
 			<trans-unit id="templates_email_confirmationReservationUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 			</trans-unit>
