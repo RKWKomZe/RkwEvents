@@ -1347,31 +1347,17 @@
 				<source>Last name (person 5)</source>
 			</trans-unit>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<trans-unit id="tx_rkwevents_fluid.survey">
 				<source>Survey</source>
 			</trans-unit>
 
+
+            <trans-unit id="evaluation.oops">
+                <source>Oops!</source>
+            </trans-unit>
+            <trans-unit id="evaluation.eventEndDate.error">
+                <source>Event end date can not be before event start date!</source>
+            </trans-unit>
 
 
 		</body>

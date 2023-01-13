@@ -264,7 +264,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime, required',
+                'eval' => 'datetime, required, RKW\\RkwEvents\\Evaluation\\EventEndDate',
                 'checkbox' => 0,
                 'default' => 0,
             ],

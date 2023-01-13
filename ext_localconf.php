@@ -152,7 +152,6 @@ call_user_func(
         );
 
 
-
         //=================================================================
         // Register Hook for Geodata and reservation cleanup on copy
         //=================================================================
@@ -160,10 +159,14 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$extKey] = 'RKW\\RkwEvents\\Hooks\\TceMainHooks';
 
         //=================================================================
-        //  Register Command Controller
+        // Register Command Controller
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'RKW\\RkwEvents\\Controller\\EventCommandController';
 
+        //=================================================================
+        // Register the class to be available in 'eval' of TCA
+        //=================================================================
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['RKW\\RkwEvents\\Evaluation\\EventEndDate'] = '';
 
         //=================================================================
         // Register Signal-Slots
