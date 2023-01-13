@@ -1764,31 +1764,20 @@
 			</trans-unit>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<trans-unit id="tx_rkwevents_fluid.survey">
 				<source>Survey</source>
 				<target>Zur Umfrage</target>
 			</trans-unit>
 
+
+            <trans-unit id="evaluation.oops">
+                <source>Oops!</source>
+                <target>Oops!</target>
+            </trans-unit>
+            <trans-unit id="evaluation.eventEndDate.error">
+                <source>Event end date can not be before event start date!</source>
+                <target>Das Enddatum einer Veranstaltung kann nicht kleiner sein als das Startdatum!</target>
+            </trans-unit>
 
 
 		</body>
