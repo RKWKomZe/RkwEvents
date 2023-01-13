@@ -1203,11 +1203,14 @@
 				<source>See you soon!</source>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.direction">
-				<source>Click here for your personal route description</source>
+				<source>Click here for your route description</source>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.googleLink">
 				<source>Open Google Maps</source>
 			</trans-unit>
+            <trans-unit id="templates_email_informUpcomingEventUser.routeDescription">
+                <source>Route description</source>
+            </trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 			</trans-unit>

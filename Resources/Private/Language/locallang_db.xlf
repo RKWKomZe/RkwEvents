@@ -315,7 +315,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventplace.latitude">
 				<source>Latitude</source>
 			</trans-unit>
-
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.driving_directions_link" approved="yes">
+				<source>Driving directions link</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventcontact -->
