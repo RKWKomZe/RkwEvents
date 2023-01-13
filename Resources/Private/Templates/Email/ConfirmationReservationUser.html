@@ -9,7 +9,6 @@
 
 <vh:frontend.translate key="templates_email_confirmationReservationUser.text1" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 <vh:frontend.translate key="templates_email_confirmationReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
-<f:if condition="{reservation.event.costsReg}"><vh:frontend.translate key="templates_email_confirmationReservationUser.billing" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /></f:if>
 
 <f:render partial="Email/Details" section="Plaintext" arguments="{reservation: reservation, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isRegistered : 1, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
@@ -27,11 +26,6 @@
 		<vh:frontend.translate key="templates_email_confirmationReservationUser.text1" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" /><br>
 		<vh:frontend.translate key="templates_email_confirmationReservationUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 	</p>
-	<f:if condition="{reservation.event.costsReg}">
-		<p>
-			<vh:frontend.translate key="templates_email_confirmationReservationUser.billing" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
-		</p>
-	</f:if>
 
 	<f:render partial="Email/Details" section="Html" arguments="{reservation:reservation, frontendUser: frontendUser, language:frontendUser.txRkwregistrationLanguageKey, showPid: showPid, isRegistered : 1, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
