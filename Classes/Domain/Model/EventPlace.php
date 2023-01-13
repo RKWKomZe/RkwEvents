@@ -84,6 +84,13 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $latitude;
 
     /**
+     * drivingDirectionsLink
+     *
+     * @var string
+     */
+    protected $drivingDirectionsLink;
+
+    /**
      * @var integer
      */
     protected $crdate;
@@ -273,6 +280,22 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDrivingDirectionsLink()
+    {
+        return $this->drivingDirectionsLink;
+    }
+
+    /**
+     * @param string $drivingDirectionsLink
+     */
+    public function setDrivingDirectionsLink($drivingDirectionsLink)
+    {
+        $this->drivingDirectionsLink = $drivingDirectionsLink;
     }
 
     /**

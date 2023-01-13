@@ -14,7 +14,8 @@
 </f:if></f:then><f:else><vh:frontend.translate key="templates_email_informUpcomingEventUser.text2" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 
 <vh:frontend.translate key="templates_email_informUpcomingEventUser.direction" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />:
-{googleMapsLink}
+
+<f:if condition="{reservation.event.place.drivingDirectionsLink}"><f:then>{reservation.event.place.drivingDirectionsLink}</f:then><f:else>{googleMapsLink}</f:else></f:if>
 </f:else></f:if>
 <vh:frontend.translate key="templates_email_informUpcomingEventUser.text3" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
 
@@ -48,9 +49,18 @@
         <f:else>
             <p>
                 <strong><vh:frontend.translate key="templates_email_informUpcomingEventUser.direction" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />:</strong><br/>
-                <a href="{googleMapsLink}" target="_blank">
-                    <img src="###baseUrl###/{extRelPath}Resources/Public/Images/MapSmall.png" alt="<vh:frontend.translate key='templates_email_informUpcomingEventUser.googleLink' languageKey='{frontendUser.txRkwregistrationLanguageKey}' extensionName='rkwEvents' />" title="<vh:frontend.translate key='templates_email_informUpcomingEventUser.googleLink' languageKey='{frontendUser.txRkwregistrationLanguageKey}' extensionName='rkwEvents' />" />
-                </a>
+                <f:if condition="{reservation.event.place.drivingDirectionsLink}">
+                    <f:then>
+                        <a href='<vh:frontend.typolink parameter="{reservation.event.place.drivingDirectionsLink}"/>' target="_blank">
+                            <vh:frontend.translate key="templates_email_informUpcomingEventUser.routeDescription" languageKey="{frontendUser.txRkwregistrationLanguageKey}" extensionName="rkwEvents" />
+                        </a>
+                    </f:then>
+                    <f:else>
+                        <a href="{googleMapsLink}" target="_blank">
+                            <img src="###baseUrl###/{extRelPath}Resources/Public/Images/MapSmall.png" alt="<vh:frontend.translate key='templates_email_informUpcomingEventUser.googleLink' languageKey='{frontendUser.txRkwregistrationLanguageKey}' extensionName='rkwEvents' />" title="<vh:frontend.translate key='templates_email_informUpcomingEventUser.googleLink' languageKey='{frontendUser.txRkwregistrationLanguageKey}' extensionName='rkwEvents' />" />
+                        </a>
+                    </f:else>
+                </f:if>
             </p>
         </f:else>
     </f:if>

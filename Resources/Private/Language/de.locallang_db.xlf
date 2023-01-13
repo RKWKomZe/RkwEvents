@@ -419,6 +419,10 @@
 				<source>Latitude</source>
 				<target>Breitengrad</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventplace.driving_directions_link" approved="yes">
+                <source>Driving directions link</source>
+                <target>Anfahrtsbeschreibung (Link)</target>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventcontact -->
