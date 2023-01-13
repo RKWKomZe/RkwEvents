@@ -142,6 +142,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventplace (
 	country int(11) unsigned DEFAULT '0',
 	longitude varchar(255) DEFAULT '' NOT NULL,
 	latitude varchar(255) DEFAULT '' NOT NULL,
+    driving_directions_link varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

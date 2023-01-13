@@ -1573,13 +1573,17 @@
 				<target>Bis bald!</target>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.direction">
-				<source>Click here for your personal route description</source>
-				<target>Klicken Sie hier für Ihre persönliche Anfahrtsbeschreibung</target>
+				<source>Click here for your route description</source>
+				<target>Klicken Sie hier für Ihre Anfahrtsbeschreibung</target>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.googleLink">
 				<source>Open Google Maps</source>
 				<target>Google Maps öffnen</target>
 			</trans-unit>
+            <trans-unit id="templates_email_informUpcomingEventUser.routeDescription">
+                <source>Route description</source>
+                <target>Anfahrtshinweise</target>
+            </trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 				<target>Löschen / Ändern</target>
