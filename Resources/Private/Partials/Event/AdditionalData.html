@@ -146,9 +146,18 @@
                             </th>
 
                             <td>
-                                <f:link.external uri="http://maps.google.com/maps/dir//<f:format.urlencode>{event.place.address}, {event.place.zip} {event.place.city}</f:format.urlencode>" target="_blank" title="<f:translate key='tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps' />" rel="nofollow">
-                                    <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps" />
-                                </f:link.external>
+                                <f:if condition="{event.place.drivingDirectionsLink}">
+                                    <f:then>
+                                        <f:link.typolink parameter="{event.place.drivingDirectionsLink}" target="_blank">
+                                            <f:translate key="templates_email_informUpcomingEventUser.routeDescription" />
+                                        </f:link.typolink>
+                                    </f:then>
+                                    <f:else>
+                                        <f:link.external uri="http://maps.google.com/maps/dir//<f:format.urlencode>{event.place.address}, {event.place.zip} {event.place.city}</f:format.urlencode>" target="_blank" title="<f:translate key='tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps' />" rel="nofollow">
+                                            <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps" />
+                                        </f:link.external>
+                                    </f:else>
+                                </f:if>
                             </td>
                         </tr>
                     </f:if>
