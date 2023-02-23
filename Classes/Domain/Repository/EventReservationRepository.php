@@ -2,8 +2,10 @@
 
 namespace RKW\RkwEvents\Domain\Repository;
 
+use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -48,7 +50,7 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
      * @param bool $respectStoragePid
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByEvent($event, $respectStoragePid = true)
+    public function findByEvent($event, bool $respectStoragePid = true): QueryResultInterface
     {
         $query = $this->createQuery();
         if (!$respectStoragePid) {
@@ -66,9 +68,9 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
      *
      * @param \RKW\RkwRegistration\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
      * @param bool $respectStoragePid
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByFeUser($feUser, $respectStoragePid = true)
+    public function findByFeUser($feUser, bool $respectStoragePid = true): QueryResultInterface
     {
         $query = $this->createQuery();
         if (!$respectStoragePid) {
@@ -84,7 +86,6 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
         return $query->matching(
             $query->equals('feUser', $feUser)
         )->execute();
-        //===
     }
 
 
@@ -96,7 +97,7 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
 
-    public function findByEventAndFeUser($event, $feUser)
+    public function findByEventAndFeUser(Event $event, $feUser): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
@@ -114,11 +115,11 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
      * Find all events that have been updated recently
      *
      * @api Used by SOAP-API
-     * @param integer $timestamp
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @param int $timestamp
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findByTimestamp($timestamp)
+    public function findByTimestamp(int $timestamp): QueryResultInterface
     {
 
         $query = $this->createQuery();

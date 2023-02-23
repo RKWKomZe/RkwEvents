@@ -108,7 +108,7 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the salutation
      *
-     * @return integer $salutation
+     * @return int $salutation
      */
     public function getSalutation()
     {
@@ -118,7 +118,7 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the salutation
      *
-     * @param integer $salutation
+     * @param int $salutation
      * @return void
      */
     public function setSalutation($salutation)

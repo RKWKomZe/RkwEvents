@@ -75,7 +75,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
     /**
      * Inform user regarding of an upcoming event
      *
-     * @param integer $timeFrame Defines when we start to send e-mails as reminder for the user before the event starts (start
+     * @param int $timeFrame Defines when we start to send e-mails as reminder for the user before the event starts (start
      *     time of event <= time() + $timeFrame; in seconds; default: 86400)
      */
     public function informUserUpcomingEventCommand($timeFrame = 86400)
@@ -118,7 +118,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
     /**
      * Inform user regarding of an upcoming event
      *
-     * @param integer $timeFrame Defines when we start to send e-mails with survey link after the event has ended (start time of
+     * @param int $timeFrame Defines when we start to send e-mails with survey link after the event has ended (start time of
      *     event <= time() + $timeFrame; in seconds; default: 86400)
      */
     public function sendSurveyForPastEventCommand($timeFrame = 86400)

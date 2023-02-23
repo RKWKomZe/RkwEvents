@@ -47,7 +47,7 @@ class DepartmentRepository extends \RKW\RkwBasics\Domain\Repository\DepartmentRe
     /**
      * findVisibleAndRestrictedByEvents
      *
-     * @param integer $storagePid the pid of the event storage
+     * @param int $storagePid the pid of the event storage
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findVisibleAndRestrictedByEvents($storagePid = 0)

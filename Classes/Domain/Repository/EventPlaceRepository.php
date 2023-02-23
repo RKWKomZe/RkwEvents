@@ -3,6 +3,7 @@
 namespace RKW\RkwEvents\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -35,14 +36,19 @@ class EventPlaceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Find places by address, zip and city
      *
+     * @param int $pid
      * @param string $address
      * @param string $zip
      * @param string $city
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @api
      */
-    public function findByAddressZipCityForImport($pid, $address, $zip, $city)
-    {
+    public function findByAddressZipCityForImport(
+        int $pid,
+        string $address,
+        string $zip,
+        string $city
+    ): QueryResultInterface {
 
 
         $query = $this->createQuery();
@@ -66,11 +72,12 @@ class EventPlaceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Find all events that have been updated recently
      *
-     * @api Used by SOAP-API
-     * @param integer $timestamp
+     * @param int $timestamp
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @api Used by SOAP-API
      */
-    public function findByTimestamp($timestamp)
+    public function findByTimestamp(int $timestamp): QueryResultInterface
     {
 
         $query = $this->createQuery();
@@ -84,7 +91,6 @@ class EventPlaceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
 
         return $query->execute();
-        //===
     }
 
 }

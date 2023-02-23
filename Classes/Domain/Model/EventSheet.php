@@ -55,7 +55,7 @@ class EventSheet extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the sorting
      *
-     * @return integer sorting
+     * @return int sorting
      */
     public function getSorting()
     {
@@ -65,7 +65,7 @@ class EventSheet extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the sorting
      *
-     * @param integer $sorting
+     * @param int $sorting
      * @return void
      */
     public function setSorting($sorting)

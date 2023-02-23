@@ -44,7 +44,7 @@ class EventScheduled extends \RKW\RkwEvents\Domain\Model\Event
     /**
      * Returns the start
      *
-     * @return integer $start
+     * @return int $start
      */
     public function getStart()
     {
@@ -54,7 +54,7 @@ class EventScheduled extends \RKW\RkwEvents\Domain\Model\Event
     /**
      * Sets the start
      *
-     * @param integer $start
+     * @param int $start
      * @return void
      */
     public function setStart($start)
@@ -65,7 +65,7 @@ class EventScheduled extends \RKW\RkwEvents\Domain\Model\Event
     /**
      * Returns the end
      *
-     * @return integer $end
+     * @return int $end
      */
     public function getEnd()
     {
@@ -75,7 +75,7 @@ class EventScheduled extends \RKW\RkwEvents\Domain\Model\Event
     /**
      * Sets the end
      *
-     * @param integer $end
+     * @param int $end
      * @return void
      */
     public function setEnd($end)

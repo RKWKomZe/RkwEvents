@@ -81,10 +81,10 @@ class LoopViewHelper extends AbstractLoopViewHelper
 
 
     /**
-     * @param integer $i
-     * @param integer $from
-     * @param integer $to
-     * @param integer $step
+     * @param int $i
+     * @param int $from
+     * @param int $to
+     * @param int $step
      * @return boolean
      */
     protected function isLast($i, $from, $to, $step)

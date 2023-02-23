@@ -13,6 +13,9 @@ namespace RKW\RkwEvents\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use RKW\RkwEvents\Domain\Model\Authors;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -31,11 +34,11 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
     /**
      * findOneByIdAndType
      *
-     * @param integer $id
+     * @param int $id
      * @param string $type
      * @return \RKW\RkwEvents\Domain\Model\Authors
      */
-    public function findOneByIdAndType($id, $type)
+    public function findOneByIdAndType(int $id, string $type):? Authors
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
@@ -48,7 +51,6 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         );
 
         return $query->execute()->getFirst();
-        //===
     }
 
 
@@ -58,7 +60,7 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
      * @param string $type
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByType($type)
+    public function findByType(string $type): QueryResultInterface
     {
 
         $query = $this->createQuery();
@@ -70,7 +72,6 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         );
 
         return $query->execute();
-        //===
     }
 
 
@@ -79,11 +80,15 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
      *
      * @param string $type
      * @param boolean $includeDefault
-     * @param integer $storagePid the pid of the event storage
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     * @param int $storagePid the pid of the event storage
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAllByTypeAndVisibilityAndRestrictedByEvents($type = null, $includeDefault = true, $storagePid = 0)
-    {
+    public function findAllByTypeAndVisibilityAndRestrictedByEvents(
+        string $type = '',
+        bool $includeDefault = true,
+        int $storagePid = 0
+    ): QueryResultInterface {
+
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
 

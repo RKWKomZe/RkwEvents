@@ -6,6 +6,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
@@ -88,11 +89,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Return reservations of upcoming event
      *
-     * @param integer $timeFrame
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @param int $timeFrame
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findUpcomingEventsForReminder($timeFrame = 86400)
+    public function findUpcomingEventsForReminder(int $timeFrame = 86400): QueryResultInterface
     {
 
         $query = $this->createQuery();
@@ -120,11 +121,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Return reservations of past event
      *
-     * @param integer $timeFrame
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @param int $timeFrame
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAllByPastEvents($timeFrame = 86400)
+    public function findAllByPastEvents(int $timeFrame = 86400): QueryResultInterface
     {
         $query = $this->createQuery();
 
@@ -147,11 +148,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Return reservations of past event, which have to sent their survey after
      *
-     * @param integer $timeFrame
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @param int $timeFrame
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAllByPastEventsWithoutSentSurveyAfter($timeFrame = 86400)
+    public function findAllByPastEventsWithoutSentSurveyAfter(int $timeFrame = 86400): QueryResultInterface
     {
         $query = $this->createQuery();
 
@@ -602,7 +603,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Used by CSV-importer
      *
      * @param string $title
-     * @param integer $start
+     * @param int $start
      * @return \RKW\RkwEvents\Domain\Model\Event
      */
     public function findOneByTitleAndStart($title, $start)
@@ -676,7 +677,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Find all events that have been updated recently
      *
      * @api Used by SOAP-API
-     * @param integer $timestamp
+     * @param int $timestamp
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */

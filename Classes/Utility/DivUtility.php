@@ -333,7 +333,7 @@ class DivUtility
      * function which returns the current and upcoming months for filter sorting
      * returning timestamps (for january the function will return 01.01.; for february 01.02. etc... as timestamp)
      *
-     * @param integer $monthsToShow how many upcoming months include current
+     * @param int $monthsToShow how many upcoming months include current
      * @return array
      */
     public static function createMonthListArray($monthsToShow = 6)
@@ -356,7 +356,7 @@ class DivUtility
      * createCategoryTree
      *
      * @param array $categoryList List of categories
-     * @param integer $parentCategoryForFilter the initial category
+     * @param int $parentCategoryForFilter the initial category
      * @return array
      * @throws \Exception
      */

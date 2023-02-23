@@ -16,6 +16,7 @@ namespace RKW\RkwEvents\Domain\Repository;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -43,8 +44,12 @@ class FileReferenceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param int $sysLanguageUid
      * @return array
      */
-    public function findAllByRecordFieldnameAndSysLangUid($record, $fieldName, $sysLanguageUid)
-    {
+    public function findAllByRecordFieldnameAndSysLangUid(
+        AbstractEntity $record,
+        string $fieldName,
+        int $sysLanguageUid
+    ): array {
+
         $className = get_class($record);
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -113,11 +118,11 @@ class FileReferenceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param int $recordUid
      * @param string $fieldName
      * @param string $tableName
-     *
      * @return array
      */
-    public function getReferenceRecordList ($recordUid, $fieldName, $tableName)
+    public function getReferenceRecordList (int $recordUid, string $fieldName, string $tableName): array
     {
+
         /** @var  \TYPO3\CMS\Core\Database\Connection $connectionPages */
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
 

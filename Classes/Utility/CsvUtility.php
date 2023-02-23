@@ -74,7 +74,7 @@ class CsvUtility
      *
      * @param Event   $event
      * @param string  $separator
-     * @param integer $maxAddPersons
+     * @param int $maxAddPersons
      * @return void
      */
     protected static function addReservationDataToCsv(Event $event, string $separator, int $maxAddPersons)
