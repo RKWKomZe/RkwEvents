@@ -15,7 +15,7 @@ namespace RKW\RkwEvents\UserFunctions;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwBasics\Utility\GeneralUtility;
+use Madj2k\CoreExtended\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -23,7 +23,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * Class TypoScriptSettings
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -33,7 +33,7 @@ class DisplayCond
      * configurationManager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $configurationManager;
 
@@ -71,7 +71,7 @@ class DisplayCond
      */
     protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-        return GeneralUtility::getTyposcriptConfiguration('Rkwevents', $which);
+        return GeneralUtility::getTypoScriptConfiguration('Rkwevents', $which);
     }
 
 

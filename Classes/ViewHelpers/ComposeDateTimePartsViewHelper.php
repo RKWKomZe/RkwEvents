@@ -14,9 +14,11 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwBasics\Utility\FrontendLocalizationUtility;
-use RKW\RkwEvents\Domain\Model\Event;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility as FrontendLocalizationUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+use RKW\RkwEvents\Domain\Model\Event;
 
 /**
  * Class ComposeDateTimePartsViewHelper
@@ -24,12 +26,28 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class ComposeDateTimePartsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithContentArgumentAndRenderStatic;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event', true);
+        $this->registerArgument('languageKey', 'string', 'Optional language key', false, 'default');
+        $this->registerArgument('onlyTime', 'bool', 'Show only time');
+        $this->registerArgument('onlyDate', 'bool', 'Show only date');
+    }
+
     /**
      * Managed datetime output for detail view and email templates
      * -----------------------------------
@@ -61,15 +79,21 @@ class ComposeDateTimePartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
      * </f:if>
      * -----------------------------------
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event
-     * @param string $languageKey
-     * @param bool $onlyDate
-     * @param bool $onlyTime
-     *
-     * @return boolean
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @return string
      */
-    public function render($event, $languageKey = 'default', $onlyDate = false, $onlyTime = false)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $event = $arguments['event'];
+        $languageKey = $arguments['languageKey'];
+        $onlyTime = $arguments['onlyTime'];
+        $onlyDate = $arguments['onlyDate'];
+
         // for secure: If an event is hidden or deleted, the following VH content is still callable (and throws errors)
         // (Uncaught TYPO3 Exception: Call to a member function getStart() on null | Error thrown in file /var/www/rkw-kompetenzzentrum.de/surf/releases/20201006153122/web/typo3conf/ext/rkw_events/Classes/ViewHelpers/ComposeDateTimePartsViewHelper.php in line xyz.)
         if (!$event instanceof Event) {

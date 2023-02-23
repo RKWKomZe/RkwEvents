@@ -14,13 +14,11 @@ call_user_func(
             array(
                 'Event' => 'myEvents, archive, list, listSimple, show, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
                 'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
-                'Ajax' => 'filter, more, moreArchive'
             ),
             // non-cacheable actions
             array(
                 'Event' => 'myEvents, show, list, listSimple, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
                 'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
-                'Ajax' => 'filter, more, moreArchive'
             )
         );
 
@@ -171,70 +169,63 @@ call_user_func(
         /**
          * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher
          */
-        $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
+        $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
 
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
             $signalSlotDispatcher->connect(
-                'RKW\\RkwRegistration\\Tools\\Registration',
-                \RKW\RkwRegistration\Tools\Registration::SIGNAL_AFTER_CREATING_OPTIN_EXISTING_USER . 'RkwEvents',
-                'RKW\\RkwEvents\\Service\\RkwMailService',
+                RKW\RkwRegistration\Registration\AbstractRegistration::class,
+                \RKW\RkwRegistration\Registration\AbstractRegistration::SIGNAL_AFTER_CREATING_OPTIN . 'RkwEvents',
+                RKW\RkwFeecalculator\Service\RkwMailService::class,
                 'optInRequest'
             );
 
             $signalSlotDispatcher->connect(
-                'RKW\\RkwRegistration\\Tools\\Registration',
-                \RKW\RkwRegistration\Tools\Registration::SIGNAL_AFTER_CREATING_OPTIN_USER . 'RkwEvents',
-                'RKW\\RkwEvents\\Service\\RkwMailService',
-                'optInRequest'
-            );
-
-            $signalSlotDispatcher->connect(
-                'RKW\\RkwRegistration\\Tools\\Registration',
-                \RKW\RkwRegistration\Tools\Registration::SIGNAL_AFTER_DELETING_USER,
-                'RKW\\RkwEvents\\Controller\\EventReservationController',
+                RKW\RkwRegistration\Registration\AbstractRegistration::class,
+                \RKW\RkwRegistration\Registration\AbstractRegistration::SIGNAL_AFTER_REGISTRATION_ENDED,
+                RKW\RkwEvents\Controller\EventReservationController::class,
                 'removeAllOfUserSignalSlot'
             );
         }
 
         $signalSlotDispatcher->connect(
-            'RKW\\RkwEvents\\Controller\\EventReservationController',
+            RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_CREATED_USER,
-            'RKW\\RkwEvents\\Service\\RkwMailService',
+            RKW\RkwFeecalculator\Service\RkwMailService::class,
             'confirmReservationUser'
         );
 
         $signalSlotDispatcher->connect(
-            'RKW\\RkwEvents\\Controller\\EventReservationController',
+            RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_CREATED_ADMIN,
-            'RKW\\RkwEvents\\Service\\RkwMailService',
+            RKW\RkwFeecalculator\Service\RkwMailService::class,
             'confirmReservationAdmin'
         );
 
         $signalSlotDispatcher->connect(
-            'RKW\\RkwEvents\\Controller\\EventReservationController',
+            RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_UPDATE_USER,
-            'RKW\\RkwEvents\\Service\\RkwMailService',
+            RKW\RkwFeecalculator\Service\RkwMailService::class,
             'updateReservationUser'
         );
 
         $signalSlotDispatcher->connect(
-            'RKW\\RkwEvents\\Controller\\EventReservationController',
+            RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_UPDATE_ADMIN,
-            'RKW\\RkwEvents\\Service\\RkwMailService',
+            RKW\RkwFeecalculator\Service\RkwMailService::class,
             'updateReservationAdmin'
         );
 
         $signalSlotDispatcher->connect(
-            'RKW\\RkwEvents\\Controller\\EventReservationController',
+            RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_DELETE_USER,
-            'RKW\\RkwEvents\\Service\\RkwMailService',
+            RKW\RkwFeecalculator\Service\RkwMailService::class,
             'deleteReservationUser'
         );
 
         $signalSlotDispatcher->connect(
-            'RKW\\RkwEvents\\Controller\\EventReservationController',
+            RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN,
-            'RKW\\RkwEvents\\Service\\RkwMailService',
+            RKW\RkwFeecalculator\Service\RkwMailService::class,
             'deleteReservationAdmin'
         );
 

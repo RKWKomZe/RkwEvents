@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -278,7 +278,7 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the crdate value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getCrdate()
@@ -291,7 +291,7 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the tstamp value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getTstamp()
@@ -302,7 +302,7 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the hidden value
      *
-     * @param integer $hidden
+     * @param int $hidden
      * @api
      */
     public function setHidden($hidden)
@@ -314,7 +314,7 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the hidden value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getHidden()
@@ -325,7 +325,7 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the deleted value
      *
-     * @param integer $deleted
+     * @param int $deleted
      * @api
      */
     public function setDeleted($deleted)
@@ -337,7 +337,7 @@ class EventPlace extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the deleted value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getDeleted()

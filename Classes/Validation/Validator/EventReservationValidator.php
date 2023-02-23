@@ -3,7 +3,7 @@
 namespace RKW\RkwEvents\Validation\Validator;
 
 use RKW\RkwEvents\Utility\DivUtility;
-use \RKW\RkwBasics\Helper\Common;
+use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use SJBR\SrFreecap\Domain\Repository\WordRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -28,7 +28,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -46,10 +46,10 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
      * validation
      *
      * @var \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation
-     * @return boolean
+     * @return bool
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function isValid($newEventReservation)
+    public function isValid($newEventReservation): bool
     {
 
         // initialize typoscript settings
@@ -262,7 +262,7 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
     {
 
         if (!$this->settings) {
-            $this->settings = Common::getTyposcriptConfiguration('Rkwevents');
+            $this->settings = Common::getTypoScriptConfiguration('Rkwevents');
         }
 
         if (!$this->settings) {

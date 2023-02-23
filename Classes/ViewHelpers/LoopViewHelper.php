@@ -21,7 +21,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -36,7 +36,6 @@ class LoopViewHelper extends AbstractLoopViewHelper
      */
     public function initializeArguments()
     {
-
         parent::initializeArguments();
         $this->registerArgument('count', 'integer', 'Number of times to render child content', true);
         $this->registerArgument('minimum', 'integer', 'Minimum number of loops before stopping', false, 0);
@@ -78,20 +77,18 @@ class LoopViewHelper extends AbstractLoopViewHelper
         }
 
         return $content;
-        //===
     }
 
 
     /**
-     * @param integer $i
-     * @param integer $from
-     * @param integer $to
-     * @param integer $step
+     * @param int $i
+     * @param int $from
+     * @param int $to
+     * @param int $step
      * @return boolean
      */
     protected function isLast($i, $from, $to, $step)
     {
         return ($i + $step >= $to);
-        //===
     }
 }

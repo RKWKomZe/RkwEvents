@@ -8,7 +8,7 @@ namespace RKW\RkwEvents\ViewHelpers;
  * LICENSE.md file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Abstract class with basic functionality for loop view helpers.
@@ -16,7 +16,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -38,14 +38,15 @@ abstract class AbstractLoopViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
         $this->registerArgument('iteration', 'string', 'Variable name to insert result into, suppresses output');
     }
 
     /**
-     * @param integer $i
-     * @param integer $from
-     * @param integer $to
-     * @param integer $step
+     * @param int $i
+     * @param int $from
+     * @param int $to
+     * @param int $step
      * @param string $iterationArgument
      * @return string
      * @throws \TYPO3Fluid\Fluid\Core\Exception
@@ -75,10 +76,10 @@ abstract class AbstractLoopViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param integer $i
-     * @param integer $from
-     * @param integer $to
-     * @param integer $step
+     * @param int $i
+     * @param int $from
+     * @param int $to
+     * @param int $step
      * @return boolean
      */
     protected function isLast($i, $from, $to, $step)

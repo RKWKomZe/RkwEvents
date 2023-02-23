@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEvents\Utility;
 
-use RKW\RkwBasics\Utility\GeneralUtility;
+use Madj2k\CoreExtended\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventPlace;
 use RKW\RkwEvents\Domain\Model\EventReservation;
@@ -27,7 +27,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * CsvUtility
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwFeecalculator
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -74,7 +74,7 @@ class CsvUtility
      *
      * @param Event   $event
      * @param string  $separator
-     * @param integer $maxAddPersons
+     * @param int $maxAddPersons
      * @return void
      */
     protected static function addReservationDataToCsv(Event $event, string $separator, int $maxAddPersons)

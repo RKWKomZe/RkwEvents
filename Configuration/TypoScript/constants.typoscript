@@ -1,205 +1,204 @@
+
 plugin.tx_rkwevents {
-    view {
-        # cat=plugin.tx_rkwevents/file; type=string; label=Path to template root (FE)
-        templateRootPath = EXT:rkw_events/Resources/Private/Templates/
-        # cat=plugin.tx_rkwevents/file; type=string; label=Path to template partials (FE)
-        partialRootPath = EXT:rkw_events/Resources/Private/Partials/
-        # cat=plugin.tx_rkwevents/file; type=string; label=Path to template layouts (FE)
-        layoutRootPath = EXT:rkw_events/Resources/Private/Layouts/
+	view {
+		# cat=plugin.tx_rkwevents/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:rkw_events/Resources/Private/Templates/
+		# cat=plugin.tx_rkwevents/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:rkw_events/Resources/Private/Partials/
+		# cat=plugin.tx_rkwevents/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:rkw_events/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_rkwevents; type=integer; label=Default storage PID (read/write)
+		storagePid =
+
+        # cat=plugin.tx_rkwevents; type=integer; label=Default storage PID for eventReservation (write only). PID set here has to be included in storagePid-List
+        eventReservation.newRecordStoragePid =
+
+        # cat=plugin.tx_rkwevents; type=integer; label=Default storage PID for eventReservationAddPerson (write only). PID set here has to be included in storagePid-List
+        eventReservationAddPerson.newRecordStoragePid =
+
     }
-    persistence {
-        # cat=plugin.tx_rkwevents; type=integer; label=Default storage PID (read/write)
-        storagePid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=Default storage PID for eventReservation (write only). PID set here has to be included in storagePid-List
-            eventReservation.newRecordStoragePid =
+    settings {
 
-            # cat=plugin.tx_rkwevents; type=integer; label=Default storage PID for eventReservationAddPerson (write only). PID set here has to be included in storagePid-List
-            eventReservationAddPerson.newRecordStoragePid =
+        # cat=plugin.tx_rkwevents//f; type=integer; label=Version to use (the version is mainly related to the new RkwAjax-API)
+        version = 2
 
-        }
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for list view
+        listPid =
 
-        settings {
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for detail view
+        # !!! Hint: Can be overwritten by EventOrganizer "showPid" !!!
+        showPid =
 
-            # cat=plugin.tx_rkwevents//f; type=integer; label=Version to use (the version is mainly related to the new RkwAjax-API)
-            version = 2
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for login
+        loginPid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for list view
-            listPid =
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for create new reservation
+        reservationPid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for detail view
-            # !!! Hint: Can be overwritten by EventOrganizer "showPid" !!!
-            showPid =
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for create new FeUser
+        storagePidFeUser =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for login
-            loginPid =
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for terms and conditions (AGB)
+        termsPid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for create new reservation
-            reservationPid =
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for terms and conditions (AGB)
+        terms2Pid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for create new FeUser
-            storagePidFeUser =
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for list of events the user has registered for
+        myEventsPid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for terms and conditions (AGB)
-            termsPid =
+        # cat=plugin.tx_rkwevents; type=integer; label=Defines the parent category for the FE-filter in event listing
+        parentCategoryForFilter =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for terms and conditions (AGB)
-            terms2Pid =
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for sheets for event view
+        sheetsForEventPid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for list of events the user has registered for
-            myEventsPid =
+		# cat=plugin.tx_rkwevents; type=integer; label=PID for archive list
+		archivePid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=Defines the parent category for the FE-filter in event listing
-            parentCategoryForFilter =
+		# cat=plugin.tx_rkwevents; type=integer; label=PID for survey
+		surveyPid =
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for sheets for event view
-            sheetsForEventPid =
+		# cat=plugin.tx_rkwevents; type=integer; label=Number of items in list view (default 10)
+        itemsPerPage = 10
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for archive list
-            archivePid =
+        // @todo @deprecated (typeNum is only needed for OLD Ajax API)
+		# cat=plugin.tx_rkwevents; type=integer; label=PageNum for AJAX-requests
+		ajaxTypeNum = 1472648979
 
-            # cat=plugin.tx_rkwevents; type=integer; label=PID for survey
-            surveyPid =
+		# cat=plugin.tx_rkwevents; type=boolean; label=Include Gallery?
+		includeGallery = 0
 
-            # cat=plugin.tx_rkwevents; type=integer; label=Number of items in list view (default 10)
-            itemsPerPage = 10
+		# cat=plugin.tx_rkwevents; type=boolean; label=Include jQuery?
+		includeJQuery = 0
 
-            // @toDo: @deprecated (typeNum is only needed for OLD Ajax API)
-            # cat=plugin.tx_rkwevents; type=integer; label=PageNum for AJAX-requests
-            ajaxTypeNum = 1472648979
+        # cat=plugin.tx_rkwevents; type=boolean; label=Attaches a calendar event to the event confirmation email
+        attachCalendarEvent = 1
 
-            # cat=plugin.tx_rkwevents; type=boolean; label=Include Gallery?
-            includeGallery = 0
+        # cat=plugin.tx_rkwevents; type=string; label=Default language for subject of reminder-email
+        defaultLanguageKey = de
 
-            # cat=plugin.tx_rkwevents; type=boolean; label=Include jQuery?
-            includeJQuery = 0
+        # cat=plugin.tx_rkwevents; type=boolean; label=Disable internal registration
+        disableInternalRegistration = 0
 
-            # cat=plugin.tx_rkwevents; type=boolean; label=Attaches a calendar event to the event confirmation email
-            attachCalendarEvent = 1
+        # cat=plugin.tx_rkwevents; type=boolean; label=Hide GoogleMaps
+        hideMap = 0
 
-            # cat=plugin.tx_rkwevents; type=string; label=Default language for subject of reminder-email
-            defaultLanguageKey = de
-
-            # cat=plugin.tx_rkwevents; type=boolean; label=Disable internal registration
-            disableInternalRegistration = 0
-
-            # cat=plugin.tx_rkwevents; type=boolean; label=Hide GoogleMaps
-            hideMap = 0
-
-            costs {
-                red {
-                    hint {
-
-                        # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
-                        enabled = 0
-
-                        # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
-                        # Hint: Can be overridden by property event->costsRedLink
-                        link =
-                    }
-                }
-            }
-
-            eligibility {
+        costs {
+            red {
                 hint {
 
                     # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
                     enabled = 0
 
-                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to eligibility
-                    # Hint: Can be overridden by property event->eligibilityLink
+                    # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to reduced price condition
+                    # Hint: Can be overridden by property event->costsRedLink
                     link =
                 }
             }
-
-
-            list {
-
-                multipartView {
-                    # cat=plugin.tx_rkwevents; type=bool; label=Use multipart view for list
-                    enabled = 0
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=shown items of started events
-                    limitStarted = 4
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=shown items of upcoming events
-                    limitUpcoming = 8
-                }
-
-                # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
-                detailLinkTargetBlank = 0
-
-                filter {
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"
-                    showDepartment = 1
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "documentType"
-                    showDocumentType = 1
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "category"
-                    showCategory = 0
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "time"
-                    showTime = 0
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=number of months which are shown in filter "time"
-                    # hint: use value "11" for the maximum amount of months!
-                    showTimeNumberOfMonths = 6
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
-                    showAddress = 1
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "showOnlyOnlineEvents"
-                    showOnlyOnlineEvents = 0
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "freeOfCharge"
-                    showFreeOfCharge = 0
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "eligible"
-                    showEligible = 0
-                }
-            }
-
-            listSimilar {
-                # cat=plugin.tx_rkwevents; type=integer; label=Number of items in list similar view
-                itemsPerPage = 6
-
-                # cat=plugin.tx_rkwevents; type=bool; label=Show more link
-                showMoreLink = 1
-
-                # define which similarities between events should be used for the searchQuery for a logical OR
-                # hint: If nothing is set here, absolutely nothing will be found by the query
-                searchQuery {
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Search by department
-                    byDepartment = 1
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Search by documentType
-                    byDocumentType = 1
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Search by categories
-                    byCategories = 1
-
-                    # cat=plugin.tx_rkwevents; type=integer; label=Search by project
-                    byProject = 1
-                }
-            }
-
-        mandatoryFields {
-            # cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of main person. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
-            eventReservationMainPerson =
-
-            # cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of additional persons. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
-            eventReservationAdditionalPersons =
-
-            # cat=plugin.tx_rkwevents; type=integer; label=use captcha (requires EXT sr_freecap! (optional))
-            captcha = 1
         }
 
-        mail {
-            # cat=plugin.tx_rkwevents; type=string; label=Uids of be_users for E-mail notification
-            backendUser =
+        eligibility {
+            hint {
+
+                # cat=plugin.tx_rkwevents; type=int; label=enable or disable the costsRedHint in /Partials/Event/Info/Costs.html
+                enabled = 0
+
+                # cat=plugin.tx_rkwevents; type=string; label=link for hint relating to eligibility
+                # Hint: Can be overridden by property event->eligibilityLink
+                link =
+            }
         }
+
+
+        list {
+
+            multipartView {
+                # cat=plugin.tx_rkwevents; type=bool; label=Use multipart view for list
+                enabled = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=shown items of started events
+                limitStarted = 4
+
+                # cat=plugin.tx_rkwevents; type=integer; label=shown items of upcoming events
+                limitUpcoming = 8
+            }
+
+            # cat=plugin.tx_rkwevents; type=integer; label=Open detail view page in new tab
+            detailLinkTargetBlank = 0
+
+            filter {
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "department"
+                showDepartment = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "documentType"
+                showDocumentType = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "category"
+                showCategory = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "time"
+                showTime = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=number of months which are shown in filter "time"
+                # hint: use value "11" for the maximum amount of months!
+                showTimeNumberOfMonths = 6
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "address"
+                showAddress = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "showOnlyOnlineEvents"
+                showOnlyOnlineEvents = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "freeOfCharge"
+                showFreeOfCharge = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "eligible"
+                showEligible = 0
+            }
+        }
+
+        listSimilar {
+            # cat=plugin.tx_rkwevents; type=integer; label=Number of items in list similar view
+            itemsPerPage = 6
+
+            # cat=plugin.tx_rkwevents; type=bool; label=Show more link
+            showMoreLink = 1
+
+            # define which similarities between events should be used for the searchQuery for a logical OR
+            # hint: If nothing is set here, absolutely nothing will be found by the query
+            searchQuery {
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by department
+                byDepartment = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by documentType
+                byDocumentType = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by categories
+                byCategories = 1
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Search by project
+                byProject = 1
+            }
+        }
+
+		mandatoryFields {
+
+			# cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of main person. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
+			eventReservationMainPerson =
+
+			# cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of additional persons. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
+			eventReservationAdditionalPersons =
+		}
+
+		mail {
+			# cat=plugin.tx_rkwevents; type=string; label=Uids of be_users for E-mail notification
+			backendUser =
+		}
     }
 }
 

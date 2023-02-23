@@ -1,17 +1,17 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    xmlns:ajaxApi="http://typo3.org/ns/Madj2k/AjaxApi/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
     <f:if condition="<f:count>{sortedEventList}</f:count>">
 
         <!-- simple element list without nesting -->
-        <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
+        <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
             <div class="tiles flex-container flex-container--margin">
                 <f:for each="{sortedEventList}" as="event">
                     <f:render partial="Event/List/Box" section="flex-4" arguments="{_all}" />
                 </f:for>
             </div>
-        </rkwAjax:ajaxWrapper>
+        </ajaxApi:ajaxWrapper>
 
     </f:if>
 

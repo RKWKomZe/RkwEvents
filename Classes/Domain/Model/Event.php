@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -638,7 +638,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the start
      *
-     * @return integer $start
+     * @return int $start
      */
     public function getStart()
     {
@@ -648,7 +648,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the start
      *
-     * @param integer $start
+     * @param int $start
      * @return void
      */
     public function setStart($start)
@@ -659,7 +659,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the end
      *
-     * @return integer $end
+     * @return int $end
      */
     public function getEnd()
     {
@@ -669,7 +669,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the end
      *
-     * @param integer $end
+     * @param int $end
      * @return void
      */
     public function setEnd($end)
@@ -893,7 +893,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the seats
      *
-     * @return integer $seats
+     * @return int $seats
      */
     public function getSeats()
     {
@@ -903,7 +903,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the seats
      *
-     * @param integer $seats
+     * @param int $seats
      * @return void
      */
     public function setSeats($seats)
@@ -1022,7 +1022,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the costsTax
      *
-     * @return integer $costsTax
+     * @return int $costsTax
      */
     public function getCostsTax()
     {
@@ -1032,7 +1032,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the costsTax
      *
-     * @param integer $costsTax
+     * @param int $costsTax
      * @return void
      */
     public function setCostsTax($costsTax)
@@ -1095,7 +1095,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the regEnd
      *
-     * @return integer $regEnd
+     * @return int $regEnd
      */
     public function getRegEnd()
     {
@@ -1106,7 +1106,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the regEnd
      *
-     * @param integer $regEnd
+     * @param int $regEnd
      * @return void
      */
     public function setRegEnd($regEnd)
@@ -1117,7 +1117,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the cancelEnd
      *
-     * @return integer $cancelEnd
+     * @return int $cancelEnd
      */
     public function getCancelEnd()
     {
@@ -1128,7 +1128,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the cancelEnd
      *
-     * @param integer $cancelEnd
+     * @param int $cancelEnd
      * @return void
      */
     public function setCancelEnd($cancelEnd)
@@ -2303,7 +2303,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the reminderMailTstamp
      *
-     * @return integer $reminderMailTstamp
+     * @return int $reminderMailTstamp
      */
     public function getReminderMailTstamp()
     {
@@ -2313,7 +2313,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the reminderMailTstamp
      *
-     * @param integer $reminderMailTstamp
+     * @param int $reminderMailTstamp
      * @return void
      */
     public function setReminderMailTstamp($reminderMailTstamp)
@@ -2324,7 +2324,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the surveyAfterMailTstamp
      *
-     * @return integer $surveyAfterMailTstamp
+     * @return int $surveyAfterMailTstamp
      */
     public function getSurveyAfterMailTstamp()
     {
@@ -2334,7 +2334,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the surveyAfterMailTstamp
      *
-     * @param integer $surveyAfterMailTstamp
+     * @param int $surveyAfterMailTstamp
      * @return void
      */
     public function setSurveyAfterMailTstamp($surveyAfterMailTstamp)
@@ -2367,7 +2367,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the distance
      *
-     * @return integer $distance
+     * @return int $distance
      */
     public function getDistance()
     {
@@ -2377,7 +2377,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the distance
      *
-     * @param integer $distance
+     * @param int $distance
      * @return void
      */
     public function setDistance($distance)
@@ -2389,7 +2389,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the crdate value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getCrdate()
@@ -2402,7 +2402,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the tstamp value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getTstamp()
@@ -2413,7 +2413,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the hidden value
      *
-     * @param integer $hidden
+     * @param int $hidden
      * @api
      */
     public function setHidden($hidden)
@@ -2425,7 +2425,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the hidden value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getHidden()
@@ -2436,7 +2436,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the deleted value
      *
-     * @param integer $deleted
+     * @param int $deleted
      * @api
      */
     public function setDeleted($deleted)
@@ -2448,7 +2448,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the deleted value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getDeleted()

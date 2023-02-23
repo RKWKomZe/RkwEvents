@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -108,7 +108,7 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the salutation
      *
-     * @return integer $salutation
+     * @return int $salutation
      */
     public function getSalutation()
     {
@@ -118,7 +118,7 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the salutation
      *
-     * @param integer $salutation
+     * @param int $salutation
      * @return void
      */
     public function setSalutation($salutation)

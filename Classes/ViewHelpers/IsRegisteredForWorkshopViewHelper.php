@@ -20,31 +20,39 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class IsRegisteredForWorkshopViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class IsRegisteredForWorkshopViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('eventWorkshop', '\RKW\RkwEvents\Domain\Model\EventWorkshop', 'The event workshop');
+        $this->registerArgument('frontendUser', '\RKW\RkwEvents\Domain\Model\FrontendUser', 'The frontendUser');
+    }
 
     /**
      * check if user is registered for workshop
      * Used for disable a checkbox (or disable not, if user is registered and may want to edit ;-))
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $eventWorkshop
-     * @param \RKW\RkwEvents\Domain\Model\FrontendUser $frontendUser
      * @return boolean
      */
-    public function render($eventWorkshop, $frontendUser)
+    public function render()
     {
+        $eventWorkshop = $this->arguments['eventWorkshop'];
+        $frontendUser = $this->arguments['frontendUser'];
 
         if ($eventWorkshop->getRegisteredFrontendUsers()->offsetExists($frontendUser)) {
             return true;
-            //===
         }
 
         return false;
-        //===
-
     }
 }

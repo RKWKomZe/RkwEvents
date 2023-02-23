@@ -3,6 +3,7 @@
 namespace RKW\RkwEvents\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -23,7 +24,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -36,9 +37,9 @@ class EventReservationAddPersonRepository extends \TYPO3\CMS\Extbase\Persistence
      *
      * @param \RKW\RkwEvents\Domain\Model\EventReservation|int $eventReservation
      * @param bool $respectStoragePid
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByEventReservation($eventReservation, $respectStoragePid = true)
+    public function findByEventReservation($eventReservation, bool $respectStoragePid = true): QueryResultInterface
     {
         $query = $this->createQuery();
         if (!$respectStoragePid) {
@@ -56,11 +57,11 @@ class EventReservationAddPersonRepository extends \TYPO3\CMS\Extbase\Persistence
      * Find all events that have been updated recently
      *
      * @api Used by SOAP-API
-     * @param integer $timestamp
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @param int $timestamp
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findByTimestamp($timestamp)
+    public function findByTimestamp(int $timestamp): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);

@@ -1,0 +1,28 @@
+routeEnhancers:
+  RkwEvents:
+    type: Extbase
+    namespace: 'tx_rkwevents_pi1'
+    routes:
+      - routePath: '/rkw-events/show/{event}'
+        _controller: 'Event::show'
+      - routePath: '/rkw-events/list/'
+        _controller: 'Event::list'
+      - routePath: '/rkw-events/list/{page}'
+        _controller: 'Event::list'
+      - routePath: '/rkw-eventreservation/{event}'
+        _controller: 'EventReservation::new'
+      - routePath: '/rkw-eventreservation/create'
+        _controller: 'EventReservation::create'
+      - routePath: '/rkw-eventreservation/optin/{event}/{tokenUser}/{token}'
+        _controller: 'EventReservation::optin'
+    defaultController: 'Event::list'
+    requirements:
+      page: '[0-9]{1,3}'
+      tokenUser: '[a-zA-Z0-9]{60}'
+      token: '[a-zA-Z0-9]{60}'
+    aspects:
+      event:
+        type: PersistedSlugifiedPatternMapper
+        tableName: 'tx_rkwevents_domain_model_event'
+        routeFieldPattern: '^(.*)-(?P<uid>\d+)$'
+        routeFieldResult: '{title|sanitized}-{uid}'
