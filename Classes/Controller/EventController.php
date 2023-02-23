@@ -119,7 +119,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * Hint: The given params ($filter, $page, $archive) are only needed for AJAX purpose
      *
      * @param array $filter
-     * @param integer $page
+     * @param int $page
      * @param bool $archive
      * @param bool $noEventFound
      * @return void
@@ -299,7 +299,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * returns similar events for a detail view page
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event Needed for ajax request e.g.
-     * @param integer                           $page
+     * @param int                           $page
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
@@ -634,7 +634,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     /**
      * Id of logged User
      *
-     * @return integer
+     * @return int
      */
     protected function getFrontendUserId(): int
     {

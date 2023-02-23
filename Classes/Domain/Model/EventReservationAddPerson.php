@@ -101,7 +101,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Returns the salutation
      *
-     * @return integer $salutation
+     * @return int $salutation
      */
     public function getSalutation()
     {
@@ -111,7 +111,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Sets the salutation
      *
-     * @param integer $salutation
+     * @param int $salutation
      * @return void
      */
     public function setSalutation($salutation)
@@ -165,7 +165,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Returns the crdate value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getCrdate()
@@ -178,7 +178,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Returns the tstamp value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getTstamp()
@@ -189,7 +189,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Sets the hidden value
      *
-     * @param integer $hidden
+     * @param int $hidden
      * @api
      */
     public function setHidden($hidden)
@@ -201,7 +201,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Returns the hidden value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getHidden()
@@ -212,7 +212,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Sets the deleted value
      *
-     * @param integer $deleted
+     * @param int $deleted
      * @api
      */
     public function setDeleted($deleted)
@@ -224,7 +224,7 @@ class EventReservationAddPerson extends \TYPO3\CMS\Extbase\DomainObject\Abstract
     /**
      * Returns the deleted value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getDeleted()

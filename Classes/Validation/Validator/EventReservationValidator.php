@@ -46,10 +46,10 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
      * validation
      *
      * @var \RKW\RkwEvents\Domain\Model\EventReservation $newEventReservation
-     * @return boolean
+     * @return bool
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function isValid($newEventReservation)
+    public function isValid($newEventReservation): bool
     {
 
         // initialize typoscript settings

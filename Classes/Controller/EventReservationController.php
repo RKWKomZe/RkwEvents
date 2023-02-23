@@ -158,8 +158,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     public function initializeAction()
     {
         if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Error while initializing EventReservationController: Required extension RkwRegistration is not loaded!'));
-            trigger_error('Error: Operation not allowed.', E_USER_ERROR, E_USER_DEPRECATED);
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR,
+               'Error while initializing EventReservationController: Required extension RkwRegistration is not loaded!'
+            );
+            trigger_error(
+                'Error while initializing EventReservationController: Required extension RkwRegistration is not loaded!',
+                E_USER_ERROR
+            );
             exit;
         }
     }
@@ -1290,7 +1295,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * Id of logged User
      *
-     * @return integer
+     * @return int
      */
     protected function getFrontendUserId(): int
     {

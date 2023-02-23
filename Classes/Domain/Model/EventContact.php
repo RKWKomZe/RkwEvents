@@ -46,7 +46,7 @@ class EventContact extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Returns the salutation
      *
-     * @return integer $salutation
+     * @return int $salutation
      */
     public function getSalutation()
     {
@@ -56,7 +56,7 @@ class EventContact extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Sets the salutation
      *
-     * @param integer $salutation
+     * @param int $salutation
      * @return void
      */
     public function setSalutation($salutation)
