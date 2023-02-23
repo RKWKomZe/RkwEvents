@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -45,7 +45,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     /**
      * Returns the fieldname
      *
-     * @return integer $fieldname
+     * @return int $fieldname
      */
     public function getFieldname()
     {
@@ -55,7 +55,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     /**
      * Sets the fieldname
      *
-     * @param integer $fieldname
+     * @param int $fieldname
      * @return void
      */
     public function setFieldname($fieldname)
@@ -66,7 +66,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     /**
      * Returns the uidLocal
      *
-     * @return integer $uidLocal
+     * @return int $uidLocal
      */
     public function getUidLocal()
     {
@@ -76,7 +76,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     /**
      * Sets the uidLocal
      *
-     * @param integer $uidLocal
+     * @param int $uidLocal
      * @return void
      */
     public function setUidLocal($uidLocal)

@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -262,7 +262,7 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the start
      *
-     * @return integer $start
+     * @return int $start
      */
     public function getStart()
     {
@@ -272,7 +272,7 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the start
      *
-     * @param integer $start
+     * @param int $start
      * @return void
      */
     public function setStart($start)
@@ -283,7 +283,7 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the end
      *
-     * @return integer $end
+     * @return int $end
      */
     public function getEnd()
     {
@@ -293,7 +293,7 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the end
      *
-     * @param integer $end
+     * @param int $end
      * @return void
      */
     public function setEnd($end)
@@ -304,7 +304,7 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the availableSeats
      *
-     * @return integer $availableSeats
+     * @return int $availableSeats
      */
     public function getAvailableSeats()
     {
@@ -314,7 +314,7 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the availableSeats
      *
-     * @param integer $availableSeats
+     * @param int $availableSeats
      * @return void
      */
     public function setAvailableSeats($availableSeats)

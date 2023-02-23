@@ -91,7 +91,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) 
         ],
     ];
 
-    // @toDo: Not sure if this lines should be shown (was also commented out before in the top of the file],
+    // @todo Not sure if this lines should be shown (was also commented out before in the top of the file],
     //$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem'] = str_replace(', ext_reg_link,', ', ext_reg_link,survey_before,survey_after,survey_after_mail_tstamp,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem']);
 }
 

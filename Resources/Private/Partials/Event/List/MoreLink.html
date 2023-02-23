@@ -1,9 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
-    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    xmlns:ajaxApi="http://typo3.org/ns/Madj2k/AjaxApi/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-    <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
+    <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="3">
         <f:if condition="{showMoreLink}">
             <div class="flex-container flex-basis-12">
                 <f:link.action
@@ -19,6 +19,6 @@
                 </f:link.action>
             </div>
         </f:if>
-    </rkwAjax:ajaxWrapper>
+    </ajaxApi:ajaxWrapper>
 
 </html>

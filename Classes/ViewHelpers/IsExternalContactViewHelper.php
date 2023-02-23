@@ -14,33 +14,44 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEvents\Domain\Model\EventContact;
+
 /**
  * Class IsExternalContactViewHelper
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class IsExternalContactViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class IsExternalContactViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
-     * return TRUE, if the given contact is an external contact
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('contact', 'mixed', 'The contact');
+    }
+
+    /**
+     * return true, if the given contact is an external contact
      *
      * @param mixed $contact
      * @return bool
      */
-    public function render($contact)
+    public function render()
     {
-        if ($contact instanceof \RKW\RkwEvents\Domain\Model\EventContact) {
+        if ($this->arguments['contact'] instanceof EventContact) {
             return true;
-            //===
         }
 
         return false;
-        //===
     }
 
 

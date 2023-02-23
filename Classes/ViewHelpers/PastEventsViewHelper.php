@@ -20,33 +20,41 @@ namespace RKW\RkwEvents\ViewHelpers;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PastEventsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class PastEventsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', '\RKW\RkwEvents\Domain\Model\Event', 'The event');
+    }
 
     /**
      * Returns true if event is in the past
      *
-     * @param mixed $event
      * @return bool
      */
-    public function render($event)
+    public function render()
     {
+        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+        $event = $this->arguments['event'];
+
         $date = new \DateTime();
 
-        /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         if ($event->getEnd() <= $date) {
             return true;
-            //===
         } else {
             return false;
-            //===
         }
 
     }
 }
 
-?>

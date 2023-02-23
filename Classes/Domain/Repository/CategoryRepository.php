@@ -3,6 +3,8 @@
 namespace RKW\RkwEvents\Domain\Repository;
 
 use \RKW\RkwEvents\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -22,7 +24,7 @@ use \RKW\RkwEvents\Domain\Model\Category;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -52,10 +54,10 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param int $category
      * @param array $excludeCategories
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findChildrenByParent($category = 0, $excludeCategories = array())
+    public function findChildrenByParent(int $category = 0, array $excludeCategories = []): QueryResultInterface
     {
         $constraints = array();
         $query = $this->createQuery();
@@ -67,23 +69,19 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->matching($query->logicalAnd($constraints));
 
         return $query->execute();
-        //===
     }
-
 
 
     /**
      * findAllRestrictedByEvents
      *
-     * @param integer $storagePid the pid of the event storage
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array|object|void
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @param int $storagePid the pid of the event storage
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAllRestrictedByEvents($storagePid = 0)
+    public function findAllRestrictedByEvents(int $storagePid = 0): QueryResultInterface
     {
 
         // get all entries where MM is related to an event (of certain PID) which is currently running
-
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
 
@@ -94,8 +92,8 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         $query->statement(
             'SELECT sys_category.*
-            FROM sys_category, tx_rkwevents_domain_model_event 
-            INNER JOIN sys_category_record_mm 
+            FROM sys_category, tx_rkwevents_domain_model_event
+            INNER JOIN sys_category_record_mm
             WHERE sys_category_record_mm.tablenames = "tx_rkwevents_domain_model_event"
             AND sys_category_record_mm.fieldname = "categories"
             AND sys_category.uid = sys_category_record_mm.uid_local
@@ -110,7 +108,6 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         return $query->execute();
-        //===
 
     }
 }

@@ -20,12 +20,14 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
+
     /**
      * event
      *
@@ -37,7 +39,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * addPerson
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationAddPerson>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $addPerson = null;
 
@@ -71,6 +73,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * company
+     *
      * @var string
      */
     protected $company;
@@ -131,6 +134,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $remark;
 
+
     /**
      * workshopRegister
      *
@@ -138,15 +142,18 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $workshopRegister;
 
+
     /**
      * @var integer
      */
     protected $crdate;
 
+
     /**
      * @var integer
      */
     protected $tstamp;
+
 
     /**
      * @var integer
@@ -337,7 +344,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the salutation
      *
-     * @return integer $salutation
+     * @return int $salutation
      */
     public function getSalutation()
     {
@@ -347,7 +354,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the salutation
      *
-     * @param integer $salutation
+     * @param int $salutation
      * @return void
      */
     public function setSalutation($salutation)
@@ -590,7 +597,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the crdate value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getCrdate()
@@ -602,7 +609,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the tstamp value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getTstamp()
@@ -613,7 +620,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the deleted value
      *
-     * @param integer $deleted
+     * @param int $deleted
      * @api
      */
     public function setDeleted($deleted)
@@ -624,7 +631,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the deleted value
      *
-     * @return integer
+     * @return int
      * @api
      */
     public function getDeleted()
@@ -656,7 +663,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the showPid value
      *
-     * @param integer $showPid
+     * @param int $showPid
      * @return void
      */
     public function setShowPid($showPid)
@@ -667,7 +674,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the showPid value
      *
-     * @return integer
+     * @return int
      */
     public function getShowPid()
     {

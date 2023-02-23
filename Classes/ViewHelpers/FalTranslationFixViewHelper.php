@@ -8,10 +8,11 @@ namespace RKW\RkwEvents\ViewHelpers;
  * LICENSE.md file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
@@ -20,7 +21,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * !! SHOULD BE DEPRECATED WITH TYPO3 v9 !!
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -51,7 +52,11 @@ class FalTranslationFixViewHelper extends AbstractViewHelper
      * @param RenderingContextInterface $renderingContext
      * @return array
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    public static function renderStatic(
+        array $arguments, \
+        Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): ?array
     {
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
@@ -59,7 +64,11 @@ class FalTranslationFixViewHelper extends AbstractViewHelper
         /** @var \RKW\RkwEvents\Domain\Repository\FileReferenceRepository $fileReferenceRepository */
         $fileReferenceRepository = $objectManager->get(\RKW\RkwEvents\Domain\Repository\FileReferenceRepository::class);
 
-        return $fileReferenceRepository->findAllByRecordFieldnameAndSysLangUid($arguments['parentRecord'], $arguments['fieldName'], $GLOBALS['TSFE']->sys_language_uid);
+        /** @var \TYPO3\CMS\Core\Context\LanguageAspect $languageAspect */
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $languageUid = $languageAspect->getId();
+
+        return $fileReferenceRepository->findAllByRecordFieldnameAndSysLangUid($arguments['parentRecord'], $arguments['fieldName'], $languageUid);
     }
 
 

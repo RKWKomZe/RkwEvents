@@ -13,6 +13,9 @@ namespace RKW\RkwEvents\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use RKW\RkwEvents\Domain\Model\Authors;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -21,7 +24,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -31,11 +34,11 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
     /**
      * findOneByIdAndType
      *
-     * @param integer $id
+     * @param int $id
      * @param string $type
      * @return \RKW\RkwEvents\Domain\Model\Authors
      */
-    public function findOneByIdAndType($id, $type)
+    public function findOneByIdAndType(int $id, string $type):? Authors
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
@@ -48,7 +51,6 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         );
 
         return $query->execute()->getFirst();
-        //===
     }
 
 
@@ -58,7 +60,7 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
      * @param string $type
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByType($type)
+    public function findByType(string $type): QueryResultInterface
     {
 
         $query = $this->createQuery();
@@ -70,7 +72,6 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         );
 
         return $query->execute();
-        //===
     }
 
 
@@ -79,12 +80,15 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
      *
      * @param string $type
      * @param boolean $includeDefault
-     * @param integer $storagePid the pid of the event storage
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
-     * @A
+     * @param int $storagePid the pid of the event storage
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAllByTypeAndVisibilityAndRestrictedByEvents($type = null, $includeDefault = true, $storagePid = 0)
-    {
+    public function findAllByTypeAndVisibilityAndRestrictedByEvents(
+        string $type = '',
+        bool $includeDefault = true,
+        int $storagePid = 0
+    ): QueryResultInterface {
+
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
 
@@ -98,19 +102,19 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         }
 
         if ($includeDefault) {
-            $andWhere .= ' 
-            AND 
-            (tx_rkwbasics_domain_model_documenttype.visibility = 1 
-                AND 
+            $andWhere .= '
+            AND
+            (tx_rkwbasics_domain_model_documenttype.visibility = 1
+                AND
                 (tx_rkwbasics_domain_model_documenttype.type = "' . $type . '"
                 OR tx_rkwbasics_domain_model_documenttype.type = "default"
                 )
             )';
         } else {
-            $andWhere .= ' 
-            AND 
-            (tx_rkwbasics_domain_model_documenttype.visibility = 1 
-            AND tx_rkwbasics_domain_model_documenttype.type = "' . $type . '" 
+            $andWhere .= '
+            AND
+            (tx_rkwbasics_domain_model_documenttype.visibility = 1
+            AND tx_rkwbasics_domain_model_documenttype.type = "' . $type . '"
             )';
 
         }
@@ -119,13 +123,13 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
             'SELECT tx_rkwbasics_domain_model_documenttype.*
             FROM tx_rkwbasics_domain_model_documenttype
             LEFT JOIN tx_rkwevents_domain_model_event
-            ON tx_rkwbasics_domain_model_documenttype.uid = tx_rkwevents_domain_model_event.document_type 
+            ON tx_rkwbasics_domain_model_documenttype.uid = tx_rkwevents_domain_model_event.document_type
             WHERE tx_rkwbasics_domain_model_documenttype.uid IN (tx_rkwevents_domain_model_event.document_type)
             AND tx_rkwevents_domain_model_event.hidden = 0
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
             ' . $andWhere . '
-            ' . \RKW\RkwBasics\Helper\QueryTypo3::getWhereClauseForEnableFields('tx_rkwbasics_domain_model_documenttype') . '
+            ' . \Madj2k\CoreExtended\Utility\QueryUtility::getWhereClauseEnabled('tx_rkwbasics_domain_model_documenttype') . '
             GROUP BY tx_rkwbasics_domain_model_documenttype.uid
             ORDER BY tx_rkwbasics_domain_model_documenttype.name ASC
             '

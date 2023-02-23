@@ -20,7 +20,7 @@ namespace RKW\RkwEvents\Domain\Model;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -55,7 +55,7 @@ class EventSheet extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the sorting
      *
-     * @return integer sorting
+     * @return int sorting
      */
     public function getSorting()
     {
@@ -65,7 +65,7 @@ class EventSheet extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the sorting
      *
-     * @param integer $sorting
+     * @param int $sorting
      * @return void
      */
     public function setSorting($sorting)

@@ -13,7 +13,7 @@
             class="select-field"
             id="tx_rkwevents_pi1_salutation"
             property="salutation"
-            value="{f:if(condition:'<rkw:or firstIsSalutation=\'true\' or1=\'{newEventReservation.salutation}\' or2=\'{editMode}\' />',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}"
+            value="{f:if(condition:'(\'{newEventReservation.salutation}\' == 99 || {editMode}',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}"
             options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}', 2: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.2\')}'}"
         />
 	</div>
@@ -26,7 +26,7 @@
 		<f:form.textfield
             id="tx_rkwevents_pi1_firstName"
             property="firstName"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.firstName}\' or2=\'{editMode}\' />',then:'{newEventReservation.firstName}',else:'{frontendUser.firstName}')}"
+            value="{f:if(condition:'{newEventReservation.firstName} || {editMode}',then:'{newEventReservation.firstName}',else:'{frontendUser.firstName}')}"
             additionalAttributes="{autocomplete:'fname'}"
         />
 	</div>
@@ -39,7 +39,7 @@
 		<f:form.textfield
             id="tx_rkwevents_pi1_lastName"
             property="lastName"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.lastName}\' or2=\'{editMode}\' />',then:'{newEventReservation.lastName}',else:'{frontendUser.lastName}')}"
+            value="{f:if(condition:'{newEventReservation.lastName} || {editMode}',then:'{newEventReservation.lastName}',else:'{frontendUser.lastName}')}"
             additionalAttributes="{autocomplete:'lname'}"
         />
 	</div>
@@ -50,7 +50,7 @@
             <f:render partial="LabelSuffix" arguments="{field: 'email', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
 		</label>
 
-		<f:if condition="<rkw:or or1='{validFrontendUserEmail}' or2='{editMode}'/>">
+		<f:if condition="{validFrontendUserEmail} || {editMode}">
 			<f:then>
 				<f:form.textfield
                     class="readonly"
@@ -82,7 +82,7 @@
 		<f:form.textfield
             id="tx_rkwevents_pi1_company"
             property="company"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.company}\' or2=\'{editMode}\' />',then:'{newEventReservation.company}',else:'{frontendUser.company}')}"
+            value="{f:if(condition:'{newEventReservation.company} || {editMode}',then:'{newEventReservation.company}',else:'{frontendUser.company}')}"
         />
 	</div>
 
@@ -95,7 +95,7 @@
         <f:form.textfield
             id="tx_rkwevents_pi1_phone"
             property="phone"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.phone}\' or2=\'{editMode}\' />',then:'{newEventReservation.phone}',else:'{frontendUser.phone}')}"
+            value="{f:if(condition:'{newEventReservation.phone} || {editMode}',then:'{newEventReservation.phone}',else:'{frontendUser.phone}')}"
         />
     </div>
 
@@ -108,7 +108,7 @@
         <f:form.textfield
             id="tx_rkwevents_pi1_mobile"
             property="mobile"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.mobile}\' or2=\'{editMode}\' />',then:'{newEventReservation.mobile}',else:'{frontendUser.mobile}')}"
+            value="{f:if(condition:'{newEventReservation.mobile} || {editMode}',then:'{newEventReservation.mobile}',else:'{frontendUser.mobile}')}"
         />
     </div>
 
@@ -121,7 +121,7 @@
 		<f:form.textfield
             id="tx_rkwevents_pi1_address"
             property="address"
-            value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.address}\' or2=\'{editMode}\' />',then:'{newEventReservation.address}',else:'{frontendUser.address}')}"
+            value="{f:if(condition:'{newEventReservation.address} || {editMode}',then:'{newEventReservation.address}',else:'{frontendUser.address}')}"
             additionalAttributes="{autocomplete:'address'}"
         />
 	</div>
@@ -135,7 +135,7 @@
             <f:form.textfield
                 id="tx_rkwevents_pi1_zip"
                 property="zip"
-                value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.zip}\' or2=\'{editMode}\' />',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
+                value="{f:if(condition:'{newEventReservation.zip} || {editMode}',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
                 additionalAttributes="{autocomplete:'zip'}"
             />
         </div>
@@ -148,7 +148,7 @@
             <f:form.textfield
                 id="tx_rkwevents_pi1_city"
                 property="city"
-                value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.city}\' or2=\'{editMode}\' />',then:'{newEventReservation.city}',else:'{frontendUser.city}')}"
+                value="{f:if(condition:'{newEventReservation.city} || {editMode}',then:'{newEventReservation.city}',else:'{frontendUser.city}')}"
                 additionalAttributes="{autocomplete:'city'}"
             />
         </div>
@@ -161,7 +161,7 @@
                 <f:translate key="tx_rkwevents_domain_model_eventreservation.telephone" />
                 <f:render partial="LabelSuffix" arguments="{field: 'phone', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
             </label>
-            <f:form.textfield property="phone" id="tx_rkwevents_pi1_phone" value="{f:if(condition:'<rkw:or or1=\'{newEventReservation.phone}\' or2=\'{editMode}\' />',then:'{newEventReservation.phone}',else:'{frontendUser.telephone}')}" additionalAttributes="{autocomplete:'tel'}" placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.phone' />" />
+            <f:form.textfield property="phone" id="tx_rkwevents_pi1_phone" value="{f:if(condition:'{newEventReservation.phone} || {editMode}',then:'{newEventReservation.phone}',else:'{frontendUser.telephone}')}" additionalAttributes="{autocomplete:'tel'}" placeholder="<f:translate key='tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.placeholder.phone' />" />
         </div>
         -->
     </f:comment>
@@ -251,24 +251,9 @@
 
     <f:if condition="{editMode}">
         <f:else>
-            <div class="form__field">
-                <f:form.checkbox class="checkbox" id="terms" name="terms" value="1" />
-                <label for="terms" class="checkbox-label">
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro" /> <f:link.page pageUid="{settings.termsPid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms" /></f:link.page>
-                    <f:if condition="{settings.terms2Pid}">
-                        <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro" /> <f:link.page pageUid="{settings.terms2Pid}" target="_blank"><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2" /></f:link.page>
-                    </f:if>
-                    <br><br><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3" />
-                </label>
-            </div>
-
-            <div class="form__field">
-                <f:form.checkbox class="checkbox" id="privacy" name="privacy" value="1" />
-                <label for="privacy" class="checkbox-label">
-                    <rkwRegistration:privacyText textVersion="events"/>
-                </label>
-            </div>
-
+            <rkwRegistration:consent type="terms" key="events" />
+            <rkwRegistration:consent type="privacy" key="events" />
+            <rkwRegistration:consent type="marketing" />
         </f:else>
     </f:if>
 

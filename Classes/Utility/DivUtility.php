@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -155,8 +155,8 @@ class DivUtility
         }
 
         if (
-            (!\RKW\RkwRegistration\Tools\Registration::validEmail($frontendUser->getEmail()))
-            && (\RKW\RkwRegistration\Tools\Registration::validEmail($eventReservation->getEmail()))
+            (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($frontendUser->getEmail()))
+            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($eventReservation->getEmail()))
         ) {
             $frontendUser->setEmail($eventReservation->getEmail());
         }
@@ -333,7 +333,7 @@ class DivUtility
      * function which returns the current and upcoming months for filter sorting
      * returning timestamps (for january the function will return 01.01.; for february 01.02. etc... as timestamp)
      *
-     * @param integer $monthsToShow how many upcoming months include current
+     * @param int $monthsToShow how many upcoming months include current
      * @return array
      */
     public static function createMonthListArray($monthsToShow = 6)
@@ -356,7 +356,7 @@ class DivUtility
      * createCategoryTree
      *
      * @param array $categoryList List of categories
-     * @param integer $parentCategoryForFilter the initial category
+     * @param int $parentCategoryForFilter the initial category
      * @return array
      * @throws \Exception
      */

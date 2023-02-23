@@ -73,7 +73,7 @@
                 <f:if condition="<rkw:notFinishedEvents event='{event}' />">
                     <f:else>
                         <f:if condition="{event.presentations}">
-                            <f:if condition="<rkw:Or or1='{event.presentations}' or2='{event.sheets}' />">
+                            <f:if condition="{event.presentations} || {event.sheets}">
                                 <tr>
                                     <th>
                                         <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.presentations" />

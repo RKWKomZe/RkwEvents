@@ -22,7 +22,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -32,7 +32,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
      * eventRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventRepository = null;
 
@@ -40,7 +40,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
      * eventReservationRepository
      *
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventReservationRepository = null;
 
@@ -55,7 +55,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
      * persistenceManager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 
@@ -75,7 +75,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
     /**
      * Inform user regarding of an upcoming event
      *
-     * @param integer $timeFrame Defines when we start to send e-mails as reminder for the user before the event starts (start
+     * @param int $timeFrame Defines when we start to send e-mails as reminder for the user before the event starts (start
      *     time of event <= time() + $timeFrame; in seconds; default: 86400)
      */
     public function informUserUpcomingEventCommand($timeFrame = 86400)
@@ -91,7 +91,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
 
                         // send mails
                         /** @var \RKW\RkwEvents\Service\RkwMailService $mailService */
-                        $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Service\\RkwMailService');
+                        $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwEvents\Service\RkwMailService::class);
                         $mailService->informUpcomingEventUser($eventReservationList, $event);
 
                         // set timestamp in event, so that mails are not send twice
@@ -118,7 +118,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
     /**
      * Inform user regarding of an upcoming event
      *
-     * @param integer $timeFrame Defines when we start to send e-mails with survey link after the event has ended (start time of
+     * @param int $timeFrame Defines when we start to send e-mails with survey link after the event has ended (start time of
      *     event <= time() + $timeFrame; in seconds; default: 86400)
      */
     public function sendSurveyForPastEventCommand($timeFrame = 86400)
@@ -134,7 +134,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
                         if ($eventReservationList = $event->getReservation()) {
 
                             /** @var \RKW\RkwEvents\Service\RkwMailService $mailService */
-                            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Service\\RkwMailService');
+                            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwEvents\Service\RkwMailService::class);
                             $mailService->sendSurveyForPastEvent($eventReservationList);
 
                             $event->setSurveyAfterMailTstamp(time());

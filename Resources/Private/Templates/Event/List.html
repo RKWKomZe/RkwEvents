@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
-    xmlns:rkwAjax="http://typo3.org/ns/RKW/RkwAjax/ViewHelpers"
+    xmlns:ajaxApi="http://typo3.org/ns/Madj2k/AjaxApi/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
     <f:layout name="Default" />
@@ -12,8 +12,8 @@
         <f:if condition="{noEventFound}">
             <f:comment><!-- If redirected from showAction after no event was found --></f:comment>
             <div class="system-message system-message--scroll" role="alert">
-                <div class="system-message__item system-message__item--alert-danger">
-                    <f:translate key="eventController.message.error.notAvailable2" extensionName="rkwEvents" />
+                <div class="system-message__item system-message__item--severity1">
+                    <f:translate key="eventController.message.error.notAvailable2" extensionName="RkwEvents" />
                 </div>
             </div>
         </f:if>
@@ -41,7 +41,7 @@
 
                 <f:render partial="Event/Filter" arguments="{_all}" />
 
-                <rkwAjax:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
+                <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
 
                     <div class="tiles-wrapper">
                         <f:if condition="<f:count>{sortedEventList}</f:count>">
@@ -60,7 +60,7 @@
                         </f:if>
                     </div>
 
-                </rkwAjax:ajaxWrapper>
+                </ajaxApi:ajaxWrapper>
             </f:else>
         </f:if>
 

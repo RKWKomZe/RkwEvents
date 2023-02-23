@@ -1,13 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-07-15T15:28:16Z" product-name="rkw_events">
-		<header/>
+	<file original="messages" source-language="en" datatype="plaintext" date="2015-07-15T15:28:16Z" product-name="rkw_events" target-language="de">
+		<header>
+      <phase-group>
+        <phase phase-name="approval-1" contact-email="berberich@rkw.de" date="2022-02-08" process-name="approval" contact-name="Melanie" tool-id="lokalize-22.03.70"/>
+      </phase-group>
+      <tool tool-version="22.03.70" tool-id="lokalize-22.03.70" tool-name="Lokalize"/>
+    </header>
 		<body>
 
 			<!--tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
 				<source>Event</source>
-				<target>Veranstaltung</target>
+				<target phase-name="approval-1" state="signed-off">Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
 				<source>Title</source>
@@ -45,9 +50,9 @@
 				<source>Target Group</source>
 				<target>Zielgruppe</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="no">
 				<source>Partner</source>
-				<target>Partner</target>
+				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.seats" approved="yes">
 				<source>Seats</source>
@@ -89,9 +94,9 @@
 				<source>Series</source>
 				<target>Reihe</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="no">
 				<source>Logos</source>
-				<target>Partner</target>
+				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.currency" approved="yes">
 				<source>Currency</source>
@@ -101,13 +106,13 @@
 				<source>Place</source>
 				<target>Ort</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="no">
 				<source>External Contact</source>
-				<target>Externer Ansprechpartner</target>
+				<target phase-name="approval-1" state="final">Externe Ansprechperson</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
+			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="no">
 				<source>Internal Contact</source>
-				<target>Interner Ansprechpartner</target>
+				<target phase-name="approval-1" state="final">Interne Ansprechperson</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.add_info" approved="yes">
 				<source>Additional Information</source>
@@ -260,7 +265,7 @@
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCreated">
 				<source>Reservation successfully created.</source>
-				<target>Wohoo! Sie sind nun für die Veranstaltung angemeldet. In Kürze erhalten Sie eine Bestätigung per E-Mail.</target>
+				<target>Woohoo! Sie sind nun für die Veranstaltung angemeldet. In Kürze erhalten Sie eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.reservationCanceled">
 				<source>Reservation was canceled.</source>
@@ -270,13 +275,9 @@
 				<source>An error occurred. Please try again.</source>
 				<target>Upps, da ist wohl etwas schief gelaufen. Haben Sie die Anmeldung möglicherweise bereits bestätigt?</target>
 			</trans-unit>
-			<trans-unit id="eventReservationController.error.acceptTerms">
-				<source>You have to accept our terms and conditions.</source>
-				<target>Das muss leider sein: Bitte akzeptieren Sie unsere allgemeinen Nutzungs- und Geschäftsbedingungen, um sich anmelden zu können.</target>
-			</trans-unit>
 			<trans-unit id="eventReservationController.message.updateSuccess">
 				<source>Update successfull!</source>
-				<target>Wohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
+				<target>Woohoo! Die Änderung Ihrer Anmeldung wurde erfolgreich durchgeführt. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.deleteSuccess">
 				<source>Reservation has been canceled</source>
@@ -286,9 +287,9 @@
 				<source>Please enter a valid username.</source>
 				<target>Da ist etwas schief gelaufen. Bitte geben Sie eine gültige E-Mailadresse ein.</target>
 			</trans-unit>
-			<trans-unit id="eventReservationController.error.email_already_in_use">
+			<trans-unit id="eventReservationController.error.email_already_in_use" approved="no">
 				<source>The given E-mail is already used by another user.</source>
-				<target>Hm, die gewünschte E-Mailadresse wird bereits von einem anderen Nutzer verwendet. Bitte geben Sie eine andere E-Mailadresse an.</target>
+				<target phase-name="approval-1" state="final">Hm, die gewünschte E-Mailadresse wird bereits von einem anderen Nutzenden verwendet. Bitte geben Sie eine andere E-Mailadresse an.</target>
 			</trans-unit>
 
 
@@ -338,21 +339,21 @@
 				<source>Could not find documentType with id %s. Nothing set (CSV-LINE:%s).</source>
 				<target>Veranstaltungsart mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.organizerNotFound">
+			<trans-unit id="backendController.error.organizerNotFound" approved="no">
 				<source>Could not find organizer with id %s. Nothing set (CSV-LINE:%s).</source>
-				<target>Organisator mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
+				<target phase-name="approval-1" state="final">Organisierende mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.nothingImported">
 				<source>Nothing found for import.</source>
 				<target>Es konnte nichts zum Importieren gefunden werden.</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.importSuccessfull">
+			<trans-unit id="backendController.error.importSuccessfull" approved="no">
 				<source>Successfully imported %s events, created %s new event locations and %s new external contacts.</source>
-				<target>Es wurden %s Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpartner importiert.</target>
+				<target phase-name="approval-1" state="final">Es wurden %s Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpersonen importiert.</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.importCheckSuccessfull">
+			<trans-unit id="backendController.error.importCheckSuccessfull" approved="no">
 				<source>Import-Check successfull.</source>
-				<target>Import-Check erfolgreich. Es wurden %s neue Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpartner gefunden.</target>
+				<target phase-name="approval-1" state="final">Import-Check erfolgreich. Es wurden %s neue Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpersonen gefunden.</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.importWrongFiletype">
                 <source>You have to use CSV files.</source>
@@ -398,9 +399,9 @@
 				<source>Really Do Import (Else Just Check Data)</source>
 				<target>Daten wirklich importieren (sonst nur Prüfung)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_msexcel">
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_msexcel" approved="no">
                 <source>Semicolin ";" is used as delimiter (instead of comma ",")</source>
-                <target>Semikolon ";" wird in CSV-Datei als Trenner genutzt (anstatt Komma ",") </target>
+                <target phase-name="approval-1" state="final">Semikolon ";" wird in CSV-Datei als Trennung genutzt (anstatt Komma ",") </target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_typeId">
 				<source>Event Type; overrides CSV Values when set</source>
@@ -410,9 +411,9 @@
 				<source>Department Type; overrides CSV Values when set</source>
 				<target>Fachbereich/Schwerpunkt; überschreibt CSV-Werte, wenn gesetzt</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId">
+			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_organizerId" approved="no">
 				<source>Organizer; overrides CSV Values when set</source>
-				<target>Organisator; überschreibt CSV-Werte, wenn gesetzt</target>
+				<target phase-name="approval-1" state="final">Organisierende; überschreibt CSV-Werte, wenn gesetzt</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_timeZone">
 				<source>Timezone of CSV Data</source>
@@ -422,9 +423,9 @@
                 <source>PID for import; overrides CSV Values when set</source>
                 <target>PID: Speicherort der Datensätze; überschreibt CSV-Werte, wenn gesetzt</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPidAuthors">
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_targetPidAuthors" approved="no">
                 <source>PID for internal contact; overrides CSV Values when set</source>
-                <target>PID: Speicherort der internen Ansprechpartner; überschreibt CSV-Werte, wenn gesetzt</target>
+                <target phase-name="approval-1" state="final">PID: Speicherort der internen Ansprechpersonen; überschreibt CSV-Werte, wenn gesetzt</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_backend_show.label_submit">
 				<source>Start import</source>
@@ -555,9 +556,9 @@
 
 
 			<!-- Templates/Event/ShowGalleryTwo.html -->
-			<trans-unit id="tx_rkwevents_fluid.templates_event_showGalleryTwo.headline" approved="yes">
+			<trans-unit id="tx_rkwevents_fluid.templates_event_showGalleryTwo.headline" approved="no">
 				<source>Restricted Gallery</source>
-				<target>Galerie für Teilnehmer</target>
+				<target phase-name="approval-1" state="final">Galerie für Teilnehmende</target>
 			</trans-unit>
 
 
@@ -657,7 +658,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.labelSearch">
 				<source>Search</source>
-				<target>&gt;</target>
+				<target>></target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.allOfCategory">
                 <source>All</source>
@@ -891,7 +892,7 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" approved="yes">
                 <source>Inform here</source>
                 <target>Hier informieren</target>
-            </trans-unit>            
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member? </source>
                 <target>Noch kein Mitglied? </target>
@@ -900,7 +901,7 @@
                 <source>Inform here</source>
                 <target>Hier informieren</target>
             </trans-unit>
-            
+
 
 			<!-- Partials/Event/Info/Seats.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats" approved="yes">
@@ -926,17 +927,17 @@
                 <source>Target Learning</source>
                 <target>Inhaltliches Ziel</target>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.partner" approved="yes">
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.partner" approved="no">
 				<source>Partner</source>
-				<target>Partner</target>
+				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.schedule" approved="yes">
 				<source>Schedule</source>
 				<target>Programm</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.testimonials" approved="yes">
+			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.testimonials" approved="no">
 				<source>Testimonials</source>
-				<target>Meinungen von Teilnehmern</target>
+				<target phase-name="approval-1" state="final">Meinungen von Teilnehmenden</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.presentations" approved="yes">
 				<source>Presentations</source>
@@ -962,9 +963,9 @@
                 <source>Code</source>
                 <target>Veranstaltungs-Nr.</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="yes">
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.trainer" approved="no">
                 <source>Trainer</source>
-                <target>Trainer/in</target>
+                <target phase-name="approval-1" state="final">Unterrichtende</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.cancellation" approved="yes">
                 <source>Cancellation</source>
@@ -1166,26 +1167,6 @@
 				<source>Additional remarks regarding your reservation.</source>
 				<target>Machen Sie hier ergänzende Angaben zu Ihrer Reservierung.</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.termsIntro">
-				<source>I accept the</source>
-				<target>Ich akzeptiere die</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms">
-				<source>terms</source>
-				<target>Nutzungsbedingungen</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2Intro">
-				<source>and</source>
-				<target>und</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms2">
-				<source>conditions</source>
-				<target>AGB.</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3">
-				<source>We would like to point out that images, sound and video recordings may be made at this event and published in various media for the purposes of event reporting and general public relations. You will receive further information on this and your rights directly at the start of the event.</source>
-				<target>Wir weisen darauf hin, dass auf dieser Veranstaltung Bild-, Ton- und Videoaufnahmen erstellt und für Zwecke der Veranstaltungsberichterstattung und der allgemeinen Öffentlichkeitsarbeit in verschiedenen Medien veröffentlicht werden können. Weitere Informationen hierzu und zu ihren Rechten erhalten Sie direkt zu Veranstaltungsbeginn.</target>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
 				<source>Workshop unit 1</source>
 				<target>Workshop Block 1</target>
@@ -1209,21 +1190,21 @@
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headline">
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headline" approved="no">
 				<source>Add more Participants?</source>
-				<target>Weitere Teilnehmer hinzufügen?</target>
+				<target phase-name="approval-1" state="final">Weitere Teilnehmende hinzufügen?</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headlineEdit">
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.headlineEdit" approved="no">
 				<source>Add, Delete or Edit more Participants?</source>
-				<target>Weitere Teilnehmer hinzufügen, löschen oder ändern?</target>
+				<target phase-name="approval-1" state="final">Weitere Teilnehmende hinzufügen, löschen oder ändern?</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant">
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant" approved="no">
 				<source>Participants</source>
-				<target>Teilnehmer</target>
+				<target phase-name="approval-1" state="final">Teilnehmende</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete">
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete" approved="no">
 				<source>Delete participant</source>
-				<target>Teilnehmer entfernen</target>
+				<target phase-name="approval-1" state="final">Teilnehmende entfernen</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.billing">
 				<source>Note that a cancelation may involve additional costs.</source>
@@ -1232,13 +1213,13 @@
 
 
 			<!-- Partials/EventReservation/Properties.html -->
-			<trans-unit id="tx_rkwevents_fluid.partials_eventreservation_properties.additionalParticipants">
+			<trans-unit id="tx_rkwevents_fluid.partials_eventreservation_properties.additionalParticipants" approved="no">
 				<source>More Participants</source>
-				<target>Weitere Teilnehmer</target>
+				<target phase-name="approval-1" state="final">Weitere Teilnehmende</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant">
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.participant" approved="no">
 				<source>Participants</source>
-				<target>Teilnehmer</target>
+				<target phase-name="approval-1" state="final">Teilnehmende</target>
 			</trans-unit>
 
 
@@ -1310,9 +1291,9 @@
 				<source>Please check and confirm your request below.</source>
 				<target>Bitte prüfen Sie Ihre Anmeldung auf Richtigkeit und bestätigen Sie sie über den untenstehenden Link. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
 			</trans-unit>
-			<trans-unit id="templates_email_optInReservationUser.textOptIn">
+			<trans-unit id="templates_email_optInReservationUser.textOptIn" approved="no">
 				<source>Click here to confirm your request:</source>
-				<target>Bitte klicken Sie hier, um die Anmeldung zu bestätigen. Um Ihnen zukünftige Veranstaltungsanmeldungen zu erleichtern, wird automatisch ein kostenloser Account erstellt, falls Sie nicht schon als Nutzer registriert sind. Das Passwort erhalten Sie in einer weiteren E-Mail.</target>
+				<target phase-name="approval-1" state="final">Bitte klicken Sie hier, um die Anmeldung zu bestätigen. Um Ihnen zukünftige Veranstaltungsanmeldungen zu erleichtern, wird automatisch ein kostenloser Account erstellt, falls Sie nicht schon als Nutzender registriert sind. Das Passwort erhalten Sie in einer weiteren E-Mail.</target>
 			</trans-unit>
 			<trans-unit id="templates_email_optInReservationUser.textOptOut">
 				<source>Click here to cancel your request:</source>
@@ -1381,9 +1362,9 @@
 				<source>Remarks</source>
 				<target>Bemerkungen und Fragen</target>
 			</trans-unit>
-			<trans-unit id="partials_email_details.reservationOthers">
+			<trans-unit id="partials_email_details.reservationOthers" approved="no">
 				<source>Further participants</source>
-				<target>Weitere Teilnehmer</target>
+				<target phase-name="approval-1" state="final">Weitere Teilnehmende</target>
 			</trans-unit>
             <trans-unit id="partials_email_details.reservationVia">
                 <source>Registration via</source>
@@ -1409,9 +1390,9 @@
                 <source>Direct Link</source>
                 <target>Direktlink für Teilnahme an der Veranstaltung</target>
             </trans-unit>
-            <trans-unit id="partials_email_details.privacyHint">
+            <trans-unit id="partials_email_details.privacyHint" approved="no">
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
-				<target>Aus Gründen des Datenschutzes dürfen wir Ihnen leider keine Details zum Veranstaltungsteilnehmer übermitteln.</target>
+				<target phase-name="approval-1" state="final">Aus Gründen des Datenschutzes dürfen wir Ihnen leider keine Details zu Veranstaltungsteilnehmenden übermitteln.</target>
 			</trans-unit>
 			<trans-unit id="partials_email_details.registerAddInformation">
                 <source>Registration additional information</source>
@@ -1479,13 +1460,13 @@
 				<source>Hello %s,</source>
 				<target>Hallo %s,</target>
 			</trans-unit>
-			<trans-unit id="templates_email_confirmationReservationAdmin.text1">
+			<trans-unit id="templates_email_confirmationReservationAdmin.text1" approved="no">
 				<source>a reservation has been placed.</source>
-				<target>jemand hat sich über die Website an einer Veranstaltung angemeldet. Sie können dem Nutzer direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
+				<target phase-name="approval-1" state="final">jemand hat sich über die Website an einer Veranstaltung angemeldet. Sie können dem oder der Nutzenden direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
 			</trans-unit>
-            <trans-unit id="templates_email_confirmationReservationAdmin.text2">
+            <trans-unit id="templates_email_confirmationReservationAdmin.text2" approved="no">
                 <source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
-                <target>WICHTIG: Der Nutzer hat bereits eine Bestätigungsemail für seine Anmeldung erhalten. Sofern es sich nicht um eine Online-Veranstaltung handelt, wird er darüber hinaus kurz vor der Veranstaltung eine automatische Erinnerungsmail mit Anfahrtsskizze erhalten.</target>
+                <target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. Sofern es sich nicht um eine Online-Veranstaltung handelt, wird er darüber hinaus kurz vor der Veranstaltung eine automatische Erinnerungsmail mit Anfahrtsskizze erhalten.</target>
             </trans-unit>
 
 
@@ -1518,9 +1499,9 @@
 				<source>Hello %s,</source>
 				<target>Hallo %s,</target>
 			</trans-unit>
-			<trans-unit id="templates_email_updateReservationAdmin.text1">
+			<trans-unit id="templates_email_updateReservationAdmin.text1" approved="no">
 				<source>a reservation has been changed.</source>
-				<target>jemand hat über die Website seine Anmeldung an einer Veranstaltung verändert. Sie können dem Nutzer direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
+				<target phase-name="approval-1" state="final">jemand hat über die Website seine Anmeldung an einer Veranstaltung verändert. Sie können dem oder der Nutzenden direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
 			</trans-unit>
 
 
@@ -1548,9 +1529,9 @@
 				<source>Hello %s,</source>
 				<target>Hallo %s,</target>
 			</trans-unit>
-			<trans-unit id="templates_email_deleteReservationAdmin.text1">
+			<trans-unit id="templates_email_deleteReservationAdmin.text1" approved="no">
 				<source>a reservation has been canceled.</source>
-				<target>jemand hat über die Website seine Anmeldung an einer Veranstaltung storniert. Sie können dem Nutzer direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
+				<target phase-name="approval-1" state="final">jemand hat über die Website seine Anmeldung an einer Veranstaltung storniert. Sie können dem oder der Nutzenden direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
 			</trans-unit>
 
 
@@ -1693,69 +1674,69 @@
 				<source>City</source>
 				<target>Ort</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_salutation_0">
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_0" approved="no">
 				<source>Salutation (person 2)</source>
-				<target>Anrede (Teilnehmer 2)</target>
+				<target phase-name="approval-1" state="final">Anrede (Teilnehmende 2)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_title_0">
+			<trans-unit id="tx_rkwevents_validator.additional_title_0" approved="no">
 				<source>Title (person 2)</source>
-				<target>Titel (Teilnehmer 2)</target>
+				<target phase-name="approval-1" state="final">Titel (Teilnehmende 2)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_firstName_0">
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_0" approved="no">
 				<source>First name (person 2)</source>
-				<target>Vorname (Teilnehmer 2)</target>
+				<target phase-name="approval-1" state="final">Vorname (Teilnehmende 2)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_lastName_0">
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_0" approved="no">
 				<source>Last name (person 2)</source>
-				<target>Nachname (Teilnehmer 2)</target>
+				<target phase-name="approval-1" state="final">Nachname (Teilnehmende 2)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_salutation_1">
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_1" approved="no">
 				<source>Salutation (person 3)</source>
-				<target>Anrede (Teilnehmer 3)</target>
+				<target phase-name="approval-1" state="final">Anrede (Teilnehmende 3)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_title_1">
+			<trans-unit id="tx_rkwevents_validator.additional_title_1" approved="no">
 				<source>Title (person 3)</source>
-				<target>Titel (Teilnehmer 3)</target>
+				<target phase-name="approval-1" state="final">Titel (Teilnehmende 3)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_firstName_1">
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_1" approved="no">
 				<source>First name (person 3)</source>
-				<target>Vorname (Teilnehmer 3)</target>
+				<target phase-name="approval-1" state="final">Vorname (Teilnehmende 3)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_lastName_1">
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_1" approved="no">
 				<source>Last name (person 3)</source>
-				<target>Nachname (Teilnehmer 3)</target>
+				<target phase-name="approval-1" state="final">Nachname (Teilnehmende 3)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_salutation_2">
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_2" approved="no">
 				<source>Salutation (person 4)</source>
-				<target>Anrede (Teilnehmer 4)</target>
+				<target phase-name="approval-1" state="final">Anrede (Teilnehmende 4)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_title_2">
+			<trans-unit id="tx_rkwevents_validator.additional_title_2" approved="no">
 				<source>Title (person 4)</source>
-				<target>Titel (Teilnehmer 4)</target>
+				<target phase-name="approval-1" state="final">Titel (Teilnehmende 4)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_firstName_2">
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_2" approved="no">
 				<source>First name (person 4)</source>
-				<target>Vorname (Teilnehmer 4)</target>
+				<target phase-name="approval-1" state="final">Vorname (Teilnehmende 4)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_lastName_2">
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_2" approved="no">
 				<source>Last name (person 4)</source>
-				<target>Nachname (Teilnehmer 4)</target>
+				<target phase-name="approval-1" state="final">Nachname (Teilnehmende 4)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_salutation_3">
+			<trans-unit id="tx_rkwevents_validator.additional_salutation_3" approved="no">
 				<source>Salutation (person 5)</source>
-				<target>Anrede (Teilnehmer 5)</target>
+				<target phase-name="approval-1" state="final">Anrede (Teilnehmende 5)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_title_3">
+			<trans-unit id="tx_rkwevents_validator.additional_title_3" approved="no">
 				<source>Title (person 5)</source>
-				<target>Titel (Teilnehmer 5)</target>
+				<target phase-name="approval-1" state="final">Titel (Teilnehmende 5)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_firstName_3">
+			<trans-unit id="tx_rkwevents_validator.additional_firstName_3" approved="no">
 				<source>First name (person 5)</source>
-				<target>Vorname (Teilnehmer 5)</target>
+				<target phase-name="approval-1" state="final">Vorname (Teilnehmende 5)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_validator.additional_lastName_3">
+			<trans-unit id="tx_rkwevents_validator.additional_lastName_3" approved="no">
 				<source>Last name (person 5)</source>
-				<target>Nachname (Teilnehmer 5)</target>
+				<target phase-name="approval-1" state="final">Nachname (Teilnehmende 5)</target>
 			</trans-unit>
 
 
