@@ -126,18 +126,18 @@ class DivUtility
      * merge eventReservation-data into frontendUser
      *
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
      * @return void
      */
-    public static function mergeFeUsers(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation, \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser)
+    public static function mergeFeUsers(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation, \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser)
     {
 
         // we just migrate the data to our object!
         if (
-            ($frontendUser->getTxRkwregistrationGender() == 99)
+            ($frontendUser->getTxFeregisterGender() == 99)
             && (!$eventReservation->getSalutation() == 99)
         ) {
-            $frontendUser->setTxRkwregistrationGender($eventReservation->getSalutation());
+            $frontendUser->setTxFeregisterGender($eventReservation->getSalutation());
         }
 
         if (
@@ -155,8 +155,8 @@ class DivUtility
         }
 
         if (
-            (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($frontendUser->getEmail()))
-            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($eventReservation->getEmail()))
+            (!\Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($frontendUser->getEmail()))
+            && (\Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($eventReservation->getEmail()))
         ) {
             $frontendUser->setEmail($eventReservation->getEmail());
         }

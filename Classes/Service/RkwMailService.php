@@ -5,8 +5,8 @@ namespace RKW\RkwEvents\Service;
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\EventContact;
-use RKW\RkwMailer\Service\MailService;
-use RKW\RkwMailer\Utility\FrontendLocalizationUtility;
+use Madj2k\Postmaster\Service\MailService;
+use Madj2k\Postmaster\Utility\FrontendLocalizationUtility;
 use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -52,11 +52,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Handles opt-in event
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
-     * @param \RKW\RkwRegistration\Domain\Model\OptIn $optIn
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\OptIn $optIn
      * @param mixed $signalInformation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -66,8 +66,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function optInRequest(
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
-        \RKW\RkwRegistration\Domain\Model\OptIn $optIn,
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser,
+        \Madj2k\FeRegister\Domain\Model\OptIn $optIn,
         $signalInformation
     )
     {
@@ -86,7 +86,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \RKW\RkwMailer\Service\MailService $mailService */
+            /** @var \Madj2k\Postmaster\Service\MailService $mailService */
             $mailService = GeneralUtility::makeInstance(MailService::class);
 
             // send new user an email with token
@@ -122,7 +122,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'rkwMailService.optInReservationUser.subject',
                     'rkw_events',
                     null,
-                    $frontendUser->getTxRkwregistrationLanguageKey()
+                    $frontendUser->getTxFeregisterLanguageKey()
                 )
             );
 
@@ -139,12 +139,12 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
     /**
      * Handles confirm mail for user
-     * Works with RkwRegistration-FrontendUser -> this is correct! (data comes from TxRkwRegistration)
+     * Works with FeRegister-FrontendUser -> this is correct! (data comes from TxFeRegister)
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -154,7 +154,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function confirmReservationUser(
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser,
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
     )
     {
@@ -176,7 +176,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -196,10 +196,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Handles update mail for user
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -209,7 +209,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function updateReservationUser(
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser,
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
     )
     {
@@ -223,7 +223,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -244,10 +244,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Handles delete mail for user
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -257,7 +257,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function deleteReservationUser(
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser,
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
     )
     {
@@ -269,10 +269,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * Handles delete mail for admin
      *
      * @param BackendUser|array $backendUser
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -283,7 +283,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function deleteReservationAdmin(
         $backendUser,
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser,
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
     )
     {
@@ -297,7 +297,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -356,7 +356,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 'rkwMailService.informUpcomingEventUser.subject',
                                 'rkw_events',
                                 array(0 => $eventReservation->getEvent()->getTitle()),
-                                $eventReservation->getFeUser()->getTxRkwregistrationLanguageKey()
+                                $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
                             ),
                         ));
                     }
@@ -390,7 +390,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList
      * @return void
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -431,7 +431,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                     'rkwMailService.sendSurveyForPastEvent.subject',
                                     'rkw_events',
                                     array(0 => $eventReservation->getEvent()->getTitle()),
-                                    $eventReservation->getFeUser()->getTxRkwregistrationLanguageKey()
+                                    $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
                                 ),
                             ));
                         }
@@ -464,11 +464,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Sends an E-Mail to a Frontend-User
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @param boolean $sendCalendarMeeting
      * @param string $action
-     * @throws \RKW\RkwMailer\Exception
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -478,7 +478,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     protected function userMail(
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser,
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser,
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation,
         $action = 'confirmation',
         $sendCalendarMeeting = false
@@ -535,7 +535,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
                     'rkw_events',
                     null,
-                    $frontendUser->getTxRkwregistrationLanguageKey()
+                    $frontendUser->getTxFeregisterLanguageKey()
                 )
             );
 
@@ -565,8 +565,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @param BackendUser|array $backendUser
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
      * @param string $action
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser
-     * @throws \RKW\RkwMailer\Exception
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
+     * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -579,7 +579,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $backendUser,
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation,
         $action = 'confirmation',
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser = null
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser = null
     )
     {
         // get settings

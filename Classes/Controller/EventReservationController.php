@@ -6,8 +6,8 @@ use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Utility\DivUtility;
-use RKW\RkwRegistration\Domain\Model\FrontendUser;
-use RKW\RkwRegistration\Registration\FrontendUserRegistration;
+use Madj2k\FeRegister\Domain\Model\FrontendUser;
+use Madj2k\FeRegister\Registration\FrontendUserRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -151,18 +151,18 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
     /**
      * initializeAction
-     * !! The whole controller depends on the RkwRegistration Extension. Throw an error on dependency problems !!
+     * !! The whole controller depends on the FeRegister Extension. Throw an error on dependency problems !!
      *
      * @return void
      */
     public function initializeAction()
     {
-        if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
+        if (!\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {
             $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR,
-               'Error while initializing EventReservationController: Required extension RkwRegistration is not loaded!'
+               'Error while initializing EventReservationController: Required extension FeRegister is not loaded!'
             );
             trigger_error(
-                'Error while initializing EventReservationController: Required extension RkwRegistration is not loaded!',
+                'Error while initializing EventReservationController: Required extension FeRegister is not loaded!',
                 E_USER_ERROR
             );
             exit;
@@ -229,7 +229,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->view->assign('newEventReservation', $newEventReservation);
         $this->view->assign('frontendUser', $this->getFrontendUser());
         if ($this->getFrontendUser()) {
-            $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
+            $this->view->assign('validFrontendUserEmail', \Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
         }
     }
 
@@ -262,7 +262,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->view->assign('frontendUser', $this->getFrontendUser());
             $this->view->assign('noBackButton', true);
             if ($this->getFrontendUser()) {
-                $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
+                $this->view->assign('validFrontendUserEmail', \Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
             }
         }
 
@@ -274,7 +274,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param EventReservation $newEventReservation
      * @return void
-     * @throws \RKW\RkwRegistration\Exception
+     * @throws \Madj2k\FeRegister\Exception
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -287,9 +287,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="newEventReservation")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwRegistration\Validation\Consent\TermsValidator", param="newEventReservation")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwRegistration\Validation\Consent\PrivacyValidator", param="newEventReservation")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwRegistration\Validation\Consent\MarketingValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\Madj2k\FeRegister\Validation\Consent\TermsValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\Madj2k\FeRegister\Validation\Consent\PrivacyValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("\Madj2k\FeRegister\Validation\Consent\MarketingValidator", param="newEventReservation")
      */
     public function createAction(EventReservation $newEventReservation)
     {
@@ -390,7 +390,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         }
 
         // 5. check if email is valid
-        if (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($newEventReservation->getEmail())) {
+        if (!\Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($newEventReservation->getEmail())) {
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'eventReservationController.error.no_valid_email', 'rkw_events'
@@ -405,13 +405,13 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // if user is logged in and has a valid email, create the reservation now!
         if (
             ($this->getFrontendUser())
-            && (\RKW\RkwRegistration\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()))
+            && (\Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()))
         ) {
             // for standardization for reservation creation (also possible with optin)
             $this->finalSaveReservation($newEventReservation, $this->getFrontendUser());
 
             // add privacy info
-            \RKW\RkwRegistration\DataProtection\ConsentHandler::add(
+            \Madj2k\FeRegister\DataProtection\ConsentHandler::add(
                 $this->request,
                 $this->getFrontendUser(),
                 $newEventReservation,
@@ -429,7 +429,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             // check if email is not already used - relevant for logged in users with no email-address (e.g. via Facebook or Twitter)
             if (
                 ($this->getFrontendUser())
-                && (!\RKW\RkwRegistration\Utility\FrontendUserUtility::isUsernameUnique($newEventReservation->getEmail()))
+                && (!\Madj2k\FeRegister\Utility\FrontendUserUtility::isUsernameUnique($newEventReservation->getEmail()))
             ) {
 
                 $this->addFlashMessage(
@@ -444,9 +444,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
 
             // register new user or simply send opt-in to existing user
-            /** @var \RKW\RkwRegistration\Domain\Model\FrontendUser $frontendUser */
+            /** @var \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser */
             $frontendUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(FrontendUser::class);
-            $frontendUser->setTxRkwregistrationGender($newEventReservation->getSalutation());
+            $frontendUser->setTxFeregisterGender($newEventReservation->getSalutation());
             $frontendUser->setFirstName($newEventReservation->getFirstName());
             $frontendUser->setLastName($newEventReservation->getLastName());
             $frontendUser->setCompany($newEventReservation->getCompany());
@@ -454,7 +454,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $frontendUser->setZip($newEventReservation->getZip());
             $frontendUser->setEmail($newEventReservation->getEmail());
 
-            /** @var \RKW\RkwRegistration\Registration\FrontendUserRegistration $registration */
+            /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
             $registration = $this->objectManager->get(FrontendUserRegistration::class);
             $registration->setFrontendUser($frontendUser)
                 ->setData($newEventReservation)
@@ -490,7 +490,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @param string $tokenUser
      * @param string $token
      * @return void
-     * @throws \RKW\RkwRegistration\Exception
+     * @throws \Madj2k\FeRegister\Exception
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -548,7 +548,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->redirect($showAction, $controller, null, array('event' => $event), intval($this->settings['showPid']));
         }
 
-        /** @var \RKW\RkwRegistration\Registration\FrontendUserRegistration $registration */
+        /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
         $registration = $this->objectManager->get(FrontendUserRegistration::class);
         $result = $registration->setFrontendUserToken($tokenUser)
             ->setCategory('rkwEvents')
@@ -835,14 +835,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
 
             // 3. some merging of FE-user
-            if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
+            if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {
                 DivUtility::mergeFeUsers($eventReservation, $feUser);
 
                 /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
                 $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-                /** @var \RKW\RkwRegistration\Domain\Repository\FrontendUserRepository $frontendUserRepository */
-                $frontendUserRepository = $objectManager->get('RKW\\RkwRegistration\\Domain\\Repository\\FrontendUserRepository');
+                /** @var \Madj2k\FeRegister\Domain\Repository\FrontendUserRepository $frontendUserRepository */
+                $frontendUserRepository = $objectManager->get('Madj2k\\FeRegister\\Domain\\Repository\\FrontendUserRepository');
                 $frontendUserRepository->update($feUser);
             }
 
@@ -1091,10 +1091,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Removes all reservations of a FE-User
      * Used by Signal-Slot
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $feUser
      * @return void
      */
-    public function removeAllOfUserSignalSlot(\RKW\RkwRegistration\Domain\Model\FrontendUser $feUser)
+    public function removeAllOfUserSignalSlot(\Madj2k\FeRegister\Domain\Model\FrontendUser $feUser)
     {
         try {
             $eventReservations = $this->eventReservationRepository->findByFeUser($feUser, false);
@@ -1175,8 +1175,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Added by Maximilian Fäßler | FäßlerWeb
      *
      * @param EventReservation $newEventReservation
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser
-     * @param \RKW\RkwRegistration\Domain\Model\OptIn $optIn
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\OptIn $optIn
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
@@ -1185,18 +1185,18 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     protected function finalSaveReservation(
         EventReservation $newEventReservation,
-        \RKW\RkwRegistration\Domain\Model\FrontendUser $feUser,
-        \RKW\RkwRegistration\Domain\Model\OptIn $optIn = null)
+        \Madj2k\FeRegister\Domain\Model\FrontendUser $feUser,
+        \Madj2k\FeRegister\Domain\Model\OptIn $optIn = null)
     {
         // optional service: Merge form data (eventReservation) in frontendUser, if some field is empty
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {
             DivUtility::mergeFeUsers($newEventReservation, $feUser);
 
             /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
             $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
-            /** @var \RKW\RkwRegistration\Domain\Repository\FrontendUserRepository $frontendUserRepository */
-            $frontendUserRepository = $objectManager->get('RKW\\RkwRegistration\\Domain\\Repository\\FrontendUserRepository');
+            /** @var \Madj2k\FeRegister\Domain\Repository\FrontendUserRepository $frontendUserRepository */
+            $frontendUserRepository = $objectManager->get('Madj2k\\FeRegister\\Domain\\Repository\\FrontendUserRepository');
             $frontendUserRepository->update($feUser);
         }
 

@@ -1,5 +1,5 @@
 <?php
-namespace RKW\RkwRegistration\Tests\Functional\Utility;
+namespace Madj2k\FeRegister\Tests\Functional\Utility;
 
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -31,7 +31,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  *
  * @author Christian Dilger <c.dilger@addorange.de>
  * @copyright RKW Kompetenzzentrum
- * @package RKW_RkwRegistration
+ * @package RKW_FeRegister
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class DivUtilityTest extends FunctionalTestCase
@@ -78,7 +78,7 @@ class DivUtilityTest extends FunctionalTestCase
         $this->setUpFrontendRootPage(
             1,
             [
-                'EXT:rkw_registration/Configuration/TypoScript/setup.txt',
+                'EXT:fe_register/Configuration/TypoScript/setup.txt',
             ]
         );
 

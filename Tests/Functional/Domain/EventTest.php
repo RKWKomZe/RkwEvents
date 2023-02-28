@@ -1,5 +1,5 @@
 <?php
-namespace RKW\RkwRegistration\Tests\Functional\Domain;
+namespace Madj2k\FeRegister\Tests\Functional\Domain;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use RKW\RkwEvents\Domain\Model\Event;
@@ -27,7 +27,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  *
  * @author Christian Dilger <c.dilger@addorange.de>
  * @copyright RKW Kompetenzzentrum
- * @package RKW_RkwRegistration
+ * @package RKW_FeRegister
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class EventTest extends FunctionalTestCase
@@ -79,7 +79,7 @@ class EventTest extends FunctionalTestCase
         $this->setUpFrontendRootPage(
             1,
             [
-                'EXT:rkw_registration/Configuration/TypoScript/setup.txt',
+                'EXT:fe_register/Configuration/TypoScript/setup.txt',
             ]
         );
 

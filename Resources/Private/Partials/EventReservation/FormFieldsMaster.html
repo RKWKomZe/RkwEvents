@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
-    xmlns:rkwRegistration="http://typo3.org/ns/RKW/RkwRegistration/ViewHelpers"
+    xmlns:feRegister="http://typo3.org/ns/Madj2k/FeRegister/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
 
@@ -13,7 +13,7 @@
             class="select-field"
             id="tx_rkwevents_pi1_salutation"
             property="salutation"
-            value="{f:if(condition:'(\'{newEventReservation.salutation}\' == 99 || {editMode}',then:'{newEventReservation.salutation}',else:'{frontendUser.txRkwregistrationGender}')}"
+            value="{f:if(condition:'(\'{newEventReservation.salutation}\' == 99 || {editMode}',then:'{newEventReservation.salutation}',else:'{frontendUser.txFeregisterGender}')}"
             options="{99: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.99\')}', 0: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.0\')}', 1: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.1\')}', 2: '{f:translate(key: \'tx_rkwevents_domain_model_eventreservation.salutation.I.2\')}'}"
         />
 	</div>
@@ -251,9 +251,9 @@
 
     <f:if condition="{editMode}">
         <f:else>
-            <rkwRegistration:consent type="terms" key="events" />
-            <rkwRegistration:consent type="privacy" key="events" />
-            <rkwRegistration:consent type="marketing" />
+            <feRegister:consent type="terms" key="events" />
+            <feRegister:consent type="privacy" key="events" />
+            <feRegister:consent type="marketing" />
         </f:else>
     </f:if>
 

@@ -24,8 +24,8 @@ namespace RKW\RkwEvents\Domain\Model;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
-    class FrontendUser extends \RKW\RkwRegistration\Domain\Model\FrontendUser
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {
+    class FrontendUser extends \Madj2k\FeRegister\Domain\Model\FrontendUser
     {
 
     }

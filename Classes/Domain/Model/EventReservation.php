@@ -312,7 +312,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the feUser
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
      * @return void
      */
     public function setFeUser($feUser)

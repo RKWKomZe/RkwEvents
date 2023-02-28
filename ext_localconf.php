@@ -171,17 +171,17 @@ call_user_func(
          */
         $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
 
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_registration')) {
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {
             $signalSlotDispatcher->connect(
-                RKW\RkwRegistration\Registration\AbstractRegistration::class,
-                \RKW\RkwRegistration\Registration\AbstractRegistration::SIGNAL_AFTER_CREATING_OPTIN . 'RkwEvents',
+                Madj2k\FeRegister\Registration\AbstractRegistration::class,
+                \Madj2k\FeRegister\Registration\AbstractRegistration::SIGNAL_AFTER_CREATING_OPTIN . 'RkwEvents',
                 RKW\RkwFeecalculator\Service\RkwMailService::class,
                 'optInRequest'
             );
 
             $signalSlotDispatcher->connect(
-                RKW\RkwRegistration\Registration\AbstractRegistration::class,
-                \RKW\RkwRegistration\Registration\AbstractRegistration::SIGNAL_AFTER_REGISTRATION_ENDED,
+                Madj2k\FeRegister\Registration\AbstractRegistration::class,
+                \Madj2k\FeRegister\Registration\AbstractRegistration::SIGNAL_AFTER_REGISTRATION_ENDED,
                 RKW\RkwEvents\Controller\EventReservationController::class,
                 'removeAllOfUserSignalSlot'
             );
