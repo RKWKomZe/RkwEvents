@@ -185,7 +185,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * function findUpcomingByFeUser
      *
      * @deprecated
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
      * @param bool $respectStoragePid
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
@@ -210,7 +210,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Return started and former events by User
      *
      * @deprecated
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */

@@ -66,7 +66,7 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
     /**
      * function findByFeUser
      *
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
      * @param bool $respectStoragePid
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
@@ -93,7 +93,7 @@ class EventReservationRepository extends \TYPO3\CMS\Extbase\Persistence\Reposito
      * function findByEventAndFeUser
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
-     * @param \RKW\RkwRegistration\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
+     * @param \Madj2k\FeRegister\Domain\Model\FrontendUser|\RKW\RkwEvents\Domain\Model\FrontendUser $feUser
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
 
