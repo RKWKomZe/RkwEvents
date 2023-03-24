@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Domain\Repository;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,17 +15,18 @@ namespace RKW\RkwEvents\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\CoreExtended\Domain\Repository\StoragePidAwareAbstractRepository;
+
 /**
- * Class FileRepository
+ * AbstractRepository
  *
- * @author Carlos Meyer <cm@davitec.de>
- * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright RKW Kompetenzzentrum
- * @package RKW_RkwEvents
+ * @package RKW_RkwAlerts
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FileRepository extends AbstractRepository
+class AbstractRepository  extends StoragePidAwareAbstractRepository
 {
+
 
 }

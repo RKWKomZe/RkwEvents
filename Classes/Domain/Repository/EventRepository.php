@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class EventRepository extends AbstractRepository
 {
 
     /**

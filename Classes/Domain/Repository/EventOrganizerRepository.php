@@ -25,16 +25,17 @@ namespace RKW\RkwEvents\Domain\Repository;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventOrganizerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class EventOrganizerRepository extends AbstractRepository
 {
 
     /**
-     * initializeObject
+     * Some important things on init
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function initializeObject() {
-
+    public function initializeObject(): void
+    {
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
         $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         $querySettings->setRespectStoragePage(false);

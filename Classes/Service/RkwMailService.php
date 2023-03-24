@@ -3,9 +3,9 @@
 namespace RKW\RkwEvents\Service;
 
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
+use Madj2k\Postmaster\Mail\MailMessage;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\EventContact;
-use Madj2k\Postmaster\Service\MailService;
 use Madj2k\Postmaster\Utility\FrontendLocalizationUtility;
 use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -86,8 +86,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \Madj2k\Postmaster\Service\MailService $mailService */
-            $mailService = GeneralUtility::makeInstance(MailService::class);
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(MailMessage::class);
 
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
@@ -318,8 +318,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var MailService $mailService */
-            $mailService = GeneralUtility::makeInstance(MailService::class);
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
 
             if (count($eventReservationList)) {
                 /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
@@ -409,8 +409,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
             if ($settings['view']['templateRootPaths']) {
 
-                /** @var MailService $mailService */
-                $mailService = GeneralUtility::makeInstance(MailService::class);
+                /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+                $mailService = GeneralUtility::makeInstance(MailMessage::class);
 
                 if (count($eventReservationList)) {
                     foreach ($eventReservationList as $eventReservation) {
@@ -499,8 +499,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var MailService $mailService */
-            $mailService = GeneralUtility::makeInstance(MailService::class);
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
 
             // send new user an email with token
             $mailService->setTo($frontendUser, array(
@@ -604,8 +604,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var MailService $mailService */
-            $mailService = GeneralUtility::makeInstance(MailService::class);
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
 
             foreach ($recipients as $recipient) {
 

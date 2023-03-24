@@ -13,13 +13,20 @@ routeEnhancers:
         _controller: 'EventReservation::new'
       - routePath: '/rkw-eventreservation/create'
         _controller: 'EventReservation::create'
+      - routePath: '/rkw-eventreservation/edit/{eventReservation}'
+        _controller: 'EventReservation::edit'
+      - routePath: '/rkw-eventreservation/update'
+        _controller: 'EventReservation::update'
+      - routePath: '/rkw-eventreservation/myevents/{event}'
+        _controller: 'EventReservation::myEvents'
       - routePath: '/rkw-eventreservation/optin/{event}/{tokenUser}/{token}'
-        _controller: 'EventReservation::optin'
+        _controller: 'EventReservation::optIn'
     defaultController: 'Event::list'
     requirements:
-      page: '[0-9]{1,3}'
-      tokenUser: '[a-zA-Z0-9]{60}'
-      token: '[a-zA-Z0-9]{60}'
+      page: '[0-9]{1,10}'
+      eventReservation: '[0-9]{1,10}'
+      tokenUser: '[a-zA-Z0-9]{30}'
+      token: '[a-zA-Z0-9]{30}'
     aspects:
       event:
         type: PersistedSlugifiedPatternMapper

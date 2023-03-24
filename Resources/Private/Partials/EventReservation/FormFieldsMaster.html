@@ -256,14 +256,8 @@
             <feRegister:consent type="marketing" />
         </f:else>
     </f:if>
-
-    <f:if condition="{editMode}">
-        <f:else>
-            <f:if condition="{settings.mandatoryFields.captcha}">
-                <f:render partial="EventReservation/CaptchaElement" />
-            </f:if>
-        </f:else>
-    </f:if>
+    
+    <f:render partial="CaptchaElement" />
 
     <!-- Button Set -->
     <f:render partial="EventReservation/ButtonSet" arguments="{_all}"/>

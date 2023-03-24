@@ -42,8 +42,10 @@
 		"madj2k/t3-postmaster": "~9.5.0",
 		"sjbr/static-info-tables": "^6.8.0",
 		"league/csv": "^9.5",
-		"sjbr/sr-freecap": "~2.4",
 		"rkw/rkw-basics": "~9.5.0"
+	},
+	"suggest": {
+		"sjbr/sr-freecap": "~2.4"
 	},
     "autoload": {
         "psr-4": {
