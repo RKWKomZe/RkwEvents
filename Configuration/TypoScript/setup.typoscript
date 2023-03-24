@@ -16,7 +16,6 @@ config.tx_extbase.persistence {
             }
         }
 
-
         RKW\RkwEvents\Domain\Model\Department {
             mapping {
                 tableName = tx_rkwbasics_domain_model_department
@@ -191,7 +190,22 @@ config.tx_extbase.persistence {
                 recordType = \RKW\RkwEvents\Domain\Model\EventAnnouncement
                 tableName = tx_rkwevents_domain_model_event
             }
+        }
 
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventReservation {
+
+            // storage for new records in cross-extension-context
+            newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservation.newRecordStoragePid}
+        }
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventReservationAddPerson {
+
+            // storage for new records in cross-extension-context
+            newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservationAddPerson.newRecordStoragePid}
         }
     }
 }
@@ -210,14 +224,11 @@ plugin.tx_rkwevents {
         partialRootPaths {
             0 = EXT:rkw_events/Resources/Private/Partials/
             1 = {$plugin.tx_rkwevents.view.partialRootPath}
+            2 = {$plugin.tx_coreextended.view.partialRootPath}
         }
     }
 	persistence {
 		storagePid = {$plugin.tx_rkwevents.persistence.storagePid}
-        classes {
-            RKW\RkwEvents\Domain\Model\EventReservation.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservation.newRecordStoragePid}
-            RKW\RkwEvents\Domain\Model\EventReservationAddPerson.newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservationAddPerson.newRecordStoragePid}
-        }
     }
     features {
 
@@ -313,15 +324,15 @@ plugin.tx_rkwevents {
 }
 
 // Add jQuery
-[globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.includeJQuery}]
+[{$plugin.tx_rkwevents.settings.includeJQuery} == 1]
 	page.includeJSFooterlibs.txRkwEventsJQuery  = EXT:rkw_events/Resources/Public/Js/jquery-3.4.1.min.js
-[global]
+[END]
 
 // Add Galleria-Gallery
-[globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.includeGallery}]
+[{$plugin.tx_rkwevents.settings.includeGallery} == 1]
 	page.includeJSFooter.txRkwEventsGallery  = EXT:rkw_events/Resources/Public/Galleria/galleria-1.4.7.min.js
 	page.includeCSS.txRkwEventsGallery = EXT:rkw_events/Resources/Public/Css/Gallery.css
-[global]
+[END]
 
 # needed for backend context (cronjobs)
 module.tx_rkwevents.settings < plugin.tx_rkwevents.settings
@@ -332,7 +343,7 @@ module.tx_rkwevents.view < plugin.tx_rkwevents.view
 #===============================================================
 # @deprecated below
 #===============================================================
-[globalVar = LIT:1 = {$plugin.tx_rkwevents.settings.version}]
+[{$plugin.tx_rkwevents.settings.version} == 1]
 
     page.includeJSFooter.txRkwEventsBasic  = EXT:rkw_events/Resources/Public/Js/events.js
 
@@ -375,4 +386,4 @@ module.tx_rkwevents.view < plugin.tx_rkwevents.view
             settings < plugin.tx_rkwevents.settings
         }
     }
-[global]
+[END]

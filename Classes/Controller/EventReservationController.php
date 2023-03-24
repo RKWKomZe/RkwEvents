@@ -276,20 +276,23 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @return void
      * @throws \Madj2k\FeRegister\Exception
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
+     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
      * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception\NotImplementedException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="newEventReservation")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\Madj2k\FeRegister\Validation\Consent\TermsValidator", param="newEventReservation")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\Madj2k\FeRegister\Validation\Consent\PrivacyValidator", param="newEventReservation")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\Madj2k\FeRegister\Validation\Consent\MarketingValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\FeRegister\Validation\Consent\TermsValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\FeRegister\Validation\Consent\PrivacyValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\FeRegister\Validation\Consent\MarketingValidator", param="newEventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\CoreExtended\Validation\CaptchaValidator", param="newEventReservation")
      */
     public function createAction(EventReservation $newEventReservation)
     {
@@ -454,7 +457,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $frontendUser->setZip($newEventReservation->getZip());
             $frontendUser->setEmail($newEventReservation->getEmail());
 
-            /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
+                        /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
             $registration = $this->objectManager->get(FrontendUserRegistration::class);
             $registration->setFrontendUser($frontendUser)
                 ->setData($newEventReservation)
@@ -775,7 +778,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param EventReservation $eventReservation
      * @return void
-     * @TYPO3\CMS\Extbase\Annotation\Validate("\RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="eventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("RKW\RkwEvents\Validation\Validator\EventReservationValidator", param="eventReservation")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\CoreExtended\Validation\CaptchaValidator", param="eventReservation")
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
@@ -1341,7 +1345,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     {
         if (!$this->signalSlotDispatcher) {
             $objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $this->signalSlotDispatcher = $objectManager->get(TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
+            $this->signalSlotDispatcher = $objectManager->get(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class);
         }
 
         return $this->signalSlotDispatcher;

@@ -24,7 +24,7 @@ namespace RKW\RkwEvents\Domain\Repository;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AuthorsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class AuthorsRepository extends AbstractRepository
 {
 
 

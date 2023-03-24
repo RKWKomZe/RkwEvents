@@ -1,35 +1,35 @@
-{namespace vh=Madj2k\Postmaster\ViewHelpers}
+{namespace postmaster=Madj2k\Postmaster\ViewHelpers}
 <f:layout name="Email/{mailType}" />
 
 
 <!-- PLAINTEXT -->
 <f:section name="Plaintext">
-<vh:frontend.translate key="templates_email_updateReservationUser.headline" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" />
+<postmaster:email.translate key="templates_email_updateReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" />
 
-<vh:frontend.translate key="templates_email_updateReservationUser.text1" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
-<vh:frontend.translate key="templates_email_updateReservationUser.text2" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_updateReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_updateReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 
 <f:render partial="Email/Details" section="Plaintext" arguments="{reservation: reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isRegistered : 1}"/>
 
 =============================================================
-<vh:frontend.translate key="templates_email_updateReservationUser.changeDeleteHeadline" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_updateReservationUser.changeDeleteHeadline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 =============================================================
-<vh:frontend.translate key="templates_email_updateReservationUser.text3" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
-<vh:frontend.link absolute="true" pageUid="{loginPid}" />
+<postmaster:email.translate key="templates_email_updateReservationUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<postmaster:email.uri.page absolute="true" pageUid="{loginPid}" />
 </f:section>
 
 <!-- HTML -->
 <f:section name="Html">
-	<h1><vh:frontend.translate key="templates_email_updateReservationUser.headline" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" /></h1>
+	<h1><postmaster:email.translate key="templates_email_updateReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" /></h1>
 	<p>
-		<vh:frontend.translate key="templates_email_updateReservationUser.text1" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" /><br>
-		<vh:frontend.translate key="templates_email_updateReservationUser.text2" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
+		<postmaster:email.translate key="templates_email_updateReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
+		<postmaster:email.translate key="templates_email_updateReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 	</p>
 
 	<f:render partial="Email/Details" section="Html" arguments="{reservation:reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isRegistered : 1}"/>
 
-	<h2><vh:frontend.translate key="templates_email_updateReservationUser.changeDeleteHeadline" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" /></h2>
+	<h2><postmaster:email.translate key="templates_email_updateReservationUser.changeDeleteHeadline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></h2>
 	<p>
-		<a href="<vh:frontend.link absolute='true' pageUid='{loginPid}' />" target="_blank"><vh:frontend.translate key="templates_email_updateReservationUser.text3" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" /></a>
+		<a href="<postmaster:email.uri.page absolute='true' pageUid='{loginPid}' />" target="_blank"><postmaster:email.translate key="templates_email_updateReservationUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></a>
 	</p>
 </f:section>

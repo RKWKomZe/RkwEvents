@@ -1,5 +1,5 @@
 <?php
-namespace Madj2k\FeRegister\Tests\Functional\Utility;
+namespace RKW\RkwEvents\Tests\Functional\Utility;
 
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -78,7 +78,7 @@ class DivUtilityTest extends FunctionalTestCase
         $this->setUpFrontendRootPage(
             1,
             [
-                'EXT:fe_register/Configuration/TypoScript/setup.txt',
+                'EXT:rkw_events/Configuration/TypoScript/setup.txt',
             ]
         );
 

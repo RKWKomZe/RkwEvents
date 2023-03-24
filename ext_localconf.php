@@ -84,18 +84,6 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
-            'Eventdescription',
-            array(
-                'Event' => 'description'
-            ),
-            // non-cacheable actions
-            array(
-                'Event' => 'description'
-            )
-        );
-
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'RKW.' . $extKey,
             'Galleryone',
             array(
                 'Event' => 'showGalleryOne'
@@ -162,6 +150,12 @@ call_user_func(
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'RKW\\RkwEvents\\Controller\\EventCommandController';
 
+        //=================================================================
+        //  Override TagGenerator of ext:core_extended
+        //=================================================================
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['TYPO3\CMS\Frontend\Page\PageGenerator']['generateMetaTags']['metatag'] =
+            \RKW\RkwEvents\MetaTag\MetaTagGenerator::class . '->generate';
+
 
         //=================================================================
         // Register Signal-Slots
@@ -175,7 +169,7 @@ call_user_func(
             $signalSlotDispatcher->connect(
                 Madj2k\FeRegister\Registration\AbstractRegistration::class,
                 \Madj2k\FeRegister\Registration\AbstractRegistration::SIGNAL_AFTER_CREATING_OPTIN . 'RkwEvents',
-                RKW\RkwFeecalculator\Service\RkwMailService::class,
+                RKW\RkwEvents\Service\RkwMailService::class,
                 'optInRequest'
             );
 
@@ -190,42 +184,42 @@ call_user_func(
         $signalSlotDispatcher->connect(
             RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_CREATED_USER,
-            RKW\RkwFeecalculator\Service\RkwMailService::class,
+            RKW\RkwEvents\Service\RkwMailService::class,
             'confirmReservationUser'
         );
 
         $signalSlotDispatcher->connect(
             RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_CREATED_ADMIN,
-            RKW\RkwFeecalculator\Service\RkwMailService::class,
+            RKW\RkwEvents\Service\RkwMailService::class,
             'confirmReservationAdmin'
         );
 
         $signalSlotDispatcher->connect(
             RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_UPDATE_USER,
-            RKW\RkwFeecalculator\Service\RkwMailService::class,
+            RKW\RkwEvents\Service\RkwMailService::class,
             'updateReservationUser'
         );
 
         $signalSlotDispatcher->connect(
             RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_UPDATE_ADMIN,
-            RKW\RkwFeecalculator\Service\RkwMailService::class,
+            RKW\RkwEvents\Service\RkwMailService::class,
             'updateReservationAdmin'
         );
 
         $signalSlotDispatcher->connect(
             RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_DELETE_USER,
-            RKW\RkwFeecalculator\Service\RkwMailService::class,
+            RKW\RkwEvents\Service\RkwMailService::class,
             'deleteReservationUser'
         );
 
         $signalSlotDispatcher->connect(
             RKW\RkwEvents\Controller\EventReservationController::class,
             \RKW\RkwEvents\Controller\EventReservationController::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN,
-            RKW\RkwFeecalculator\Service\RkwMailService::class,
+            RKW\RkwEvents\Service\RkwMailService::class,
             'deleteReservationAdmin'
         );
 
@@ -241,7 +235,7 @@ call_user_func(
                 // add a FileWriter
                 'TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
                     // configuration for the writer
-                    'logFile' => 'typo3temp/var/logs/tx_rkwevents.log'
+                    'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath()  . '/log/tx_rkwevents.log'
                 )
             ),
         );

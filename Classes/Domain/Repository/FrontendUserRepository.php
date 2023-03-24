@@ -25,16 +25,9 @@ namespace RKW\RkwEvents\Domain\Repository;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FrontendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class FrontendUserRepository extends AbstractRepository
 {
 
-    // Example for repository wide settings
-    public function initializeObject()
-    {
-        /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-        $querySettings->setRespectStoragePage(false);
-        $this->setDefaultQuerySettings($querySettings);
-    }
+
 
 }

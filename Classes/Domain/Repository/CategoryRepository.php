@@ -28,16 +28,19 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class CategoryRepository extends AbstractRepository
 {
 
     /**
-     * initializeObject
+     * Some important things on init
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
+
+        parent::initializeObject();
 
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
         $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');

@@ -500,6 +500,15 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $surveyAfterMailTstamp = 0;
 
+
+    /**
+     * keywords
+     *
+     * @var string
+     */
+    protected string $keywords = '';
+
+
     /**
      * distance
      *
@@ -529,6 +538,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var integer
      */
     protected $deleted;
+
 
 
     /**
@@ -2383,6 +2393,29 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setDistance($distance)
     {
         $this->distance = $distance;
+    }
+
+
+    /**
+     * Returns the keywords
+     *
+     * @return string
+     */
+    public function getKeywords(): string
+    {
+        return $this->keywords;
+    }
+
+
+    /**
+     * Sets the keywords
+     *
+     * @param string $keywords
+     * @return void
+     */
+    public function setKeywords(string $keywords): void
+    {
+        $this->keywords = $keywords;
     }
 
 

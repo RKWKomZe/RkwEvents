@@ -1,28 +1,28 @@
-{namespace vh=Madj2k\Postmaster\ViewHelpers}
+{namespace postmaster=Madj2k\Postmaster\ViewHelpers}
 <f:layout name="Email/{mailType}" />
 
 
 <!-- PLAINTEXT -->
 <f:section name="Plaintext">
-<vh:frontend.translate key="templates_email_deleteReservationUser.headline" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" />
+<postmaster:email.translate key="templates_email_deleteReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" />
 
-<vh:frontend.translate key="templates_email_deleteReservationUser.text1" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
-<vh:frontend.translate key="templates_email_deleteReservationUser.text2" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
-<f:if condition="{reservation.event.costsReg}"><vh:frontend.translate key="templates_email_deleteReservationUser.billing" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" /></f:if>
+<postmaster:email.translate key="templates_email_deleteReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_deleteReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<f:if condition="{reservation.event.costsReg}"><postmaster:email.translate key="templates_email_deleteReservationUser.billing" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></f:if>
 
 <f:render partial="Email/Details" section="Plaintext" arguments="{reservation: reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 </f:section>
 
 <!-- HTML -->
 <f:section name="Html">
-	<h1><vh:frontend.translate key="templates_email_deleteReservationUser.headline" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" /></h1>
+	<h1><postmaster:email.translate key="templates_email_deleteReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" /></h1>
 	<p>
-		<vh:frontend.translate key="templates_email_deleteReservationUser.text1" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" /><br>
-		<vh:frontend.translate key="templates_email_deleteReservationUser.text2" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" />
+		<postmaster:email.translate key="templates_email_deleteReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
+		<postmaster:email.translate key="templates_email_deleteReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 	</p>
 	<f:if condition="{reservation.event.costsReg}">
 		<p>
-			<f:format.raw><vh:frontend.translate key="templates_email_deleteReservationUser.billing" languageKey="{frontendUser.txFeregisterLanguageKey}" extensionName="rkwEvents" /></f:format.raw>
+			<f:format.raw><postmaster:email.translate key="templates_email_deleteReservationUser.billing" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></f:format.raw>
 		</p>
 	</f:if>
 
