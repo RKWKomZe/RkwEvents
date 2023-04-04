@@ -8,7 +8,7 @@
       <tool tool-version="22.03.70" tool-id="lokalize-22.03.70" tool-name="Lokalize"/>
     </header>
 		<body>
-			
+
 			<!-- tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
 				<source>RKW Events: Event</source>
@@ -598,6 +598,14 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.fe_user" approved="yes">
 				<source>Frontend User</source>
 				<target>Frontend User</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.event" approved="yes">
+				<source>Event</source>
+				<target phase-name="approval-1" state="final">Veranstaltung</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroups" approved="yes">
+				<source>Target groups</source>
+				<target phase-name="approval-1" state="final">Zielgruppen</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.add_person" approved="no">
 				<source>Add Person</source>

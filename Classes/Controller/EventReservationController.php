@@ -110,6 +110,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected $backendUserRepository;
 
     /**
+     * categoryRepository
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository = null;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      * @inject
      */
@@ -131,6 +139,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @inject
      */
     protected $frontendUserRepository = null;
+
 
     /**
      * logged FrontendUser
@@ -220,6 +229,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->view->assign('newEventReservation', $newEventReservation);
         $this->view->assign('frontendUser', $this->getFrontendUser());
         $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
+        $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
 
     }
 
@@ -252,6 +262,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->view->assign('frontendUser', $this->getFrontendUser());
             $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
             $this->view->assign('noBackButton', true);
+            $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
         }
 
     }

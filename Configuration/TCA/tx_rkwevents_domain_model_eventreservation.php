@@ -80,8 +80,15 @@ return [
 			],
 		],
         'event' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.add_person',
             'config' => [
-                'type' => 'passthrough',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_rkwevents_domain_model_event',
+                'minitems' => 1,
+                'maxitems' => 1,
+                'readOnly' => true
             ],
         ],
 		'salutation' => [

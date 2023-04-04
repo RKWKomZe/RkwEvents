@@ -293,6 +293,8 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation (
   participate_dinner tinyint(1) unsigned DEFAULT '0' NOT NULL,
   participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
+  target_group varchar(255) DEFAULT '' NOT NULL,
+
   tstamp int(11) unsigned DEFAULT '0' NOT NULL,
   crdate int(11) unsigned DEFAULT '0' NOT NULL,
   cruser_id int(11) unsigned DEFAULT '0' NOT NULL,

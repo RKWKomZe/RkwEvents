@@ -197,6 +197,10 @@
 				<source>Remarks</source>
 				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroups" approved="yes">
+				<source>Target groups</source>
+				<target>Zielgruppen</target>
+			</trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -896,7 +900,7 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" approved="yes">
                 <source>Inform here</source>
                 <target>Hier informieren</target>
-            </trans-unit>            
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member? </source>
                 <target>Noch kein Mitglied? </target>
@@ -905,7 +909,7 @@
                 <source>Inform here</source>
                 <target>Hier informieren</target>
             </trans-unit>
-            
+
 
 			<!-- Partials/Event/Info/Seats.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats" approved="yes">
