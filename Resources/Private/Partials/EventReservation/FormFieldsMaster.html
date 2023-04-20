@@ -18,25 +18,6 @@
         />
 	</div>
 
-    <!-- targetGroup -->
-    <div class="form__field width50">
-        <label for="tx_rkwevents_pi1_0_targetGroup">
-            <f:translate key="LLL:EXT:rkw_shop/Resources/Private/Language/locallang.xlf:tx_rkwshop_domain_model_order.targetGroup" />
-            <f:render partial="LabelSuffix" arguments="{field: 'targetGroup', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
-        </label>
-        <f:form.select
-            class="select-field"
-            id="tx_rkwevents_pi1_0_targetGroup"
-            property="targetGroup.0"
-            value="{newEventReservation.0.targetGroup}"
-            options="{targetGroupList}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel="<f:translate key='tx_rkwshop_domain_model_order.targetGroup.pleaseSelect' />"
-            prependOptionValue="0"
-        />
-    </div>
-
     <div class="form__field width50">
 		<label class="form-label" for="tx_rkwevents_pi1_firstName">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.firstName" />
@@ -171,6 +152,25 @@
                 additionalAttributes="{autocomplete:'city'}"
             />
         </div>
+    </div>
+
+    <!-- targetGroup -->
+    <div class="form__field width50">
+        <label for="tx_rkwevents_pi1_0_targetGroup">
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.targetGroup" />
+            <f:render partial="LabelSuffix" arguments="{field: 'targetGroup', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+        </label>
+        <f:form.select
+            class="select-field"
+            id="tx_rkwevents_pi1_0_targetGroup"
+            property="targetGroup.0"
+            value="{newEventReservation.0.targetGroup}"
+            options="{targetGroupList}"
+            optionValueField="uid"
+            optionLabelField="title"
+            prependOptionLabel="<f:translate key='tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect' />"
+            prependOptionValue="0"
+        />
     </div>
 
     <f:comment>

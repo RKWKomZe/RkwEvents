@@ -147,9 +147,11 @@
 				<source>Remarks</source>
 				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroups" approved="yes">
-				<source>Target groups</source>
-				<target>Zielgruppen</target>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup" approved="yes">
+				<source>Target group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect" approved="yes">
+				<source>Please choose</source>
 			</trans-unit>
 
 
