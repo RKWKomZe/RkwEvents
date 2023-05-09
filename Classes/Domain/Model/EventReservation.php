@@ -191,7 +191,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
-    protected $targetGroup;
+    protected $targetGroup = null;
 
 
     /**

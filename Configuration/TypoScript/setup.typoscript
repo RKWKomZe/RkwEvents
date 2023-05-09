@@ -311,6 +311,10 @@ plugin.tx_rkwevents {
 
         targetGroupsPid = {$plugin.tx_rkwevents.settings.targetGroupsPid}
 
+        marketing {
+            revocationEmail = {$plugin.tx_rkwevents.settings.marketing.revocationEmail}
+        }
+
     }
 }
 

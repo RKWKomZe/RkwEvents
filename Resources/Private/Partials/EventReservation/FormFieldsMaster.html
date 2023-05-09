@@ -155,23 +155,25 @@
     </div>
 
     <!-- targetGroup -->
-    <div class="form__field width50">
-        <label for="tx_rkwevents_pi1_0_targetGroup">
-            <f:translate key="tx_rkwevents_domain_model_eventreservation.targetGroup" />
-            <f:render partial="LabelSuffix" arguments="{field: 'targetGroup', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
-        </label>
-        <f:form.select
-            class="select-field"
-            id="tx_rkwevents_pi1_0_targetGroup"
-            property="targetGroup.0"
-            value="{newEventReservation.0.targetGroup}"
-            options="{targetGroupList}"
-            optionValueField="uid"
-            optionLabelField="title"
-            prependOptionLabel="<f:translate key='tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect' />"
-            prependOptionValue="0"
-        />
-    </div>
+    <f:if condition="{targetGroupList}">
+        <div class="form__field width50">
+            <label for="tx_rkwevents_pi1_targetGroup">
+                <f:translate key="tx_rkwevents_domain_model_eventreservation.targetGroup" />
+                <f:render partial="LabelSuffix" arguments="{field: 'targetGroup', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+            </label>
+            <f:form.select
+                class="select-field"
+                id="tx_rkwevents_pi1_targetGroup"
+                name="targetGroup"
+                value="{targetGroup}"
+                options="{targetGroupList}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel="<f:translate key='tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect' />"
+                prependOptionValue="0"
+            />
+        </div>
+    </f:if>
 
     <f:comment>
         <!--
@@ -270,6 +272,15 @@
 
     <f:if condition="{editMode}">
         <f:else>
+
+            <f:if condition="{targetGroupList}">
+                <p class="text-small">
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart" />
+                    <a href="mailto:{revocationEmail}" target="_blank">{revocationEmail}</a>
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart" />
+                </p>
+            </f:if>
+
             <div class="form__field">
                 <f:form.checkbox class="checkbox" id="terms" name="terms" value="1" />
                 <label for="terms" class="checkbox-label">

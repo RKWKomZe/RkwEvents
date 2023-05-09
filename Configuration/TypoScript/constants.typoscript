@@ -203,6 +203,14 @@ plugin.tx_rkwevents {
 
         # cat=plugin.tx_rkwevents//a; type=integer; label=Pid of target groups
         targetGroupsPid =
+
+        marketing {
+
+          # cat=plugin.tx_rkwevents//a; type=integer; label=Email to send revoke to marketing confirmation to
+          revocationEmail =
+
+        }
+
     }
 }
 
