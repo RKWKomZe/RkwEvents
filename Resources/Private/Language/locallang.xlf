@@ -147,6 +147,12 @@
 				<source>Remarks</source>
 				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup" approved="yes">
+				<source>Target group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect" approved="yes">
+				<source>Please choose</source>
+			</trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -669,14 +675,14 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" approved="yes">
                 <source>Inform here</source>
-            </trans-unit>    
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member?</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.link" approved="yes">
                 <source>Inform here</source>
             </trans-unit>
-       
+
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -921,6 +927,12 @@
             <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateMeeting">
                 <source>Participate in meeting</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
+				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
+				<source>taking effect for the future.</source>
+			</trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->

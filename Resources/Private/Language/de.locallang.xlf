@@ -197,6 +197,14 @@
 				<source>Remarks</source>
 				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup" approved="yes">
+				<source>Target group</source>
+				<target>Zielgruppe</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect" approved="yes">
+				<source>Please choose</source>
+				<target>Bitte wählen</target>
+			</trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -896,7 +904,7 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" approved="yes">
                 <source>Inform here</source>
                 <target>Hier informieren</target>
-            </trans-unit>            
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member? </source>
                 <target>Noch kein Mitglied? </target>
@@ -905,7 +913,7 @@
                 <source>Inform here</source>
                 <target>Hier informieren</target>
             </trans-unit>
-            
+
 
 			<!-- Partials/Event/Info/Seats.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_seats.seats" approved="yes">
@@ -1211,6 +1219,14 @@
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
+				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
+				<target>Wichtiger Hinweis: Das RKW Kompetenzzentrum ist bestrebt, seine Produkte weiterzuentwickeln. Mit Ausfüllen des Feldes 'Zielgruppe' willige ich ausdrücklich ein, vom RKW Kompetenzzentrum nach Erhalt der Bestellung Zufriedenheitsanfragen bezüglich seiner Produkte per E-Mail zu erhalten. Meine Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft per E-Mail an </target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
+				<source>taking effect for the future.</source>
+				<target>widerrufen werden.</target>
+			</trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->

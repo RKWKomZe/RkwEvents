@@ -110,6 +110,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected $backendUserRepository;
 
     /**
+     * categoryRepository
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository = null;
+
+    /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      * @inject
      */
@@ -131,6 +139,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @inject
      */
     protected $frontendUserRepository = null;
+
 
     /**
      * logged FrontendUser
@@ -167,13 +176,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param Event $event
      * @param EventReservation $newEventReservation
+     * @param integer $targetGroup
      * @ignorevalidation $event
      * @ignorevalidation $newEventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function newAction(Event $event = null, EventReservation $newEventReservation = null)
+    public function newAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0)
     {
         // catch all people who are trying to visit a dead reservation link
         if (!$event instanceof Event) {
@@ -220,6 +230,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->view->assign('newEventReservation', $newEventReservation);
         $this->view->assign('frontendUser', $this->getFrontendUser());
         $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
+        $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
+        $this->view->assign('targetGroup', $targetGroup);
+        $this->view->assign('revocationEmail', $this->settings['marketing']['revocationEmail']);
 
     }
 
@@ -229,13 +242,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param Event $event
      * @param EventReservation $newEventReservation
+     * @param integer $targetGroup
      * @ignorevalidation $event
      * @ignorevalidation $newEventReservation
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null)
+    public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0)
     {
         if (intval($this->settings['eventRegisterStandalone'])) {
             /** @var Event $event */
@@ -252,6 +266,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->view->assign('frontendUser', $this->getFrontendUser());
             $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
             $this->view->assign('noBackButton', true);
+            $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
+            $this->view->assign('targetGroup', $targetGroup);
+            $this->view->assign('revocationEmail', $this->settings['marketing']['revocationEmail']);
         }
 
     }
@@ -263,6 +280,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @param EventReservation $newEventReservation
      * @param integer $terms
      * @param integer $privacy
+     * @param integer $targetGroup
      * @validate $newEventReservation \RKW\RkwEvents\Validation\Validator\EventReservationValidator
      * @return void
      * @throws \RKW\RkwRegistration\Exception
@@ -273,7 +291,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
      * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
-    public function createAction(EventReservation $newEventReservation, $terms = null, $privacy = null)
+    public function createAction(EventReservation $newEventReservation, $terms = null, $privacy = null, int $targetGroup = 0)
     {
         // standard behavior
         $showAction = 'show';
@@ -412,6 +430,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
         }
 
+        // check targetGroup
+        if ($targetGroup) {
+            $newEventReservation->addTargetGroup($this->categoryRepository->findByUid($targetGroup));
+        }
 
         // if user is logged in and has a valid email, create the reservation now!
         if (
