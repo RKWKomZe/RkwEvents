@@ -199,7 +199,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup" approved="yes">
 				<source>Target group</source>
-				<target>Zielgruppe</target>
+				<target>Anmelden als</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect" approved="yes">
 				<source>Please choose</source>
