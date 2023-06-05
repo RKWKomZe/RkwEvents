@@ -15,9 +15,8 @@
                 name="filter"
                 additionalParams="{ajax_api : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'1\'}'}"
             >
-                <div class="btn-list">
-
-
+                <div class="btn-list" aria-label="{f:translate(key:'tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel')}">
+                    
                     <f:comment><!-- DEPARTMENT --></f:comment>
                     <f:if condition="{departmentList} && {settings.list.filter.showDepartment}">
                         <f:form.select
@@ -30,10 +29,11 @@
                             optionLabelField="name"
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelTopics' />"
                             prependOptionValue="0"
-                        />
+                            additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result', 'aria-label': '{f:translate(key:\'tx_rkwevents_fluid.partials_event_filter.filterTopicsAriaLabel\')}'}" />
+                        
                         <f:if condition="{settings.list.filter.showDepartmentLink}">
                             <f:link.page pageUid="{settings.list.filter.showDepartmentLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDepartmentInfo}">
-                                <svg class="icon icon--32">
+                                <svg class="icon icon--32" aria-hidden="true">
                                     <use xlink:href="#ic-info" />
                                 </svg>
                             </f:link.page>
@@ -53,10 +53,11 @@
                             optionLabelField="name"
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelDocumentType' />"
                             prependOptionValue="0"
-                        />
+                            additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result', 'aria-label': '{f:translate(key:\'tx_rkwevents_fluid.partials_event_filter.filterDocumentTypeAriaLabel\')}'}" />
+                        
                         <f:if condition="{settings.list.filter.showDocumentTypeLink}">
                             <f:link.page pageUid="{settings.list.filter.showDocumentTypeLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showDocumentTypeInfo}">
-                                <svg class="icon icon--32">
+                                <svg class="icon icon--32" aria-hidden="true">
                                     <use xlink:href="#ic-info" />
                                 </svg>
                             </f:link.page>
@@ -79,10 +80,11 @@
                             optionLabelField="title"
                             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelMonth' />"
                             prependOptionValue="0"
-                        />
+                            additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result', 'aria-label': '{f:translate(key:\'tx_rkwevents_fluid.partials_event_filter.filterMonthAriaLabel\')}'}" />
+                        
                         <f:if condition="{settings.list.filter.showTimeLink}">
                             <f:link.page pageUid="{settings.list.filter.showTimeLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showTimeInfo}">
-                                <svg class="icon icon--32">
+                                <svg class="icon icon--32" aria-hidden="true">
                                     <use xlink:href="#ic-info" />
                                 </svg>
                             </f:link.page>
@@ -99,12 +101,13 @@
                                     value="{filter.address}"
                                     type="text"
                                     placeholder="<f:translate key='tx_rkwevents_fluid.partials_event_filter.placeholderZipSearch' extensionName='rkwEvents' />"
-                                />
+                                    additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result', 'aria-label': '{f:translate(key:\'tx_rkwevents_fluid.partials_event_filter.filterAddressAriaLabel\')}'}" />
 
                                 <button type="submit" class="btn btn--secondary search-field__submit"
                                     title="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelSearch' extensionName='rkwEvents' />">
-                                    <svg class="icon icon--16">
-                                    <use xlink:href="#ic-arrow-primary" /></svg>
+                                    <svg class="icon icon--16" aria-hidden="true">
+                                        <use xlink:href="#ic-arrow-primary" />
+                                    </svg>
                                 </button>
                             </div>
                         </f:if>
@@ -113,7 +116,11 @@
                     <f:comment><!-- showOnlyOnlineEvents --></f:comment>
                     <f:if condition="{settings.list.filter.showOnlyOnlineEvents}">
                         <div class="checkbox-field">
-                            <f:form.checkbox class="checkbox" id="onlyOnlineEvents" name="filter[onlyOnlineEvents]" value="1" />
+                            <f:form.checkbox class="checkbox" 
+                                             id="onlyOnlineEvents" 
+                                             name="filter[onlyOnlineEvents]" 
+                                             value="1"
+                                             additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result'}"/>
                             <label for="onlyOnlineEvents" class="checkbox-label">
                                 <f:translate key="tx_rkwevents_fluid.partials_event_filter.onlyOnlineEvents" />
                             </label>
@@ -123,7 +130,11 @@
                     <f:comment><!-- freeOfCharge --></f:comment>
                     <f:if condition="{settings.list.filter.showFreeOfCharge}">
                         <div class="checkbox-field">
-                            <f:form.checkbox class="checkbox" id="freeOfCharge" name="filter[freeOfCharge]" value="1" />
+                            <f:form.checkbox class="checkbox" 
+                                             id="freeOfCharge" 
+                                             name="filter[freeOfCharge]" 
+                                             value="1"
+                                             additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result'}" />
                             <label for="freeOfCharge" class="checkbox-label">
                                 <f:translate key="tx_rkwevents_fluid.partials_event_filter.freeOfCharge" />
                             </label>
@@ -133,7 +144,11 @@
                     <f:comment><!-- eligible --></f:comment>
                     <f:if condition="{settings.list.filter.showEligible}">
                         <div class="checkbox-field">
-                            <f:form.checkbox class="checkbox" id="eligible" name="filter[eligible]" value="1" />
+                            <f:form.checkbox class="checkbox" 
+                                             id="eligible" 
+                                             name="filter[eligible]" 
+                                             value="1"
+                                             additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result'}" />
                             <label for="eligible" class="checkbox-label">
                                 <f:translate key="tx_rkwevents_fluid.partials_event_filter.eligible" />
                             </label>
@@ -183,6 +198,7 @@
             value="{filter.category}"
             prependOptionLabel="<f:translate key='tx_rkwevents_fluid.partials_event_filter.labelCategory' />"
             prependOptionValue="0"
+            additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result', 'aria-label': '{f:translate(key:\'tx_rkwevents_fluid.partials_event_filter.filterCategoryAriaLabel\')}'}"
         >
 
 

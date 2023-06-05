@@ -676,6 +676,30 @@
                 <source>Eligible</source>
                 <target>Förderfähig</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel">
+                <source>Filter events according to specific criteria</source>
+                <target>Veranstaltungen nach bestimmten Kriterien filtern</target>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterTopicsAriaLabel">
+				<source>Filter by topic</source>
+				<target>Nach Thema filtern</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterDocumentTypeAriaLabel">
+				<source>Filter by event type</source>
+				<target>Nach Veranstaltungsart filtern</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterMonthAriaLabel">
+				<source>Filter by month</source>
+				<target>Nach Monat filtern</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterAddressAriaLabel">
+				<source>Filter by address</source>
+				<target>Nach Adresse filtern</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterCategoryAriaLabel">
+				<source>Filter by category</source>
+				<target>Nach Kategorie filtern</target>
+			</trans-unit>
 
 
 
@@ -1070,6 +1094,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.online" approved="yes">
                 <source>Online</source>
                 <target>Online</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel" approved="yes">
+                <source>Location</source>
+                <target>Ort</target>
             </trans-unit>
 
 

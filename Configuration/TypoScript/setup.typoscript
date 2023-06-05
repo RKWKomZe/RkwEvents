@@ -7,6 +7,20 @@ config.tx_extbase.persistence {
 
         // dependeny to rkw_authors is optional - see configuration in rkw_authors
         // dependeny to rkw_survey is optional - see configuration in rkw_survey
+        # Optional dependency for rkw_events!
+        RKW\RkwSurvey\Domain\Model\Survey {
+            subclasses {
+                Tx_RkwEvents_Survey = RKW\RkwEvents\Domain\Model\Survey
+            }
+        }
+
+        RKW\RkwEvents\Domain\Model\Survey {
+            mapping {
+                tableName = tx_rkwsurvey_domain_model_survey
+                recordType =
+            }
+        }
+
         #===============================================
 
         RKW\RkwBasics\Domain\Model\Department {

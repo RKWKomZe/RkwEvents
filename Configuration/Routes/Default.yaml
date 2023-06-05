@@ -5,7 +5,7 @@ routeEnhancers:
     routes:
       - routePath: '/rkw-events/show/{event}'
         _controller: 'Event::show'
-      - routePath: '/rkw-events/list/'
+      - routePath: '/rkw-events/list'
         _controller: 'Event::list'
       - routePath: '/rkw-events/list/{page}'
         _controller: 'Event::list'

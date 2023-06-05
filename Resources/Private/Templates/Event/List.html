@@ -29,7 +29,7 @@
                 <f:if condition="{settings.list.multipartView.enabled}">
                     <p>
                         <f:link.action action="list" class="btn btn--icon">
-                            <svg class="icon icon--16">
+                            <svg class="icon icon--16" aria-hidden="true">
                                 <use xlink:href="#ic-circle-arrow" />
                             </svg>
                             <span>
@@ -41,26 +41,28 @@
 
                 <f:render partial="Event/Filter" arguments="{_all}" />
 
-                <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
-
-                    <div class="tiles-wrapper">
-                        <f:if condition="<f:count>{sortedEventList}</f:count>">
-                            <f:then>
-                                <f:render partial="Event/List" arguments="{_all}" />
-                            </f:then>
-                            <f:else>
-                                <div class="flex-container flex-basis-12 center-main">
-                                    <div class="no-results">
-                                        <p class="no-results__headline">
-                                            <f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="rkwEvents" />
-                                        </p>
+                <div id="tx_rkwevents_filter_result">
+                    <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
+    
+                        <div class="tiles-wrapper">
+                            <f:if condition="<f:count>{sortedEventList}</f:count>">
+                                <f:then>
+                                    <f:render partial="Event/List" arguments="{_all}" />
+                                </f:then>
+                                <f:else>
+                                    <div class="flex-container flex-basis-12 center-main">
+                                        <div class="no-results" role="alert">
+                                            <p class="no-results__headline">
+                                                <f:translate key="tx_rkwevents_fluid.templates_event_list.noEvent" extensionName="rkwEvents" />
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </f:else>
-                        </f:if>
-                    </div>
-
-                </ajaxApi:ajaxWrapper>
+                                </f:else>
+                            </f:if>
+                        </div>
+    
+                    </ajaxApi:ajaxWrapper>
+                </div>
             </f:else>
         </f:if>
 

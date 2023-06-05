@@ -28,7 +28,7 @@
             <div class="tile__content">
                 <h3 class="tile__title icon">
                     <span class="tile__title-icon">
-                        <svg class="icon icon--36"><use xlink:href="#ic-events"></use></svg>
+                        <svg class="icon icon--36" aria-hidden="true"><use xlink:href="#ic-events"></use></svg>
                     </span>
                     <span class="tile__title-text">
                         {event.title}
@@ -69,7 +69,9 @@
                 <div class="tile__contact-text">
                     <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
                         <f:then>
-                            <svg class="icon icon--16"><use xlink:href="#ic-date-alarm"></use></svg>
+                            <svg class="icon icon--16" aria-hidden="true">                                     
+                                <use xlink:href="#ic-date-alarm"></use>
+                            </svg>
                             <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkwEvents' />
                         </f:then>
                         <f:else>
@@ -113,10 +115,14 @@
                         </f:if>
                     </f:comment>
                 </div>
-                <div class="tile__contact-location">
+                <div class="tile__contact-location"                                  
+                     title="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
                     <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
                         <f:else>
-                            <svg class="icon icon--16"><use xlink:href="#ic-location"></use></svg>
+                            <svg class="icon icon--16"
+                                 aria-label="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
+                                <use xlink:href="#ic-location"></use>
+                            </svg>
                         </f:else>
                     </f:if>
                     <f:if condition="{event.place}">

@@ -519,6 +519,22 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
                 <source>Eligible</source>
             </trans-unit>
+    		<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel">
+                <source>Filter events according to specific criteria</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterTopicsAriaLabel">
+				<source>Filter by topic</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterDocumentTypeAriaLabel">
+				<source>Filter by event type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterMonthAriaLabel">
+				<source>Filter by month</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterAddressAriaLabel">
+				<source>Filter by address</source>
+			</trans-unit>
+
 
 
 			<!-- Partials/Event/List.html -->
@@ -669,14 +685,14 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.eligibilityLink" approved="yes">
                 <source>Inform here</source>
-            </trans-unit>    
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsRedHint" approved="yes">
                 <source>Want to be a member?</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.link" approved="yes">
                 <source>Inform here</source>
             </trans-unit>
-       
+
 
 
 			<!-- Partials/Event/Info/Seats.html -->
@@ -809,7 +825,9 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.online" approved="yes">
                 <source>Online</source>
-                <target>Online</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel" approved="yes">
+                <source>Location</source>
             </trans-unit>
 
 
