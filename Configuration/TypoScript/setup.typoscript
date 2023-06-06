@@ -309,6 +309,8 @@ plugin.tx_rkwevents {
             backendUser = {$plugin.tx_rkwevents.settings.mail.backendUser}
         }
 
+        activateRkwOutcomeFeatures = {$plugin.tx_rkwevents.settings.activateRkwOutcomeFeatures}
+
         targetGroupsPid = {$plugin.tx_rkwevents.settings.targetGroupsPid}
 
         marketing {

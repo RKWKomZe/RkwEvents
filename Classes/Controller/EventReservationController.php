@@ -230,6 +230,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->view->assign('newEventReservation', $newEventReservation);
         $this->view->assign('frontendUser', $this->getFrontendUser());
         $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
+        $this->view->assign('activateRkwOutcomeFeatures', $this->settings['activateRkwOutcomeFeatures']);
         $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
         $this->view->assign('targetGroup', $targetGroup);
         $this->view->assign('revocationEmail', $this->settings['marketing']['revocationEmail']);
@@ -266,6 +267,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->view->assign('frontendUser', $this->getFrontendUser());
             $this->view->assign('validFrontendUserEmail', \RKW\RkwRegistration\Tools\Registration::validEmail($this->getFrontendUser()));
             $this->view->assign('noBackButton', true);
+            $this->view->assign('activateRkwOutcomeFeatures', $this->settings['activateRkwOutcomeFeatures']);
             $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
             $this->view->assign('targetGroup', $targetGroup);
             $this->view->assign('revocationEmail', $this->settings['marketing']['revocationEmail']);
