@@ -202,7 +202,7 @@
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.project">
                 <source>Project</source>
-            </trans-unit>	
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reminder_mail_tstamp" approved="yes">
 				<source>Reminder mail timestamp</source>
 			</trans-unit>
@@ -315,7 +315,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventplace.latitude">
 				<source>Latitude</source>
 			</trans-unit>
-
+			<trans-unit id="tx_rkwevents_domain_model_eventplace.driving_directions_link" approved="yes">
+				<source>Driving directions link</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventcontact -->
@@ -452,6 +454,12 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.fe_user">
 				<source>Frontend User</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.event">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroups">
+				<source>Target groups</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.add_person">
 				<source>Add Person</source>

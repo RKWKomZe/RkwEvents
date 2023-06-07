@@ -9,8 +9,8 @@
 
 <postmaster:email.translate key="templates_email_confirmationReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <postmaster:email.translate key="templates_email_confirmationReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
-<f:if condition="{reservation.event.costsReg}"><postmaster:email.translate key="templates_email_confirmationReservationUser.billing" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></f:if>
-
+<f:comment><f:if condition="{reservation.event.costsReg}"><postmaster:email.translate key="templates_email_confirmationReservationUser.billing" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></f:if>
+</f:comment>
 <f:render partial="Email/Details" section="Plaintext" arguments="{reservation: reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isRegistered : 1, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 
 =============================================================
@@ -27,11 +27,11 @@
 		<postmaster:email.translate key="templates_email_confirmationReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
 		<postmaster:email.translate key="templates_email_confirmationReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 	</p>
-	<f:if condition="{reservation.event.costsReg}">
+	<f:comment><f:if condition="{reservation.event.costsReg}">
 		<p>
 			<postmaster:email.translate key="templates_email_confirmationReservationUser.billing" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 		</p>
-	</f:if>
+	</f:if></f:comment>
 
 	<f:render partial="Email/Details" section="Html" arguments="{reservation:reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isRegistered : 1, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
 

@@ -1,18 +1,6 @@
 <?php
-
 namespace RKW\RkwEvents\Controller;
 
-use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
-use RKW\RkwEvents\Domain\Model\Event;
-use RKW\RkwEvents\Domain\Model\EventReservation;
-use RKW\RkwEvents\Utility\DivUtility;
-use Madj2k\FeRegister\Domain\Model\FrontendUser;
-use Madj2k\FeRegister\Registration\FrontendUserRegistration;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -26,6 +14,18 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventReservation;
+use RKW\RkwEvents\Utility\DivUtility;
+use Madj2k\FeRegister\Domain\Model\FrontendUser;
+use Madj2k\FeRegister\Registration\FrontendUserRegistration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class EventReservationController
@@ -87,7 +87,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventRepository = null;
+    protected $eventRepository;
 
     /**
      * eventReservationRepository
@@ -95,7 +95,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventReservationRepository = null;
+    protected $eventReservationRepository;
 
     /**
      * eventReservationAddPersonRepository
@@ -103,7 +103,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventReservationAddPersonRepository = null;
+    protected $eventReservationAddPersonRepository;
 
     /**
      * BackendUserRepository
@@ -112,6 +112,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $backendUserRepository;
+
+    /**
+     * categoryRepository
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected $categoryRepository;
 
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
@@ -134,7 +142,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $frontendUserRepository = null;
+    protected $frontendUserRepository;
 
     /**
      * logged FrontendUser
@@ -174,15 +182,16 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action new
      * Hint: Set default $event-Param to null for possibility to lead users,if event link is not longer available
      *
-     * @param Event $event
-     * @param EventReservation $newEventReservation
+     * @param Event|null $event
+     * @param EventReservation|null $newEventReservation
+     * @param int$targetGroup
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function newAction(Event $event = null, EventReservation $newEventReservation = null)
+    public function newAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0)
     {
         // catch all people who are trying to visit a dead reservation link
         if (!$event instanceof Event) {
@@ -231,21 +240,24 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if ($this->getFrontendUser()) {
             $this->view->assign('validFrontendUserEmail', \Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
         }
+
+        $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent(intval($this->settings['targetGroupsPid'])));
+        $this->view->assign('targetGroup', $targetGroup);
     }
 
 
     /**
      * action new
      *
-     * @param Event $event
-     * @param EventReservation $newEventReservation
+     * @param Event|null $event
+     * @param EventReservation|null $newEventReservation
+     * @param int $targetGroup
      * @ignorevalidation $event
      * @ignorevalidation $newEventReservation
      * @return void
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null)
+    public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0)
     {
         if (intval($this->settings['eventRegisterStandalone'])) {
             /** @var Event $event */
@@ -264,8 +276,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             if ($this->getFrontendUser()) {
                 $this->view->assign('validFrontendUserEmail', \Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
             }
-        }
 
+            $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent(intval($this->settings['targetGroupsPid'])));
+            $this->view->assign('targetGroup', $targetGroup);
+        }
     }
 
 
@@ -273,6 +287,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action create
      *
      * @param EventReservation $newEventReservation
+     * @param int $targetGroup
      * @return void
      * @throws \Madj2k\FeRegister\Exception
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
@@ -294,7 +309,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\FeRegister\Validation\Consent\MarketingValidator", param="newEventReservation")
      * @TYPO3\CMS\Extbase\Annotation\Validate("Madj2k\CoreExtended\Validation\CaptchaValidator", param="newEventReservation")
      */
-    public function createAction(EventReservation $newEventReservation)
+    public function createAction(EventReservation $newEventReservation, int $targetGroup = 0)
     {
         // standard behavior
         $showAction = 'show';
@@ -403,6 +418,11 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
 
             $this->forward($newAction, null, null, array('newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()));
+        }
+
+        // check targetGroup
+        if ($targetGroup) {
+            $newEventReservation->addTargetGroup($this->categoryRepository->findByUid($targetGroup));
         }
 
         // if user is logged in and has a valid email, create the reservation now!

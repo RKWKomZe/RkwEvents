@@ -145,6 +145,8 @@ CREATE TABLE tx_rkwevents_domain_model_eventplace
 	country          int(11) unsigned DEFAULT '0',
 	longitude        varchar(255) DEFAULT '' NOT NULL,
 	latitude         varchar(255) DEFAULT '' NOT NULL,
+    driving_directions_link varchar(255) DEFAULT '' NOT NULL,
+
 
 	tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate           int(11) unsigned DEFAULT '0' NOT NULL,
@@ -298,6 +300,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	show_pid            int(11) unsigned DEFAULT '0' NOT NULL,
 	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    target_group varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate              int(11) unsigned DEFAULT '0' NOT NULL,

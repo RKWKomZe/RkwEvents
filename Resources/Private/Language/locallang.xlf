@@ -147,6 +147,12 @@
 				<source>Remarks</source>
 				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup" approved="yes">
+				<source>Target group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect" approved="yes">
+				<source>Please choose</source>
+			</trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -939,6 +945,12 @@
             <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateMeeting">
                 <source>Participate in meeting</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
+				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
+				<source>taking effect for the future.</source>
+			</trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1131,9 +1143,6 @@
 			<trans-unit id="templates_email_confirmationReservationUser.text2">
 				<source>Please find below the details of your reservation.</source>
 			</trans-unit>
-			<trans-unit id="templates_email_confirmationReservationUser.billing">
-				<source>You will receive an invoice in a few days.</source>
-			</trans-unit>
 			<trans-unit id="templates_email_confirmationReservationUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 			</trans-unit>
@@ -1224,11 +1233,14 @@
 				<source>See you soon!</source>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.direction">
-				<source>Click here for your personal route description</source>
+				<source>Click here for your route description</source>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.googleLink">
 				<source>Open Google Maps</source>
 			</trans-unit>
+            <trans-unit id="templates_email_informUpcomingEventUser.routeDescription">
+                <source>Route description</source>
+            </trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 			</trans-unit>
@@ -1365,31 +1377,17 @@
 				<source>Last name (person 5)</source>
 			</trans-unit>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<trans-unit id="tx_rkwevents_fluid.survey">
 				<source>Survey</source>
 			</trans-unit>
 
+
+            <trans-unit id="evaluation.oops">
+                <source>Oops!</source>
+            </trans-unit>
+            <trans-unit id="evaluation.eventEndDate.error">
+                <source>Event end date can not be before event start date!</source>
+            </trans-unit>
 
 
 		</body>
