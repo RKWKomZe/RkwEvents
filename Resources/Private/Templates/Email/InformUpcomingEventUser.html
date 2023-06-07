@@ -14,7 +14,7 @@
 </f:if></f:then><f:else><postmaster:email.translate key="templates_email_informUpcomingEventUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 
 <postmaster:email.translate key="templates_email_informUpcomingEventUser.direction" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />:
-<f:if condition="{reservation.event.place.drivingDirectionsLink}"><f:then>{reservation.event.place.drivingDirectionsLink}</f:then><f:else>{googleMapsLink}</f:else></f:if>
+<f:if condition="{reservation.event.place.drivingDirectionsLink}"><f:then><postmaster:email.uri.typolink parameter="{reservation.event.place.drivingDirectionsLink}"/></f:then><f:else>{googleMapsLink}</f:else></f:if>
 </f:else></f:if>
 <postmaster:email.translate key="templates_email_informUpcomingEventUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 

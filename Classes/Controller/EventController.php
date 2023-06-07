@@ -268,7 +268,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         // 3. get department and document list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-        $categoryList = $this->categoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
+        $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
 
         $this->view->assignMultiple(
             [

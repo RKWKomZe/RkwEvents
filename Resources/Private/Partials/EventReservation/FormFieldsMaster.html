@@ -154,6 +154,27 @@
         </div>
     </div>
 
+    <!-- targetGroup -->
+    <f:if condition="{settings.targetGroupsPid}">
+        <div class="form__field width50">
+            <label for="tx_rkwevents_pi1_targetGroup">
+                <f:translate key="tx_rkwevents_domain_model_eventreservation.targetGroup" />
+                <f:render partial="LabelSuffix" arguments="{field: 'targetGroup', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+            </label>
+            <f:form.select
+                class="select-field"
+                id="tx_rkwevents_pi1_targetGroup"
+                name="targetGroup"
+                value="{targetGroup}"
+                options="{targetGroupList}"
+                optionValueField="uid"
+                optionLabelField="title"
+                prependOptionLabel="<f:translate key='tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect' />"
+                prependOptionValue="0"
+            />
+        </div>
+    </f:if>
+    
     <f:comment>
         <!--
         <div class="v320-1">
@@ -251,14 +272,6 @@
 
     <f:if condition="{editMode}">
         <f:else>
-			<f:if condition="{activateRkwOutcomeFeatures} == 1">
-                <p class="text-small">
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart" />
-                    <a href="mailto:{revocationEmail}" target="_blank">{revocationEmail}</a>
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart" />
-                </p>
-            </f:if>
-            
             <feRegister:consent type="terms" key="events" />
             <feRegister:consent type="privacy" key="events" />
             <feRegister:consent type="marketing" />

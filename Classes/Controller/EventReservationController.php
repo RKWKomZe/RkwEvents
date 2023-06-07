@@ -87,7 +87,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventRepository = null;
+    protected $eventRepository;
 
     /**
      * eventReservationRepository
@@ -95,7 +95,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventReservationRepository = null;
+    protected $eventReservationRepository;
 
     /**
      * eventReservationAddPersonRepository
@@ -103,24 +103,24 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventReservationAddPersonRepository = null;
+    protected $eventReservationAddPersonRepository;
 
     /**
      * BackendUserRepository
      *
-     * @var \RKW\RkwEvents\Domain\Repository\BackendUserRepository|null
+     * @var \RKW\RkwEvents\Domain\Repository\BackendUserRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $backendUserRepository = null;
+    protected $backendUserRepository;
 
     /**
      * categoryRepository
      *
-     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository|null
+     * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $categoryRepository = null;
-    
+    protected $categoryRepository;
+
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      * @TYPO3\CMS\Extbase\Annotation\Inject
@@ -142,7 +142,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $frontendUserRepository = null;
+    protected $frontendUserRepository;
 
     /**
      * logged FrontendUser
@@ -182,9 +182,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action new
      * Hint: Set default $event-Param to null for possibility to lead users,if event link is not longer available
      *
-     * @param Event $event
-     * @param EventReservation $newEventReservation
-     * @param integer $targetGroup
+     * @param Event|null $event
+     * @param EventReservation|null $newEventReservation
+     * @param int$targetGroup
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
      * @return void
@@ -240,24 +240,22 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if ($this->getFrontendUser()) {
             $this->view->assign('validFrontendUserEmail', \Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
         }
-        $this->view->assign('activateRkwOutcomeFeatures', $this->settings['activateRkwOutcomeFeatures']);
-        $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
+
+        $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent(intval($this->settings['targetGroupsPid'])));
         $this->view->assign('targetGroup', $targetGroup);
-        $this->view->assign('revocationEmail', $this->settings['marketing']['revocationEmail']);        
     }
 
 
     /**
      * action new
      *
-     * @param Event $event
-     * @param EventReservation $newEventReservation
-     * @param integer $targetGroup
+     * @param Event|null $event
+     * @param EventReservation|null $newEventReservation
+     * @param int $targetGroup
      * @ignorevalidation $event
      * @ignorevalidation $newEventReservation
      * @return void
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0)
     {
@@ -278,13 +276,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             if ($this->getFrontendUser()) {
                 $this->view->assign('validFrontendUserEmail', \Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()));
             }
- 			$this->view->assign('activateRkwOutcomeFeatures', $this->settings['activateRkwOutcomeFeatures']);
-            $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent($this->settings['targetGroupsPid']));
-            $this->view->assign('targetGroup', $targetGroup);
-            $this->view->assign('revocationEmail', $this->settings['marketing']['revocationEmail']);
-            
-        }
 
+            $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent(intval($this->settings['targetGroupsPid'])));
+            $this->view->assign('targetGroup', $targetGroup);
+        }
     }
 
 
@@ -292,7 +287,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * action create
      *
      * @param EventReservation $newEventReservation
-     * @param integer $targetGroup     
+     * @param int $targetGroup
      * @return void
      * @throws \Madj2k\FeRegister\Exception
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
@@ -429,7 +424,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         if ($targetGroup) {
             $newEventReservation->addTargetGroup($this->categoryRepository->findByUid($targetGroup));
         }
-
 
         // if user is logged in and has a valid email, create the reservation now!
         if (

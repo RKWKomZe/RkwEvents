@@ -113,7 +113,6 @@ plugin.tx_rkwevents {
             }
         }
 
-
         list {
 
             multipartView {
@@ -200,11 +199,8 @@ plugin.tx_rkwevents {
 			backendUser =
 		}
 
-        # cat=plugin.tx_rkwevents/a; type=boolean; label=Activate RKW Outcome features?
-        activateRkwOutcomeFeatures = 0
-
         # cat=plugin.tx_rkwevents//a; type=integer; label=Pid of target groups
-        targetGroupsPid =		
+        targetGroupsPid =
     }
 }
 
