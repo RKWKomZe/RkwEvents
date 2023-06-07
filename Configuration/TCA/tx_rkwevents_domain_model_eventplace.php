@@ -22,10 +22,10 @@ return [
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventplace.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, address, zip, city, country, short, longitude, latitude',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, address, zip, city, country, short, driving_directions_link, longitude, latitude',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, name, address, zip, city, country, short, longitude, latitude'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, name, address, zip, city, country, short, driving_directions_link, longitude, latitude'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -161,5 +161,16 @@ return [
 				'readOnly' =>1,
 			],
 		],
+        'driving_directions_link' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventplace.driving_directions_link',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'size' => 30,
+                'eval' => 'trim',
+                'softref' => 'typolink'
+            ],
+        ],
 	],
 ];

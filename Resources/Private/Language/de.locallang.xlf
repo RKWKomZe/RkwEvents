@@ -197,6 +197,14 @@
 				<source>Remarks</source>
 				<target>Bemerkungen &amp; Fragen</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup" approved="yes">
+				<source>Target group</source>
+				<target>Anmelden als</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.targetGroup.pleaseSelect" approved="yes">
+				<source>Please choose</source>
+				<target>Bitte wählen</target>
+			</trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -1215,6 +1223,14 @@
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
+				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
+				<target>Wichtiger Hinweis: Das RKW Kompetenzzentrum ist bestrebt, seine Produkte weiterzuentwickeln. Mit Ausfüllen des Feldes 'Zielgruppe' willige ich ausdrücklich ein, vom RKW Kompetenzzentrum nach Erhalt der Bestellung Zufriedenheitsanfragen bezüglich seiner Produkte per E-Mail zu erhalten. Meine Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft per E-Mail an </target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
+				<source>taking effect for the future.</source>
+				<target>widerrufen werden.</target>
+			</trans-unit>
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1465,10 +1481,6 @@
 				<source>Please find below the details of your reservation.</source>
 				<target>Untenstehend finden Sie die Details Ihrer Anmeldung. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
 			</trans-unit>
-			<trans-unit id="templates_email_confirmationReservationUser.billing">
-				<source>You will receive an invoice in a few days.</source>
-				<target>In Kürze erhalten Sie von uns eine Rechnung.</target>
-			</trans-unit>
 			<trans-unit id="templates_email_confirmationReservationUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 				<target>Löschen / Ändern</target>
@@ -1581,13 +1593,17 @@
 				<target>Bis bald!</target>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.direction">
-				<source>Click here for your personal route description</source>
-				<target>Klicken Sie hier für Ihre persönliche Anfahrtsbeschreibung</target>
+				<source>Click here for your route description</source>
+				<target>Klicken Sie hier für Ihre Anfahrtsbeschreibung</target>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.googleLink">
 				<source>Open Google Maps</source>
 				<target>Google Maps öffnen</target>
 			</trans-unit>
+            <trans-unit id="templates_email_informUpcomingEventUser.routeDescription">
+                <source>Route description</source>
+                <target>Anfahrtshinweise</target>
+            </trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.changeDeleteHeadline">
 				<source>Change / Delete</source>
 				<target>Löschen / Ändern</target>
@@ -1768,31 +1784,20 @@
 			</trans-unit>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<trans-unit id="tx_rkwevents_fluid.survey">
 				<source>Survey</source>
 				<target>Zur Umfrage</target>
 			</trans-unit>
 
+
+            <trans-unit id="evaluation.oops">
+                <source>Oops!</source>
+                <target>Oops!</target>
+            </trans-unit>
+            <trans-unit id="evaluation.eventEndDate.error">
+                <source>Event end date can not be before event start date!</source>
+                <target>Das Enddatum einer Veranstaltung kann nicht kleiner sein als das Startdatum!</target>
+            </trans-unit>
 
 
 		</body>

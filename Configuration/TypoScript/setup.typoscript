@@ -334,6 +334,9 @@ plugin.tx_rkwevents {
 			# comma seperated list with UID's of be_users
 			backendUser = {$plugin.tx_rkwevents.settings.mail.backendUser}
 		}
+
+        activateRkwOutcomeFeatures = {$plugin.tx_rkwevents.settings.activateRkwOutcomeFeatures}
+        targetGroupsPid = {$plugin.tx_rkwevents.settings.targetGroupsPid}
 	}
 }
 

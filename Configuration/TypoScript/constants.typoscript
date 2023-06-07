@@ -199,6 +199,12 @@ plugin.tx_rkwevents {
 			# cat=plugin.tx_rkwevents; type=string; label=Uids of be_users for E-mail notification
 			backendUser =
 		}
+
+        # cat=plugin.tx_rkwevents/a; type=boolean; label=Activate RKW Outcome features?
+        activateRkwOutcomeFeatures = 0
+
+        # cat=plugin.tx_rkwevents//a; type=integer; label=Pid of target groups
+        targetGroupsPid =		
     }
 }
 

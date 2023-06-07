@@ -251,6 +251,14 @@
 
     <f:if condition="{editMode}">
         <f:else>
+			<f:if condition="{activateRkwOutcomeFeatures} == 1">
+                <p class="text-small">
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart" />
+                    <a href="mailto:{revocationEmail}" target="_blank">{revocationEmail}</a>
+                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart" />
+                </p>
+            </f:if>
+            
             <feRegister:consent type="terms" key="events" />
             <feRegister:consent type="privacy" key="events" />
             <feRegister:consent type="marketing" />
