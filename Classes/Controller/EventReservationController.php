@@ -252,8 +252,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @param Event|null $event
      * @param EventReservation|null $newEventReservation
      * @param int $targetGroup
-     * @ignorevalidation $event
-     * @ignorevalidation $newEventReservation
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
