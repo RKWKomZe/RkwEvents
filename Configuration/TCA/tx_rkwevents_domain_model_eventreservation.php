@@ -81,7 +81,7 @@ return [
 		],
         'event' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.add_person',
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.event',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
