@@ -43,6 +43,7 @@ class EventRepository extends AbstractRepository
      */
     protected $logger;
 
+
     // Order by start date
     protected $defaultOrderings = array(
         'start' => QueryInterface::ORDER_ASCENDING,
