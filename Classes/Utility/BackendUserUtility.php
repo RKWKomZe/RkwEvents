@@ -14,12 +14,10 @@ namespace RKW\RkwEvents\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\CoreExtended\Utility\GeneralUtility;
+use Madj2k\CoreExtended\Utility\QueryUtility;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\BackendUserGroup;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Database\QueryGenerator;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * BackendUserUtility
@@ -37,6 +35,7 @@ class BackendUserUtility
      *
      * @param BackendUser $backendUser
      * @return array Returns mountpoints (PID) which are allowed to this user (WITH sub-PIDs!)
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     public static function getMountpointsOfAllGroups($backendUser)
     {
@@ -48,9 +47,7 @@ class BackendUserUtility
             if ($backendUserGroup->getDatabaseMounts()) {
                 foreach (GeneralUtility::trimExplode(',', $backendUserGroup->getDatabaseMounts(), true) as $initialRootPid) {
 
-                    $queryGenerator = GeneralUtility::makeInstance(QueryGenerator::class);
-                    $pidListWithChilds = $queryGenerator->getTreeList($initialRootPid, 999, 0, 1);
-
+                    $pidListWithChilds = QueryUtility::getTreeList($initialRootPid);
                     foreach (GeneralUtility::trimExplode(',', $pidListWithChilds, true) as $singlePid) {
                         $allowedPidList[] = (int)$singlePid;
                     }
