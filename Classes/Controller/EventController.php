@@ -2,7 +2,10 @@
 
 namespace RKW\RkwEvents\Controller;
 
+use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
+use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\FrontendUser;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -610,21 +613,19 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     }
 
 
-
     /**
      * Id of logged User
      *
      * @return int
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
     protected function getFrontendUserId(): int
     {
-        // is user logged in
-        $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
         if (
-            ($context->getPropertyFromAspect('frontend.user', 'isLoggedIn'))
-            && ($frontendUserId = $context->getPropertyFromAspect('frontend.user', 'id'))
+            ($frontendUser = FrontendUserSessionUtility::getLoggedInUser())
+            && (! FrontendUserUtility::isGuestUser($frontendUser))
         ){
-            return intval($frontendUserId);
+            return $frontendUser->getUid();
         }
 
         return 0;
@@ -634,20 +635,18 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     /**
      * Returns current logged in user object
      *
-     * @return \RKW\RkwEvents\Domain\Model\FrontendUser|NULL
+     * @return \RKW\RkwEvents\Domain\Model\FrontendUser|null
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
-    protected function getFrontendUser()
+    protected function getFrontendUser():? FrontendUser
     {
         /** @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository $frontendUserRepository */
-        //$frontendUserRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Repository\\FrontendUserRepository');
         $this->frontendUser = $this->frontendUserRepository->findByIdentifier($this->getFrontendUserId());
 
         if ($this->frontendUser instanceof \TYPO3\CMS\Extbase\Domain\Model\FrontendUser) {
             return $this->frontendUser;
-            //===
         }
 
         return null;
-        //===
     }
 }
