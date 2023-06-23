@@ -16,6 +16,8 @@ namespace RKW\RkwEvents\Controller;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
+use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
+use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Utility\DivUtility;
@@ -1320,16 +1322,15 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Id of logged User
      *
      * @return int
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
     protected function getFrontendUserId(): int
     {
-        // is user logged in
-        $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
         if (
-            ($context->getPropertyFromAspect('frontend.user', 'isLoggedIn'))
-            && ($frontendUserId = $context->getPropertyFromAspect('frontend.user', 'id'))
+            ($frontendUser = FrontendUserSessionUtility::getLoggedInUser())
+            && (! FrontendUserUtility::isGuestUser($frontendUser))
         ){
-            return intval($frontendUserId);
+            return $frontendUser->getUid();
         }
 
         return 0;
@@ -1340,6 +1341,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Returns current logged in user object
      *
      * @return \RKW\RkwEvents\Domain\Model\FrontendUser|NULL
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
     protected function getFrontendUser()
     {
@@ -1349,10 +1351,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             return $this->frontendUser;
         }
 
-        //===
-
         return null;
-        //===
     }
 
 
