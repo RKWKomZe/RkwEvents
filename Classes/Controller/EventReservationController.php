@@ -430,7 +430,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         // if user is logged in and has a valid email, create the reservation now!
         if (
             ($this->getFrontendUser())
-            && (\Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()))
+            && (\Madj2k\FeRegister\Utility\FrontendUserUtility::isEmailValid($this->getFrontendUser()->getEmail()))
         ) {
             // for standardization for reservation creation (also possible with optin)
             $this->finalSaveReservation($newEventReservation, $this->getFrontendUser());
