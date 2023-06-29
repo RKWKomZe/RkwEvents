@@ -187,7 +187,11 @@ class CsvUtility
         if ($event->getPlace() instanceof EventPlace) {
             $row[] = $event->getPlace()->getName();
         } else {
-            $row[] = 'online';
+            if ($event->getPlaceUnknown()) {
+                $row[] = 'noch offen';
+            } else {
+                $row[] = 'online';
+            }
         }
         if ($event->getCostsRed()) {
             $row[] = $event->getCostsReg() . '€ (' . $event->getCostsRed() . '€)';

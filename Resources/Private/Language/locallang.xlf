@@ -74,6 +74,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.currency" approved="yes">
 				<source>Currency</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.place_unknown" approved="yes">
+                <source>Location unknown</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.place" approved="yes">
 				<source>Place</source>
 			</trans-unit>
@@ -385,6 +388,9 @@
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.online">
                 <source>Online</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.placeUnknown">
+                <source>Place unknown yet</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export">
                 <source>export</source>
             </trans-unit>
@@ -647,6 +653,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_place.online" approved="yes">
                 <source>Online</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_info_place.placeUnknown" approved="yes">
+                <source>Location unknown</source>
+            </trans-unit>
 
 
 			<!-- Partials/Event/Info/Type.html -->
@@ -742,6 +751,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.directionGoogleMaps" approved="yes">
 				<source>Open Google Maps</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.placeUnknown" approved="yes">
+                <source>Location unknown yet</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
             </trans-unit>
@@ -834,6 +846,9 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel" approved="yes">
                 <source>Location</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown" approved="yes">
+                <source>Location unknown</source>
             </trans-unit>
 
 
@@ -1074,6 +1089,9 @@
 			<trans-unit id="partials_email_details.eventCostsReduced">
 				<source>reduced</source>
 			</trans-unit>
+            <trans-unit id="partials_email_details.placeUnknown">
+                <source>Place unknown yet</source>
+            </trans-unit>
 			<trans-unit id="partials_email_details.eventCostsFree">
 				<source>Free</source>
 			</trans-unit>

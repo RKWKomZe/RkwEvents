@@ -141,6 +141,13 @@ class TceMainHooks
                     $fieldArray['place'] = '';
                 }
 
+                if (
+                    $fieldArray['place_unknown']
+                    || $eventRaw['place_unknown']
+                ) {
+                    $fieldArray['place'] = '';
+                }
+
                 // REMOVE START & END IF TYPE IS "EventAnnouncement"
                 if (
                     $fieldArray['record_type'] == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'
