@@ -187,6 +187,14 @@
 				<source>Currency</source>
 				<target>Währung</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.place_unknown" approved="yes">
+                <source>Location unknown</source>
+                <target>noch offen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.place_unknown.I.enabled">
+                <source>Event has no location yet</source>
+                <target>Veranstaltung hat bislang keinen Ort</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.place" approved="yes">
 				<source>Location</source>
 				<target>Veranstaltungsort</target>
