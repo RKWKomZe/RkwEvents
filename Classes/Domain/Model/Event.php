@@ -238,6 +238,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $onlineEvent = false;
 
     /**
+     * placeUnknown
+     *
+     * @var bool
+     */
+    protected $placeUnknown = false;
+
+    /**
      * code
      *
      * @var string
@@ -1228,6 +1235,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOnlineEvent($onlineEvent)
     {
         $this->onlineEvent = $onlineEvent;
+    }
+
+
+    /**
+     * Returns the placeUnknown
+     *
+     * @return bool $placeUnknown
+     */
+    public function getPlaceUnknown()
+    {
+        return $this->placeUnknown;
+    }
+
+    /**
+     * Sets the placeUnknown
+     *
+     * @param bool $placeUnknown
+     * @return void
+     */
+    public function setPlaceUnknown($placeUnknown)
+    {
+        $this->placeUnknown = $placeUnknown;
     }
 
 
