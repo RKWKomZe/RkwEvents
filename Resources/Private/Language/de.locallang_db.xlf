@@ -91,8 +91,8 @@
 				<target>Verfügbare Plätze</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_unknown" approved="yes">
-                <source>Costs unknown</source>
-                <target>Preis noch nicht festgelegt</target>
+                <source>Costs not yet determined</source>
+                <target>Preis steht noch nicht fest</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.costs_reg" approved="yes">
 				<source>Price Reg (per Person)</source>
@@ -187,13 +187,21 @@
 				<source>Currency</source>
 				<target>Währung</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.place_unknown" approved="yes">
+                <source>Location not yet determined</source>
+                <target>Veranstaltungsort steht noch nicht fest</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.place_unknown.I.enabled">
+                <source>Event has no location yet</source>
+                <target>Veranstaltung hat bislang keinen Ort</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.place" approved="yes">
 				<source>Location</source>
 				<target>Veranstaltungsort</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.online_event">
-				<source>Online Event</source>
-				<target>Online Event</target>
+				<source>Online-Event</source>
+				<target>Online-Event</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.online_event.I.enabled">
 				<source>Event takes place online (no location)</source>
