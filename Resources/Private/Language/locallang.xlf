@@ -75,7 +75,7 @@
 				<source>Currency</source>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.place_unknown" approved="yes">
-                <source>Location unknown</source>
+                <source>Location not yet determined</source>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.place" approved="yes">
 				<source>Place</source>
@@ -389,7 +389,7 @@
                 <source>Online</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.placeUnknown">
-                <source>Place unknown yet</source>
+                <source>Place not yet determinded</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export">
                 <source>export</source>
@@ -654,7 +654,7 @@
                 <source>Online</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_place.placeUnknown" approved="yes">
-                <source>Location unknown</source>
+                <source>Location not yet determined</source>
             </trans-unit>
 
 
@@ -752,7 +752,7 @@
 				<source>Open Google Maps</source>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.placeUnknown" approved="yes">
-                <source>Location unknown yet</source>
+                <source>Location not yet determined</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
@@ -848,7 +848,7 @@
                 <source>Location</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown" approved="yes">
-                <source>Location unknown</source>
+                <source>Location not yet determined</source>
             </trans-unit>
 
 
@@ -1090,7 +1090,7 @@
 				<source>reduced</source>
 			</trans-unit>
             <trans-unit id="partials_email_details.placeUnknown">
-                <source>Place unknown yet</source>
+                <source>not yet determined</source>
             </trans-unit>
 			<trans-unit id="partials_email_details.eventCostsFree">
 				<source>Free</source>

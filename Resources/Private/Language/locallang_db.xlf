@@ -138,7 +138,7 @@
 				<source>Currency</source>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.place_unknown" approved="yes">
-                <source>Place unknown</source>
+                <source>Place not yet determined</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.place_unknown.I.enabled">
                 <source>Event has no location yet</source>

@@ -103,8 +103,8 @@
 				<target>Währung</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.place_unknown" approved="yes">
-                <source>Location unknown</source>
-                <target>Ort noch unbekannt</target>
+                <source>Location not yet determined</source>
+                <target>Ort steht noch nicht fest</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.place" approved="yes">
 				<source>Place</source>
@@ -510,8 +510,8 @@
                 <target>Online</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.placeUnknown">
-                <source>Place unknown yet</source>
-                <target>noch offen</target>
+                <source>Place not yet determined</source>
+                <target>Ort steht noch nicht fest</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export">
                 <source>export</source>
@@ -874,8 +874,8 @@
                 <target>Online</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_info_place.placeUnknown" approved="yes">
-                <source>Location unknown</source>
-                <target>noch offen</target>
+                <source>not yet determined</source>
+                <target>steht noch nicht fest</target>
             </trans-unit>
 
 
@@ -918,8 +918,8 @@
 				<target>kostenlos</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsUnknown" approved="yes">
-                <source>Costs unknown</source>
-                <target>Preis noch nicht festgelegt</target>
+                <source>Costs not yet determined</source>
+                <target>Preis steht noch nicht fest</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_info_costs.costsPerPerson" approved="yes">
 				<source>p.P.</source>
@@ -1000,8 +1000,8 @@
 				<target>Google Maps öffnen</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.placeUnknown" approved="yes">
-                <source>Location unknown yet</source>
-                <target>Ort noch nicht bekannt</target>
+                <source>Location not yet determined</source>
+                <target>Ort steht noch nicht fest</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.download" approved="yes">
                 <source>Download</source>
@@ -1124,7 +1124,7 @@
                 <target>Ort</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown" approved="yes">
-                <source>Location unknown</source>
+                <source>not yet defined</source>
                 <target>noch offen</target>
             </trans-unit>
 
@@ -1411,8 +1411,8 @@
 				<target>ermäßigt</target>
 			</trans-unit>
             <trans-unit id="partials_email_details.placeUnknown">
-                <source>Place unknown yet</source>
-                <target>Noch offen</target>
+                <source>not yet determined</source>
+                <target>steht noch nicht fest</target>
             </trans-unit>
 			<trans-unit id="partials_email_details.eventCostsFree">
 				<source>Free</source>
