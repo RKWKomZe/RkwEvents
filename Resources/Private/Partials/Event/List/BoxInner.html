@@ -130,9 +130,16 @@
                             {event.place.city}
                         </f:then>
                         <f:else>
-                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                            <f:if condition="{event.placeUnknown}">
+                                <f:then>
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown' extensionName='rkwEvents' />
+                                </f:then>
                                 <f:else>
-                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkwEvents' />
+                                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                        <f:else>
+                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkwEvents' />
+                                        </f:else>
+                                    </f:if>
                                 </f:else>
                             </f:if>
                         </f:else>

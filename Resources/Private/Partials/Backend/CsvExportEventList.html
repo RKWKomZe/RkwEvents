@@ -50,7 +50,14 @@
                                 <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.online" />
                             </f:then>
                             <f:else>
-                                {event.place.name}
+                                <f:if condition="{event.placeUnknown}">
+                                    <f:then>
+                                        <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.placeUnknown" />
+                                    </f:then>
+                                    <f:else>
+                                        {event.place.name}
+                                    </f:else>
+                                </f:if>
                             </f:else>
                         </f:if>
                     </td>
