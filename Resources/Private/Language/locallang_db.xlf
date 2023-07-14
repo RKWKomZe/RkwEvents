@@ -99,7 +99,7 @@
 				<source>Only single reservation</source>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.reg_inhouse">
-                <source>Inhouse training available</source>
+                <source>Bookable as in-house training</source>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end">
 				<source>Registration End</source>

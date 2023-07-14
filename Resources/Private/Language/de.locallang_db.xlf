@@ -136,8 +136,8 @@
 				<target>Nur Einzelanmeldungen erlauben (nur für interne Anmeldung relevant)</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.reg_inhouse" approved="yes">
-                <source>Inhouse training available</source>
-                <target>als Inhouse-Schulung verfügbar</target>
+                <source>Bookable as in-house training</source>
+                <target>Als Inhouse-Schulung buchbar</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
 				<source>Registration End</source>
