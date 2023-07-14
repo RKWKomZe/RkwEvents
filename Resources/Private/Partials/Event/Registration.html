@@ -17,8 +17,8 @@
                                     <f:else>
                                         <f:if condition="{settings.disableInternalRegistration}">
                                             <f:then>
-                                                <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                                    <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" />
+                                                <div class="btn {additionalCssClass} btn btn--disabled">
+                                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" />
                                                 </div>
                                             </f:then>
                                             <f:else>
@@ -26,27 +26,37 @@
                                                     <f:then>
                                                         <f:if condition="<rkw:freePlacesAvailable event='{event}' />">
                                                             <f:then>
-                                                                <f:link.action action="new" controller="EventReservation" arguments="{event : event}" section="tx-rkwevents-reservation" pageUid="{settings.reservationPid}" class="btn btn--contains-icon {additionalCssClass}" rel="nofollow">
+                                                                <f:comment><!-- standard register link --></f:comment>
+                                                                <f:link.action
+                                                                    action="new"
+                                                                    controller="EventReservation"
+                                                                    arguments="{event : event}"
+                                                                    section="tx-rkwevents-reservation"
+                                                                    pageUid="{settings.reservationPid}"
+                                                                    class="btn {additionalCssClass}"
+                                                                    rel="nofollow"
+                                                                >
                                                                     <f:security.ifAuthenticated>
                                                                         <f:then>
-                                                                            <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.internalLinkLoggedIn" />
+                                                                            <f:translate key="tx_rkwevents_fluid.partials_event_registration.internalLinkLoggedIn" />
                                                                         </f:then>
                                                                         <f:else>
-                                                                            <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.internalLink" />
+                                                                            <f:translate key="tx_rkwevents_fluid.partials_event_registration.internalLink" />
                                                                         </f:else>
                                                                     </f:security.ifAuthenticated>
                                                                 </f:link.action>
+
                                                             </f:then>
                                                             <f:else>
-                                                                <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                                                    <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.noSeats" />
+                                                                <div class="btn {additionalCssClass} btn btn--disabled">
+                                                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.noSeats" />
                                                                 </div>
                                                             </f:else>
                                                         </f:if>
                                                     </f:then>
                                                     <f:else>
-                                                        <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                                            <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" />
+                                                        <div class="btn {additionalCssClass} btn btn--disabled">
+                                                            <f:translate key="tx_rkwevents_fluid.partials_event_registration.noInternalRegistration" />
                                                         </div>
                                                     </f:else>
                                                 </f:if>
@@ -54,10 +64,34 @@
                                         </f:if>
                                     </f:else>
                                 </f:if>
+
+                                <f:comment><!-- optional inhouse link --></f:comment>
+                                <f:if condition="{event.regInhouse}">
+                                    <f:if condition="<rkw:extensionIsLoaded extensionName='rkw_authors' />">
+                                        <f:if condition="<rkw:rkwAuthorsContactFormPid />">
+                                            <f:if condition="<f:count>{event.internalContact}</f:count>">
+                                                <f:link.action
+                                                    action="show"
+                                                    controller="Authors"
+                                                    pluginName="Details"
+                                                    extensionName="RkwAuthors"
+                                                    arguments="{author : event.internalContact.0}"
+                                                    section="tx-rkwauthors-form"
+                                                    pageUid="{rkw:rkwAuthorsContactFormPid()}"
+                                                    class="btn {additionalCssClass}"
+                                                    rel="nofollow"
+                                                    target="_blank"
+                                                >
+                                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.inhouseRegisterLink" />
+                                                </f:link.action>
+                                            </f:if>
+                                        </f:if>
+                                    </f:if>
+                                </f:if>
                             </f:then>
                             <f:else>
-                                <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                    <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.noRegistrationRequired" />
+                                <div class="btn {additionalCssClass} btn btn--disabled">
+                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.noRegistrationRequired" />
                                 </div>
                             </f:else>
                         </f:if>
@@ -75,22 +109,22 @@
                                                 <f:render section="extRegLink" arguments="{_all}" />
                                             </f:then>
                                             <f:else>
-                                                <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                                    <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" />
+                                                <div class="btn {additionalCssClass} btn btn--disabled">
+                                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.eventAnnouncement" />
                                                 </div>
                                             </f:else>
                                         </f:if>
                                     </f:then>
                                     <f:else>
-                                        <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                            <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.eventExpired" />
+                                        <div class="btn {additionalCssClass} btn btn--disabled">
+                                            <f:translate key="tx_rkwevents_fluid.partials_event_registration.eventExpired" />
                                         </div>
                                     </f:else>
                                 </f:if>
                             </f:then>
                             <f:else>
-                                <div class="btn btn--contains-icon {additionalCssClass} btn btn--contains-icon btn--disabled">
-                                    <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.registrationExpired" />
+                                <div class="btn {additionalCssClass} btn btn--disabled">
+                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.registrationExpired" />
                                 </div>
                             </f:else>
                         </f:if>
@@ -100,8 +134,8 @@
         </f:if>
 
         <f:section name="extRegLink">
-            <f:link.external uri="{event.extRegLink}" class="btn btn--contains-icon {additionalCssClass}" target="_blank" rel="nofollow">
-                <svg class="icon icon--24" aria-hidden="true"><use xlink:href="#ic-ticket"></use></svg><f:translate key="tx_rkwevents_fluid.partials_event_registration.externalLink" />
+            <f:link.external uri="{event.extRegLink}" class="btn {additionalCssClass}" target="_blank" rel="nofollow">
+                <f:translate key="tx_rkwevents_fluid.partials_event_registration.externalLink" />
             </f:link.external>
         </f:section>
     </f:if>

@@ -32,6 +32,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	costs_tax                tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_required             tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_single               tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_end                  int(11) unsigned DEFAULT '0' NOT NULL,
 	cancel_end               int(11) unsigned DEFAULT '0' NOT NULL,
 	ext_reg_link             varchar(255) DEFAULT '' NOT NULL,
