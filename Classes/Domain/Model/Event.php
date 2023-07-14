@@ -196,6 +196,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $regSingle = false;
 
     /**
+     * regInhouse
+     *
+     * @var boolean
+     */
+    protected $regInhouse = false;
+
+    /**
      * regEnd
      *
      * @var integer
@@ -1107,6 +1114,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRegSingle($regSingle)
     {
         $this->regSingle = $regSingle;
+    }
+
+    /**
+     * Returns the regInhouse
+     *
+     * @return boolean $regInhouse
+     */
+    public function getRegInhouse()
+    {
+        return $this->regInhouse;
+    }
+
+    /**
+     * Sets the regInhouse
+     *
+     * @param boolean $regInhouse
+     * @return void
+     */
+    public function setRegInhouse($regInhouse)
+    {
+        $this->regInhouse = $regInhouse;
     }
 
     /**
