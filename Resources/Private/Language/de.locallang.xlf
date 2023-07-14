@@ -1080,6 +1080,10 @@
 				<source>Register now</source>
 				<target>Jetzt anmelden</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_registration.inhouseRegisterLink" approved="yes">
+                <source>Book as in-house training</source>
+                <target>Als Inhouse-Schulung buchen</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noSeats" approved="yes">
 				<source>Unfortunately there are no free seats left</source>
 				<target>Leider sind bereits alle Plätze vergeben</target>
@@ -1274,6 +1278,10 @@
 				<source>Note that a cancelation may involve additional costs.</source>
 				<target><![CDATA[<strong>Bitte beachten Sie:</strong> Wenn Sie zusätzliche Teilnehmer entfernen, gilt dies als Teilstornierung. Wenn Ihre Teilstornierung bis fünf Werktage vor Veranstaltungsbeginn eingeht, stornieren wir kostenfrei. Bei einer späteren Stornierung müssen wir Ihnen den vollen Teilnehmerbeitrag für den stornierten Teilnehmer in Rechnung stellen, wenn Sie uns keinen Ersatzteilnehmer nennen können.]]></target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.hintAddPers">
+                <source>With the registration of further participating persons I confirm that I am authorized to register them for the event.</source>
+                <target>Mit der Anmeldung weiterer teilnehmender Personen bestätige ich, dass ich berechtigt bin, diese für die Veranstaltung anzumelden.</target>
+            </trans-unit>
 
 
 			<!-- Partials/EventReservation/Properties.html -->

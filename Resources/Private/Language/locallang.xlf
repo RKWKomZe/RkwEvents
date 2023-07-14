@@ -814,6 +814,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.internalLinkLoggedIn" approved="yes">
 				<source>Register now</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_registration.inhouseRegisterLink" approved="yes">
+                <source>Book as in-house training</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noSeats" approved="yes">
 				<source>Unfortunately no free seats left</source>
 			</trans-unit>
@@ -981,6 +984,12 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.delete">
 				<source>Delete participant</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.billing">
+                <source>Note that a cancelation may involve additional costs.</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsSub.hintAddPers">
+                <source>With the registration of further participating persons I confirm that I am authorized to register them for the event.</source>
+            </trans-unit>
 
 
 
