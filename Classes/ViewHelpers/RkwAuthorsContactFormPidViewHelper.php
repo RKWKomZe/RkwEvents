@@ -24,14 +24,14 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class rkwAuthorsContactFormPidViewHelper
+ * Class RkwAuthorsContactFormPidViewHelper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class rkwAuthorsContactFormPidViewHelper extends AbstractViewHelper
+class RkwAuthorsContactFormPidViewHelper extends AbstractViewHelper
 {
 
     /**
