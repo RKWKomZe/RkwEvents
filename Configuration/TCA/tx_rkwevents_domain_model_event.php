@@ -47,7 +47,7 @@ return [
                 cancel_end, --palette--;;externalCancel,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
-                online_event, online_event_access_link, place_unknown, place, be_user, external_contact, longitude, latitude,
+                online_event, online_event_access_link, register_add_information, place_unknown, place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
                 presentations, sheet,
@@ -56,8 +56,8 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, additional_tile_flag, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
-		
+                header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive,
+
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
             ',
@@ -76,7 +76,7 @@ return [
                 cancel_end, --palette--;;externalCancel,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_place_contact,
-                online_event, online_event_access_link, place_unknown, place, be_user, external_contact, longitude, latitude,
+                online_event, online_event_access_link, register_add_information, place_unknown, place, be_user, external_contact, longitude, latitude,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_gallery,
                 presentations, sheet,
@@ -85,7 +85,7 @@ return [
                 reservation,
 
                  --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, additional_tile_flag, register_add_information, recommended_events, recommended_links, backend_user_exclusive,
+                header_image, additional_tile_flag,recommended_events, recommended_links, backend_user_exclusive,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,

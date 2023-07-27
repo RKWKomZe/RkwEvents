@@ -483,6 +483,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $registration = $this->objectManager->get(FrontendUserRegistration::class);
             $registration->setFrontendUser($frontendUser)
                 ->setData($newEventReservation)
+                ->setDataParent($newEventReservation->getEvent())
                 ->setCategory('rkwEvents')
                 ->setRequest($this->request)
                 ->startRegistration();
