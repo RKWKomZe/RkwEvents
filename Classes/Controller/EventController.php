@@ -341,6 +341,45 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
 
     /**
+     * action listPrefiltered
+     * returns a list which is prefiltered by flexform
+     *
+     * @param int $page
+     * @return void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listPrefilteredAction(int $page = 0)
+    {
+        $filter = [];
+        // grab given categories from Flexform
+        $filter['category'] = $this->settings['categoriesList'];
+
+        $listItemsPerView = intval($this->settings['listPrefiltered']['itemsPerPage']) ?: 6;
+
+        $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, $page);
+        $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
+
+        // Check if we need to display a more-link
+        $showMoreLink = count($eventList) < count($queryResult);
+
+        if ($page > 0) {
+            $showMoreLink = count($eventList) < (count($queryResult) - 1);
+        }
+
+        // target template is also used by ajax - so we have to set typoscript settings this way
+        $this->view->assignMultiple(
+            array(
+                'sortedEventList' => $eventList,
+                'ajaxTypeNum'     => intval($this->settings['ajaxTypeNum']),
+                'showPid'         => intval($this->settings['showPid']),
+                'pageMore'        => $page + 1,
+                'showMoreLink'    => $showMoreLink,
+            )
+        );
+    }
+
+
+    /**
      * action archive
      *
      * @return void

@@ -48,6 +48,18 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
+            'Prefiltered',
+            array(
+                'Event' => 'listPrefiltered'
+            ),
+            // non-cacheable actions
+            array(
+                'Event' => 'listPrefiltered'
+            )
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
             'Eventmaps',
             array(
                 'Event' => 'maps'
@@ -122,9 +134,6 @@ call_user_func(
             )
         );
 
-        //=================================================================
-        // Configure Plugins
-        //=================================================================
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
             'Standaloneregister',
@@ -136,6 +145,8 @@ call_user_func(
                 'EventReservation' => 'newStandalone, create, optIn',
             )
         );
+
+
 
 
 
