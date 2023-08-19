@@ -1,4 +1,55 @@
 #
+# Table structure for table 'tx_rkwevents_domain_model_eventseries'
+#
+CREATE TABLE tx_rkwevents_domain_model_eventseries
+(
+
+    uid                     int(11) NOT NULL auto_increment,
+    pid                     int(11) DEFAULT '0' NOT NULL,
+
+    record_type             varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventScheduled' NOT NULL,
+    title                   varchar(255) DEFAULT '' NOT NULL,
+    subtitle                varchar(255) DEFAULT '' NOT NULL,
+    keywords                text,
+    description             text NOT NULL,
+    description2            text NOT NULL,
+    target_learning         text NOT NULL,
+    target_group            text NOT NULL,
+    schedule                text NOT NULL,
+    partner                 text NOT NULL,
+    add_info                varchar(255) DEFAULT '' NOT NULL,
+    testimonials            text NOT NULL,
+    header_image            int(11) unsigned DEFAULT '0',
+    backend_user_exclusive  tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    additional_tile_flag    varchar(255) DEFAULT '' NOT NULL,
+    recommended_events      varchar(255) DEFAULT '' NOT NULL,
+    recommended_links       varchar(255) DEFAULT '' NOT NULL,
+    document_type           varchar(255) DEFAULT '' NOT NULL,
+    department              varchar(255) DEFAULT '' NOT NULL,
+    categories              varchar(255) DEFAULT '' NOT NULL,
+    categories_displayed    varchar(255) DEFAULT '' NOT NULL,
+    reg_inhouse             tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    event                   varchar(255) DEFAULT '' NOT NULL,
+
+    tstamp                  int(11) unsigned DEFAULT '0' NOT NULL,
+    crdate                  int(11) unsigned DEFAULT '0' NOT NULL,
+    cruser_id               int(11) unsigned DEFAULT '0' NOT NULL,
+    deleted                 tinyint(4) unsigned DEFAULT '0' NOT NULL,
+    hidden                  tinyint(4) unsigned DEFAULT '0' NOT NULL,
+
+    sys_language_uid        int(11) DEFAULT '0' NOT NULL,
+    l10n_parent             int(11) DEFAULT '0' NOT NULL,
+    l10n_diffsource         mediumblob,
+
+    PRIMARY KEY (uid),
+    KEY              parent (pid),
+    KEY language (l10n_parent,sys_language_uid)
+
+);
+
+
+
+#
 # Table structure for table 'tx_rkwevents_domain_model_event'
 #
 CREATE TABLE tx_rkwevents_domain_model_event
@@ -38,10 +89,6 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	ext_reg_link             varchar(255) DEFAULT '' NOT NULL,
 	ext_cancel_info          varchar(255) DEFAULT '' NOT NULL,
 	ext_cancel_link          varchar(255) DEFAULT '' NOT NULL,
-	document_type            varchar(255) DEFAULT '' NOT NULL,
-	department               varchar(255) DEFAULT '' NOT NULL,
-	categories               varchar(255) DEFAULT '' NOT NULL,
-	categories_displayed     varchar(255) DEFAULT '' NOT NULL,
 	project                  varchar(255) DEFAULT '' NOT NULL,
 	series                   varchar(255) DEFAULT '' NOT NULL,
 	logos                    varchar(255) DEFAULT '' NOT NULL,
@@ -73,7 +120,6 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	eligibility              tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	eligibility_link         varchar(255) DEFAULT '' NOT NULL,
 	additional_tile_flag     varchar(255) DEFAULT '' NOT NULL,
-
 	recommended_events       varchar(255) DEFAULT '' NOT NULL,
 	recommended_links        varchar(255) DEFAULT '' NOT NULL,
 	header_image             int(11) unsigned DEFAULT '0',
@@ -99,35 +145,6 @@ CREATE TABLE tx_rkwevents_domain_model_event
 
 );
 
-
-#
-# Table structure for table 'tx_rkwevents_domain_model_eventseries'
-#
-CREATE TABLE tx_rkwevents_domain_model_eventseries
-(
-
-	uid              int(11) NOT NULL auto_increment,
-	pid              int(11) DEFAULT '0' NOT NULL,
-
-	name             varchar(255) DEFAULT '' NOT NULL,
-	short            text                    NOT NULL,
-	rota             varchar(255) DEFAULT '' NOT NULL,
-
-	tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate           int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id        int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted          tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden           tinyint(4) unsigned DEFAULT '0' NOT NULL,
-
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l10n_parent      int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource  mediumblob,
-
-	PRIMARY KEY (uid),
-	KEY              parent (pid),
-	KEY language (l10n_parent,sys_language_uid)
-
-);
 
 
 #

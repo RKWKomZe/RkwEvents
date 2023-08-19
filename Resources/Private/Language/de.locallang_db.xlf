@@ -9,6 +9,106 @@
     </header>
 		<body>
 
+            <!-- tx_rkwevents_domain_model_eventseries -->
+            <trans-unit id="tx_rkwevents_domain_model_eventseries" approved="yes">
+                <source>RKW Events: Event Series</source>
+                <target>RKW Events: Veranstaltungsreihen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.title" approved="yes">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle" approved="yes">
+                <source>Subtitle</source>
+                <target>Untertitel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description" approved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description2" approved="yes">
+                <source>Description (Additional)</source>
+                <target>Beschreibung (Zusatz)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_learning" approved="yes">
+                <source>Target Learning</source>
+                <target>Inhaltliches Ziel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_group" approved="yes">
+                <source>Target Group</source>
+                <target>Zielgruppe</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.schedule">
+                <source>Schedule as Table</source>
+                <target>Programm als Tabelle</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.partner" approved="no">
+                <source>Partner</source>
+                <target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.add_info" approved="yes">
+                <source>Schedule as File</source>
+                <target>Programm als Datei</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.testimonials" approved="no">
+                <source>Testimonials  (only for Series)</source>
+                <target phase-name="approval-1" state="final">Meinungen von Teilnehmenden (nur für Veranstaltungsreihen)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.header_image" approved="yes">
+                <source>Header image</source>
+                <target>Header Bild (Hinweis: Ersetzt Kartenausschnitt auf Detailseite, wenn gesetzt)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.backend_user_exclusive" approved="yes">
+                <source>Backend User exclusive</source>
+                <target>Nur mit Direktlink erreichbar (außer für im Backend angemeldete Nutzende)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.additional_tile_flag" approved="yes">
+                <source>Additional tile flag</source>
+                <target>Zusätzliches Kachel-Label (Störer)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recommended_events" approved="yes">
+                <source>Recommended Events</source>
+                <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recommended_links" approved="yes">
+                <source>Recommended Links</source>
+                <target>Marginalspalte: Weitere Empfehlungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.document_type" approved="yes">
+                <source>Document Type</source>
+                <target>Veranstaltungsart</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.department" approved="yes">
+                <source>Department</source>
+                <target>Schwerpunkt</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.categories" approved="yes">
+                <source>Category</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.categories_displayed" approved="yes">
+                <source>Category displayed</source>
+                <target>Optional: Ausgewählte Kategorie (vorrangige Anzeige im Frontend)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.reg_inhouse" approved="yes">
+                <source>Bookable as in-house training</source>
+                <target>Als Inhouse-Schulung buchbar</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.event" approved="yes">
+                <source>Event list</source>
+                <target>Veranstlatungen hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.default">
+                <source>Default</source>
+                <target>Standard</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.announcement">
+                <source>Announcement</source>
+                <target>Ankündigung</target>
+            </trans-unit>
+
+
+
 			<!-- tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
 				<source>RKW Events: Event</source>
@@ -26,14 +126,6 @@
                 <source>Announcement</source>
                 <target>Ankündigung</target>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
-				<source>Title</source>
-				<target>Titel</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.subtitle" approved="yes">
-				<source>Subtitle</source>
-				<target>Untertitel</target>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.start" approved="yes">
 				<source>Start</source>
 				<target>Start Veranstaltung</target>
@@ -58,34 +150,6 @@
                 <source>Distance</source>
                 <target>Distanz</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.testimonials" approved="no">
-				<source>Testimonials  (only for Series)</source>
-				<target phase-name="approval-1" state="final">Meinungen von Teilnehmenden (nur für Veranstaltungsreihen)</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.description" approved="yes">
-				<source>Description</source>
-				<target>Beschreibung</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.description2" approved="yes">
-				<source>Description (Additional)</source>
-				<target>Beschreibung (Zusatz)</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.target_learning" approved="yes">
-				<source>Target Learning</source>
-				<target>Inhaltliches Ziel</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.target_group" approved="yes">
-				<source>Target Group</source>
-				<target>Zielgruppe</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.schedule">
-				<source>Schedule as Table</source>
-				<target>Programm als Tabelle</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="no">
-				<source>Partner</source>
-				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.seats" approved="yes">
 				<source>Seats</source>
 				<target>Verfügbare Plätze</target>
@@ -135,10 +199,6 @@
 				<source>Only single reservation</source>
 				<target>Nur Einzelanmeldungen erlauben (nur für interne Anmeldung relevant)</target>
 			</trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.reg_inhouse" approved="yes">
-                <source>Bookable as in-house training</source>
-                <target>Als Inhouse-Schulung buchbar</target>
-            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reg_end" approved="yes">
 				<source>Registration End</source>
 				<target>Anmeldeschluss</target>
@@ -162,22 +222,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
                 <source>External Cancel Link</source>
                 <target>Link zu externer Stornierung</target>
-            </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
-				<source>Document Type</source>
-				<target>Veranstaltungsart</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.department" approved="yes">
-				<source>Department</source>
-				<target>Schwerpunkt</target>
-			</trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.categories" approved="yes">
-                <source>Category</source>
-                <target>Kategorie</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.categories_displayed" approved="yes">
-                <source>Category displayed</source>
-                <target>Optional: Ausgewählte Kategorie (vorrangige Anzeige im Frontend)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
 				<source>Series</source>
@@ -234,10 +278,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.be_user" approved="yes">
 				<source>Backend User (E-Mails only)</source>
 				<target>Backend-User (nur E-Mailbenachrichtigung)</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.add_info" approved="yes">
-				<source>Schedule as File</source>
-				<target>Programm als Datei</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.presentations" approved="yes">
 				<source>Presentations</source>
@@ -319,26 +359,16 @@
                 <source>Link to site with information about eligibility</source>
                 <target>Hinweis-Link in Bezug auf Förderfähigkeit (oder per Typoscript: "eligibility.hint.link")</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
-                <source>Additional tile flag</source>
-                <target>Zusätzliches Kachel-Label (Störer)</target>
+            <trans-unit id="tx_rkwevents_domain_model_event.recordType.default">
+                <source>Default</source>
+                <target>Standard</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
-                <source>Recommended Events</source>
-                <target>Marginalspalte: Veranstaltungsempfehlungen (Fallback: Veranstaltungsreihe)</target>
+            <trans-unit id="tx_rkwevents_domain_model_event.recordType.announcement">
+                <source>Announcement</source>
+                <target>Ankündigung</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.recommended_links" approved="yes">
-                <source>Recommended Links</source>
-                <target>Marginalspalte: Weitere Empfehlungen</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.header_image" approved="yes">
-                <source>Header image</source>
-                <target>Header Bild (Hinweis: Ersetzt Kartenausschnitt auf Detailseite, wenn gesetzt)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.backend_user_exclusive" approved="yes">
-                <source>Backend User exclusive</source>
-                <target>Nur mit Direktlink erreichbar (außer für im Backend angemeldete Nutzende)</target>
-            </trans-unit>
+
+
 
 
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata" approved="yes">
@@ -372,25 +402,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_place_contact" approved="yes">
 				<source>Place and contact</source>
 				<target>Ort und Kontakt</target>
-			</trans-unit>
-
-
-			<!-- tx_rkwevents_domain_model_eventseries -->
-			<trans-unit id="tx_rkwevents_domain_model_eventseries" approved="yes">
-				<source>RKW Events: Event Series</source>
-				<target>RKW Events: Veranstaltungsreihen</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.name" approved="yes">
-				<source>Name</source>
-				<target>Name</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.short" approved="yes">
-				<source>Short</source>
-				<target>Kurzbeschreibung</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.rota" approved="yes">
-				<source>Rota</source>
-				<target>Turnus</target>
 			</trans-unit>
 
 
