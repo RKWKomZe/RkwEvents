@@ -556,6 +556,20 @@
                 <target>Keine passenden Veranstaltungen</target>
             </trans-unit>
 
+            <!-- Templates/Event/ListPrefiltered.html -->
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listPrefiltered.similarEvents" approved="yes">
+                <source>Prefiltered events</source>
+                <target>Ähnliche Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listPrefiltered.header" approved="yes">
+                <source>Also interesting</source>
+                <target>Auch interessant</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_event_listPrefiltered.noResults" approved="yes">
+                <source>No results</source>
+                <target>Keine passenden Veranstaltungen</target>
+            </trans-unit>
+
 
 			<!-- Templates/Event/Archive.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_event_archive.noEvent" approved="yes">

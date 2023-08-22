@@ -33,3 +33,25 @@ routeEnhancers:
         tableName: 'tx_rkwevents_domain_model_event'
         routeFieldPattern: '^(.*)-(?P<uid>\d+)$'
         routeFieldResult: '{title|sanitized}-{uid}'
+  RkwEvents1:
+    type: Extbase
+    namespace: 'tx_rkwevents_prefiltered'
+    routes:
+      - routePath: '/rkw-events/filtered-list'
+        _controller: 'Event::listPrefiltered'
+      - routePath: '/rkw-events/filtered-list/{page}'
+        _controller: 'Event::listPrefiltered'
+    defaultController: 'Event::listPrefiltered'
+    requirements:
+      page: '[0-9]{1,10}'
+  RkwEvents2:
+    type: Extbase
+    namespace: 'tx_rkwevents_similar'
+    routes:
+      - routePath: '/rkw-events/similar-list'
+        _controller: 'Event::listSimilar'
+      - routePath: '/rkw-events/similar-list/{page}'
+        _controller: 'Event::listSimilar'
+    defaultController: 'Event::listSimilar'
+    requirements:
+      page: '[0-9]{1,10}'

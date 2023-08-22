@@ -271,7 +271,14 @@
     <f:if condition="{editMode}">
         <f:else>
             <feRegister:consent type="terms" key="events" />
-            <feRegister:consent type="privacy" key="events" />
+            <f:if condition="{event.regSingle}">
+                <f:then>
+                    <feRegister:consent type="privacy" key="eventsSingle" />
+                </f:then>
+                <f:else>
+                    <feRegister:consent type="privacy" key="events" />
+                </f:else>
+            </f:if>
             <feRegister:consent type="marketing" />
         </f:else>
     </f:if>
