@@ -734,6 +734,14 @@
                 <source>Select participate in meeting checkbox</source>
             </trans-unit>
 
+
+            <trans-unit id="flexform.eventPrefiltered.general">
+                <source>General settings</source>
+            </trans-unit>
+            <trans-unit id="flexform.eventPrefiltered.categories">
+                <source>Filter: Category pre-select</source>
+            </trans-unit>
+
         </body>
 	</file>
 </xliff>

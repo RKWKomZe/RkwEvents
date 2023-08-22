@@ -406,6 +406,7 @@ class EventRepository extends AbstractRepository
                 }
                 $constraints[] = $query->logicalOr($categoryQueries);
             }
+
             // additional filter options
             if ($filter['time']) {
                 $month = date("M", intval($filter['time']));

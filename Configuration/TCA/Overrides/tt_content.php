@@ -17,6 +17,12 @@ ExtensionUtility::registerPlugin(
 
 ExtensionUtility::registerPlugin(
     $extKey,
+    'Prefiltered',
+    'RKW Events: Vorgefilterte Liste (flexform)'
+);
+
+ExtensionUtility::registerPlugin(
+    $extKey,
     'Eventtitle',
     'RKW Events: Title'
 );
@@ -110,6 +116,15 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
 $pluginSignature = str_replace('_','',$extKey) . '_standaloneregister';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_standaloneregister.xml';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
+    $fileName
+);
+
+// Prefiltered list
+$pluginSignature = str_replace('_','',$extKey) . '_prefiltered';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+$fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_events-prefiltered.xml';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     $pluginSignature,
     $fileName
