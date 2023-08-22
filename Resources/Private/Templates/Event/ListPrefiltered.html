@@ -20,7 +20,7 @@
 
         <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="replace" ajaxId="1">
 
-            <div class="tiles-wrapper">
+            <div class="flex-container">
 
                 <f:comment>
                     <!--
@@ -41,7 +41,7 @@
                             <div class="tiles flex-container flex-container--margin">
 
                                 <f:for each="{sortedEventList}" as="event">
-                                    <f:render partial="Event/List/Box" section="flex-4" arguments="{_all}" />
+                                    <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                                 </f:for>
                             </div>
                         </ajaxApi:ajaxWrapper>
@@ -54,7 +54,7 @@
                                     <f:link.action
                                         action="listPrefiltered"
                                         controller="Event"
-                                        pluginName="similar"
+                                        pluginName="prefiltered"
                                         extensionName="RkwEvents"
                                         class="btn btn--primary btn--centered mt-1 ajax"
                                         additionalParams="{tx_rkwevents_prefiltered: '{page: pageMore}', ajax_api : '{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \'2,3\'}'}"
