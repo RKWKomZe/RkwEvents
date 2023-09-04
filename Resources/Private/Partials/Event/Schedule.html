@@ -2,9 +2,9 @@
     xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-    <f:if condition="{event.schedule}">
+    <f:if condition="{event.series.schedule}">
         <h3><f:translate key="tx_rkwevents_fluid.partials_event_schedule.headline" /></h3>
 
-        <f:format.html>{event.schedule}</f:format.html>
+        <f:format.html>{event.series.schedule}</f:format.html>
     </f:if>
 </html>

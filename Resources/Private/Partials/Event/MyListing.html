@@ -10,7 +10,7 @@
                     <f:if condition="{eventReservation.event}">
                         <tr>
                             <td>
-                                <h3 class="h4">{eventReservation.event.title}</h3>
+                                <h3 class="h4">{eventReservation.event.series.title}</h3>
                                 <p>
                                     <!-- Time -->
                                     <f:if condition="{eventReservation.event.recordType} == '\RKW\RkwEvents\Domain\Model\EventScheduled'">

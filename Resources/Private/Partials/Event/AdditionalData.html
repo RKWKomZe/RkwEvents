@@ -7,25 +7,25 @@
             <tbody>
 
                 <f:comment><!-- Target Group--></f:comment>
-                <f:if condition="{event.targetGroup}">
+                <f:if condition="{event.series.targetGroup}">
                     <tr>
                         <th>
                             <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_group" />
                         </th>
 
                         <td>
-                            <f:format.htmlentities>{event.targetGroup}</f:format.htmlentities>
+                            <f:format.htmlentities>{event.series.targetGroup}</f:format.htmlentities>
                         </td>
                     </tr>
                 </f:if>
-                <f:if condition="{event.targetLearning}">
+                <f:if condition="{event.series.targetLearning}">
                     <tr>
                         <th>
                             <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.target_learning" />
                         </th>
 
                         <td>
-                            <f:format.raw>{event.targetLearning}</f:format.raw>
+                            <f:format.raw>{event.series.targetLearning}</f:format.raw>
                         </td>
                     </tr>
                 </f:if>
@@ -57,14 +57,14 @@
                 </f:if>
 
                 <f:comment><!-- Partner --></f:comment>
-                <f:if condition="{event.partner}">
+                <f:if condition="{event.series.partner}">
                     <tr>
                         <th>
                             <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.partner" />
                         </th>
 
                         <td>
-                            <f:format.html>{event.partner}</f:format.html>
+                            <f:format.html>{event.series.partner}</f:format.html>
                         </td>
                     </tr>
                 </f:if>
@@ -114,13 +114,13 @@
 
 
                 <f:comment><!-- Downloads --></f:comment>
-                <f:if condition="{event.addInfo}">
+                <f:if condition="{event.series.addInfo}">
                     <tr>
                         <th>
                             <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.schedule" />
                         </th>
                         <td>
-                            <f:for each="<rkw:falTranslationFix parentRecord='{event}' fieldName='add_info' />" as="download">
+                            <f:for each="<rkw:falTranslationFix parentRecord='{event.series}' fieldName='add_info' />" as="download">
                                 <a href="{download.originalResource.publicUrl}" target="_blank" title="{download.originalResource.title}" >
                                     <f:if condition="{download.originalResource.title}">
                                         <f:then>
