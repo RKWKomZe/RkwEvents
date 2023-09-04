@@ -7,7 +7,6 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     uid                     int(11) NOT NULL auto_increment,
     pid                     int(11) DEFAULT '0' NOT NULL,
 
-    record_type             varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventScheduled' NOT NULL,
     title                   varchar(255) DEFAULT '' NOT NULL,
     subtitle                varchar(255) DEFAULT '' NOT NULL,
     keywords                text,
@@ -21,7 +20,6 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     testimonials            text NOT NULL,
     header_image            int(11) unsigned DEFAULT '0',
     backend_user_exclusive  tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    additional_tile_flag    varchar(255) DEFAULT '' NOT NULL,
     recommended_events      varchar(255) DEFAULT '' NOT NULL,
     recommended_links       varchar(255) DEFAULT '' NOT NULL,
     document_type           varchar(255) DEFAULT '' NOT NULL,
@@ -29,6 +27,8 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     categories              varchar(255) DEFAULT '' NOT NULL,
     categories_displayed    varchar(255) DEFAULT '' NOT NULL,
     reg_inhouse             tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    project                  varchar(255) DEFAULT '' NOT NULL,
+    organizer                varchar(255) DEFAULT '' NOT NULL,
     event                   varchar(255) DEFAULT '' NOT NULL,
 
     tstamp                  int(11) unsigned DEFAULT '0' NOT NULL,

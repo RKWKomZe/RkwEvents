@@ -112,13 +112,6 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $backendUserExclusive = false;
 
     /**
-     * additionalTileFlag
-     *
-     * @var string
-     */
-    protected $additionalTileFlag = '';
-
-    /**
      * Holds recommendedLinks
      *
      * @var string
@@ -175,6 +168,20 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $categoriesDisplayed;
 
     /**
+     * department
+     *
+     * @var \RKW\RkwProjects\Domain\Model\Projects
+     */
+    protected $project = null;
+
+    /**
+     * Holds organizer
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer>
+     */
+    protected $organizer = null;
+
+    /**
      * Event
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event>
@@ -204,6 +211,7 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->recommendedEvents = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->categoriesDisplayed = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->organizer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->event = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
@@ -453,22 +461,6 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setBackendUserExclusive(bool $backendUserExclusive): void
     {
         $this->backendUserExclusive = $backendUserExclusive;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAdditionalTileFlag(): string
-    {
-        return $this->additionalTileFlag;
-    }
-
-    /**
-     * @param string $additionalTileFlag
-     */
-    public function setAdditionalTileFlag(string $additionalTileFlag): void
-    {
-        $this->additionalTileFlag = $additionalTileFlag;
     }
 
     /**
@@ -743,6 +735,71 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->event->detach($event);
     }
+
+    /**
+     * Returns the end
+     *
+     * @return \RKW\RkwProjects\Domain\Model\Projects
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * Sets the end
+     *
+     * @param \RKW\RkwProjects\Domain\Model\Projects $end
+     * @return void
+     */
+    public function setProject($end)
+    {
+        $this->project = $end;
+    }
+
+    /**
+     * Adds a organizer
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventOrganizer $organizer
+     * @return void
+     */
+    public function addOrganizer(\RKW\RkwEvents\Domain\Model\EventOrganizer $organizer)
+    {
+        $this->organizer->attach($organizer);
+    }
+
+    /**
+     * Removes a organizer
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventOrganizer $backendUser
+     * @return void
+     */
+    public function removeOrganizer(\RKW\RkwEvents\Domain\Model\EventOrganizer $organizer)
+    {
+        $this->organizer->detach($organizer);
+    }
+
+    /**
+     * Returns the organizer
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer> $organizer
+     */
+    public function getOrganizer()
+    {
+        return $this->organizer;
+    }
+
+    /**
+     * Sets the organizer
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer> $organizer
+     * @return void
+     */
+    public function setOrganizer(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $organizer)
+    {
+        $this->organizer = $organizer;
+    }
+
 
     /**
      * Returns the Event

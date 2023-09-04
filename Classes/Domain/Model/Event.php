@@ -222,18 +222,18 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $registerAddInformation;
 
     /**
+     * additionalTileFlag
+     *
+     * @var string
+     */
+    protected $additionalTileFlag = '';
+
+    /**
      * Holds place
      *
      * @var \RKW\RkwEvents\Domain\Model\EventPlace
      */
     protected $place = null;
-
-    /**
-     * department
-     *
-     * @var \RKW\RkwProjects\Domain\Model\Projects
-     */
-    protected $project = null;
 
     /**
      * Holds surveyBefore
@@ -290,13 +290,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\BackendUser>
      */
     protected $beUser = null;
-
-    /**
-     * Holds organizer
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer>
-     */
-    protected $organizer = null;
 
 
     /**
@@ -430,7 +423,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->externalContact = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->internalContact = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->beUser = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->organizer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->presentations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->gallery1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->gallery2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -964,6 +956,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return string
      */
+    public function getAdditionalTileFlag(): string
+    {
+        return $this->additionalTileFlag;
+    }
+
+    /**
+     * @param string $additionalTileFlag
+     */
+    public function setAdditionalTileFlag(string $additionalTileFlag): void
+    {
+        $this->additionalTileFlag = $additionalTileFlag;
+    }
+
+    /**
+     * @return string
+     */
     public function getCode()
     {
         return $this->code;
@@ -1049,27 +1057,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setPlace(\RKW\RkwEvents\Domain\Model\EventPlace $place)
     {
         $this->place = $place;
-    }
-
-    /**
-     * Returns the end
-     *
-     * @return \RKW\RkwProjects\Domain\Model\Projects
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-
-    /**
-     * Sets the end
-     *
-     * @param \RKW\RkwProjects\Domain\Model\Projects $end
-     * @return void
-     */
-    public function setProject($end)
-    {
-        $this->project = $end;
     }
 
     /**
@@ -1330,49 +1317,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->beUser = $beUser;
     }
 
-
-    /**
-     * Adds a organizer
-     *
-     * @param \RKW\RkwEvents\Domain\Model\EventOrganizer $organizer
-     * @return void
-     */
-    public function addOrganizer(\RKW\RkwEvents\Domain\Model\EventOrganizer $organizer)
-    {
-        $this->organizer->attach($organizer);
-    }
-
-    /**
-     * Removes a organizer
-     *
-     * @param \RKW\RkwEvents\Domain\Model\EventOrganizer $backendUser
-     * @return void
-     */
-    public function removeOrganizer(\RKW\RkwEvents\Domain\Model\EventOrganizer $organizer)
-    {
-        $this->organizer->detach($organizer);
-    }
-
-    /**
-     * Returns the organizer
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer> $organizer
-     */
-    public function getOrganizer()
-    {
-        return $this->organizer;
-    }
-
-    /**
-     * Sets the organizer
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer> $organizer
-     * @return void
-     */
-    public function setOrganizer(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $organizer)
-    {
-        $this->organizer = $organizer;
-    }
 
     /**
      * Adds a presentation

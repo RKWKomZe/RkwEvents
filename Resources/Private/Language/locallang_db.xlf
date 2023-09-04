@@ -77,6 +77,12 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.announcement">
                 <source>Announcement</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.project">
+                <source>Project</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
+                <source>Organizer</source>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_event -->
@@ -203,9 +209,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
 				<source>Internal Contacts (Display only)</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
-				<source>Organizer</source>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.be_user" approved="yes">
 				<source>Backend User (E-Mail only)</source>
 			</trans-unit>
@@ -242,9 +245,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.workshop3" approved="yes">
 				<source>Workshop 3</source>
 			</trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.project">
-                <source>Project</source>
-            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reminder_mail_tstamp" approved="yes">
 				<source>Reminder mail timestamp</source>
 			</trans-unit>

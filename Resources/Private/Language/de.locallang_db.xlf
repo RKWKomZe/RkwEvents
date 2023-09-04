@@ -106,6 +106,14 @@
                 <source>Announcement</source>
                 <target>Ankündigung</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.project">
+                <source>Project</source>
+                <target>Projekt</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.organizer" approved="yes">
+                <source>Organizer</source>
+                <target>Organisator</target>
+            </trans-unit>
 
 
 
@@ -271,10 +279,6 @@
 				<source>Internal Contact (Display only)</source>
 				<target phase-name="approval-1" state="final">Interne Ansprechperson (nur Anzeige)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
-				<source>Organizer</source>
-				<target>Organisator</target>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.be_user" approved="yes">
 				<source>Backend User (E-Mails only)</source>
 				<target>Backend-User (nur E-Mailbenachrichtigung)</target>
@@ -323,10 +327,6 @@
 				<source>Workshop 3</source>
 				<target>Workshops Block 3</target>
 			</trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.project">
-                <source>Project</source>
-                <target>Projekt</target>
-            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.reminder_mail_tstamp" approved="yes">
 				<source>Reminder mail timestamp</source>
 				<target>Erinnerungs-E-Mail verschickt</target>

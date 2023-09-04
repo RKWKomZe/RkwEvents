@@ -8,12 +8,12 @@
             controller="Event"
             pluginName="Pi1"
             extensionName="RkwEvents"
-            pageUid="{f:if(condition: '{event.organizer.0.showPid}', then: '{event.organizer.0.showPid}', else: '{showPid}')}"
+            pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
             arguments="{event : event}"
-            title="{event.title}"
+            title="{event.series.title}"
             target="{f:if(condition: '{settings.list.detailLinkTargetBlank} == 1', then: '_blank')}"
         >
-            {event.title}
+            {event.series.title}
         </f:link.action>
     </li>        
 

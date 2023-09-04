@@ -3,19 +3,19 @@
     data-namespace-typo3-fluid="true">
 
     <!-- Description -->
-    <f:format.html>{event.description}</f:format.html>
+    <f:format.html>{event.series.description}</f:format.html>
 
-    <f:format.html>{event.description2}</f:format.html>
+    <f:format.html>{event.series.description2}</f:format.html>
 
 
     <!-- Testimonials -->
     <f:if condition="{event.series}">
-        <f:if condition="{event.testimonials}">
+        <f:if condition="{event.series.testimonials}">
             <h3>
                 <f:translate key="tx_rkwevents_fluid.partials_events_additionalData.testimonials" />
 
             </h3>
-            <f:format.html>{event.testimonials}</f:format.html>
+            <f:format.html>{event.series.testimonials}</f:format.html>
         </f:if>
     </f:if>
 

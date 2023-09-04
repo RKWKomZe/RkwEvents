@@ -7,7 +7,7 @@
     <f:section name="main">
 
         <h2><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.headline" /></h2>
-        <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.introduction" arguments="{0: event.title}"/></f:format.raw></p>
+        <p><f:format.raw><f:translate key="tx_rkwevents_fluid.templates_eventReservation_show.introduction" arguments="{0: event.series.title}"/></f:format.raw></p>
 
         <f:render partial="FlashMessages" arguments="{_all}" />
 

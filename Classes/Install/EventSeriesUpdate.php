@@ -94,7 +94,6 @@ class EventSeriesUpdate implements UpgradeWizardInterface
                     // custom extension fields
                     'uid' => $row['uid'],
                     'pid' => $row['pid'],
-                    'record_type' => $row['record_type'],
                     'title' => $row['title'],
                     'subtitle' => $row['subtitle'],
                     'keywords' => $row['keywords'],
@@ -108,13 +107,14 @@ class EventSeriesUpdate implements UpgradeWizardInterface
                     'testimonials' => $row['testimonials'],
                     'reg_inhouse' => $row['reg_inhouse'],
                     'header_image' => $row['header_image'],
-                    'additional_tile_flag' => $row['additional_tile_flag'],
                     'recommended_events' => $row['recommended_events'],
                     'recommended_links' => $row['recommended_links'],
                     'backend_user_exclusive' => $row['backend_user_exclusive'],
                     'document_type' => $row['document_type'],
                     'department' => $row['department'],
                     'categories_displayed' => $row['categories_displayed'],
+                    'project' => $row['project'],
+                    'organizer' => $row['organizer'],
                 ])
                 ->execute();
 

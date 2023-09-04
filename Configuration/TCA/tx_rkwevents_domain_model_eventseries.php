@@ -10,7 +10,6 @@ return [
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => true,
-        'type' => 'record_type',
         'default_sortby' => 'ORDER BY title ASC',
 		'languageField' => 'sys_language_uid',
 		'transOrigPointerField' => 'l10n_parent',
@@ -19,32 +18,19 @@ return [
 		'enablecolumns' => [
 			'disabled' => 'hidden',
 		],
-		'searchFields' => 'record_type,title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,additional_tile_flag,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,event',
+		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,additional_tile_flag,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventseries.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, record_type, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, event',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, organizer, event',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, record_type, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, event'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, organizer, event'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
 	],
 	'columns' => [
-
-        'record_type' => [
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.recordType',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.recordType.default', '\RKW\RkwEvents\Domain\Model\EventScheduled'],
-                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.recordType.announcement', '\RKW\RkwEvents\Domain\Model\EventAnnouncement'],
-                ],
-                'default' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
-            ],
-        ],
 
 		'sys_language_uid' => [
 			'exclude' => 1,
@@ -240,15 +226,6 @@ return [
                 'default' => 0,
             ]
         ],
-        'additional_tile_flag' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.additional_tile_flag',
-            'config' => [
-                'type' => 'input',
-                'size' => 5,
-                'eval' => 'trim'
-            ],
-        ],
         'recommended_links' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.recommended_links',
@@ -350,6 +327,27 @@ return [
                 'maxitems'      => 1,
                 'size'          => 5,
 
+            ],
+        ],
+        'organizer' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.organizer',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventorganizer',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventorganizer.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventorganizer.last_name ASC, tx_rkwevents_domain_model_eventorganizer.company ASC, tx_rkwevents_domain_model_eventorganizer.email ASC',
+                'maxitems'      => 1,
+                'minitems' 		=> 1,
+                'size'          => 5,
+                'fieldControl'  => [
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'editPopup' => [
+                        'disabled' => false,
+                    ]
+                ]
             ],
         ],
         'event' => [

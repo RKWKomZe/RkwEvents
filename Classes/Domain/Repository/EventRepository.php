@@ -63,7 +63,7 @@ class EventRepository extends AbstractRepository
             !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication
             && !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
         ) {
-            return $query->logicalNot($query->equals('backendUserExclusive', 1));
+            return $query->logicalNot($query->equals('series.backendUserExclusive', 1));
         }
     }
 
@@ -263,7 +263,7 @@ class EventRepository extends AbstractRepository
         //always
         $constraints[] =
             $query->logicalNot(
-                $query->equals('title', '')
+                $query->equals('series.title', '')
             );
 
         $constraints[] = $this->constraintBackendUserExclusive();
@@ -394,15 +394,15 @@ class EventRepository extends AbstractRepository
 
             // 3. additional filter options
             if ($filter['department']) {
-                $constraints[] = $query->equals('department', intval($filter['department']));
+                $constraints[] = $query->equals('series.department', intval($filter['department']));
             }
             if ($filter['documentType']) {
-                $constraints[] = $query->equals('documentType', intval($filter['documentType']));
+                $constraints[] = $query->equals('series.documentType', intval($filter['documentType']));
             }
             if ($filter['category']) {
                 $categoryQueries = [];
                 foreach ($categoryList as $category) {
-                    $categoryQueries[] = $query->contains('categories', $category);
+                    $categoryQueries[] = $query->contains('series.categories', $category);
                 }
                 $constraints[] = $query->logicalOr($categoryQueries);
             }
@@ -444,7 +444,7 @@ class EventRepository extends AbstractRepository
                 && ($filter['project'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
             ) {
-                $constraints[] = $query->in('project', $projectUids);
+                $constraints[] = $query->in('series.project', $projectUids);
             }
             if ($filter['onlyOnlineEvents']) {
                 $constraints[] = $query->equals('online_event', 1);
@@ -496,7 +496,7 @@ class EventRepository extends AbstractRepository
             );
         $constraints[] =
             $query->logicalNot(
-                $query->equals('title', '')
+                $query->equals('series.title', '')
             );
 
         // backendUser special case
@@ -516,7 +516,7 @@ class EventRepository extends AbstractRepository
                 ($settings['projectUids'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
             ) {
-                $constraints[] = $query->in('project', $projectUids);
+                $constraints[] = $query->in('series.project', $projectUids);
             }
         }
 
@@ -574,7 +574,7 @@ class EventRepository extends AbstractRepository
 
         $query = $this->createQuery();
         $constraints[] = $query->lessThan('end', time());
-        $constraints[] = $query->logicalNot($query->equals('title', ''));
+        $constraints[] = $query->logicalNot($query->equals('series.title', ''));
 
         $constraints[] = $this->constraintBackendUserExclusive();
 
@@ -583,7 +583,7 @@ class EventRepository extends AbstractRepository
             && ($settings['projectUids'])
             && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
         ) {
-            $constraints[] = $query->in('project', $projectUids);
+            $constraints[] = $query->in('series.project', $projectUids);
         }
 
         return $query->matching(
@@ -613,7 +613,7 @@ class EventRepository extends AbstractRepository
 
         return $query->matching(
             $query->logicalAnd(
-                $query->equals('title', trim($title)),
+                $query->equals('series.title', trim($title)),
                 $query->equals('start', intval($start))
             )
         )->execute()->getFirst();
@@ -733,7 +733,7 @@ class EventRepository extends AbstractRepository
             );
         $constraints[] =
             $query->logicalNot(
-                $query->equals('title', '')
+                $query->equals('series.title', '')
             );
 
         $constraints[] = $this->constraintBackendUserExclusive();
@@ -772,19 +772,19 @@ class EventRepository extends AbstractRepository
             $settings['listSimilar']['searchQuery']['byDepartment']
             && $event->getDepartment()
         ) {
-            $constraintsSubQueryOr[] = $query->equals('department', $event->getDepartment());
+            $constraintsSubQueryOr[] = $query->equals('series.department', $event->getDepartment());
         }
          if (
              $settings['listSimilar']['searchQuery']['byDocumentType']
              && $event->getDocumentType())
          {
-             $constraintsSubQueryOr[] = $query->equals('documentType', $event->getDocumentType());
+             $constraintsSubQueryOr[] = $query->equals('series.documentType', $event->getDocumentType());
          }
          if (
              $settings['listSimilar']['searchQuery']['byCategories']
              && $event->getCategories()->count())
          {
-             $categoryQueries[] = $query->in('categories', $event->getCategories());
+             $categoryQueries[] = $query->in('series.categories', $event->getCategories());
              $constraintsSubQueryOr[] = $query->logicalOr($categoryQueries);
          }
          if (
@@ -792,7 +792,7 @@ class EventRepository extends AbstractRepository
              && $settings['listSimilar']['searchQuery']['byProject']
              && $event->getProject()
          ) {
-             $constraintsSubQueryOr[] = $query->equals('project', $event->getProject());
+             $constraintsSubQueryOr[] = $query->equals('series.project', $event->getProject());
          }
 
          // fallback, if nothing is set
