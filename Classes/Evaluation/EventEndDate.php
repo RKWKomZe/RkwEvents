@@ -15,12 +15,12 @@ namespace RKW\RkwEvents\Evaluation;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwBasics\Utility\GeneralUtility;
+use Madj2k\CoreExtended\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Class EventEndDate
@@ -67,8 +67,8 @@ class EventEndDate
 
         if ($courseStart > $courseEnd) {
             $this->flashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('evaluation.oops', 'rkw_events'),
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('evaluation.eventEndDate.error', 'rkw_events'),
+                LocalizationUtility::translate('evaluation.oops', 'rkw_events'),
+                LocalizationUtility::translate('evaluation.eventEndDate.error', 'rkw_events'),
                 FlashMessage::ERROR
             );
             $set = false; //do not save value

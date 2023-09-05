@@ -14,6 +14,10 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEvents\Service\RkwMailService;
+use TYPO3\CMS\Core\Log\LogLevel;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -78,7 +82,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
      * @param int $timeFrame Defines when we start to send e-mails as reminder for the user before the event starts (start
      *     time of event <= time() + $timeFrame; in seconds; default: 86400)
      */
-    public function informUserUpcomingEventCommand($timeFrame = 86400)
+    public function informUserUpcomingEventCommand(int $timeFrame = 86400)
     {
         try {
             $eventList = $this->eventRepository->findUpcomingEventsForReminder($timeFrame);
@@ -90,8 +94,8 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
                     if ($eventReservationList = $event->getReservation()) {
 
                         // send mails
-                        /** @var \RKW\RkwEvents\Service\RkwMailService $mailService */
-                        $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwEvents\Service\RkwMailService::class);
+                        /** @var RkwMailService $mailService */
+                        $mailService = GeneralUtility::makeInstance(RkwMailService::class);
                         $mailService->informUpcomingEventUser($eventReservationList, $event);
 
                         // set timestamp in event, so that mails are not send twice
@@ -99,17 +103,17 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
                         $this->eventRepository->update($event);
                         $this->persistenceManager->persistAll();
 
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully sent %s reminder mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
+                        $this->getLogger()->log(LogLevel::INFO, sprintf('Successfully sent %s reminder mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
                     } else {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No reservations found for upcoming event %s. No reminder mail sent.', $event->getUid()));
+                        $this->getLogger()->log(LogLevel::INFO, sprintf('No reservations found for upcoming event %s. No reminder mail sent.', $event->getUid()));
                     }
                 }
             } else {
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No relevant events found for reminder mail.'));
+                $this->getLogger()->log(LogLevel::INFO, sprintf('No relevant events found for reminder mail.'));
             }
 
         } catch (\Exception $e) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to send an inform mail about an upcoming event. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+            $this->getLogger()->log(LogLevel::ERROR, sprintf('An error occurred while trying to send an inform mail about an upcoming event. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
         }
 
     }
@@ -123,7 +127,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
      */
     public function sendSurveyForPastEventCommand($timeFrame = 86400)
     {
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_survey')) {
+        if (ExtensionManagementUtility::isLoaded('rkw_survey')) {
             try {
                 $eventList = $this->eventRepository->findAllByPastEvents($timeFrame);
                 if (count($eventList)) {
@@ -133,25 +137,25 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
 
                         if ($eventReservationList = $event->getReservation()) {
 
-                            /** @var \RKW\RkwEvents\Service\RkwMailService $mailService */
-                            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwEvents\Service\RkwMailService::class);
+                            /** @var RkwMailService $mailService */
+                            $mailService = GeneralUtility::makeInstance(RkwMailService::class);
                             $mailService->sendSurveyForPastEvent($eventReservationList);
 
                             $event->setSurveyAfterMailTstamp(time());
                             $this->eventRepository->update($event);
                             $this->persistenceManager->persistAll();
 
-                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully sent %s survey mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
+                            $this->getLogger()->log(LogLevel::INFO, sprintf('Successfully sent %s survey mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
                         } else {
-                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No reservations found for event %s. No survey mail sent.', $event->getUid()));
+                            $this->getLogger()->log(LogLevel::INFO, sprintf('No reservations found for event %s. No survey mail sent.', $event->getUid()));
                         }
                     }
                 } else {
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No relevant events found for survey mail.'));
+                    $this->getLogger()->log(LogLevel::INFO, sprintf('No relevant events found for survey mail.'));
                 }
 
             } catch (\Exception $e) {
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to send an survey mail about a past event. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+                $this->getLogger()->log(LogLevel::ERROR, sprintf('An error occurred while trying to send an survey mail about a past event. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
             }
         }
     }
@@ -165,7 +169,7 @@ class EventCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCo
     protected function getLogger()
     {
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
         }
 
         return $this->logger;

@@ -369,6 +369,18 @@
             </trans-unit>
 
 
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_additionaldata" approved="yes">
+                <source>Additional data</source>
+                <target>Zusatzdaten</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_basicdata" approved="yes">
+                <source>Basic data</source>
+                <target>Basisdaten</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_other" approved="yes">
+                <source>Other</source>
+                <target>Sonstiges</target>
+            </trans-unit>
 
 
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata" approved="yes">

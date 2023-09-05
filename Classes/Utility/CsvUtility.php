@@ -181,7 +181,7 @@ class CsvUtility
         // 2. event content
         $row = [];
         // add all reservation values
-        $row[] = $event->getTitle();
+        $row[] = $event->getSeries()->getTitle();
         $row[] = date('d.m.Y', $event->getStart());
         $row[] = date('d.m.Y', $event->getEnd());
         if ($event->getPlace() instanceof EventPlace) {

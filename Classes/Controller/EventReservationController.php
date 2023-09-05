@@ -510,7 +510,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * Comment by Maximilian Fäßler: We get tricky validation issues here (https://rkwticket.rkw.de/issues/2803)
      * -> So we ignore the validation itself and checking with internal alias "instanceof" for trustful data
      * -> Benefit: We can set more helpful error messages for frontend users
-     * Added by Maximilian Fäßler | FäßlerWeb
      *
      * @param Event $event
      * @param string $tokenUser
