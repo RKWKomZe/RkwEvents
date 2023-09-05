@@ -59,7 +59,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	uid                      int(11) NOT NULL auto_increment,
 	pid                      int(11) DEFAULT '0' NOT NULL,
 
-
+    /*
     title                    varchar(255) DEFAULT '' NOT NULL,
     subtitle                 varchar(255) DEFAULT '' NOT NULL,
     keywords                 text,
@@ -82,6 +82,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
     categories_displayed     varchar(255) DEFAULT '' NOT NULL,
     reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
     backend_user_exclusive   tinyint(1) unsigned DEFAULT '0' NOT NULL,
+     */
 
 
 	record_type              varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventScheduled' NOT NULL,

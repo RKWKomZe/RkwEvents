@@ -356,7 +356,7 @@ return [
         ],
         'organizer' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.organizer',
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.organizer',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
@@ -382,6 +382,7 @@ return [
                 'type' => 'inline',
                 'foreign_table' => 'tx_rkwevents_domain_model_event',
                 'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.deleted = 0',
+                'foreign_field' => 'series',
                 'maxitems'      => 9999,
                 'minitems'      => 0,
                 'size'          => 5,
