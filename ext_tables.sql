@@ -90,26 +90,6 @@ CREATE TABLE tx_rkwevents_domain_model_event
       */
 
 
-    title                    varchar(255) DEFAULT '' NOT NULL,
-    subtitle                 varchar(255) DEFAULT '' NOT NULL,
-    keywords                 text,
-    testimonials             text NOT NULL,
-    description              text NOT NULL,
-    description2             text NOT NULL,
-    target_learning          text NOT NULL,
-    target_group             text NOT NULL,
-    schedule                 text NOT NULL,
-    partner                  text NOT NULL,
-    project                  varchar(255) DEFAULT '' NOT NULL,
-    organizer                varchar(255) DEFAULT '' NOT NULL,
-    add_info                 varchar(255) DEFAULT '' NOT NULL,
-    document_type            varchar(255) DEFAULT '' NOT NULL,
-    department               varchar(255) DEFAULT '' NOT NULL,
-    categories               varchar(255) DEFAULT '' NOT NULL,
-    categories_displayed     varchar(255) DEFAULT '' NOT NULL,
-    reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
-
-
 	start                    int(11) unsigned DEFAULT '0' NOT NULL,
 	end                      int(11) unsigned DEFAULT '0' NOT NULL,
 	show_time                tinyint(1) unsigned DEFAULT '1' NOT NULL,

@@ -467,12 +467,10 @@ return [
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwevents_domain_model_eventseries',
-                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventseries.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventseries.name ASC',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventseries.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventseries.title ASC',
                 'maxitems'      => 1,
-                'size'          => 5,
-
             ],
         ],
         'logos' => [

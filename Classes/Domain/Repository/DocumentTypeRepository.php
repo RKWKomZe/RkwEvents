@@ -122,9 +122,11 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         $query->statement(
             'SELECT tx_rkwbasics_domain_model_documenttype.*
             FROM tx_rkwbasics_domain_model_documenttype
-            LEFT JOIN tx_rkwevents_domain_model_event
-            ON tx_rkwbasics_domain_model_documenttype.uid = tx_rkwevents_domain_model_event.document_type
-            WHERE tx_rkwbasics_domain_model_documenttype.uid IN (tx_rkwevents_domain_model_event.document_type)
+            LEFT JOIN tx_rkwevents_domain_model_eventseries ON tx_rkwbasics_domain_model_documenttype.uid = tx_rkwevents_domain_model_eventseries.document_type
+            LEFT JOIN tx_rkwevents_domain_model_event ON tx_rkwevents_domain_model_event.series = tx_rkwevents_domain_model_eventseries.uid
+            WHERE tx_rkwbasics_domain_model_documenttype.uid IN (tx_rkwevents_domain_model_eventseries.document_type)
+            AND tx_rkwevents_domain_model_eventseries.hidden = 0
+            AND tx_rkwevents_domain_model_eventseries.deleted = 0
             AND tx_rkwevents_domain_model_event.hidden = 0
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
