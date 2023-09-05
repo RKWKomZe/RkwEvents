@@ -2,6 +2,8 @@
 
 namespace RKW\RkwEvents\Domain\Repository;
 
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventSeries;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
@@ -629,7 +631,7 @@ class EventRepository extends AbstractRepository
      * @return mixed
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findRunningBySeries($event)
+    public function findRunningBySeries(Event $event)
     {
         $query = $this->createQuery();
 
@@ -752,14 +754,14 @@ class EventRepository extends AbstractRepository
         );
 
         // exclude given event series
-        if ($event->getSeries()->count()) {
+        if ($event->getSeries() instanceof EventSeries) {
             $constraints[] = $query->logicalNot(
                 $query->equals('series', $event->getSeries())
             );
         }
 
         // exclude manually set recommendations (returned through other plugin "seriesProposals")
-        if ($event->getRecommendedEvents()->count()) {
+        if ($event->getSeries()->getRecommendedEvents()->count()) {
             $constraints[] = $query->logicalNot(
                 $query->in('uid', $event->getRecommendedEvents())
             );
@@ -771,29 +773,29 @@ class EventRepository extends AbstractRepository
 
         if (
             $settings['listSimilar']['searchQuery']['byDepartment']
-            && $event->getDepartment()
+            && $event->getSeries()->getDepartment()
         ) {
-            $constraintsSubQueryOr[] = $query->equals('series.department', $event->getDepartment());
+            $constraintsSubQueryOr[] = $query->equals('series.department', $event->getSeries()->getDepartment());
         }
          if (
              $settings['listSimilar']['searchQuery']['byDocumentType']
-             && $event->getDocumentType())
+             && $event->getSeries()->getDocumentType())
          {
-             $constraintsSubQueryOr[] = $query->equals('series.documentType', $event->getDocumentType());
+             $constraintsSubQueryOr[] = $query->equals('series.documentType', $event->getSeries()->getDocumentType());
          }
          if (
              $settings['listSimilar']['searchQuery']['byCategories']
-             && $event->getCategories()->count())
+             && $event->getSeries()->getCategories()->count())
          {
-             $categoryQueries[] = $query->in('series.categories', $event->getCategories());
+             $categoryQueries[] = $query->in('series.categories', $event->getSeries()->getCategories());
              $constraintsSubQueryOr[] = $query->logicalOr($categoryQueries);
          }
          if (
              ExtensionManagementUtility::isLoaded('rkw_projects')
              && $settings['listSimilar']['searchQuery']['byProject']
-             && $event->getProject()
+             && $event->getSeries()->getProject()
          ) {
-             $constraintsSubQueryOr[] = $query->equals('series.project', $event->getProject());
+             $constraintsSubQueryOr[] = $query->equals('series.project', $event->getSeries()->getProject());
          }
 
          // fallback, if nothing is set

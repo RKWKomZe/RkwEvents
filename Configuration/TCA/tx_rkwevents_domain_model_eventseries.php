@@ -25,10 +25,35 @@ return [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, organizer, event',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, organizer, event'],
+		'1' => [
+            'showitem' => '
+            
+            title, subtitle, event,
+            
+            --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_basicdata,
+            reg_inhouse, document_type, department, categories, categories_displayed, organizer,
+            
+            --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_additionaldata,
+            keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info, 
+            
+             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
+            header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive,
+            
+            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+            --palette--;;dataFields, --palette--;;systemFields,
+            
+            '
+        ],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
+        'dataFields' => [
+            'showitem' => 'hidden, sys_language_uid, l10n_parent, l10n_diffsource',
+        ],
+        'systemFields' => [
+            'showitem' => 'starttime, endtime',
+            'isHiddenPalette' => true,
+        ],
 	],
 	'columns' => [
 

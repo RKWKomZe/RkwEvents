@@ -5,6 +5,7 @@ namespace RKW\RkwEvents\Controller;
 use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventSeries;
 use RKW\RkwEvents\Domain\Model\FrontendUser;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -592,11 +593,11 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
 
         if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
-            if ($event->getRecommendedEvents()->count()) {
-                $eventList = $event->getRecommendedEvents();
+            if ($event->getSeries()->getRecommendedEvents()->count()) {
+                $eventList = $event->getSeries()->getRecommendedEvents();
             } else {
                 // fallback
-                if ($event->getSeries()->count()) {
+                if ($event->getSeries() instanceof EventSeries) {
                     $eventList = $this->eventRepository->findRunningBySeries($event);
                 }
             }
