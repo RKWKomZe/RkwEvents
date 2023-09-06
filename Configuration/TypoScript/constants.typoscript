@@ -185,6 +185,14 @@ plugin.tx_rkwevents {
             }
         }
 
+        listRegInhouse {
+            # cat=plugin.tx_rkwevents; type=integer; label=Number of items in list similar view
+            itemsPerPage = 2
+
+            # cat=plugin.tx_rkwevents; type=bool; label=Show more link
+            showMoreLink = 1
+        }
+
 		mandatoryFields {
 
 			# cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of main person. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)

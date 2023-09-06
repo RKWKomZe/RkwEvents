@@ -122,9 +122,6 @@ call_user_func(
             )
         );
 
-        //=================================================================
-        // Configure Plugins
-        //=================================================================
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
             'Standaloneregister',
@@ -134,6 +131,18 @@ call_user_func(
             // non-cacheable actions
             array(
                 'EventReservation' => 'newStandalone, create, optIn',
+            )
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
+            'Reginhouselist',
+            array(
+                'Event' => 'listRegInhouse'
+            ),
+            // non-cacheable actions
+            array(
+                'Event' => 'listRegInhouse'
             )
         );
 

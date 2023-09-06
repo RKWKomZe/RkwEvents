@@ -342,6 +342,44 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
 
     /**
+     * action listRegInhouse
+     * returns events with "reg_inhouse" (now part of EventSeries)
+     *
+     * @param int $page
+     * @return void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function listRegInhouseAction(int $page = 0)
+    {
+
+        $listItemsPerView = intval($this->settings['listRegInhouse']['itemsPerPage']) ?: 6;
+        $queryResult = $this->eventRepository->findByRegInhouse($listItemsPerView, $page);
+        $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView, $page);
+
+        if ($this->settings['listRegInhouse']['showMoreLink']) {
+            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+            if ($page > 0) {
+                $showMoreLink = count($eventList) < (count($queryResult) - 1) ? true : false;
+            }
+        } else {
+            $showMoreLink = false;
+        }
+
+        // target template is also used by ajax - so we have to set typoscript settings this way
+        $this->view->assignMultiple(
+            array(
+                'sortedEventList' => $eventList,
+                'ajaxTypeNum'     => intval($this->settings['ajaxTypeNum']),
+                'showPid'         => intval($this->settings['showPid']),
+                'pageMore'        => $page + 1,
+                'showMoreLink'    => $showMoreLink,
+            )
+        );
+
+    }
+
+
+    /**
      * action archive
      *
      * @return void
