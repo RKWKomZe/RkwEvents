@@ -193,7 +193,7 @@ return [
                 'type' => 'check',
                 'default' => 0
             ],
-            'displayCond' => 'FIELD:reg_required:REQ:true',
+            //'displayCond' => 'FIELD:reg_required:REQ:true',
         ],
         'schedule' => [
             'exclude' => 0,
@@ -383,6 +383,7 @@ return [
                 'foreign_table' => 'tx_rkwevents_domain_model_event',
                 'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.deleted = 0',
                 'foreign_field' => 'series',
+                'foreign_sortby' => 'sorting',
                 'maxitems'      => 9999,
                 'minitems'      => 0,
                 'size'          => 5,

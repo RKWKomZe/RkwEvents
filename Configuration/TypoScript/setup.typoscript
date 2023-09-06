@@ -323,6 +323,11 @@ plugin.tx_rkwevents {
             }
         }
 
+        listRegInhouse {
+            itemsPerPage = {$plugin.tx_rkwevents.settings.listRegInhouse.itemsPerPage}
+            showMoreLink = {$plugin.tx_rkwevents.settings.listRegInhouse.showMoreLink}
+        }
+
 		mandatoryFields {
 			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
 			eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}

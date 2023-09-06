@@ -701,8 +701,9 @@ class EventRepository extends AbstractRepository
         return $query->execute();
     }
 
+
     /**
-     * findByFilterOptions
+     * findSimilar
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @param int $limit
@@ -816,6 +817,66 @@ class EventRepository extends AbstractRepository
 
         return $query->execute();
     }
+
+
+    /**
+     * findByRegInhouse
+     *
+     * @param int $limit
+     * @param int $page
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findByRegInhouse($limit, $page)
+    {
+        // results between 'from' and 'till' (with additional proof item to check, if there are more results -> +1)
+        $offset = $page * $limit;
+        $limit = $limit + 1;
+
+        // if we are on a page > 1, we also fetch none item twice
+        // we need this to figure out which date was the last for grouping!
+        if ($page > 0) {
+            $offset--;
+            $limit++;
+        }
+
+        $query = $this->createQuery();
+
+
+        $constraints[] = $query->equals('series.regInhouse', 1);
+
+        // query basics as "AND" query
+        // !! do NOT show already running events !!
+        $constraints[] =
+            $query->logicalOr(
+                $query->greaterThanOrEqual('start', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            );
+
+        $constraints[] =
+            $query->logicalNot(
+                $query->equals('series.title', '')
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
+
+        $query->setOrderings(
+            array(
+                'record_type' => QueryInterface::ORDER_DESCENDING,
+                'start' => QueryInterface::ORDER_ASCENDING,
+            )
+        );
+
+        // NOW: construct final query!
+        $query->matching($query->logicalAnd(array_filter($constraints)));
+        $query->setOffset($offset);
+        $query->setLimit($limit);
+
+        return $query->execute();
+    }
+
+
 
     /**
      * Returns logger instance

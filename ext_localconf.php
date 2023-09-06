@@ -146,6 +146,18 @@ call_user_func(
             )
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
+            'Reginhouselist',
+            array(
+                'Event' => 'listRegInhouse'
+            ),
+            // non-cacheable actions
+            array(
+                'Event' => 'listRegInhouse'
+            )
+        );
+
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesUpdate'] = \RKW\RkwEvents\Install\EventSeriesUpdate::class;
 
