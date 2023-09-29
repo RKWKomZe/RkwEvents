@@ -1,3 +1,8 @@
+#typo3-docbody {
+    margin-bottom: 0;
+    font-size:1.3em;
+}
+
 .tx-rkwevents-backend textarea {
 	width:100%;
 	height:300px;
@@ -80,4 +85,111 @@ table.tx-rkwevents-list a,
 table.tx-rkwevents-list a:link,
 table.tx-rkwevents-list a:visited {
     color:#e64415;
+}
+
+
+/** ==================================================================================  */
+/**
+* COMPONENTS/TYPO3 Message
+*
+*  Severity:
+*   const NOTICE = -2;
+*   const INFO = -1;
+*   const OK = 0;
+*   const WARNING = 1;
+*   const ERROR = 2;
+* ================================================== */
+
+.system-message {
+    font-weight: bold;
+    border: 4px solid #505050;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    margin: 0 0 2em 0;
+    padding: 1em 1em 0.5em 1em;
+}
+
+.system-message__item {
+    font-size: 18px !important;
+    font-size: 1.125rem;
+    margin-bottom: 0.5em;
+    padding-left: 2em;
+    display: block;
+}
+
+.system-message__item a,
+.system-message__item a:link,
+.system-message__item a:visited,
+.system-message__item a:hover {
+    text-decoration: underline;
+}
+
+.system-message__item:before {
+    font-size: 18px !important;
+    font-size: 1.125rem;
+    line-height: 1.2em;
+    content: "\0021";
+    display: block;
+    float: left;
+    margin: 0.1em 0 0 -1.5em;
+}
+
+.system-message__item--severity-1 {
+    color: #e16a00;
+}
+
+.system-message__item--severity-1:before {
+    content: "?";
+}
+
+.system-message__item--severity-1 a,
+.system-message__item--severity-1 a:link,
+.system-message__item--severity-1 a:visited,
+.system-message__item--severity-1 a:hover {
+    color: #e16a00;
+}
+
+.system-message__item--severity0 {
+    color: #408040;
+}
+
+.system-message__item--severity0:before {
+    content: "\2714";
+}
+
+.system-message__item--severity0 a,
+.system-message__item--severity0 a:link,
+.system-message__item--severity0 a:visited,
+.system-message__item--severity0 a:hover {
+    color: #408040;
+}
+
+.system-message__item--severity1 {
+    color: #e16a00;
+}
+
+.system-message__item--severity1 a,
+.system-message__item--severity1 a:link,
+.system-message__item--severity1 a:visited,
+.system-message__item--severity1 a:hover {
+    color: #e16a00;
+}
+
+.system-message__item--severity2 {
+    color: #ff0002;
+}
+
+.system-message__item--severity2:before {
+    content: "\0021\0021";
+}
+
+.system-message__item--severity2 a,
+.system-message__item--severity2 a:link,
+.system-message__item--severity2 a:visited,
+.system-message__item--severity2 a:hover {
+    color: #ff0002;
+}
+
+.system-message ol, .system-message ul {
+    margin-bottom: 0;
 }
