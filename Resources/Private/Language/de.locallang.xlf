@@ -360,12 +360,12 @@
 				<target>Es konnte nichts zum Importieren gefunden werden.</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.importSuccessfull" approved="no">
-				<source>Successfully imported %s events, created %s new event locations and %s new external contacts.</source>
-				<target phase-name="approval-1" state="final">Es wurden %s Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpersonen importiert.</target>
+				<source>Successfully imported %s events.</source>
+				<target phase-name="approval-1" state="final">Es wurden %s Veranstaltungen importiert.</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.importCheckSuccessfull" approved="no">
 				<source>Import-Check successfull.</source>
-				<target phase-name="approval-1" state="final">Import-Check erfolgreich. Es wurden %s neue Veranstaltungen, %s neue Veranstaltungsorte und %s neue externe Ansprechpersonen gefunden.</target>
+				<target phase-name="approval-1" state="final">Import-Check erfolgreich.</target>
 			</trans-unit>
 			<trans-unit id="backendController.error.importWrongFiletype">
                 <source>You have to use CSV files.</source>

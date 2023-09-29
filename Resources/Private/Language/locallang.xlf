@@ -276,10 +276,10 @@
 				<source>Nothing found for import.</source>
 			</trans-unit>
 			<trans-unit id="backendController.error.importSuccessfull">
-				<source>Successfully imported %s events, created %s new event locations and %s new external contacts.</source>
+				<source>Successfully imported %s events.</source>
 			</trans-unit>
 			<trans-unit id="backendController.error.importCheckSuccessfull">
-				<source>Import-Check successfull.</source>
+				<source>Import-Check successful.</source>
 			</trans-unit>
 			<trans-unit id="backendController.error.importWrongFiletype">
                 <source>You have to use CSV files.</source>

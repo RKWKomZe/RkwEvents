@@ -101,7 +101,6 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 ),
             ));
 
-
             // set reply address
             if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
                 if (count($optIn->getData()->getEvent()->getInternalContact()) > 0) {
@@ -309,8 +308,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     public function informUpcomingEventUser(
         \TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventReservationList,
         \RKW\RkwEvents\Domain\Model\Event $event
-    )
-    {
+    ){
 
         // get settings
         $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
@@ -359,6 +357,21 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
                             ),
                         ));
+                    }
+                }
+
+                // set reply address
+                if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
+                    if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
+
+                        /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
+                        foreach ($eventReservation->getEvent()->getInternalContact() as $contact) {
+
+                            if ($contact->getEmail()) {
+                                $mailService->getQueueMail()->setReplyToAddress($contact->getEmail());
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -518,14 +531,16 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             ));
 
             // set reply address
-            if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
+            if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
+                if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
 
-                /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
-                foreach ($eventReservation->getEvent()->getInternalContact() as $contact) {
+                    /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
+                    foreach ($eventReservation->getEvent()->getInternalContact() as $contact) {
 
-                    if ($contact->getEmail()) {
-                        $mailService->getQueueMail()->setReplyAddress($contact->getEmail());
-                        break;
+                        if ($contact->getEmail()) {
+                            $mailService->getQueueMail()->setReplyToAddress($contact->getEmail());
+                            break;
+                        }
                     }
                 }
             }
