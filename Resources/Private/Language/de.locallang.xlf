@@ -219,12 +219,10 @@
 				<source>No user logged in!</source>
 				<target>Sie sind nicht angemeldet. Bitte loggen Sie sich ein.</target>
 			</trans-unit>
-
 			<trans-unit id="eventController.message.error.notPermitted">
 				<source>Not permitted!</source>
 				<target><![CDATA[Zugriff verweigert. Bitte wenden Sie sich an den <a href="mailto:service@rkw.de">Support</a>.]]></target>
 			</trans-unit>
-
 			<trans-unit id="eventController.message.error.notAvailable">
                 <source>This event does not exist anymore.</source>
                 <target><![CDATA[Oops! Diese Veranstaltung steht leider nicht mehr zur Verfügung.<br/><a href="%s">Interessante Veranstaltungen gesucht? Klicken Sie hier!</a> ]]></target>
@@ -304,74 +302,23 @@
 				<target phase-name="approval-1" state="final">Hm, die gewünschte E-Mailadresse wird bereits von einem anderen Nutzenden verwendet. Bitte geben Sie eine andere E-Mailadresse an.</target>
 			</trans-unit>
 
-
-
 			<!-- BackendController -->
-			<trans-unit id="backendController.error.noBasicDataGiven">
-				<source>No title and time for event given. Event skipped (CSV-LINE:%s).</source>
-				<target>Weder Titel noch Beginn der Veranstaltung angegeben. Veranstaltung ignoriert (CSV-ZEILE: %s).</target>
+			<trans-unit id="backendController.error.wrongFileType">
+				<source>The selected file is not a valid CSV file.</source>
+				<target>Die ausgewählte Datei ist keine gültige CSV-Datei.</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.eventAlreadyExists">
-				<source>Event with title "%s" already exists on given Date/Time (%s). Event skipped (CSV-LINE:%s).</source>
-				<target>Veranstaltung mit dem Titel "%s" am angegebenen Zeitpunkt (%s) existiert bereits. Veranstaltung ignoriert (CSV-ZEILE: %s).</target>
+			<trans-unit id="backendController.error.importFailed">
+				<source>Unfortunately, the import failed: %s</source>
+				<target>Der Import ist leider fehlgeschlagen: %s</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.moreThanOnePlace">
-				<source>More than one possible match in existing data-sets for given event location found. No event location added to event (CSV-LINE:%s).</source>
-				<target>Mehr als ein Treffer für angegeben Veranstaltungsort in den bestehenden Datensätzen gefunden. Kein Veranstaltungsort zugeordnet (CSV-ZEILE: %s).</target>
+			<trans-unit id="backendController.warning.nothingImported">
+				<source>No records were imported.</source>
+				<target>Es wurden keine Datensätze importiert.</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.invalidCountryCode">
-				<source>Invalid country code "%s" given. No country set (CSV-LINE:%s).</source>
-				<target>Ungültiger Ländercode "%s" gesetzt. Kein Land zugeordnet (CSV-ZEILE: %s).</target>
+			<trans-unit id="backendController.message.importSuccessful">
+				<source>The import was successful. Imported records:</source>
+				<target>Der Import war erfolgreich. Importierte Datensätze: %s</target>
 			</trans-unit>
-			<trans-unit id="backendController.error.invalidCurrencyCode">
-				<source>Invalid currency code "%s" given. No currency set (CSV-LINE:%s).</source>
-				<target>Ungültige Währung "%s" gesetzt. Keine Währung zugeordnet (CSV-ZEILE: %s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.noEventLocationGiven">
-				<source>No event location given. Event skipped (CSV-LINE:%s).</source>
-				<target>Kein Veranstaltungsort angegeben. Veranstaltung ignoriert (CSV-ZEILE: %s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.geoDataApiOffline">
-				<source>Could not fetch Geo-Data. Reason: %s (CSV-LINE:%s).</source>
-				<target>Konnte Geo-Daten zum Veranstaltungsort nicht holen. Grund: %s (CSV-ZEILE: %s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.noBackendUserFound">
-				<source>Event seems to be an internal one, but no BE-User for notifications could be set (CSV-LINE:%s).</source>
-				<target>Für die offenbar interne Veranstaltung konnte kein BE-User für Anmeldungen gesetzt werden (CSV-ZEILE: %s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.ignoredRow">
-				<source>Ignored invalid row "%s".</source>
-				<target>Ignoriere ungültige Spalte "%s".</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.departmentNotFound">
-				<source>Could not find department/topic with id %s. Nothing set (CSV-LINE:%s).</source>
-				<target>Fachbereich/Schwerpunkt mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.documentTypeNotFound">
-				<source>Could not find documentType with id %s. Nothing set (CSV-LINE:%s).</source>
-				<target>Veranstaltungsart mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.organizerNotFound" approved="no">
-				<source>Could not find organizer with id %s. Nothing set (CSV-LINE:%s).</source>
-				<target phase-name="approval-1" state="final">Organisierende mit der ID %s konnte nicht gefunden werden. Nichts zugeordnet. (CSV-LINE:%s).</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.nothingImported">
-				<source>Nothing found for import.</source>
-				<target>Es konnte nichts zum Importieren gefunden werden.</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.importSuccessfull" approved="no">
-				<source>Successfully imported %s events.</source>
-				<target phase-name="approval-1" state="final">Es wurden %s Veranstaltungen importiert.</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.importCheckSuccessfull" approved="no">
-				<source>Import-Check successfull.</source>
-				<target phase-name="approval-1" state="final">Import-Check erfolgreich.</target>
-			</trans-unit>
-			<trans-unit id="backendController.error.importWrongFiletype">
-                <source>You have to use CSV files.</source>
-                <target>Oops! Offenbar handelt es sich hierbei nicht um eine CSV Datei.</target>
-            </trans-unit>
-
 
 
 			<!-- ==================================================================================== -->

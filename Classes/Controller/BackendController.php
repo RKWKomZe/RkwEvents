@@ -198,7 +198,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         if (strtolower($fileType) != 'text/csv') {
             $this->addFlashMessage(
                 LocalizationUtility::translate(
-                    'backendController.error.importWrongFiletype',
+                    'backendController.error.wrongFileType',
                     'rkw_events'
                 ),
                 '',
@@ -208,126 +208,142 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $this->forward('show');
         }
 
+        try {
+            /** @var \Madj2k\CoreExtended\Transfer\CsvImporter $csvImporter */
+            $csvImporter = $this->objectManager->get(
+                CsvImporter::class,
+                'tx_rkwevents_domain_model_event' // your primary table
+            );
 
-        /** @var \Madj2k\CoreExtended\Transfer\CsvImporter $csvImporter */
-        $csvImporter = $this->objectManager->get(
-            CsvImporter::class,
-            'tx_rkwevents_domain_model_event' // your primary table
-        );
-
-        // init importer and do some basic setup
-        $csvImporter->readCsv($filePath);
-        $csvImporter->setAllowedTables(
-            [
-                'tx_rkwevents_domain_model_event',
-                'tx_rkwevents_domain_model_eventplace',
-                'tx_rkwevents_domain_model_eventcontact',
-                'tx_rkwauthors_domain_model_authors',
-            ]
-        );
-        $csvImporter->setAllowedRelationTables(
-            [
-                'tx_rkwevents_domain_model_event' => [
-                    'be_users',
-                    'sys_category',
+            // init importer and do some basic setup
+            $csvImporter->readCsv($filePath);
+            $csvImporter->setAllowedTables(
+                [
+                    'tx_rkwevents_domain_model_event',
                     'tx_rkwevents_domain_model_eventplace',
                     'tx_rkwevents_domain_model_eventcontact',
                     'tx_rkwauthors_domain_model_authors',
-                    'tx_rkwevents_domain_model_eventorganizer',
-                    'tx_rkwbasics_domain_model_documenttype',
-                    'tx_rkwbasics_domain_model_department'
                 ]
-            ]
-        );
-        $csvImporter->setExcludeColumns(
-            [
-                'tx_rkwevents_domain_model_event' => [
-                    'testimonials', 'series', 'logos', 'add_info', 'presentations', 'sheet',
-                    'gallery1', 'gallery2', 'reservation', 'workshop1', 'workshop2', 'workshop3', 'reminder_mail_tstamp',
-                    'survey_before', 'survey_after', 'survey_after_mail_tstamp', 'longitude', 'latitude', 'recommended_events',
-                    'recommended_links', 'header_image', 'tstamp', 'crdate', 'cruser_id', 'deleted', 'starttime', 'endtime',
-                    'sorting', 'sys_language_uid', 'l10n_parent', 'l10n_diffsource'
+            );
+            $csvImporter->setAllowedRelationTables(
+                [
+                    'tx_rkwevents_domain_model_event' => [
+                        'be_users',
+                        'sys_category',
+                        'tx_rkwevents_domain_model_eventplace',
+                        'tx_rkwevents_domain_model_eventcontact',
+                        'tx_rkwauthors_domain_model_authors',
+                        'tx_rkwevents_domain_model_eventorganizer',
+                        'tx_rkwbasics_domain_model_documenttype',
+                        'tx_rkwbasics_domain_model_department'
                     ]
                 ]
-        );
-        $csvImporter->setIncludeColumns(
-            [
-                'tx_rkwevents_domain_model_event' => [
-                    'pid'
-                ],
-                'tx_rkwevents_domain_model_eventplace' => [
-                    'pid'
-                ],
-                'tx_rkwevents_domain_model_eventcontact' => [
-                    'pid'
-                ],
-                'tx_rkwauthors_domain_model_authors' => [
-                    'pid'
-                ]
-            ]
-        );
-        $csvImporter->setUniqueSelectColumns(
-            [
-                'tx_rkwevents_domain_model_event' => ['pid', 'title', 'start'],
-                'tx_rkwevents_domain_model_eventplace' => ['pid', 'address', 'zip', 'city'],
-                'tx_rkwevents_domain_model_eventcontact' => ['pid', 'email'],
-                'tx_rkwauthors_domain_model_authors' => ['pid', 'email'],
-            ]
-        );
-
-        $additionalData = [
-            'pid' => intval($data['targetPid']),
-            'place.pid' => intval($data['targetPid']),
-            'external_contact.pid' => intval($data['targetPid']),
-            'internal_contact.pid' => intval($data['targetPidAuthors']),
-            'hidden' => 1,
-        ];
-
-        if ($data['document_type']) {
-            $additionalData['document_type'] = intval($data['document_type']);
-        }
-
-        if ($data['department']) {
-            $additionalData['department.uid'] = intval($data['department']);
-        }
-
-        if ($data['organizer']) {
-            $additionalData['organizer.uid'] = intval($data['organizer']);
-        }
-
-        if ($data['activate']) {
-            $additionalData['hidden'] = 0;
-        }
-
-        $csvImporter->setAdditionalData($additionalData);
-        $csvImporter->applyAdditionalData();
-
-        $defaultValues = [
-            'seats' => 100000,
-            'record_type' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
-        ];
-
-        $csvImporter->setDefaultValues($defaultValues);
-        $csvImporter->applyDefaultValues();
-
-        try {
-
-            $result = $csvImporter->import();
-
-            $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'backendController.error.importSuccessfull',
-                    'rkw_events',
-                    count($result)
-                ),
-                '',
-                AbstractMessage::OK
             );
+            $csvImporter->setExcludeColumns(
+                [
+                    'tx_rkwevents_domain_model_event' => [
+                        'testimonials', 'series', 'logos', 'add_info', 'presentations', 'sheet',
+                        'gallery1', 'gallery2', 'reservation', 'workshop1', 'workshop2', 'workshop3', 'reminder_mail_tstamp',
+                        'survey_before', 'survey_after', 'survey_after_mail_tstamp', 'longitude', 'latitude', 'recommended_events',
+                        'recommended_links', 'header_image', 'tstamp', 'crdate', 'cruser_id', 'deleted', 'starttime', 'endtime',
+                        'sorting', 'sys_language_uid', 'l10n_parent', 'l10n_diffsource'
+                        ]
+                    ]
+            );
+            $csvImporter->setIncludeColumns(
+                [
+                    'tx_rkwevents_domain_model_event' => [
+                        'pid'
+                    ],
+                    'tx_rkwevents_domain_model_eventplace' => [
+                        'pid'
+                    ],
+                    'tx_rkwevents_domain_model_eventcontact' => [
+                        'pid'
+                    ],
+                    'tx_rkwauthors_domain_model_authors' => [
+                        'pid'
+                    ]
+                ]
+            );
+            $csvImporter->setUniqueSelectColumns(
+                [
+                    'tx_rkwevents_domain_model_event' => ['pid', 'title', 'start'],
+                    'tx_rkwevents_domain_model_eventplace' => ['pid', 'address', 'zip', 'city'],
+                    'tx_rkwevents_domain_model_eventcontact' => ['pid', 'email'],
+                    'tx_rkwauthors_domain_model_authors' => ['pid', 'email'],
+                ]
+            );
+
+            $additionalData = [
+                'pid' => intval($data['targetPid']),
+                'place.pid' => intval($data['targetPid']),
+                'external_contact.pid' => intval($data['targetPid']),
+                'internal_contact.pid' => intval($data['targetPidAuthors']),
+                'hidden' => 1,
+            ];
+
+            if ($data['document_type']) {
+                $additionalData['document_type'] = intval($data['document_type']);
+            }
+
+            if ($data['department']) {
+                $additionalData['department.uid'] = intval($data['department']);
+            }
+
+            if ($data['organizer']) {
+                $additionalData['organizer.uid'] = intval($data['organizer']);
+            }
+
+            if ($data['activate']) {
+                $additionalData['hidden'] = 0;
+            }
+
+            $csvImporter->setAdditionalData($additionalData);
+            $csvImporter->applyAdditionalData();
+
+            $defaultValues = [
+                'seats' => 100000,
+                'record_type' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
+            ];
+
+            $csvImporter->setDefaultValues($defaultValues);
+            $csvImporter->applyDefaultValues();
+
+            if ($result = $csvImporter->import()) {
+
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'backendController.message.importSuccessful',
+                        'rkw_events',
+                        count($result)
+                    ),
+                    '',
+                    AbstractMessage::OK
+                );
+            } else {
+
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'backendController.warning.importFailed',
+                        'rkw_events',
+                        count($result)
+                    ),
+                    '',
+                    AbstractMessage::ERROR
+                );
+            }
+
+
 
         } catch (\Exception $e) {
 
             $this->addFlashMessage(
-                $e->getMessage(),
+                LocalizationUtility::translate(
+                    'backendController.error.importFailed',
+                    'rkw_events',
+                    $e->getMessage(),
+                ),
                 '',
                 AbstractMessage::ERROR
             );
@@ -335,68 +351,5 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $this->redirect('show');
 
-    }
-
-
-    /**
-     * Cleans given string for import
-     *
-     * @param string $string
-     * @return string
-     */
-    protected function parseHtml($string)
-    {
-        // add p-tag-wrap
-        if (strip_tags($string) == $string) {
-            $string = '<p>' . nl2br($string) . '</p>';
-        }
-
-        // get replacement for UL-lists
-        // $string = preg_replace('/[\\]{1}[n]{1}\* (.*?)/', '<ul><li>$1</li></ul>', $string);
-        // $string = preg_replace('/<\/ul><ul>/', '', $string);
-
-        return trim($string);
-        //===
-    }
-
-
-    /**
-     * Cleans given string for import
-     *
-     * @param string $string
-     * @return string
-     */
-    protected function stringCleanUp($string)
-    {
-        // configuration for HTML-Cleanup
-        $tagCfg = array(
-            'br' => array(),
-            'a'  => array(),
-            'p'  => array(),
-            'ul' => array(
-                'nesting' => 1,
-            ),
-            'ol' => array(
-                'nesting' => 1,
-            ),
-            'li' => array(
-                'nesting' => 1,
-            ),
-
-        );
-        $additionalConfig = array(
-            'stripEmptyTags' => 1,
-        );
-
-        /** @var \TYPO3\CMS\Core\Html\HtmlParser $parseObj */
-        $parseObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Html\\HtmlParser');
-        $string = $parseObj->HTMLcleaner(trim($string), $tagCfg, 0, 0, $additionalConfig);
-        $string = str_replace('\n', "", trim($string));
-        $string = str_replace('<p><p>', '<p>', trim($string));
-        $string = str_replace('</p></p>', '</p>', trim($string));
-        $string = str_replace('&shy;', '', trim($string));
-
-        return trim($string);
-        //===
     }
 }
