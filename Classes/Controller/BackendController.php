@@ -316,7 +316,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     LocalizationUtility::translate(
                         'backendController.message.importSuccessful',
                         'rkw_events',
-                        count($result)
+                        [count($result)]
                     ),
                     '',
                     AbstractMessage::OK
@@ -327,7 +327,6 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     LocalizationUtility::translate(
                         'backendController.warning.importFailed',
                         'rkw_events',
-                        count($result)
                     ),
                     '',
                     AbstractMessage::ERROR
