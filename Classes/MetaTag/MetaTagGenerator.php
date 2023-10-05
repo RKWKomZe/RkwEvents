@@ -61,6 +61,8 @@ class MetaTagGenerator extends \Madj2k\CoreExtended\MetaTag\MetaTagGenerator
                 if ($keywords = $event->getKeywords()) {
                     $manager = $metaTagManagerRegistry->getManagerForProperty('keywords');
                     $manager->removeProperty('keywords');
+
+                    // @extensionScannerIgnoreLine
                     $manager->addProperty('keywords', $keywords);
                 }
 
@@ -84,6 +86,8 @@ class MetaTagGenerator extends \Madj2k\CoreExtended\MetaTag\MetaTagGenerator
 
                     $manager = $metaTagManagerRegistry->getManagerForProperty('description');
                     $manager->removeProperty('description');
+
+                    // @extensionScannerIgnoreLine
                     $manager->addProperty('description', $description);
                 }
             }
@@ -139,11 +143,15 @@ class MetaTagGenerator extends \Madj2k\CoreExtended\MetaTag\MetaTagGenerator
 
         if (!empty($description)) {
             $manager = $metaTagManagerRegistry->getManagerForProperty('description');
+
+            // @extensionScannerIgnoreLine
             $manager->addProperty('description', $description);
         }
 
         if (!empty($keywords)) {
             $manager = $metaTagManagerRegistry->getManagerForProperty('keywords');
+
+            // @extensionScannerIgnoreLine
             $manager->addProperty('keywords', $keywords);
         }
     }

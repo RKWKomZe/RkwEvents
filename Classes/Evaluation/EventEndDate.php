@@ -106,6 +106,8 @@ class EventEndDate
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $flashMessageService = $objectManager->get(FlashMessageService::class);
         $messageQueue = $flashMessageService->getMessageQueueByIdentifier();
+
+        // @extensionScannerIgnoreLine
         $messageQueue->addMessage($message);
     }
 
