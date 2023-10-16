@@ -27,7 +27,7 @@
             id="tx_rkwevents_pi1_firstName"
             property="firstName"
             value="{f:if(condition:'{newEventReservation.firstName} || {editMode}',then:'{newEventReservation.firstName}',else:'{frontendUser.firstName}')}"
-            additionalAttributes="{autocomplete:'fname'}"
+            additionalAttributes="{autocomplete:'given-name'}"
         />
 	</div>
 
@@ -40,7 +40,7 @@
             id="tx_rkwevents_pi1_lastName"
             property="lastName"
             value="{f:if(condition:'{newEventReservation.lastName} || {editMode}',then:'{newEventReservation.lastName}',else:'{frontendUser.lastName}')}"
-            additionalAttributes="{autocomplete:'lname'}"
+            additionalAttributes="{autocomplete:'family-name'}"
         />
 	</div>
 
@@ -83,6 +83,7 @@
             id="tx_rkwevents_pi1_company"
             property="company"
             value="{f:if(condition:'{newEventReservation.company} || {editMode}',then:'{newEventReservation.company}',else:'{frontendUser.company}')}"
+            additionalAttributes="{autocomplete:'organization'}"
         />
 	</div>
 
@@ -96,6 +97,7 @@
             id="tx_rkwevents_pi1_phone"
             property="phone"
             value="{f:if(condition:'{newEventReservation.phone} || {editMode}',then:'{newEventReservation.phone}',else:'{frontendUser.phone}')}"
+            additionalAttributes="{autocomplete:'tel'}"
         />
     </div>
 
@@ -122,7 +124,7 @@
             id="tx_rkwevents_pi1_address"
             property="address"
             value="{f:if(condition:'{newEventReservation.address} || {editMode}',then:'{newEventReservation.address}',else:'{frontendUser.address}')}"
-            additionalAttributes="{autocomplete:'address'}"
+            additionalAttributes="{autocomplete:'street-address'}"
         />
 	</div>
 
@@ -136,7 +138,7 @@
                 id="tx_rkwevents_pi1_zip"
                 property="zip"
                 value="{f:if(condition:'{newEventReservation.zip} || {editMode}',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
-                additionalAttributes="{autocomplete:'zip'}"
+                additionalAttributes="{autocomplete:'postal-code'}"
             />
         </div>
 
@@ -149,7 +151,7 @@
                 id="tx_rkwevents_pi1_city"
                 property="city"
                 value="{f:if(condition:'{newEventReservation.city} || {editMode}',then:'{newEventReservation.city}',else:'{frontendUser.city}')}"
-                additionalAttributes="{autocomplete:'city'}"
+                additionalAttributes="{autocomplete:'address-level2'}"
             />
         </div>
     </div>
