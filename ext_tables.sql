@@ -59,7 +59,34 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	uid                      int(11) NOT NULL auto_increment,
 	pid                      int(11) DEFAULT '0' NOT NULL,
 
+    /*
+    title                    varchar(255) DEFAULT '' NOT NULL,
+    subtitle                 varchar(255) DEFAULT '' NOT NULL,
+    keywords                 text,
+    testimonials             text NOT NULL,
+    description              text NOT NULL,
+    description2             text NOT NULL,
+    target_learning          text NOT NULL,
+    target_group             text NOT NULL,
+    schedule                 text NOT NULL,
+    partner                  text NOT NULL,
+    header_image             int(11) unsigned DEFAULT '0',
+    project                  varchar(255) DEFAULT '' NOT NULL,
+    organizer                varchar(255) DEFAULT '' NOT NULL,
+    add_info                 varchar(255) DEFAULT '' NOT NULL,
+    recommended_events       varchar(255) DEFAULT '' NOT NULL,
+    recommended_links        varchar(255) DEFAULT '' NOT NULL,
+    document_type            varchar(255) DEFAULT '' NOT NULL,
+    department               varchar(255) DEFAULT '' NOT NULL,
+    categories               varchar(255) DEFAULT '' NOT NULL,
+    categories_displayed     varchar(255) DEFAULT '' NOT NULL,
+    reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    backend_user_exclusive   tinyint(1) unsigned DEFAULT '0' NOT NULL,
+     */
+
+
 	record_type              varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventScheduled' NOT NULL,
+<<<<<<< HEAD
     series                   varchar(255) DEFAULT '' NOT NULL,
 
 	code                     varchar(255) DEFAULT '' NOT NULL,
@@ -90,6 +117,8 @@ CREATE TABLE tx_rkwevents_domain_model_event
       */
 
 
+=======
+>>>>>>> 6c23171e9bceea4cd422aa456da46a2e54e8e440
 	start                    int(11) unsigned DEFAULT '0' NOT NULL,
 	end                      int(11) unsigned DEFAULT '0' NOT NULL,
 	show_time                tinyint(1) unsigned DEFAULT '1' NOT NULL,
@@ -109,6 +138,10 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	ext_reg_link             varchar(255) DEFAULT '' NOT NULL,
 	ext_cancel_info          varchar(255) DEFAULT '' NOT NULL,
 	ext_cancel_link          varchar(255) DEFAULT '' NOT NULL,
+<<<<<<< HEAD
+=======
+	series                   varchar(255) DEFAULT '' NOT NULL,
+>>>>>>> 6c23171e9bceea4cd422aa456da46a2e54e8e440
 	logos                    varchar(255) DEFAULT '' NOT NULL,
     currency                 int(11) unsigned DEFAULT '0',
     eligibility              tinyint(1) unsigned DEFAULT '0' NOT NULL,
@@ -121,6 +154,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	external_contact         varchar(255) DEFAULT '' NOT NULL,
 	internal_contact         varchar(255) DEFAULT '' NOT NULL,
 	be_user                  varchar(255) DEFAULT '' NOT NULL,
+<<<<<<< HEAD
 
 	description              text NOT NULL,
 	description2             text NOT NULL,
@@ -132,6 +166,8 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	testimonials             text NOT NULL,
 	logos                    varchar(255) DEFAULT '' NOT NULL,
 	add_info                 varchar(255) DEFAULT '' NOT NULL,
+=======
+>>>>>>> 6c23171e9bceea4cd422aa456da46a2e54e8e440
 	presentations            varchar(255) DEFAULT '' NOT NULL,
 	sheet                    varchar(255) DEFAULT '' NOT NULL,
 	gallery1                 int(11) unsigned DEFAULT '0',
@@ -148,6 +184,10 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	trainer                  varchar(255) DEFAULT '' NOT NULL,
 	additional_tile_flag     varchar(255) DEFAULT '' NOT NULL,
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6c23171e9bceea4cd422aa456da46a2e54e8e440
 	tstamp                   int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate                   int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id                int(11) unsigned DEFAULT '0' NOT NULL,
