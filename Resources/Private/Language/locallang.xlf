@@ -249,7 +249,10 @@
 			<trans-unit id="backendController.error.wrongFileType">
 				<source>The selected file is not a valid CSV file.</source>
 			</trans-unit>
-			<trans-unit id="backendController.warning.importFailed">
+            <trans-unit id="backendController.warning.noRecordsImported">
+                <source>No records imported. please contact the admin if you suspect a technical error.</source>
+            </trans-unit>
+			<trans-unit id="backendController.error.importFailed">
 				<source>Unfortunately, the import failed: %s</source>
 			</trans-unit>
 			<trans-unit id="mailingController.warning.nothingImported">

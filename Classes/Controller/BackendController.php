@@ -15,6 +15,7 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use ApacheSolrForTypo3\Solr\Search\DebugComponent;
 use League\Csv\Reader;
 use Madj2k\CoreExtended\Transfer\CsvImporter;
 use RKW\RkwEvents\Domain\Model\BackendUser;
@@ -23,6 +24,7 @@ use RKW\RkwEvents\Utility\BackendUserUtility;
 use RKW\RkwEvents\Utility\CsvUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -212,13 +214,16 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             /** @var \Madj2k\CoreExtended\Transfer\CsvImporter $csvImporter */
             $csvImporter = $this->objectManager->get(
                 CsvImporter::class,
-                'tx_rkwevents_domain_model_event' // your primary table
+                'tx_rkwevents_domain_model_eventseries' // your primary table
             );
 
             // init importer and do some basic setup
             $csvImporter->readCsv($filePath);
+
+            // "setAllowedTables" is used for main and all sub-relational-tables like "event.place"
             $csvImporter->setAllowedTables(
                 [
+                    'tx_rkwevents_domain_model_eventseries',
                     'tx_rkwevents_domain_model_event',
                     'tx_rkwevents_domain_model_eventplace',
                     'tx_rkwevents_domain_model_eventcontact',
@@ -227,31 +232,42 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             );
             $csvImporter->setAllowedRelationTables(
                 [
-                    'tx_rkwevents_domain_model_event' => [
-                        'be_users',
+                    'tx_rkwevents_domain_model_eventseries' => [
+                        'tx_rkwevents_domain_model_event',
                         'sys_category',
+                        'tx_rkwbasics_domain_model_documenttype',
+                        'tx_rkwbasics_domain_model_department',
+                        'be_users'                                  // field "backend_user_exclusive"
+                    ],
+                    'tx_rkwevents_domain_model_event' => [
+                        'be_users',                                 // field "be_user" (e-mail admin)
                         'tx_rkwevents_domain_model_eventplace',
                         'tx_rkwevents_domain_model_eventcontact',
                         'tx_rkwauthors_domain_model_authors',
                         'tx_rkwevents_domain_model_eventorganizer',
-                        'tx_rkwbasics_domain_model_documenttype',
-                        'tx_rkwbasics_domain_model_department'
                     ]
                 ]
             );
             $csvImporter->setExcludeColumns(
                 [
+                    'tx_rkwevents_domain_model_eventseries' => [
+                        'tstamp', 'crdate', 'cruser_id', 'deleted', 'starttime', 'endtime',
+                        'sorting', 'sys_language_uid', 'l10n_parent', 'l10n_diffsource'
+                    ],
                     'tx_rkwevents_domain_model_event' => [
-                        'testimonials', 'series', 'logos', 'add_info', 'presentations', 'sheet',
+                        'testimonials', 'logos', 'add_info', 'presentations', 'sheet',
                         'gallery1', 'gallery2', 'reservation', 'workshop1', 'workshop2', 'workshop3', 'reminder_mail_tstamp',
                         'survey_before', 'survey_after', 'survey_after_mail_tstamp', 'longitude', 'latitude', 'recommended_events',
                         'recommended_links', 'header_image', 'tstamp', 'crdate', 'cruser_id', 'deleted', 'starttime', 'endtime',
                         'sorting', 'sys_language_uid', 'l10n_parent', 'l10n_diffsource'
-                        ]
                     ]
+                ]
             );
             $csvImporter->setIncludeColumns(
                 [
+                    'tx_rkwevents_domain_model_eventseries' => [
+                        'pid'
+                    ],
                     'tx_rkwevents_domain_model_event' => [
                         'pid'
                     ],
@@ -268,20 +284,30 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             );
             $csvImporter->setUniqueSelectColumns(
                 [
-                    'tx_rkwevents_domain_model_event' => ['pid', 'title', 'start'],
+                    'tx_rkwauthors_domain_model_eventseries' => ['pid', 'title'],
+                    'tx_rkwevents_domain_model_event' => ['pid', 'start', 'series'],
                     'tx_rkwevents_domain_model_eventplace' => ['pid', 'address', 'zip', 'city'],
                     'tx_rkwevents_domain_model_eventcontact' => ['pid', 'email'],
                     'tx_rkwauthors_domain_model_authors' => ['pid', 'email'],
                 ]
             );
 
-            $additionalData = [
-                'pid' => intval($data['targetPid']),
-                'place.pid' => intval($data['targetPid']),
-                'external_contact.pid' => intval($data['targetPid']),
-                'internal_contact.pid' => intval($data['targetPidAuthors']),
-                'hidden' => 1,
-            ];
+            // default: always set new events hidden
+            $additionalData['event.hidden'] = 1;
+
+            // user input data from import form
+            if ($data['targetPid']) {
+                $additionalData = [
+                    'pid' => intval($data['targetPid']),
+                    'event.pid' => intval($data['targetPid']),
+                    'event.place.pid' => intval($data['targetPid']),
+                    'event.external_contact.pid' => intval($data['targetPid']),
+                ];
+            }
+
+            if ($data['targetPidAuthors']) {
+                $additionalData['event.internal_contact.pid'] = intval($data['targetPidAuthors']);
+            }
 
             if ($data['document_type']) {
                 $additionalData['document_type'] = intval($data['document_type']);
@@ -296,15 +322,15 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             }
 
             if ($data['activate']) {
-                $additionalData['hidden'] = 0;
+                $additionalData['event.hidden'] = 0;
             }
 
             $csvImporter->setAdditionalData($additionalData);
             $csvImporter->applyAdditionalData();
 
             $defaultValues = [
-                'seats' => 100000,
-                'record_type' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
+                'event.seats' => 100000,
+                'event.record_type' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
             ];
 
             $csvImporter->setDefaultValues($defaultValues);
@@ -325,7 +351,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
                 $this->addFlashMessage(
                     LocalizationUtility::translate(
-                        'backendController.warning.importFailed',
+                        'backendController.warning.noRecordsImported',
                         'rkw_events',
                     ),
                     '',

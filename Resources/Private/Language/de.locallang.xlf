@@ -318,6 +318,10 @@
 				<source>The selected file is not a valid CSV file.</source>
 				<target>Die ausgewählte Datei ist keine gültige CSV-Datei.</target>
 			</trans-unit>
+            <trans-unit id="backendController.warning.noRecordsImported">
+                <source>No records imported. Please contact the admin if you suspect a technical error.</source>
+                <target>Es wurden keine Datensätze importiert. Falls sie einen technischen Fehler als Ursache vermuten, wenden Sie sich bitte an den zuständigen Admin.</target>
+            </trans-unit>
 			<trans-unit id="backendController.error.importFailed">
 				<source>Unfortunately, the import failed: %s</source>
 				<target>Der Import ist leider fehlgeschlagen: %s</target>
