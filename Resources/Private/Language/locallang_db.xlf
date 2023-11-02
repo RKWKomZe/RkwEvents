@@ -735,6 +735,12 @@
             <trans-unit id="flexform.event.filterInfo.showTimeInfo">
                 <source>Info for month</source>
             </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showInhouseInfoLink">
+                <source>Link for inhouse</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showInhouseInfo">
+                <source>Info for inhouse</source>
+            </trans-unit>
 
 
             <trans-unit id="flexform.event.eventSelect">

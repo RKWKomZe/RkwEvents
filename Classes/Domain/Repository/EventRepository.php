@@ -435,6 +435,10 @@ class EventRepository extends AbstractRepository
                 $constraints[] = $query->lessThanOrEqual('start', time());
             }
 
+            if ($filter['regInhouse']) {
+                $constraints[] = $query->equals('series.regInhouse', 1);
+            }
+
             if ($filter['onlyUpcoming']) {
                 $constraints[] = $query->logicalOr(
                     $query->greaterThanOrEqual('start', time()),
@@ -442,6 +446,7 @@ class EventRepository extends AbstractRepository
                     $query->equals('start', 0)
                 );
             }
+
             if (
                 (ExtensionManagementUtility::isLoaded('rkw_projects'))
                 && ($filter['project'])

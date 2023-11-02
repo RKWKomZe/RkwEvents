@@ -309,6 +309,12 @@ plugin.tx_rkwevents {
                 showOnlyOnlineEvents = {$plugin.tx_rkwevents.settings.list.filter.showOnlyOnlineEvents}
                 showFreeOfCharge = {$plugin.tx_rkwevents.settings.list.filter.showFreeOfCharge}
                 showEligible = {$plugin.tx_rkwevents.settings.list.filter.showEligible}
+                showInhouse = {$plugin.tx_rkwevents.settings.list.filter.showInhouse}
+            }
+            regInHouseTile {
+                show = {$plugin.tx_rkwevents.settings.list.regInHouseTile.show}
+                image = {$plugin.tx_rkwevents.settings.list.regInHouseTile.image}
+                listPid = {$plugin.tx_rkwevents.settings.list.regInHouseTile.listPid}
             }
         }
 

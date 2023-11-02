@@ -157,6 +157,18 @@ plugin.tx_rkwevents {
 
                 # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "eligible"
                 showEligible = 0
+
+                # cat=plugin.tx_rkwevents; type=integer; label=Show filter option "inhouse"
+                showInhouse = 0
+            }
+
+            regInHouseTile {
+                # cat=plugin.tx_rkwevents; type=integer; label=Display initial "regInHouseEvents"-Tile
+                show = 0
+                # cat=plugin.tx_rkwevents; type=string; label=Image for "regInHouseEvents"-Tile
+                image = EXT:rkw_events/Resources/Public/Images/fallback-tile.png
+                # cat=plugin.tx_rkwevents; type=integer; label= (optional!) List PID of regInHouse-Events plugin
+                listPid =
             }
         }
 

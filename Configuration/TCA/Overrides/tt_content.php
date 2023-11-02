@@ -81,11 +81,6 @@ ExtensionUtility::registerPlugin(
     'RKW Events: Registrierung (standalone)'
 );
 
-ExtensionUtility::registerPlugin(
-    $extKey,
-    'Reginhouselist',
-    'RKW Events: Liste (RegInhouse only)'
-);
 
 
 //=================================================================

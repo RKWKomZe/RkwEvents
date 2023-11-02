@@ -518,6 +518,9 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
                 <source>Eligible</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.inhouse">
+                <source>Inhouse</source>
+            </trans-unit>
     		<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel">
                 <source>Filter events according to specific criteria</source>
             </trans-unit>

@@ -668,6 +668,10 @@
                 <source>Eligible</source>
                 <target>Förderfähig</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.inhouse">
+                <source>Inhouse</source>
+                <target>Inhouse</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel">
                 <source>Filter events according to specific criteria</source>
                 <target>Veranstaltungen nach bestimmten Kriterien filtern</target>

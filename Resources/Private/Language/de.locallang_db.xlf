@@ -981,6 +981,14 @@
                 <source>Info for month</source>
                 <target>Infotext zu "Monat"</target>
             </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showInhouseInfoLink">
+                <source>Link for inhouse</source>
+                <target>Link zu "Inhouse"</target>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showInhouseInfo">
+                <source>Info for inhouse</source>
+                <target>Infotext zu "Inhouse"</target>
+            </trans-unit>
 
 
             <trans-unit id="flexform.event.eventSelect">

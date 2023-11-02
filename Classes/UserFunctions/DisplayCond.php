@@ -38,8 +38,8 @@ class DisplayCond
     protected $configurationManager;
 
     /**
-     * Returns a setting
-     * Used for flexform displaycond
+     * Returns a TS setting (compares Flexform options with TypoScript filter options. The field naming is important)
+     * Used for flexform displaycond (shows only flexform options if an option is active in TS)
      *
      * Hint: Works only for certain fields and field namings. NOT usable for other use cases!
      *
