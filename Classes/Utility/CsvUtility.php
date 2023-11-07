@@ -50,7 +50,7 @@ class CsvUtility
      */
     public static function createCsv(Event $event, string $separator = ';', int $maxAddPersons = 3)
     {
-        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getTitle()) . '.csv';
+        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getSeries()->getTitle()) . '.csv';
 
         self::$csv = fopen('php://output', 'w');
 

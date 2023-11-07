@@ -67,8 +67,10 @@ class EventSeriesUpdate implements UpgradeWizardInterface
         foreach ($rows as $row) {
 
             // because the EventSeries will have the same uid as the original events, simply set the own UID as foreignId
+            // @toDo: Title slugify update is untestet!
             $qbEvent->update('tx_rkwevents_domain_model_event')
                 ->set('series', $row['uid'])
+                ->set('title', \Madj2k\CoreExtended\Utility\GeneralUtility::slugify($row['title']))
                 ->where(
                     $qbEvent->expr()->eq('uid', $qbEvent->createNamedParameter($row['uid'], Connection::PARAM_INT))
                 )

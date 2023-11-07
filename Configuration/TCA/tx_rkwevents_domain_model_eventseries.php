@@ -28,7 +28,7 @@ return [
 		'1' => [
             'showitem' => '
             
-            title, subtitle, event,
+            --palette--;;title, subtitle, event,
             
             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_basicdata,
             reg_inhouse, document_type, department, categories, categories_displayed, organizer,
@@ -47,6 +47,9 @@ return [
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
+        'title' => [
+            'showitem' => 'title, url_override',
+        ],
         'dataFields' => [
             'showitem' => 'hidden, sys_language_uid, l10n_parent, l10n_diffsource',
         ],
@@ -109,6 +112,13 @@ return [
                 'eval' => 'trim, required'
             ],
             'onChange' => 'reload'
+        ],
+        'url_override' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.url_override',
+            'config' => [
+                'type' => 'check',
+            ],
         ],
         'subtitle' => [
             'exclude' => 0,
@@ -383,7 +393,8 @@ return [
                 'foreign_table' => 'tx_rkwevents_domain_model_event',
                 'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.deleted = 0',
                 'foreign_field' => 'series',
-                'foreign_sortby' => 'sorting',
+                //'foreign_sortby' => 'sorting',
+                'foreign_default_sortby' => 'start DESC',
                 'maxitems'      => 9999,
                 'minitems'      => 0,
                 'size'          => 5,

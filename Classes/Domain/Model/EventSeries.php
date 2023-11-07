@@ -35,6 +35,13 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $title;
 
     /**
+     * urlOverride
+     *
+     * @var string
+     */
+    protected $urlOverride;
+
+    /**
      * subtitle
      *
      * @var string
@@ -235,6 +242,23 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrlOverride(): string
+    {
+        return $this->urlOverride;
+    }
+
+    /**
+     * @param string $urlOverride
+     * @return void
+     */
+    public function setUrlOverride(string $urlOverride): void
+    {
+        $this->urlOverride = $urlOverride;
     }
 
     /**

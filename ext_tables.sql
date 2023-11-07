@@ -8,6 +8,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     pid                     int(11) DEFAULT '0' NOT NULL,
 
     title                   varchar(255) DEFAULT '' NOT NULL,
+    url_override            tinyint(4) unsigned DEFAULT '0' NOT NULL,
     subtitle                varchar(255) DEFAULT '' NOT NULL,
     keywords                text,
     testimonials            text NOT NULL,
@@ -60,7 +61,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	pid                      int(11) DEFAULT '0' NOT NULL,
 
     /*
-    title                    varchar(255) DEFAULT '' NOT NULL,
+
     subtitle                 varchar(255) DEFAULT '' NOT NULL,
     keywords                 text,
     testimonials             text NOT NULL,
@@ -83,6 +84,9 @@ CREATE TABLE tx_rkwevents_domain_model_event
     reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
     backend_user_exclusive   tinyint(1) unsigned DEFAULT '0' NOT NULL,
      */
+
+    /* still needed as slug uri helper */
+    title                    varchar(255) DEFAULT '' NOT NULL,
 
 	record_type              varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventScheduled' NOT NULL,
 	code                     varchar(255) DEFAULT '' NOT NULL,

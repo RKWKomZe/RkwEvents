@@ -11,6 +11,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.title">
                 <source>Title</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.url_override">
+                <source>URL override of all events</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle">
                 <source>Subtitle</source>
             </trans-unit>
@@ -89,6 +92,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_event">
 				<source>RKW Events: Event</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
+                <source>URL path</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
                 <source>Event-Type</source>
             </trans-unit>

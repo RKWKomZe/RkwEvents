@@ -18,6 +18,10 @@
                 <source>Title</source>
                 <target>Titel</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.url_override">
+                <source>URL override</source>
+                <target>Einmalige Aktion: Titel für URL der einzelnen Veranstaltungen übernehmen</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle" approved="yes">
                 <source>Subtitle</source>
                 <target>Untertitel</target>
@@ -122,6 +126,10 @@
 				<source>RKW Events: Event</source>
 				<target>RKW Events: Veranstaltung</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.title">
+                <source>URL path</source>
+                <target>URL Pfad (VORSICHT: Hier nur mit Bedacht Änderungen vornehmen! Kann außerdem global überschrieben werden.)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
                 <source>Event-Type</source>
                 <target>Veranstaltungs-Typ</target>

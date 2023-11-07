@@ -28,6 +28,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * title
+     *
+     * @var string
+     */
+    protected $title;
+
+    /**
      * @var string
      */
     protected $recordType;
@@ -432,6 +439,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
      * Returns the recordType value
      *
      * @return string
@@ -441,7 +469,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->recordType;
     }
-
 
     /**
      * Sets the recordType value
