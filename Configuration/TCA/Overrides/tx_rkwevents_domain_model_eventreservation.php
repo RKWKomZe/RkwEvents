@@ -30,5 +30,5 @@ call_user_func(
         //$GLOBALS['TCA']['tx_rkwevents_domain_model_eventreservation']['columns']['target_group']['config']['treeConfig']['rootUid'] = 147;
 
     },
-    $_EXTKEY
+    'rkw_events'
 );
