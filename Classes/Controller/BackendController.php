@@ -210,10 +210,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         try {
             /** @var \Madj2k\CoreExtended\Transfer\CsvImporter $csvImporter */
-            $csvImporter = $this->objectManager->get(
-                CsvImporter::class,
-                'tx_rkwevents_domain_model_event' // your primary table
-            );
+            $csvImporter = $this->objectManager->get(CsvImporter::class);
+            $csvImporter->setTableName('tx_rkwevents_domain_model_event');
 
             // init importer and do some basic setup
             $csvImporter->readCsv($filePath);
