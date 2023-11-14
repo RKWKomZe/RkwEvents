@@ -20,7 +20,7 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.url_override">
                 <source>URL override</source>
-                <target>Einmalige Aktion: Titel für URL der einzelnen Veranstaltungen übernehmen</target>
+                <target>Titel für URL der einzelnen Veranstaltungen übernehmen</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle" approved="yes">
                 <source>Subtitle</source>

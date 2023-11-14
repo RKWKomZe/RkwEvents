@@ -32,6 +32,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * Class TceMainHooks
@@ -174,6 +175,23 @@ class TceMainHooks
             $this->getLogger()->log(LogLevel::ERROR, sprintf('Could not delete interfering data of an event record. Reason: %s.', $e->getMessage()));
         }
 
+
+        /*
+            if ($table == 'tx_rkwevents_domain_model_event') {
+
+                $eventRaw = BackendUtility::getRecord('tx_rkwevents_domain_model_event', intval($id));
+                $eventSeriesRaw = BackendUtility::getRecord('tx_rkwevents_domain_model_eventseries', intval($eventRaw['series']));
+
+                $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_rkwevents_domain_model_event');
+                $connection->update(
+                    'tx_rkwevents_domain_model_event',
+                    [
+                        'title' => GeneralUtility::slugify($eventSeriesRaw['title'])
+                    ],
+                    ['series' => intval($eventRaw['series'])]
+                );
+            }
+*/
     }
 
 
@@ -263,71 +281,49 @@ class TceMainHooks
     public function processDatamap_afterDatabaseOperations($status, $table, $uid, array $fields, DataHandler $tceMain)
     {
 
+        if ($table == 'tx_rkwevents_domain_model_event') {
+
+            $eventRaw = BackendUtility::getRecord('tx_rkwevents_domain_model_event', intval($uid));
+            $eventSeriesRaw = BackendUtility::getRecord('tx_rkwevents_domain_model_eventseries', intval($eventRaw['series']));
+
+            if ($eventSeriesRaw['url_override']) {
+                $titleSlug = GeneralUtility::slugify($eventSeriesRaw['title']);
+                GeneralUtility::makeInstance(ConnectionPool::class)
+                    ->getConnectionForTable('tx_rkwevents_domain_model_event')
+                    ->update(
+                        'tx_rkwevents_domain_model_event',
+                        ['title' => $titleSlug],
+                        ['uid' => (int)$uid]
+                    );
+            }
+
+        }
+
         if ($table == 'tx_rkwevents_domain_model_eventseries') {
 
             $eventSeriesRaw = BackendUtility::getRecord('tx_rkwevents_domain_model_eventseries', intval($uid));
 
-            // set (slugified) title from "eventSeries" to every NEW "event" (needed for event URL)
-            if (key_exists('tx_rkwevents_domain_model_event', $tceMain->newRelatedIDs)) {
-                foreach ($tceMain->newRelatedIDs['tx_rkwevents_domain_model_event'] as $keyIndex => $newEventUid) {
+            // check if eventSeries exists (important on BE-formfield-reload if the eventSeries is not persistent yet)
+            if (is_array($eventSeriesRaw)) {
 
-                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_rkwevents_domain_model_event');
-                    $connection->update(
-                        'tx_rkwevents_domain_model_event',
-                        [
-                            'title' => GeneralUtility::slugify($eventSeriesRaw['title']),
-                        ],
-                        ['uid' => (int) $newEventUid]
-                    );
-                }
-            }
-
-            // delete corresponding reservations and set counter in event to zero
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
-            /** @var PersistenceManager $persistenceManager */
-            $persistenceManager = $objectManager->get(PersistenceManager::class);
-
-            // if "url_override" in eventSeries is set, change all titles of related sub-events
-            if (key_exists('url_override', $fields)) {
-
-                /** @var EventRepository $eventRepository */
-                $eventRepository = $objectManager->get(EventRepository::class);
-
-                $eventList = $eventRepository->findBySeries(intval($uid));
-
+                $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_rkwevents_domain_model_event');
                 $titleSlug = GeneralUtility::slugify($eventSeriesRaw['title']);
-                /** @var Event $event */
-                foreach ($eventList as $event) {
 
-                    //$event->setTitle($titleSlug);
-                    //$eventRepository->update($event);
+                // set (slugified) title from "eventSeries" to every NEW "event" (needed for event URL)
+                if (key_exists('tx_rkwevents_domain_model_event', $tceMain->newRelatedIDs)) {
 
-                    $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_rkwevents_domain_model_event');
-                    $connection->update(
-                        'tx_rkwevents_domain_model_event',
-                        [
-                            'title' => $titleSlug,
-                        ],
-                        ['uid' => (int) $event->getUid()]
-                    );
+                    foreach ($tceMain->newRelatedIDs['tx_rkwevents_domain_model_event'] as $keyIndex => $newEventUid) {
+
+                        $connection->update(
+                            'tx_rkwevents_domain_model_event',
+                            [
+                                'title' => $titleSlug,
+                            ],
+                            ['uid' => (int) $newEventUid]
+                        );
+                    }
                 }
             }
-
-            // reset url override if is newly set or by any reason already persistent (maybe via CSV import; or failed hook, what ever)
-            if (
-                key_exists('url_override', $fields)
-                || $eventSeriesRaw['url_override']
-            ) {
-                /** @var EventSeriesRepository $eventSeriesRepository */
-                $eventSeriesRepository = $objectManager->get(EventSeriesRepository::class);
-                $eventSeries = $eventSeriesRepository->findByIdentifier(intval($uid));
-                $eventSeries->setUrlOverride(0);
-                $eventSeriesRepository->update($eventSeries);
-
-            }
-
-            $persistenceManager->persistAll();
-
         }
     }
 
