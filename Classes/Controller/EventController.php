@@ -653,7 +653,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             } else {
                 // fallback
                 if ($event->getSeries() instanceof EventSeries) {
-                    $eventList = $this->eventRepository->findRunningBySeries($event);
+                    $eventList = $this->eventRepository->findRunningByCategories($event);
                 }
             }
 

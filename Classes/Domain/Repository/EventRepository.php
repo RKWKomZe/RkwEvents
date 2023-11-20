@@ -882,6 +882,63 @@ class EventRepository extends AbstractRepository
     }
 
 
+    /**
+     * findRunningByCategories
+     * Find running events by categories (without given event!)
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @return mixed
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findRunningByCategories(Event $event)
+    {
+        // @toDo: additional "GroupBy" Series could be make sense (show only the first event of a series)
+
+
+        $query = $this->createQuery();
+
+        if ($event->getSeries()->getCategories()->count()) {
+
+            $constraintsCategories = [];
+            foreach ($event->getSeries()->getCategories() as $category) {
+                $constraintsCategories[] = $query->contains('series.categories', $category);
+            }
+
+            $constraints[] = $query->logicalOr($constraintsCategories);
+
+            $constraints[] =
+                $query->logicalAnd(
+                    $query->logicalOr(
+                        $query->greaterThanOrEqual('end', time()),
+                        // include announcements (without start date)
+                        $query->equals('start', 0)
+                    ),
+                    $query->logicalNot(
+                        $query->equals('uid', $event)
+                    ),
+                    $query->logicalNot(
+                        $query->equals('series', $event->getSeries())
+                    )
+                );
+
+            $constraints[] = $this->constraintBackendUserExclusive();
+
+            $query->setOrderings(
+                array(
+                    'record_type' => QueryInterface::ORDER_DESCENDING,
+                    'start' => QueryInterface::ORDER_ASCENDING,
+                )
+            );
+
+            $query->setLimit(10);
+
+            return $query->matching($query->logicalAnd(array_filter($constraints)))->execute();
+        }
+
+        return [];
+    }
+
+
 
     /**
      * Returns logger instance

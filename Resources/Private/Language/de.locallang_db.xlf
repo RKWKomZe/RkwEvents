@@ -128,7 +128,7 @@
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.title">
                 <source>URL path</source>
-                <target>URL Pfad (VORSICHT: Hier nur mit Bedacht Änderungen vornehmen! Kann außerdem global überschrieben werden.)</target>
+                <target>URL Pfad (HINWEIS: Wird initial beim Speichern von selbst befüllt. Hier außerdem nur mit Bedacht Änderungen vornehmen! Kann zudem global überschrieben werden.)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
                 <source>Event-Type</source>
