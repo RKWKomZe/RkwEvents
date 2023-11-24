@@ -14,12 +14,12 @@ call_user_func(
              * Registers a Backend Module
              */
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-                $extKey,
+                'RKW.' . $extKey,
                 'tools',	 // Make module a submodule of 'Web'
                 'eventsImport',	// Submodule key
                 '',						// Position
                 [
-                    \RKW\RkwEvents\Controller\BackendController::class => 'show, create, csvExport, createCsv',
+                    'backend' => 'show, create, csvExport, createCsv',
                 ],
                 [
                     'access' => 'user,group',
