@@ -1,0 +1,1 @@
+<f:if condition="{event.recordType} != '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">{rkwEvents:ComposeDateTimeParts( event: '{event}')} – </f:if>{event.title} <f:if condition="{event.documentType}">({event.documentType.name}) </f:if>{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}
