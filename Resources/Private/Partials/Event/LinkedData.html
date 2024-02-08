@@ -1,0 +1,50 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkwEvents="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    xmlns:coreExtended="http://typo3.org/ns/Madj2k/CoreExtended/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:comment>
+<!--
+    Also possible in the future:
+    https://schema.org/EventSeries
+
+    More specific event types:
+    https://schema.org/BusinessEvent
+    https://schema.org/EducationEvent
+
+
+   "eventSchedule : " -> EventSeries
+   "previousStartDate : " -> Last Event of an EventSeries
+   "typicalAgeRange : " -> Define static?
+
+   "about : " -> Short description would be nice (like a meta description)
+-->
+</f:comment>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Event",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "<f:cObject typoscriptObjectPath='lib.txRkwTemplate.schemaOrg.url' />"
+        },
+        "name" : "{event.title}",
+        "description" : "<f:render partial='LinkedData/Description' arguments='{_all}' />",
+        "image" : "<f:if condition='{event.headerImage}'>{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', absolute: '1')}</f:if>",
+        "url" : "{f:cObject(typoscriptObjectPath: 'lib.txRkwTemplate.schemaOrg.url')}",
+        "organizer" : "<f:if condition='{event.organizer}'>{event.organizer.0.company}</f:if>",
+        "startDate" : "<f:if condition='{event.start}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.start}')}</f:if>",
+        "endDate" : "<f:if condition='{event.end}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.end}')}</f:if>",
+        "isAccessibleForFree" : "{f:if(condition: '{event.costsReg} == 0.00', then: 'true', else: 'false')}",
+        "location" : "{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}",
+        "performer" : "{event.trainer}",
+        "maximumAttendeeCapacity" : "{event.seats}",
+        "keywords" : "<coreExtended:format.addSlashes charList="\""><f:format.htmlspecialchars><f:format.htmlentitiesDecode>{event.keywords}</f:format.htmlentitiesDecode></f:format.htmlspecialchars></coreExtended:format.addSlashes>",
+
+    }
+</script>
+
+</html>
+

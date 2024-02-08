@@ -33,6 +33,8 @@
             <f:if condition="{event.schedule}">
                 <f:render partial="Event/Registration" arguments="{event:event, isReservationPage: isReservationPage, additionalCssClass:'btn--primary'}" />
             </f:if>
+
+            <f:render partial="Event/LinkedData" arguments="{_all}" />
         </f:if>
 
     </f:section>
