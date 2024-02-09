@@ -40,8 +40,8 @@
         "location" : "{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}",
         "performer" : "{event.trainer}",
         "maximumAttendeeCapacity" : "{event.seats}",
-        "keywords" : "<f:format.htmlentitiesDecode><f:format.stripTags>{event.keywords}</f:format.stripTags></f:format.htmlentitiesDecode>",
-        "description" : "<f:format.htmlentitiesDecode><f:format.stripTags>{event.description} {event.description2}</f:format.stripTags></f:format.htmlentitiesDecode>"
+        "keywords" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:format.stripTags>{event.keywords}</f:format.stripTags></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
+        "description" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:format.stripTags>{event.description} {event.description2}</f:format.stripTags></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>"
     }
 </script>
 
