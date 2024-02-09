@@ -30,18 +30,18 @@
             "@type": "WebPage",
             "@id": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
         },
-        "name" : "{event.title}",
+        "name" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode>{event.title}</f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
         "image" : "<f:if condition='{event.headerImage}'>{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', absolute: '1')}</f:if>",
         "url" : "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />",
-        "organizer" : "<f:if condition='{event.organizer}'>{event.organizer.0.company}</f:if>",
+        "organizer" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:if condition='{event.organizer}'>{event.organizer.0.company}</f:if></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
         "startDate" : "<f:if condition='{event.start}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.start}')}</f:if>",
         "endDate" : "<f:if condition='{event.end}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.end}')}</f:if>",
         "isAccessibleForFree" : "{f:if(condition: '{event.costsReg} == 0.00', then: 'true', else: 'false')}",
-        "location" : "{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}",
+        "location" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode>{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}</f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
         "performer" : "{event.trainer}",
         "maximumAttendeeCapacity" : "{event.seats}",
-        "keywords" : "<f:format.htmlentitiesDecode><f:format.stripTags>{event.keywords}</f:format.stripTags></f:format.htmlentitiesDecode>",
-        "description" : "<f:format.htmlentitiesDecode><f:format.stripTags>{event.description} {event.description2}</f:format.stripTags></f:format.htmlentitiesDecode>"
+        "keywords" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:format.stripTags>{event.keywords}</f:format.stripTags></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
+        "description" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:format.stripTags>{event.description} {event.description2}</f:format.stripTags></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>"
     }
 </script>
 
