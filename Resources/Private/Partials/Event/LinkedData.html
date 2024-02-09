@@ -28,12 +28,11 @@
         "@type": "Event",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "<f:cObject typoscriptObjectPath='lib.txRkwTemplate.schemaOrg.url' />"
+            "@id": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
         },
         "name" : "{event.title}",
-        "description" : "<f:render partial='LinkedData/Description' arguments='{_all}' />",
         "image" : "<f:if condition='{event.headerImage}'>{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', absolute: '1')}</f:if>",
-        "url" : "{f:cObject(typoscriptObjectPath: 'lib.txRkwTemplate.schemaOrg.url')}",
+        "url" : "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />",
         "organizer" : "<f:if condition='{event.organizer}'>{event.organizer.0.company}</f:if>",
         "startDate" : "<f:if condition='{event.start}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.start}')}</f:if>",
         "endDate" : "<f:if condition='{event.end}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.end}')}</f:if>",
@@ -41,8 +40,8 @@
         "location" : "{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}",
         "performer" : "{event.trainer}",
         "maximumAttendeeCapacity" : "{event.seats}",
-        "keywords" : "<coreExtended:format.addSlashes charList="\""><f:format.htmlspecialchars><f:format.htmlentitiesDecode>{event.keywords}</f:format.htmlentitiesDecode></f:format.htmlspecialchars></coreExtended:format.addSlashes>",
-
+        "keywords" : "<f:format.htmlentitiesDecode><f:format.stripTags>{event.keywords}</f:format.stripTags></f:format.htmlentitiesDecode>",
+        "description" : "<f:format.htmlentitiesDecode><f:format.stripTags>{event.description} {event.description2}</f:format.stripTags></f:format.htmlentitiesDecode>"
     }
 </script>
 
