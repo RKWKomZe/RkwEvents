@@ -47,7 +47,7 @@ class EventContact extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      *
      * @var integer
      */
-    protected $recipientOfPersonalData = 99;
+    protected $recipientOfPersonalData = 0;
 
 
     /**
