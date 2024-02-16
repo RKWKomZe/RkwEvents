@@ -24,7 +24,7 @@
 <postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" />
 =============================================================
 
-<f:if condition="<rkwEvents:isExternalDataReceiver contact='{admin}' />"><f:else><postmaster:email.translate key="partials_email_details.privacyHint" languageKey="{language}" extensionName="rkwEvents" /></f:else><f:then><f:if condition="{reservation.company}">{reservation.company}
+<f:if condition="<rkwEvents:doNotPublishPrivacyData contact='{admin}' />"><f:then><postmaster:email.translate key="partials_email_details.privacyHint" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else><f:if condition="{reservation.company}">{reservation.company}
 </f:if>{reservation.firstName} {reservation.lastName} <f:if condition="{frontendUser}">({frontendUser.username})</f:if>
 {reservation.address}
 {reservation.zip} {reservation.city}
@@ -41,7 +41,7 @@
 </f:else></f:if></f:if></f:for></f:if><f:if condition="{reservation.serverHost}">
 
 <postmaster:email.translate key="partials_email_details.reservationVia" languageKey="{language}" extensionName="rkwEvents" />:
-{reservation.serverHost}</f:if></f:then></f:if>
+{reservation.serverHost}</f:if></f:else></f:if>
 </f:section>
 
 
@@ -114,13 +114,13 @@
 
 
 	<h2><postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" /></h2>
-	<f:if condition="<rkwEvents:isExternalDataReceiver contact='{admin}' />">
-		<f:else>
+	<f:if condition="<rkwEvents:doNotPublishPrivacyData contact='{admin}' />">
+		<f:then>
 			<p>
 				<postmaster:email.translate key="partials_email_details.privacyHint" languageKey="{language}" extensionName="rkwEvents" />
 			</p>
-		</f:else>
-		<f:then>
+		</f:then>
+		<f:else>
 			<p>
 				<f:if condition="{reservation.company}">{reservation.company}<br/></f:if>
 				{reservation.firstName} {reservation.lastName} <f:if condition="{frontendUser}">({frontendUser.username})</f:if><br/>
@@ -166,6 +166,6 @@
                     <br/>{reservation.serverHost}
                 </p>
             </f:if>
-		</f:then>
+		</f:else>
 	</f:if>
 </f:section>
