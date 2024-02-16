@@ -42,6 +42,13 @@ class EventContact extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     protected $lang;
 
+    /**
+     * recipientOfPersonalData
+     *
+     * @var integer
+     */
+    protected $recipientOfPersonalData = 0;
+
 
     /**
      * Returns the salutation
@@ -83,6 +90,27 @@ class EventContact extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     public function setLang($language)
     {
         $this->lang = $language;
+    }
+
+    /**
+     * Returns the RecipientOfPersonalData
+     *
+     * @return int $recipientOfPersonalData
+     */
+    public function getRecipientOfPersonalData(): int
+    {
+        return $this->recipientOfPersonalData;
+    }
+
+    /**
+     * Sets the RecipientOfPersonalData
+     *
+     * @param int $recipientOfPersonalData
+     * @return void
+     */
+    public function setRecipientOfPersonalData(int $recipientOfPersonalData): void
+    {
+        $this->recipientOfPersonalData = $recipientOfPersonalData;
     }
 
 }
