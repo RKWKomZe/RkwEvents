@@ -18,7 +18,7 @@ use RKW\RkwEvents\Domain\Model\EventContact;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class IsExternalDataReceiverViewHelper
+ * Class DoNotPublishPrivacyDataViewHelper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
@@ -26,7 +26,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class IsExternalDataReceiverViewHelper extends AbstractViewHelper
+class DoNotPublishPrivacyDataViewHelper extends AbstractViewHelper
 {
     /**
      * Initialize arguments.
@@ -40,7 +40,7 @@ class IsExternalDataReceiverViewHelper extends AbstractViewHelper
     }
 
     /**
-     * return true, if the given contact is eligible to receive external data (BE AWARE OF PRIVACY WHILE USING THIS!)
+     * return true, if the given contact is NOT eligible to receive external data (BE AWARE OF PRIVACY WHILE USING THIS!)
      *
      * @return bool
      */
@@ -50,7 +50,7 @@ class IsExternalDataReceiverViewHelper extends AbstractViewHelper
         $eventContact = $this->arguments['contact'];
         if (
             $eventContact instanceof EventContact
-            && $eventContact->getRecipientOfPersonalData()
+            && !$eventContact->getRecipientOfPersonalData()
         ) {
             return true;
         }
