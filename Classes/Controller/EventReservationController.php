@@ -1132,43 +1132,40 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 /** @var EventReservation $eventReservation */
                 foreach ($eventReservations as $eventReservation) {
 
-                    // 1. only cancel events that are about to come
-                    if ($eventReservation->getEvent()->getStart() < time()) {
-                        continue;
-                        //===
-                    }
-
-                    // 2. remove reservation and additional users
-                    foreach ($eventReservation->getAddPerson() as $addPerson)
+                    // 1. remove reservation and additional users
+                    foreach ($eventReservation->getAddPerson() as $addPerson) {
                         $this->eventReservationAddPersonRepository->remove($addPerson);
+                    }
                     $this->eventReservationRepository->remove($eventReservation);
                     $this->persistenceManager->persistAll();
 
-                    // 3. send final confirmation mail to user
+                    // 2. send final confirmation mail to user
                     $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, array($feUser, $eventReservation));
 
-                    // 4. send information mail to be-users
+                    // 3. send information mail to be-users
                     $adminMails = array();
-                    if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
-                        /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
-                        foreach ($beUsers as $beUser) {
-                            if ($beUser->getEmail()) {
-                                $adminMails[] = $beUser;
+                    if ($eventReservation->getEvent()) {
+                        if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
+                            /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
+                            foreach ($beUsers as $beUser) {
+                                if ($beUser->getEmail()) {
+                                    $adminMails[] = $beUser;
+                                }
+                            }
+                        }
+
+                        // 4. send information mail to external users
+                        if ($externalContacts = $eventReservation->getEvent()->getExternalContact()) {
+                            /** @var  $externalContact \RKW\RkwEvents\Domain\Model\EventContact */
+                            foreach ($externalContacts as $externalContact) {
+                                if ($externalContact->getEmail()) {
+                                    $adminMails[] = $externalContact;
+                                }
                             }
                         }
                     }
 
-                    // 5. send information mail to external users
-                    if ($externalContacts = $eventReservation->getEvent()->getExternalContact()) {
-                        /** @var  $externalContact \RKW\RkwEvents\Domain\Model\EventContact */
-                        foreach ($externalContacts as $externalContact) {
-                            if ($externalContact->getEmail()) {
-                                $adminMails[] = $externalContact;
-                            }
-                        }
-                    }
-
-                    // 6. send information mail to admins from TypoScript
+                    // 5. send information mail to admins from TypoScript
                     $adminUidList = GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
                     if ($adminUidList) {
                         foreach ($adminUidList as $adminUid) {
