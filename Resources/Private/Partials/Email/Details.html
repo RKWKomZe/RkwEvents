@@ -24,7 +24,7 @@
 <postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" />
 =============================================================
 
-<f:if condition="<rkwEvents:isExternalContact contact='{admin}' />"><f:then><postmaster:email.translate key="partials_email_details.privacyHint" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else><f:if condition="{reservation.company}">{reservation.company}
+<f:if condition="<rkwEvents:doNotPublishPrivacyData contact='{admin}' />"><f:then><postmaster:email.translate key="partials_email_details.privacyHint" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else><f:if condition="{reservation.company}">{reservation.company}
 </f:if>{reservation.firstName} {reservation.lastName} <f:if condition="{frontendUser}">({frontendUser.username})</f:if>
 {reservation.address}
 {reservation.zip} {reservation.city}
@@ -72,7 +72,7 @@
 		<f:if condition="{reservation.event.costsReg}">
 			<f:then>
 				{reservation.event.costsReg -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <postmaster:email.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" />
-				<f:if condition="{reservation.event.costsRed}">
+				<f:if condition="{reservation.event.costsRed} || {reservation.event.costsRedCondition}">
 					<postmaster:email.translate key="partials_email_details.eventCostsRegular" languageKey="{language}" extensionName="rkwEvents" /> /
 					{reservation.event.costsRed -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <postmaster:email.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /> <postmaster:email.translate key="partials_email_details.eventCostsReduced" languageKey="{language}" extensionName="rkwEvents" />
 				</f:if>
@@ -114,7 +114,7 @@
 
 
 	<h2><postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" /></h2>
-	<f:if condition="<rkwEvents:isExternalContact contact='{admin}' />">
+	<f:if condition="<rkwEvents:doNotPublishPrivacyData contact='{admin}' />">
 		<f:then>
 			<p>
 				<postmaster:email.translate key="partials_email_details.privacyHint" languageKey="{language}" extensionName="rkwEvents" />

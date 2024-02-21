@@ -193,6 +193,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventcontact
 	fax              varchar(255) DEFAULT '' NOT NULL,
 	email            varchar(255) DEFAULT '' NOT NULL,
 	lang             int(11) unsigned DEFAULT '0',
+    recipient_of_personal_data tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate           int(11) unsigned DEFAULT '0' NOT NULL,

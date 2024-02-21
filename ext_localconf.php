@@ -147,6 +147,12 @@ call_user_func(
         );
 
         //=================================================================
+        // Register TCA evaluation to be available in 'eval' of TCA
+        //=================================================================
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['RKW\\RkwEvents\\Evaluation\\EventEndDate'] = '';
+
+
+        //=================================================================
         // Register Hook for Geodata and reservation cleanup on copy
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$extKey] = 'RKW\\RkwEvents\\Hooks\\TceMainHooks';
@@ -231,100 +237,101 @@ call_user_func(
         );
 
         //=================================================================
+        // ATTENTION: deactivated due to faulty mapping in TYPO3 9.5
         // Add XClasses for extending existing classes
         //=================================================================
-        if (class_exists(\RKW\RkwAuthors\Domain\Model\Authors::class)) {
-            // for TYPO3 12+
-            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwAuthors\Domain\Model\Authors::class] = [
-                'className' => \RKW\RkwEvents\Domain\Model\Authors::class
-            ];
-
-            // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-            \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-                ->registerImplementation(
-                    \RKW\RkwAuthors\Domain\Model\Authors::class,
-                    \RKW\RkwEvents\Domain\Model\Authors::class
-                );
-        }
-
-        if (class_exists(\RKW\RkwSurvey\Domain\Model\Survey::class)) {
-            // for TYPO3 12+
-            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwSurvey\Domain\Model\Survey::class] = [
-                'className' => \RKW\RkwEvents\Domain\Model\Survey::class
-            ];
-
-            // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-            \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-                ->registerImplementation(
-                    \RKW\RkwSurvey\Domain\Model\Survey::class,
-                    \RKW\RkwEvents\Domain\Model\Survey::class
-                );
-        }
-
-
-        // for TYPO3 12+
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwBasics\Domain\Model\Department::class] = [
-            'className' => \RKW\RkwEvents\Domain\Model\Department::class
-        ];
-
-        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-            ->registerImplementation(
-                \RKW\RkwBasics\Domain\Model\Department::class,
-                \RKW\RkwEvents\Domain\Model\Department::class
-            );
-
-
-        // for TYPO3 12+
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwBasics\Domain\Model\DocumentType::class] = [
-            'className' => \RKW\RkwEvents\Domain\Model\DocumentType::class
-        ];
-
-        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-            ->registerImplementation(
-                \RKW\RkwBasics\Domain\Model\DocumentType::class,
-                \RKW\RkwEvents\Domain\Model\DocumentType::class
-            );
-
-
-        // for TYPO3 12+
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\BackendUser::class] = [
-            'className' => \TYPO3\CMS\Extbase\Domain\Model\BackendUser::class
-        ];
-
-        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-            ->registerImplementation(
-                \TYPO3\CMS\Extbase\Domain\Model\BackendUser::class,
-                \RKW\RkwEvents\Domain\Model\BackendUser::class
-            );
-
-
-        // for TYPO3 12+
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup::class] = [
-            'className' => \RKW\RkwEvents\Domain\Model\BackendUserGroup::class
-        ];
-
-        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-            ->registerImplementation(
-                \TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup::class,
-                \RKW\RkwEvents\Domain\Model\BackendUserGroup::class
-            );
-
-
-        // for TYPO3 12+
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\Category::class] = [
-            'className' => \RKW\RkwEvents\Domain\Model\Category::class
-        ];
-
-        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
-            ->registerImplementation(
-                \TYPO3\CMS\Extbase\Domain\Model\Category::class,
-                \RKW\RkwEvents\Domain\Model\Category::class
-            );
+//        if (class_exists(\RKW\RkwAuthors\Domain\Model\Authors::class)) {
+//            // for TYPO3 12+
+//            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwAuthors\Domain\Model\Authors::class] = [
+//                'className' => \RKW\RkwEvents\Domain\Model\Authors::class
+//            ];
+//
+//            // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//            \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//                ->registerImplementation(
+//                    \RKW\RkwAuthors\Domain\Model\Authors::class,
+//                    \RKW\RkwEvents\Domain\Model\Authors::class
+//                );
+//        }
+//
+//        if (class_exists(\RKW\RkwSurvey\Domain\Model\Survey::class)) {
+//            // for TYPO3 12+
+//            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwSurvey\Domain\Model\Survey::class] = [
+//                'className' => \RKW\RkwEvents\Domain\Model\Survey::class
+//            ];
+//
+//            // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//            \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//                ->registerImplementation(
+//                    \RKW\RkwSurvey\Domain\Model\Survey::class,
+//                    \RKW\RkwEvents\Domain\Model\Survey::class
+//                );
+//        }
+//
+//
+//        // for TYPO3 12+
+//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwBasics\Domain\Model\Department::class] = [
+//            'className' => \RKW\RkwEvents\Domain\Model\Department::class
+//        ];
+//
+//        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//            ->registerImplementation(
+//                \RKW\RkwBasics\Domain\Model\Department::class,
+//                \RKW\RkwEvents\Domain\Model\Department::class
+//            );
+//
+//
+//        // for TYPO3 12+
+//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\RKW\RkwBasics\Domain\Model\DocumentType::class] = [
+//            'className' => \RKW\RkwEvents\Domain\Model\DocumentType::class
+//        ];
+//
+//        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//            ->registerImplementation(
+//                \RKW\RkwBasics\Domain\Model\DocumentType::class,
+//                \RKW\RkwEvents\Domain\Model\DocumentType::class
+//            );
+//
+//
+//        // for TYPO3 12+
+//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\BackendUser::class] = [
+//            'className' => \TYPO3\CMS\Extbase\Domain\Model\BackendUser::class
+//        ];
+//
+//        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//            ->registerImplementation(
+//                \TYPO3\CMS\Extbase\Domain\Model\BackendUser::class,
+//                \RKW\RkwEvents\Domain\Model\BackendUser::class
+//            );
+//
+//
+//        // for TYPO3 12+
+//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup::class] = [
+//            'className' => \RKW\RkwEvents\Domain\Model\BackendUserGroup::class
+//        ];
+//
+//        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//            ->registerImplementation(
+//                \TYPO3\CMS\Extbase\Domain\Model\BackendUserGroup::class,
+//                \RKW\RkwEvents\Domain\Model\BackendUserGroup::class
+//            );
+//
+//
+//        // for TYPO3 12+
+//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Extbase\Domain\Model\Category::class] = [
+//            'className' => \RKW\RkwEvents\Domain\Model\Category::class
+//        ];
+//
+//        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+//        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+//            ->registerImplementation(
+//                \TYPO3\CMS\Extbase\Domain\Model\Category::class,
+//                \RKW\RkwEvents\Domain\Model\Category::class
+//            );
 
         //=================================================================
         // Register Logger
