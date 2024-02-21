@@ -1163,27 +1163,27 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                                 }
                             }
                         }
-                    }
 
-                    // 5. send information mail to admins from TypoScript
-                    $adminUidList = GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
-                    if ($adminUidList) {
-                        foreach ($adminUidList as $adminUid) {
+                        // 5. send information mail to admins from TypoScript
+                        $adminUidList = GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
+                        if ($adminUidList) {
+                            foreach ($adminUidList as $adminUid) {
 
-                            /** @var \RKW\RkwEvents\Domain\Model\BackendUser $admin */
-                            $admin = $this->backendUserRepository->findByUid($adminUid);
-                            if (
-                                ($admin)
-                                && ($admin->getEmail())
-                            ) {
-                                $adminMails[] = $admin;
+                                /** @var \RKW\RkwEvents\Domain\Model\BackendUser $admin */
+                                $admin = $this->backendUserRepository->findByUid($adminUid);
+                                if (
+                                    ($admin)
+                                    && ($admin->getEmail())
+                                ) {
+                                    $adminMails[] = $admin;
+                                }
                             }
                         }
+
+                        $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN, array($adminMails, $feUser, $eventReservation));
                     }
 
-                    $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN, array($adminMails, $feUser, $eventReservation));
                     $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Deleted event reservation with uid %s of user with uid %s via signal-slot.', $eventReservation->getUid(), $feUser->getUid()));
-
                 }
             }
         } catch (\Exception $e) {
