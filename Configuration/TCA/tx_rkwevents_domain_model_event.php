@@ -300,7 +300,9 @@ return [
         ],
         // only needed for SQL-query with distance calculation!
         'distance' => [
-            'type' => 'passthrough'
+            'config' => [
+                'type' => 'passthrough'
+            ],
         ],
 
         'testimonials' => [
