@@ -424,7 +424,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
-        // $this->handleContentNotFound($event);
+         // $this->handleContentNotFound($event);
 
         /*
         // Fallback: Using old "notAvailable" message INSIDE show action
@@ -448,6 +448,10 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             );
         }
         */
+
+    //    DebuggerUtility::var_dump($this->request->getArgument('event'));
+
+        $event = $this->eventRepository->findHiddenByUid($this->request->getArgument('event'));
 
         $this->view->assign('event', $event);
     }

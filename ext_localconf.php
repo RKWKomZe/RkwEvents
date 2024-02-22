@@ -151,7 +151,6 @@ call_user_func(
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['RKW\\RkwEvents\\Evaluation\\EventEndDate'] = '';
 
-
         //=================================================================
         // Register Hook for Geodata and reservation cleanup on copy
         //=================================================================
@@ -169,6 +168,10 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['TYPO3\CMS\Frontend\Page\PageGenerator']['generateMetaTags']['metatag'] =
             \RKW\RkwEvents\MetaTag\MetaTagGenerator::class . '->generate';
 
+        //=================================================================
+        //  Override Routing
+        //=================================================================
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['EventPersistentSlugifiedPatternMapper'] = \RKW\RkwEvents\Routing\EventPersistentSlugifiedPatternMapper::class;
 
         //=================================================================
         // Register Signal-Slots

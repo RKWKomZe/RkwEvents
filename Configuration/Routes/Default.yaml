@@ -5,6 +5,8 @@ routeEnhancers:
     routes:
       - routePath: '/rkw-events/show/{event}'
         _controller: 'Event::show'
+        _arguments:
+          event1: event
       - routePath: '/rkw-events/list'
         _controller: 'Event::list'
       - routePath: '/rkw-events/list/{page}'
@@ -29,7 +31,7 @@ routeEnhancers:
       token: '[a-zA-Z0-9]{30}'
     aspects:
       event:
-        type: PersistedSlugifiedPatternMapper
+        type: EventPersistentSlugifiedPatternMapper
         tableName: 'tx_rkwevents_domain_model_event'
         routeFieldPattern: '^(.*)-(?P<uid>\d+)$'
         routeFieldResult: '{title|sanitized}-{uid}'
