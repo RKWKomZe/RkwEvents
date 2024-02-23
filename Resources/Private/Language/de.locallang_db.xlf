@@ -339,6 +339,10 @@
                 <source>Backend User exclusive</source>
                 <target>Nur mit Direktlink erreichbar (außer für im Backend angemeldete Nutzende)</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
+                <source>Extended Network</source>
+                <target>Erweiterte Einwilligung (Weitergabe der Daten an RKW Netzwerk)</target>
+            </trans-unit>
 
 
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata" approved="yes">

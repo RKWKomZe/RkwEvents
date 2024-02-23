@@ -42,6 +42,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	eligibility_link         varchar(255) DEFAULT '' NOT NULL,
 	seats                    int(11) DEFAULT '0' NOT NULL,
 	backend_user_exclusive   tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    extended_network   tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	online_event             tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	online_event_access_link varchar(255) DEFAULT '' NOT NULL,
