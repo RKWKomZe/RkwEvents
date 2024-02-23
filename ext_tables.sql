@@ -26,7 +26,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
 	reg_end                  int(11) unsigned DEFAULT '0' NOT NULL,
 	reg_required             tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	reg_single               tinyint(1) unsigned DEFAULT '0' NOT NULL,
-  reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    reg_inhouse              tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	ext_reg_link             varchar(255) DEFAULT '' NOT NULL,
 	cancel_end               int(11) unsigned DEFAULT '0' NOT NULL,
 	ext_cancel_info          varchar(255) DEFAULT '' NOT NULL,
@@ -233,6 +233,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventorganizer
 	fax              varchar(255) DEFAULT '' NOT NULL,
 	email            varchar(255) DEFAULT '' NOT NULL,
 	show_pid         int(11) DEFAULT '0' NOT NULL,
+    website_url      varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate           int(11) unsigned DEFAULT '0' NOT NULL,

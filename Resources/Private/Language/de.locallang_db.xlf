@@ -573,6 +573,10 @@
                 <source>Show PID</source>
                 <target>Spezifische Detailseite für Veranstaltungen (überschreibt TypoScript-Konfiguration "showPid" bei Listenansichten)</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventorganizer.website_url" approved="yes">
+                <source>Website-URL</source>
+                <target>Website-URL</target>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventsheet -->

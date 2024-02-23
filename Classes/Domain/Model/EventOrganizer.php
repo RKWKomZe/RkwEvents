@@ -104,6 +104,13 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $showPid = 0;
 
+    /**
+     * websiteUrl
+     *
+     * @var string
+     */
+    protected $websiteUrl;
+
 
     /**
      * Returns the salutation
@@ -329,5 +336,26 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setShowPid(int $showPid): void
     {
         $this->showPid = $showPid;
+    }
+
+    /**
+     * Returns the websiteUrl
+     *
+     * @return string $websiteUrl
+     */
+    public function getWebsiteUrl(): string
+    {
+        return $this->websiteUrl;
+    }
+
+    /**
+     * Sets the websiteUrl
+     *
+     * @param string $websiteUrl
+     * @return void
+     */
+    public function setWebsiteUrl(string $websiteUrl): void
+    {
+        $this->websiteUrl = $websiteUrl;
     }
 }
