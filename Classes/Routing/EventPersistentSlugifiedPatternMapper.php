@@ -38,19 +38,11 @@ class EventPersistentSlugifiedPatternMapper extends \Madj2k\CoreExtended\Routing
 
     protected function createQueryBuilder(): QueryBuilder
     {
-        $aspectTest = GeneralUtility::makeInstance(VisibilityAspect::class, true, true, true);
-        $this->context->setAspect('visibility', $aspectTest);
+    //    $aspectTest = GeneralUtility::makeInstance(VisibilityAspect::class, true, true, true);
+    //    $this->context->setAspect('visibility', $aspectTest);
 
         //$this->context->setAspect('includeDeletedRecords', true);
 
-    //    $aspectTest = GeneralUtility::makeInstance(VisibilityAspect::class, false, false, true);
-    //    $this->context->setAspect('visibility', $aspectTest);
-
-        // $this->context->getPropertyFromAspect('visibility', 'includeDeletedRecords')
-        /** @var VisibilityAspect $aspect */
-        //$aspect = $this->context->getAspect('visibility');
-        //$bool = $aspect->includeDeletedRecords();
-    //    DebuggerUtility::var_dump($this->context->getAspect('visibility')); exit;
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable($this->tableName)
@@ -63,11 +55,10 @@ class EventPersistentSlugifiedPatternMapper extends \Madj2k\CoreExtended\Routing
         $queryBuilder->getRestrictions()->removeByType(FrontendGroupRestriction::class);
 
 
-        // EDIT START
-        // @toDo: Instead of do this override we maybe simply can use FrontendRestrictionContainer?
-    //    $queryBuilder->getRestrictions()->removeByType(DeletedRestriction::class);
-    //    $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
-        // EDIT END
+        // ####### EDIT START #######
+        $queryBuilder->getRestrictions()->removeByType(DeletedRestriction::class);
+        $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
+        // ####### EDIT END #######
 
 
         return $queryBuilder;
