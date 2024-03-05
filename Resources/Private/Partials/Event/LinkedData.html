@@ -29,7 +29,7 @@
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "Event",
+            "@type": "EducationEvent",
             "mainEntityOfPage": {
                 "@type": "WebPage",
                 "@id": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
@@ -37,20 +37,35 @@
             "url": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />",
 
             <rkwEvents:JsonProperty property='name' value='{event.title}' />
-            <rkwEvents:JsonProperty property='image' value='{f:uri.image(image:\'{event.headerImage}\', treatIdAsReference: \'1\', absolute: \'1\')}' />
             <rkwEvents:JsonProperty property='startDate' value='{f:format.date(format: \'Y-m-d H:i\', date: \'{event.start}\')}' />
             <rkwEvents:JsonProperty property='endDate' value='{f:format.date(format: \'Y-m-d H:i\', date: \'{event.end}\')}' />
             <rkwEvents:JsonProperty property='isAccessibleForFree' value='{f:if(condition: \'{event.costsReg} == 0.00\', then: \'true\', else: \'false\')}' />
             <rkwEvents:JsonProperty property='maximumAttendeeCapacity' value='{event.seats}' />
             <rkwEvents:JsonProperty property='keywords' value='{event.keywords}' />
             <rkwEvents:JsonProperty property='description' value='{event.description} {event.description2}' />
+            <rkwEvents:JsonProperty property='teaches' value='{event.targetLearning}' />
+            <f:render section='image' arguments='{image: event.headerImage}' />
+            <f:render section='offer' arguments='{_all}' />
             <f:render section='performer' arguments='{_all}' />
             <f:render section='organizer' arguments='{_all}' />
             <f:render section='location' arguments='{_all}' />
-
-
         }
     </script>
+
+    <f:section name="image"><f:spaceless>
+        <f:if condition='{image}'>
+            <rkwEvents:JsonProperty property='image' value='{f:uri.image(image:"{image}", treatIdAsReference: "1", absolute: "1")}' />
+        </f:if>
+    </f:spaceless></f:section>
+
+    <f:section name="offer"><f:spaceless>
+            "offers": {
+                <rkwEvents:JsonProperty property='price' value='{event.costsReg}' />
+                <rkwEvents:JsonProperty property='availabilityEnds' value='{f:format.date(format: "Y-m-d H:i", date: "{event.reg_end}")}' />
+                "priceCurrency": "EUR",
+                "@type": "Offer"
+            },
+    </f:spaceless></f:section>
 
     <f:section name="performer"><f:spaceless>
         <f:if condition='{event.trainer}'>
@@ -73,7 +88,11 @@
 
     <f:section name="location"><f:spaceless>
         <f:if condition='{event.onlineEvent}'>
+            <f:then>
+            "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+            </f:then>
             <f:else>
+            "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
             "location": {
                 "@type": "Place",
                 <rkwEvents:JsonProperty property='name' value='{event.place.name}' />
