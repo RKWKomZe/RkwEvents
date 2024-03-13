@@ -480,7 +480,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $frontendUser->setCity($newEventReservation->getCity());
             $frontendUser->setEmail($newEventReservation->getEmail());
 
-                        /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
+            /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
             $registration = $this->objectManager->get(FrontendUserRegistration::class);
             $registration->setFrontendUser($frontendUser)
                 ->setData($newEventReservation)

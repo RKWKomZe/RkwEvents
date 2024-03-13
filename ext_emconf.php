@@ -28,7 +28,8 @@ $EM_CONF[$_EXTKEY] = [
             'ajax_api' => '9.5.0-10.4.99',
             'postmaster' => '9.5.0-10.4.99',
             'static_info_tables' => '6.3.7',
-            'rkw_basics' => '9.5.0-10.4.99'
+            'rkw_basics' => '9.5.0-10.4.99',
+            'fe_register' => '9.5.1002-10.4.99',
         ],
 		'conflicts' => [
 		],
