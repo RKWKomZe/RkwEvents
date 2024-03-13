@@ -20,7 +20,7 @@ $EM_CONF[$_EXTKEY] = [
 	'internal' => '',
 	'uploadfolder' => '1',
 	'clearCacheOnLoad' => 0,
-	'version' => '9.5.37',
+	'version' => '9.5.38',
 	'constraints' => [
         'depends' => [
             'typo3' => '9.5.0-10.4.99',
@@ -28,7 +28,8 @@ $EM_CONF[$_EXTKEY] = [
             'ajax_api' => '9.5.0-10.4.99',
             'postmaster' => '9.5.0-10.4.99',
             'static_info_tables' => '6.3.7',
-            'rkw_basics' => '9.5.0-10.4.99'
+            'rkw_basics' => '9.5.0-10.4.99',
+            'fe_register' => '9.5.1002-10.4.99',
         ],
 		'conflicts' => [
 		],

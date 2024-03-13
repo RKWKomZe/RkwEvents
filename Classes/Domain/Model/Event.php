@@ -294,6 +294,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $backendUserExclusive = false;
 
     /**
+     * extendedNetwork
+     *
+     * @var bool
+     */
+    protected $extendedNetwork = false;
+
+    /**
      * onlineEventAccessLink
      *
      * @var string
@@ -1424,6 +1431,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setBackendUserExclusive(bool $backendUserExclusive): void
     {
         $this->backendUserExclusive = $backendUserExclusive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExtendedNetwork(): bool
+    {
+        return $this->extendedNetwork;
+    }
+
+    /**
+     * @param bool $extendedNetwork
+     */
+    public function setExtendedNetwork(bool $extendedNetwork): void
+    {
+        $this->extendedNetwork = $extendedNetwork;
     }
 
     /**

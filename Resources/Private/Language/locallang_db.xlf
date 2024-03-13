@@ -251,6 +251,9 @@
             <trans-unit id="tx_rkwevents_domain_model_event.backend_user_exclusive" approved="yes">
                 <source>Backend User exclusive</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
+                <source>Extended Network</source>
+            </trans-unit>
 
 
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_additionaldata">
