@@ -275,10 +275,10 @@
             <feRegister:consent type="terms" key="events" />
             <f:if condition="{event.regSingle}">
                 <f:then>
-                    <feRegister:consent type="privacy" key="eventsSingle" />
+                    <feRegister:consent type="privacy" key="eventsSingle" subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}" />
                 </f:then>
                 <f:else>
-                    <feRegister:consent type="privacy" key="events" />
+                    <feRegister:consent type="privacy" key="events" subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}" />
                 </f:else>
             </f:if>
             <feRegister:consent type="marketing" />
