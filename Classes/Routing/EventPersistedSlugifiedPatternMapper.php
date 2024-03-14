@@ -1,27 +1,23 @@
 <?php
 namespace RKW\RkwEvents\Routing;
 
-use InvalidArgumentException;
-use TYPO3\CMS\Core\Context\VisibilityAspect;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendGroupRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
-use TYPO3\CMS\Core\Routing\Aspect\PersistedAliasMapper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
- * Class EventSlugifiedPatternMapper
+ * Class EventPersistedSlugifiedPatternMapper
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @copyright Maximilian Fäßler
  * @package Rkw_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventPersistentSlugifiedPatternMapper extends \Madj2k\CoreExtended\Routing\Aspect\PersistedSlugifiedPatternMapper
+class EventPersistedSlugifiedPatternMapper extends \Madj2k\CoreExtended\Routing\Aspect\PersistedSlugifiedPatternMapper
 {
 
     /**
@@ -31,16 +27,14 @@ class EventPersistentSlugifiedPatternMapper extends \Madj2k\CoreExtended\Routing
     public function __construct(array $settings)
     {
         parent::__construct($settings);
-
-
     }
 
 
     protected function createQueryBuilder(): QueryBuilder
     {
-    //    $aspectTest = GeneralUtility::makeInstance(VisibilityAspect::class, true, true, true);
-    //    $this->context->setAspect('visibility', $aspectTest);
-
+        // Idea: Work with context aspect
+        //$aspectTest = GeneralUtility::makeInstance(VisibilityAspect::class, true, true, true);
+        //$this->context->setAspect('visibility', $aspectTest);
         //$this->context->setAspect('includeDeletedRecords', true);
 
 
