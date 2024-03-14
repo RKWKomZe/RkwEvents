@@ -29,7 +29,7 @@ routeEnhancers:
       token: '[a-zA-Z0-9]{30}'
     aspects:
       event:
-        type: PersistedSlugifiedPatternMapper
+        type: EventPersistedSlugifiedPatternMapper
         tableName: 'tx_rkwevents_domain_model_event'
         routeFieldPattern: '^(.*)-(?P<uid>\d+)$'
         routeFieldResult: '{title|sanitized}-{uid}'
