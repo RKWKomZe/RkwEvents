@@ -449,8 +449,6 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         }
         */
 
-    //    DebuggerUtility::var_dump($this->request->getArgument('event'));
-
         $event = $this->eventRepository->findHiddenByUid($this->request->getArgument('event'));
 
         $this->view->assign('event', $event);

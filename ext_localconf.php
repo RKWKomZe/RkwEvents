@@ -171,7 +171,7 @@ call_user_func(
         //=================================================================
         //  Override Routing
         //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['EventPersistentSlugifiedPatternMapper'] = \RKW\RkwEvents\Routing\EventPersistentSlugifiedPatternMapper::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['EventPersistedSlugifiedPatternMapper'] = \RKW\RkwEvents\Routing\EventPersistedSlugifiedPatternMapper::class;
 
         //=================================================================
         // Register Signal-Slots
