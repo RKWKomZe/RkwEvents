@@ -134,14 +134,12 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $remark;
 
-
     /**
-     * workshopRegister
+     * addPerson
      *
-     * @var array
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop>
      */
-    protected $workshopRegister;
-
+    protected $workshopRegister = null;
 
     /**
      * @var integer
@@ -222,6 +220,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->addPerson = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->targetGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->workshopRegister = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -626,28 +625,6 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->email = $email;
     }
 
-
-    /**
-     * Returns the workshopRegister
-     *
-     * @return array $workshopRegister
-     */
-    public function getWorkshopRegister()
-    {
-        return $this->workshopRegister;
-    }
-
-    /**
-     * Sets the workshopRegister
-     *
-     * @param array $workshopRegister
-     * @return void
-     */
-    public function setWorkshopRegister($workshopRegister)
-    {
-        $this->workshopRegister = $workshopRegister;
-    }
-
     /**
      * Returns the crdate value
      *
@@ -765,5 +742,48 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setParticipateMeeting($participateMeeting)
     {
         $this->participateMeeting = $participateMeeting;
+    }
+
+    /**
+     * Adds a WorkshopRegister
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $workshopRegister
+     * @return void
+     */
+    public function addWorkshopRegister(\RKW\RkwEvents\Domain\Model\EventWorkshop $workshopRegister)
+    {
+        $this->workshopRegister->attach($workshopRegister);
+    }
+
+    /**
+     * Removes a workshopRegister
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $workshopRegister The workshopRegister to be removed
+     * @return void
+     */
+    public function removeWorkshopRegister(\RKW\RkwEvents\Domain\Model\EventWorkshop $workshopRegister)
+    {
+        $this->workshopRegister->detach($workshopRegister);
+    }
+
+    /**
+     * Returns the workshopRegister
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshopRegister
+     */
+    public function getWorkshopRegister()
+    {
+        return $this->workshopRegister;
+    }
+
+    /**
+     * Sets the workshopRegister
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshopRegister
+     * @return void
+     */
+    public function setWorkshopRegister(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $workshopRegister)
+    {
+        $this->workshopRegister = $workshopRegister;
     }
 }

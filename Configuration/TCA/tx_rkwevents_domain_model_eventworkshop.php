@@ -24,7 +24,8 @@ return [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users'],
+        // '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, speaker, description, registered_frontend_users'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -147,22 +148,9 @@ return [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventworkshop.description',
 			'config' => [
-				'type' => 'text',
-				'cols' => 40,
-				'rows' => 15,
-				'eval' => 'trim, required',
-				'wizards' => [
-					'RTE' => [
-						'icon' => 'actions-wizard-rte',
-						'notNewRecords'=> 1,
-						'RTEonly' => 1,
-						'module' => [
-							'name' => 'wizard_rte',
-						],
-						'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
-						'type' => 'script'
-					],
-				],
+				'type' => 'input',
+                'size' => 30,
+				'eval' => 'trim',
 			],
 		],
 		'type' => [
@@ -238,6 +226,7 @@ return [
 				'maxitems'      => 9999,
 				'minitems'      => 0,
 				'size'          => 5,
+                'readOnly'      => true,
 			],
 		],
 	],

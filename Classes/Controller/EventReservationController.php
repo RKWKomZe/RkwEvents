@@ -286,6 +286,30 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
 
     /**
+     * initializeCreateAction
+     * If workshop is multiple choice, we have to handle not selected checkboxes (kill them)
+     * -> Exception while property mapping at property path "workshopRegister": PHP Warning: spl_object_hash() expects parameter 1 to be object, null given in /var/www/rkw-website-composer/web/typo3/sysext/extbase/Classes/Persistence/ObjectStorage.php line 152
+     *
+     * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+     */
+    public function initializeCreateAction(): void
+    {
+        if ($this->request->hasArgument('newEventReservation')) {
+
+            $newEventReservation = $this->request->getArgument('newEventReservation');
+            if (array_key_exists('workshopRegister', $newEventReservation)) {
+                // remove not chosen entries from workshopRegister-property
+                $newEventReservation['workshopRegister'] = array_filter($newEventReservation['workshopRegister']);
+                // re-set filtered element
+                $this->request->setArgument('newEventReservation', $newEventReservation);
+            }
+        }
+    }
+
+
+    /**
      * action create
      *
      * @param EventReservation $newEventReservation
@@ -1248,7 +1272,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $newEventReservation->setAddPerson($tempObjectStorage);
 
         // 2.2 Sub-operation: Register workshop reservations
-        $workshopResult = DivUtility::workshopRegistration($newEventReservation);
+        DivUtility::workshopRegistration($newEventReservation);
+        /*
         // if there is no longer place in a workshop, set message. Don't break reservation! Just an info.
         if (!$workshopResult) {
             $this->addFlashMessage(
@@ -1259,6 +1284,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO
             );
         }
+        */
 
         $this->eventReservationRepository->add($newEventReservation);
         $this->persistenceManager->persistAll();

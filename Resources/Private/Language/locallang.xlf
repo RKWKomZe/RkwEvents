@@ -923,6 +923,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.terms3">
 				<source>We would like to point out that images, sound and video recordings may be made at this event and published in various media for the purposes of event reporting and general public relations. You will receive further information on this and your rights directly at the start of the event.</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop">
+                <source>Workshop</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
 				<source>Workshop unit 1</source>
 			</trans-unit>
@@ -1297,6 +1300,9 @@
 			<trans-unit id="tx_rkwevents_validator.workshop_no_places">
 				<source>A choosen workshop does not have longer free seats.</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_validator.workshop_required">
+                <source>Please choose at least one workshop.</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_validator.remark">
 				<source>Remark</source>
 			</trans-unit>
