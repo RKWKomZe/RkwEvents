@@ -13,6 +13,10 @@ namespace RKW\RkwEvents\Utility;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use Madj2k\CoreExtended\Utility\GeneralUtility;
+use RKW\RkwEvents\Domain\Model\EventWorkshop;
+use RKW\RkwEvents\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -200,7 +204,6 @@ class DivUtility
      */
     public static function prepareResultsList($queryResult, $limit, $page = 0, &$firstItem = null)
     {
-
         $eventList = $queryResult->toArray();
 
         // kill first item at first :)
@@ -223,107 +226,45 @@ class DivUtility
         }
 
         return $eventList;
-        //===
     }
 
 
     /**
      * workshopRegistration
-     * !! returns FALSE, if not every workshop had a place for registration
+     * Simply add registered FeUser to given EventWorkshop(s)
      *
      * @author Maximilian Fäßler
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
-     * @return boolean
+     * @return void
      */
     public static function workshopRegistration(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
     {
 
-        $booleanReturnValue = true;
+        // check workshop reservation
+        if (count($eventReservation->getWorkshopRegister())) {
+            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+            $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+            /** @var \Rkw\RkwEvents\Domain\Repository\EventWorkshopRepository $eventWorkshopRepository */
+            $eventWorkshopRepository = $objectManager->get(\Rkw\RkwEvents\Domain\Repository\EventWorkshopRepository::class);
+            /** @var EventWorkshop $eventWorkshop */
+            foreach ($eventReservation->getWorkshopRegister() as $eventWorkshop) {
 
-        // 3. check workshop reservation
-        if (
-            $eventReservation->getWorkshopRegister()
-            && count($eventReservation->getWorkshopRegister())
-        ) {
+                // if using OptIn: Avoid weird "The object of type "RKW\RkwEvents\Domain\Model\EventWorkshop" given to update must be persisted already, but is new."
+                $eventWorkshopWorkaround = $eventWorkshopRepository->findByUid($eventWorkshop->getUid());
 
-            // (1) filter form array
-            foreach ($eventReservation->getWorkshopRegister() as $unitName => $workshopUnit) {
+                // Danger: The FeUser-Entity can be also Madj2k or simply extbase (see EventModel)
+                // -> Avoid errors: Just get the Event-FrontendUser
+                /** @var \Rkw\RkwEvents\Domain\Repository\FrontendUserRepository $frontendUserRepository */
+                $frontendUserRepository = $objectManager->get(\Rkw\RkwEvents\Domain\Repository\FrontendUserRepository::class);
+                /** @var FrontendUser $eventUser */
+                $eventUser = $frontendUserRepository->findByUid($eventReservation->getFeUser()->getUid());
 
-                foreach ($workshopUnit as $workshopUid) {
+                $eventWorkshopWorkaround->addRegisteredFrontendUsers($eventUser);
 
-                    // go ahead only if value is set (user has selected checkbox)
-                    // (2) check places
-                    if (intval($workshopUid)) {
+                $eventWorkshopRepository->update($eventWorkshopWorkaround);
 
-                        // iterate workshopunit from event
-                        $getWorkshopUnit = 'get' . ucfirst($unitName);
-
-                        // we can't work with "$key =>" in foreach instead of iteration (cryptic output -> storage identifier)
-                        $i = 1;
-                        /** @var \RKW\RkwEvents\Domain\Model\EventWorkshop $eventWorkshop */
-                        foreach ($eventReservation->getEvent()->$getWorkshopUnit() as $eventWorkshop) {
-
-                            /* ! Block darunter könnte geschickter sein für an- und abmelden
-                            // a) Set user to workshop, if he has select it
-                            if ($eventWorkshop->getUid() == intval($workshopUid)) {
-
-                                // count already reserved places and check, if there is space (if place limit is set)
-                                if ($eventWorkshop->getAvailableSeats()) {
-
-                                    // a) Either: Error, no place free
-                                    if (count($eventWorkshop->getRegisteredFrontendUsers()) >= $eventWorkshop->getAvailableSeats()) {
-
-                                        // Error! Set flash message in controller! Only info!
-                                        // Do not set a return at this point -> let iterate further workshops!
-                                        $booleanReturnValue = FALSE;
-
-                                    } else {
-                                        // b) Everything okay, set user to workshop (if not already set)
-                                        if (!$eventWorkshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser()))
-                                            $eventWorkshop->addRegisteredFrontendUsers($eventReservation->getFeUser());
-                                    }
-                                }
-                            }
-                            */
-
-                            // If: Workshop not in form-array and user is registered, put him out!
-                            if (!in_array($eventWorkshop->getUid(), $workshopUnit)) {
-
-                                // remove if set
-                                if ($eventWorkshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                                    $eventWorkshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                                }
-
-                            } else {
-
-                                // Else: Register (if seats still available)
-                                // count already reserved places and check, if there is space (if place limit is set)
-                                if ($eventWorkshop->getAvailableSeats()) {
-
-                                    // a) Either: Error, no place free
-                                    if (count($eventWorkshop->getRegisteredFrontendUsers()) >= $eventWorkshop->getAvailableSeats()) {
-
-                                        // Error! Set flash message in controller! Only info!
-                                        // Do not set a return at this point -> let iterate further workshops!
-                                        $booleanReturnValue = false;
-
-                                    } else {
-                                        // b) Everything okay, set user to workshop (if not already set)
-                                        if (!$eventWorkshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                                            $eventWorkshop->addRegisteredFrontendUsers($eventReservation->getFeUser());
-                                        }
-                                    }
-                                }
-                            }
-                            $i++;
-                        }
-                    }
-                }
             }
         }
-
-        return $booleanReturnValue;
-        //===
     }
 
 
@@ -336,7 +277,7 @@ class DivUtility
      * @param int $monthsToShow how many upcoming months include current
      * @return array
      */
-    public static function createMonthListArray($monthsToShow = 6)
+    public static function createMonthListArray(int $monthsToShow = 6): array
     {
         $resultArray = [];
 
@@ -347,7 +288,6 @@ class DivUtility
         }
 
         return $resultArray;
-        //===
     }
 
 
