@@ -264,7 +264,6 @@ class DivUtility
                 $eventWorkshopRepository->update($eventWorkshopWorkaround);
 
             }
-
         }
     }
 
