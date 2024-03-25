@@ -292,7 +292,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 
 	event               int(11) unsigned DEFAULT '0' NOT NULL,
 
-	remark              text                    NOT NULL,
+	remark              text NOT NULL,
 	valid_until         int(11) unsigned DEFAULT '0' NOT NULL,
 	add_person          varchar(255) DEFAULT '' NOT NULL,
 	fe_user             varchar(255) DEFAULT '' NOT NULL,
@@ -311,7 +311,8 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	show_pid            int(11) unsigned DEFAULT '0' NOT NULL,
 	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    target_group varchar(255) DEFAULT '' NOT NULL,
+    target_group        varchar(255) DEFAULT '' NOT NULL,
+    workshop_register   varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate              int(11) unsigned DEFAULT '0' NOT NULL,
