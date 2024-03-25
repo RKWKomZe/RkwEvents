@@ -19,10 +19,10 @@ return [
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservation.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting,',
+		'showRecordFieldList' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, workshop_register,',
 	],
 	'types' => [
-		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting'],
+		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, workshop_register'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -232,6 +232,20 @@ return [
             'config' => [
                 'type' => 'check',
                 'default' => 0
+            ],
+        ],
+        'workshop_register' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventworkshop.workshop_register',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
+                'maxitems'      => 9999,
+                'minitems'      => 0,
+                'size'          => 5,
+                'readOnly'      => true,
             ],
         ],
 	],

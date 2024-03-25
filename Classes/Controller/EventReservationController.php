@@ -20,6 +20,7 @@ use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
+use RKW\RkwEvents\Domain\Model\EventWorkshop;
 use RKW\RkwEvents\Utility\DivUtility;
 use Madj2k\FeRegister\Domain\Model\FrontendUser;
 use Madj2k\FeRegister\Registration\FrontendUserRegistration;
@@ -106,6 +107,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventReservationAddPersonRepository;
+
+    /**
+     * eventWorkshop
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\EventWorkshopRepository
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected $eventWorkshopRepository;
 
     /**
      * BackendUserRepository
@@ -288,7 +297,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * initializeCreateAction
      * If workshop is multiple choice, we have to handle not selected checkboxes (kill them)
-     * -> Exception while property mapping at property path "workshopRegister": PHP Warning: spl_object_hash() expects parameter 1 to be object, null given in /var/www/rkw-website-composer/web/typo3/sysext/extbase/Classes/Persistence/ObjectStorage.php line 152
+     * -> Exception while property mapping at property path "workshopRegister": PHP Warning: spl_object_hash() expects parameter
+     * 1 to be object, null given in /var/www/rkw-website-composer/web/typo3/sysext/extbase/Classes/Persistence/ObjectStorage.php
+     * line 152
      *
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException
@@ -1062,20 +1073,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
 
             // 2.2 remove additional workshop reservations
-            foreach ($eventReservation->getEvent()->getWorkshop1() as $workshop) {
-                if ($workshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                    $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                }
-            }
-            foreach ($eventReservation->getEvent()->getWorkshop2() as $workshop) {
-                if ($workshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                    $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                }
-            }
-            foreach ($eventReservation->getEvent()->getWorkshop3() as $workshop) {
-                if ($workshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                    $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                }
+            /** @var EventWorkshop $workshop */
+            foreach ($eventReservation->getWorkshopRegister() as $workshop) {
+                $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
+                $this->eventWorkshopRepository->update($workshop);
             }
 
             // 3. send final confirmation mail to user
