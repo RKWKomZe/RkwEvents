@@ -509,6 +509,9 @@
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
+                <source>Workshop register</source>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventreservationaddperson -->
