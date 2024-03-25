@@ -1162,6 +1162,12 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     foreach ($eventReservation->getAddPerson() as $addPerson) {
                         $this->eventReservationAddPersonRepository->remove($addPerson);
                     }
+                    // 2. remove workshops according to reservation
+                    /** @var EventWorkshop $workshop */
+                    foreach ($eventReservation->getWorkshopRegister() as $workshop) {
+                        $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
+                        $this->eventWorkshopRepository->update($workshop);
+                    }
                     $this->eventReservationRepository->remove($eventReservation);
                     $this->persistenceManager->persistAll();
 
