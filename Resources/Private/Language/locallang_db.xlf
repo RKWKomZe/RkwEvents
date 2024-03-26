@@ -200,6 +200,23 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.reservations">
 				<source>Reservations</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop" approved="yes">
+                <source>Workshop</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_type" approved="yes">
+                <source>Workshop select type</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_type.check" approved="yes">
+                <source>Checkbox</source>
+                <target>Checkbox (Multiple Choice)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_type.radio" approved="yes">
+                <source>Radio</source>
+                <target>Radio (Single Choice)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_req" approved="yes">
+                <source>Workshop select required</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.workshop1" approved="yes">
 				<source>Workshop 1</source>
 			</trans-unit>
@@ -491,6 +508,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.participate_meeting" approved="yes">
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
+                <source>Workshop register</source>
             </trans-unit>
 
 
