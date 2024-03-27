@@ -87,16 +87,16 @@ return [
             ],
         ],
         'subclasses' => [
-            \RKW\RkwEvents\Domain\Model\EventScheduled::class => \RKW\RkwEvents\Domain\Model\EventScheduled::class,
-            \RKW\RkwEvents\Domain\Model\EventAnnouncement::class => \RKW\RkwEvents\Domain\Model\EventAnnouncement::class
+            '\RKW\RkwEvents\Domain\Model\EventScheduled' => \RKW\RkwEvents\Domain\Model\EventScheduled::class,
+            '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => \RKW\RkwEvents\Domain\Model\EventAnnouncement::class
         ]
     ],
     \RKW\RkwEvents\Domain\Model\EventScheduled::class => [
         'tableName' => 'tx_rkwevents_domain_model_event',
-        'recordType' => \RKW\RkwEvents\Domain\Model\EventScheduled::class
+        'recordType' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
     ],
     \RKW\RkwEvents\Domain\Model\EventAnnouncement::class => [
         'tableName' => 'tx_rkwevents_domain_model_event',
-        'recordType' => \RKW\RkwEvents\Domain\Model\EventAnnouncement::class
+        'recordType' => '\RKW\RkwEvents\Domain\Model\EventAnnouncement'
     ],
 ];

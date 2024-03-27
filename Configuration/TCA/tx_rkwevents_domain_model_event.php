@@ -26,11 +26,11 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,keywords,start,end,show_time,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_inhouse,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, eligibility_link, additional_tile_flag, categories, categories_displayed, recommended_events, recommended_links, header_image, backend_user_exclusive',
+		'searchFields' => 'title,subtitle,keywords,start,end,show_time,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_inhouse,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop,code,trainer,eligibility, eligibility_link, additional_tile_flag, categories, categories_displayed, recommended_events, recommended_links, header_image, backend_user_exclusive, extended_network',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, show_time, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_inhouse, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place_unknown, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility, eligibility_link, additional_tile_flag, recommended_events, recommended_links, header_image, backend_user_exclusive',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, show_time, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_inhouse, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place_unknown, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop, code, trainer, eligibility, eligibility_link, additional_tile_flag, recommended_events, recommended_links, header_image, backend_user_exclusive, extended_network',
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
@@ -41,7 +41,7 @@ return [
                 code, trainer, keywords, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
-                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link,
+                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
                 cancel_end, --palette--;;externalCancel,
@@ -56,7 +56,7 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive,
+                header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive, extended_network,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -70,7 +70,7 @@ return [
                 code, trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
-                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link,
+                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
                 cancel_end, --palette--;;externalCancel,
@@ -85,7 +85,7 @@ return [
                 reservation,
 
                  --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, additional_tile_flag,recommended_events, recommended_links, backend_user_exclusive,
+                header_image, additional_tile_flag,recommended_events, recommended_links, backend_user_exclusive, extended_network,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -936,6 +936,45 @@ return [
             ],
         ],
 
+        'workshop' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
+                'maxitems'      => 9999,
+                'minitems'      => 0,
+                'size'          => 5,
+                'appearance' => [
+                    'collapseAll' => true
+                ]
+            ],
+        ],
+        'workshop_select_type' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_type',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_type.check', '0'],
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_type.radio', '1'],
+                ],
+            ],
+        ],
+        'workshop_select_req' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_req',
+            'config' => [
+                'type' => 'check',
+                'default' => 0
+            ],
+        ],
+
+        // ###############################
+        // !! Workshop 1-3 is deprecated!
+        // ###############################
 		'workshop1' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop1',
@@ -1094,6 +1133,14 @@ return [
         'backend_user_exclusive' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.backend_user_exclusive',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
+            ]
+        ],
+        'extended_network' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
             'config' => [
                 'type' => 'check',
                 'default' => 0,

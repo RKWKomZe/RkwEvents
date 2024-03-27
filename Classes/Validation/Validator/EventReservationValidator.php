@@ -15,6 +15,7 @@ namespace RKW\RkwEvents\Validation\Validator;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class EventReservationValidator
@@ -154,52 +155,24 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
         }
 
 
-        // 3. check workshop reservation
+        // 3. check workshop reservation (only if workshops are created AND selection is mandatory)
         if (
-            $newEventReservation->getWorkshopRegister()
-            && count($newEventReservation->getWorkshopRegister())
+            $newEventReservation->getEvent()->getWorkshop()->count()
+            && $newEventReservation->getEvent()->isWorkshopSelectReq()
         ) {
 
-            // (1) filter form array
-            foreach ($newEventReservation->getWorkshopRegister() as $unitName => $workshopUnit) {
-
-                foreach ($workshopUnit as $workshopUid) {
-
-                    // go ahead only if value is set (user has selected checkbox)
-                    // (2) check places
-                    if (intval($workshopUid)) {
-
-                        // iterate workshopunit from event
-                        $getWorkshopUnit = 'get' . ucfirst($unitName);
-
-                        // we can't work with "$key =>" in foreach instead of iteration (cryptic output -> storage identifier)
-                        // Gedanke MF: Möglicherweise ist hier "$newEventReservation->getEvent()->$getWorkshopUnit()->getKey()" eine Lösung
-                        $i = 1;
-                        /** @var \RKW\RkwEvents\Domain\Model\EventWorkshop $eventWorkshop */
-                        foreach ($newEventReservation->getEvent()->$getWorkshopUnit() as $eventWorkshop) {
-                            if ($eventWorkshop->getUid() == intval($workshopUid)) {
-
-                                // count already reserved places and check, if there is space (if place limit is set)
-                                if ($eventWorkshop->getAvailableSeats()) {
-
-                                    if (count($eventWorkshop->getRegisteredFrontendUsers()) >= $eventWorkshop->getAvailableSeats()) {
-                                        $this->result->forProperty('workshopRegister.' . $unitName . '.' . $i)->addError(
-                                            new \TYPO3\CMS\Extbase\Error\Error(
-                                                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                                    'tx_rkwevents_validator.workshop_no_places',
-                                                    'rkw_events'
-                                                ), 1481623579
-                                            )
-                                        );
-                                        $isValid = false;
-                                    }
-                                }
-                            }
-                            $i++;
-                        }
-                    }
-                }
+            if ($newEventReservation->getWorkshopRegister()->count() < 1) {
+                $this->result->forProperty('workshopRegister.0')->addError(
+                    new \TYPO3\CMS\Extbase\Error\Error(
+                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                            'tx_rkwevents_validator.workshop_required',
+                            'rkw_events'
+                        ), 1481623579
+                    )
+                );
+                $isValid = false;
             }
+
         }
 
         return $isValid;
