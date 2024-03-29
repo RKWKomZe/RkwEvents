@@ -323,6 +323,26 @@
 				<source>Reservations</source>
 				<target>Reservierungen</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop" approved="yes">
+                <source>Workshop</source>
+                <target>Workshops</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_type" approved="yes">
+                <source>Workshop select type</source>
+                <target>Workshop Auswahl (Single- oder Multiple Choice)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_type.check" approved="yes">
+                <source>Checkbox</source>
+                <target>Checkbox (Multiple Choice)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_type.radio" approved="yes">
+                <source>Radio</source>
+                <target>Radio (Single Choice)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.workshop_select_req" approved="yes">
+                <source>Workshop select required</source>
+                <target>Workshop Auswahl ist Pflicht (mindestens 1)</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.workshop1" approved="yes">
 				<source>Workshop 1</source>
 				<target>Workshops Block 1</target>
@@ -388,6 +408,10 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_other" approved="yes">
                 <source>Other</source>
                 <target>Sonstiges</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
+                <source>Extended Network</source>
+                <target>Erweiterte Einwilligung (Weitergabe der Daten an RKW Netzwerk)</target>
             </trans-unit>
 
 
@@ -533,6 +557,10 @@
 				<source>Language</source>
 				<target>Sprache</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventcontact.recipient_of_personal_data">
+                <source>Recipient of personal data </source>
+                <target>Personenbezogene Daten der Anmeldung erhalten</target>
+            </trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventorganizer -->
@@ -669,6 +697,10 @@
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.participate_meeting" approved="yes">
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
+                <source>Workshop register</source>
+                <target>Registrierte Workshops</target>
             </trans-unit>
 
 

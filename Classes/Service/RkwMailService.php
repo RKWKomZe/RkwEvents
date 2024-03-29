@@ -102,7 +102,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             ));
 
             // set reply address
-            if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
+            if (
+                (ExtensionManagementUtility::isLoaded('rkw_authors'))
+                && ($optIn->getData()->getEvent())
+            ){
                 if (count($optIn->getData()->getEvent()->getInternalContact()) > 0) {
 
                     /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
@@ -531,7 +534,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             ));
 
             // set reply address
-            if (ExtensionManagementUtility::isLoaded('rkw_authors')) {
+            if (
+                (ExtensionManagementUtility::isLoaded('rkw_authors'))
+                && ($eventReservation->getEvent())
+            ){
                 if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
 
                     /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
@@ -704,7 +710,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      * @return array
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
+    protected function getSettings(string $which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): array
     {
         return Common::getTypoScriptConfiguration('Rkwevents', $which);
     }

@@ -3,6 +3,6 @@
     data-namespace-typo3-fluid="true">
 
     <f:comment><!-- This is used in RKW\RkwEvents\MetaTag\MetaTagGenerator --></f:comment>
-    <rkwEvents:ComposeDateTimeParts event='{event}' /> – {event.series.title} ({event.series.documentType.name})<f:if condition="{event.onlineEvent}"><f:else><f:if condition="{event.placeUnknown}"><f:else>, {event.place.name}, {event.place.address}, {event.place.zip} {event.place.city}</f:else></f:if></f:else></f:if>
+    <f:if condition="{event.recordType} != '\RKW\RkwEvents\Domain\Model\EventAnnouncement'"><rkwEvents:ComposeDateTimeParts event='{event}' /> – </f:if>{event.title} ({event.documentType.name})<f:if condition="{event.onlineEvent}"><f:else><f:if condition="{event.placeUnknown}"><f:else>, {event.place.name}, {event.place.address}, {event.place.zip} {event.place.city}</f:else></f:if></f:else></f:if>
 
 </html>

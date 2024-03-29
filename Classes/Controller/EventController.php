@@ -480,7 +480,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
-        $this->handleContentNotFound($event);
+         $this->handleContentNotFound($event);
 
         /*
         // Fallback: Using old "notAvailable" message INSIDE show action

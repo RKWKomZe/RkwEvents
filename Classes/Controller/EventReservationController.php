@@ -20,6 +20,7 @@ use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
+use RKW\RkwEvents\Domain\Model\EventWorkshop;
 use RKW\RkwEvents\Utility\DivUtility;
 use Madj2k\FeRegister\Domain\Model\FrontendUser;
 use Madj2k\FeRegister\Registration\FrontendUserRegistration;
@@ -106,6 +107,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $eventReservationAddPersonRepository;
+
+    /**
+     * eventWorkshop
+     *
+     * @var \RKW\RkwEvents\Domain\Repository\EventWorkshopRepository
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected $eventWorkshopRepository;
 
     /**
      * BackendUserRepository
@@ -281,6 +290,32 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
             $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent(intval($this->settings['targetGroupsPid'])));
             $this->view->assign('targetGroup', $targetGroup);
+        }
+    }
+
+
+    /**
+     * initializeCreateAction
+     * If workshop is multiple choice, we have to handle not selected checkboxes (kill them)
+     * -> Exception while property mapping at property path "workshopRegister": PHP Warning: spl_object_hash() expects parameter
+     * 1 to be object, null given in /var/www/rkw-website-composer/web/typo3/sysext/extbase/Classes/Persistence/ObjectStorage.php
+     * line 152
+     *
+     * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidArgumentNameException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+     */
+    public function initializeCreateAction(): void
+    {
+        if ($this->request->hasArgument('newEventReservation')) {
+
+            $newEventReservation = $this->request->getArgument('newEventReservation');
+            if (array_key_exists('workshopRegister', $newEventReservation)) {
+                // remove not chosen entries from workshopRegister-property
+                $newEventReservation['workshopRegister'] = array_filter($newEventReservation['workshopRegister']);
+                // re-set filtered element
+                $this->request->setArgument('newEventReservation', $newEventReservation);
+            }
         }
     }
 
@@ -477,9 +512,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $frontendUser->setCompany($newEventReservation->getCompany());
             $frontendUser->setAddress($newEventReservation->getAddress());
             $frontendUser->setZip($newEventReservation->getZip());
+            $frontendUser->setCity($newEventReservation->getCity());
             $frontendUser->setEmail($newEventReservation->getEmail());
 
-                        /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
+            /** @var \Madj2k\FeRegister\Registration\FrontendUserRegistration $registration */
             $registration = $this->objectManager->get(FrontendUserRegistration::class);
             $registration->setFrontendUser($frontendUser)
                 ->setData($newEventReservation)
@@ -1036,20 +1072,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
 
             // 2.2 remove additional workshop reservations
-            foreach ($eventReservation->getEvent()->getWorkshop1() as $workshop) {
-                if ($workshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                    $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                }
-            }
-            foreach ($eventReservation->getEvent()->getWorkshop2() as $workshop) {
-                if ($workshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                    $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                }
-            }
-            foreach ($eventReservation->getEvent()->getWorkshop3() as $workshop) {
-                if ($workshop->getRegisteredFrontendUsers()->offsetExists($eventReservation->getFeUser())) {
-                    $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                }
+            /** @var EventWorkshop $workshop */
+            foreach ($eventReservation->getWorkshopRegister() as $workshop) {
+                $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
+                $this->eventWorkshopRepository->update($workshop);
             }
 
             // 3. send final confirmation mail to user
@@ -1131,61 +1157,64 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 /** @var EventReservation $eventReservation */
                 foreach ($eventReservations as $eventReservation) {
 
-                    // 1. only cancel events that are about to come
-                    if ($eventReservation->getEvent()->getStart() < time()) {
-                        continue;
-                        //===
-                    }
-
-                    // 2. remove reservation and additional users
-                    foreach ($eventReservation->getAddPerson() as $addPerson)
+                    // 1. remove reservation and additional users
+                    foreach ($eventReservation->getAddPerson() as $addPerson) {
                         $this->eventReservationAddPersonRepository->remove($addPerson);
+                    }
+                    // 2. remove workshops according to reservation
+                    /** @var EventWorkshop $workshop */
+                    foreach ($eventReservation->getWorkshopRegister() as $workshop) {
+                        $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
+                        $this->eventWorkshopRepository->update($workshop);
+                    }
                     $this->eventReservationRepository->remove($eventReservation);
                     $this->persistenceManager->persistAll();
 
-                    // 3. send final confirmation mail to user
+                    // 2. send final confirmation mail to user
                     $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, array($feUser, $eventReservation));
 
-                    // 4. send information mail to be-users
+                    // 3. send information mail to be-users
                     $adminMails = array();
-                    if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
-                        /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
-                        foreach ($beUsers as $beUser) {
-                            if ($beUser->getEmail()) {
-                                $adminMails[] = $beUser;
+                    if ($eventReservation->getEvent()) {
+                        if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
+                            /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
+                            foreach ($beUsers as $beUser) {
+                                if ($beUser->getEmail()) {
+                                    $adminMails[] = $beUser;
+                                }
                             }
                         }
-                    }
 
-                    // 5. send information mail to external users
-                    if ($externalContacts = $eventReservation->getEvent()->getExternalContact()) {
-                        /** @var  $externalContact \RKW\RkwEvents\Domain\Model\EventContact */
-                        foreach ($externalContacts as $externalContact) {
-                            if ($externalContact->getEmail()) {
-                                $adminMails[] = $externalContact;
+                        // 4. send information mail to external users
+                        if ($externalContacts = $eventReservation->getEvent()->getExternalContact()) {
+                            /** @var  $externalContact \RKW\RkwEvents\Domain\Model\EventContact */
+                            foreach ($externalContacts as $externalContact) {
+                                if ($externalContact->getEmail()) {
+                                    $adminMails[] = $externalContact;
+                                }
                             }
                         }
-                    }
 
-                    // 6. send information mail to admins from TypoScript
-                    $adminUidList = GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
-                    if ($adminUidList) {
-                        foreach ($adminUidList as $adminUid) {
+                        // 5. send information mail to admins from TypoScript
+                        $adminUidList = GeneralUtility::trimExplode(',', $settings['mail']['backendUser']);
+                        if ($adminUidList) {
+                            foreach ($adminUidList as $adminUid) {
 
-                            /** @var \RKW\RkwEvents\Domain\Model\BackendUser $admin */
-                            $admin = $this->backendUserRepository->findByUid($adminUid);
-                            if (
-                                ($admin)
-                                && ($admin->getEmail())
-                            ) {
-                                $adminMails[] = $admin;
+                                /** @var \RKW\RkwEvents\Domain\Model\BackendUser $admin */
+                                $admin = $this->backendUserRepository->findByUid($adminUid);
+                                if (
+                                    ($admin)
+                                    && ($admin->getEmail())
+                                ) {
+                                    $adminMails[] = $admin;
+                                }
                             }
                         }
+
+                        $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN, array($adminMails, $feUser, $eventReservation));
                     }
 
-                    $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN, array($adminMails, $feUser, $eventReservation));
                     $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Deleted event reservation with uid %s of user with uid %s via signal-slot.', $eventReservation->getUid(), $feUser->getUid()));
-
                 }
             }
         } catch (\Exception $e) {
@@ -1249,7 +1278,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $newEventReservation->setAddPerson($tempObjectStorage);
 
         // 2.2 Sub-operation: Register workshop reservations
-        $workshopResult = DivUtility::workshopRegistration($newEventReservation);
+        DivUtility::workshopRegistration($newEventReservation);
+        /*
         // if there is no longer place in a workshop, set message. Don't break reservation! Just an info.
         if (!$workshopResult) {
             $this->addFlashMessage(
@@ -1260,6 +1290,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO
             );
         }
+        */
 
         $this->eventReservationRepository->add($newEventReservation);
         $this->persistenceManager->persistAll();

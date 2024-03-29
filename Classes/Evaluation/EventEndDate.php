@@ -18,9 +18,9 @@ namespace RKW\RkwEvents\Evaluation;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
 
 /**
  * Class EventEndDate
@@ -106,6 +106,8 @@ class EventEndDate
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $flashMessageService = $objectManager->get(FlashMessageService::class);
         $messageQueue = $flashMessageService->getMessageQueueByIdentifier();
+
+        // @extensionScannerIgnoreLine
         $messageQueue->addMessage($message);
     }
 

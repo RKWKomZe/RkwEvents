@@ -27,7 +27,7 @@
             id="tx_rkwevents_pi1_firstName"
             property="firstName"
             value="{f:if(condition:'{newEventReservation.firstName} || {editMode}',then:'{newEventReservation.firstName}',else:'{frontendUser.firstName}')}"
-            additionalAttributes="{autocomplete:'fname'}"
+            additionalAttributes="{autocomplete:'given-name'}"
         />
 	</div>
 
@@ -40,7 +40,7 @@
             id="tx_rkwevents_pi1_lastName"
             property="lastName"
             value="{f:if(condition:'{newEventReservation.lastName} || {editMode}',then:'{newEventReservation.lastName}',else:'{frontendUser.lastName}')}"
-            additionalAttributes="{autocomplete:'lname'}"
+            additionalAttributes="{autocomplete:'family-name'}"
         />
 	</div>
 
@@ -83,6 +83,7 @@
             id="tx_rkwevents_pi1_company"
             property="company"
             value="{f:if(condition:'{newEventReservation.company} || {editMode}',then:'{newEventReservation.company}',else:'{frontendUser.company}')}"
+            additionalAttributes="{autocomplete:'organization'}"
         />
 	</div>
 
@@ -96,6 +97,7 @@
             id="tx_rkwevents_pi1_phone"
             property="phone"
             value="{f:if(condition:'{newEventReservation.phone} || {editMode}',then:'{newEventReservation.phone}',else:'{frontendUser.phone}')}"
+            additionalAttributes="{autocomplete:'tel'}"
         />
     </div>
 
@@ -122,7 +124,7 @@
             id="tx_rkwevents_pi1_address"
             property="address"
             value="{f:if(condition:'{newEventReservation.address} || {editMode}',then:'{newEventReservation.address}',else:'{frontendUser.address}')}"
-            additionalAttributes="{autocomplete:'address'}"
+            additionalAttributes="{autocomplete:'street-address'}"
         />
 	</div>
 
@@ -136,7 +138,7 @@
                 id="tx_rkwevents_pi1_zip"
                 property="zip"
                 value="{f:if(condition:'{newEventReservation.zip} || {editMode}',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
-                additionalAttributes="{autocomplete:'zip'}"
+                additionalAttributes="{autocomplete:'postal-code'}"
             />
         </div>
 
@@ -149,7 +151,7 @@
                 id="tx_rkwevents_pi1_city"
                 property="city"
                 value="{f:if(condition:'{newEventReservation.city} || {editMode}',then:'{newEventReservation.city}',else:'{frontendUser.city}')}"
-                additionalAttributes="{autocomplete:'city'}"
+                additionalAttributes="{autocomplete:'address-level2'}"
             />
         </div>
     </div>
@@ -187,48 +189,28 @@
 
 
     <!-- workshops -->
-    <f:comment>
+    <f:if condition="{event.workshop}">
+        <div class="v320-1">
+            <h4>
+                <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop" />
+                <f:if condition="!{event.workshopSelectReq}">
+                    <f:then>
+                        <span class="is-optional"><f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+                    </f:then>
+                    <f:else>
+                        <span class="is-required"><f:translate key="tx_rkwevents_fluid.label_required" /></span>
+                    </f:else>
+                </f:if>
+            </h4>
+            <f:for each="{event.workshop}" as="workshop" iteration="iter">
+                <f:render partial="EventReservation/Workshop" arguments="{_all}"/>
+                <f:if condition="!{iter.islast}">
+                    <br>
+                </f:if>
+            </f:for>
+        </div>
+    </f:if>
 
-        <f:if condition="{event.workshop1}">
-            <div class="v320-1">
-                <h5>
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1" />
-                </h5>
-                <f:for each="{event.workshop1}" as="workshop" iteration="iter">
-                    <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop1', frontendUser: frontendUser}"/>
-                    <if condition="!{iter.islast}">
-                        <br>
-                    </if>
-                </f:for>
-            </div>
-        </f:if>
-        <f:if condition="{event.workshop2}">
-            <div class="v320-1">
-                <h5>
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop2" />
-                </h5>
-                <f:for each="{event.workshop2}" as="workshop" iteration="iter">
-                    <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop2', frontendUser: frontendUser}"/>
-                </f:for>
-                <if condition="!{iter.islast}">
-                    <br>
-                </if>
-            </div>
-        </f:if>
-        <f:if condition="{event.workshop3}">
-            <div class="v320-1">
-                <h5>
-                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop3" />
-                </h5>
-                <f:for each="{event.workshop3}" as="workshop" iteration="iter">
-                    <f:render partial="EventReservation/Workshop" arguments="{workshop: workshop, workshopUnit: 'workshop3', frontendUser: frontendUser}"/>
-                </f:for>
-                <if condition="!{iter.islast}">
-                    <br>
-                </if>
-            </div>
-        </f:if>
-    </f:comment>
 
 
     <!-- remark and questions -->
@@ -273,10 +255,10 @@
             <feRegister:consent type="terms" key="events" />
             <f:if condition="{event.regSingle}">
                 <f:then>
-                    <feRegister:consent type="privacy" key="eventsSingle" />
+                    <feRegister:consent type="privacy" key="eventsSingle" subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}" />
                 </f:then>
                 <f:else>
-                    <feRegister:consent type="privacy" key="events" />
+                    <feRegister:consent type="privacy" key="events" subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}" />
                 </f:else>
             </f:if>
             <feRegister:consent type="marketing" />

@@ -1207,6 +1207,10 @@
 				<source>Additional remarks regarding your reservation.</source>
 				<target>Machen Sie hier ergänzende Angaben zu Ihrer Reservierung.</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop">
+                <source>Workshop</source>
+                <target>Workshop</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.workshop1">
 				<source>Workshop unit 1</source>
 				<target>Workshop Block 1</target>
@@ -1686,6 +1690,10 @@
 				<source>A choosen workshop does not have longer free seats.</source>
 				<target>Ein ausgewählter Workshop bietet leider keine freien Plätze mehr.</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_validator.workshop_required">
+                <source>Please choose at least one workshop.</source>
+                <target>Es muss mindestens ein Workshop ausgewählt werden.</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_validator.remark">
 				<source>Remark</source>
 				<target>Anmerkung</target>

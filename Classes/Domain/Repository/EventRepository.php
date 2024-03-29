@@ -671,6 +671,7 @@ class EventRepository extends AbstractRepository
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setIncludeDeleted(true);
 
         if (!$respectStoragePid) {
             $query->getQuerySettings()->setRespectStoragePage(false);

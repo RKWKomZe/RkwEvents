@@ -29,11 +29,12 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,workshop1,workshop2,workshop3,code,trainer,eligibility, eligibility_link',
+		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility, eligibility_link, workshop_select_type, workshop_select_req, workshop',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start, end, show_time, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, series, currency, place_unknown, place, online_event,online_event_access_link, register_add_information, additional_tile_flag, longitude, latitude, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop1, workshop2, workshop3, code, trainer, eligibility, eligibility_link',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start, end, show_time, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, series, currency, place_unknown, place, online_event,online_event_access_link, register_add_information, additional_tile_flag, longitude, latitude, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop_select_type, workshop_select_req, workshop, code, trainer, eligibility, eligibility_link',
+
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
@@ -44,7 +45,7 @@ return [
                 code, trainer,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
-                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link,
+                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
                 cancel_end, --palette--;;externalCancel,
@@ -73,7 +74,7 @@ return [
                 code, trainer,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
-                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link,
+                seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
                 cancel_end, --palette--;;externalCancel,
@@ -86,7 +87,7 @@ return [
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
-                
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 additional_tile_flag, title,
 
@@ -282,7 +283,9 @@ return [
         ],
         // only needed for SQL-query with distance calculation!
         'distance' => [
-            'type' => 'passthrough'
+            'config' => [
+                'type' => 'passthrough'
+            ],
         ],
         'seats' => [
             'exclude' => 0,
@@ -715,42 +718,41 @@ return [
             ],
         ],
 
-		'workshop1' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop1',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
-				'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
-				'maxitems'      => 9999,
-				'minitems'      => 0,
-				'size'          => 5,
-			],
-		],
-		'workshop2' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop2',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
-				'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
-				'maxitems'      => 9999,
-				'minitems'      => 0,
-				'size'          => 5,
-			],
-		],
-		'workshop3' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop3',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
-				'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
-				'maxitems'      => 9999,
-				'minitems'      => 0,
-				'size'          => 5,
-			],
-		],
+        'workshop' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
+                'maxitems'      => 9999,
+                'minitems'      => 0,
+                'size'          => 5,
+                'appearance' => [
+                    'collapseAll' => true
+                ]
+            ],
+        ],
+        'workshop_select_type' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_type',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_type.check', '0'],
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_type.radio', '1'],
+                ],
+            ],
+        ],
+        'workshop_select_req' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop_select_req',
+            'config' => [
+                'type' => 'check',
+                'default' => 0
+            ],
+        ],
         'reminder_mail_tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reminder_mail_tstamp',
@@ -807,6 +809,84 @@ return [
                 'softref' => 'typolink'
             ],
         ],
-
+        'additional_tile_flag' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.additional_tile_flag',
+            'config' => [
+                'type' => 'input',
+                'size' => 5,
+                'eval' => 'trim'
+            ],
+        ],
+        'recommended_events' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.recommended_events',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_rkwevents_domain_model_event',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.uid!=###THIS_UID### AND tx_rkwevents_domain_model_event.pid=###CURRENT_PID### AND tx_rkwevents_domain_model_event.sys_language_uid = ###REC_FIELD_sys_language_uid### AND ( (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.start > unix_timestamp(now())) OR (tx_rkwevents_domain_model_event.end > unix_timestamp(now())) ) ORDER BY tx_rkwevents_domain_model_event.start DESC',
+                'maxitems'      => 99,
+                'size'          => 5,
+            ],
+        ],
+        'recommended_links' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.recommended_links',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'pages',
+                'maxitems' => 5,
+                'minitems' => 0,
+                'size' => 5,
+                'default' => 0,
+                'suggestOptions' => [
+                    'default' => [
+                        'additionalSearchFields' => 'nav_title, alias',
+                        'addWhere' => 'AND pages.doktype = 1'
+                    ]
+                ],
+            ]
+        ],
+        'header_image' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.header_image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'maxitems' => 1,
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ],
+                        ],
+                    ],
+                    'appearance' => [
+                        'collapseAll' => 1
+                    ]
+                ],
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
+        ],
+        'backend_user_exclusive' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.backend_user_exclusive',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
+            ]
+        ],
+        'extended_network' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
+            ]
+        ],
     ],
 ];

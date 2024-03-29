@@ -5,8 +5,6 @@ call_user_func(
     function($extKey)
     {
 
-
-
         //=================================================================
         // Register BE-Module
         //=================================================================
@@ -20,14 +18,14 @@ call_user_func(
                 'tools',	 // Make module a submodule of 'Web'
                 'eventsImport',	// Submodule key
                 '',						// Position
-                array(
+                [
                     'Backend' => 'show, create, csvExport, createCsv',
-                ),
-                array(
+                ],
+                [
                     'access' => 'user,group',
                     'icon'   => 'EXT:' . $extKey . '/ext_icon.gif',
                     'labels' => 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_be.xlf',
-                )
+                ]
             );
 
         }
@@ -72,5 +70,5 @@ call_user_func(
         );
 
     },
-    $_EXTKEY
+    'rkw_events'
 );
