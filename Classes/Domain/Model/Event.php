@@ -222,6 +222,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $additionalTileFlag = '';
 
     /**
+     * extendedNetwork
+     *
+     * @var bool
+     */
+    protected $extendedNetwork = false;
+
+    /**
      * onlineEventAccessLink
      *
      * @var string
@@ -1098,22 +1105,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEligibilityLink(string $eligibilityLink): void
     {
         $this->eligibilityLink = $eligibilityLink;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBackendUserExclusive(): bool
-    {
-        return $this->backendUserExclusive;
-    }
-
-    /**
-     * @param bool $backendUserExclusive
-     */
-    public function setBackendUserExclusive(bool $backendUserExclusive): void
-    {
-        $this->backendUserExclusive = $backendUserExclusive;
     }
 
     /**
