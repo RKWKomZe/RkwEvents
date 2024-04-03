@@ -55,3 +55,21 @@ routeEnhancers:
     defaultController: 'Event::listSimilar'
     requirements:
       page: '[0-9]{1,10}'
+  RkwEvents3:
+    type: Extbase
+    namespace: 'tx_rkwevents_standaloneregister'
+    routes:
+      - routePath: '/rkw-events-solo'
+        _controller: 'EventReservation::newStandalone'
+      - routePath: '/rkw-events-solo/create'
+        _controller: 'EventReservation::create'
+      - routePath: '/rkw-events-solo/{event}'
+        _controller: 'EventReservation::newStandalone'
+      - routePath: '/rkw-events-solo/optin/{event}/{tokenUser}/{token}'
+        _controller: 'EventReservation::optIn'
+    defaultController: 'EventReservation::newStandalone'
+    requirements:
+      page: '[0-9]{1,10}'
+      eventReservation: '[0-9]{1,10}'
+      tokenUser: '[a-zA-Z0-9]{30}'
+      token: '[a-zA-Z0-9]{30}'
