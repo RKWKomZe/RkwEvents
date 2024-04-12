@@ -17,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @package Rkw_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventPersistedSlugifiedPatternMapper extends \Madj2k\CoreExtended\Routing\Aspect\PersistedSlugifiedPatternMapper
+class EventPersistedSlugifiedPatternMapper extends \Madj2k\DrSeo\Routing\Aspect\PersistedSlugifiedPatternMapper
 {
 
     /**
