@@ -38,6 +38,7 @@
         "php": ">=7.4",
         "typo3/cms-core": "~9.5.0 || ~10.4.0",
 		"madj2k/t3-core-extended": "~9.5.34 || ~10.4.0",
+		"madj2k/t3-dr-seo": "~9.5.0 || ~10.4.0 || ~11.5.0 || ~12.4.0",
 		"madj2k/t3-ajax-api": "~9.5.0 || ~10.4.0",
 		"madj2k/t3-postmaster": "~9.5.0 || ~10.4.0",
 		"sjbr/static-info-tables": "^6.8.0",

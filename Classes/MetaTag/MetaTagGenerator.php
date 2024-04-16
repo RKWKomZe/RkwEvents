@@ -30,7 +30,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  * @package Madj2k_CoreExtended
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class MetaTagGenerator extends \Madj2k\CoreExtended\MetaTag\MetaTagGenerator
+class MetaTagGenerator extends \Madj2k\DrSeo\MetaTag\MetaTagGenerator
 {
     /**
      * Generate the meta tags that can be set in backend and add them to frontend by using the MetaTag API
