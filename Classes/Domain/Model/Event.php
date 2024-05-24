@@ -476,6 +476,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Holds reservations
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservation>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $reservation = null;
 
