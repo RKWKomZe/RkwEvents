@@ -32,84 +32,84 @@ class EventOrganizer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer
      */
-    protected $salutation = 99;
+    protected int $salutation = 99;
 
     /**
      * firstName
      *
      * @var string
      */
-    protected $firstName;
+    protected string $firstName = '';
 
     /**
      * lastName
      *
      * @var string
      */
-    protected $lastName;
+    protected string $lastName = '';
 
     /**
      * company
      *
      * @var string
      */
-    protected $company;
+    protected string $company = '';
 
     /**
      * address
      *
      * @var string
      */
-    protected $address;
+    protected string $address = '';
 
     /**
      * zip
      *
      * @var string
      */
-    protected $zip;
+    protected string $zip = '';
 
     /**
      * city
      *
      * @var string
      */
-    protected $city;
+    protected string $city = '';
 
     /**
      * phone
      *
      * @var string
      */
-    protected $phone;
+    protected string $phone = '';
 
     /**
      * fax
      *
      * @var string
      */
-    protected $fax;
+    protected string $fax = '';
 
     /**
      * email
      *
      * @var string
      */
-    protected $email;
+    protected string $email = '';
 
     /**
      * showPid
      *
      * @var int
      */
-    protected $showPid = 0;
+    protected int $showPid = 0;
 
     /**
      * websiteUrl
      *
      * @var string
      */
-    protected $websiteUrl;
+    protected string $websiteUrl = '';
 
 
     /**
