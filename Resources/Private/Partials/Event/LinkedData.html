@@ -75,11 +75,11 @@
         },
     </f:if>
 </f:spaceless></f:section>
-<f:debug>{event.organizer}</f:debug>
+
 <f:section name="organizer"><f:spaceless>
     <f:if condition='{event.organizer}'>
         "organizer": {
-        <rkwEvents:JsonProperty property='name' value='{event.organizer.0.company}' closingComma="false" />
+        <rkwEvents:JsonProperty property='name' value='{event.organizer.0.company}' />
         <rkwEvents:JsonProperty property='url' value='{f:uri.typolink( absolute: \'1\', parameter: \'{event.organizer.0.websiteUrl}\')}' />
         "@type": "Organization"
         },
