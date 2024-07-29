@@ -5,107 +5,107 @@
     data-namespace-typo3-fluid="true">
 
 <f:comment>
-<!--
-    Also possible in the future:
-    https://schema.org/EventSeries
+    <!--
+        Also possible in the future:
+        https://schema.org/EventSeries
 
-    More specific event types:
-    https://schema.org/BusinessEvent
-    https://schema.org/EducationEvent
+        More specific event types:
+        https://schema.org/BusinessEvent
+        https://schema.org/EducationEvent
 
 
-   "eventSchedule : " -> EventSeries
-   "previousStartDate : " -> Last Event of an EventSeries
-   "typicalAgeRange : " -> Define static?
+       "eventSchedule : " -> EventSeries
+       "previousStartDate : " -> Last Event of an EventSeries
+       "typicalAgeRange : " -> Define static?
 
-   "about : " -> Short description would be nice (like a meta description)
--->
+       "about : " -> Short description would be nice (like a meta description)
+    -->
 
-<!--
-    IMPORTANT HINT: Closing comma without following row are NOT VALID JSON!
--->
+    <!--
+        IMPORTANT HINT: Closing comma without following row are NOT VALID JSON!
+    -->
 </f:comment>
 
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "EducationEvent",
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
-            },
-            "url": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />",
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationEvent",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
+        },
+        "url": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />",
 
-            <rkwEvents:JsonProperty property='name' value='{event.title}' />
-            <rkwEvents:JsonProperty property='startDate' value='{f:format.date(format: \'Y-m-d H:i\', date: \'{event.start}\')}' />
-            <rkwEvents:JsonProperty property='endDate' value='{f:format.date(format: \'Y-m-d H:i\', date: \'{event.end}\')}' />
-            <rkwEvents:JsonProperty property='isAccessibleForFree' value='{f:if(condition: \'{event.costsReg} == 0.00\', then: \'true\', else: \'false\')}' />
-            <rkwEvents:JsonProperty property='maximumAttendeeCapacity' value='{event.seats}' />
-            <rkwEvents:JsonProperty property='keywords' value='{event.keywords}' />
-            <rkwEvents:JsonProperty property='description' value='{event.description} {event.description2}' />
-            <rkwEvents:JsonProperty property='teaches' value='{event.targetLearning}' />
-            <f:render section='image' arguments='{image: event.headerImage}' />
-            <f:render section='offer' arguments='{_all}' />
-            <f:render section='performer' arguments='{_all}' />
-            <f:render section='organizer' arguments='{_all}' />
-            <f:render section='location' arguments='{_all}' />
-        }
-    </script>
+        <rkwEvents:JsonProperty property='name' value='{event.title}' />
+        <rkwEvents:JsonProperty property='startDate' value='{f:format.date(format: \'Y-m-d H:i\', date: \'{event.start}\')}' />
+        <rkwEvents:JsonProperty property='endDate' value='{f:format.date(format: \'Y-m-d H:i\', date: \'{event.end}\')}' />
+        <rkwEvents:JsonProperty property='isAccessibleForFree' value='{f:if(condition: \'{event.costsReg} == 0.00\', then: \'true\', else: \'false\')}' />
+        <rkwEvents:JsonProperty property='maximumAttendeeCapacity' value='{event.seats}' />
+        <rkwEvents:JsonProperty property='keywords' value='{event.keywords}' />
+        <rkwEvents:JsonProperty property='description' value='{event.description} {event.description2}' />
+        <rkwEvents:JsonProperty property='teaches' value='{event.targetLearning}' />
+        <f:render section='image' arguments='{image: event.headerImage}' />
+        <f:render section='offer' arguments='{_all}' />
+        <f:render section='performer' arguments='{_all}' />
+        <f:render section='organizer' arguments='{_all}' />
+        <f:render section='location' arguments='{_all}' />
+    }
+</script>
 
-    <f:section name="image"><f:spaceless>
-        <f:if condition='{image}'>
-            <rkwEvents:JsonProperty property='image' value='{f:uri.image(image:"{image}", treatIdAsReference: "1", absolute: "1")}' />
-        </f:if>
-    </f:spaceless></f:section>
+<f:section name="image"><f:spaceless>
+    <f:if condition='{image}'>
+        <rkwEvents:JsonProperty property='image' value='{f:uri.image(image:"{image}", treatIdAsReference: "1", absolute: "1")}' />
+    </f:if>
+</f:spaceless></f:section>
 
-    <f:section name="offer"><f:spaceless>
-            "offers": {
-                <rkwEvents:JsonProperty property='price' value='{event.costsReg}' />
-                <rkwEvents:JsonProperty property='availabilityEnds' value='{f:format.date(format: "Y-m-d H:i", date: "{event.reg_end}")}' />
-                "priceCurrency": "EUR",
-                "@type": "Offer"
-            },
-    </f:spaceless></f:section>
+<f:section name="offer"><f:spaceless>
+    "offers": {
+    <rkwEvents:JsonProperty property='price' value='{event.costsReg}' />
+    <rkwEvents:JsonProperty property='availabilityEnds' value='{f:format.date(format: "Y-m-d H:i", date: "{event.reg_end}")}' />
+    "priceCurrency": "EUR",
+    "@type": "Offer"
+    },
+</f:spaceless></f:section>
 
-    <f:section name="performer"><f:spaceless>
-        <f:if condition='{event.trainer}'>
-            "performer": {
-                <rkwEvents:JsonProperty property='name' value='{event.trainer}' />
-                "@type": "Person"
-            },
-        </f:if>
-    </f:spaceless></f:section>
+<f:section name="performer"><f:spaceless>
+    <f:if condition='{event.trainer}'>
+        "performer": {
+        <rkwEvents:JsonProperty property='name' value='{event.trainer}' />
+        "@type": "Person"
+        },
+    </f:if>
+</f:spaceless></f:section>
 
-    <f:section name="organizer"><f:spaceless>
-        <f:if condition='{event.organizer}'>
-            "organizer": {
-                <rkwEvents:JsonProperty property='name' value='{event.organizer.0.company}' />
-                <rkwEvents:JsonProperty property='url' value='{f:uri.typolink( absolute: \'1\', parameter: \'{event.organizer.0.websiteUrl}\')}' />
-                "@type": "Organization"
-            },
-        </f:if>
-    </f:spaceless></f:section>
+<f:section name="organizer"><f:spaceless>
+    <f:if condition='{event.organizer}'>
+        "organizer": {
+        <rkwEvents:JsonProperty property='name' value='{event.organizer.0.company}' />
+        <rkwEvents:JsonProperty property='url' value='{f:uri.typolink( absolute: \'1\', parameter: \'{event.organizer.0.websiteUrl}\')}' />
+        "@type": "Organization"
+        },
+    </f:if>
+</f:spaceless></f:section>
 
-    <f:section name="location"><f:spaceless>
-        <f:if condition='{event.onlineEvent}'>
-            <f:then>
+<f:section name="location"><f:spaceless>
+    <f:if condition='{event.onlineEvent}'>
+        <f:then>
             "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-            </f:then>
-            <f:else>
+        </f:then>
+        <f:else>
             "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
             "location": {
-                "@type": "Place",
-                <rkwEvents:JsonProperty property='name' value='{event.place.name}' />
-                "address": {
-                    <rkwEvents:JsonProperty property='streetAddress' value='{event.place.address}' />
-                    <rkwEvents:JsonProperty property='addressLocality' value='{event.place.city}' />
-                    <rkwEvents:JsonProperty property='postalCode' value='{event.place.zip}' />
-                    <rkwEvents:JsonProperty property='addressCountry' value='{event.place.country.shortNameLocal}' closingComma='false' />
-                }
+            "@type": "Place",
+            <rkwEvents:JsonProperty property='name' value='{event.place.name}' />
+            "address": {
+            <rkwEvents:JsonProperty property='streetAddress' value='{event.place.address}' />
+            <rkwEvents:JsonProperty property='addressLocality' value='{event.place.city}' />
+            <rkwEvents:JsonProperty property='postalCode' value='{event.place.zip}' />
+            <rkwEvents:JsonProperty property='addressCountry' value='{event.place.country.shortNameLocal}' closingComma='false' />
             }
-            </f:else>
-        </f:if>
-    </f:spaceless></f:section>
+            }
+        </f:else>
+    </f:if>
+</f:spaceless></f:section>
 
 </html>
 
