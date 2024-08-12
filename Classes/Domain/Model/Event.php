@@ -362,6 +362,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Holds reservations
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservation>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $reservation = null;
 
@@ -1516,7 +1517,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSheet> $sheets
      */
-    public function getSheets()
+    public function getSheet()
     {
         return $this->sheet;
     }
@@ -1527,7 +1528,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSheet> $sheet
      * @return void
      */
-    public function setSheets(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sheet)
+    public function setSheet(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sheet)
     {
         $this->sheet = $sheet;
     }
@@ -1733,7 +1734,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshop
@@ -1745,7 +1746,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Sets the EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshop
@@ -1758,7 +1759,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Adds a EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $workshop
@@ -1771,7 +1772,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Removes a EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $workshop
@@ -1784,7 +1785,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshop
@@ -1796,7 +1797,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Sets the EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshop
@@ -1809,7 +1810,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Adds a EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $workshop
@@ -1822,7 +1823,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Removes a EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \RKW\RkwEvents\Domain\Model\EventWorkshop $workshop
@@ -1835,7 +1836,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshop
@@ -1847,7 +1848,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Sets the EventWorkshop
-     * 
+     *
      * @deprecated
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop> $workshop
