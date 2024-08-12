@@ -480,30 +480,24 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      */
     public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
     {
-         $this->handleContentNotFound($event);
+    //     $this->handleContentNotFound($event);
 
-        /*
-        // Fallback: Using old "notAvailable" message INSIDE show action
+        // If no event is given (hidden; deleted) Extbase does not provide the event object
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+
+            $arguments = [
+                'noEventFound' => true,
+            ];
 
             $uri = $this->uriBuilder->reset()
                 ->setTargetPageUid($this->settings['listPid'])
                 ->setCreateAbsoluteUri(true)
+                ->setArguments($arguments)
                 ->build();
 
-            $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                    'eventController.message.error.notAvailable',
-                    'rkw_events',
-                    array(
-                        0 => $uri
-                    )
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
+            $this->redirectToUri($uri, 0, 404);
         }
-        */
+
 
         $this->view->assign('event', $event);
     }
@@ -675,6 +669,8 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * if event is not given (hidden or deleted) make 404 redirect
      * Hint: 404 seems not to working yet. Firefox and Chrome are repeating a 302
      *
+     * @deprecated
+     *
      * @param mixed $event
      * @return void
      */
@@ -692,6 +688,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                 ->setCreateAbsoluteUri(true)
                 ->setArguments($arguments)
                 ->build();
+
 
             $this->addFlashMessage(
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(

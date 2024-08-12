@@ -54,8 +54,6 @@ class EventSeriesUpdate implements UpgradeWizardInterface
             )
             ->execute();
 
-
-
         $qbEvent = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_rkwevents_domain_model_event');
         $qbEvent->getRestrictions()->removeAll();
 
