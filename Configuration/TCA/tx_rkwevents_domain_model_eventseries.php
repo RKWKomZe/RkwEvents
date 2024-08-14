@@ -27,21 +27,21 @@ return [
 	'types' => [
 		'1' => [
             'showitem' => '
-            
+
             --palette--;;title, subtitle, event,
-            
+
             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_basicdata,
             reg_inhouse, document_type, department, categories, categories_displayed, organizer,
-            
+
             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_additionaldata,
-            keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info, 
-            
+            keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info,
+
              --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
             header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive,
-            
+
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
             --palette--;;dataFields, --palette--;;systemFields,
-            
+
             '
         ],
 	],
@@ -131,7 +131,7 @@ return [
         ],
         'keywords' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.keywords',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.keywords',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,

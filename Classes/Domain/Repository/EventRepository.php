@@ -770,7 +770,7 @@ class EventRepository extends AbstractRepository
         // exclude manually set recommendations (returned through other plugin "seriesProposals")
         if ($event->getSeries()->getRecommendedEvents()->count()) {
             $constraints[] = $query->logicalNot(
-                $query->in('uid', $event->getRecommendedEvents())
+                $query->in('uid', $event->getSeries()->getRecommendedEvents())
             );
         }
 

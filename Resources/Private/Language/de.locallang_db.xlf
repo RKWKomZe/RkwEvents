@@ -100,7 +100,7 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.event" approved="yes">
                 <source>Event list</source>
-                <target>Veranstlatungen hinzufügen</target>
+                <target>Veranstaltungen hinzufügen</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.default">
                 <source>Default</source>
