@@ -16,7 +16,6 @@ namespace RKW\RkwEvents\Domain\Repository;
 
 use RKW\RkwEvents\Domain\Model\Authors;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class DocumentTypeRepository

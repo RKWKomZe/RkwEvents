@@ -17,7 +17,6 @@ namespace RKW\RkwEvents\UserFunctions;
 
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class DisplayCond

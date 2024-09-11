@@ -9,7 +9,6 @@ use RKW\RkwEvents\Domain\Model\EventSeries;
 use RKW\RkwEvents\Domain\Model\FrontendUser;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.

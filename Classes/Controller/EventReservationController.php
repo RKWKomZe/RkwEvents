@@ -15,20 +15,17 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Madj2k\Accelerator\Persistence\MarkerReducer;
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
+use Madj2k\FeRegister\Domain\Model\FrontendUser;
+use Madj2k\FeRegister\Registration\FrontendUserRegistration;
 use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventWorkshop;
 use RKW\RkwEvents\Utility\DivUtility;
-use Madj2k\FeRegister\Domain\Model\FrontendUser;
-use Madj2k\FeRegister\Registration\FrontendUserRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -1162,7 +1159,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     foreach ($eventReservation->getAddPerson() as $addPerson) {
                         $this->eventReservationAddPersonRepository->remove($addPerson);
                     }
-                    // 2. remove workshops according to reservation
+                    // 2.1 remove workshops according to reservation
                     /** @var EventWorkshop $workshop */
                     foreach ($eventReservation->getWorkshopRegister() as $workshop) {
                         $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
@@ -1171,7 +1168,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     $this->eventReservationRepository->remove($eventReservation);
                     $this->persistenceManager->persistAll();
 
-                    // 2. send final confirmation mail to user
+                    // 2.2 send final confirmation mail to user
                     $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, array($feUser, $eventReservation));
 
                     // 3. send information mail to be-users

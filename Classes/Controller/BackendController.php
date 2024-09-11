@@ -15,16 +15,12 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use ApacheSolrForTypo3\Solr\Search\DebugComponent;
-use League\Csv\Reader;
 use Madj2k\CoreExtended\Transfer\CsvImporter;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Utility\BackendUserUtility;
 use RKW\RkwEvents\Utility\CsvUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**

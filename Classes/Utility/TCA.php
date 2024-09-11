@@ -15,7 +15,6 @@ namespace RKW\RkwEvents\Utility;
  */
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * TCA utility

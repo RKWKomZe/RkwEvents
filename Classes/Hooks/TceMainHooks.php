@@ -16,13 +16,10 @@ namespace RKW\RkwEvents\Hooks;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility;
-use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
-use RKW\RkwEvents\Domain\Repository\EventSeriesRepository;
 use RKW\RkwGeolocation\Service\Geolocation;
-use Solarium\Component\Debug;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -31,8 +28,6 @@ use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * Class TceMainHooks

@@ -15,7 +15,6 @@ namespace RKW\RkwEvents\Validation\Validator;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class EventReservationValidator
