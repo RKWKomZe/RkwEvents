@@ -394,7 +394,7 @@ return [
                 'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.deleted = 0',
                 'foreign_field' => 'series',
                 //'foreign_sortby' => 'sorting',
-                'foreign_default_sortby' => 'start DESC',
+                'foreign_default_sortby' => 'start',
                 'maxitems'      => 9999,
                 'minitems'      => 0,
                 'size'          => 5,

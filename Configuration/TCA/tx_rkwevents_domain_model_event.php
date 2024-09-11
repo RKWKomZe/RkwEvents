@@ -818,60 +818,6 @@ return [
                 'eval' => 'trim'
             ],
         ],
-        'recommended_events' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.recommended_events',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rkwevents_domain_model_event',
-                'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.uid!=###THIS_UID### AND tx_rkwevents_domain_model_event.pid=###CURRENT_PID### AND tx_rkwevents_domain_model_event.sys_language_uid = ###REC_FIELD_sys_language_uid### AND ( (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.start > unix_timestamp(now())) OR (tx_rkwevents_domain_model_event.end > unix_timestamp(now())) ) ORDER BY tx_rkwevents_domain_model_event.start DESC',
-                'maxitems'      => 99,
-                'size'          => 5,
-            ],
-        ],
-        'recommended_links' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.recommended_links',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'pages',
-                'maxitems' => 5,
-                'minitems' => 0,
-                'size' => 5,
-                'default' => 0,
-                'suggestOptions' => [
-                    'default' => [
-                        'additionalSearchFields' => 'nav_title, alias',
-                        'addWhere' => 'AND pages.doktype = 1'
-                    ]
-                ],
-            ]
-        ],
-        'header_image' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.header_image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'image',
-                [
-                    'maxitems' => 1,
-                    'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                            ],
-                        ],
-                    ],
-                    'appearance' => [
-                        'collapseAll' => 1
-                    ]
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
-        ],
         'backend_user_exclusive' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.backend_user_exclusive',

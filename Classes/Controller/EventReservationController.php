@@ -15,6 +15,7 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\Accelerator\Persistence\MarkerReducer;
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
