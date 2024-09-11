@@ -8,15 +8,15 @@
             controller="Event"
             pluginName="Pi1"
             extensionName="RkwEvents"
-            pageUid="{f:if(condition: '{event.organizer.0.showPid}', then: '{event.organizer.0.showPid}', else: '{showPid}')}"
+            pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
             arguments="{event : event}"
-            title="{event.title}"
+            title="{event.series.title}"
             target="{f:if(condition: '{settings.list.detailLinkTargetBlank} == 1', then: '_blank')}"
         >
             <div class="tile__header">
                 <div class="tile__label-wrapper">
                     <span class="tile__label">
-                        {event.documentType.name}
+                        {event.series.documentType.name}
                     </span>
                     <f:if condition="{event.additionalTileFlag}">
                         <span class="tile__label tile__label--primary">
@@ -31,27 +31,27 @@
                         <svg class="icon icon--36" aria-hidden="true"><use xlink:href="#ic-events"></use></svg>
                     </span>
                     <span class="tile__title-text">
-                        {event.title}
+                        {event.series.title}
                     </span>
                 </h3>
                 <div class="tile__text tile__text--no-img">
                     <p>
                         <f:if condition="{settings.list.filter.showDepartment}">
                             <f:then>
-                                {event.department.name}
+                                {event.series.department.name}
                             </f:then>
                             <f:else>
-                                <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.categories}</f:count>">
-                                    <f:if condition="{event.categoriesDisplayed}">
+                                <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.series.categories}</f:count>">
+                                    <f:if condition="{event.series.categoriesDisplayed}">
                                         <f:then>
-                                            <f:for each="{event.categoriesDisplayed}" as="category" iteration="iter">
+                                            <f:for each="{event.series.categoriesDisplayed}" as="category" iteration="iter">
                                                 <f:if condition="{iter.isFirst}">
                                                     {category.title}
                                                 </f:if>
                                             </f:for>
                                         </f:then>
                                         <f:else>
-                                            <f:for each="{event.categories}" as="category" iteration="iter">
+                                            <f:for each="{event.series.categories}" as="category" iteration="iter">
                                                 <f:if condition="{iter.isFirst}">
                                                     {category.title}
                                                 </f:if>

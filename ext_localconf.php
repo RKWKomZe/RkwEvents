@@ -146,16 +146,21 @@ call_user_func(
             )
         );
 
+
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesUpdate'] = \RKW\RkwEvents\Install\EventSeriesUpdate::class;
+
+
         //=================================================================
         // Register TCA evaluation to be available in 'eval' of TCA
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['RKW\\RkwEvents\\Evaluation\\EventEndDate'] = '';
 
+
         //=================================================================
         // Register Hook for Geodata and reservation cleanup on copy
         //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$extKey] = 'RKW\\RkwEvents\\Hooks\\TceMainHooks';
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][$extKey] = 'RKW\\RkwEvents\\Hooks\\TceMainHooks';
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][$extKey] = 'RKW\\RkwEvents\\Hooks\\TceMainHooks';
 
         //=================================================================
         //  Register Command Controller

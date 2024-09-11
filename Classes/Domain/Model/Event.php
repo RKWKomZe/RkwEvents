@@ -28,11 +28,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * @var string
-     */
-    protected $recordType;
-
-    /**
      * title
      *
      * @var string
@@ -40,11 +35,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $title;
 
     /**
-     * subtitle
-     *
      * @var string
      */
-    protected $subtitle;
+    protected $recordType;
 
     /**
      * start
@@ -80,57 +73,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $latitude;
-
-    /**
-     * testimonials
-     *
-     * @var string
-     */
-    protected $testimonials;
-
-    /**
-     * description
-     *
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * description2
-     *
-     * @var string
-     */
-    protected $description2;
-
-    /**
-     * targetLearning
-     *
-     * @var string
-     */
-    protected $targetLearning;
-
-
-    /**
-     * targetGroup
-     *
-     * @var string
-     */
-    protected $targetGroup;
-
-    /**
-     *    schedule
-     *
-     * @var string
-     */
-    protected $schedule;
-
-
-    /**
-     * partner
-     *
-     * @var string
-     */
-    protected $partner;
 
     /**
      * seats
@@ -194,13 +136,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var boolean
      */
     protected $regSingle = false;
-
-    /**
-     * regInhouse
-     *
-     * @var boolean
-     */
-    protected $regInhouse = false;
 
     /**
      * regEnd
@@ -287,13 +222,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $additionalTileFlag = '';
 
     /**
-     * backendUserExclusive
-     *
-     * @var bool
-     */
-    protected $backendUserExclusive = false;
-
-    /**
      * extendedNetwork
      *
      * @var bool
@@ -329,13 +257,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $workshopSelectReq = false;
 
     /**
-     * Holds place
-     *
-     * @var \RKW\RkwEvents\Domain\Model\EventPlace
-     */
-    protected $place = null;
-
-    /**
      * type
      *
      * @var \RKW\RkwBasics\Domain\Model\DocumentType
@@ -343,18 +264,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $documentType = null;
 
     /**
-     * department
+     * Holds place
      *
-     * @var \RKW\RkwBasics\Domain\Model\Department
+     * @var \RKW\RkwEvents\Domain\Model\EventPlace
      */
-    protected $department = null;
-
-    /**
-     * department
-     *
-     * @var \RKW\RkwProjects\Domain\Model\Projects
-     */
-    protected $project = null;
+    protected $place = null;
 
     /**
      * Holds surveyBefore
@@ -371,23 +285,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $surveyAfter = null;
 
     /**
-     * Categories
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     */
-    protected $categories;
-
-    /**
-     * CategoriesDisplayed
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     */
-    protected $categoriesDisplayed;
-
-    /**
      * A series of events
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSeries>
+     * @var \RKW\RkwEvents\Domain\Model\EventSeries
      */
     protected $series = null;
 
@@ -425,20 +325,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\BackendUser>
      */
     protected $beUser = null;
-
-    /**
-     * Holds organizer
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer>
-     */
-    protected $organizer = null;
-
-    /**
-     * Holds add info
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\FileReference>
-     */
-    protected $addInfo = null;
 
 
     /**
@@ -515,27 +401,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $workshop3 = null;
 
     /**
-     * Holds recommendedEvents
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event>
-     */
-    protected $recommendedEvents = null;
-
-    /**
-     * Holds recommendedLinks
-     *
-     * @var string
-     */
-    protected $recommendedLinks = '';
-
-    /**
-     * headerImage
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $headerImage = null;
-
-    /**
      * reminderMailTstamp
      *
      * @var integer
@@ -548,14 +413,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var integer
      */
     protected $surveyAfterMailTstamp = 0;
-
-
-    /**
-     * keywords
-     *
-     * @var string
-     */
-    protected string $keywords = '';
 
 
     /**
@@ -609,15 +466,12 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->series = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->logos = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->reservation = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->addInfo = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->sheet = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->externalContact = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->internalContact = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->beUser = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->organizer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->presentations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->gallery1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->gallery2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -625,32 +479,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->workshop1 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop2 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshop3 = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->categoriesDisplayed = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
-
-    /**
-     * Returns the recordType value
-     *
-     * @return string
-     * @api
-     */
-    public function getRecordType()
-    {
-        return $this->recordType;
-    }
-
-
-    /**
-     * Sets the recordType value
-     *
-     * @param $recordType
-     * @return string
-     * @api
-     */
-    public function setRecordType($recordType)
-    {
-        return $this->recordType = $recordType;
     }
 
     /**
@@ -675,24 +503,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the subtitle
+     * Returns the recordType value
      *
-     * @return string $subtitle
+     * @return string
+     * @api
      */
-    public function getSubtitle()
+    public function getRecordType()
     {
-        return $this->subtitle;
+        return $this->recordType;
     }
 
     /**
-     * Sets the subtitle
+     * Sets the recordType value
      *
-     * @param string $subtitle
-     * @return void
+     * @param $recordType
+     * @return string
+     * @api
      */
-    public function setSubtitle($subtitle)
+    public function setRecordType($recordType)
     {
-        $this->subtitle = $subtitle;
+        return $this->recordType = $recordType;
     }
 
     /**
@@ -801,153 +631,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
-    }
-
-    /**
-     * Returns the testimonials
-     *
-     * @return string $testimonials
-     */
-    public function getTestimonials()
-    {
-        return $this->testimonials;
-    }
-
-    /**
-     * Sets the testimonials
-     *
-     * @param string $testimonials
-     * @return void
-     */
-    public function setTestimonials($testimonials)
-    {
-        $this->testimonials = $testimonials;
-    }
-
-    /**
-     * Returns the description
-     *
-     * @return string $description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Sets the description
-     *
-     * @param string $description
-     * @return void
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Returns the description2
-     *
-     * @return string $description2
-     */
-    public function getDescription2()
-    {
-        return $this->description2;
-    }
-
-    /**
-     * Sets the description2
-     *
-     * @param string $description2
-     * @return void
-     */
-    public function setDescription2($description2)
-    {
-        $this->description2 = $description2;
-    }
-
-    /**
-     * Returns the targetLearning
-     *
-     * @return string $targetLearning
-     */
-    public function getTargetLearning()
-    {
-        return $this->targetLearning;
-    }
-
-    /**
-     * Sets the targetLearning
-     *
-     * @param string $targetLearning
-     * @return void
-     */
-    public function setTargetLearning($targetLearning)
-    {
-        $this->targetLearning = $targetLearning;
-    }
-
-    /**
-     * Returns the targetGroup
-     *
-     * @return string $targetGroup
-     */
-    public function getTargetGroup()
-    {
-        return $this->targetGroup;
-    }
-
-    /**
-     * Sets the targetGroup
-     *
-     * @param string $targetGroup
-     * @return void
-     */
-    public function setTargetGroup($targetGroup)
-    {
-        $this->targetGroup = $targetGroup;
-    }
-
-    /**
-     * Returns the schedule
-     *
-     * @return string $schedule
-     */
-    public function getSchedule()
-    {
-        return $this->schedule;
-    }
-
-    /**
-     * Sets the schedule
-     *
-     * @param string $schedule
-     * @return void
-     */
-    public function setSchedule($schedule)
-    {
-        $this->schedule = $schedule;
-    }
-
-    /**
-     * Returns the partner
-     *
-     * @return string $partner
-     */
-    public function getPartner()
-    {
-        return $this->partner;
-    }
-
-    /**
-     * Sets the partner
-     *
-     * @param string $partner
-     * @return void
-     */
-    public function setPartner($partner)
-    {
-        $this->partner = $partner;
     }
 
     /**
@@ -1153,27 +836,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the regInhouse
-     *
-     * @return boolean $regInhouse
-     */
-    public function getRegInhouse()
-    {
-        return $this->regInhouse;
-    }
-
-    /**
-     * Sets the regInhouse
-     *
-     * @param boolean $regInhouse
-     * @return void
-     */
-    public function setRegInhouse($regInhouse)
-    {
-        $this->regInhouse = $regInhouse;
-    }
-
-    /**
      * Returns the regEnd
      *
      * @return int $regEnd
@@ -1364,6 +1026,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return string
      */
+    public function getAdditionalTileFlag(): string
+    {
+        return $this->additionalTileFlag;
+    }
+
+    /**
+     * @param string $additionalTileFlag
+     */
+    public function setAdditionalTileFlag(string $additionalTileFlag): void
+    {
+        $this->additionalTileFlag = $additionalTileFlag;
+    }
+
+    /**
+     * @return string
+     */
     public function getCode()
     {
         return $this->code;
@@ -1428,38 +1106,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEligibilityLink(string $eligibilityLink): void
     {
         $this->eligibilityLink = $eligibilityLink;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAdditionalTileFlag(): string
-    {
-        return $this->additionalTileFlag;
-    }
-
-    /**
-     * @param string $additionalTileFlag
-     */
-    public function setAdditionalTileFlag(string $additionalTileFlag): void
-    {
-        $this->additionalTileFlag = $additionalTileFlag;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBackendUserExclusive(): bool
-    {
-        return $this->backendUserExclusive;
-    }
-
-    /**
-     * @param bool $backendUserExclusive
-     */
-    public function setBackendUserExclusive(bool $backendUserExclusive): void
-    {
-        $this->backendUserExclusive = $backendUserExclusive;
     }
 
     /**
@@ -1542,69 +1188,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the document type
-     *
-     * @return \RKW\RkwBasics\Domain\Model\DocumentType $documentType
-     */
-    public function getDocumentType()
-    {
-        return $this->documentType;
-    }
-
-    /**
-     * Sets the document type
-     *
-     * @param \RKW\RkwBasics\Domain\Model\DocumentType $documentType
-     * @return void
-     */
-    public function setDocumentType(\RKW\RkwBasics\Domain\Model\DocumentType $documentType)
-    {
-        $this->documentType = $documentType;
-    }
-
-    /**
-     * Returns the department
-     *
-     * @return \RKW\RkwBasics\Domain\Model\Department $department
-     */
-    public function getDepartment()
-    {
-        return $this->department;
-    }
-
-    /**
-     * Sets the department
-     *
-     * @param \RKW\RkwBasics\Domain\Model\Department $department
-     * @return void
-     */
-    public function setDepartment(\RKW\RkwBasics\Domain\Model\Department $department)
-    {
-        $this->department = $department;
-    }
-
-    /**
-     * Returns the end
-     *
-     * @return \RKW\RkwProjects\Domain\Model\Projects
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-
-    /**
-     * Sets the end
-     *
-     * @param \RKW\RkwProjects\Domain\Model\Projects $end
-     * @return void
-     */
-    public function setProject($end)
-    {
-        $this->project = $end;
-    }
-
-    /**
      * Returns the surveyBefore
      *
      * @return \RKW\RkwEvents\Domain\Model\Survey $surveyBefore
@@ -1647,117 +1230,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds a Category
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     * @return void
-     */
-    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
-    {
-        $this->categories->attach($category);
-    }
-
-    /**
-     * Removes a Category
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove The Category to be removed
-     * @return void
-     */
-    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove)
-    {
-        $this->categories->detach($categoryToRemove);
-    }
-
-    /**
-     * Returns the categories
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * Sets the categories
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
-     * @return void
-     */
-    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
-    {
-        $this->categories = $categories;
-    }
-
-    /**
-     * Adds a CategoryDisplayed
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayed
-     * @return void
-     */
-    public function addCategoryDisplayed(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayed)
-    {
-        $this->categoriesDisplayed->attach($categoryDisplayed);
-    }
-
-    /**
-     * Removes a CategoryDisplayed
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayedToRemove The CategoryDisplayed to be removed
-     * @return void
-     */
-    public function removeCategoryDisplayed(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryDisplayedToRemove)
-    {
-        $this->categoriesDisplayed->detach($categoryDisplayedToRemove);
-    }
-
-    /**
-     * Returns the categoriesDisplayed
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categoriesDisplayed
-     */
-    public function getCategoriesDisplayed()
-    {
-        return $this->categoriesDisplayed;
-    }
-
-    /**
-     * Sets the categoriesDisplayed
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categoriesDisplayed
-     * @return void
-     */
-    public function setCategoriesDisplayed(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categoriesDisplayed)
-    {
-        $this->categoriesDisplayed = $categoriesDisplayed;
-    }
-
-    /**
-     * Adds a EventSeries
-     *
-     * @param \RKW\RkwEvents\Domain\Model\EventSeries $series
-     * @return void
-     */
-    public function addSeries(\RKW\RkwEvents\Domain\Model\EventSeries $series)
-    {
-        $this->series->attach($series);
-    }
-
-    /**
-     * Removes a EventSeries
-     *
-     * @param \RKW\RkwEvents\Domain\Model\EventSeries $seriesToRemove The EventSeries to be removed
-     * @return void
-     */
-    public function removeSeries(\RKW\RkwEvents\Domain\Model\EventSeries $seriesToRemove)
-    {
-        $this->series->detach($seriesToRemove);
-    }
-
-    /**
      * Returns the series
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSeries> $series
+     * @return \RKW\RkwEvents\Domain\Model\EventSeries $series
      */
     public function getSeries()
     {
@@ -1767,10 +1242,10 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the series
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventSeries> $series
+     * @param \RKW\RkwEvents\Domain\Model\EventSeries $series
      * @return void
      */
-    public function setSeries(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $series)
+    public function setSeries(\RKW\RkwEvents\Domain\Model\EventSeries $series)
     {
         $this->series = $series;
     }
@@ -1970,92 +1445,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->beUser = $beUser;
     }
 
-
-    /**
-     * Adds a organizer
-     *
-     * @param \RKW\RkwEvents\Domain\Model\EventOrganizer $organizer
-     * @return void
-     */
-    public function addOrganizer(\RKW\RkwEvents\Domain\Model\EventOrganizer $organizer)
-    {
-        $this->organizer->attach($organizer);
-    }
-
-    /**
-     * Removes a organizer
-     *
-     * @param \RKW\RkwEvents\Domain\Model\EventOrganizer $backendUser
-     * @return void
-     */
-    public function removeOrganizer(\RKW\RkwEvents\Domain\Model\EventOrganizer $organizer)
-    {
-        $this->organizer->detach($organizer);
-    }
-
-    /**
-     * Returns the organizer
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer> $organizer
-     */
-    public function getOrganizer()
-    {
-        return $this->organizer;
-    }
-
-    /**
-     * Sets the organizer
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventOrganizer> $organizer
-     * @return void
-     */
-    public function setOrganizer(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $organizer)
-    {
-        $this->organizer = $organizer;
-    }
-
-    /**
-     * Adds a addInfo
-     *
-     * @param \RKW\RkwEvents\Domain\Model\FileReference $addInfo
-     * @return void
-     */
-    public function addAddInfo(\RKW\RkwEvents\Domain\Model\FileReference $addInfo)
-    {
-        $this->addInfo->attach($addInfo);
-    }
-
-    /**
-     * Removes a addInfo
-     *
-     * @param \RKW\RkwEvents\Domain\Model\FileReference $addInfo
-     * @return void
-     */
-    public function removeAddInfo(\RKW\RkwEvents\Domain\Model\FileReference $addInfo)
-    {
-        $this->addInfo->detach($addInfo);
-    }
-
-    /**
-     * Returns the addInfo
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\FileReference> $addInfo
-     */
-    public function getAddInfo()
-    {
-        return $this->addInfo;
-    }
-
-    /**
-     * Sets the addInfo
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\FileReference> $addInfo
-     * @return void
-     */
-    public function setAddInfo(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $addInfo)
-    {
-        $this->addInfo = $addInfo;
-    }
 
     /**
      * Adds a presentation
@@ -2471,65 +1860,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds a RecommendedEvents
-     *
-     * @param \RKW\RkwEvents\Domain\Model\Event $recommendedEvents
-     * @return void
-     */
-    public function addRecommendedEvents(\RKW\RkwEvents\Domain\Model\Event $recommendedEvents)
-    {
-        $this->recommendedEvents->attach($recommendedEvents);
-    }
-
-    /**
-     * Removes a EventWorkshop
-     *
-     * @param \RKW\RkwEvents\Domain\Model\Event $recommendedEvents
-     * @return void
-     */
-    public function removeRecommendedEvents(\RKW\RkwEvents\Domain\Model\Event $recommendedEvents)
-    {
-        $this->recommendedEvents->detach($recommendedEvents);
-    }
-
-    /**
-     * Returns the EventWorkshop
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $recommendedEvents
-     */
-    public function getRecommendedEvents()
-    {
-        return $this->recommendedEvents;
-    }
-
-    /**
-     * Sets the EventWorkshop
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\Event> $recommendedEvents
-     * @return void
-     */
-    public function setRecommendedEvents(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $recommendedEvents)
-    {
-        $this->recommendedEvents = $recommendedEvents;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRecommendedLinks(): string
-    {
-        return $this->recommendedLinks;
-    }
-
-    /**
-     * @param string $recommendedLinks
-     */
-    public function setRecommendedLinks(string $recommendedLinks): void
-    {
-        $this->recommendedLinks = $recommendedLinks;
-    }
-
-    /**
      * Returns the reminderMailTstamp
      *
      * @return int $reminderMailTstamp
@@ -2572,28 +1902,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the headerImage
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $headerImage
-     */
-    public function getHeaderImage()
-    {
-        return $this->headerImage;
-    }
-
-    /**
-     * Sets the headerImage
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $headerImage
-     * @return void
-     */
-    public function setHeaderImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $headerImage)
-    {
-        $this->headerImage = $headerImage;
-    }
-
-
-    /**
      * Returns the distance
      *
      * @return int $distance
@@ -2614,30 +1922,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->distance = $distance;
     }
 
-
-    /**
-     * Returns the keywords
-     *
-     * @return string
-     */
-    public function getKeywords(): string
-    {
-        return $this->keywords;
-    }
-
-
-    /**
-     * Sets the keywords
-     *
-     * @param string $keywords
-     * @return void
-     */
-    public function setKeywords(string $keywords): void
-    {
-        $this->keywords = $keywords;
-    }
-
-
     /**
      * Returns the crdate value
      *
@@ -2649,7 +1933,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return $this->crdate;
     }
-
 
     /**
      * Returns the tstamp value

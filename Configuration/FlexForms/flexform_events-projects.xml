@@ -237,6 +237,31 @@
                         <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
                     </settings.list.filter.showTimeInfo>
 
+                    <!--
+                    <settings.list.filter.showInhouseLink>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showInhouseInfoLink</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showInhouseLink>
+                    <settings.list.filter.showInhouseInfo>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showInhouseInfo</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <max>100</max>
+                            <eval>trim</eval>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showInhouseInfo>
+                    -->
 
                 </el>
             </ROOT>

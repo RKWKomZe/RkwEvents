@@ -17,7 +17,6 @@ namespace RKW\RkwEvents\Utility;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Model\EventWorkshop;
 use RKW\RkwEvents\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * DivUtility

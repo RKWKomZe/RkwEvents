@@ -5,10 +5,10 @@ namespace RKW\RkwEvents\Controller;
 use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventSeries;
 use RKW\RkwEvents\Domain\Model\FrontendUser;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -121,6 +121,8 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * Hint: The given params ($filter, $page, $archive) are only needed for AJAX purpose
      *
+     * ! Has $noEventFound any function? The related function handleContentNotFound is without use currently
+     *
      * @param array $filter
      * @param int $page
      * @param bool $archive
@@ -131,19 +133,15 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
     {
 
-        if (!$noEventFound) {
-            $getParamNotFound = GeneralUtility::_GP('noEventFound');
-            if ($getParamNotFound) {
-                $noEventFound = intval($getParamNotFound);
-            }
-        }
-
         // get department and document list (for filter)
         $globalEventSettings = \Madj2k\CoreExtended\Utility\GeneralUtility::getTypoScriptConfiguration('rkwEvents', \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $departmentList = $this->departmentRepository->findVisibleAndRestrictedByEvents(strip_tags($globalEventSettings['persistence']['storagePid']));
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibilityAndRestrictedByEvents('events', false, strip_tags($globalEventSettings['persistence']['storagePid']));
         $categoryListRaw = $this->categoryRepository->findAllRestrictedByEvents(strip_tags($globalEventSettings['persistence']['storagePid']))->toArray();
         $categoryList = DivUtility::createCategoryTree($categoryListRaw, $this->settings['parentCategoryForFilter']);
+
+        // if no specific listPid is set, simply use the current one
+        $regInhouseListPid = $this->settings['list']['regInHouseTile']['listPid'] ?: intval($GLOBALS['TSFE']->id);
 
         if ($filter || $page || $archive) {
 
@@ -156,7 +154,17 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             }
 
             // 2. get event list
-            $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
+            $listItemsPerView = intval($this->settings['itemsPerPage']) ?: 10;
+
+            // if reg_inhouse item is enabled via TS substract one item (on the first page)
+            // (except regInhouse is part of the filter options (the tile is not shown then))
+            if (
+                $this->settings['list']['regInHouseTile']['show']
+                && !key_exists('regInhouse', $filter)
+            ) {
+                --$listItemsPerView;
+            }
+
             $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, intval($page), boolval($archive));
 
             // 3. proof if we have further results (query with listItemsPerQuery + 1)
@@ -182,6 +190,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                 'showMoreLink' => $showMoreLink,
                 'filter'       => $filter,
                 'timeArrayList' => DivUtility::createMonthListArray($this->settings['list']['filter']['showTimeNumberOfMonths']),
+                'regInhouseListPid' => $regInhouseListPid
             );
 
             $this->view->assignMultiple($replacements);
@@ -224,7 +233,13 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                 // else: return one list
 
                 // 1. get event list
-                $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
+                $listItemsPerView = intval($this->settings['itemsPerPage']) ?: 10;
+
+                // if reg_inhouse item is enabled via TS substract one item (on the first page)
+                if ($this->settings['list']['regInHouseTile']['show']) {
+                    --$listItemsPerView;
+                }
+
                 $queryResult = $this->eventRepository->findNotFinishedOrderAsc($listItemsPerView + 1, $this->settings);
 
                 // 2. proof if we have further results (query with listItemsPerQuery + 1)
@@ -254,11 +269,43 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                     'showPid'      => intval($this->settings['showPid']),
                     'pageMore'     => 1,
                     'showMoreLink' => $showMoreLink,
+                    'regInhouseListPid' => $regInhouseListPid
                 )
             );
         }
 
     }
+
+
+
+    /**
+     * action list
+     *
+     * Hint: The given params ($filter, $page, $archive) are only needed for AJAX purpose
+     *
+     *
+     * @param array $filter
+     * @param int $page
+     * @param bool $archive
+     * @param bool $noEventFound
+     * @return void
+     * @throws \Exception
+     */
+    public function listRegInhouseAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
+    {
+
+        // @toDo: Dieses Plugin einstampfen und einfach im Link diese Filter-Var mitgeben? Würde in Sachen Flexform etc einiges erleichtern
+
+        // @toDo: Und falls Reginhouse-PID gesetzt, dann nutze sie. Ansonsten einfach die aktuelle nehmen!
+
+        // @toDo: Aber wie kenntlich machen, dass man eine reine RegInhouse-Liste sieht?
+
+        $filter['regInhouse'] = 1;
+
+        $this->listAction($filter, $page);
+    }
+
+
 
     /**
      * action listSimple
@@ -594,12 +641,12 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
 
         if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
-            if ($event->getRecommendedEvents()->count()) {
-                $eventList = $event->getRecommendedEvents();
+            if ($event->getSeries()->getRecommendedEvents()->count()) {
+                $eventList = $event->getSeries()->getRecommendedEvents();
             } else {
                 // fallback
-                if ($event->getSeries()->count()) {
-                    $eventList = $this->eventRepository->findRunningBySeries($event);
+                if ($event->getSeries() instanceof EventSeries) {
+                    $eventList = $this->eventRepository->findRunningByCategories($event);
                 }
             }
 

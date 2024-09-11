@@ -1,6 +1,7 @@
 <?php
 
-namespace RKW\RkwEvents\Utility;
+namespace RKW\RkwEvents\Domain\Repository;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,27 +15,15 @@ namespace RKW\RkwEvents\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-
 /**
- * TCA utility
+ * Class EventSeriesRepository
  *
- * @author Christian Dilger <c.dilger@addorange.de>
- * @copyright RKW Kompetenzzentrum
+ * @author Maximilian Fäßler <maximilian@faesslerweb.de>
+ * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class TCA
+class EventSeriesRepository extends AbstractRepository
 {
-
-    /**
-     * Returns true if reg time for event has ended
-     */
-    public function eventTitle(&$parameters, $parentObject): void
-    {
-        $record = BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
-        $start = BackendUtility::datetime((int)$record['start']);
-        $parameters['title'] = $start . ' - ' . $record['title'];
-    }
 
 }

@@ -4,10 +4,97 @@
 		<header/>
 		<body>
 
+            <!-- tx_rkwevents_domain_model_eventseries -->
+            <trans-unit id="tx_rkwevents_domain_model_eventseries">
+                <source>RKW Events: Event Series</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.url_override">
+                <source>URL override of all events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle">
+                <source>Subtitle</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description2" approved="yes">
+                <source>Description (Additional)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_learning" approved="yes">
+                <source>Target Learning</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_group">
+                <source>Target Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.schedule">
+                <source>Schedule as Table</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.partner">
+                <source>Partner</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.add_info">
+                <source>Schedule as File</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.testimonials">
+                <source>Testimonials (only for Series)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.header_image" approved="yes">
+                <source>Header image</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.backend_user_exclusive" approved="yes">
+                <source>Backend User exclusive</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.additional_tile_flag" approved="yes">
+                <source>Additional tile flag</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recommended_events" approved="yes">
+                <source>Recommended Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recommended_links" approved="yes">
+                <source>Recommended Links</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.document_types">
+                <source>Document Types</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.department">
+                <source>Department</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.categories">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.categories_displayed" approved="yes">
+                <source>Category displayed</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.reg_inhouse">
+                <source>Bookable as in-house training</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.event" approved="yes">
+                <source>Event list</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.default">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.announcement">
+                <source>Announcement</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.project">
+                <source>Project</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
+                <source>Organizer</source>
+            </trans-unit>
+
+
 			<!-- tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event">
 				<source>RKW Events: Event</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
+                <source>URL path</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
                 <source>Event-Type</source>
             </trans-unit>
@@ -17,12 +104,6 @@
             <trans-unit id="tx_rkwevents_domain_model_event.recordType.announcement">
                 <source>Announcement</source>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.subtitle">
-				<source>Subtitle</source>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.start">
 				<source>Start</source>
 			</trans-unit>
@@ -41,27 +122,6 @@
             <trans-unit id="tx_rkwevents_domain_model_event.distance">
                 <source>Distance</source>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.testimonials">
-				<source>Testimonials (only for Series)</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.description2" approved="yes">
-				<source>Description (Additional)</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.target_learning" approved="yes">
-				<source>Target Learning</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.target_group">
-				<source>Target Group</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.schedule">
-				<source>Schedule as Table</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.partner">
-				<source>Partner</source>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.seats">
 				<source>Seats</source>
 			</trans-unit>
@@ -119,18 +179,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
                 <source>External Cancel Link</source>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.document_types">
-				<source>Document Types</source>
-			</trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.department">
-                <source>Department</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.categories">
-                <source>Category</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.categories_displayed" approved="yes">
-                <source>Category displayed</source>
-            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.series">
 				<source>Series</source>
 			</trans-unit>
@@ -167,14 +215,8 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
 				<source>Internal Contacts (Display only)</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.organizer" approved="yes">
-				<source>Organizer</source>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.be_user" approved="yes">
 				<source>Backend User (E-Mail only)</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.add_info">
-				<source>Schedule as File</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.presentations">
 				<source>Presentations</source>
@@ -226,9 +268,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.workshop3" approved="yes">
 				<source>Workshop 3</source>
 			</trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.project">
-                <source>Project</source>
-            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reminder_mail_tstamp" approved="yes">
 				<source>Reminder mail timestamp</source>
 			</trans-unit>
@@ -253,20 +292,16 @@
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility_link" approved="yes">
                 <source>Link to site with information about eligibility</source>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
-                <source>Additional tile flag</source>
+
+
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_additionaldata">
+                <source>Additional data</source>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.recommended_events" approved="yes">
-                <source>Recommended Events</source>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_basicdata" approved="yes">
+                <source>Basic data</source>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.recommended_links" approved="yes">
-                <source>Recommended Links</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.header_image" approved="yes">
-                <source>Header image</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_event.backend_user_exclusive" approved="yes">
-                <source>Backend User exclusive</source>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_other" approved="yes">
+                <source>Other</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
                 <source>Extended Network</source>
@@ -296,22 +331,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_place_contact">
 				<source>Place and contact</source>
-			</trans-unit>
-
-
-
-			<!-- tx_rkwevents_domain_model_eventseries -->
-			<trans-unit id="tx_rkwevents_domain_model_eventseries">
-				<source>RKW Events: Event Series</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.short">
-				<source>Short</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.rota">
-				<source>Rota</source>
 			</trans-unit>
 
 
@@ -747,6 +766,12 @@
             </trans-unit>
             <trans-unit id="flexform.event.filterInfo.showTimeInfo">
                 <source>Info for month</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showInhouseInfoLink">
+                <source>Link for inhouse</source>
+            </trans-unit>
+            <trans-unit id="flexform.event.filterInfo.showInhouseInfo">
+                <source>Info for inhouse</source>
             </trans-unit>
 
 

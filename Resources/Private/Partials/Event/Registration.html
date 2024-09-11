@@ -66,7 +66,7 @@
                                 </f:if>
 
                                 <f:comment><!-- optional inhouse link --></f:comment>
-                                <f:if condition="{event.regInhouse}">
+                                <f:if condition="{event.series.regInhouse}">
                                     <f:if condition="<rkw:extensionIsLoaded extensionName='rkw_authors' />">
                                         <f:if condition="<rkw:rkwAuthorsContactFormPid />">
                                             <f:if condition="<f:count>{event.internalContact}</f:count>">

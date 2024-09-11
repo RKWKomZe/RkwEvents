@@ -7,7 +7,7 @@
     </h5>
 
 
-    <f:if condition="<f:count>{sortedEventList}</f:count> || {eventMain.recommendedLinks}">
+    <f:if condition="<f:count>{sortedEventList}</f:count> || {eventMain.series.recommendedLinks}">
         <f:then>
             <ul class="iconlist">
                 <f:comment><!-- standard recommendations --></f:comment>
@@ -17,7 +17,7 @@
 
                 <f:comment><!-- additional links --></f:comment>
                 <f:if condition="{eventMain.recommendedLinks}">
-                    <f:for each="<rkw:explode delimiter=',' string='{eventMain.recommendedLinks}' />" as="pageUid" iteration="iterator">
+                    <f:for each="<rkw:explode delimiter=',' string='{eventMain.series.recommendedLinks}' />" as="pageUid" iteration="iterator">
                         <li class="iconlist__item public">
                             <f:link.page pageUid="{pageUid}"><rkw:pageProperty pageUid='{pageUid}' field='title' /></f:link.page>
                         </li>
@@ -55,12 +55,12 @@
 
                 <!-- event list without shown main event (filtered by given series of shown event) -->
                 <f:for each="{eventList}" as="event">
-                    <f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" class="box {event.department.cssClass} event big" title="{event.title}" target="_blank">
+                    <f:link.action action="show" controller="Event" pluginName="Pi1" extensionName="RkwEvents" pageUid="{showPid}" arguments="{event : event}" class="box {event.series.department.cssClass} event big" title="{event.series.title}" target="_blank">
                         <header>
-                            <p> {event.title} </p>
+                            <p> {event.series.title} </p>
                         </header>
 
-                        <p class="icon-calendar">{event.documentType.name}</p>
+                        <p class="icon-calendar">{event.series.documentType.name}</p>
                     </f:link.action>
                 </f:for>
 

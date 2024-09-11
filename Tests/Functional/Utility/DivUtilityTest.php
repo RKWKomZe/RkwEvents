@@ -1,15 +1,14 @@
 <?php
 namespace RKW\RkwEvents\Tests\Functional\Utility;
 
-use RKW\RkwEvents\Utility\DivUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use RKW\RkwEvents\Domain\Model\EventReservation;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventReservation;
+use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
+use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /*
