@@ -118,7 +118,10 @@
                 <source>Organizer</source>
                 <target>Organisator</target>
             </trans-unit>
-
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.from" approved="yes">
+				<source>from %s</source>
+				<target>ab %s</target>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_event -->

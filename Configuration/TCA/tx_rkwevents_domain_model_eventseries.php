@@ -6,6 +6,7 @@ return [
 	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries',
         'label' => 'title',
+        'label_userFunc' => TCA::class . '->eventSeriesTitle',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',

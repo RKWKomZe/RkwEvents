@@ -1,7 +1,5 @@
 <?php
 
-use RKW\RkwEvents\Utility\TCA;
-
 return [
     'ctrl' => [
         'hideTable' => 1,
@@ -9,7 +7,6 @@ return [
         'label' => 'start',
         'label_alt' => 'place',
         'label_alt_force' => true,
-        //'label_userFunc' => TCA::class . '->eventTitle',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',

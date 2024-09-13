@@ -9,7 +9,7 @@
     </header>
 		<body>
 
-            <!--tx_rkwevents_domain_model_event -->
+            <!--tx_rkwevents_domain_model_eventseries -->
             <trans-unit id="tx_rkwevents_domain_model_eventseries.title" approved="yes">
                 <source>Title</source>
                 <target>Titel</target>
