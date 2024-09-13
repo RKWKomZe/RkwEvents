@@ -32,7 +32,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
     'categories',
     array(
         // Set a custom label
-        'label' => 'LLL:EXT:examples/Resources/Private/Language/locallang.xlf:additional_categories',
+        'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.categories',
         // This field should not be an exclude-field
         'exclude' => FALSE,
         // Override generic configuration, e.g. sort by title rather than by sorting
