@@ -1,6 +1,7 @@
 <?php
 
 namespace RKW\RkwEvents\Utility;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,7 +15,9 @@ namespace RKW\RkwEvents\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use RKW\RkwEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * TCA utility
@@ -28,13 +31,42 @@ class TCA
 {
 
     /**
-     * Returns true if reg time for event has ended
+     * Returns the title with the start of the first contained event
      */
-    public function eventTitle(&$parameters, $parentObject): void
+    public function eventSeriesTitle(&$parameters, $parentObject): void
     {
-        $record = BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
-        $start = BackendUtility::datetime((int)$record['start']);
-        $parameters['title'] = $start . ' - ' . $record['title'];
+        $eventSeriesUid = $parameters['row']['uid'];
+
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $objectManager->get(EventRepository::class);
+
+        $events = $eventRepository->findAllBySeries($eventSeriesUid);
+
+        if (count($events)) {
+            $startDates = [];
+            /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+            foreach ($events as $event) {
+                if ($event->getStart() > 0) {
+                    $startDates[] = $event->getStart();
+                }
+            }
+
+            sort($startDates);
+
+            $startDate = date('d.m.Y', (int)$startDates[0]);
+
+            $suffix = (count($startDates) > 1)
+                ? LocalizationUtility::translate(
+                    'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.from',
+                    'rkw_events',
+                    [$startDate])
+                : $startDate;
+
+            $parameters['title'] = $parameters['row']['title'] . ' (' . $suffix . ')';
+        }
+
     }
 
 }
