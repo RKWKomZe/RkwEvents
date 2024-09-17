@@ -1,14 +1,6 @@
 <?php
-
 namespace RKW\RkwEvents\Controller;
 
-use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
-use Madj2k\FeRegister\Utility\FrontendUserUtility;
-use RKW\RkwEvents\Domain\Model\Event;
-use RKW\RkwEvents\Domain\Model\EventSeries;
-use RKW\RkwEvents\Domain\Model\FrontendUser;
-use RKW\RkwEvents\Utility\DivUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -23,72 +15,101 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * The TYPO3 project - inspiring people to share!
  */
 
+
+use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
+use Madj2k\FeRegister\Utility\FrontendUserUtility;
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventSeries;
+use RKW\RkwEvents\Domain\Model\FrontendUser;
+use RKW\RkwEvents\Domain\Repository\CategoryRepository;
+use RKW\RkwEvents\Domain\Repository\DepartmentRepository;
+use RKW\RkwEvents\Domain\Repository\DocumentTypeRepository;
+use RKW\RkwEvents\Domain\Repository\EventRepository;
+use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
+use RKW\RkwEvents\Domain\Repository\FrontendUserRepository;
+use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+
 /**
  * Class EventController
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @author Steffen Kroggel <developer@steffenkroggel.de>
+ * @author Christian Dilger <c.dilger@addorange.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 {
+
     /**
-     * eventRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventRepository = null;
+    protected ?EventRepository $eventRepository = null;
+
 
     /**
-     * eventReservationRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventReservationRepository = null;
+    protected ?EventReservationRepository $eventReservationRepository = null;
+
 
     /**
-     * categoryRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $categoryRepository = null;
+    protected ?CategoryRepository $categoryRepository = null;
+
 
     /**
-     * departmentRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\DepartmentRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $departmentRepository = null;
+    protected ?DepartmentRepository $departmentRepository = null;
+
 
     /**
-     * documentTypeRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\DocumentTypeRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $documentTypeRepository = null;
+    protected ?DocumentTypeRepository $documentTypeRepository = null;
+
 
     /**
-     * frontendUserRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $frontendUserRepository = null;
+    protected ?FrontendUserRepository $frontendUserRepository = null;
+
 
     /**
-     * logged FrontendUser
-     *
      * @var \RKW\RkwEvents\Domain\Model\FrontendUser
      */
-    protected $frontendUser = null;
+    protected ?FrontendUser $frontendUser = null;
+
+
+    /**
+     * @param EventRepository            $eventRepository
+     * @param EventReservationRepository $eventReservationRepository
+     * @param CategoryRepository         $categoryRepository
+     * @param DepartmentRepository       $departmentRepository
+     * @param DocumentTypeRepository     $documentTypeRepository
+     * @param FrontendUserRepository     $frontendUserRepository
+     */
+    public function __construct(
+        EventRepository $eventRepository,
+        EventReservationRepository $eventReservationRepository,
+        CategoryRepository $categoryRepository,
+        DepartmentRepository $departmentRepository,
+        DocumentTypeRepository $documentTypeRepository,
+        FrontendUserRepository $frontendUserRepository
+    ) {
+        $this->eventRepository = $eventRepository;
+        $this->eventReservationRepository = $eventReservationRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->departmentRepository = $departmentRepository;
+        $this->documentTypeRepository = $documentTypeRepository;
+        $this->frontendUserRepository = $frontendUserRepository;
+    }
 
 
     /**
@@ -97,7 +118,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * @return void
      */
-    public function myEventsAction()
+    public function myEventsAction(): void
     {
         if (!$this->getFrontendUser()) {
 
@@ -130,7 +151,12 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @throws \Exception
      */
-    public function listAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
+    public function listAction(
+        array $filter = [],
+        int $page = 0,
+        bool $archive = false,
+        bool $noEventFound = false
+    ): void
     {
 
         // get department and document list (for filter)
@@ -141,7 +167,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         $categoryList = DivUtility::createCategoryTree($categoryListRaw, $this->settings['parentCategoryForFilter']);
 
         // if no specific listPid is set, simply use the current one
-        $regInhouseListPid = $this->settings['list']['regInHouseTile']['listPid'] ?: intval($GLOBALS['TSFE']->id);
+        $regInhouseListPid = $this->settings['list']['regInHouseTile']['listPid'] ?: (int)$GLOBALS['TSFE']->id;
 
         if ($filter || $page || $archive) {
 
@@ -154,44 +180,44 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             }
 
             // 2. get event list
-            $listItemsPerView = intval($this->settings['itemsPerPage']) ?: 10;
+            $listItemsPerView = (int)$this->settings['itemsPerPage'] ?: 10;
 
             // if reg_inhouse item is enabled via TS substract one item (on the first page)
             // (except regInhouse is part of the filter options (the tile is not shown then))
             if (
                 $this->settings['list']['regInHouseTile']['show']
-                && !key_exists('regInhouse', $filter)
+                && !array_key_exists('regInhouse', $filter)
             ) {
                 --$listItemsPerView;
             }
 
-            $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, intval($page), boolval($archive));
+            $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, $page, $archive);
 
             // 3. proof if we have further results (query with listItemsPerQuery + 1)
             $lastItem = null;
-            $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView, intval($page), $lastItem);
+            $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView, $page, $lastItem);
 
             // 4. Check if we need to display a more-link
-            $showMoreLink = count($eventList) < count($queryResult) ? true : false;
+            $showMoreLink = count($eventList) < count($queryResult);
 
             if ($page > 0) {
                 $showMoreLink = count($eventList) < (count($queryResult) - 1) ? true : false;
             }
 
             // get new list
-            $replacements = array(
+            $replacements = [
                 'sortedEventList'  => $eventList,
                 'departmentList'   => $departmentList,
                 'documentTypeList' => $documentTypeList,
                 'categoryList'     => $categoryList,
-                'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']), //@deprecated
-                'showPid'      => intval($this->settings['showPid']),
+                'ajaxTypeNum'  => (int)$this->settings['ajaxTypeNum'], //@deprecated
+                'showPid'      => (int)$this->settings['showPid'],
                 'pageMore'     => $page + 1,
                 'showMoreLink' => $showMoreLink,
                 'filter'       => $filter,
                 'timeArrayList' => DivUtility::createMonthListArray($this->settings['list']['filter']['showTimeNumberOfMonths']),
                 'regInhouseListPid' => $regInhouseListPid
-            );
+            ];
 
             $this->view->assignMultiple($replacements);
 
@@ -205,35 +231,35 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                 $limitUpcoming = (int) $this->settings['list']['multipartView']['limitUpcoming'];
 
                 $this->view->assignMultiple(
-                    array(
+                    [
                         'showDividedList' => true,
                         'startedEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitStarted, $this->settings, '\RKW\RkwEvents\Domain\Model\EventScheduled', true),
-                        'filterStartedEventList' => array(
+                        'filterStartedEventList' => [
                             'project' => $this->settings['projectUids'],
                             'recordType' => 'EventScheduled',
                             'onlyStarted' => true
-                        ),
+                        ],
                         // Change: Announcements are now also part of "upcoming"
                         'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitUpcoming, $this->settings, '', false, true),
-                        'filterUpcomingEventList' => array(
+                        'filterUpcomingEventList' => [
                             'project' => $this->settings['projectUids'],
                             //'recordType' => 'EventScheduled',
                             'onlyUpcoming' => true
-                        ),
+                        ],
                         /*
                         'announcementEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventAnnouncement'),
-                        'filterAnnouncementEventList' => array(
+                        'filterAnnouncementEventList' => [
                             'project' => $this->settings['projectUids'],
                             'recordType' => 'EventAnnouncement'
-                        )
+                        ]
                         */
-                    )
+                    ]
                 );
             } else {
                 // else: return one list
 
                 // 1. get event list
-                $listItemsPerView = intval($this->settings['itemsPerPage']) ?: 10;
+                $listItemsPerView = (int)$this->settings['itemsPerPage'] ?: 10;
 
                 // if reg_inhouse item is enabled via TS substract one item (on the first page)
                 if ($this->settings['list']['regInHouseTile']['show']) {
@@ -251,31 +277,30 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
 
             $this->view->assignMultiple(
-                array(
-                    'filter'           => array('project' => $this->settings['projectUids']),
+                [
+                    'filter'           => ['project' => $this->settings['projectUids']],
                     'departmentList'   => $departmentList,
                     'documentTypeList' => $documentTypeList,
                     'categoryList'     => $categoryList,
                     'page',
                     'timeArrayList' => DivUtility::createMonthListArray($this->settings['list']['filter']['showTimeNumberOfMonths']),
                     'noEventFound' => $noEventFound
-                )
+                ]
             );
 
             // target template is also used by ajax - so we have to set typoscript settings this way
             $this->view->assignMultiple(
-                array(
-                    'ajaxTypeNum'  => intval($this->settings['ajaxTypeNum']),
-                    'showPid'      => intval($this->settings['showPid']),
+                [
+                    'ajaxTypeNum'  => (int)$this->settings['ajaxTypeNum'],
+                    'showPid'      => (int)$this->settings['showPid'],
                     'pageMore'     => 1,
                     'showMoreLink' => $showMoreLink,
                     'regInhouseListPid' => $regInhouseListPid
-                )
+                ]
             );
         }
 
     }
-
 
 
     /**
@@ -285,13 +310,18 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      *
      * @param array $filter
-     * @param int $page
-     * @param bool $archive
-     * @param bool $noEventFound
+     * @param int   $page
+     * @param bool  $archive
+     * @param bool  $noEventFound
      * @return void
      * @throws \Exception
      */
-    public function listRegInhouseAction($filter = array(), $page = 0, $archive = false, $noEventFound = false)
+    public function listRegInhouseAction(
+        array $filter = [],
+        int   $page = 0,
+        bool  $archive = false,
+        bool $noEventFound = false
+    ): void
     {
 
         // @toDo: Dieses Plugin einstampfen und einfach im Link diese Filter-Var mitgeben? Würde in Sachen Flexform etc einiges erleichtern
@@ -313,7 +343,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listSimpleAction()
+    public function listSimpleAction(): void
     {
         // 1. get event list
         $listItemsPerView = (int)$this->settings['itemsPerPage'] ? (int)$this->settings['itemsPerPage'] : 10;
@@ -326,7 +356,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         // 3. get department and document list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
         $documentTypeList = $this->documentTypeRepository->findAllByTypeAndVisibility('events', false);
-        $categoryList = $this->categoryRepository->findChildrenByParent(intval($this->settings['parentCategoryForFilter']));
+        $categoryList = $this->categoryRepository->findChildrenByParent((int)$this->settings['parentCategoryForFilter']);
 
         $this->view->assignMultiple(
             [
@@ -356,12 +386,12 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * action listSimilar
      * returns similar events for a detail view page
      *
-     * @param \RKW\RkwEvents\Domain\Model\Event $event Needed for ajax request e.g.
-     * @param int                           $page
+     * @param \RKW\RkwEvents\Domain\Model\Event|null $event Needed for ajax request e.g.
+     * @param int                                    $page
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listSimilarAction($event = null, $page = 0)
+    public function listSimilarAction(Event $event = null, int $page = 0): void
     {
         if (!$event instanceof Event) {
             $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
@@ -371,8 +401,8 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         }
 
         if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
-            $listItemsPerView = intval($this->settings['listSimilar']['itemsPerPage']) ? intval($this->settings['listSimilar']['itemsPerPage']) : 6;
-            $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, intval($page), $this->settings);
+            $listItemsPerView = (int)$this->settings['listSimilar']['itemsPerPage'] ? (int)$this->settings['listSimilar']['itemsPerPage'] : 6;
+            $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, (int)$page, $this->settings);
             $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
             if ($this->settings['listSimilar']['showMoreLink']) {
                 $showMoreLink = count($eventList) < count($queryResult) ? true : false;
@@ -382,14 +412,14 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
             // target template is also used by ajax - so we have to set typoscript settings this way
             $this->view->assignMultiple(
-                array(
+                [
                     'sortedEventList' => $eventList,
-                    'ajaxTypeNum'     => intval($this->settings['ajaxTypeNum']),
-                    'showPid'         => intval($this->settings['showPid']),
+                    'ajaxTypeNum'     => (int)$this->settings['ajaxTypeNum'],
+                    'showPid'         => (int)$this->settings['showPid'],
                     'pageMore'        => $page + 1,
                     'showMoreLink'    => $showMoreLink,
                     'currentEvent'    => $event
-                )
+                ]
             );
         }
     }
@@ -403,13 +433,13 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listPrefilteredAction(int $page = 0)
+    public function listPrefilteredAction(int $page = 0): void
     {
         $filter = [];
         // grab given categories from Flexform
         $filter['category'] = $this->settings['categoriesList'];
 
-        $listItemsPerView = intval($this->settings['listPrefiltered']['itemsPerPage']) ?: 6;
+        $listItemsPerView = (int)$this->settings['listPrefiltered']['itemsPerPage'] ?: 6;
 
         $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, $page);
         $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
@@ -423,13 +453,13 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
         // target template is also used by ajax - so we have to set typoscript settings this way
         $this->view->assignMultiple(
-            array(
+            [
                 'sortedEventList' => $eventList,
-                'ajaxTypeNum'     => intval($this->settings['ajaxTypeNum']),
-                'showPid'         => intval($this->settings['showPid']),
+                'ajaxTypeNum'     => (int)$this->settings['ajaxTypeNum'],
+                'showPid'         => (int)$this->settings['showPid'],
                 'pageMore'        => $page + 1,
                 'showMoreLink'    => $showMoreLink,
-            )
+            ]
         );
     }
 
@@ -440,10 +470,10 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function archiveAction()
+    public function archiveAction(): void
     {
         // 1. get event list
-        $listItemsPerView = intval($this->settings['itemsPerPage']) ? intval($this->settings['itemsPerPage']) : 10;
+        $listItemsPerView = (int)$this->settings['itemsPerPage'] ? (int)$this->settings['itemsPerPage'] : 10;
         $queryResult = $this->eventRepository->findFinishedOrderAsc($listItemsPerView + 1, $this->settings);
 
         // 2. proof if we have further results (query with listItemsPerQuery + 1)
@@ -453,7 +483,6 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         // 3. get department list (for filter)
         $departmentList = $this->departmentRepository->findAllByVisibility();
 
-
         // archive parameter
         $this->view->assign('archive', 1);
 
@@ -462,8 +491,8 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         $this->view->assign('page', 0);
 
         // target template is also used by ajax - so we have to set typoscript settings this way
-        $this->view->assign('ajaxTypeNum', intval($this->settings['ajaxTypeNum']));
-        $this->view->assign('showPid', intval($this->settings['showPid']));
+        $this->view->assign('ajaxTypeNum', (int)$this->settings['ajaxTypeNum']);
+        $this->view->assign('showPid', (int)$this->settings['showPid']);
         $this->view->assign('pageMore', 1);
         $this->view->assign('showMoreLink', $showMoreLink);
 
@@ -477,7 +506,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null)
+    public function showAction(\RKW\RkwEvents\Domain\Model\Event $event = null): void
     {
     //     $this->handleContentNotFound($event);
 
@@ -497,7 +526,6 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             $this->redirectToUri($uri, 0, 404);
         }
 
-
         $this->view->assign('event', $event);
     }
 
@@ -509,7 +537,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function showAddInfoAction(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function showAddInfoAction(\RKW\RkwEvents\Domain\Model\Event $event): void
     {
         $this->view->assign('event', $event);
     }
@@ -522,7 +550,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @return void
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      */
-    public function showSheetAction(\RKW\RkwEvents\Domain\Model\Event $event)
+    public function showSheetAction(\RKW\RkwEvents\Domain\Model\Event $event): void
     {
         $this->view->assign('event', $event);
     }
@@ -533,7 +561,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * @return void
      */
-    public function showGalleryOneAction()
+    public function showGalleryOneAction(): void
     {
         $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
@@ -549,7 +577,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * @return void
      */
-    public function showGalleryTwoAction()
+    public function showGalleryTwoAction(): void
     {
         $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
@@ -567,7 +595,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * @return void
      */
-    public function mapsAction()
+    public function mapsAction(): void
     {
         $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
@@ -585,7 +613,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * @return void
      */
-    public function infoAction()
+    public function infoAction(): void
     {
         $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
         $eventUid = preg_replace('/[^0-9]/', '', $getParams['event']);
@@ -594,7 +622,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         //$this->handleContentNotFound($event);
 
         $this->view->assign('isReservationPage', 0);
-        if (intval($GLOBALS['TSFE']->id) == intval($this->settings['reservationPid'])) {
+        if ((int)$GLOBALS['TSFE']->id == (int)$this->settings['reservationPid']) {
             $this->view->assign('isReservationPage', 1);
         }
 
@@ -608,7 +636,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * @return void
      */
-    public function titleAction()
+    public function titleAction(): void
     {
         $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
 
@@ -617,9 +645,9 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
         //$this->handleContentNotFound($event);
 
-        $this->view->assignMultiple(array(
+        $this->view->assignMultiple([
             'event' => $event,
-        ));
+        ]);
 
     }
 
@@ -630,9 +658,9 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      *
      * Hint: Used as sidebar plugin since nov 2021
      *
-     * @return void|string
+     * @return void
      */
-    public function seriesProposalsAction()
+    public function seriesProposalsAction(): void
     {
         $getParams = GeneralUtility::_GP('tx_rkwevents_pi1');
 
@@ -650,17 +678,14 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                 }
             }
 
-            $this->view->assignMultiple(array(
+            $this->view->assignMultiple([
                 'eventMain' => $event,
                 'sortedEventList'  => $eventList,
-                'showPid' => intval($this->settings['showPid'])
-            ));
+                'showPid' => (int)$this->settings['showPid']
+            ]);
         }
 
     }
-
-
-
 
 
     /**
@@ -673,7 +698,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @param mixed $event
      * @return void
      */
-    protected function handleContentNotFound($event)
+    protected function handleContentNotFound($event): void
     {
         if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
 
