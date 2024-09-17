@@ -660,6 +660,33 @@ class EventRepository extends AbstractRepository
     }
 
     /**
+     * findAllBySeries
+     * Find running events by series (without given event!)
+     *
+     * @param int $eventSeriesUid
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+    */
+    public function findAllBySeries($eventSeriesUid)
+    {
+        $query = $this->createQuery();
+
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+
+        $constraints[] =
+            $query->logicalAnd(
+                $query->equals('series', $eventSeriesUid),
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
+
+        return $query
+            ->matching($query->logicalAnd(array_filter($constraints)))
+            ->execute();
+    }
+
+
+    /**
      * function findHiddenByUid
      *
      * @param \RKW\RkwEvents\Domain\Model\Event|int $event

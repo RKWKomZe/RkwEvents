@@ -15,7 +15,8 @@ namespace RKW\RkwEvents\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
-use Madj2k\CoreExtended\Utility\GeneralUtility;
+use RKW\RkwEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -30,18 +31,25 @@ class TCA
 {
 
     /**
-     * Returns the title prefixed by the start of the first contained event
+     * Returns the title with the start of the first contained event
      */
     public function eventSeriesTitle(&$parameters, $parentObject): void
     {
         $eventSeriesUid = $parameters['row']['uid'];
-        $events = $this->getEvents($eventSeriesUid);
 
-        if (!empty($events)) {
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $objectManager->get(EventRepository::class);
+
+        $events = $eventRepository->findAllBySeries($eventSeriesUid);
+
+        if (count($events)) {
             $startDates = [];
-            foreach ($events as $eventRecord) {
-                if ($eventRecord['start'] > 0) {
-                    $startDates[] = $eventRecord['start'];
+            /** @var \RKW\RkwEvents\Domain\Model\Event $event */
+            foreach ($events as $event) {
+                if ($event->getStart() > 0) {
+                    $startDates[] = $event->getStart();
                 }
             }
 
@@ -58,30 +66,7 @@ class TCA
 
             $parameters['title'] = $parameters['row']['title'] . ' (' . $suffix . ')';
         }
-    }
 
-    /**
-     * Getting the events of the eventSeries record
-     *
-     * @param int $eventSeriesUid
-     * @return array
-     */
-    protected function getEvents($eventSeriesUid): array
-    {
-        $queryBuilder = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_rkwevents_domain_model_event');
-
-        return $queryBuilder
-            ->select('*')
-            ->from('tx_rkwevents_domain_model_event')
-            ->where(
-                $queryBuilder->expr()->eq(
-                    'series',
-                    $queryBuilder->createNamedParameter($eventSeriesUid, \PDO::PARAM_INT)
-                )
-            )
-            ->execute()
-            ->fetchAll();
     }
 
 }
