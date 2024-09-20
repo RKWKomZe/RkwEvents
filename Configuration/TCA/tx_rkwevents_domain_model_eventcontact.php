@@ -22,9 +22,6 @@ return [
 		'searchFields' => 'salutation,first_name,last_name,company,address,zip,city,telephone,fax,email,recipient_of_personal_data,',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventcontact.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, first_name, last_name, address, zip, city, telephone, email, recipient_of_personal_data, lang',
-	],
 	'types' => [
 		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, company, first_name, last_name, telephone, email, recipient_of_personal_data, lang'],
 	],
