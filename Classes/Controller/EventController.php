@@ -32,7 +32,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 
 /**
- * Class EventController
+ * EventController
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
@@ -402,7 +402,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
         if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
             $listItemsPerView = (int)$this->settings['listSimilar']['itemsPerPage'] ? (int)$this->settings['listSimilar']['itemsPerPage'] : 6;
-            $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, (int)$page, $this->settings);
+            $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, $page, $this->settings);
             $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
             if ($this->settings['listSimilar']['showMoreLink']) {
                 $showMoreLink = count($eventList) < count($queryResult) ? true : false;

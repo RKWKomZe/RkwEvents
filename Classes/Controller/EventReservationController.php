@@ -35,14 +35,13 @@ use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
 /**
- * Class EventReservationController
+ * EventReservationController
  *
  * @author Carlos Meyer <cm@davitec.de>
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
@@ -106,63 +105,55 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
      */
-    protected ?EventRepository $eventRepository = null;
+    protected ?EventRepository $eventRepository;
 
 
     /**
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
      */
-    protected ?EventReservationRepository $eventReservationRepository = null;
+    protected ?EventReservationRepository $eventReservationRepository;
 
 
     /**
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository
      */
-    protected ?EventReservationAddPersonRepository $eventReservationAddPersonRepository = null;
+    protected ?EventReservationAddPersonRepository $eventReservationAddPersonRepository;
 
 
     /**
      * @var \RKW\RkwEvents\Domain\Repository\EventWorkshopRepository
      */
-    protected ?EventWorkshopRepository $eventWorkshopRepository = null;
+    protected ?EventWorkshopRepository $eventWorkshopRepository;
 
 
     /**
      * @var \RKW\RkwEvents\Domain\Repository\BackendUserRepository
      */
-    protected ?BackendUserRepository $backendUserRepository = null;
+    protected ?BackendUserRepository $backendUserRepository;
 
 
     /**
      * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
      */
-    protected ?CategoryRepository $categoryRepository = null;
+    protected ?CategoryRepository $categoryRepository;
 
 
     /**
      * @var \RKW\RkwEvents\Domain\Repository\FrontendUserRepository
      */
-    protected ?FrontendUserRepository $frontendUserRepository = null;
-
-
-    /**
-     * logged FrontendUser
-     *
-     * @var \RKW\RkwEvents\Domain\Model\FrontendUser
-     */
-    protected $frontendUser = null;
-
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    protected $objectManager = null;
+    protected ?FrontendUserRepository $frontendUserRepository;
 
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
      */
-    protected $persistenceManager = null;
+    protected ?PersistenceManager $persistenceManager;
+
+
+    /**
+     * @var \RKW\RkwEvents\Domain\Model\FrontendUser
+     */
+    protected $frontendUser = null;
 
 
     /**
@@ -171,6 +162,16 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected ?Logger $logger = null;
 
 
+    /**
+     * @param EventRepository $eventRepository,
+     * @param EventReservationRepository $eventReservationRepository,
+     * @param EventReservationAddPersonRepository $eventReservationAddPersonRepository,
+     * @param EventWorkshopRepository $eventWorkshopRepository,
+     * @param BackendUserRepository $backendUserRepository,
+     * @param CategoryRepository $categoryRepository,
+     * @param FrontendUserRepository $frontendUserRepository,
+     * @param PersistenceManager $persistenceManager
+    */
     public function __construct(
         EventRepository $eventRepository,
         EventReservationRepository $eventReservationRepository,
@@ -179,7 +180,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         BackendUserRepository $backendUserRepository,
         CategoryRepository $categoryRepository,
         FrontendUserRepository $frontendUserRepository,
-        ObjectManagerInterface $objectManager,
         PersistenceManager $persistenceManager
     ) {
         $this->eventRepository = $eventRepository;
@@ -189,7 +189,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $this->backendUserRepository = $backendUserRepository;
         $this->categoryRepository = $categoryRepository;
         $this->frontendUserRepository = $frontendUserRepository;
-        $this->objectManager = $objectManager;
         $this->persistenceManager = $persistenceManager;
     }
 
@@ -221,7 +220,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      *
      * @param Event|null $event
      * @param EventReservation|null $newEventReservation
-     * @param int$targetGroup
+     * @param int $targetGroup
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
      * @return void
@@ -294,7 +293,11 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function newStandaloneAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0): void
+    public function newStandaloneAction(
+        Event $event = null,
+        EventReservation $newEventReservation = null,
+        int $targetGroup = 0
+    ): void
     {
         if ((int)$this->settings['eventRegisterStandalone']) {
             /** @var Event $event */
@@ -1262,7 +1265,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     protected function finalSaveReservation(
         EventReservation $newEventReservation,
         \Madj2k\FeRegister\Domain\Model\FrontendUser $feUser,
-        \Madj2k\FeRegister\Domain\Model\OptIn $optIn = null): void
+        \Madj2k\FeRegister\Domain\Model\OptIn $optIn = null
+    ): void
     {
         // optional service: Merge form data (eventReservation) in frontendUser, if some field is empty
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {

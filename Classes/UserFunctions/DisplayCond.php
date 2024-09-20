@@ -28,13 +28,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class DisplayCond
 {
-    /**
-     * configurationManager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $configurationManager;
 
     /**
      * Returns a TS setting (compares Flexform options with TypoScript filter options. The field naming is important)
@@ -60,7 +53,6 @@ class DisplayCond
     }
 
 
-
     /**
      * Returns TYPO3 settings
      *
@@ -72,6 +64,5 @@ class DisplayCond
     {
         return GeneralUtility::getTypoScriptConfiguration('Rkwevents', $which);
     }
-
 
 }

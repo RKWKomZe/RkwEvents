@@ -523,7 +523,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'frontendUser' => $frontendUser,
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
-                    'showPid'      => intval($showPid),
+                    'showPid'      => $showPid,
                     'uniqueKey'    => uniqid(),
                     'currentTime'  => time(),
                     'surveyPid'    => intval($settingsDefault['surveyPid']),
@@ -657,7 +657,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'frontendUser' => $frontendUser,
                             'pageUid'      => intval($GLOBALS['TSFE']->id),
                             'loginPid'     => intval($settingsDefault['loginPid']),
-                            'showPid'      => intval($showPid),
+                            'showPid'      => $showPid,
                             'fullName'     => $name,
                             'language'     => $language,
                             'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin

@@ -1066,7 +1066,6 @@ class EventRepository extends AbstractRepository
         /** @var \TYPO3\CMS\Core\TypoScript\TemplateService $template */
         $template = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
         $template->tt_track = 0;
-        $template->init();
 
         /** @var array $rootlineLine */
         $rootLine = GeneralUtility::makeInstance(RootlineUtility::class,$pageId)->get();

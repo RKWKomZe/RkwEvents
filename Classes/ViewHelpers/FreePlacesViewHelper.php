@@ -84,4 +84,4 @@ class FreePlacesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractVie
     }
 }
 
-?>
+
