@@ -50,7 +50,7 @@ class FreePlacesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractVie
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $event = $this->arguments['event'];
 
-        $status = array('green', 'yellow', 'red');
+        $status = ['green', 'yellow', 'red'];
 
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $reservations = $event->getReservation();

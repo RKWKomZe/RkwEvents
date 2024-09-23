@@ -46,9 +46,9 @@ class EventRepository extends AbstractRepository
 
 
     // Order by start date
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'start' => QueryInterface::ORDER_ASCENDING,
-    );
+    ];
 
 
     /**
@@ -365,9 +365,9 @@ class EventRepository extends AbstractRepository
 
                 // 1. Sort by end-date
                 $query->setOrderings(
-                    array(
+                    [
                         'start' => QueryInterface::ORDER_DESCENDING,
-                    )
+                    ]
                 );
 
                 // 2. filter by time
@@ -377,10 +377,10 @@ class EventRepository extends AbstractRepository
 
                 // 1. Sort by end-date
                 $query->setOrderings(
-                    array(
+                    [
                         'record_type' => QueryInterface::ORDER_DESCENDING,
                         'start' => QueryInterface::ORDER_ASCENDING,
-                    )
+                    ]
                 );
 
                 // 2. filter by time
@@ -491,7 +491,7 @@ class EventRepository extends AbstractRepository
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false, $ignoreBeUserExclusive = false)
+    public function findNotFinishedOrderAsc($limit, $settings = [], $recordType = '', $onlyStarted = false, $onlyUpcoming = false, $ignoreBeUserExclusive = false)
     {
         $query = $this->createQuery();
 
@@ -555,12 +555,12 @@ class EventRepository extends AbstractRepository
             $query->logicalAnd(array_filter($constraints))
         )
             ->setOrderings(
-                array(
+                [
                     'record_type' => QueryInterface::ORDER_DESCENDING,
                     'start' => QueryInterface::ORDER_ASCENDING,
                     // this is a "fix" for unequal list behavior between the multipart view and the standard list view
                     'tstamp' => QueryInterface::ORDER_ASCENDING,
-                )
+                ]
             )
             ->setLimit($limit)
             ->execute();
@@ -576,7 +576,7 @@ class EventRepository extends AbstractRepository
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findFinishedOrderAsc($limit, $settings = array())
+    public function findFinishedOrderAsc($limit, $settings = [])
     {
 
         $query = $this->createQuery();
@@ -597,9 +597,9 @@ class EventRepository extends AbstractRepository
             $query->logicalAnd(array_filter($constraints))
         )
             ->setOrderings(
-                array(
+                [
                     'start' => QueryInterface::ORDER_DESCENDING,
-                )
+                ]
             )
             ->setLimit($limit)
             ->execute();
@@ -728,7 +728,7 @@ class EventRepository extends AbstractRepository
         $query->matching(
             $query->greaterThanOrEqual('tstamp', intval($timestamp))
         );
-        $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['tstamp' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
     }
@@ -775,10 +775,10 @@ class EventRepository extends AbstractRepository
         $constraints[] = $this->constraintBackendUserExclusive();
 
         $query->setOrderings(
-            array(
+            [
                 'record_type' => QueryInterface::ORDER_DESCENDING,
                 'start' => QueryInterface::ORDER_ASCENDING,
-            )
+            ]
         );
 
         // exclude given event
@@ -802,7 +802,7 @@ class EventRepository extends AbstractRepository
 
         // for all options which could be part of the "similar query"
         // START: SubQuery
-        $constraintsSubQueryOr = array();
+        $constraintsSubQueryOr = [];
 
         if (
             $settings['listSimilar']['searchQuery']['byDepartment']
@@ -894,10 +894,10 @@ class EventRepository extends AbstractRepository
         $constraints[] = $this->constraintBackendUserExclusive();
 
         $query->setOrderings(
-            array(
+            [
                 'record_type' => QueryInterface::ORDER_DESCENDING,
                 'start' => QueryInterface::ORDER_ASCENDING,
-            )
+            ]
         );
 
         // NOW: construct final query!
@@ -951,10 +951,10 @@ class EventRepository extends AbstractRepository
             $constraints[] = $this->constraintBackendUserExclusive();
 
             $query->setOrderings(
-                array(
+                [
                     'record_type' => QueryInterface::ORDER_DESCENDING,
                     'start' => QueryInterface::ORDER_ASCENDING,
-                )
+                ]
             );
 
             $query->setLimit(10);

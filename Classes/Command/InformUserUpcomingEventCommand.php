@@ -1,7 +1,6 @@
 <?php
 namespace RKW\RkwEvents\Command;
 
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -14,7 +13,6 @@ namespace RKW\RkwEvents\Command;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
@@ -29,7 +27,6 @@ use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-
 
 /**
  * InformUserUpcomingEventCommand
@@ -195,4 +192,5 @@ class InformUserUpcomingEventCommand extends Command
 
         return $this->logger;
     }
+
 }

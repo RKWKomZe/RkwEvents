@@ -52,7 +52,7 @@ class TceMainHooks
      * @param $reference
      * @return void
      */
-    function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$reference)
+    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$reference)
     {
 
         if (ExtensionManagementUtility::isLoaded('rkw_geolocation')) {
@@ -61,7 +61,7 @@ class TceMainHooks
                 if ($table == 'tx_rkwevents_domain_model_eventplace') {
 
                     // set longitude and latitude into event location
-                    $eventPlaceDb = array();
+                    $eventPlaceDb = [];
                     if ($status != 'new') {
                         $eventPlaceDb = BackendUtility::getRecord('tx_rkwevents_domain_model_eventplace', intval($id));
                     }
@@ -100,7 +100,7 @@ class TceMainHooks
                     // inherit geo-data into event
                     if ($fieldArray['place']) {
 
-                        $eventDb = array();
+                        $eventDb = [];
                         if ($status != 'new') {
                             $eventDb = BackendUtility::getRecord('tx_rkwevents_domain_model_event', intval($id));
                         }
@@ -198,7 +198,7 @@ class TceMainHooks
      * @return void
      * @see DataHandler::processRemapStack
      */
-    function processCmdmap_afterFinish($object)
+    public function processCmdmap_afterFinish($object)
     {
 
         try {

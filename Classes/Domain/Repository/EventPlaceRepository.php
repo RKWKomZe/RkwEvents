@@ -88,7 +88,7 @@ class EventPlaceRepository extends AbstractRepository
         $query->matching(
             $query->greaterThanOrEqual('tstamp', $timestamp)
         );
-        $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['tstamp' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
     }

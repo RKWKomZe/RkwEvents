@@ -69,9 +69,9 @@ class EventReservationRepository extends AbstractRepository
         }
 
         $query->setOrderings(
-            array(
+            [
                 'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-            )
+            ]
         );
 
         return $query->matching(
@@ -121,7 +121,7 @@ class EventReservationRepository extends AbstractRepository
         $query->matching(
             $query->greaterThanOrEqual('tstamp', $timestamp)
         );
-        $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['tstamp' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
         //===

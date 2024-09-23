@@ -172,10 +172,10 @@ return [
 				'eval' => 'trim,email'
 			],
 		],
-        'show_pid' => array(
+        'show_pid' => [
             'label'   => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.show_pid',
             'exclude' => 0,
-            'config'  => array(
+            'config'  => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
@@ -189,7 +189,7 @@ return [
                         'addWhere' => 'AND pages.doktype = 1'
                     ]
                 ]
-            ),
-        ),
+            ],
+        ],
 	],
 ];

@@ -30,19 +30,19 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
     'tx_rkwevents_domain_model_eventseries',
     // Do not use the default field name ("categories") for pages, tt_content, sys_file_metadata, which is already used
     'categories',
-    array(
+    [
         // Set a custom label
         'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.categories',
         // This field should not be an exclude-field
         'exclude' => FALSE,
         // Override generic configuration, e.g. sort by title rather than by sorting
-        'fieldConfiguration' => array(
+        'fieldConfiguration' => [
             'foreign_table_where' => ' AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(sys_category.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
-        ),
+        ],
         // string (keyword), see TCA reference for details
         'l10n_mode' => 'exclude',
         // list of keywords, see TCA reference for details
         'l10n_display' => 'hideDiff',
-    )
+    ]
 );
 

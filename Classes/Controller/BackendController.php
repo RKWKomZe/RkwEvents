@@ -1,6 +1,6 @@
 <?php
-namespace RKW\RkwEvents\Controller;
 
+namespace RKW\RkwEvents\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -14,7 +14,6 @@ namespace RKW\RkwEvents\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 
 use Madj2k\CoreExtended\Transfer\CsvImporter;
 use RKW\RkwEvents\Domain\Model\BackendUser;
@@ -32,7 +31,6 @@ use RKW\RkwEvents\Utility\CsvUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-
 
 /**
  * BackendController
@@ -388,4 +386,5 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->redirect('show');
 
     }
+
 }

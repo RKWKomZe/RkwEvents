@@ -87,7 +87,7 @@ class EventContact extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      * @param \SJBR\StaticInfoTables\Domain\Model\Language $language
      * @return void
      */
-    public function setLang($language)
+    public function setLang(\SJBR\StaticInfoTables\Domain\Model\Language $language)
     {
         $this->lang = $language;
     }
