@@ -85,7 +85,7 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
                                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                                     'tx_rkwevents_validator.not_filled',
                                     'rkw_events',
-                                    array($propertyName)
+                                    [$propertyName]
                                 ), 1449314603
                             )
                         );
@@ -140,7 +140,7 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
                                         \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                                             'tx_rkwevents_validator.not_filled',
                                             'rkw_events',
-                                            array($propertyName)
+                                            [$propertyName]
                                         ), 1449314603
                                     )
                                 );
@@ -192,7 +192,7 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
         }
 
         if (!$this->settings) {
-            return array();
+            return [];
         }
         //===
 

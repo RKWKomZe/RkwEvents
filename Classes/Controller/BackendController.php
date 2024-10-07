@@ -18,9 +18,18 @@ namespace RKW\RkwEvents\Controller;
 use Madj2k\CoreExtended\Transfer\CsvImporter;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Repository\BackendUserRepository;
+use RKW\RkwEvents\Domain\Repository\CategoryRepository;
+use RKW\RkwEvents\Domain\Repository\DepartmentRepository;
+use RKW\RkwEvents\Domain\Repository\DocumentTypeRepository;
+use RKW\RkwEvents\Domain\Repository\EventContactRepository;
+use RKW\RkwEvents\Domain\Repository\EventOrganizerRepository;
+use RKW\RkwEvents\Domain\Repository\EventPlaceRepository;
+use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Utility\BackendUserUtility;
 use RKW\RkwEvents\Utility\CsvUtility;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -35,87 +44,93 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+
     /**
-     * eventRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\EventRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventRepository = null;
+    protected ?EventRepository $eventRepository = null;
+
 
     /**
-     * eventPlaceRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\EventPlaceRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventPlaceRepository = null;
+    protected ?EventPlaceRepository $eventPlaceRepository = null;
+
 
     /**
-     * eventContactRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\EventContactRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventContactRepository = null;
+    protected ?EventContactRepository $eventContactRepository = null;
+
 
     /**
-     * eventOrganizerRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\EventOrganizerRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $eventOrganizerRepository = null;
+    protected ?EventOrganizerRepository $eventOrganizerRepository = null;
+
 
     /**
-     * departmentRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\DepartmentRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $departmentRepository = null;
+    protected ?DepartmentRepository $departmentRepository = null;
+
 
     /**
-     * documentTypeRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\DocumentTypeRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $documentTypeRepository = null;
+    protected ?DocumentTypeRepository $documentTypeRepository = null;
+
 
     /**
-     * backendUserRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\BackendUserRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $backendUserRepository = null;
+    protected ?BackendUserRepository $backendUserRepository = null;
+
 
     /**
-     * categoryRepository
-     *
      * @var \RKW\RkwEvents\Domain\Repository\CategoryRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $categoryRepository = null;
+    protected ?CategoryRepository $categoryRepository = null;
 
 
     /**
-     * Persistence Manager
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $persistenceManager;
+    protected ?PersistenceManager $persistenceManager = null;
+
 
     /**
-     * objectManager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @param EventRepository $eventRepository
+     * @param EventPlaceRepository $eventPlaceRepository
+     * @param EventContactRepository $eventContactRepository
+     * @param EventOrganizerRepository $eventOrganizerRepository
+     * @param DepartmentRepository $departmentRepository
+     * @param DocumentTypeRepository $documentTypeRepository
+     * @param BackendUserRepository $backendUserRepository
+     * @param CategoryRepository $categoryRepository
+     * @param PersistenceManager $persistenceManager
      */
-    protected $objectManager;
-
+    public function __construct(
+        EventRepository $eventRepository,
+        EventPlaceRepository $eventPlaceRepository,
+        EventContactRepository $eventContactRepository,
+        EventOrganizerRepository $eventOrganizerRepository,
+        DepartmentRepository $departmentRepository,
+        DocumentTypeRepository $documentTypeRepository,
+        BackendUserRepository $backendUserRepository,
+        CategoryRepository $categoryRepository,
+        PersistenceManager $persistenceManager
+    ) {
+        $this->eventRepository = $eventRepository;
+        $this->eventPlaceRepository = $eventPlaceRepository;
+        $this->eventContactRepository = $eventContactRepository;
+        $this->eventOrganizerRepository = $eventOrganizerRepository;
+        $this->departmentRepository = $departmentRepository;
+        $this->documentTypeRepository = $documentTypeRepository;
+        $this->backendUserRepository = $backendUserRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->persistenceManager = $persistenceManager;
+    }
 
 
     /**
@@ -123,7 +138,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @return void
      */
-    public function csvExportAction()
+    public function csvExportAction(): void
     {
         /** @var BackendUser $currentBackendUser */
         $currentBackendUser = $this->backendUserRepository->findByUid(intval($GLOBALS['BE_USER']->user['uid']));
@@ -152,7 +167,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @param Event $event
      * @return void
      */
-    public function createCsvAction(Event $event)
+    public function createCsvAction(Event $event): void
     {
         CsvUtility::createCsv($event);
         exit;
@@ -164,15 +179,15 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @return void
      */
-    public function showAction()
+    public function showAction(): void
     {
         $this->view->assignMultiple(
-            array(
+            [
                 'content'       => '',
                 'documentTypes' => $this->documentTypeRepository->findByType('events'),
                 'departments'   => $this->departmentRepository->findAll(),
                 'organizers'    => $this->eventOrganizerRepository->findAll(),
-            )
+            ]
         );
 
     }
@@ -187,13 +202,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
      */
-    public function createAction(array $data)
+    public function createAction(array $data): void
     {
         $fileType = $_FILES['tx_rkwevents_tools_rkweventseventsimport']['type']['data']['file'];
         $filePath = $_FILES['tx_rkwevents_tools_rkweventseventsimport']['tmp_name']['data']['file'];
 
         // check file type
-        if (strtolower($fileType) != 'text/csv') {
+        if (strtolower($fileType) !== 'text/csv') {
             $this->addFlashMessage(
                 LocalizationUtility::translate(
                     'backendController.error.wrongFileType',
@@ -371,4 +386,5 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->redirect('show');
 
     }
+
 }

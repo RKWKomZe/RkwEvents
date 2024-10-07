@@ -89,7 +89,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
      *
      * @param \RKW\RkwEvents\Domain\Model\File $file
      */
-    public function setFile($file)
+    public function setFile(File $file)
     {
         $this->file = $file;
     }

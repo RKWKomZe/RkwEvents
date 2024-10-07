@@ -22,9 +22,6 @@ return [
 		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,additional_tile_flag,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventseries.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, description, description2, target_learning, target_group, reg_inhouse, schedule, partner, testimonials, backend_user_exclusive, additional_tile_flag, recommended_links, header_image, add_info, recommended_events, document_type, department, categories, categories_displayed, organizer, event',
-	],
 	'types' => [
 		'1' => [
             'showitem' => '

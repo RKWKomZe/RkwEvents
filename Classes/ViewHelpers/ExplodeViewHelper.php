@@ -70,7 +70,7 @@ class ExplodeViewHelper extends AbstractViewHelper
         }
 
         // Or: return values as associative array
-        $valueArray = array();
+        $valueArray = [];
         foreach ($dividedOptions as $option) {
             $valueArray[strtolower($option)] = $option;
         }

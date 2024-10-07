@@ -20,9 +20,6 @@ return [
 		'searchFields' => 'title,start,end,description,type,previous_experience,objective,speaker,available_seats,reg_required,costs,registered_frontend_users,',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventworkshop.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users',
-	],
 	'types' => [
         // '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users'],
 		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, speaker, description, registered_frontend_users'],

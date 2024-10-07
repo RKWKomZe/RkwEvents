@@ -45,7 +45,7 @@ class DocumentTypeRepository extends \RKW\RkwBasics\Domain\Repository\DocumentTy
         $query->matching(
             $query->logicalAnd(
                 $query->equals('type', $type),
-                $query->equals('uid', intval($id))
+                $query->equals('uid', $id)
             )
         );
 

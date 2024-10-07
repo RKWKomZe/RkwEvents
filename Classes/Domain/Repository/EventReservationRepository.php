@@ -3,7 +3,6 @@
 namespace RKW\RkwEvents\Domain\Repository;
 
 use RKW\RkwEvents\Domain\Model\Event;
-use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -33,15 +32,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class EventReservationRepository extends AbstractRepository
 {
-
-    /**
-     * Persistence Manager
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $persistenceManager;
-
 
     /**
      * function findByEvent
@@ -79,9 +69,9 @@ class EventReservationRepository extends AbstractRepository
         }
 
         $query->setOrderings(
-            array(
+            [
                 'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-            )
+            ]
         );
 
         return $query->matching(
@@ -129,30 +119,13 @@ class EventReservationRepository extends AbstractRepository
         $query->getQuerySettings()->setIgnoreEnableFields(true);
 
         $query->matching(
-            $query->greaterThanOrEqual('tstamp', intval($timestamp))
+            $query->greaterThanOrEqual('tstamp', $timestamp)
         );
-        $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['tstamp' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
         //===
     }
 
-
-    /**
-     * Returns PersistanceManager
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     */
-    protected function getPersistanceManager()
-    {
-
-        if (!$this->persistenceManager) {
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-            $this->persistenceManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-        }
-
-        return $this->persistenceManager;
-        //===
-    }
 
 }
