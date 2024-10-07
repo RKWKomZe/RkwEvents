@@ -57,7 +57,7 @@ class EventPlaceRepository extends AbstractRepository
         $query->matching(
             $query->logicalOr(
                 $query->logicalAnd(
-                    $query->equals('pid', intval($pid)),
+                    $query->equals('pid', $pid),
                     $query->equals('address', trim($address)),
                     $query->equals('zip', trim($zip)),
                     $query->equals('city', trim($city))
@@ -86,9 +86,9 @@ class EventPlaceRepository extends AbstractRepository
         $query->getQuerySettings()->setIgnoreEnableFields(true);
 
         $query->matching(
-            $query->greaterThanOrEqual('tstamp', intval($timestamp))
+            $query->greaterThanOrEqual('tstamp', $timestamp)
         );
-        $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['tstamp' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
     }

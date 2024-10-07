@@ -9,18 +9,53 @@
     </header>
 		<body>
 
+            <!--tx_rkwevents_domain_model_eventseries -->
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.title" approved="yes">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle" approved="yes">
+                <source>Subtitle</source>
+                <target>Untertitel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description" approved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description2" approved="yes">
+                <source>Description 2</source>
+                <target>Beschreibung 2</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_learning" approved="yes">
+                <source>Target Learning</source>
+                <target>Inhaltliches Ziel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_group" approved="yes">
+                <source>Target Group</source>
+                <target>Zielgruppe</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.partner" approved="no">
+                <source>Partner</source>
+                <target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.add_info" approved="yes">
+                <source>Additional Information</source>
+                <target>Zusatzinfos</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.testimonials" approved="yes">
+                <source>Testimonials</source>
+                <target>Testimonials</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.document_type" approved="yes">
+                <source>Event Type</source>
+                <target>Art</target>
+            </trans-unit>
+
+
 			<!--tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
 				<source>Event</source>
 				<target phase-name="approval-1" state="signed-off">Veranstaltung</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
-				<source>Title</source>
-				<target>Titel</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.subtitle" approved="yes">
-				<source>Subtitle</source>
-				<target>Untertitel</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.start" approved="yes">
 				<source>Start</source>
@@ -37,22 +72,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.latitude" approved="yes">
 				<source>Latitude</source>
 				<target>Breitengrad</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.testimonials" approved="yes">
-				<source>Testimonials</source>
-				<target>Testimonials</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.description" approved="yes">
-				<source>Description</source>
-				<target>Beschreibung</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.target_group" approved="yes">
-				<source>Target Group</source>
-				<target>Zielgruppe</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="no">
-				<source>Partner</source>
-				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.seats" approved="yes">
 				<source>Seats</source>
@@ -86,10 +105,6 @@
 				<source>External Link for Registration</source>
 				<target>Externer Anmeldungslink</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.document_type" approved="yes">
-				<source>Event Type</source>
-				<target>Art</target>
-			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
 				<source>Series</source>
 				<target>Reihe</target>
@@ -118,10 +133,6 @@
 				<source>Internal Contact</source>
 				<target phase-name="approval-1" state="final">Interne Ansprechperson</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.add_info" approved="yes">
-				<source>Additional Information</source>
-				<target>Zusatzinfos</target>
-				</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.sheet" approved="yes">
 				<source>Sheet</source>
 				<target>Folien</target>
@@ -307,6 +318,10 @@
 				<source>The selected file is not a valid CSV file.</source>
 				<target>Die ausgewählte Datei ist keine gültige CSV-Datei.</target>
 			</trans-unit>
+            <trans-unit id="backendController.warning.noRecordsImported">
+                <source>No records imported. Please contact the admin if you suspect a technical error.</source>
+                <target>Es wurden keine Datensätze importiert. Falls sie einen technischen Fehler als Ursache vermuten, wenden Sie sich bitte an den zuständigen Admin.</target>
+            </trans-unit>
 			<trans-unit id="backendController.error.importFailed">
 				<source>Unfortunately, the import failed: %s</source>
 				<target>Der Import ist leider fehlgeschlagen: %s</target>
@@ -652,6 +667,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
                 <source>Eligible</source>
                 <target>Förderfähig</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.inhouse">
+                <source>Inhouse</source>
+                <target>Inhouse</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel">
                 <source>Filter events according to specific criteria</source>

@@ -62,7 +62,7 @@ class CategoryRepository extends AbstractRepository
      */
     public function findChildrenByParent(int $category = 0, array $excludeCategories = []): QueryResultInterface
     {
-        $constraints = array();
+        $constraints = [];
         $query = $this->createQuery();
 
         $constraints[] = $query->equals('parent', $category);

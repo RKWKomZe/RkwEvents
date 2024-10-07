@@ -4,9 +4,39 @@
     data-namespace-typo3-fluid="true">
 
     <f:if condition="<f:count>{sortedEventList}</f:count>">
+
+        <f:comment>
+        <f:if condition="{filter.regInhouse}">
+            <div class="system-message" role="alert">
+                <div class="system-message__item system-message__item--severity3">
+                    Es werden nur Veranstaltungen angezeigt, die Inhouse-Schulung anbieten.
+                </div>
+            </div>
+        </f:if>
+        </f:comment>
+
         <!-- simple element list without nesting -->
         <ajaxApi:ajaxWrapper ajaxHelper="{ajaxHelper}" ajaxAction="append" ajaxId="2">
+
             <div class="tiles flex-container flex-container--margin">
+                <f:if condition="{settings.list.regInHouseTile.show}">
+                    <f:if condition="{filter.regInhouse} != 1">
+                        <f:if condition="{pageMore} <= 1">
+                            <div class="flex-item flex-basis-3">
+                                <div class="tile has-logo">
+                                    <div class="tile__content">
+                                        <f:link.page
+                                            pageUid="{regInhouseListPid}"
+                                            additionalParams="{tx_rkwevents_pi1: {filter: {regInhouse: '1'}}}"
+                                        >
+                                            <f:image src="{settings.list.regInHouseTile.image}" alt="inhouse registration" />
+                                        </f:link.page>
+                                    </div>
+                                </div>
+                            </div>
+                        </f:if>
+                    </f:if>
+                </f:if>
                 <f:for each="{sortedEventList}" as="event">
                     <f:render partial="Event/List/Box" section="flex-3" arguments="{_all}" />
                 </f:for>

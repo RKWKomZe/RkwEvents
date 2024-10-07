@@ -1,7 +1,7 @@
 {
     "name": "rkw/rkw-events",
     "type": "typo3-cms-extension",
-    "description": "Extension for events and registation",
+    "description": "Extension for events and registration",
     "homepage": "https://www.rkw-kompetenzzentrum.de",
     "license": ["GPL-2.0+"],
     "keywords": ["TYPO3 CMS", "RKW", "Events"],
@@ -36,14 +36,14 @@
     ],
     "require": {
         "php": ">=7.4",
-        "typo3/cms-core": "~9.5.0 || ~10.4.0",
-		"madj2k/t3-core-extended": "~9.5.34 || ~10.4.0",
-		"madj2k/t3-dr-seo": "~9.5.0 || ~10.4.0 || ~11.5.0 || ~12.4.0",
-		"madj2k/t3-ajax-api": "~9.5.0 || ~10.4.0",
-		"madj2k/t3-postmaster": "~9.5.0 || ~10.4.0",
+        "typo3/cms-core": "~10.4.0",
+		"madj2k/t3-core-extended": "~10.4.0 || ~11.5.0 || ~12.4.0",
+		"madj2k/t3-dr-seo": "~12.4.0",
+		"madj2k/t3-ajax-api": "~10.4.0 || ~11.5.0 || ~12.4.0",
+		"madj2k/t3-postmaster": "~10.4.0 || ~11.5.0 || ~12.4.0",
 		"sjbr/static-info-tables": "^6.8.0",
 		"league/csv": "^9.5",
-		"rkw/rkw-basics": "~9.5.0 || ~10.4.0"
+		"rkw/rkw-basics": "~10.4.0 || ~11.5.0 || ~12.4.0"
 	},
 	"suggest": {
 		"sjbr/sr-freecap": "~2.4"

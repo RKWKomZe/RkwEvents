@@ -58,7 +58,7 @@ class MetaTagGenerator extends \Madj2k\DrSeo\MetaTag\MetaTagGenerator
             /** @var \RKW\RkwEvents\Domain\Model\Event $event */
             if ($event = $eventRepository->findByIdentifier($eventId)) {
 
-                if ($keywords = $event->getKeywords()) {
+                if ($keywords = $event->getSeries()->getKeywords()) {
                     $manager = $metaTagManagerRegistry->getManagerForProperty('keywords');
                     $manager->removeProperty('keywords');
 

@@ -22,11 +22,6 @@ return [
 		'searchFields' => 'salutation,first_name,last_name,company,address,zip,city,phone,fax,email,show_pid,',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventorganizer.gif'
 	],
-	'interface' => [
-		// 'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, first_name, last_name, address, zip, city, phone, email',
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, company, show_pid',
-
-	],
 	'types' => [
 		// '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, company, first_name, last_name, phone, email'],
 		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, company, show_pid'],
@@ -177,10 +172,10 @@ return [
 				'eval' => 'trim,email'
 			],
 		],
-        'show_pid' => array(
+        'show_pid' => [
             'label'   => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventorganizer.show_pid',
             'exclude' => 0,
-            'config'  => array(
+            'config'  => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
@@ -194,7 +189,7 @@ return [
                         'addWhere' => 'AND pages.doktype = 1'
                     ]
                 ]
-            ),
-        ),
+            ],
+        ],
 	],
 ];

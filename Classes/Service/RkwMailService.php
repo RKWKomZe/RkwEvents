@@ -6,14 +6,12 @@ use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use Madj2k\Postmaster\Mail\MailMessage;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\EventContact;
-use Madj2k\Postmaster\Utility\FrontendLocalizationUtility;
 use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use RKW\RkwEvents\Utility\DivUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -90,16 +88,16 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(MailMessage::class);
 
             // send new user an email with token
-            $mailService->setTo($frontendUser, array(
-                'marker' => array(
+            $mailService->setTo($frontendUser, [
+                'marker' => [
                     'frontendUser' => $frontendUser,
                     'optIn'        => $optIn,
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
                     'showPid'      => $showPid,
                     'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
-                ),
-            ));
+                ],
+            ]);
 
             // set reply address
             if (
@@ -120,7 +118,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                FrontendLocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'rkwMailService.optInReservationUser.subject',
                     'rkw_events',
                     null,
@@ -339,8 +337,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                         }
 
                         // send mail to main participant
-                        $mailService->setTo($eventReservation->getFeUser(), array(
-                            'marker'  => array(
+                        $mailService->setTo($eventReservation->getFeUser(), [
+                            'marker'  => [
                                 'reservation'    => $eventReservation,
                                 'event'          => $eventReservation->getEvent(),
                                 'frontendUser'   => $eventReservation->getFeUser(),
@@ -352,14 +350,14 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                 // b) Use manually set showPid of EventReservation instead!
                                 'showPid'        => intval($eventReservation->getShowPid()),
                                 'extRelPath'     => PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('rkw_events')),
-                            ),
-                            'subject' => FrontendLocalizationUtility::translate(
+                            ],
+                            'subject' => LocalizationUtility::translate(
                                 'rkwMailService.informUpcomingEventUser.subject',
                                 'rkw_events',
-                                array(0 => $eventReservation->getEvent()->getTitle()),
+                                [0 => $eventReservation->getEvent()->getTitle()],
                                 $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
                             ),
-                        ));
+                        ]);
                     }
                 }
 
@@ -379,10 +377,10 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 }
 
                 $mailService->getQueueMail()->setSubject(
-                    FrontendLocalizationUtility::translate(
+                    LocalizationUtility::translate(
                         'rkwMailService.informUpcomingEventUser.subject',
                         'rkw_events',
-                        array(0 => $event->getTitle()),
+                        [0 => $event->getTitle()],
                         $settings['settings']['defaultLanguageKey'] ? $settings['settings']['defaultLanguageKey'] : 'default'
                     )
                 );
@@ -433,8 +431,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                         if ($eventReservation->getFeUser()) {
 
                             // send new user an email with token
-                            $mailService->setTo($eventReservation->getFeUser(), array(
-                                'marker'  => array(
+                            $mailService->setTo($eventReservation->getFeUser(), [
+                                'marker'  => [
                                     'reservation'  => $eventReservation,
                                     'event'        => $eventReservation->getEvent(),
                                     'frontendUser' => $eventReservation->getFeUser(),
@@ -442,19 +440,19 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                                     'surveyPid'    => intval($settingsDefault['surveyPid']),
                                     'loginPid'     => intval($settingsDefault['loginPid']),
                                     'showPid'      => intval($settingsDefault['showPid']),
-                                ),
-                                'subject' => FrontendLocalizationUtility::translate(
+                                ],
+                                'subject' => LocalizationUtility::translate(
                                     'rkwMailService.sendSurveyForPastEvent.subject',
                                     'rkw_events',
-                                    array(0 => $eventReservation->getEvent()->getTitle()),
+                                    [0 => $eventReservation->getEvent()->getTitle()],
                                     $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
                                 ),
-                            ));
+                            ]);
                         }
                     }
 
                     $mailService->getQueueMail()->setSubject(
-                        FrontendLocalizationUtility::translate(
+                        LocalizationUtility::translate(
                             'rkwMailService.sendSurveyForPastEvent.subject',
                             'rkw_events',
                             null,
@@ -519,19 +517,19 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             $mailService = GeneralUtility::makeInstance(MailMessage::class);
 
             // send new user an email with token
-            $mailService->setTo($frontendUser, array(
-                'marker' => array(
+            $mailService->setTo($frontendUser, [
+                'marker' => [
                     'reservation'  => $eventReservation,
                     'frontendUser' => $frontendUser,
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
-                    'showPid'      => intval($showPid),
+                    'showPid'      => $showPid,
                     'uniqueKey'    => uniqid(),
                     'currentTime'  => time(),
                     'surveyPid'    => intval($settingsDefault['surveyPid']),
                     'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
-                ),
-            ));
+                ],
+            ]);
 
             // set reply address
             if (
@@ -552,7 +550,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                FrontendLocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
                     'rkw_events',
                     null,
@@ -616,7 +614,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             $showPid = intval($GLOBALS['TSFE']->id);
         }
 
-        $recipients = array();
+        $recipients = [];
         if (is_array($backendUser)) {
             $recipients = $backendUser;
         } else {
@@ -652,25 +650,25 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     }
 
                     // send new user an email with token
-                    $mailService->setTo($recipient, array(
-                        'marker'  => array(
+                    $mailService->setTo($recipient, [
+                        'marker'  => [
                             'reservation'  => $eventReservation,
                             'admin'        => $recipient,
                             'frontendUser' => $frontendUser,
                             'pageUid'      => intval($GLOBALS['TSFE']->id),
                             'loginPid'     => intval($settingsDefault['loginPid']),
-                            'showPid'      => intval($showPid),
+                            'showPid'      => $showPid,
                             'fullName'     => $name,
                             'language'     => $language,
                             'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
-                        ),
-                        'subject' => FrontendLocalizationUtility::translate(
+                        ],
+                        'subject' => LocalizationUtility::translate(
                             'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                             'rkw_events',
                             null,
                             $recipient->getLang()
                         ),
-                    ));
+                    ]);
                 }
             }
 
@@ -682,7 +680,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             }
 
             $mailService->getQueueMail()->setSubject(
-                FrontendLocalizationUtility::translate(
+                LocalizationUtility::translate(
                     'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                     'rkw_events',
                     null,

@@ -1,0 +1,20 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  RKW\RkwEvents\:
+    resource: '../Classes/*'
+
+  RKW\RkwEvents\Command\InformUserUpcomingEventCommand:
+    tags:
+      - name: 'console.command'
+        command: 'rkw_events:informUserUpcomingEvent'
+        schedulable: true
+
+  RKW\RkwEvents\Command\SendSurveyForPastEventCommand:
+    tags:
+      - name: 'console.command'
+        command: 'rkw_events:sendSurveyForPastEvent'
+        schedulable: true

@@ -21,9 +21,6 @@ return [
 		'searchFields' => 'title,html,',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventsheet.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, html',
-	],
 	'types' => [
 		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, html'],
 	],

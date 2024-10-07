@@ -7,7 +7,6 @@ use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventPlace;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -50,7 +49,7 @@ class CsvUtility
      */
     public static function createCsv(Event $event, string $separator = ';', int $maxAddPersons = 3)
     {
-        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getTitle()) . '.csv';
+        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getSeries()->getTitle()) . '.csv';
 
         self::$csv = fopen('php://output', 'w');
 
@@ -181,7 +180,7 @@ class CsvUtility
         // 2. event content
         $row = [];
         // add all reservation values
-        $row[] = $event->getTitle();
+        $row[] = $event->getSeries()->getTitle();
         $row[] = date('d.m.Y', $event->getStart());
         $row[] = date('d.m.Y', $event->getEnd());
         if ($event->getPlace() instanceof EventPlace) {

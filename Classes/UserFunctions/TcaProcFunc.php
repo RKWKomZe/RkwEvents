@@ -14,18 +14,8 @@ namespace RKW\RkwEvents\UserFunctions;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwCheckup\Domain\Model\Checkup;
-use RKW\RkwCheckup\Domain\Model\Question;
-use RKW\RkwCheckup\Domain\Model\Section;
-use RKW\RkwCheckup\Domain\Model\Step;
-use RKW\RkwCheckup\Domain\Repository\CheckupRepository;
-use RKW\RkwCheckup\Domain\Repository\QuestionRepository;
-use RKW\RkwCheckup\Domain\Repository\SectionRepository;
-use RKW\RkwCheckup\Domain\Repository\StepRepository;
-use RKW\RkwCheckup\Utility\AnswerUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
@@ -80,6 +70,41 @@ class TcaProcFunc
                 if ($category) {
                     // put it into the result set
                     $params['items'][] = [$category['title'], $category['uid']];
+                }
+            }
+
+        }
+
+    }
+
+
+    /**
+     * Return a usable title
+     *
+     * @param array $params
+     * @return void
+     */
+    public function getEventTitle(array &$params): void
+    {
+        if (
+            $params['table'] == 'tx_rkwevents_domain_model_event'
+            && $params['row']['series']
+        ) {
+
+            $tableName = 'tx_rkwevents_domain_model_eventseries';
+            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
+            $result = $queryBuilder
+                ->select('uid', 'title')
+                ->from($tableName)
+                ->where(
+                    $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($params['row']['series'], \PDO::PARAM_INT)),
+                )
+                ->execute();
+
+            while ($eventSeries = $result->fetch()) {
+                if ($eventSeries) {
+                    // put it into the result set
+                    $params['items'][] = [$eventSeries['title'], $row['uid']];
                 }
             }
 
