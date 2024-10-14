@@ -32,11 +32,15 @@ use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Domain\Repository\EventWorkshopRepository;
 use RKW\RkwEvents\Domain\Repository\FrontendUserRepository;
 use RKW\RkwEvents\Utility\DivUtility;
+use Solarium\Component\Debug;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
@@ -285,13 +289,14 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     /**
      * action new
      *
-     * @param Event|null $event
+     * @param Event|null            $event
      * @param EventReservation|null $newEventReservation
-     * @param int $targetGroup
+     * @param int                   $targetGroup
+     * @return void
+     * @throws AspectNotFoundException
+     * @throws InvalidQueryException
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("event")
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
-     * @return void
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function newStandaloneAction(
         Event $event = null,
@@ -299,7 +304,18 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         int $targetGroup = 0
     ): void
     {
+
         if ((int)$this->settings['eventRegisterStandalone']) {
+
+            // if an event is already given (and not read via flexform), we're coming from the "createAction"
+            // hide form in fluid (for usability reasons)
+            // Hint: Actually we can't work with an additional parameter, because we get an #1537633463 OutOfRangeException...
+            // ... because the plugin name is longer than 30 signs: tx_rkwevents_standaloneregister
+            // @toDo: Improve this solution through update to a shorter plugin name
+            if ($event instanceof Event) {
+                $this->view->assign('successfullyRegistered', true);
+            }
+
             /** @var Event $event */
             $event = $this->eventRepository->findByUid((int)$this->settings['eventRegisterStandalone']);
 
@@ -319,6 +335,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
             $this->view->assign('targetGroupList', $this->categoryRepository->findChildrenByParent((int)$this->settings['targetGroupsPid']));
             $this->view->assign('targetGroup', $targetGroup);
+
         }
     }
 
@@ -563,7 +580,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         }
 
         if ($this->request->getPluginName() === 'Standaloneregister') {
-            $this->forward($showAction, $controller, null, ['event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
+            $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()]);
         }
 
         $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
