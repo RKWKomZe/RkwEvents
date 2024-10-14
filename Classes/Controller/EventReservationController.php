@@ -32,7 +32,6 @@ use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Domain\Repository\EventWorkshopRepository;
 use RKW\RkwEvents\Domain\Repository\FrontendUserRepository;
 use RKW\RkwEvents\Utility\DivUtility;
-use Solarium\Component\Debug;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -40,7 +39,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
