@@ -1,12 +1,10 @@
 <?php
 
-use RKW\RkwEvents\Utility\TCA;
-
 return [
 	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries',
         'label' => 'title',
-        'label_userFunc' => TCA::class . '->eventSeriesTitle',
+        'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventSeriesTitle',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -320,7 +318,7 @@ return [
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_rkwevents_domain_model_event',
                 'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.uid!=###THIS_UID### AND tx_rkwevents_domain_model_event.pid=###CURRENT_PID### AND tx_rkwevents_domain_model_event.sys_language_uid = ###REC_FIELD_sys_language_uid### AND ( (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.start > unix_timestamp(now())) OR (tx_rkwevents_domain_model_event.end > unix_timestamp(now())) ) ORDER BY tx_rkwevents_domain_model_event.start DESC',
-                'itemsProcFunc' => 'RKW\\RkwEvents\\UserFunctions\\TcaProcFunc->getEventTitle',
+                //'itemsProcFunc' => 'RKW\\RkwEvents\\UserFunctions\\TcaProcFunc->getEventTitle',
                 'maxitems'      => 99,
                 'size'          => 5,
             ],
