@@ -16,6 +16,11 @@ return [
     ],
     \RKW\RkwEvents\Domain\Model\BackendUser::class => [
         'tableName' => 'be_users',
+        'properties' => [
+            'backendUserGroups' => [
+                'fieldName' => 'usergroup'
+            ],
+        ],
     ],
     \RKW\RkwEvents\Domain\Model\BackendUserGroup::class => [
         'tableName' => 'be_groups',
