@@ -81,6 +81,10 @@ class TcaProcFunc
     /**
      * Return a usable title
      *
+     * @deprecated Function will be removed soon. After migrating "event" to "eventSeries" this function does no longer works
+     * Solves by general TcaLabel->eventTitle solution
+     *
+     *
      * @param array $params
      * @return void
      */

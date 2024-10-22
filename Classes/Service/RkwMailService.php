@@ -354,7 +354,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'subject' => LocalizationUtility::translate(
                                 'rkwMailService.informUpcomingEventUser.subject',
                                 'rkw_events',
-                                [0 => $eventReservation->getEvent()->getTitle()],
+                                [0 => $eventReservation->getEvent()->getSeries()->getTitle()],
                                 $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
                             ),
                         ]);
@@ -380,7 +380,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     LocalizationUtility::translate(
                         'rkwMailService.informUpcomingEventUser.subject',
                         'rkw_events',
-                        [0 => $event->getTitle()],
+                        [0 => $event->getSeries()->getTitle()],
                         $settings['settings']['defaultLanguageKey'] ? $settings['settings']['defaultLanguageKey'] : 'default'
                     )
                 );

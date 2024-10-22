@@ -1,6 +1,6 @@
 <?php
 
-namespace RKW\RkwEvents\Utility;
+namespace RKW\RkwEvents\UserFunctions;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,19 +15,24 @@ namespace RKW\RkwEvents\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Doctrine\DBAL\Driver\Exception;
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventPlace;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
- * TCA utility
+ * TCA
  *
  * @author Christian Dilger <c.dilger@addorange.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class TCA
+class TcaLabel
 {
 
     /**
@@ -38,7 +43,7 @@ class TCA
         $eventSeriesUid = $parameters['row']['uid'];
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         /** @var EventRepository $eventRepository */
         $eventRepository = $objectManager->get(EventRepository::class);
 
@@ -67,6 +72,54 @@ class TCA
             $parameters['title'] = $parameters['row']['title'] . ' (' . $suffix . ')';
         }
 
+    }
+
+
+    /**
+     * eventTitle: ##startDate##title##place
+     *
+     * Returns the title with the start of the first contained event
+     * @throws Exception
+     */
+    public function eventTitle(&$parameters, $parentObject): void
+    {
+        $eventUid = $parameters['row']['uid'];
+
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        /** @var EventRepository $eventRepository */
+        $eventRepository = $objectManager->get(EventRepository::class);
+
+        $event = $eventRepository->findByIdentifier($eventUid);
+
+        if ($event instanceof Event) {
+
+            $eventTitle = [];
+
+            // if startDate is set? (be aware of announcements)
+            if ($event->getStart() > 0) {
+                $eventTitle[] = date("Y-m-d H:i", $event->getStart());
+            }
+
+            // is place already set, unknown, or an online event?
+            if (
+                $event->getPlace() instanceof EventPlace
+                && $event->getPlace()->getName()
+                && $event->getPlace()->getCity()
+            ) {
+                //$eventTitle[] = $event->getPlace()->getName() . ', ' . $event->getPlace()->getCity();
+                $eventTitle[] = $event->getPlace()->getCity();
+            } elseif ($event->getOnlineEvent()) {
+                // @toDo: Does we need this?
+                //$eventTitle[] = 'Online Event';
+            }
+
+            // always: Set title
+            $eventTitle[] = $event->getSeries()->getTitle();
+
+
+            $parameters['title'] = implode('; ', $eventTitle);
+        }
     }
 
 }
