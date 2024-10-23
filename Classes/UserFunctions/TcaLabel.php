@@ -18,6 +18,7 @@ namespace RKW\RkwEvents\UserFunctions;
 use Doctrine\DBAL\Driver\Exception;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventPlace;
+use RKW\RkwEvents\Domain\Model\EventSeries;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -114,11 +115,17 @@ class TcaLabel
                 //$eventTitle[] = 'Online Event';
             }
 
-            // always: Set title
-            $eventTitle[] = $event->getSeries()->getTitle();
+            // Set title
+            // prevent issues for new records (which are not persistent and having no EventSeries relation yet)
+            if ($event->getSeries() instanceof EventSeries) {
+                $eventTitle[] = $event->getSeries()->getTitle();
+            }
 
+            // assemble title only if there is something inside the array. Otherwise, do nothing.
+            if (count($eventTitle)) {
+                $parameters['title'] = implode('; ', $eventTitle);
+            }
 
-            $parameters['title'] = implode('; ', $eventTitle);
         }
     }
 
