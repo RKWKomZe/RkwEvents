@@ -30,6 +30,7 @@
                                 <maxitems>5</maxitems>
                                 <minitems>0</minitems>
                                 <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
                                 <foreign_table>tx_rkwprojects_domain_model_projects</foreign_table>
                                 <foreign_table_where>
                                     AND tx_rkwprojects_domain_model_projects.deleted = 0 AND tx_rkwprojects_domain_model_projects.hidden = 0 ORDER BY tx_rkwprojects_domain_model_projects.short_name
