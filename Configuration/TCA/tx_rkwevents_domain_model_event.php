@@ -812,21 +812,13 @@ return [
                 'eval' => 'trim'
             ],
         ],
-        'backend_user_exclusive' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.backend_user_exclusive',
-            'config' => [
-                'type' => 'check',
-                'default' => 0,
-            ]
-        ],
-        'extended_network' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
-            'config' => [
-                'type' => 'check',
-                'default' => 0,
-            ]
-        ],
+//        'extended_network' => [
+//            'exclude' => 0,
+//            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
+//            'config' => [
+//                'type' => 'check',
+//                'default' => 0,
+//            ]
+//        ],
     ],
 ];
