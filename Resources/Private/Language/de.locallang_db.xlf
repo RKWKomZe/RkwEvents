@@ -122,6 +122,10 @@
 				<source>from %s</source>
 				<target>ab %s</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.event_start_date" approved="yes">
+				<source>Start date of nearest event (is updated when saving)</source>
+				<target>Startdatum des nächsten Events (Dieses Feld wird beim speichern aktualisiert)</target>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_event -->

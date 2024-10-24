@@ -6,7 +6,8 @@ return [
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event',
         'label' => 'start',
         'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventTitle',
-        //'label_alt' => 'place',
+        // "label_alt" with "title" is also possible instead of using "label_userFunc" (but shows only the "slug")
+        //'label_alt' => 'title, place',
         //'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -467,17 +468,6 @@ return [
             ],
             'displayCond' => 'FIELD:cancel_end:!=:0'
         ],
-        'series' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_rkwevents_domain_model_eventseries',
-                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventseries.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventseries.title ASC',
-                'maxitems'      => 1,
-            ],
-        ],
         'logos' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.logos',
@@ -577,15 +567,6 @@ return [
                 'cols' => 40,
                 'rows' => 5,
                 'eval' => 'trim',
-            ],
-        ],
-        'additional_tile_flag' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.additional_tile_flag',
-            'config' => [
-                'type' => 'input',
-                'size' => 5,
-                'eval' => 'trim'
             ],
         ],
         'external_contact' => [
@@ -820,5 +801,16 @@ return [
 //                'default' => 0,
 //            ]
 //        ],
+        'series' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventseries',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventseries.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventseries.title ASC',
+                'maxitems'      => 1,
+            ],
+        ],
     ],
 ];

@@ -22,12 +22,15 @@ use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwGeolocation\Service\Geolocation;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class TceMainHooks
@@ -301,16 +304,17 @@ class TceMainHooks
             // check if eventSeries exists (important on BE-formfield-reload if the eventSeries is not persistent yet)
             if (is_array($eventSeriesRaw)) {
 
-                $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tx_rkwevents_domain_model_event');
+                $tableNameEvent = 'tx_rkwevents_domain_model_event';
+                $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableNameEvent);
                 $titleSlug = GeneralUtility::slugify($eventSeriesRaw['title']);
 
                 // set (slugified) title from "eventSeries" to every NEW "event" (needed for event URL)
-                if (key_exists('tx_rkwevents_domain_model_event', $tceMain->newRelatedIDs)) {
+                if (key_exists($tableNameEvent, $tceMain->newRelatedIDs)) {
 
-                    foreach ($tceMain->newRelatedIDs['tx_rkwevents_domain_model_event'] as $keyIndex => $newEventUid) {
+                    foreach ($tceMain->newRelatedIDs[$tableNameEvent] as $keyIndex => $newEventUid) {
 
                         $connection->update(
-                            'tx_rkwevents_domain_model_event',
+                            $tableNameEvent,
                             [
                                 'title' => $titleSlug,
                             ],
@@ -318,6 +322,65 @@ class TceMainHooks
                         );
                     }
                 }
+
+
+                // set startDate of current or upcoming event (fallback: Last event)
+                // @toDo: HINT: This code does NOT react to freshly added IRRE elements (hide; make visible etc need second save)
+                // 1. Get event
+                $queryBuilder = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableNameEvent);
+                $result = $queryBuilder
+
+                    ->select('uid', 'start')
+                    ->from($tableNameEvent)
+                    // get event with the highest date
+                    ->where(
+                        $queryBuilder->expr()->neq(
+                            'start',
+                            $queryBuilder->createNamedParameter(0), \PDO::PARAM_INT)
+                    )
+                    // or announcement (time value 0)
+                    ->orWhere(
+                        $queryBuilder->expr()->eq(
+                            'start',
+                            $queryBuilder->createNamedParameter(0), \PDO::PARAM_INT),
+                    )
+                    ->andWhere(
+                        $queryBuilder->expr()->eq(
+                            'series',
+                            $queryBuilder->createNamedParameter($eventSeriesRaw['uid'], \PDO::PARAM_INT)
+                        ),
+                        // exclude hidden and deleted
+                        $queryBuilder->expr()->eq(
+                            'hidden',
+                            $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'deleted',
+                            $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                        )
+                    )
+                    ->setMaxResults(1)
+                    ->orderBy('start', 'DESC')
+                    ->execute();
+
+                $tableNameEventSeries = 'tx_rkwevents_domain_model_eventseries';
+
+                while ($event = $result->fetchAssociative()) {
+
+                    if (key_exists('start', $event)) {
+                        $connection->update(
+                            $tableNameEventSeries,
+                            [
+                                'event_start_date' => $event['start'],
+                            ],
+                            ['uid' => (int) $eventSeriesRaw['uid']]
+                        );
+                    }
+
+                    // else: Do nothing
+
+                }
+
             }
         }
     }

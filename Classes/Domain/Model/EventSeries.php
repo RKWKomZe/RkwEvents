@@ -126,6 +126,14 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $recommendedLinks = '';
 
     /**
+     * eventStartDate
+     * holds the startDate of the most current event. Is always set via hook an saving an eventSeries record
+     *
+     * @var integer
+     */
+    protected $eventStartDate;
+
+    /**
      * headerImage
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
@@ -501,6 +509,27 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRecommendedLinks(string $recommendedLinks): void
     {
         $this->recommendedLinks = $recommendedLinks;
+    }
+
+    /**
+     * Returns the eventStartDate
+     *
+     * @return int $eventStartDate
+     */
+    public function getEventStartDate(): int
+    {
+        return $this->eventStartDate;
+    }
+
+    /**
+     * Sets the eventStartDate
+     *
+     * @param int $eventStartDate
+     * @return void
+     */
+    public function setEventStartDate(int $eventStartDate)
+    {
+        $this->eventStartDate = $eventStartDate;
     }
 
     /**

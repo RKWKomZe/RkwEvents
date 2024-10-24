@@ -30,6 +30,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     categories_displayed    varchar(255) DEFAULT '' NOT NULL,
     reg_inhouse             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     backend_user_exclusive  tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	  event_start_date				int(11) unsigned DEFAULT '0' NOT NULL,
 
     event                   varchar(255) DEFAULT '' NOT NULL,
 
