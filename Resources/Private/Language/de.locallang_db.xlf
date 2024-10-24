@@ -66,7 +66,7 @@
                 <source>Backend User exclusive</source>
                 <target>Nur mit Direktlink erreichbar (außer für im Backend angemeldete Nutzende)</target>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_eventseries.additional_tile_flag" approved="yes">
+            <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
                 <source>Additional tile flag</source>
                 <target>Zusätzliches Kachel-Label (Störer)</target>
             </trans-unit>
