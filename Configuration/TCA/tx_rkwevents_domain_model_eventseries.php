@@ -17,7 +17,7 @@ return [
 		'enablecolumns' => [
 			'disabled' => 'hidden',
 		],
-		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,additional_tile_flag,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
+		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventseries.gif'
 	],
 	'types' => [
@@ -33,7 +33,7 @@ return [
             keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info,
 
              --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
-            header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive,
+            header_image, recommended_events, recommended_links, backend_user_exclusive,
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
             --palette--;;dataFields, --palette--;;systemFields,

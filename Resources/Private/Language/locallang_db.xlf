@@ -47,7 +47,7 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.backend_user_exclusive" approved="yes">
                 <source>Backend User exclusive</source>
             </trans-unit>
-            <trans-unit id="tx_rkwevents_domain_model_eventseries.additional_tile_flag" approved="yes">
+            <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
                 <source>Additional tile flag</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.recommended_events" approved="yes">
