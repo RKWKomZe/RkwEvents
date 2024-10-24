@@ -333,13 +333,15 @@ class TceMainHooks
                     ->where(
                         $queryBuilder->expr()->neq(
                             'start',
-                            $queryBuilder->createNamedParameter(0), \PDO::PARAM_INT)
+                            $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                        )
                     )
                     // or announcement (time value 0)
                     ->orWhere(
                         $queryBuilder->expr()->eq(
                             'start',
-                            $queryBuilder->createNamedParameter(0), \PDO::PARAM_INT),
+                            $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                        )
                     )
                     ->andWhere(
                         $queryBuilder->expr()->eq(
