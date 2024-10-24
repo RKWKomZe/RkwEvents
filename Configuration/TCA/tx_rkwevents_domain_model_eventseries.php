@@ -3,13 +3,15 @@
 return [
 	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries',
-        'label' => 'title',
-        'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventSeriesTitle',
+        'label' => 'event_start_date',
+        //'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventSeriesTitle',
+        'label_alt' => 'title',
+        'label_alt_force' => true,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => true,
-        'default_sortby' => 'ORDER BY title ASC',
+        'default_sortby' => 'ORDER BY event_start_date DESC',
 		'languageField' => 'sys_language_uid',
 		'transOrigPointerField' => 'l10n_parent',
 		'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -380,6 +382,19 @@ return [
                         'disabled' => false,
                     ]
                 ]
+            ],
+        ],
+        'event_start_date' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.event_start_date',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'size' => 13,
+                'eval' => 'datetime, required',
+                'checkbox' => 0,
+                'default' => 0,
+                'readOnly' => true
             ],
         ],
         'event' => [
