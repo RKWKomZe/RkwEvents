@@ -148,6 +148,7 @@ call_user_func(
 
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesUpdate'] = \RKW\RkwEvents\Install\EventSeriesUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesTitleUpdate'] = \RKW\RkwEvents\Install\EventSeriesTitleUpdate::class;
 
 
         //=================================================================
