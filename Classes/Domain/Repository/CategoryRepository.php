@@ -95,12 +95,13 @@ class CategoryRepository extends AbstractRepository
 
         $query->statement(
             'SELECT sys_category.*
-            FROM sys_category, tx_rkwevents_domain_model_event
+            FROM sys_category, tx_rkwevents_domain_model_event, tx_rkwevents_domain_model_eventseries
             INNER JOIN sys_category_record_mm
-            WHERE sys_category_record_mm.tablenames = "tx_rkwevents_domain_model_event"
+            WHERE sys_category_record_mm.tablenames = "tx_rkwevents_domain_model_eventseries"
             AND sys_category_record_mm.fieldname = "categories"
             AND sys_category.uid = sys_category_record_mm.uid_local
-            AND tx_rkwevents_domain_model_event.uid = sys_category_record_mm.uid_foreign
+            AND tx_rkwevents_domain_model_eventseries.uid = sys_category_record_mm.uid_foreign
+            AND tx_rkwevents_domain_model_eventseries.uid = tx_rkwevents_domain_model_event.series
             AND tx_rkwevents_domain_model_event.hidden = 0
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))
