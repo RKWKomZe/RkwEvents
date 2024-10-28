@@ -1,56 +1,12 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:rkwEvents="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
-    xmlns:coreExtended="http://typo3.org/ns/Madj2k/CoreExtended/ViewHelpers"
     xmlns:schema="http://typo3.org/ns/Brotkrueml/Schema/ViewHelpers"
     xmlns:schemaVl="http://typo3.org/ns/Brotkrueml/SchemaVirtualLocation/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<f:comment>
-<!--
-    Also possible in the future:
-    https://schema.org/EventSeries
-
-    More specific event types:
-    https://schema.org/BusinessEvent
-    https://schema.org/EducationEvent
-
-
-   "eventSchedule : " -> EventSeries
-   "previousStartDate : " -> Last Event of an EventSeries
-   "typicalAgeRange : " -> Define static?
-
-   "about : " -> Short description would be nice (like a meta description)
--->
-</f:comment>
-
-<f:comment>
-    <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Event",
-            "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
-            },
-            "name" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode>{event.title}</f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
-            "image" : "<f:if condition='{event.headerImage}'>{f:uri.image(image:'{event.headerImage}', treatIdAsReference: '1', absolute: '1')}</f:if>",
-            "url" : "<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />",
-            "organizer" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:if condition='{event.organizer}'>{event.organizer.0.company}</f:if></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
-            "startDate" : "<f:if condition='{event.start}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.start}')}</f:if>",
-            "endDate" : "<f:if condition='{event.end}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.end}')}</f:if>",
-            "isAccessibleForFree" : "{f:if(condition: '{event.costsReg} == 0.00', then: 'true', else: 'false')}",
-            "location" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode>{f:if(condition: '{event.onlineEvent}', then: '{event.placeUnknown}', else: '{event.place.address}, {event.place.zip} {event.place.city}')}</f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
-            "performer" : "{event.trainer}",
-            "maximumAttendeeCapacity" : "{event.seats}",
-            "keywords" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:format.stripTags>{event.keywords}</f:format.stripTags></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>",
-            "description" : "<coreExtended:format.addSlashes charList='\"'><f:format.htmlentitiesDecode><f:format.stripTags>{event.description} {event.description2}</f:format.stripTags></f:format.htmlentitiesDecode></coreExtended:format.addSlashes>"
-        }
-    </script>
-</f:comment>
 
 <schema:type.WebPage>
-    <schema:type.event
+    <schema:type.educationEvent
         -as="mainEntity"
         name="{event.series.title}"
         image="<f:if condition='{event.series.headerImage}'>{f:uri.image(image:'{event.series.headerImage}', treatIdAsReference: '1', absolute: '1')}</f:if>"
@@ -58,7 +14,6 @@
         startDate="<f:if condition='{event.start}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.start}')}</f:if>"
         endDate="<f:if condition='{event.end}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.end}')}</f:if>"
         isAccessibleForFree="{f:if(condition: '{event.costsReg} == 0.00', then: 'true', else: 'false')}"
-        performer="{event.trainer}"
         maximumAttendeeCapacity="{event.seats}"
         keywords="<f:format.stripTags>{event.series.keywords}</f:format.stripTags>"
         description="<f:format.stripTags>{event.series.description} {event.series.description2}</f:format.stripTags>"
@@ -106,7 +61,7 @@
             </f:else>
         </f:if>
 
-    </schema:type.event>
+    </schema:type.educationEvent>
 </schema:type.WebPage>
 
 </html>
