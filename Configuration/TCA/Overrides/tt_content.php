@@ -77,7 +77,7 @@ call_user_func(
 
         ExtensionUtility::registerPlugin(
             $extKey,
-            'Standaloneregister',
+            'Standalonereg',
             'RKW Events: Registrierung (standalone)'
         );
 
@@ -112,10 +112,10 @@ call_user_func(
             $fileName
         );
 
-        // Standaloneregister
-        $pluginSignature = str_replace('_','',$extKey) . '_standaloneregister';
+        // Standalonereg
+        $pluginSignature = str_replace('_','',$extKey) . '_standalonereg';
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-        $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_standaloneregister.xml';
+        $fileName = 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/flexform_standalonereg.xml';
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
             $pluginSignature,
             $fileName

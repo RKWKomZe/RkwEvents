@@ -16,7 +16,6 @@ namespace RKW\RkwEvents\UserFunctions;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class TcaProcFunc
