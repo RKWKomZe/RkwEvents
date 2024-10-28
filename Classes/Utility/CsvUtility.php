@@ -7,6 +7,8 @@ use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventPlace;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
+use RKW\RkwEvents\Domain\Model\EventWorkshop;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -105,6 +107,12 @@ class CsvUtility
             break;
         }
 
+        // extended headings for optional workshops
+        /** @var EventWorkshop $workshop */
+        foreach ($event->getWorkshop() as $workshop) {
+            $headings[] = $workshop->getTitle();
+        }
+
         // extended headings for up to 3 additional persons
         for ($i = 1; $i <= $maxAddPersons; $i++) {
             $headings[] = 'salutation_' . 'addPerson' . $i;
@@ -127,6 +135,28 @@ class CsvUtility
                     $row[] = self::propertyValueConverter($property, $reservation->$getter());
                 }
             }
+
+
+            // mark as participant (if he is one)
+            /** @var EventWorkshop $workshop */
+            foreach ($event->getWorkshop() as $workshop) {
+
+                $isRegisteredForWorkshop = false;
+                foreach ($reservation->getWorkshopRegister() as $registeredWorkshop) {
+
+                    if ($registeredWorkshop->getUid() == $workshop->getUid()) {
+                        // is a participant
+                        $row[] = 1;
+                        $isRegisteredForWorkshop = true;
+                    }
+                }
+
+                // is not a participant
+                if (!$isRegisteredForWorkshop) {
+                    $row[] = '';
+                }
+            }
+
 
             // add additional persons reservation values
             /** @var EventReservationAddPerson $addPerson */
