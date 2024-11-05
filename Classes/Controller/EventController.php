@@ -397,7 +397,10 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
         }
 
-        if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+        if (
+            $event instanceof \RKW\RkwEvents\Domain\Model\Event
+            && $event->getSeries() instanceof EventSeries
+        ) {
             $listItemsPerView = (int)$this->settings['listSimilar']['itemsPerPage'] ? (int)$this->settings['listSimilar']['itemsPerPage'] : 6;
             $queryResult = $this->eventRepository->findSimilar($event, $listItemsPerView, $page, $this->settings);
             $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
@@ -508,7 +511,11 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     //     $this->handleContentNotFound($event);
 
         // If no event is given (hidden; deleted) Extbase does not provide the event object
-        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+        // Or if container (the "EventSeries") is hidden or deleted
+        if (
+            !$event instanceof \RKW\RkwEvents\Domain\Model\Event
+            || !$event->getSeries() instanceof EventSeries
+        ) {
 
             $arguments = [
                 'noEventFound' => true,
@@ -665,14 +672,15 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $event = $this->eventRepository->findByIdentifier(filter_var($eventUid, FILTER_SANITIZE_NUMBER_INT));
 
-        if ($event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+        if (
+            $event instanceof \RKW\RkwEvents\Domain\Model\Event
+            && $event->getSeries() instanceof EventSeries
+        ) {
             if ($event->getSeries()->getRecommendedEvents()->count()) {
                 $eventList = $event->getSeries()->getRecommendedEvents();
             } else {
                 // fallback
-                if ($event->getSeries() instanceof EventSeries) {
-                    $eventList = $this->eventRepository->findRunningByCategories($event);
-                }
+                $eventList = $this->eventRepository->findRunningByCategories($event);
             }
 
             $this->view->assignMultiple([

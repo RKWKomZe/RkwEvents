@@ -15,6 +15,7 @@ namespace RKW\RkwEvents\MetaTag;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility;
+use RKW\RkwEvents\Domain\Model\EventSeries;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
@@ -58,7 +59,10 @@ class MetaTagGenerator extends \Madj2k\DrSeo\MetaTag\MetaTagGenerator
             /** @var \RKW\RkwEvents\Domain\Model\Event $event */
             if ($event = $eventRepository->findByIdentifier($eventId)) {
 
-                if ($keywords = $event->getSeries()->getKeywords()) {
+                if (
+                    $event->getSeries() instanceof EventSeries
+                    && $keywords = $event->getSeries()->getKeywords()
+                ) {
                     $manager = $metaTagManagerRegistry->getManagerForProperty('keywords');
                     $manager->removeProperty('keywords');
 
