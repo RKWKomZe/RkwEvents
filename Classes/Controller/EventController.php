@@ -429,6 +429,8 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * action listPrefiltered
      * returns a list which is prefiltered by flexform
      *
+     * @todo This action contains workarounds due to a strange MoreButton-URL override with tx_solr prefix (only on LIVE)
+     *
      * @param int $page
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
@@ -439,13 +441,18 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         // grab given categories from Flexform
         $filter['category'] = $this->settings['categoriesList'];
 
-        $listItemsPerView = (int)$this->settings['listPrefiltered']['itemsPerPage'] ?: 6;
+        //$listItemsPerView = (int)$this->settings['listPrefiltered']['itemsPerPage'] ?: 6;
+        // workaround (@toDo)
+        $listItemsPerView = 20;
 
         $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, $page);
         $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);
 
         // Check if we need to display a more-link
-        $showMoreLink = count($eventList) < count($queryResult);
+        //$showMoreLink = count($eventList) < count($queryResult);
+        // workaround (@toDo)
+        $showMoreLink = false;
+
 
         if ($page > 0) {
             $showMoreLink = count($eventList) < (count($queryResult) - 1);
