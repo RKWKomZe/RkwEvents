@@ -398,7 +398,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $controller = 'Event';
 
         // if we're in registerstandalone plugin, always use "newStandalone" as forward action
-        if ($this->request->getPluginName() === 'Standaloneregister') {
+        if ($this->request->getPluginName() === 'Standalonereg') {
             // override showPid. Use current PID instead
            // $this->settings['showPid'] = intval($GLOBALS['TSFE']->id);
             // set different action and controller name
@@ -447,7 +447,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 );
 
                 // already registered
-                if ($this->request->getPluginName() === 'Standaloneregister') {
+                if ($this->request->getPluginName() === 'Standalonereg') {
                     $this->forward($showAction, $controller, null, ['newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
                 }
                 $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
@@ -465,7 +465,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
 
-            if ($this->request->getPluginName() === 'Standaloneregister') {
+            if ($this->request->getPluginName() === 'Standalonereg') {
                 $this->forward($showAction, $controller, null, ['newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
             }
             $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
@@ -482,7 +482,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
 
-            if ($this->request->getPluginName() === 'Standaloneregister') {
+            if ($this->request->getPluginName() === 'Standalonereg') {
                 $this->forward($showAction, $controller, null, ['newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
             }
             $this->redirect($showAction, $controller, null, ['newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
@@ -577,7 +577,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
         }
 
-        if ($this->request->getPluginName() === 'Standaloneregister') {
+        if ($this->request->getPluginName() === 'Standalonereg') {
             $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()]);
         }
 
@@ -616,7 +616,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $controller = 'Event';
 
         // if we're in registerstandalone plugin, always use "newStandalone" as forward action
-        if ($this->request->getPluginName() === 'Standaloneregister') {
+        if ($this->request->getPluginName() === 'Standalonereg') {
             $showAction = 'newStandalone';
             $controller = 'EventReservation';
         }
@@ -631,7 +631,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
-            if ($this->request->getPluginName() === 'Standaloneregister') {
+            if ($this->request->getPluginName() === 'Standalonereg') {
                 $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
             }
             $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -647,7 +647,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 '',
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
-            if ($this->request->getPluginName() === 'Standaloneregister') {
+            if ($this->request->getPluginName() === 'Standalonereg') {
                 $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
             }
             $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -699,7 +699,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                             ]
                         )
                     );
-                    if ($this->request->getPluginName() === 'Standaloneregister') {
+                    if ($this->request->getPluginName() === 'Standalonereg') {
                         $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
                     }
                     $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -713,7 +713,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
-                    if ($this->request->getPluginName() === 'Standaloneregister') {
+                    if ($this->request->getPluginName() === 'Standalonereg') {
                         $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
                     }
                     $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -727,7 +727,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                         '',
                         \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
-                    if ($this->request->getPluginName() === 'Standaloneregister') {
+                    if ($this->request->getPluginName() === 'Standalonereg') {
                         $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
                     }
                     $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -742,7 +742,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                         'eventReservationController.message.reservationCreated', 'rkw_events'
                     )
                 );
-                if ($this->request->getPluginName() === 'Standaloneregister') {
+                if ($this->request->getPluginName() === 'Standalonereg') {
                     $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
                 }
                 $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -756,7 +756,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     'eventReservationController.message.reservationCanceled', 'rkw_events'
                 )
             );
-            if ($this->request->getPluginName() === 'Standaloneregister') {
+            if ($this->request->getPluginName() === 'Standalonereg') {
                 $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
             }
             $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
@@ -770,7 +770,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             '',
             \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
         );
-        if ($this->request->getPluginName() === 'Standaloneregister') {
+        if ($this->request->getPluginName() === 'Standalonereg') {
             $this->forward($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);
         }
         $this->redirect($showAction, $controller, null, ['event' => $event], (int)$this->settings['showPid']);

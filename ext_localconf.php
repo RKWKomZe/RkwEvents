@@ -136,7 +136,7 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
-            'Standaloneregister',
+            'Standalonereg',
             [
                 'EventReservation' => 'newStandalone, create, optIn',
             ],
@@ -149,6 +149,7 @@ call_user_func(
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesUpdate'] = \RKW\RkwEvents\Install\EventSeriesUpdate::class;
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesTitleUpdate'] = \RKW\RkwEvents\Install\EventSeriesTitleUpdate::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventStandaloneRegUpdate'] = \RKW\RkwEvents\Install\EventStandaloneRegUpdate::class;
 
 
         //=================================================================
