@@ -74,8 +74,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $settingsDefault = $this->getSettings();
         $showPid = intval($settingsDefault['showPid']);
 
-        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
-        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        // if plugin is "standalonereg" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standalonereg');
         $isStandaloneRegisterPlugin = (bool)$request;
         if ($isStandaloneRegisterPlugin) {
             // if standalone reservation form plugin: Override showPid!
@@ -503,8 +503,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $settingsDefault = $this->getSettings();
         $showPid = intval($settingsDefault['showPid']);
 
-        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
-        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        // if plugin is "standalonereg" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standalonereg');
         $isStandaloneRegisterPlugin = (bool)$request;
         if ($isStandaloneRegisterPlugin) {
             // if standalone reservation form plugin: Override showPid!
@@ -606,8 +606,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $settingsDefault = $this->getSettings();
         $showPid = intval($settingsDefault['showPid']);
 
-        // if plugin is "standaloneregister" (and not "pi1") set flag to true. Needed in mail template
-        $request = GeneralUtility::_GP('tx_rkwevents_standaloneregister');
+        // if plugin is "standalonereg" (and not "pi1") set flag to true. Needed in mail template
+        $request = GeneralUtility::_GP('tx_rkwevents_standalonereg');
         $isStandaloneRegisterPlugin = (bool)$request;
         if ($isStandaloneRegisterPlugin) {
             // if standalone reservation form plugin: Override showPid!

@@ -443,7 +443,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
 
         //$listItemsPerView = (int)$this->settings['listPrefiltered']['itemsPerPage'] ?: 6;
         // workaround (@toDo)
-        $listItemsPerView = 20;
+        $listItemsPerView = 999;
 
         $queryResult = $this->eventRepository->findByFilterOptions($filter, $listItemsPerView, $page);
         $eventList = DivUtility::prepareResultsList($queryResult, $listItemsPerView);

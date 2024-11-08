@@ -57,7 +57,7 @@ routeEnhancers:
       page: '[0-9]{1,10}'
   RkwEvents3:
     type: Extbase
-    namespace: 'tx_rkwevents_standaloneregister'
+    namespace: 'tx_rkwevents_standalonereg'
     routes:
       - routePath: '/rkw-events-solo'
         _controller: 'EventReservation::newStandalone'
