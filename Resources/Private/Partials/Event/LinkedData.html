@@ -1,9 +1,9 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
     xmlns:schema="http://typo3.org/ns/Brotkrueml/Schema/ViewHelpers"
     xmlns:schemaVl="http://typo3.org/ns/Brotkrueml/SchemaVirtualLocation/ViewHelpers"
     data-namespace-typo3-fluid="true">
-
 
 <schema:type.WebPage>
     <schema:type.educationEvent
@@ -11,13 +11,49 @@
         name="{event.series.title}"
         image="<f:if condition='{event.series.headerImage}'>{f:uri.image(image:'{event.series.headerImage}', treatIdAsReference: '1', absolute: '1')}</f:if>"
         url="<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
-        startDate="<f:if condition='{event.start}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.start}')}</f:if>"
-        endDate="<f:if condition='{event.end}'>{f:format.date(format: 'Y-m-d H:i', date: '{event.end}')}</f:if>"
+        startDate="<f:if condition='{event.start}'>{f:format.date(format: 'c', date: '{event.start}')}</f:if>"
+        endDate="<f:if condition='{event.end}'>{f:format.date(format: 'c', date: '{event.end}')}</f:if>"
         isAccessibleForFree="{f:if(condition: '{event.costsReg} == 0.00', then: 'true', else: 'false')}"
+        eventAttendanceMode="{f:if(condition: '{event.onlineEvent}', then: 'OnlineEventAttendanceMode', else: 'OfflineEventAttendanceMode')}"
         maximumAttendeeCapacity="{event.seats}"
         keywords="<f:format.stripTags>{event.series.keywords}</f:format.stripTags>"
         description="<f:format.stripTags>{event.series.description} {event.series.description2}</f:format.stripTags>"
     >
+
+        <f:if condition="<rkw:regTimeEndEvents event='{event}' />">
+            <f:then>
+                <f:if condition="{event.costsUnknown} && {event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                    <f:then>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{event.costsReg}">
+                            <f:then>
+                                <f:if condition="{event.costsRed}">
+                                    <f:then>
+                                        <schema:type.Offer
+                                            -as="offers"
+                                            availability="{f:if(condition: '{rkw:FreePlacesAvailable(event: event)}', then: 'InStock', else: 'SoldOut')}"
+                                            price="{event.costsRed}"
+                                            priceCurrency="EUR"
+                                            url="<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
+                                        />
+                                    </f:then>
+                                </f:if>
+
+                                <schema:type.Offer
+                                    -as="offers"
+                                    availability="{f:if(condition: '{rkw:FreePlacesAvailable(event: event)}', then: 'InStock', else: 'SoldOut')}"
+                                    price="{event.costsReg}"
+                                    priceCurrency="EUR"
+                                    url="<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
+                                />
+
+                            </f:then>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </f:then>
+        </f:if>
 
         <f:if condition='{event.series.organizer}'>
             <schema:type.organization
@@ -37,7 +73,7 @@
             <f:then>
                 <schemaVl:type.virtualLocation
                     -as="location"
-                    url="{event.onlineEventAccessLink}"
+                    url="<f:uri.action absolute='true' action='show' controller='Event' extensionName='rkwevents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: event}}' />"
                 />
             </f:then>
             <f:else>
