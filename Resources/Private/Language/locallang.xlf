@@ -1170,9 +1170,8 @@
 				<source>Login here to change or delete your reservation.</source>
 			</trans-unit>
             <trans-unit id="templates_email_confirmationReservationUser.onlineEventAccessLink">
-                <source>Login here to change or delete your reservation.</source>
+				<source>Click here to join</source>
             </trans-unit>
-
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
