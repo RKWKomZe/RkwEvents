@@ -1,5 +1,7 @@
 {namespace postmaster=Madj2k\Postmaster\ViewHelpers}
 {namespace rkwEvents=RKW\RkwEvents\ViewHelpers}
+{namespace coreExtended=Madj2k\CoreExtended\ViewHelpers}
+
 
 <!-- PLAINTEXT -->
 <f:section name="Plaintext">
@@ -19,6 +21,21 @@
 <postmaster:email.translate key="partials_email_details.eventAccessLink" languageKey="{language}" extensionName="rkwEvents" />
 <f:uri.external uri="{reservation.event.onlineEventAccessLink}"/>
 </f:if></f:if></f:if>
+
+<f:if condition="<<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
+<f:if condition="{reservation.event.internalContact}">
+=============================================================
+<postmaster:email.translate key="partials_email_details.reservationEventContact" languageKey="{language}" extensionName="rkwEvents" />
+=============================================================
+<postmaster:email.translate key="partials_email_details.reservationEventContact.text" languageKey="{language}" extensionName="rkwEvents" />
+<f:for each="<coreExtended:objectStorageSort objectStorage='{reservation.event.internalContact}' sortBy='lastName' />" as="contact" iteration="iterator">
+<f:if condition="{contact.company}"><f:then>{contact.company}</f:then><f:else><f:if condition="{contact.internal} == 1">RKW Kompetenzzentrum</f:if></f:else></f:if>
+{contact.titleBefore} {contact.firstName} {contact.lastName}
+<f:if condition="{contact.phone2}"><f:then><rkwEvents:getFormattedPhoneNumber author="{contact}" /></f:then><f:else>{contact.phone}</f:else></f:if>
+{contact.email}
+</f:for>
+</f:if>
+</f:if>
 
 =============================================================
 <postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" />
@@ -113,6 +130,38 @@
         </f:if>
     </f:if>
 
+    <f:if condition="<<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
+        <f:if condition="{reservation.event.internalContact}">
+            <h2><postmaster:email.translate key="partials_email_details.reservationEventContact" languageKey="{language}" extensionName="rkwEvents" /></h2>
+            <p><postmaster:email.translate key="partials_email_details.reservationEventContact.text" languageKey="{language}" extensionName="rkwEvents" /></p>
+            <f:for each="<coreExtended:objectStorageSort objectStorage='{reservation.event.internalContact}' sortBy='lastName' />" as="contact" iteration="iterator">
+                <p>
+                    <f:if condition="{contact.company}">
+                        <f:then>
+                            {contact.company}<br/>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{contact.internal} == 1">
+                                RKW Kompetenzzentrum<br/>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                    {contact.titleBefore} {contact.firstName} {contact.lastName}<br/>
+                    <f:if condition="{contact.phone2}">
+                        <f:then>
+                            <rkwEvents:getFormattedPhoneNumber author="{contact}" /><br/>
+                        </f:then>
+                        <f:else>
+                            {contact.phone}<br/>
+                        </f:else>
+                    </f:if>
+                    <f:link.email email="{contact.email}" >
+                        <coreExtended:uri.typolink.plainEmail email="{contact.email}" /><br/>
+                    </f:link.email>
+                </p>
+            </f:for>
+        </f:if>
+    </f:if>
 
 	<h2><postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" /></h2>
 	<f:if condition="<rkwEvents:doNotPublishPrivacyData contact='{admin}' />">
