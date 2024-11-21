@@ -15,6 +15,7 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Brotkrueml\Schema\Type\TypeFactory;
 use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
@@ -85,13 +86,14 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     protected ?FrontendUser $frontendUser = null;
 
 
+
     /**
-     * @param EventRepository            $eventRepository
+     * @param EventRepository $eventRepository
      * @param EventReservationRepository $eventReservationRepository
-     * @param CategoryRepository         $categoryRepository
-     * @param DepartmentRepository       $departmentRepository
-     * @param DocumentTypeRepository     $documentTypeRepository
-     * @param FrontendUserRepository     $frontendUserRepository
+     * @param CategoryRepository $categoryRepository
+     * @param DepartmentRepository $departmentRepository
+     * @param DocumentTypeRepository $documentTypeRepository
+     * @param FrontendUserRepository $frontendUserRepository
      */
     public function __construct(
         EventRepository $eventRepository,
@@ -538,6 +540,23 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
         }
 
         $this->view->assign('event', $event);
+
+        /*
+        $event = \Brotkrueml\Schema\Type\TypeFactory::createType('Event')
+            ->setProperty('name', 'Fancy Event 789abc')
+            ->setProperty('image', 'https:/example.org/event.png')
+            ->setProperty('url', 'https://example.org/')
+            ->setProperty('isAccessibleForFree', true)
+            ->setProperty('sameAs', 'https://twitter.com/fancy-event')
+            ->addProperty('sameAs', 'https://facebook.com/fancy-event')
+        ;
+
+        $schemaManager = GeneralUtility::makeInstance(
+            \Brotkrueml\Schema\Manager\SchemaManager::class
+        );
+        $schemaManager->addType($event);
+        */
+
     }
 
 
