@@ -1100,6 +1100,12 @@
 			<trans-unit id="partials_email_details.code">
                 <source>Code</source>
             </trans-unit>
+			<trans-unit id="partials_email_details.reservationEventContact">
+				<source>Details Contact</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.reservationEventContact.text">
+				<source>If you have questions or want to give some feedback, please use the following contact data.</source>
+			</trans-unit>
 			<trans-unit id="partials_email_details.reservationDetails">
 				<source>Details Reservation</source>
 			</trans-unit>
@@ -1170,9 +1176,8 @@
 				<source>Login here to change or delete your reservation.</source>
 			</trans-unit>
             <trans-unit id="templates_email_confirmationReservationUser.onlineEventAccessLink">
-                <source>Login here to change or delete your reservation.</source>
+				<source>Click here to join</source>
             </trans-unit>
-
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->

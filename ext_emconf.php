@@ -20,7 +20,7 @@ $EM_CONF[$_EXTKEY] = [
 	'internal' => '',
 	'uploadfolder' => '1',
 	'clearCacheOnLoad' => 0,
-	'version' => '10.4.13',
+	'version' => '10.4.14',
 	'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-10.4.99',
@@ -31,6 +31,9 @@ $EM_CONF[$_EXTKEY] = [
             'static_info_tables' => '6.3.7',
             'rkw_basics' => '10.4.0-10.4.99',
             'fe_register' => '10.4.0-10.4.99',
+            'schema' => '2.11.0-2.11.99',
+            'schema-pending' => '1.7.0-1.7.99',
+            'schema_virtuallocation' => '1.3.0-1.3.99'
         ],
 		'conflicts' => [
 		],
