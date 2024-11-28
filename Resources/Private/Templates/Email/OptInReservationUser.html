@@ -18,7 +18,7 @@
 <postmaster:email.translate key="templates_email_optInReservationUser.textOptIn" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <f:if condition="{isStandaloneRegisterPlugin}">
     <f:then>
-        <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standaloneregister: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
+        <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standalonereg" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standalonereg: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
     </f:then>
     <f:else>
         <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
@@ -28,7 +28,7 @@
 <postmaster:email.translate key="templates_email_optInReservationUser.textOptOut" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <f:if condition="{isStandaloneRegisterPlugin}">
     <f:then>
-        <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standaloneregister: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
+        <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standalonereg" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standalonereg: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
     </f:then>
     <f:else>
         <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenNo, event: optIn.data.event}}" section="rkw-events" />
@@ -51,7 +51,7 @@
 		<postmaster:email.translate key="templates_email_optInReservationUser.textOptIn" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/><br>
         <f:if condition="{isStandaloneRegisterPlugin}">
             <f:then>
-                <a href="<postmaster:email.uri.action action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standaloneregister: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}' section='rkw-events' />">
+                <a href="<postmaster:email.uri.action action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standalonereg: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}' section='rkw-events' />">
                     <postmaster:email.translate key="templates_email_optInReservationUser.textOptInLinkLabel" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/>
                 </a>
             </f:then>
@@ -67,7 +67,7 @@
 		<postmaster:email.translate key="templates_email_optInReservationUser.textOptOut" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
         <f:if condition="{isStandaloneRegisterPlugin}">
             <f:then>
-                <a href="<postmaster:email.uri.action action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standaloneregister: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data.event}}' section='rkw-events' />">
+                <a href="<postmaster:email.uri.action action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standalonereg: {token: optIn.tokenNo, tokenUser: optIn.tokenUser, event: optIn.data.event}}' section='rkw-events' />">
                     <postmaster:email.translate key="templates_email_optInReservationUser.textOptOutLinkLabel" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/>
                 </a>
             </f:then>

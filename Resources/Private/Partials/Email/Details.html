@@ -1,5 +1,7 @@
 {namespace postmaster=Madj2k\Postmaster\ViewHelpers}
 {namespace rkwEvents=RKW\RkwEvents\ViewHelpers}
+{namespace coreExtended=Madj2k\CoreExtended\ViewHelpers}
+
 
 <!-- PLAINTEXT -->
 <f:section name="Plaintext">
@@ -7,8 +9,8 @@
 <postmaster:email.translate key="partials_email_details.eventDetails" languageKey="{language}" extensionName="rkwEvents" />
 =============================================================
 
-<f:format.htmlentitiesDecode>{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}">  ({reservation.event.documentType.name})</f:if></f:format.htmlentitiesDecode>
-<f:if condition="{reservation.event.onlineEvent}"><f:else><f:if condition="{isStandaloneRegisterPlugin}"><f:then><postmaster:email.uri.action absolute="true" pageUid="{showPid}" action="newStandalone" controller="EventReservation" extensionName="rkwEvents" pluginName="standaloneregister" additionalParams="{tx_rkwevents_standaloneregister: {event: reservation.event.uid}}" /></f:then><f:else><postmaster:email.uri.action absolute="true" pageUid="{showPid}" action="show" controller="Event" extensionName="rkwEvents" pluginName="pi1" additionalParams="{tx_rkwevents_pi1: {event: reservation.event.uid}}" /></f:else></f:if></f:else></f:if>
+<f:format.htmlentitiesDecode>{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}">  ({reservation.event.series.documentType.name})</f:if></f:format.htmlentitiesDecode>
+<f:if condition="{reservation.event.onlineEvent}"><f:else><f:if condition="{isStandaloneRegisterPlugin}"><f:then><postmaster:email.uri.action absolute="true" pageUid="{showPid}" action="newStandalone" controller="EventReservation" extensionName="rkwEvents" pluginName="standalonereg" additionalParams="{tx_rkwevents_standalonereg: {event: reservation.event.uid}}" /></f:then><f:else><postmaster:email.uri.action absolute="true" pageUid="{showPid}" action="show" controller="Event" extensionName="rkwEvents" pluginName="pi1" additionalParams="{tx_rkwevents_pi1: {event: reservation.event.uid}}" /></f:else></f:if></f:else></f:if>
 
 <postmaster:email.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" />: <rkwEvents:composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
 <f:if condition="{reservation.event.onlineEvent}"><f:else><postmaster:email.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" />: <f:if condition="{reservation.event.placeUnknown}"><f:then><postmaster:email.translate key="partials_email_details.placeUnknown" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else>{reservation.event.place.name}, {reservation.event.place.address}, {reservation.event.place.zip} {reservation.event.place.city}</f:else></f:if>
@@ -19,6 +21,21 @@
 <postmaster:email.translate key="partials_email_details.eventAccessLink" languageKey="{language}" extensionName="rkwEvents" />
 <f:uri.external uri="{reservation.event.onlineEventAccessLink}"/>
 </f:if></f:if></f:if>
+
+<f:if condition="<<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
+<f:if condition="{reservation.event.internalContact}">
+=============================================================
+<postmaster:email.translate key="partials_email_details.reservationEventContact" languageKey="{language}" extensionName="rkwEvents" />
+=============================================================
+<postmaster:email.translate key="partials_email_details.reservationEventContact.text" languageKey="{language}" extensionName="rkwEvents" />
+<f:for each="<coreExtended:objectStorageSort objectStorage='{reservation.event.internalContact}' sortBy='lastName' />" as="contact" iteration="iterator">
+<f:if condition="{contact.company}"><f:then>{contact.company}</f:then><f:else><f:if condition="{contact.internal} == 1">RKW Kompetenzzentrum</f:if></f:else></f:if>
+{contact.titleBefore} {contact.firstName} {contact.lastName}
+<f:if condition="{contact.phone2}"><f:then><rkwEvents:getFormattedPhoneNumber author="{contact}" /></f:then><f:else>{contact.phone}</f:else></f:if>
+{contact.email}
+</f:for>
+</f:if>
+</f:if>
 
 =============================================================
 <postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" />
@@ -53,15 +70,15 @@
 	<p>
 		<f:if condition="{reservation.event.onlineEvent}">
 			<f:then>
-				<strong>{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}"> ({reservation.event.documentType.name})</f:if></strong>
+				<strong>{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></strong>
 			</f:then>
 			<f:else>
                 <f:if condition="{isStandaloneRegisterPlugin}">
                     <f:then>
-                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='newStandalone' controller='EventReservation' extensionName='rkwEvents' pluginName='standaloneregister' additionalParams='{tx_rkwevents_standaloneregister: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}"> ({reservation.event.documentType.name})</f:if></a>
+                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='newStandalone' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' additionalParams='{tx_rkwevents_standalonereg: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
                     </f:then>
                     <f:else>
-                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.title}<f:if condition="{reservation.event.subTitle}"> - {reservation.event.subTitle}</f:if><f:if condition="{reservation.event.documentType}"> ({reservation.event.documentType.name})</f:if></a>
+                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
                     </f:else>
                 </f:if>
 			</f:else>
@@ -113,6 +130,38 @@
         </f:if>
     </f:if>
 
+    <f:if condition="<<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
+        <f:if condition="{reservation.event.internalContact}">
+            <h2><postmaster:email.translate key="partials_email_details.reservationEventContact" languageKey="{language}" extensionName="rkwEvents" /></h2>
+            <p><postmaster:email.translate key="partials_email_details.reservationEventContact.text" languageKey="{language}" extensionName="rkwEvents" /></p>
+            <f:for each="<coreExtended:objectStorageSort objectStorage='{reservation.event.internalContact}' sortBy='lastName' />" as="contact" iteration="iterator">
+                <p>
+                    <f:if condition="{contact.company}">
+                        <f:then>
+                            {contact.company}<br/>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{contact.internal} == 1">
+                                RKW Kompetenzzentrum<br/>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                    {contact.titleBefore} {contact.firstName} {contact.lastName}<br/>
+                    <f:if condition="{contact.phone2}">
+                        <f:then>
+                            <rkwEvents:getFormattedPhoneNumber author="{contact}" /><br/>
+                        </f:then>
+                        <f:else>
+                            {contact.phone}<br/>
+                        </f:else>
+                    </f:if>
+                    <f:link.email email="{contact.email}" >
+                        <coreExtended:uri.typolink.plainEmail email="{contact.email}" /><br/>
+                    </f:link.email>
+                </p>
+            </f:for>
+        </f:if>
+    </f:if>
 
 	<h2><postmaster:email.translate key="partials_email_details.reservationDetails" languageKey="{language}" extensionName="rkwEvents" /></h2>
 	<f:if condition="<rkwEvents:doNotPublishPrivacyData contact='{admin}' />">

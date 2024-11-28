@@ -1,18 +1,20 @@
 <?php
 
-use RKW\RkwEvents\Utility\TCA;
-
 return [
     'ctrl' => [
+        'hideTable' => 1,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event',
-        'label' => 'title',
-        'label_userFunc' => TCA::class . '->eventTitle',
+        'label' => 'start',
+        'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventTitle',
+        // "label_alt" with "title" is also possible instead of using "label_userFunc" (but shows only the "slug")
+        //'label_alt' => 'title, place',
+        //'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
         //'sortby' => 'sorting',
-        'default_sortby' => 'ORDER BY start DESC',
+        'default_sortby' => 'ORDER BY start ASC',
         'hideAtCopy' => true,
         'prependAtCopy' => true,
         //'requestUpdate' => 'reg_required, online_event, ext_reg_link',
@@ -26,19 +28,16 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,subtitle,keywords,start,end,show_time,longitude,latitude,testimonials,description,description2,schedule,target_group,target_learning,partner,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_inhouse,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,document_type,department,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,external_contact,be_user,add_info,presentations, sheet,gallery1,gallery2,reservation,workshop,code,trainer,eligibility, eligibility_link, additional_tile_flag, categories, categories_displayed, recommended_events, recommended_links, header_image, backend_user_exclusive, extended_network',
+		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility, eligibility_link, workshop_select_type, workshop_select_req, workshop',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
-    ],
-    'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, keywords, start, end, show_time, description, target_group, target_learning, partner, add_info, schedule, testimonials, seats, costs_unknown, costs_reg, costs_red, costs_red_condition, costs_red_link, costs_tax, reg_required, reg_single, reg_inhouse, reg_end, cancel_end, ext_reg_link, ext_cancel_info, ext_cancel_link, document_type, department, series, currency, place_unknown, place, online_event,online_event_access_link, register_add_information, longitude, latitude, organizer, external_contact, be_user, presentations, sheet, gallery1, gallery2, reservation, workshop, code, trainer, eligibility, eligibility_link, additional_tile_flag, recommended_events, recommended_links, header_image, backend_user_exclusive, extended_network',
     ],
     'types' => [
         '\RKW\RkwEvents\Domain\Model\EventScheduled' => [
             'showitem' => '
-                record_type,--palette--;;1, --palette--;;startEnd, title, subtitle, document_type, series, department, organizer, categories, categories_displayed,
+                record_type,--palette--;;1, --palette--;;startEnd, series,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                code, trainer, keywords, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
+                code, trainer,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,
@@ -56,7 +55,7 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, additional_tile_flag, recommended_events, recommended_links, backend_user_exclusive, extended_network,
+                additional_tile_flag, title,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -64,10 +63,10 @@ return [
         ],
         '\RKW\RkwEvents\Domain\Model\EventAnnouncement' => [
             'showitem' => '
-                record_type,--palette--;;1, title, subtitle, document_type, series, department, organizer, categories, categories_displayed,
+                record_type,--palette--;;1, series,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_additionaldata,
-                code, trainer, description, description2, target_group, target_learning, partner, add_info, schedule, testimonials,
+                code, trainer,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,
@@ -84,8 +83,8 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
                 reservation,
 
-                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                header_image, additional_tile_flag,recommended_events, recommended_links, backend_user_exclusive, extended_network,
+                --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
+                additional_tile_flag, title,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -110,7 +109,7 @@ return [
             'showitem' => 'start, end, show_time',
         ],
         'registrationRequired' => [
-            'showitem' => 'reg_required, reg_single, reg_inhouse',
+            'showitem' => 'reg_required, reg_single',
         ],
         'costsReduced' => [
             'showitem' => 'costs_red, costs_red_condition',
@@ -120,7 +119,7 @@ return [
             'showitem' => 'ext_cancel_info, ext_cancel_link',
         ],
         'systemFields' => [
-            'showitem' => 'starttime, endtime',
+            'showitem' => 'title, starttime, endtime',
             'isHiddenPalette' => true,
         ],
     ],
@@ -138,7 +137,6 @@ return [
                 'default' => '\RKW\RkwEvents\Domain\Model\EventScheduled'
             ],
         ],
-
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
@@ -223,27 +221,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim, required'
             ],
-            'onChange' => 'reload'
-        ],
-        'subtitle' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.subtitle',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'keywords' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.keywords',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 3
-            ]
         ],
         'start' => [
             'exclude' => 0,
@@ -304,113 +282,6 @@ return [
                 'type' => 'passthrough'
             ],
         ],
-
-        'testimonials' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.testimonials',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
-                'fieldControl'  => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
-                ],
-                'enableRichtext' => true,
-            ],
-        ],
-        'description' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.description',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim, required',
-                'fieldControl'  => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
-                ],
-                'enableRichtext' => true,
-            ],
-        ],
-        'description2' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.description2',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
-                'fieldControl'  => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
-                ],
-                'enableRichtext' => true,
-            ],
-        ],
-        'target_learning' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.target_learning',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
-                'fieldControl'  => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
-                ],
-                'enableRichtext' => true,
-            ],
-        ],
-        'target_group' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.target_group',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 5,
-                'eval' => 'trim',
-            ],
-        ],
-        'schedule' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.schedule',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
-                'fieldControl'  => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
-                ],
-                'enableRichtext' => true,
-            ],
-        ],
-        'partner' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.partner',
-            'config' => [
-                'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
-                'eval' => 'trim',
-                'fieldControl'  => [
-                    'fullScreenRichtext' => [
-                        'disabled' => false,
-                    ],
-                ],
-                'enableRichtext' => true,
-            ],
-        ],
         'seats' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.seats',
@@ -428,7 +299,8 @@ return [
                 'default' => 1
             ],
             'onChange' => 'reload',
-            'displayCond' => 'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventAnnouncement',
+            // @toDo: MIGRATION ISSUE
+            //'displayCond' => 'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventAnnouncement',
         ],
         'costs_reg' => [
             'exclude' => 0,
@@ -443,7 +315,8 @@ return [
             'displayCond' => [
                 'OR' => [
                     'FIELD:costs_unknown:REQ:false',
-                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                    // @toDo: MIGRATION ISSUE
+                    //'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
                 ],
             ]
 
@@ -461,7 +334,8 @@ return [
             'displayCond' => [
                 'OR' => [
                     'FIELD:costs_unknown:REQ:false',
-                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                    // @toDo: MIGRATION ISSUE
+                    //'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
                 ],
             ]
         ],
@@ -478,7 +352,8 @@ return [
             'displayCond' => [
                 'OR' => [
                     'FIELD:costs_unknown:REQ:false',
-                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                    // @toDo: MIGRATION ISSUE
+                    //'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
                 ],
             ]
         ],
@@ -511,7 +386,8 @@ return [
             'displayCond' => [
                 'OR' => [
                     'FIELD:costs_unknown:REQ:false',
-                    'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
+                    // @toDo: MIGRATION ISSUE
+                    //'FIELD:record_type:=:\RKW\RkwEvents\Domain\Model\EventScheduled',
                 ],
             ]
         ],
@@ -532,15 +408,7 @@ return [
                 'default' => 0
             ]
         ],
-        'reg_inhouse' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reg_inhouse',
-            'config' => [
-                'type' => 'check',
-                'default' => 0
-            ],
-            'displayCond' => 'FIELD:reg_required:REQ:true',
-        ],
+
         'reg_end' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reg_end',
@@ -600,80 +468,6 @@ return [
             ],
             'displayCond' => 'FIELD:cancel_end:!=:0'
         ],
-        'document_type' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.document_type',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rkwbasics_domain_model_documenttype',
-                'foreign_table_where' => ' AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(tx_rkwbasics_domain_model_documenttype.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND tx_rkwbasics_domain_model_documenttype.type = "events" AND tx_rkwbasics_domain_model_documenttype.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwbasics_domain_model_documenttype.name ASC',
-                'maxitems'      => 1,
-                'minitems'      => 1,
-                'size'          => 5,
-            ],
-        ],
-        'department' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.department',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rkwbasics_domain_model_department',
-                'foreign_table_where' => 'AND tx_rkwbasics_domain_model_department.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwbasics_domain_model_department.name ASC',
-                'maxitems'      => 1,
-                'minitems'      => 1,
-                'size'          => 5,
-            ],
-        ],
-        /*
-        'categories' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.categories',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'sys_category',
-                'foreign_table_where' => ' AND ((\'###PAGE_TSCONFIG_IDLIST###\' <> \'0\' AND FIND_IN_SET(sys_category.pid,\'###PAGE_TSCONFIG_IDLIST###\')) OR (\'###PAGE_TSCONFIG_IDLIST###\' = \'0\')) AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
-                'MM' => 'sys_category_record_mm',
-                'MM_opposite_field' => 'items',
-                'MM_match_fields' => [
-                    'tablenames' => 'tx_rkwevents_domain_model_event',
-                    'fieldname' => 'categories',
-                ],
-                'size' => 10,
-                'autoSizeMax' => 50,
-                'maxitems' => 9999,
-                'minitems'      => 0,
-            ],
-        ],
-        */
-        'categories_displayed' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.categories_displayed',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'itemsProcFunc' => 'RKW\\RkwEvents\\UserFunctions\\TcaProcFunc->getSelectedCategories',
-                'maxitems'      => 1,
-                'size'          => 5,
-
-            ],
-        ],
-        'series' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rkwevents_domain_model_eventseries',
-                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventseries.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventseries.name ASC',
-                'maxitems'      => 1,
-                'size'          => 5,
-
-            ],
-        ],
-
         'logos' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.logos',
@@ -795,28 +589,6 @@ return [
                 ]
             ],
         ],
-        'organizer' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.organizer',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rkwevents_domain_model_eventorganizer',
-                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventorganizer.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventorganizer.last_name ASC, tx_rkwevents_domain_model_eventorganizer.company ASC, tx_rkwevents_domain_model_eventorganizer.email ASC',
-                'maxitems'      => 1,
-                'minitems' 		=> 1,
-                'size'          => 5,
-                'fieldControl'  => [
-                    'addRecord' => [
-                        'disabled' => false,
-                    ],
-                    'editPopup' => [
-                        'disabled' => false,
-                    ]
-                ]
-            ],
-        ],
-
         'be_user' => [
             'displayCond' => [
                 'AND' => [
@@ -830,25 +602,12 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'be_users',
-                'foreign_table_where' => 'AND be_users.deleted = 0 AND be_users.email != "" ORDER BY be_users.username',
+                'foreign_table_where' => 'AND be_users.deleted = 0 AND be_users.disable = 0 AND be_users.email != "" ORDER BY be_users.username',
                 'maxitems'      => 9999,
                 'minitems'      => 1,
                 'size'          => 5,
             ],
         ],
-
-        'add_info' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.add_info',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'add_info',
-                [
-                    'maxitems' => 9999,
-                ],
-                'pdf'
-            ),
-        ],
-
         'presentations' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.presentations',
@@ -860,7 +619,6 @@ return [
                 'pdf,ppt'
             ),
         ],
-
         'sheet' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.sheet',
@@ -877,7 +635,6 @@ return [
                     'elementBrowserType' => 'db'
                 ],
             ],
-
         ],
         'gallery1' => [
             'exclude' => 0,
@@ -971,46 +728,6 @@ return [
                 'default' => 0
             ],
         ],
-
-        // ###############################
-        // !! Workshop 1-3 is deprecated!
-        // ###############################
-		'workshop1' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop1',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
-				'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
-				'maxitems'      => 9999,
-				'minitems'      => 0,
-				'size'          => 5,
-			],
-		],
-		'workshop2' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop2',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
-				'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
-				'maxitems'      => 9999,
-				'minitems'      => 0,
-				'size'          => 5,
-			],
-		],
-		'workshop3' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.workshop3',
-			'config' => [
-				'type' => 'inline',
-				'foreign_table' => 'tx_rkwevents_domain_model_eventworkshop',
-				'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventworkshop.deleted = 0',
-				'maxitems'      => 9999,
-				'minitems'      => 0,
-				'size'          => 5,
-			],
-		],
         'reminder_mail_tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reminder_mail_tstamp',
@@ -1076,75 +793,24 @@ return [
                 'eval' => 'trim'
             ],
         ],
-        'recommended_events' => [
+//        'extended_network' => [
+//            'exclude' => 0,
+//            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
+//            'config' => [
+//                'type' => 'check',
+//                'default' => 0,
+//            ]
+//        ],
+        'series' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.recommended_events',
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
             'config' => [
                 'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_rkwevents_domain_model_event',
-                'foreign_table_where' => 'AND tx_rkwevents_domain_model_event.uid!=###THIS_UID### AND tx_rkwevents_domain_model_event.pid=###CURRENT_PID### AND tx_rkwevents_domain_model_event.sys_language_uid = ###REC_FIELD_sys_language_uid### AND ( (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.start > unix_timestamp(now())) OR (tx_rkwevents_domain_model_event.end > unix_timestamp(now())) ) ORDER BY tx_rkwevents_domain_model_event.start DESC',
-                'maxitems'      => 99,
-                'size'          => 5,
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventseries',
+                'foreign_table_where' => 'AND tx_rkwevents_domain_model_eventseries.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwevents_domain_model_eventseries.title ASC',
+                'maxitems'      => 1,
             ],
-        ],
-        'recommended_links' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.recommended_links',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'pages',
-                'maxitems' => 5,
-                'minitems' => 0,
-                'size' => 5,
-                'default' => 0,
-                'suggestOptions' => [
-                    'default' => [
-                        'additionalSearchFields' => 'nav_title, alias',
-                        'addWhere' => 'AND pages.doktype = 1'
-                    ]
-                ],
-            ]
-        ],
-        'header_image' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.header_image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'image',
-                [
-                    'maxitems' => 1,
-                    'overrideChildTca' => [
-                        'types' => [
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                    --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette'
-                            ],
-                        ],
-                    ],
-                    'appearance' => [
-                        'collapseAll' => 1
-                    ]
-                ],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
-        ],
-        'backend_user_exclusive' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.backend_user_exclusive',
-            'config' => [
-                'type' => 'check',
-                'default' => 0,
-            ]
-        ],
-        'extended_network' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
-            'config' => [
-                'type' => 'check',
-                'default' => 0,
-            ]
         ],
     ],
 ];

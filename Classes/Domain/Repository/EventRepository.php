@@ -2,12 +2,13 @@
 
 namespace RKW\RkwEvents\Domain\Repository;
 
+use RKW\RkwEvents\Domain\Model\Event;
+use RKW\RkwEvents\Domain\Model\EventSeries;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -45,9 +46,9 @@ class EventRepository extends AbstractRepository
 
 
     // Order by start date
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'start' => QueryInterface::ORDER_ASCENDING,
-    );
+    ];
 
 
     /**
@@ -63,7 +64,7 @@ class EventRepository extends AbstractRepository
             !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Backend\FrontendBackendUserAuthentication
             && !$GLOBALS['BE_USER'] instanceof \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
         ) {
-            return $query->logicalNot($query->equals('backendUserExclusive', 1));
+            return $query->logicalNot($query->equals('series.backendUserExclusive', 1));
         }
     }
 
@@ -263,7 +264,7 @@ class EventRepository extends AbstractRepository
         //always
         $constraints[] =
             $query->logicalNot(
-                $query->equals('title', '')
+                $query->equals('series.title', '')
             );
 
         $constraints[] = $this->constraintBackendUserExclusive();
@@ -364,9 +365,9 @@ class EventRepository extends AbstractRepository
 
                 // 1. Sort by end-date
                 $query->setOrderings(
-                    array(
+                    [
                         'start' => QueryInterface::ORDER_DESCENDING,
-                    )
+                    ]
                 );
 
                 // 2. filter by time
@@ -376,10 +377,10 @@ class EventRepository extends AbstractRepository
 
                 // 1. Sort by end-date
                 $query->setOrderings(
-                    array(
+                    [
                         'record_type' => QueryInterface::ORDER_DESCENDING,
                         'start' => QueryInterface::ORDER_ASCENDING,
-                    )
+                    ]
                 );
 
                 // 2. filter by time
@@ -394,15 +395,15 @@ class EventRepository extends AbstractRepository
 
             // 3. additional filter options
             if ($filter['department']) {
-                $constraints[] = $query->equals('department', intval($filter['department']));
+                $constraints[] = $query->equals('series.department', intval($filter['department']));
             }
             if ($filter['documentType']) {
-                $constraints[] = $query->equals('documentType', intval($filter['documentType']));
+                $constraints[] = $query->equals('series.documentType', intval($filter['documentType']));
             }
             if ($filter['category']) {
                 $categoryQueries = [];
                 foreach ($categoryList as $category) {
-                    $categoryQueries[] = $query->contains('categories', $category);
+                    $categoryQueries[] = $query->contains('series.categories', $category);
                 }
                 $constraints[] = $query->logicalOr($categoryQueries);
             }
@@ -433,6 +434,10 @@ class EventRepository extends AbstractRepository
                 $constraints[] = $query->lessThanOrEqual('start', time());
             }
 
+            if ($filter['regInhouse']) {
+                $constraints[] = $query->equals('series.regInhouse', 1);
+            }
+
             if ($filter['onlyUpcoming']) {
                 $constraints[] = $query->logicalOr(
                     $query->greaterThanOrEqual('start', time()),
@@ -440,12 +445,13 @@ class EventRepository extends AbstractRepository
                     $query->equals('start', 0)
                 );
             }
+
             if (
                 (ExtensionManagementUtility::isLoaded('rkw_projects'))
                 && ($filter['project'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $filter['project'], true))
             ) {
-                $constraints[] = $query->in('project', $projectUids);
+                $constraints[] = $query->in('series.project', $projectUids);
             }
             if ($filter['onlyOnlineEvents']) {
                 $constraints[] = $query->equals('online_event', 1);
@@ -485,7 +491,7 @@ class EventRepository extends AbstractRepository
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotFinishedOrderAsc($limit, $settings = array(), $recordType = '', $onlyStarted = false, $onlyUpcoming = false, $ignoreBeUserExclusive = false)
+    public function findNotFinishedOrderAsc($limit, $settings = [], $recordType = '', $onlyStarted = false, $onlyUpcoming = false, $ignoreBeUserExclusive = false)
     {
         $query = $this->createQuery();
 
@@ -497,7 +503,7 @@ class EventRepository extends AbstractRepository
             );
         $constraints[] =
             $query->logicalNot(
-                $query->equals('title', '')
+                $query->equals('series.title', '')
             );
 
         // backendUser special case
@@ -517,7 +523,7 @@ class EventRepository extends AbstractRepository
                 ($settings['projectUids'])
                 && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
             ) {
-                $constraints[] = $query->in('project', $projectUids);
+                $constraints[] = $query->in('series.project', $projectUids);
             }
         }
 
@@ -549,12 +555,12 @@ class EventRepository extends AbstractRepository
             $query->logicalAnd(array_filter($constraints))
         )
             ->setOrderings(
-                array(
+                [
                     'record_type' => QueryInterface::ORDER_DESCENDING,
                     'start' => QueryInterface::ORDER_ASCENDING,
                     // this is a "fix" for unequal list behavior between the multipart view and the standard list view
                     'tstamp' => QueryInterface::ORDER_ASCENDING,
-                )
+                ]
             )
             ->setLimit($limit)
             ->execute();
@@ -570,12 +576,12 @@ class EventRepository extends AbstractRepository
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findFinishedOrderAsc($limit, $settings = array())
+    public function findFinishedOrderAsc($limit, $settings = [])
     {
 
         $query = $this->createQuery();
         $constraints[] = $query->lessThan('end', time());
-        $constraints[] = $query->logicalNot($query->equals('title', ''));
+        $constraints[] = $query->logicalNot($query->equals('series.title', ''));
 
         $constraints[] = $this->constraintBackendUserExclusive();
 
@@ -584,16 +590,16 @@ class EventRepository extends AbstractRepository
             && ($settings['projectUids'])
             && ($projectUids = GeneralUtility::trimExplode(',', $settings['projectUids'], true))
         ) {
-            $constraints[] = $query->in('project', $projectUids);
+            $constraints[] = $query->in('series.project', $projectUids);
         }
 
         return $query->matching(
             $query->logicalAnd(array_filter($constraints))
         )
             ->setOrderings(
-                array(
+                [
                     'start' => QueryInterface::ORDER_DESCENDING,
-                )
+                ]
             )
             ->setLimit($limit)
             ->execute();
@@ -614,7 +620,7 @@ class EventRepository extends AbstractRepository
 
         return $query->matching(
             $query->logicalAnd(
-                $query->equals('title', trim($title)),
+                $query->equals('series.title', trim($title)),
                 $query->equals('start', intval($start))
             )
         )->execute()->getFirst();
@@ -629,7 +635,7 @@ class EventRepository extends AbstractRepository
      * @return mixed
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findRunningBySeries($event)
+    public function findRunningBySeries(Event $event)
     {
         $query = $this->createQuery();
 
@@ -652,6 +658,33 @@ class EventRepository extends AbstractRepository
 
         return $query->matching($query->logicalAnd(array_filter($constraints)))->execute();
     }
+
+    /**
+     * findAllBySeries
+     * Find running events by series (without given event!)
+     *
+     * @param int $eventSeriesUid
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+    */
+    public function findAllBySeries($eventSeriesUid)
+    {
+        $query = $this->createQuery();
+
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+
+        $constraints[] =
+            $query->logicalAnd(
+                $query->equals('series', $eventSeriesUid),
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
+
+        return $query
+            ->matching($query->logicalAnd(array_filter($constraints)))
+            ->execute();
+    }
+
 
     /**
      * function findHiddenByUid
@@ -695,13 +728,14 @@ class EventRepository extends AbstractRepository
         $query->matching(
             $query->greaterThanOrEqual('tstamp', intval($timestamp))
         );
-        $query->setOrderings(array('tstamp' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['tstamp' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
     }
 
+
     /**
-     * findByFilterOptions
+     * findSimilar
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @param int $limit
@@ -735,16 +769,16 @@ class EventRepository extends AbstractRepository
             );
         $constraints[] =
             $query->logicalNot(
-                $query->equals('title', '')
+                $query->equals('series.title', '')
             );
 
         $constraints[] = $this->constraintBackendUserExclusive();
 
         $query->setOrderings(
-            array(
+            [
                 'record_type' => QueryInterface::ORDER_DESCENDING,
                 'start' => QueryInterface::ORDER_ASCENDING,
-            )
+            ]
         );
 
         // exclude given event
@@ -753,48 +787,48 @@ class EventRepository extends AbstractRepository
         );
 
         // exclude given event series
-        if ($event->getSeries()->count()) {
+        if ($event->getSeries() instanceof EventSeries) {
             $constraints[] = $query->logicalNot(
                 $query->equals('series', $event->getSeries())
             );
         }
 
         // exclude manually set recommendations (returned through other plugin "seriesProposals")
-        if ($event->getRecommendedEvents()->count()) {
+        if ($event->getSeries()->getRecommendedEvents()->count()) {
             $constraints[] = $query->logicalNot(
-                $query->in('uid', $event->getRecommendedEvents())
+                $query->in('uid', $event->getSeries()->getRecommendedEvents())
             );
         }
 
         // for all options which could be part of the "similar query"
         // START: SubQuery
-        $constraintsSubQueryOr = array();
+        $constraintsSubQueryOr = [];
 
         if (
             $settings['listSimilar']['searchQuery']['byDepartment']
-            && $event->getDepartment()
+            && $event->getSeries()->getDepartment()
         ) {
-            $constraintsSubQueryOr[] = $query->equals('department', $event->getDepartment());
+            $constraintsSubQueryOr[] = $query->equals('series.department', $event->getSeries()->getDepartment());
         }
          if (
              $settings['listSimilar']['searchQuery']['byDocumentType']
-             && $event->getDocumentType())
+             && $event->getSeries()->getDocumentType())
          {
-             $constraintsSubQueryOr[] = $query->equals('documentType', $event->getDocumentType());
+             $constraintsSubQueryOr[] = $query->equals('series.documentType', $event->getSeries()->getDocumentType());
          }
          if (
              $settings['listSimilar']['searchQuery']['byCategories']
-             && $event->getCategories()->count())
+             && $event->getSeries()->getCategories()->count())
          {
-             $categoryQueries[] = $query->in('categories', $event->getCategories());
+             $categoryQueries[] = $query->in('series.categories', $event->getSeries()->getCategories());
              $constraintsSubQueryOr[] = $query->logicalOr($categoryQueries);
          }
          if (
              ExtensionManagementUtility::isLoaded('rkw_projects')
              && $settings['listSimilar']['searchQuery']['byProject']
-             && $event->getProject()
+             && $event->getSeries()->getProject()
          ) {
-             $constraintsSubQueryOr[] = $query->equals('project', $event->getProject());
+             $constraintsSubQueryOr[] = $query->equals('series.project', $event->getSeries()->getProject());
          }
 
          // fallback, if nothing is set
@@ -815,6 +849,123 @@ class EventRepository extends AbstractRepository
 
         return $query->execute();
     }
+
+
+    /**
+     * findByRegInhouse
+     *
+     * @param int $limit
+     * @param int $page
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findByRegInhouse($limit, $page)
+    {
+        // results between 'from' and 'till' (with additional proof item to check, if there are more results -> +1)
+        $offset = $page * $limit;
+        $limit = $limit + 1;
+
+        // if we are on a page > 1, we also fetch none item twice
+        // we need this to figure out which date was the last for grouping!
+        if ($page > 0) {
+            $offset--;
+            $limit++;
+        }
+
+        $query = $this->createQuery();
+
+
+        $constraints[] = $query->equals('series.regInhouse', 1);
+
+        // query basics as "AND" query
+        // !! do NOT show already running events !!
+        $constraints[] =
+            $query->logicalOr(
+                $query->greaterThanOrEqual('start', time()),
+                // include announcements (without start date)
+                $query->equals('start', 0)
+            );
+
+        $constraints[] =
+            $query->logicalNot(
+                $query->equals('series.title', '')
+            );
+
+        $constraints[] = $this->constraintBackendUserExclusive();
+
+        $query->setOrderings(
+            [
+                'record_type' => QueryInterface::ORDER_DESCENDING,
+                'start' => QueryInterface::ORDER_ASCENDING,
+            ]
+        );
+
+        // NOW: construct final query!
+        $query->matching($query->logicalAnd(array_filter($constraints)));
+        $query->setOffset($offset);
+        $query->setLimit($limit);
+
+        return $query->execute();
+    }
+
+
+    /**
+     * findRunningByCategories
+     * Find running events by categories (without given event!)
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @return mixed
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    public function findRunningByCategories(Event $event)
+    {
+        // @toDo: additional "GroupBy" Series could be make sense (show only the first event of a series)
+
+
+        $query = $this->createQuery();
+
+        if ($event->getSeries()->getCategories()->count()) {
+
+            $constraintsCategories = [];
+            foreach ($event->getSeries()->getCategories() as $category) {
+                $constraintsCategories[] = $query->contains('series.categories', $category);
+            }
+
+            $constraints[] = $query->logicalOr($constraintsCategories);
+
+            $constraints[] =
+                $query->logicalAnd(
+                    $query->logicalOr(
+                        $query->greaterThanOrEqual('end', time()),
+                        // include announcements (without start date)
+                        $query->equals('start', 0)
+                    ),
+                    $query->logicalNot(
+                        $query->equals('uid', $event)
+                    ),
+                    $query->logicalNot(
+                        $query->equals('series', $event->getSeries())
+                    )
+                );
+
+            $constraints[] = $this->constraintBackendUserExclusive();
+
+            $query->setOrderings(
+                [
+                    'record_type' => QueryInterface::ORDER_DESCENDING,
+                    'start' => QueryInterface::ORDER_ASCENDING,
+                ]
+            );
+
+            $query->setLimit(10);
+
+            return $query->matching($query->logicalAnd(array_filter($constraints)))->execute();
+        }
+
+        return [];
+    }
+
+
 
     /**
      * Returns logger instance
@@ -915,7 +1066,6 @@ class EventRepository extends AbstractRepository
         /** @var \TYPO3\CMS\Core\TypoScript\TemplateService $template */
         $template = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TypoScript\\TemplateService');
         $template->tt_track = 0;
-        $template->init();
 
         /** @var array $rootlineLine */
         $rootLine = GeneralUtility::makeInstance(RootlineUtility::class,$pageId)->get();

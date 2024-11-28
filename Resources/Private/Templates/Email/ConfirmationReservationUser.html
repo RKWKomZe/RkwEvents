@@ -49,7 +49,7 @@ DTSTART;TZID=GMT:<vh1:calendarGmtDate format="Ymd\THis" date="{reservation.event
 DTEND;TZID=GMT:<vh1:calendarGmtDate format="Ymd\THis" date="{reservation.event.end}" />
 DTSTAMP;TZID=GMT:<vh1:calendarGmtDate format="Ymd\THis" date="{currentTime}" /><f:if condition="{reservation.event.onlineEvent} != 1">
 LOCATION:{reservation.event.place.name}, <f:if condition="{reservation.event.place.address}">{reservation.event.place.address} </f:if><f:if condition="{reservation.event.place.zip}"><f:if condition="{reservation.event.place.city}">, {reservation.event.place.zip} {reservation.event.place.city}</f:if></f:if><f:if condition="{reservation.event.place.country}"><f:if condition="{reservation.event.place.country.shortNameLocal}">, {reservation.event.place.country.shortNameLocal}</f:if></f:if></f:if>
-SUMMARY:{reservation.event.documentType.name}: {reservation.event.title}<f:if condition="{reservation.event.onlineEvent}">
-<f:if condition="{reservation.event.onlineEventAccessLink}">DESCRIPTION: <postmaster:email.translate key="templates_email_confirmationReservationUser.onlineEventAccessLink" languageKey="{language}" extensionName="rkwEvents" /> <f:uri.external uri="{reservation.event.onlineEventAccessLink}"/></f:if></f:if>
+SUMMARY:{reservation.event.series.documentType.name}: {reservation.event.series.title}<f:if condition="{reservation.event.onlineEvent}">
+<f:if condition="{reservation.event.onlineEventAccessLink}">DESCRIPTION: <postmaster:email.translate key="templates_email_confirmationReservationUser.onlineEventAccessLink" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /> <postmaster:email.uri.typolink parameter="{reservation.event.onlineEventAccessLink}" /></f:if></f:if>
 CLASS:PUBLIC
 END:VEVENT</f:section>

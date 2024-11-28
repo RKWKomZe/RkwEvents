@@ -13,7 +13,6 @@ namespace RKW\RkwEvents\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class DepartmentRepository
@@ -63,10 +62,12 @@ class DepartmentRepository extends \RKW\RkwBasics\Domain\Repository\DepartmentRe
         $query->statement(
             'SELECT tx_rkwbasics_domain_model_department.*
             FROM tx_rkwbasics_domain_model_department
-            LEFT JOIN tx_rkwevents_domain_model_event
-            ON tx_rkwbasics_domain_model_department.uid = tx_rkwevents_domain_model_event.department
+            LEFT JOIN tx_rkwevents_domain_model_eventseries ON tx_rkwbasics_domain_model_department.uid = tx_rkwevents_domain_model_eventseries.department
+            LEFT JOIN tx_rkwevents_domain_model_event ON tx_rkwevents_domain_model_event.series = tx_rkwevents_domain_model_eventseries.uid
             WHERE tx_rkwbasics_domain_model_department.visibility = 1
-            AND tx_rkwbasics_domain_model_department.uid IN (tx_rkwevents_domain_model_event.department)
+            AND tx_rkwbasics_domain_model_department.uid IN (tx_rkwevents_domain_model_eventseries.department)
+            AND tx_rkwevents_domain_model_eventseries.hidden = 0
+            AND tx_rkwevents_domain_model_eventseries.deleted = 0
             AND tx_rkwevents_domain_model_event.hidden = 0
             AND tx_rkwevents_domain_model_event.deleted = 0
             AND (tx_rkwevents_domain_model_event.start = 0 OR tx_rkwevents_domain_model_event.end > unix_timestamp(now()))

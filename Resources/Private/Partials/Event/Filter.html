@@ -155,6 +155,34 @@
                         </div>
                     </f:if>
 
+                    <f:comment><!-- regInhouse --></f:comment>
+                    <f:if condition="{settings.list.filter.showInhouse}">
+                        <div class="checkbox-field">
+                            <f:comment><!-- special need: The value can come from URI. So check for param--></f:comment>
+                            <f:form.checkbox
+                                class="checkbox"
+                                id="inhouse"
+                                name="filter[regInhouse]"
+                                value="1"
+                                additionalAttributes="{'aria-controls': 'tx_rkwevents_filter_result'}"
+                                checked="{filter.regInhouse} == 1"
+                            />
+                            <label for="inhouse" class="checkbox-label">
+                                <f:translate key="tx_rkwevents_fluid.partials_event_filter.inhouse" />
+                            </label>
+
+                            <f:comment>
+                                <f:if condition="{settings.list.filter.showInhouseLink}">
+                                    <f:link.page pageUid="{settings.list.filter.showInhouseLink}" target="_blank" class="btn select-field__info" title="{settings.list.filter.showInhouseInfo}">
+                                        <svg class="icon icon--32" aria-hidden="true">
+                                            <use xlink:href="#ic-info" />
+                                        </svg>
+                                    </f:link.page>
+                                </f:if>
+                            </f:comment>
+                        </div>
+                    </f:if>
+
                 </div>
 
                 <f:comment>

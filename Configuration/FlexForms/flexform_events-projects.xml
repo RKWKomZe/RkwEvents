@@ -16,6 +16,7 @@
                             <onChange>reload</onChange>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.list</numIndex>
@@ -93,6 +94,7 @@
                                 <maxitems>5</maxitems>
                                 <minitems>0</minitems>
                                 <type>select</type>
+                                <renderType>selectMultipleSideBySide</renderType>
                                 <foreign_table>tx_rkwprojects_domain_model_projects</foreign_table>
                                 <foreign_table_where>
                                     AND tx_rkwprojects_domain_model_projects.deleted = 0 AND tx_rkwprojects_domain_model_projects.hidden = 0 ORDER BY tx_rkwprojects_domain_model_projects.short_name
@@ -237,6 +239,31 @@
                         <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
                     </settings.list.filter.showTimeInfo>
 
+                    <!--
+                    <settings.list.filter.showInhouseLink>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showInhouseInfoLink</label>
+                        <config>
+                            <type>group</type>
+                            <internal_type>db</internal_type>
+                            <allowed>pages</allowed>
+                            <size>1</size>
+                            <maxitems>1</maxitems>
+                            <minitems>0</minitems>
+                            <show_thumbs>1</show_thumbs>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showInhouseLink>
+                    <settings.list.filter.showInhouseInfo>
+                        <label>LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.filterInfo.showInhouseInfo</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <max>100</max>
+                            <eval>trim</eval>
+                        </config>
+                        <displayCond>USER:RKW\RkwEvents\UserFunctions\DisplayCond->resolveEventFilterCondition</displayCond>
+                    </settings.list.filter.showInhouseInfo>
+                    -->
 
                 </el>
             </ROOT>

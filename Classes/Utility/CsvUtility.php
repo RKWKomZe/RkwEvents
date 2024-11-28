@@ -7,7 +7,7 @@ use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventPlace;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Model\EventReservationAddPerson;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use RKW\RkwEvents\Domain\Model\EventWorkshop;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -50,7 +50,7 @@ class CsvUtility
      */
     public static function createCsv(Event $event, string $separator = ';', int $maxAddPersons = 3)
     {
-        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getTitle()) . '.csv';
+        $attachmentName = date('Y-m-d', $event->getStart()) . '_' . GeneralUtility::slugify($event->getSeries()->getTitle()) . '.csv';
 
         self::$csv = fopen('php://output', 'w');
 
@@ -106,6 +106,12 @@ class CsvUtility
             break;
         }
 
+        // extended headings for optional workshops
+        /** @var EventWorkshop $workshop */
+        foreach ($event->getWorkshop() as $workshop) {
+            $headings[] = $workshop->getTitle();
+        }
+
         // extended headings for up to 3 additional persons
         for ($i = 1; $i <= $maxAddPersons; $i++) {
             $headings[] = 'salutation_' . 'addPerson' . $i;
@@ -128,6 +134,28 @@ class CsvUtility
                     $row[] = self::propertyValueConverter($property, $reservation->$getter());
                 }
             }
+
+
+            // mark as participant (if he is one)
+            /** @var EventWorkshop $workshop */
+            foreach ($event->getWorkshop() as $workshop) {
+
+                $isRegisteredForWorkshop = false;
+                foreach ($reservation->getWorkshopRegister() as $registeredWorkshop) {
+
+                    if ($registeredWorkshop->getUid() == $workshop->getUid()) {
+                        // is a participant
+                        $row[] = 1;
+                        $isRegisteredForWorkshop = true;
+                    }
+                }
+
+                // is not a participant
+                if (!$isRegisteredForWorkshop) {
+                    $row[] = '';
+                }
+            }
+
 
             // add additional persons reservation values
             /** @var EventReservationAddPerson $addPerson */
@@ -181,7 +209,7 @@ class CsvUtility
         // 2. event content
         $row = [];
         // add all reservation values
-        $row[] = $event->getTitle();
+        $row[] = $event->getSeries()->getTitle();
         $row[] = date('d.m.Y', $event->getStart());
         $row[] = date('d.m.Y', $event->getEnd());
         if ($event->getPlace() instanceof EventPlace) {

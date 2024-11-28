@@ -19,9 +19,6 @@ return [
 		'searchFields' => 'event_reservation, salutation,first_name,last_name,',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservationaddperson.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'event_reservation, salutation, first_name, last_name',
-	],
 	'types' => [
 		'1' => ['showitem' => 'event_reservation, salutation, first_name, last_name'],
 	],

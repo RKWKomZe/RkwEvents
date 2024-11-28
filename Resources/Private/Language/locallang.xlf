@@ -4,15 +4,39 @@
 		<header/>
 		<body>
 
+            <!--tx_rkwevents_domain_model_eventseries -->
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.title" approved="yes">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.subtitle" approved="yes">
+                <source>Subtitle</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description" approved="yes">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.description2" approved="yes">
+                <source>Description 2</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_learning" approved="yes">
+                <source>Target Learning</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.target_group" approved="yes">
+                <source>Target Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.partner" approved="yes">
+                <source>Partner</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.add_info" approved="yes">
+                <source>Additional Information</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventseries.testimonials" approved="yes">
+                <source>Testimonials</source>
+            </trans-unit>
+
+
 			<!--tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
 				<source>Event</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.title" approved="yes">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.subtitle" approved="yes">
-				<source>Subtitle</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.start" approved="yes">
 				<source>Start</source>
@@ -25,18 +49,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.latitude" approved="yes">
 				<source>Latitude</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.testimonials" approved="yes">
-				<source>Testimonials</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.description" approved="yes">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.target_group" approved="yes">
-				<source>Target Group</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.partner" approved="yes">
-				<source>Partner</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.seats" approved="yes">
 				<source>Seats</source>
@@ -85,9 +97,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.internal_contact" approved="yes">
 				<source>Internal Contact</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.add_info" approved="yes">
-				<source>Additional Information</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.sheet" approved="yes">
 				<source>Sheet</source>
@@ -240,7 +249,10 @@
 			<trans-unit id="backendController.error.wrongFileType">
 				<source>The selected file is not a valid CSV file.</source>
 			</trans-unit>
-			<trans-unit id="backendController.warning.importFailed">
+            <trans-unit id="backendController.warning.noRecordsImported">
+                <source>No records imported. please contact the admin if you suspect a technical error.</source>
+            </trans-unit>
+			<trans-unit id="backendController.error.importFailed">
 				<source>Unfortunately, the import failed: %s</source>
 			</trans-unit>
 			<trans-unit id="mailingController.warning.nothingImported">
@@ -505,6 +517,9 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_event_filter.eligible">
                 <source>Eligible</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_event_filter.inhouse">
+                <source>Inhouse</source>
             </trans-unit>
     		<trans-unit id="tx_rkwevents_fluid.partials_event_filter.filterListAriaLabel">
                 <source>Filter events according to specific criteria</source>
@@ -1085,6 +1100,12 @@
 			<trans-unit id="partials_email_details.code">
                 <source>Code</source>
             </trans-unit>
+			<trans-unit id="partials_email_details.reservationEventContact">
+				<source>Details Contact</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.reservationEventContact.text">
+				<source>If you have questions or want to give some feedback, please use the following contact data.</source>
+			</trans-unit>
 			<trans-unit id="partials_email_details.reservationDetails">
 				<source>Details Reservation</source>
 			</trans-unit>
@@ -1155,9 +1176,8 @@
 				<source>Login here to change or delete your reservation.</source>
 			</trans-unit>
             <trans-unit id="templates_email_confirmationReservationUser.onlineEventAccessLink">
-                <source>Login here to change or delete your reservation.</source>
+				<source>Click here to join</source>
             </trans-unit>
-
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->

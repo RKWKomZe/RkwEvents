@@ -19,7 +19,6 @@
                                 <minitems>1</minitems>
                                 <type>select</type>
                                 <renderType>selectMultipleSideBySide</renderType>
-                                <enableMultiSelectFilterTextfield>1</enableMultiSelectFilterTextfield>
                                 <foreign_table>tx_rkwevents_domain_model_event</foreign_table>
                                 <foreign_table_where>
                                     AND tx_rkwevents_domain_model_event.deleted = 0 AND tx_rkwevents_domain_model_event.hidden = 0 ORDER BY tx_rkwevents_domain_model_event.start DESC
