@@ -19,7 +19,6 @@ use Madj2k\CoreExtended\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
@@ -65,10 +64,10 @@ class EventEndDate
 
         // do not proof announcements without any date
         if (str_ends_with($event['record_type'], 'EventScheduled')) {
-            $courseStart = new \DateTime($event['start']);
-            $courseEnd = new \DateTime($event['end']);
+            $currentEventStart = new \DateTime($event['start']);
+            $currentEventEnd = new \DateTime($event['end']);
 
-            if ($courseStart > $courseEnd) {
+            if ($currentEventStart > $currentEventEnd) {
                 $this->flashMessage(
                     LocalizationUtility::translate('evaluation.oops', 'rkw_events'),
                     LocalizationUtility::translate('evaluation.eventEndDate.error', 'rkw_events')
