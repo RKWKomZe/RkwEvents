@@ -63,7 +63,7 @@ class EventEndDate
         $eventId = key($formData['tx_rkwevents_domain_model_event']);
         $event = $formData['tx_rkwevents_domain_model_event'][$eventId];
 
-        // to not proof announcements without any date
+        // do not proof announcements without any date
         if (str_ends_with($event['record_type'], 'EventScheduled')) {
             $courseStart = new \DateTime($event['start']);
             $courseEnd = new \DateTime($event['end']);
