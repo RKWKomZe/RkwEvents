@@ -38,7 +38,7 @@ class EventSeriesHeaderImagesUpdate implements UpgradeWizardInterface
 
     public function getDescription(): string
     {
-        return 'Migrate missing header images from tx_rkwevents_domain_model_event to tx_rkwevents_domain_model_eventseries';
+        return 'Migrate header images from tx_rkwevents_domain_model_event to tx_rkwevents_domain_model_eventseries';
     }
 
     public function executeUpdate(): bool
@@ -52,7 +52,6 @@ class EventSeriesHeaderImagesUpdate implements UpgradeWizardInterface
                 $qbSysFileRefHeaderImages->expr()->eq('tablenames', $qbSysFileRefHeaderImages->createNamedParameter('tx_rkwevents_domain_model_event', Connection::PARAM_STR))
             )
             ->execute();
-
 
         return true;
     }
