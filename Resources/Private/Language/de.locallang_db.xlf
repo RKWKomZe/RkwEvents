@@ -12,11 +12,11 @@
             <!-- tx_rkwevents_domain_model_eventseries -->
             <trans-unit id="tx_rkwevents_domain_model_eventseries" approved="yes">
                 <source>RKW Events: Event Series</source>
-                <target>RKW Events: Veranstaltungsreihen</target>
+                <target>RKW Events: Veranstaltungen</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.title" approved="yes">
                 <source>Title</source>
-                <target>Titel</target>
+                <target>Titel der Veranstaltung</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.url_override">
                 <source>URL override</source>
@@ -100,7 +100,7 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.event" approved="yes">
                 <source>Event list</source>
-                <target>Veranstaltungen hinzufügen</target>
+                <target>Termine hinzufügen</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.recordType.default">
                 <source>Default</source>
@@ -124,7 +124,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventseries.event_start_date" approved="yes">
 				<source>Start date of nearest event (is updated when saving)</source>
-				<target>Startdatum des nächsten Events (Dieses Feld wird beim speichern aktualisiert)</target>
+				<target>Startdatum des nächsten Termins (Dieses Feld wird beim speichern aktualisiert)</target>
 			</trans-unit>
 
 
@@ -139,7 +139,7 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.recordType">
                 <source>Event-Type</source>
-                <target>Veranstaltungs-Typ</target>
+                <target>Termin-Typ</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.recordType.default">
                 <source>Default</source>
@@ -151,11 +151,11 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.start" approved="yes">
 				<source>Start</source>
-				<target>Start Veranstaltung</target>
+				<target>Start des Termins</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.end" approved="yes">
 				<source>End</source>
-				<target>Ende Veranstaltung</target>
+				<target>Ende des Termins</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.show_time">
                 <source>Show time</source>
@@ -248,7 +248,7 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
 				<source>Series</source>
-				<target>Veranstaltungsreihen</target>
+				<target>Veranstaltungen</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="no">
 				<source>Logos</source>
