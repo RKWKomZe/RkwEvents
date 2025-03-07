@@ -151,11 +151,11 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.start" approved="yes">
 				<source>Start</source>
-				<target>Start des Termin</target>
+				<target>Start des Termins</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.end" approved="yes">
 				<source>End</source>
-				<target>Ende des Termin</target>
+				<target>Ende des Termins</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.show_time">
                 <source>Show time</source>
