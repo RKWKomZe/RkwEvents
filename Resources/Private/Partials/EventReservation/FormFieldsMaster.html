@@ -138,7 +138,7 @@
                 id="tx_rkwevents_pi1_zip"
                 property="zip"
                 value="{f:if(condition:'{newEventReservation.zip} || {editMode}',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
-                additionalAttributes="{autocomplete:'postal-code'}"
+                additionalAttributes="{aria-label: '{f:translate(key:\'LLL:EXT:rkw_events/Resources/Private/Language/locallang.xlf:tx_rkwevents_domain_model_eventreservation.zip.accessible\')}', autocomplete:'postal-code'}"
             />
         </div>
 
@@ -174,7 +174,7 @@
             />
         </div>
     </f:if>
-    
+
     <f:comment>
         <!--
         <div class="v320-1">
@@ -264,7 +264,7 @@
             <feRegister:consent type="marketing" />
         </f:else>
     </f:if>
-    
+
     <f:render partial="CaptchaElement" />
 
     <!-- Button Set -->
