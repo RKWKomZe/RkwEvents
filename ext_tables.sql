@@ -10,6 +10,9 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     title                   varchar(255) DEFAULT '' NOT NULL,
     url_override            tinyint(4) unsigned DEFAULT '0' NOT NULL,
     subtitle                varchar(255) DEFAULT '' NOT NULL,
+    custom_field_show		int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_mandatory	int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_label      varchar(255) DEFAULT '' NOT NULL,
     keywords                text,
     testimonials            text NOT NULL,
     description             text NOT NULL,
@@ -337,6 +340,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	target_group        varchar(255) DEFAULT '' NOT NULL,
+    custom_field        varchar(255) DEFAULT '' NOT NULL,
 	workshop_register   varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,

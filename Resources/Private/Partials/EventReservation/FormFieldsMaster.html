@@ -225,8 +225,29 @@
     </f:if>
 
 
+    <f:comment><!-- custom field --></f:comment>
+    <f:if condition="{event.series.customFieldShow}">
+        <div class="form__field flex width50">
+            <label class="form-label" for="tx_rkwevents_pi1_customField">
+                {event.series.customFieldLabel}
+                <f:if condition="{event.series.customFieldMandatory}">
+                    <f:then>
+                        <span class="is-required"><f:translate key="tx_rkwevents_fluid.label_required" /></span>
+                    </f:then>
+                    <f:else>
+                        <span class="is-optional"><f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+                    </f:else>
+                </f:if>
+            </label>
+            <f:form.textfield
+                id="tx_rkwevents_pi1_customField"
+                property="customField"
+            />
+        </div>
+    </f:if>
 
-    <!-- remark and questions -->
+
+    <f:comment><!-- remark and questions --></f:comment>
     <div class="form__field width100">
         <label class="form-label" for="tx_rkwevents_pi1_remark">
             <f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />

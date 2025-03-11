@@ -19,7 +19,7 @@ return [
 		'enablecolumns' => [
 			'disabled' => 'hidden',
 		],
-		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,disable_reminder_mail,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
+		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,disable_reminder_mail,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event,custom_field_show,custom_field_mandatory,custom_field_label',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventseries.gif'
 	],
 	'types' => [
@@ -34,8 +34,11 @@ return [
             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_additionaldata,
             keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info,
 
-             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
+            --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
             header_image, recommended_events, recommended_links, backend_user_exclusive, disable_reminder_mail,
+            
+            --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_custom,
+            custom_field_show, custom_field_mandatory, custom_field_label,
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
             --palette--;;dataFields, --palette--;;systemFields,
@@ -135,6 +138,32 @@ return [
                 'cols' => 40,
                 'rows' => 3
             ]
+        ],
+        'custom_field_show' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.custom_field_show',
+            'config' => [
+                'type' => 'check',
+            ],
+            'onChange' => 'reload',
+        ],
+        'custom_field_mandatory' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.custom_field_mandatory',
+            'config' => [
+                'type' => 'check',
+            ],
+            'displayCond' => 'FIELD:custom_field_show:REQ:true',
+        ],
+        'custom_field_label' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.custom_field_label',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim, required'
+            ],
+            'displayCond' => 'FIELD:custom_field_show:REQ:true',
         ],
         'description' => [
             'exclude' => 0,

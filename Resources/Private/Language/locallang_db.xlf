@@ -95,6 +95,15 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.event_start_date" approved="yes">
 				<source>Start date of nearest event (is updated when saving)</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_show">
+				<source>Add custom field to form</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_mandatory">
+				<source>Custom field mandatory</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_label">
+				<source>Custom field label</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_event -->
@@ -312,6 +321,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_other" approved="yes">
                 <source>Other</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.tab_custom" approved="yes">
+				<source>Custom</source>
+			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
                 <source>Extended Network</source>
             </trans-unit>
@@ -540,6 +552,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
                 <source>Workshop register</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.custom_field" approved="yes">
+				<source>Custom field</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventreservationaddperson -->
