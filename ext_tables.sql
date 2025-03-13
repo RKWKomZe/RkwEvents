@@ -115,6 +115,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
     currency                 int(11) unsigned DEFAULT '0',
     eligibility              tinyint(1) unsigned DEFAULT '0' NOT NULL,
     eligibility_link         varchar(255) DEFAULT '' NOT NULL,
+    extended_network				 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event_access_link varchar(255) DEFAULT '' NOT NULL,
     register_add_information text NOT NULL,
