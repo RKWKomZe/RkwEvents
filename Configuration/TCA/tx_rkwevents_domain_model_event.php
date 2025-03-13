@@ -28,7 +28,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility, eligibility_link, workshop_select_type, workshop_select_req, workshop',
+		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility, eligibility_link, workshop_select_type, workshop_select_req, workshop, extended_network',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'types' => [
@@ -55,7 +55,7 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                additional_tile_flag, title,
+                additional_tile_flag, extended_network, title,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -84,7 +84,7 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                additional_tile_flag, title,
+                additional_tile_flag, extended_network, title,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
@@ -793,14 +793,14 @@ return [
                 'eval' => 'trim'
             ],
         ],
-//        'extended_network' => [
-//            'exclude' => 0,
-//            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
-//            'config' => [
-//                'type' => 'check',
-//                'default' => 0,
-//            ]
-//        ],
+        'extended_network' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.extended_network',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
+            ]
+        ],
         'series' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.series',
