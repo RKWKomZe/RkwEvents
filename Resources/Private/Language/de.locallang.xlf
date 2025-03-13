@@ -196,6 +196,10 @@
 				<source>ZIP</source>
 				<target>PLZ</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.zip.accessible" approved="yes">
+				<source>Postal code</source>
+				<target>Postleitzahl</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.city" approved="yes">
 				<source>city</source>
 				<target>Ort</target>

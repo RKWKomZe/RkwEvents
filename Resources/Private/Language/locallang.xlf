@@ -146,6 +146,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.zip" approved="yes">
 				<source>ZIP</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.zip.accessible" approved="yes">
+				<source>Postal code</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.city" approved="yes">
 				<source>city</source>
 			</trans-unit>
