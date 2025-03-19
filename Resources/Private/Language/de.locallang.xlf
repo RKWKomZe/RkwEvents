@@ -1414,6 +1414,10 @@
 				<source>Free</source>
 				<target>Kostenlos</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.costsUnknown">
+				<source>Costs unknown</source>
+				<target>Preis steht noch nicht fest</target>
+			</trans-unit>
 			<trans-unit id="partials_email_details.code">
                 <source>Code</source>
                 <target>Veranstaltungs-Nr.</target>
