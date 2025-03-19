@@ -27,6 +27,7 @@ use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * InformUserUpcomingEventCommand
@@ -131,6 +132,8 @@ class InformUserUpcomingEventCommand extends Command
         try {
 
             $eventList = $this->eventRepository->findUpcomingEventsForReminder($timeFrame);
+
+            DebuggerUtility::var_dump($eventList); exit;
 
             if (count($eventList)) {
 
