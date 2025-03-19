@@ -119,6 +119,13 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $backendUserExclusive = false;
 
     /**
+     * disableReminderMail
+     *
+     * @var bool
+     */
+    protected $disableReminderMail = false;
+
+    /**
      * Holds recommendedLinks
      *
      * @var string
@@ -493,6 +500,22 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setBackendUserExclusive(bool $backendUserExclusive): void
     {
         $this->backendUserExclusive = $backendUserExclusive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDisableReminderMail(): bool
+    {
+        return $this->disableReminderMail;
+    }
+
+    /**
+     * @param bool $disableReminderMail
+     */
+    public function setDisableReminderMail(bool $disableReminderMail): void
+    {
+        $this->disableReminderMail = $disableReminderMail;
     }
 
     /**
