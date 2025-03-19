@@ -300,11 +300,11 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.presentations" approved="yes">
 				<source>Presentations</source>
-				<target>Vortragsfolien</target>
+				<target>Materialien zur Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.sheet" approved="yes">
 				<source>SlideShare</source>
-				<target>Vortragsfolien in SlideShare</target>
+				<target>Materialien in SlideShare</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.gallery1" approved="yes">
 				<source>Gallery 1 (public)</source>
@@ -436,7 +436,7 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery" approved="yes">
 				<source>Gallery und Sheets</source>
-				<target>Galerie und Folien</target>
+				<target>Materialien</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_other" approved="yes">
                 <source>Other</source>

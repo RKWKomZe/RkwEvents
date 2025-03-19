@@ -969,7 +969,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.presentations" approved="yes">
 				<source>Presentations</source>
-				<target>Vortragsfolien</target>
+				<target>Materialien zur Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.slideshare" approved="yes">
 				<source>See all Slideshare-Sheets</source>
