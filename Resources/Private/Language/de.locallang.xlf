@@ -176,6 +176,10 @@
 				<source>Last name</source>
 				<target>Nachname</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.companyRole" approved="yes">
+				<source>Role in company</source>
+				<target>Funktion im Unternehmen</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.company" approved="yes">
 				<source>Company</source>
 				<target>Firma</target>
