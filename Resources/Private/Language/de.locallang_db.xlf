@@ -540,6 +540,10 @@
 				<source>Company</source>
 				<target>Firma</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.company_role" approved="yes">
+				<source>Role in company</source>
+				<target>Funktion im Unternehmen</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.address" approved="yes">
 				<source>Address</source>
 				<target>Adresse</target>

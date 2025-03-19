@@ -84,6 +84,7 @@ class CsvUtility
             'firstName',
             'lastName',
             'company',
+            'companyRole',
             'address',
             'zip',
             'city',

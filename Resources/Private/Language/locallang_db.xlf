@@ -597,6 +597,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.company" approved="yes">
 				<source>Company</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.company_role" approved="yes">
+				<source>Role in company</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.address" approved="yes">
 				<source>Address</source>
 			</trans-unit>

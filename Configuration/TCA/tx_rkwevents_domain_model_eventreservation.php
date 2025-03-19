@@ -15,11 +15,11 @@ return [
 		'delete' => 'deleted',
 		'enablecolumns' => [
 		],
-		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner,participate_meeting',
+		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,company_role, address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner,participate_meeting',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservation.gif'
 	],
 	'types' => [
-		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, workshop_register'],
+		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, workshop_register'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -132,6 +132,15 @@ return [
 				'eval' => 'trim'
 			],
 		],
+        'company_role' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddress.company_role',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
 		'address' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddress.address',

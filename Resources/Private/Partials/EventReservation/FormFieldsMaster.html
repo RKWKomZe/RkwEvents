@@ -44,7 +44,7 @@
         />
 	</div>
 
-	<div class="form__field width50">
+	<div class="form__field width50 break-after">
 		<label class="form-label" for="tx_rkwevents_pi1_email">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.email" />
             <f:render partial="LabelSuffix" arguments="{field: 'email', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
@@ -74,7 +74,20 @@
 	</div>
 
 
-	<div class="form__field width50">
+    <div class="form__field width50">
+        <label class="form-label" for="tx_rkwevents_pi1_lastName">
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.companyRole" />
+            <f:render partial="LabelSuffix" arguments="{field: 'companyRole', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+        </label>
+        <f:form.textfield
+            id="tx_rkwevents_pi1_companyRole"
+            property="companyRole"
+            value="{f:if(condition:'{newEventReservation.companyRole} || {editMode}',then:'{newEventReservation.companyRole}',else:'{frontendUser.companyRole}')}"
+        />
+    </div>
+
+
+    <div class="form__field width50">
 		<label class="form-label" for="tx_rkwevents_pi1_company">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.company" />
             <f:render partial="LabelSuffix" arguments="{field: 'company', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
