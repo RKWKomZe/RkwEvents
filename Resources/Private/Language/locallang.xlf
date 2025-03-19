@@ -131,6 +131,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.lastName" approved="yes">
 				<source>Last name</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.companyRole" approved="yes">
+				<source>Role in company</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.company" approved="yes">
 				<source>Company</source>
 			</trans-unit>

@@ -79,6 +79,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $company;
 
     /**
+     * companyRole
+     *
+     * @var string
+     */
+    protected $companyRole;
+
+    /**
      * address
      *
      * @var string
@@ -476,6 +483,27 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCompany($company)
     {
         $this->company = $company;
+    }
+
+    /**
+     * Returns the companyRole
+     *
+     * @return string $companyRole
+     */
+    public function getCompanyRole()
+    {
+        return $this->companyRole;
+    }
+
+    /**
+     * Sets the companyRole
+     *
+     * @param string $companyRole
+     * @return void
+     */
+    public function setCompanyRole($companyRole)
+    {
+        $this->companyRole = $companyRole;
     }
 
     /**
