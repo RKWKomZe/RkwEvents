@@ -969,7 +969,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.presentations" approved="yes">
 				<source>Presentations</source>
-				<target>Vortragsfolien</target>
+				<target>Materialien zur Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.slideshare" approved="yes">
 				<source>See all Slideshare-Sheets</source>
@@ -1357,7 +1357,7 @@
 			</trans-unit>
 			<trans-unit id="templates_email_optInReservationUser.textOptOut">
 				<source>Click here to cancel your request:</source>
-				<target>Sie haben es sich anders überlegt oder haben die Anmeldung gar nicht selbst angefragt? Klicken Sie einfach hier, um alle Daten zu löschen:</target>
+				<target>Sie haben es sich anders überlegt oder haben die Anmeldung gar nicht selbst angefragt? In Kürze werden die Daten Ihrer Anfrage automatisch gelöscht. Sie brauchen nichts weiter zu tun.</target>
 			</trans-unit>
 			<trans-unit id="templates_email_optInReservationUser.textOptInLinkLabel">
 				<source>Yes, I want to attend</source>

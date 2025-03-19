@@ -47,6 +47,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.backend_user_exclusive" approved="yes">
                 <source>Backend User exclusive</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.disable_reminder_mail" approved="yes">
+				<source>Disable reminder mail</source>
+			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
                 <source>Additional tile flag</source>
             </trans-unit>
