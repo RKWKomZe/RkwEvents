@@ -34,8 +34,10 @@ return [
             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_additionaldata,
             keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info,
 
-             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
+            --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
             header_image, recommended_events, recommended_links, backend_user_exclusive, disable_reminder_mail,
+            
+            
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
             --palette--;;dataFields, --palette--;;systemFields,

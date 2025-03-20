@@ -171,7 +171,26 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
                 );
                 $isValid = false;
             }
+        }
 
+
+        // 4. check custom field
+        if (
+            $newEventReservation->getEvent()->getCustomFieldShow()
+            && $newEventReservation->getEvent()->getCustomFieldMandatory()
+        ) {
+            if (!$newEventReservation->getCustomField()) {
+                $this->result->forProperty('customField')->addError(
+                    new \TYPO3\CMS\Extbase\Error\Error(
+                        \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                            'tx_rkwevents_validator.not_filled',
+                            'rkw_events',
+                            [$newEventReservation->getEvent()->getCustomFieldLabel()]
+                        ), 1741668976
+                    )
+                );
+                $isValid = false;
+            }
         }
 
         return $isValid;
