@@ -95,16 +95,6 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.event_start_date" approved="yes">
 				<source>Start date of nearest event (is updated when saving)</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_show">
-				<source>Add custom field to form</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_mandatory">
-				<source>Custom field mandatory</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_label">
-				<source>Custom field label</source>
-			</trans-unit>
-
 
 			<!-- tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event">
@@ -310,9 +300,28 @@
             <trans-unit id="tx_rkwevents_domain_model_event.eligibility_link" approved="yes">
                 <source>Link to site with information about eligibility</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_show">
+				<source>Add custom field to form</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_mandatory">
+				<source>Custom field mandatory</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_label">
+				<source>Custom field label</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_placeholder">
+				<source>Custom field placeholder</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_type">
+				<source>Custom field type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_full_width">
+				<source>Custom field width</source>
+			</trans-unit>
 
 
-            <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_additionaldata">
+
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.tab_additionaldata">
                 <source>Additional data</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_basicdata" approved="yes">
@@ -321,9 +330,6 @@
             <trans-unit id="tx_rkwevents_domain_model_eventseries.tab_other" approved="yes">
                 <source>Other</source>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.tab_custom" approved="yes">
-				<source>Custom</source>
-			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
                 <source>Extended Network</source>
             </trans-unit>
@@ -352,6 +358,9 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_place_contact">
 				<source>Place and contact</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_custom" approved="yes">
+				<source>Custom</source>
 			</trans-unit>
 
 

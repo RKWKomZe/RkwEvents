@@ -141,27 +141,6 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $eventStartDate;
 
     /**
-     * customFieldShow
-     *
-     * @var bool
-     */
-    protected $customFieldShow;
-
-    /**
-     * customFieldMandatory
-     *
-     * @var bool
-     */
-    protected $customFieldMandatory;
-
-    /**
-     * customFieldLabel
-     *
-     * @var string
-     */
-    protected $customFieldLabel;
-
-    /**
      * headerImage
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
@@ -576,56 +555,6 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->eventStartDate = $eventStartDate;
     }
 
-    /**
-     * @return bool
-     */
-    public function getCustomFieldShow(): bool
-    {
-        return $this->customFieldShow;
-    }
-
-    /**
-     * @param bool $customFieldShow
-     * @return void
-     */
-    public function setCustomFieldShow(bool $customFieldShow): void
-    {
-        $this->customFieldShow = $customFieldShow;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getCustomFieldMandatory(): bool
-    {
-        return $this->customFieldMandatory;
-    }
-
-    /**
-     * @param bool $customFieldMandatory
-     * @return void
-     */
-    public function setCustomFieldMandatory(bool $customFieldMandatory): void
-    {
-        $this->customFieldMandatory = $customFieldMandatory;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomFieldLabel(): string
-    {
-        return $this->customFieldLabel;
-    }
-
-    /**
-     * @param string $customFieldLabel
-     * @return void
-     */
-    public function setCustomFieldLabel(string $customFieldLabel): void
-    {
-        $this->customFieldLabel = $customFieldLabel;
-    }
 
     /**
      * Returns the headerImage

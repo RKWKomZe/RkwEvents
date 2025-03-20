@@ -176,8 +176,8 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
 
         // 4. check custom field
         if (
-            $newEventReservation->getEvent()->getSeries()->getCustomFieldShow()
-            && $newEventReservation->getEvent()->getSeries()->getCustomFieldMandatory()
+            $newEventReservation->getEvent()->getCustomFieldShow()
+            && $newEventReservation->getEvent()->getCustomFieldMandatory()
         ) {
             if (!$newEventReservation->getCustomField()) {
                 $this->result->forProperty('customField')->addError(
@@ -185,7 +185,7 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
                         \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                             'tx_rkwevents_validator.not_filled',
                             'rkw_events',
-                            [$newEventReservation->getEvent()->getSeries()->getCustomFieldLabel()]
+                            [$newEventReservation->getEvent()->getCustomFieldLabel()]
                         ), 1741668976
                     )
                 );

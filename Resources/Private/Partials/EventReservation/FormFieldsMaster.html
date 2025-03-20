@@ -226,11 +226,11 @@
 
 
     <f:comment><!-- custom field --></f:comment>
-    <f:if condition="{event.series.customFieldShow}">
-        <div class="form__field flex width50">
+    <f:if condition="{event.customFieldShow}">
+        <div class="form__field flex {f:if(condition: '{event.customFieldFullWidth}', then: 'width100', else: 'width50')}">
             <label class="form-label" for="tx_rkwevents_pi1_customField">
-                {event.series.customFieldLabel}
-                <f:if condition="{event.series.customFieldMandatory}">
+                {event.customFieldLabel}
+                <f:if condition="{event.customFieldMandatory}">
                     <f:then>
                         <span class="is-required"><f:translate key="tx_rkwevents_fluid.label_required" /></span>
                     </f:then>
@@ -239,10 +239,26 @@
                     </f:else>
                 </f:if>
             </label>
-            <f:form.textfield
-                id="tx_rkwevents_pi1_customField"
-                property="customField"
-            />
+            <f:if condition="{event.customFieldType}">
+                <f:then>
+                    <f:comment><!-- textarea --></f:comment>
+                    <f:form.textarea
+                        id="tx_rkwevents_pi1_customField"
+                        property="customField"
+                        placeholder="{event.customFieldPlaceholder}"
+                        rows="3"
+                    />
+                </f:then>
+                <f:else>
+                    <f:comment><!-- input field --></f:comment>
+                    <f:form.textfield
+                        id="tx_rkwevents_pi1_customField"
+                        property="customField"
+                        placeholder="{event.customFieldPlaceholder}"
+                    />
+                </f:else>
+            </f:if>
+
         </div>
     </f:if>
 

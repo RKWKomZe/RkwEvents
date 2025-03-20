@@ -130,18 +130,6 @@
 				<source>Start date of nearest event (is updated when saving)</source>
 				<target>Startdatum des nächsten Termins (Dieses Feld wird beim speichern aktualisiert)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_show">
-				<source>Add custom field to form</source>
-				<target>Individuelles Eingabefeld hinzufügen</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_mandatory">
-				<source>Custom field mandatory</source>
-				<target>Eingabefeld muss ausgefüllt werden</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.custom_field_label">
-				<source>Custom field label</source>
-				<target>Label ("Beschriftung") für Eingabefeld</target>
-			</trans-unit>
 
 
 
@@ -433,10 +421,6 @@
                 <source>Other</source>
                 <target>Sonstiges</target>
             </trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventseries.tab_custom" approved="yes">
-				<source>Custom</source>
-				<target>Individuell</target>
-			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.extended_network" approved="yes">
                 <source>Extended Network</source>
                 <target>Erweiterte Einwilligung (Weitergabe der Daten an RKW Netzwerk)</target>
@@ -474,6 +458,34 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_place_contact" approved="yes">
 				<source>Place and contact</source>
 				<target>Ort und Kontakt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_custom" approved="yes">
+				<source>Custom</source>
+				<target>Individuell</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_show">
+				<source>Add custom field to form</source>
+				<target>Individuelles Feld zum Anmeldeformular hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_mandatory">
+				<source>Custom field mandatory</source>
+				<target>Individuelles Feld: Ist Pflichtfeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_label">
+				<source>Custom field label</source>
+				<target>Individuelles Feld: Label ("Beschriftung") über Eingabefeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_placeholder">
+				<source>Custom field placeholder</source>
+				<target>Individuelles Feld: Platzhalter im Eingabefeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_type">
+				<source>Custom field type</source>
+				<target>Individuelles Feld: Mehrzeilig (ansonsten einzeilig)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_full_width">
+				<source>Custom field width</source>
+				<target>Individuelles Feld: Volle Breite (ansonsten 50%)</target>
 			</trans-unit>
 
 

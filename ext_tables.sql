@@ -10,9 +10,6 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     title                   varchar(255) DEFAULT '' NOT NULL,
     url_override            tinyint(4) unsigned DEFAULT '0' NOT NULL,
     subtitle                varchar(255) DEFAULT '' NOT NULL,
-    custom_field_show		int(11) unsigned DEFAULT '0' NOT NULL,
-    custom_field_mandatory	int(11) unsigned DEFAULT '0' NOT NULL,
-    custom_field_label      varchar(255) DEFAULT '' NOT NULL,
     keywords                text,
     testimonials            text NOT NULL,
     description             text NOT NULL,
@@ -119,7 +116,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
     currency                 int(11) unsigned DEFAULT '0',
     eligibility              tinyint(1) unsigned DEFAULT '0' NOT NULL,
     eligibility_link         varchar(255) DEFAULT '' NOT NULL,
-    extended_network				 tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    extended_network		 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event_access_link varchar(255) DEFAULT '' NOT NULL,
     register_add_information text NOT NULL,
@@ -144,6 +141,13 @@ CREATE TABLE tx_rkwevents_domain_model_event
 
     trainer                  varchar(255) DEFAULT '' NOT NULL,
     additional_tile_flag     varchar(255) DEFAULT '' NOT NULL,
+
+    custom_field_show		 int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_mandatory	 int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_label       varchar(255) DEFAULT '' NOT NULL,
+    custom_field_placeholder varchar(255) DEFAULT '' NOT NULL,
+    custom_field_type        tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    custom_field_full_width  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
     tstamp                   int(11) unsigned DEFAULT '0' NOT NULL,
     crdate                   int(11) unsigned DEFAULT '0' NOT NULL,
