@@ -239,12 +239,13 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
                             'recordType' => 'EventScheduled',
                             'onlyStarted' => true
                         ],
-                        // Change: Announcements are now also part of "upcoming"
-                        'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitUpcoming, $this->settings, '', false, true),
+                        // Change: Announcements are now also part of "upcoming" (and since 20.03.25 also the running events...)
+                        // -> This is not a special list anymore. It's now a kind of classic view with all events
+                        'upcomingEventList' => $this->eventRepository->findNotFinishedOrderAsc($limitUpcoming, $this->settings),
                         'filterUpcomingEventList' => [
                             'project' => $this->settings['projectUids'],
                             //'recordType' => 'EventScheduled',
-                            'onlyUpcoming' => true
+                            //'onlyUpcoming' => true
                         ],
                         /*
                         'announcementEventList' => $this->eventRepository->findNotFinishedOrderAsc($limit, $this->settings, '\RKW\RkwEvents\Domain\Model\EventAnnouncement'),
