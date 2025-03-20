@@ -1103,6 +1103,9 @@
 			<trans-unit id="partials_email_details.eventCostsFree">
 				<source>Free</source>
 			</trans-unit>
+			<trans-unit id="partials_email_details.costsUnknown">
+				<source>Costs unknown</source>
+			</trans-unit>
 			<trans-unit id="partials_email_details.code">
                 <source>Code</source>
             </trans-unit>

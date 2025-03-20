@@ -38,7 +38,14 @@
 
                             </f:then>
                             <f:else>
-                                <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsFree" />
+                                <f:if condition="{event.costsUnknown}">
+                                    <f:then>
+                                        <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsUnknown" />
+                                    </f:then>
+                                    <f:else>
+                                        <f:translate key="tx_rkwevents_fluid.partials_event_info_costs.costsFree" />
+                                    </f:else>
+                                </f:if>
                             </f:else>
                         </f:if>
                     </f:else>
