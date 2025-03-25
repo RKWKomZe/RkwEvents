@@ -132,6 +132,7 @@
 			</trans-unit>
 
 
+
 			<!-- tx_rkwevents_domain_model_event -->
 			<trans-unit id="tx_rkwevents_domain_model_event" approved="yes">
 				<source>RKW Events: Event</source>
@@ -458,6 +459,34 @@
 				<source>Place and contact</source>
 				<target>Ort und Kontakt</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_custom" approved="yes">
+				<source>Custom</source>
+				<target>Individuell</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_show">
+				<source>Add custom field to form</source>
+				<target>Individuelles Feld zum Anmeldeformular hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_mandatory">
+				<source>Custom field mandatory</source>
+				<target>Individuelles Feld: Ist Pflichtfeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_label">
+				<source>Custom field label</source>
+				<target>Individuelles Feld: Label ("Beschriftung") über Eingabefeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_placeholder">
+				<source>Custom field placeholder</source>
+				<target>Individuelles Feld: Platzhalter im Eingabefeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_type">
+				<source>Custom field type</source>
+				<target>Individuelles Feld: Mehrzeilig (ansonsten einzeilig)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_full_width">
+				<source>Custom field width</source>
+				<target>Individuelles Feld: Volle Breite (ansonsten 50%)</target>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventplace -->
@@ -717,6 +746,10 @@
                 <source>Workshop register</source>
                 <target>Registrierte Workshops</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.custom_field" approved="yes">
+				<source>Custom field</source>
+				<target>Individuelles Feld</target>
+			</trans-unit>
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->

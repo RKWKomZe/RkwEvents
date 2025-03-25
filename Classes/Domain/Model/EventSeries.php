@@ -555,6 +555,7 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->eventStartDate = $eventStartDate;
     }
 
+
     /**
      * Returns the headerImage
      *
