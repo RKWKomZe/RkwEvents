@@ -21,7 +21,6 @@ use RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Service\RkwMailService;
 use RKW\RkwGeolocation\Service\Geolocation;
-use Solarium\Component\Debug;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -30,7 +29,6 @@ use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class TceMainHooks
@@ -64,7 +62,6 @@ class TceMainHooks
         ) {
 
             $tableNameEventReservation = 'tx_rkwevents_domain_model_eventreservation';
-            $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableNameEventReservation);
             $queryBuilder = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableNameEventReservation);
             $result = $queryBuilder
                 ->select('*')
@@ -84,7 +81,6 @@ class TceMainHooks
                 $mailService->cancellationReservationUser($eventReservation);
                 $cancellationCounter++;
             }
-
 
             // send eMail with count to BeUsers
             if ($cancellationCounter) {

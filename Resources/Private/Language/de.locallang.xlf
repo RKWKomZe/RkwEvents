@@ -1530,7 +1530,7 @@
 			</trans-unit>
 			<trans-unit id="templates_email_cancellationReservationAdmin.text1" approved="no">
 				<source>a reservation has been canceled.</source>
-				<target>eine Veranstaltung wurde aus dem TYPO3 System entfernt. Damit wurden auch insgesamt %s zugehörigen Reservierungen gelöscht. Die jeweiligen Teilnehmer wurden per E-Mail über die Stornierung informiert.</target>
+				<target>eine Veranstaltung wurde aus dem TYPO3 System entfernt. Dadurch wurden auch insgesamt %s zugehörigen Reservierungen gelöscht. Die jeweiligen Teilnehmer wurden ebenfalls seperat per E-Mail über die Stornierung informiert.</target>
 			</trans-unit>
 
 

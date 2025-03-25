@@ -2,9 +2,7 @@
 
 namespace RKW\RkwEvents\Service;
 
-use Madj2k\CoreExtended\Domain\Model\FrontendUser;
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
-use Madj2k\FeRegister\Domain\Repository\FrontendUserRepository;
 use Madj2k\Postmaster\Mail\MailMessage;
 use RKW\RkwEvents\Domain\Model\BackendUser;
 use RKW\RkwEvents\Domain\Model\Event;
@@ -17,7 +15,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
