@@ -1515,7 +1515,7 @@
 			</trans-unit>
 			<trans-unit id="templates_email_cancellationReservationUser.text1">
 				<source>unfortunately we have to inform you that one event has been canceled.</source>
-				<target>leider müssen wir ihnen mitteilen, dass eine Veranstaltung abgesagt wurde. Daher wurde Ihre Reservierung storniert.</target>
+				<target>leider müssen wir Ihnen mitteilen, dass eine Veranstaltung abgesagt wurde. Daher wurde Ihre Reservierung storniert.</target>
 			</trans-unit>
 			<trans-unit id="templates_email_cancellationReservationUser.text2">
 				<source>Below you can see the information about the canceled event.</source>
@@ -1572,7 +1572,7 @@
 			</trans-unit>
             <trans-unit id="templates_email_confirmationReservationAdmin.text2" approved="no">
                 <source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
-                <target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. Sofern es sich nicht um eine Online-Veranstaltung handelt, wird er darüber hinaus kurz vor der Veranstaltung eine automatische Erinnerungsmail mit Anfahrtsskizze erhalten.</target>
+                <target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. 48 Stunden vor Beginn der Veranstaltung wird automatisch eine Erinnerungsmail mit Anfahrtskizze oder im Falle einer Online-Veranstaltung mit dem zusätzlich hinterlegten Teilnahmelink versendet.</target>
             </trans-unit>
 
 
