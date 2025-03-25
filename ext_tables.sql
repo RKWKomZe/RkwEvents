@@ -116,7 +116,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
     currency                 int(11) unsigned DEFAULT '0',
     eligibility              tinyint(1) unsigned DEFAULT '0' NOT NULL,
     eligibility_link         varchar(255) DEFAULT '' NOT NULL,
-    extended_network				 tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    extended_network		 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event_access_link varchar(255) DEFAULT '' NOT NULL,
     register_add_information text NOT NULL,
@@ -141,6 +141,13 @@ CREATE TABLE tx_rkwevents_domain_model_event
 
     trainer                  varchar(255) DEFAULT '' NOT NULL,
     additional_tile_flag     varchar(255) DEFAULT '' NOT NULL,
+
+    custom_field_show		 int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_mandatory	 int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_label       varchar(255) DEFAULT '' NOT NULL,
+    custom_field_placeholder varchar(255) DEFAULT '' NOT NULL,
+    custom_field_type        tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    custom_field_full_width  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
     tstamp                   int(11) unsigned DEFAULT '0' NOT NULL,
     crdate                   int(11) unsigned DEFAULT '0' NOT NULL,
@@ -316,7 +323,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 
 	event               int(11) unsigned DEFAULT '0' NOT NULL,
 
-	remark              text                    NOT NULL,
+	remark              text NOT NULL,
 	valid_until         int(11) unsigned DEFAULT '0' NOT NULL,
 	add_person          varchar(255) DEFAULT '' NOT NULL,
 	fe_user             varchar(255) DEFAULT '' NOT NULL,
@@ -337,6 +344,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	target_group        varchar(255) DEFAULT '' NOT NULL,
+    custom_field        text NOT NULL,
 	workshop_register   varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,

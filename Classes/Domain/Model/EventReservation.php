@@ -194,6 +194,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $participateMeeting = 0;
 
     /**
+     * customField
+     *
+     * @var string
+     */
+    protected $customField = '';
+
+    /**
      * @var string
      */
     protected $captchaResponse;
@@ -770,6 +777,23 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setParticipateMeeting($participateMeeting)
     {
         $this->participateMeeting = $participateMeeting;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomField(): string
+    {
+        return $this->customField;
+    }
+
+    /**
+     * @param string $customField
+     * @return void
+     */
+    public function setCustomField(string $customField): void
+    {
+        $this->customField = $customField;
     }
 
     /**
