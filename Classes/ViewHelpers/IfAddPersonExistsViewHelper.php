@@ -14,6 +14,8 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEvents\Domain\Model\EventReservation;
+
 /**
  * Class IfAddPersonExistsViewHelper
  *
@@ -48,10 +50,12 @@ class IfAddPersonExistsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
         /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
         $eventReservation = $this->arguments['eventReservation'];
 
-        /** @var \RKW\RkwEvents\Domain\Model\EventReservationAddPerson $addPerson */
-        foreach ($eventReservation->getAddPerson() as $addPerson) {
-            if ($addPerson->getFirstName() || $addPerson->getLastName()) {
-                return true;
+        if ($eventReservation instanceof EventReservation) {
+            /** @var \RKW\RkwEvents\Domain\Model\EventReservationAddPerson $addPerson */
+            foreach ($eventReservation->getAddPerson() as $addPerson) {
+                if ($addPerson->getFirstName() || $addPerson->getLastName()) {
+                    return true;
+                }
             }
         }
 

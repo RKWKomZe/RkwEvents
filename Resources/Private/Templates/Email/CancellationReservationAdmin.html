@@ -1,0 +1,21 @@
+{namespace postmaster=Madj2k\Postmaster\ViewHelpers}
+{namespace rkwEvents=RKW\RkwEvents\ViewHelpers}
+<f:layout name="Email/{mailType}" />
+
+
+<!-- PLAINTEXT -->
+<f:section name="Plaintext">
+<postmaster:email.translate key="templates_email_cancellationReservationAdmin.headline" languageKey="{language}" extensionName="rkwEvents" arguments="{0 : fullName}" />
+
+<postmaster:email.translate key="templates_email_cancellationReservationAdmin.text1" languageKey="{language}" extensionName="rkwEvents" />
+
+<f:render partial="Email/DetailsLight" section="Plaintext" arguments="{event: event, language:language}"/>
+</f:section>
+
+<!-- HTML -->
+<f:section name="Html">
+	<h1><postmaster:email.translate key="templates_email_cancellationReservationAdmin.headline" languageKey="{language}" extensionName="rkwEvents" arguments="{0 : fullName}" /></h1>
+	<p><postmaster:email.translate key="templates_email_cancellationReservationAdmin.text1" languageKey="{language}" extensionName="rkwEvents" arguments="{0 : reservationCancellationCount}" /></p>
+
+	<f:render partial="Email/DetailsLight" section="Html" arguments="{event: event, language:language}"/>
+</f:section>

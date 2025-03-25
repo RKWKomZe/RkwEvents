@@ -1,0 +1,25 @@
+{namespace postmaster=Madj2k\Postmaster\ViewHelpers}
+<f:layout name="Email/{mailType}" />
+
+
+<!-- PLAINTEXT -->
+<f:section name="Plaintext">
+<postmaster:email.translate key="templates_email_cancellationReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" />
+
+<postmaster:email.translate key="templates_email_cancellationReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_cancellationReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+
+<f:render partial="Email/Details" section="Plaintext" arguments="{reservation: reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, withoutEventLink: 1}"/>
+</f:section>
+
+<!-- HTML -->
+<f:section name="Html">
+	<h1><postmaster:email.translate key="templates_email_cancellationReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : frontendUser.firstName, 1: frontendUser.lastName}" /></h1>
+	<p>
+		<postmaster:email.translate key="templates_email_cancellationReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
+		<postmaster:email.translate key="templates_email_cancellationReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+	</p>
+
+	<f:render partial="Email/Details" section="Html" arguments="{reservation:reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, withoutEventLink: 1}"/>
+
+</f:section>

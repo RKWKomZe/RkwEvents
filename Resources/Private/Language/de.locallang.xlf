@@ -1337,6 +1337,14 @@
 				<source>Survey after: "%s"</source>
 				<target>Abschluss-Umfrage: "%s"</target>
 			</trans-unit>
+			<trans-unit id="rkwMailService.cancellationReservationUser.subject" approved="yes">
+				<source>Your reservation has been canceled</source>
+				<target>Ihre Anmeldung wurde storniert</target>
+			</trans-unit>
+			<trans-unit id="rkwMailService.cancellationReservationAdmin.subject" approved="yes">
+				<source>Reservations for an appointment have been deleted</source>
+				<target>Reservierungen zu einem Termin wurden gelöscht</target>
+			</trans-unit>
 
 
 
@@ -1498,6 +1506,32 @@
                 <source>Yes</source>
                 <target>Ja</target>
             </trans-unit>
+
+
+			<!-- Templates/Email/CancellationReservationUser.html -->
+			<trans-unit id="templates_email_cancellationReservationUser.headline">
+				<source>Hello %s %s,</source>
+				<target>Hallo %s %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_cancellationReservationUser.text1">
+				<source>unfortunately we have to inform you that one event has been canceled.</source>
+				<target>leider müssen wir ihnen mitteilen, dass eine Veranstaltung abgesagt wurde. Daher wurde Ihre Reservierung storniert.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_cancellationReservationUser.text2">
+				<source>Below you can see the information about the canceled event.</source>
+				<target>Untenstehend finden Sie die Informationen zur abgesagten Veranstaltung. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
+			</trans-unit>
+
+
+			<!-- Templates/Email/CancellationReservationAdmin.html -->
+			<trans-unit id="templates_email_cancellationReservationAdmin.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_cancellationReservationAdmin.text1" approved="no">
+				<source>a reservation has been canceled.</source>
+				<target>eine Veranstaltung wurde aus dem TYPO3 System entfernt. Damit wurden auch insgesamt %s zugehörigen Reservierungen gelöscht. Die jeweiligen Teilnehmer wurden per E-Mail über die Stornierung informiert.</target>
+			</trans-unit>
 
 
             <!-- Templates/Email/ConfirmationReservationUser.html -->

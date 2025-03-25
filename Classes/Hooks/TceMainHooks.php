@@ -19,7 +19,9 @@ use Madj2k\CoreExtended\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
+use RKW\RkwEvents\Service\RkwMailService;
 use RKW\RkwGeolocation\Service\Geolocation;
+use Solarium\Component\Debug;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
@@ -28,6 +30,7 @@ use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class TceMainHooks
@@ -41,6 +44,58 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  */
 class TceMainHooks
 {
+
+    /**
+     * @param $table
+     * @param $id
+     * @param array $recordToDelete
+     * @param $recordWasDeleted
+     * @param DataHandler $dataHandler
+     * @return void
+     */
+    public function processCmdmap_deleteAction($table, $id, array $recordToDelete, &$recordWasDeleted, DataHandler $dataHandler)
+    {
+
+        // send cancellation mails on event delete
+        // Important: Do only fetch events which are not started yet
+        if (
+            $table == 'tx_rkwevents_domain_model_event'
+            && $recordToDelete['start'] > time()
+        ) {
+
+            $tableNameEventReservation = 'tx_rkwevents_domain_model_eventreservation';
+            $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($tableNameEventReservation);
+            $queryBuilder = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableNameEventReservation);
+            $result = $queryBuilder
+                ->select('*')
+                ->from($tableNameEventReservation)
+                ->where(
+                    $queryBuilder->expr()->eq(
+                        'event',
+                        $queryBuilder->createNamedParameter($id, \PDO::PARAM_INT)
+                    )
+                )
+                ->execute();
+
+            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(RkwMailService::class);
+            $cancellationCounter = 0;
+            while ($eventReservation = $result->fetchAssociative()) {
+
+                $mailService->cancellationReservationUser($eventReservation);
+                $cancellationCounter++;
+            }
+
+
+            // send eMail with count to BeUsers
+            if ($cancellationCounter) {
+                // send info mail to admins of the event
+                $mailService->cancellationReservationAdmin($id, $cancellationCounter);
+            }
+
+        }
+    }
+
+
 
     /**
      * Fetches GeoData from RkwGeodata
