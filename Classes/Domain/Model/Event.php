@@ -229,6 +229,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $extendedNetwork = false;
 
     /**
+     * customPrivacyConsentShow
+     *
+     * @var bool
+     */
+    protected $customPrivacyConsentShow;
+
+    /**
+     * customPrivacyConsent
+     *
+     * @var string
+     */
+    protected $customPrivacyConsent;
+
+    /**
      * onlineEventAccessLink
      *
      * @var string
@@ -1164,6 +1178,39 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setExtendedNetwork(bool $extendedNetwork): void
     {
         $this->extendedNetwork = $extendedNetwork;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCustomPrivacyConsentShow(): bool
+    {
+        return $this->customPrivacyConsentShow;
+    }
+
+    /**
+     * @param bool $customPrivacyConsentShow
+     * @return void
+     */
+    public function setCustomPrivacyConsentShow(bool $customPrivacyConsentShow): void
+    {
+        $this->customPrivacyConsentShow = $customPrivacyConsentShow;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomPrivacyConsent(): string
+    {
+        return $this->customPrivacyConsent;
+    }
+
+    /**
+     * @param string $customPrivacyConsent
+     */
+    public function setCustomPrivacyConsent(string $customPrivacyConsent): void
+    {
+        $this->customPrivacyConsent = $customPrivacyConsent;
     }
 
     /**

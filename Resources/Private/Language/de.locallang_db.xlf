@@ -251,6 +251,14 @@
                 <source>External Cancel Link</source>
                 <target>Link zu externer Stornierung</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_privacy_consent_show" approved="yes">
+				<source>Add custom privacy consent</source>
+				<target>Abweichende Einwilligungseklärung einfügen (überschreibt die erweiterte Einwilligung zur Weitergabe an das RKW Netzwerk)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_privacy_consent" approved="yes">
+				<source>Custom privacy consent</source>
+				<target>Abweichende Einwilligungseklärung</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
 				<source>Series</source>
 				<target>Veranstaltungen</target>
@@ -439,6 +447,10 @@
                 <source>Cancel</source>
                 <target>Stornierung</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_consent" approved="yes">
+				<source>Consent</source>
+				<target>Einwilligung</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery" approved="yes">
 				<source>Gallery und Sheets</source>
 				<target>Materialien</target>
