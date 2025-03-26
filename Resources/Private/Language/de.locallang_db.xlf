@@ -66,6 +66,10 @@
                 <source>Backend User exclusive</source>
                 <target>Nur mit Direktlink erreichbar (außer für im Backend angemeldete Nutzende)</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventseries.disable_reminder_mail" approved="yes">
+				<source>Disable reminder mail</source>
+				<target>Erinnerungsmails für bevorstehende Veranstaltung an Teilnehmer deaktivieren</target>
+			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.additional_tile_flag" approved="yes">
                 <source>Additional tile flag</source>
                 <target>Zusätzliches Kachel-Label (Störer)</target>
@@ -126,6 +130,7 @@
 				<source>Start date of nearest event (is updated when saving)</source>
 				<target>Startdatum des nächsten Termins (Dieses Feld wird beim speichern aktualisiert)</target>
 			</trans-unit>
+
 
 
 			<!-- tx_rkwevents_domain_model_event -->
@@ -300,11 +305,11 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.presentations" approved="yes">
 				<source>Presentations</source>
-				<target>Vortragsfolien</target>
+				<target>Materialien zur Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.sheet" approved="yes">
 				<source>SlideShare</source>
-				<target>Vortragsfolien in SlideShare</target>
+				<target>Materialien in SlideShare</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.gallery1" approved="yes">
 				<source>Gallery 1 (public)</source>
@@ -436,7 +441,7 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery" approved="yes">
 				<source>Gallery und Sheets</source>
-				<target>Galerie und Folien</target>
+				<target>Materialien</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_other" approved="yes">
                 <source>Other</source>
@@ -453,6 +458,34 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_place_contact" approved="yes">
 				<source>Place and contact</source>
 				<target>Ort und Kontakt</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_custom" approved="yes">
+				<source>Custom</source>
+				<target>Individuell</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_show">
+				<source>Add custom field to form</source>
+				<target>Individuelles Feld zum Anmeldeformular hinzufügen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_mandatory">
+				<source>Custom field mandatory</source>
+				<target>Individuelles Feld: Ist Pflichtfeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_label">
+				<source>Custom field label</source>
+				<target>Individuelles Feld: Label ("Beschriftung") über Eingabefeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_placeholder">
+				<source>Custom field placeholder</source>
+				<target>Individuelles Feld: Platzhalter im Eingabefeld</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_type">
+				<source>Custom field type</source>
+				<target>Individuelles Feld: Mehrzeilig (ansonsten einzeilig)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_field_full_width">
+				<source>Custom field width</source>
+				<target>Individuelles Feld: Volle Breite (ansonsten 50%)</target>
 			</trans-unit>
 
 
@@ -535,6 +568,10 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.company" approved="yes">
 				<source>Company</source>
 				<target>Firma</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservationaddress.company_role" approved="yes">
+				<source>Role in company</source>
+				<target>Funktion im Unternehmen</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventcontact.address" approved="yes">
 				<source>Address</source>
@@ -709,6 +746,10 @@
                 <source>Workshop register</source>
                 <target>Registrierte Workshops</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.custom_field" approved="yes">
+				<source>Custom field</source>
+				<target>Individuelles Feld</target>
+			</trans-unit>
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->

@@ -5,7 +5,11 @@ namespace RKW\RkwEvents\Service;
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use Madj2k\Postmaster\Mail\MailMessage;
 use RKW\RkwEvents\Domain\Model\BackendUser;
+use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventContact;
+use RKW\RkwEvents\Domain\Model\EventReservation;
+use RKW\RkwEvents\Domain\Repository\EventRepository;
+use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -288,6 +292,208 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     )
     {
         $this->adminMail($backendUser, $eventReservation, 'delete', $frontendUser);
+    }
+
+
+    /**
+     * Handles cancellation mail for user (if event is deleted via backend)
+     * Called via hook
+     *
+     * @param array $eventReservation
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function cancellationReservationUser(array $eventReservation)
+    {
+        $action = "cancellation";
+
+        // fetch reservation object
+        $eventReservationRepository = GeneralUtility::makeInstance(EventReservationRepository::class);
+        /** @var EventReservation $eventReservation */
+        $eventReservation = $eventReservationRepository->findByUid($eventReservation['uid']);
+
+
+        // get settings
+        $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $settingsDefault = $this->getSettings();
+        $showPid = intval($settingsDefault['showPid']);
+
+        if ($settings['view']['templateRootPaths']) {
+
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
+
+            $eventTitle = $eventReservation->getEvent()->getSeries()->getTitle();
+            if ($eventReservation->getEvent()->getSeries()->getSubtitle()) {
+                $eventTitle .= ' - ' . $eventReservation->getEvent()->getSeries()->getSubtitle();
+            }
+
+            // send new user an email with token
+            $mailService->setTo($eventReservation->getFeUser(), [
+                'marker' => [
+                    'event'        => $eventReservation->getEvent(),
+                    'frontendUser' => $eventReservation->getFeUser(),
+                    'pageUid'      => intval($GLOBALS['TSFE']->id),
+                    'loginPid'     => intval($settingsDefault['loginPid']),
+                    'showPid'      => $showPid,
+                    'uniqueKey'    => uniqid(),
+                    'currentTime'  => time(),
+                    'surveyPid'    => intval($settingsDefault['surveyPid']),
+                    'eventTitle'    => $eventTitle,
+                ],
+            ]);
+
+            // set reply address
+            if (
+                (ExtensionManagementUtility::isLoaded('rkw_authors'))
+                && ($eventReservation->getEvent())
+            ){
+                if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
+
+                    /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
+                    foreach ($eventReservation->getEvent()->getInternalContact() as $contact) {
+
+                        if ($contact->getEmail()) {
+                            $mailService->getQueueMail()->setReplyToAddress($contact->getEmail());
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $mailService->getQueueMail()->setSubject(
+                LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
+                    'rkw_events',
+                    null,
+                    $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
+                )
+            );
+
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+
+            $mailService->send();
+        }
+    }
+
+
+    /**
+     * Handles cancellation mail for admin (if event is deleted via backend)
+     * Called via hook
+     *
+     * @param int $eventUid
+     * @param int $cancellationMailsCount
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function cancellationReservationAdmin(int $eventUid, int $cancellationMailsCount)
+    {
+        $action = "cancellation";
+
+        $eventRepository = GeneralUtility::makeInstance(EventRepository::class);
+        /** @var Event $event */
+        $event = $eventRepository->findByUid($eventUid);
+
+        // get settings
+        $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $settingsDefault = $this->getSettings();
+        $showPid = intval($settingsDefault['showPid']);
+
+        $recipients = array_merge($event->getBeUser()->toArray(), $event->getExternalContact()->toArray());
+
+        if ($settings['view']['templateRootPaths']) {
+
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
+
+            foreach ($recipients as $recipient) {
+
+                if (
+                    (
+                        ($recipient instanceof BackendUser)
+                        || ($recipient instanceof EventContact)
+                    )
+                    && ($recipient->getEmail())
+                ) {
+
+                    $language = $recipient->getLang();
+                    if ($language instanceof Language) {
+                        $language = $language->getTypo3Code();
+                    }
+
+                    $name = '';
+                    if ($recipient instanceof BackendUser) {
+                        $name = $recipient->getRealName();
+                    }
+                    if ($recipient instanceof EventContact) {
+                        $name = $recipient->getFirstName() . ' ' . $recipient->getLastName();
+                    }
+
+                    $eventTitle = $event->getSeries()->getTitle();
+                    if ($event->getSeries()->getSubtitle()) {
+                        $eventTitle .= ' - ' . $event->getSeries()->getSubtitle();
+                    }
+
+                    // send new user an email with token
+                    $mailService->setTo($recipient, [
+                        'marker'  => [
+                            'event'         => $event,
+                            'admin'         => $recipient,
+                            'pageUid'       => intval($GLOBALS['TSFE']->id),
+                            'loginPid'      => intval($settingsDefault['loginPid']),
+                            'showPid'       => $showPid,
+                            'fullName'      => $name,
+                            'language'      => $language,
+                            'reservationCancellationCount' => $cancellationMailsCount,
+                            'eventTitle'    => $eventTitle,
+                        ],
+                        'subject' => LocalizationUtility::translate(
+                            'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
+                            'rkw_events',
+                            null,
+                            $language
+                        ),
+                    ]);
+                }
+            }
+
+            $mailService->getQueueMail()->setSubject(
+                LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
+                    'rkw_events',
+                    null,
+                    'de'
+                )
+            );
+
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationAdmin');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationAdmin');
+
+            if (count($mailService->getTo())) {
+                $mailService->send();
+            }
+        }
     }
 
 

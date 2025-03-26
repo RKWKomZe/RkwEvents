@@ -97,7 +97,6 @@ class EventRepository extends AbstractRepository
      */
     public function findUpcomingEventsForReminder(int $timeFrame = 86400): QueryResultInterface
     {
-
         $query = $this->createQuery();
 
         $query->getQuerySettings()->setRespectStoragePage(false);
@@ -113,7 +112,8 @@ class EventRepository extends AbstractRepository
                         $query->greaterThan('end', time())
                     )
                 ),
-                $query->equals('reminderMailTstamp', 0)
+                $query->equals('reminderMailTstamp', 0),
+                $query->equals('series.disableReminderMail', 0)
             )
 
         )->execute();

@@ -14,7 +14,7 @@
 
 <postmaster:email.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" />: <rkwEvents:composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
 <f:if condition="{reservation.event.onlineEvent}"><f:else><postmaster:email.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" />: <f:if condition="{reservation.event.placeUnknown}"><f:then><postmaster:email.translate key="partials_email_details.placeUnknown" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else>{reservation.event.place.name}, {reservation.event.place.address}, {reservation.event.place.zip} {reservation.event.place.city}</f:else></f:if>
-</f:else></f:if><postmaster:email.translate key="partials_email_details.eventCosts" languageKey="{language}" extensionName="rkwEvents" />: <f:if condition="{reservation.event.costsReg}"><f:then>{reservation.event.costsReg -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <postmaster:email.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /><f:if condition="{reservation.event.costsRed}"> <postmaster:email.translate key="partials_email_details.eventCostsRegular" languageKey="{language}" extensionName="rkwEvents" /> / {reservation.event.costsRed -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <postmaster:email.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /> <postmaster:email.translate key="partials_email_details.eventCostsReduced" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="{reservation.event.costsTax} == 0"> (<postmaster:email.translate key="partials_email_details.costsTaxExclusive" languageKey="{language}" extensionName="rkwEvents"/>)</f:if><f:if condition="{reservation.event.costsTax} == 1"> (<postmaster:email.translate key="partials_email_details.costsTaxInclusive" languageKey="{language}" extensionName="rkwEvents"/>)</f:if><f:if condition="{reservation.event.costsTax} == 2"> (<postmaster:email.translate key="partials_email_details.costsTaxFree" languageKey="{language}" extensionName="rkwEvents"/>)</f:if></f:then><f:else><postmaster:email.translate key="partials_email_details.eventCostsFree" languageKey="{language}" extensionName="rkwEvents" /></f:else></f:if>
+</f:else></f:if><postmaster:email.translate key="partials_email_details.eventCosts" languageKey="{language}" extensionName="rkwEvents" />: <f:if condition="{reservation.event.costsReg}"><f:then>{reservation.event.costsReg -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <postmaster:email.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /><f:if condition="{reservation.event.costsRed}"> <postmaster:email.translate key="partials_email_details.eventCostsRegular" languageKey="{language}" extensionName="rkwEvents" /> / {reservation.event.costsRed -> f:format.number(decimals:"2", decimalSeparator:"," )} {reservation.event.currency.symbolLeft} <postmaster:email.translate key="partials_email_details.costsPerPerson" languageKey="{language}" extensionName="rkwEvents" /> <postmaster:email.translate key="partials_email_details.eventCostsReduced" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="{reservation.event.costsTax} == 0"> (<postmaster:email.translate key="partials_email_details.costsTaxExclusive" languageKey="{language}" extensionName="rkwEvents"/>)</f:if><f:if condition="{reservation.event.costsTax} == 1"> (<postmaster:email.translate key="partials_email_details.costsTaxInclusive" languageKey="{language}" extensionName="rkwEvents"/>)</f:if><f:if condition="{reservation.event.costsTax} == 2"> (<postmaster:email.translate key="partials_email_details.costsTaxFree" languageKey="{language}" extensionName="rkwEvents"/>)</f:if></f:then><f:else> <f:if condition="{reservation.event.costsUnknown}"><f:then><postmaster:email.translate key="partials_email_details.costsUnknown" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else><postmaster:email.translate key="partials_email_details.eventCostsFree" languageKey="{language}" extensionName="rkwEvents" /></f:else></f:if></f:else></f:if>
 <f:if condition="{reservation.event.code}"><postmaster:email.translate key="partials_email_details.code" languageKey="{language}" extensionName="rkwEvents" />: {reservation.event.code}</f:if>
 <f:if condition="{isRegistered}"><f:if condition="{reservation.event.registerAddInformation}"><postmaster:email.translate key="partials_email_details.registerAddInformation" languageKey="{language}" extensionName="rkwEvents" />: <f:format.stripTags><f:format.nl2br>{reservation.event.registerAddInformation}</f:format.nl2br></f:format.stripTags></f:if>
 <f:if condition="{reservation.event.onlineEvent}"><f:if condition="{reservation.event.onlineEventAccessLink}">
@@ -73,14 +73,14 @@
 				<strong>{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></strong>
 			</f:then>
 			<f:else>
-                <f:if condition="{isStandaloneRegisterPlugin}">
-                    <f:then>
-                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='newStandalone' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' additionalParams='{tx_rkwevents_standalonereg: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
-                    </f:then>
-                    <f:else>
-                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
-                    </f:else>
-                </f:if>
+                    <f:if condition="{isStandaloneRegisterPlugin}">
+                        <f:then>
+                            <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='newStandalone' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' additionalParams='{tx_rkwevents_standalonereg: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
+                        </f:then>
+                        <f:else>
+                            <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
+                        </f:else>
+                    </f:if>
 			</f:else>
 		</f:if>
 		<br/><strong><postmaster:email.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" /></strong>: <rkwEvents:composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
@@ -105,7 +105,14 @@
 				</f:if>
 			</f:then>
 			<f:else>
-				<postmaster:email.translate key="partials_email_details.eventCostsFree" languageKey="{language}" extensionName="rkwEvents" />
+                <f:if condition="{reservation.event.costsUnknown}">
+                    <f:then>
+                        <postmaster:email.translate key="partials_email_details.costsUnknown" languageKey="{language}" extensionName="rkwEvents" />
+                    </f:then>
+                    <f:else>
+                        <postmaster:email.translate key="partials_email_details.eventCostsFree" languageKey="{language}" extensionName="rkwEvents" />
+                    </f:else>
+                </f:if>
 			</f:else>
 		</f:if>
         <f:if condition="{reservation.event.code}">
@@ -174,6 +181,7 @@
 			<p>
 				<f:if condition="{reservation.company}">{reservation.company}<br/></f:if>
 				{reservation.firstName} {reservation.lastName} <f:if condition="{frontendUser}">({frontendUser.username})</f:if><br/>
+                <f:if condition="{reservation.companyRole}">{reservation.companyRole}<br/></f:if>
 				{reservation.address}<br/>
 				{reservation.zip} {reservation.city}<br/>
 			</p>

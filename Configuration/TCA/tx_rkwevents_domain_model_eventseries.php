@@ -19,7 +19,7 @@ return [
 		'enablecolumns' => [
 			'disabled' => 'hidden',
 		],
-		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
+		'searchFields' => 'title,subtitle,keywords,description,description2,target_learning,target_group,reg_inhouse,schedule,partner,testimonials,backend_user_exclusive,disable_reminder_mail,recommended_links,header_image,add_info,recommended_events,document_type,department,categories,categories_displayed,organizer,event',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventseries.gif'
 	],
 	'types' => [
@@ -34,8 +34,10 @@ return [
             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_additionaldata,
             keywords, description, description2, target_learning, target_group, schedule, partner, testimonials, add_info,
 
-             --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
-            header_image, recommended_events, recommended_links, backend_user_exclusive,
+            --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.tab_other,
+            header_image, recommended_events, recommended_links, backend_user_exclusive, disable_reminder_mail,
+            
+            
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
             --palette--;;dataFields, --palette--;;systemFields,
@@ -254,6 +256,14 @@ return [
         'backend_user_exclusive' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.backend_user_exclusive',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
+            ]
+        ],
+        'disable_reminder_mail' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventseries.disable_reminder_mail',
             'config' => [
                 'type' => 'check',
                 'default' => 0,

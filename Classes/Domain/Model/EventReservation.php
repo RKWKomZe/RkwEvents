@@ -79,6 +79,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $company;
 
     /**
+     * companyRole
+     *
+     * @var string
+     */
+    protected $companyRole;
+
+    /**
      * address
      *
      * @var string
@@ -185,6 +192,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var integer
      */
     protected $participateMeeting = 0;
+
+    /**
+     * customField
+     *
+     * @var string
+     */
+    protected $customField = '';
 
     /**
      * @var string
@@ -479,6 +493,27 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the companyRole
+     *
+     * @return string $companyRole
+     */
+    public function getCompanyRole()
+    {
+        return $this->companyRole;
+    }
+
+    /**
+     * Sets the companyRole
+     *
+     * @param string $companyRole
+     * @return void
+     */
+    public function setCompanyRole($companyRole)
+    {
+        $this->companyRole = $companyRole;
+    }
+
+    /**
      * Returns the address
      *
      * @return string $address
@@ -742,6 +777,23 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setParticipateMeeting($participateMeeting)
     {
         $this->participateMeeting = $participateMeeting;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomField(): string
+    {
+        return $this->customField;
+    }
+
+    /**
+     * @param string $customField
+     * @return void
+     */
+    public function setCustomField(string $customField): void
+    {
+        $this->customField = $customField;
     }
 
     /**
