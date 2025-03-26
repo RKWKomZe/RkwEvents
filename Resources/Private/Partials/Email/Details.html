@@ -73,14 +73,14 @@
 				<strong>{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></strong>
 			</f:then>
 			<f:else>
-                <f:if condition="{isStandaloneRegisterPlugin}">
-                    <f:then>
-                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='newStandalone' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' additionalParams='{tx_rkwevents_standalonereg: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
-                    </f:then>
-                    <f:else>
-                        <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
-                    </f:else>
-                </f:if>
+                    <f:if condition="{isStandaloneRegisterPlugin}">
+                        <f:then>
+                            <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='newStandalone' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' additionalParams='{tx_rkwevents_standalonereg: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
+                        </f:then>
+                        <f:else>
+                            <a href="<postmaster:email.uri.action absolute='true' pageUid='{showPid}' action='show' controller='Event' extensionName='rkwEvents' pluginName='pi1' additionalParams='{tx_rkwevents_pi1: {event: reservation.event.uid}}' />" target="_blank">{reservation.event.series.title}<f:if condition="{reservation.event.series.subTitle}"> - {reservation.event.series.subTitle}</f:if><f:if condition="{reservation.event.series.documentType}"> ({reservation.event.series.documentType.name})</f:if></a>
+                        </f:else>
+                    </f:if>
 			</f:else>
 		</f:if>
 		<br/><strong><postmaster:email.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" /></strong>: <rkwEvents:composeDateTimeParts event='{reservation.event}' languageKey="{language}" />
