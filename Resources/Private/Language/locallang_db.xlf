@@ -187,6 +187,12 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.ext_cancel_link" approved="yes">
                 <source>External Cancel Link</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_privacy_consent_show" approved="yes">
+				<source>Add custom privacy consent</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.custom_privacy_consent" approved="yes">
+				<source>Custom privacy consent</source>
+			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.series">
 				<source>Series</source>
 			</trans-unit>
@@ -343,6 +349,9 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_cancel" approved="yes">
                 <source>Cancel</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.tab_consent" approved="yes">
+                <source>Consent</source>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.tab_gallery">
 				<source>Gallery and Sheets</source>

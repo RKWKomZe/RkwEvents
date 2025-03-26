@@ -28,7 +28,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility,eligibility_link,workshop_select_type,workshop_select_req,workshop,extended_network,custom_field_show,custom_field_mandatory,custom_field_label,custom_field_placeholder,custom_field_type,custom_field_full_width',
+		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility,eligibility_link,workshop_select_type,workshop_select_req,workshop,extended_network,custom_privacy_consent_show,custom_privacy_consent,custom_field_show,custom_field_mandatory,custom_field_label,custom_field_placeholder,custom_field_type,custom_field_full_width',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'types' => [
@@ -41,6 +41,9 @@ return [
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,--palette--;;customField1,--palette--;;customField2,--palette--;;customField3,
+
+                --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_consent,
+                extended_network, custom_privacy_consent_show, custom_privacy_consent,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
                 cancel_end, --palette--;;externalCancel,
@@ -55,8 +58,8 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                additional_tile_flag, extended_network, title,
-           
+                additional_tile_flag, title,
+
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
             ',
@@ -71,6 +74,9 @@ return [
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_register,
                 seats, --palette--;;registrationRequired, reg_end, costs_unknown, costs_tax, costs_reg, --palette--;;costsReduced, costs_red_link, currency, eligibility, eligibility_link, ext_reg_link, workshop_select_type, workshop_select_req, workshop,--palette--;;customField1,--palette--;;customField2,--palette--;;customField3,
 
+                --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_consent,
+                extended_network, custom_privacy_consent_show, custom_privacy_consent,
+
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_cancel,
                 cancel_end, --palette--;;externalCancel,
 
@@ -84,8 +90,8 @@ return [
                 reservation,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
-                additional_tile_flag, extended_network, title,
-                
+                additional_tile_flag, title,
+
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 --palette--;;dataFields, --palette--;;systemFields,
             ',
@@ -809,6 +815,26 @@ return [
                 'type' => 'check',
                 'default' => 0,
             ]
+        ],
+        'custom_privacy_consent_show' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.custom_privacy_consent_show',
+            'config' => [
+                'type' => 'check',
+            ],
+            'onChange' => 'reload',
+        ],
+        'custom_privacy_consent' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.custom_privacy_consent',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'enableRichtext' => true,
+            ],
+            'displayCond' => 'FIELD:custom_privacy_consent_show:REQ:true',
         ],
         'custom_field_show' => [
             'exclude' => 1,
