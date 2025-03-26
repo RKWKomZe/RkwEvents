@@ -1040,7 +1040,12 @@
 			<trans-unit id="rkwMailService.sendSurveyForPastEvent.subject" approved="yes">
 				<source>Survey after: "%s"</source>
 			</trans-unit>
-
+			<trans-unit id="rkwMailService.cancellationReservationUser.subject" approved="yes">
+				<source>Your reservation has been canceled</source>
+			</trans-unit>
+			<trans-unit id="rkwMailService.cancellationReservationAdmin.subject" approved="yes">
+				<source>Reservations for an appointment have been deleted</source>
+			</trans-unit>
 
 
 			<!-- ==================================================================================== -->
@@ -1166,6 +1171,18 @@
             <trans-unit id="partials_email_details.participateMeeting.yes">
                 <source>Yes</source>
             </trans-unit>
+
+
+			<!-- Templates/Email/CancellationReservationUser.html -->
+			<trans-unit id="templates_email_deleteReservationUser.headline">
+				<source>Hello %s %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_deleteReservationUser.text1">
+				<source>unfortunately we have to inform you that one event has been canceled.</source>
+			</trans-unit>
+			<trans-unit id="templates_email_deleteReservationUser.text2">
+				<source>Below you can see the information about the canceled event.</source>
+			</trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationUser.html -->
