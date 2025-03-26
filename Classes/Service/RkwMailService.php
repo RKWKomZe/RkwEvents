@@ -396,7 +396,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
                             'rkw_events',
                             null,
-                            $recipient->getLang()
+                            $language
                         ),
                     ]);
                 }
