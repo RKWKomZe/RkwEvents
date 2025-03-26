@@ -9,7 +9,7 @@
 
 <postmaster:email.translate key="templates_email_cancellationReservationAdmin.text1" languageKey="{language}" extensionName="rkwEvents" />
 
-<f:render partial="Email/DetailsLight" section="Plaintext" arguments="{event: event, language:language}"/>
+<f:render partial="Email/DetailsLight" section="Plaintext" arguments="{_all}"/>
 </f:section>
 
 <!-- HTML -->
@@ -17,5 +17,5 @@
 	<h1><postmaster:email.translate key="templates_email_cancellationReservationAdmin.headline" languageKey="{language}" extensionName="rkwEvents" arguments="{0 : fullName}" /></h1>
 	<p><postmaster:email.translate key="templates_email_cancellationReservationAdmin.text1" languageKey="{language}" extensionName="rkwEvents" arguments="{0 : reservationCancellationCount}" /></p>
 
-	<f:render partial="Email/DetailsLight" section="Html" arguments="{event: event, language:language}"/>
+	<f:render partial="Email/DetailsLight" section="Html" arguments="{_all}"/>
 </f:section>

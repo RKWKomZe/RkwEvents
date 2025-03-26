@@ -312,11 +312,79 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function cancellationReservationUser(array $eventReservation)
     {
+        $action = "cancellation";
+
+        // fetch reservation object
         $eventReservationRepository = GeneralUtility::makeInstance(EventReservationRepository::class);
         /** @var EventReservation $eventReservation */
         $eventReservation = $eventReservationRepository->findByUid($eventReservation['uid']);
 
-        $this->userMail($eventReservation->getFeUser(), $eventReservation, 'cancellation');
+
+        // get settings
+        $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $settingsDefault = $this->getSettings();
+        $showPid = intval($settingsDefault['showPid']);
+
+        if ($settings['view']['templateRootPaths']) {
+
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
+
+            $eventTitle = $eventReservation->getEvent()->getSeries()->getTitle();
+            if ($eventReservation->getEvent()->getSeries()->getSubtitle()) {
+                $eventTitle .= ' - ' . $eventReservation->getEvent()->getSeries()->getSubtitle();
+            }
+
+            // send new user an email with token
+            $mailService->setTo($eventReservation->getFeUser(), [
+                'marker' => [
+                    'event'        => $eventReservation->getEvent(),
+                    'frontendUser' => $eventReservation->getFeUser(),
+                    'pageUid'      => intval($GLOBALS['TSFE']->id),
+                    'loginPid'     => intval($settingsDefault['loginPid']),
+                    'showPid'      => $showPid,
+                    'uniqueKey'    => uniqid(),
+                    'currentTime'  => time(),
+                    'surveyPid'    => intval($settingsDefault['surveyPid']),
+                    'eventTitle'    => $eventTitle,
+                ],
+            ]);
+
+            // set reply address
+            if (
+                (ExtensionManagementUtility::isLoaded('rkw_authors'))
+                && ($eventReservation->getEvent())
+            ){
+                if (count($eventReservation->getEvent()->getInternalContact()) > 0) {
+
+                    /** @var \RKW\RkwEvents\Domain\Model\Authors $contact */
+                    foreach ($eventReservation->getEvent()->getInternalContact() as $contact) {
+
+                        if ($contact->getEmail()) {
+                            $mailService->getQueueMail()->setReplyToAddress($contact->getEmail());
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $mailService->getQueueMail()->setSubject(
+                LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
+                    'rkw_events',
+                    null,
+                    $eventReservation->getFeUser()->getTxFeregisterLanguageKey()
+                )
+            );
+
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+
+            $mailService->send();
+        }
     }
 
 
@@ -338,7 +406,6 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public function cancellationReservationAdmin(int $eventUid, int $cancellationMailsCount)
     {
-
         $action = "cancellation";
 
         $eventRepository = GeneralUtility::makeInstance(EventRepository::class);
@@ -380,6 +447,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                         $name = $recipient->getFirstName() . ' ' . $recipient->getLastName();
                     }
 
+                    $eventTitle = $event->getSeries()->getTitle();
+                    if ($event->getSeries()->getSubtitle()) {
+                        $eventTitle .= ' - ' . $event->getSeries()->getSubtitle();
+                    }
+
                     // send new user an email with token
                     $mailService->setTo($recipient, [
                         'marker'  => [
@@ -390,7 +462,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'showPid'       => $showPid,
                             'fullName'      => $name,
                             'language'      => $language,
-                            'reservationCancellationCount' => $cancellationMailsCount
+                            'reservationCancellationCount' => $cancellationMailsCount,
+                            'eventTitle'    => $eventTitle,
                         ],
                         'subject' => LocalizationUtility::translate(
                             'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',

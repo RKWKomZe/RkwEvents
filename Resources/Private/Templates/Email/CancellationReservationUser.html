@@ -9,7 +9,7 @@
 <postmaster:email.translate key="templates_email_cancellationReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <postmaster:email.translate key="templates_email_cancellationReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 
-<f:render partial="Email/Details" section="Plaintext" arguments="{reservation: reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, withoutEventLink: 1}"/>
+<f:render partial="Email/DetailsLight" section="Plaintext" arguments="{_all}"/>
 </f:section>
 
 <!-- HTML -->
@@ -20,6 +20,6 @@
 		<postmaster:email.translate key="templates_email_cancellationReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 	</p>
 
-	<f:render partial="Email/Details" section="Html" arguments="{reservation:reservation, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, withoutEventLink: 1}"/>
+	<f:render partial="Email/DetailsLight" section="Html" arguments="{_all}"/>
 
 </f:section>

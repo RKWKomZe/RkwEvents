@@ -9,7 +9,7 @@
 <postmaster:email.translate key="partials_email_details.eventDetails" languageKey="{language}" extensionName="rkwEvents" />
 =============================================================
 
-{event.series.title}<f:if condition="{event.series.subTitle}"> - {event.series.subTitle}</f:if><f:if condition="{event.series.documentType}"> ({event.series.documentType.name})</f:if>
+{eventTitle}
 <postmaster:email.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" />: <rkwEvents:composeDateTimeParts event='{event}' languageKey="{language}" />
 <f:if condition="{event.onlineEvent}"><f:else><postmaster:email.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" />: <f:if condition="{event.placeUnknown}"><f:then><postmaster:email.translate key="partials_email_details.placeUnknown" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else>{event.place.name}, {event.place.address}, {event.place.zip} {event.place.city}</f:else></f:if></f:else></f:if>
 
@@ -20,7 +20,7 @@
 <f:section name="Html">
     <h2><postmaster:email.translate key="partials_email_details.eventDetails" languageKey="{language}" extensionName="rkwEvents" /></h2>
     <p>
-        <strong>{event.series.title}<f:if condition="{event.series.subTitle}"> - {event.series.subTitle}</f:if><f:if condition="{event.series.documentType}"> ({event.series.documentType.name})</f:if></strong>
+        <strong>{eventTitle}</strong>
         <br/><strong><postmaster:email.translate key="partials_email_details.eventDate" languageKey="{language}" extensionName="rkwEvents" /></strong>: <rkwEvents:composeDateTimeParts event='{event}' languageKey="{language}" />
         <f:if condition="{event.onlineEvent}"><f:else><br/><strong><postmaster:email.translate key="partials_email_details.eventPlace" languageKey="{language}" extensionName="rkwEvents" /></strong>: <f:if condition="{event.placeUnknown}"><f:then><postmaster:email.translate key="partials_email_details.placeUnknown" languageKey="{language}" extensionName="rkwEvents" /></f:then><f:else>{event.place.name}, {event.place.address}, {event.place.zip} {event.place.city}</f:else></f:if></f:else></f:if>
     </p>

@@ -72,6 +72,14 @@ class TceMainHooks
                         $queryBuilder->createNamedParameter($id, \PDO::PARAM_INT)
                     )
                 )
+                // should not necessary, just to be on the safe side
+                ->andWhere(
+                    // exclude hidden and deleted
+                    $queryBuilder->expr()->eq(
+                        'deleted',
+                        $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                    )
+                )
                 ->execute();
 
             $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(RkwMailService::class);
