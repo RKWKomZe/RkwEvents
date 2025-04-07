@@ -1,7 +1,5 @@
 <?php
 
-
-
 // Extend TCA when rkw_projects is available
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')) {
     $GLOBALS['TCA']['tx_rkwevents_domain_model_eventseries']['columns']['project'] = [
@@ -17,8 +15,13 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')
             'size'          => 5,
         ],
     ];
-    //$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem'] = str_replace(', department,', ', department, project,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventScheduled']['showitem']);
-    //$GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventAnnouncement']['showitem'] = str_replace(', department,', ', department, project,', $GLOBALS['TCA']['tx_rkwevents_domain_model_event']['types']['\RKW\RkwEvents\Domain\Model\EventAnnouncement']['showitem']);
+
+    $GLOBALS['TCA']['tx_rkwevents_domain_model_eventseries']['types']['1']['showitem'] = str_replace(
+        ', department,',
+        ', department, project,',
+        $GLOBALS['TCA']['tx_rkwevents_domain_model_eventseries']['types']['1']['showitem']
+    );
+
 }
 
 //=================================================================
