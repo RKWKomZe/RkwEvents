@@ -253,11 +253,11 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.custom_privacy_consent_show" approved="yes">
 				<source>Add custom privacy consent</source>
-				<target>Abweichende Einwilligungseklärung einfügen (überschreibt die erweiterte Einwilligung zur Weitergabe an das RKW Netzwerk)</target>
+				<target>Abweichende Einwilligungserklärung einfügen (überschreibt die erweiterte Einwilligung zur Weitergabe an das RKW Netzwerk)</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.custom_privacy_consent" approved="yes">
 				<source>Custom privacy consent</source>
-				<target>Abweichende Einwilligungseklärung</target>
+				<target>Abweichende Einwilligungserklärung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.series" approved="yes">
 				<source>Series</source>
