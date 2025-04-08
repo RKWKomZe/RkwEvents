@@ -18,6 +18,8 @@
 =============================================================
 <postmaster:email.translate key="templates_email_confirmationReservationUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <postmaster:email.uri.page absolute="true" pageUid="{loginPid}" />
+<postmaster:email.translate key="templates_email_confirmationReservationUser.cancelQuestion" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<postmaster:email.uri.page absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_cancelreg: {cancelRegHash: reservation.cancelRegHash}}' />
 </f:section>
 
 <!-- HTML -->
@@ -39,8 +41,8 @@
 	<p>
 		<a href="<postmaster:email.uri.page absolute='true' pageUid='{loginPid}' />" target="_blank"><postmaster:email.translate key="templates_email_confirmationReservationUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></a>
 	</p>
-	<p>Sie haben sich bei der falschen Veranstaltung angemeldet oder etwas anderes ist Ihnen dazwischengekommen?</p>
-	<a href="<postmaster:email.uri.page absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_cancelreg: {cancelRegHash: reservation.cancelRegHash}}' />" target="_blank">Von Veranstaltung abmelden</a>
+	<p><postmaster:email.translate key="templates_email_confirmationReservationUser.cancelQuestion" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></p>
+	<a href="<postmaster:email.uri.page absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_cancelreg: {cancelRegHash: reservation.cancelRegHash}}' />" target="_blank"><postmaster:email.translate key="templates_email_confirmationReservationUser.cancelButton" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></a>
 </f:section>
 
 
