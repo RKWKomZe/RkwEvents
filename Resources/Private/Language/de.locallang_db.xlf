@@ -762,6 +762,10 @@
 				<source>Custom field</source>
 				<target>Individuelles Feld</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.cancel_reg_hash" approved="yes">
+				<source>Cancel register hash</source>
+				<target>Hash für Abmeldelink</target>
+			</trans-unit>
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->

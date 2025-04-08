@@ -146,6 +146,18 @@ call_user_func(
             ]
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
+            'Cancelreg',
+            [
+                'EventReservation' => 'removeByHash',
+            ],
+            // non-cacheable actions
+            [
+                'EventReservation' => 'removeByHash',
+            ]
+        );
+
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesUpdate'] = \RKW\RkwEvents\Install\EventSeriesUpdate::class;
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesTitleUpdate'] = \RKW\RkwEvents\Install\EventSeriesTitleUpdate::class;

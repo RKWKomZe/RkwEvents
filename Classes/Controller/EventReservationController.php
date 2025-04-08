@@ -39,6 +39,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
@@ -1093,73 +1094,11 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 );
 
                 $this->redirect('list', 'Event', null, [], $this->settings['listPid']);
-                //===
             }
 
-            // 2. remove reservation and additional users
-            foreach ($eventReservation->getAddPerson() as $addPerson) {
-                $this->eventReservationAddPersonRepository->remove($addPerson);
-            }
-            $this->eventReservationRepository->remove($eventReservation);
-
-            $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'eventReservationController.message.deleteSuccess', 'rkw_events'
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
-            );
-
-            // 2.2 remove additional workshop reservations
-            /** @var EventWorkshop $workshop */
-            foreach ($eventReservation->getWorkshopRegister() as $workshop) {
-                $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
-                $this->eventWorkshopRepository->update($workshop);
-            }
-
-            // 3. send final confirmation mail to user
-            $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, [$this->getFrontendUser(), $eventReservation]);
-
-            // 4. send information mail to be-users
-            $adminMails = [];
-            if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
-                /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
-                foreach ($beUsers as $beUser) {
-                    if ($beUser->getEmail()) {
-                        $adminMails[] = $beUser;
-                    }
-                }
-            }
-
-            // 5. send information mail to external users
-            if ($externalContacts = $eventReservation->getEvent()->getExternalContact()) {
-                /** @var  $externalContact \RKW\RkwEvents\Domain\Model\EventContact */
-                foreach ($externalContacts as $externalContact) {
-                    if ($externalContact->getEmail()) {
-                        $adminMails[] = $externalContact;
-                    }
-                }
-            }
-
-            // 6. send information mail to admins from TypoScript
-            $adminUidList = GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
-            if ($adminUidList) {
-                foreach ($adminUidList as $adminUid) {
-
-                    /** @var \RKW\RkwEvents\Domain\Model\BackendUser $admin */
-                    $admin = $this->backendUserRepository->findByUid($adminUid);
-                    if (
-                        ($admin)
-                        && ($admin->getEmail())
-                    ) {
-                        $adminMails[] = $admin;
-                    }
-                }
-            }
-            $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN, [$adminMails, $this->getFrontendUser(), $eventReservation]);
+            $this->finalRemoveReservation($eventReservation);
 
             $this->redirect('myEvents', 'Event');
-            //===
 
         } else {
 
@@ -1172,8 +1111,55 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             );
 
             $this->redirect('list', 'Event', null, [], $this->settings['listPid']);
-            //===
         }
+
+    }
+
+
+    /**
+     * Removes a reservation (via direct link + hash)
+     *
+     * @param string $cancelRegHash
+     * @param bool $confirmedByUser
+     * @return void
+     */
+    public function removeByHashAction(string $cancelRegHash, bool $confirmedByUser = false): void
+    {
+        // @toDo: Check hash
+        $eventReservation = $this->eventReservationRepository->findOneByCancelRegHash($cancelRegHash);
+
+        if ($eventReservation instanceof EventReservation) {
+
+            if ($confirmedByUser) {
+
+                // if user has confirmed, remove it
+                $this->finalRemoveReservation($eventReservation);
+
+            } else {
+                // really want to delete?
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'eventReservationController.message.question', 'rkw_events'
+                    ),
+                    '',
+                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                );
+                $this->view->assign('event', $eventReservation->getEvent());
+                $this->view->assign('eventReservation', $eventReservation);
+            }
+
+        } else {
+            // @toDo: Nichts gefunden, sind sie ggf schon abgemeldet?
+
+            $this->addFlashMessage(
+                LocalizationUtility::translate(
+                    'eventReservationController.message.nothingFoundByHash', 'rkw_events'
+                ),
+                '',
+                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+            );
+        }
+
 
     }
 
@@ -1263,6 +1249,85 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
 
     /**
+     * @param EventReservation $eventReservation
+     * @return void
+     * @throws AspectNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     */
+    protected function finalRemoveReservation(EventReservation $eventReservation): void
+    {
+
+        $frontendUser = $this->getFrontendUser() ?: $eventReservation->getFeUser();
+
+        // 2. remove reservation and additional users
+        foreach ($eventReservation->getAddPerson() as $addPerson) {
+            $this->eventReservationAddPersonRepository->remove($addPerson);
+        }
+        $this->eventReservationRepository->remove($eventReservation);
+
+        $this->addFlashMessage(
+            LocalizationUtility::translate(
+                'eventReservationController.message.deleteSuccess', 'rkw_events'
+            ),
+            '',
+            \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+        );
+
+        // 2.2 remove additional workshop reservations
+        /** @var EventWorkshop $workshop */
+        foreach ($eventReservation->getWorkshopRegister() as $workshop) {
+            $workshop->removeRegisteredFrontendUsers($eventReservation->getFeUser());
+            $this->eventWorkshopRepository->update($workshop);
+        }
+
+        // 3. send final confirmation mail to user
+        $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, [$frontendUser, $eventReservation]);
+
+        // 4. send information mail to be-users
+        $adminMails = [];
+        if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
+            /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
+            foreach ($beUsers as $beUser) {
+                if ($beUser->getEmail()) {
+                    $adminMails[] = $beUser;
+                }
+            }
+        }
+
+        // 5. send information mail to external users
+        if ($externalContacts = $eventReservation->getEvent()->getExternalContact()) {
+            /** @var  $externalContact \RKW\RkwEvents\Domain\Model\EventContact */
+            foreach ($externalContacts as $externalContact) {
+                if ($externalContact->getEmail()) {
+                    $adminMails[] = $externalContact;
+                }
+            }
+        }
+
+        // 6. send information mail to admins from TypoScript
+        $adminUidList = GeneralUtility::trimExplode(',', $this->settings['mail']['backendUser']);
+        if ($adminUidList) {
+            foreach ($adminUidList as $adminUid) {
+
+                /** @var \RKW\RkwEvents\Domain\Model\BackendUser $admin */
+                $admin = $this->backendUserRepository->findByUid($adminUid);
+                if (
+                    ($admin)
+                    && ($admin->getEmail())
+                ) {
+                    $adminMails[] = $admin;
+                }
+            }
+        }
+        $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_ADMIN, [$adminMails, $frontendUser, $eventReservation]);
+
+    }
+
+
+    /**
      * finalSaveOrder
      * Adds the order finally to database and sends information mails to user and admin
      * This function is used by "createOptInReservationAction" and "create"-function
@@ -1294,6 +1359,9 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         // 1. set FeUser
         $newEventReservation->setFeUser($feUser);
+
+        // 1.1 set hash for cancel-link
+        $newEventReservation->setCancelRegHash(md5($newEventReservation->getCrdate() . $feUser->getEmail()));
 
         // 2. save reservation
         // only add additional persons that have at least one relevant field set

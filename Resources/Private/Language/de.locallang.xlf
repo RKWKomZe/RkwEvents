@@ -320,6 +320,14 @@
 				<source>The given E-mail is already used by another user.</source>
 				<target phase-name="approval-1" state="final">Hm, die gewünschte E-Mailadresse wird bereits von einem anderen Nutzenden verwendet. Bitte geben Sie eine andere E-Mailadresse an.</target>
 			</trans-unit>
+			<trans-unit id="eventReservationController.message.nothingFoundByHash">
+				<source>Reservation not found</source>
+				<target><![CDATA[Es konnte keine zugehörige Reservierung gefunden werden. Haben Sie sich womöglich bereits von der Veranstaltung abgemeldet? Im Zweifel steht Ihnen unser <a href="mailto:service@rkw.de">Support</a> jederzeit gerne zur Verfügung.]]></target>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.question">
+				<source>Are you sure?</source>
+				<target>Sind Sie sicher, dass Sie sich von dieser Veranstaltung abmelden wollen? </target>
+			</trans-unit>
 
 			<!-- BackendController -->
 			<trans-unit id="backendController.error.wrongFileType">
@@ -1168,6 +1176,29 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.labelNo">
 				<source>No, keep it</source>
 				<target>Nein, doch nicht</target>
+			</trans-unit>
+
+
+			<!-- Templates/EventReservation/RemoveByHash.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.headline">
+				<source>Delete Reservation</source>
+				<target>Von Veranstaltung abmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.question">
+				<source>Are you sure?</source>
+				<target>Sind Sie sicher?</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel">
+				<source>Yes</source>
+				<target>Ja, abmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.avoidCancel">
+				<source>Back to event</source>
+				<target>Zurück zur Veranstaltung</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.showOther">
+				<source>Show other events</source>
+				<target>Interessante Veranstaltungen gesucht? Klicken Sie hier!</target>
 			</trans-unit>
 
 

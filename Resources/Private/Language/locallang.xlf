@@ -249,6 +249,9 @@
 			<trans-unit id="eventReservationController.error.email_already_in_use">
 				<source>The given E-mail is already used by another user.</source>
 			</trans-unit>
+			<trans-unit id="eventReservationController.message.nothingFoundByHash">
+				<source>Reservation not found</source>
+			</trans-unit>
 
 
 			<!-- BackendController -->
