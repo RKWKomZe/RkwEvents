@@ -573,6 +573,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.custom_field" approved="yes">
 				<source>Custom field</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.cancel_reg_hash" approved="yes">
+				<source>Cancel register hash</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventreservationaddperson -->

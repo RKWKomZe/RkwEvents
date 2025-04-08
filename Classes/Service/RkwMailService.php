@@ -730,6 +730,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
                     'showPid'      => $showPid,
+                    'cancelRegPid' => intval($settingsDefault['cancelRegPid']),
                     'uniqueKey'    => uniqid(),
                     'currentTime'  => time(),
                     'surveyPid'    => intval($settingsDefault['surveyPid']),

@@ -346,6 +346,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	target_group        varchar(255) DEFAULT '' NOT NULL,
 	custom_field        text NOT NULL,
+    cancel_reg_hash     varchar(255) DEFAULT '' NOT NULL,
 	workshop_register   varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
