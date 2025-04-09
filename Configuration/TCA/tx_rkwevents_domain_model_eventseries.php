@@ -368,7 +368,6 @@ return [
                 'itemsProcFunc' => 'RKW\\RkwEvents\\UserFunctions\\TcaProcFunc->getSelectedCategories',
                 'maxitems'      => 1,
                 'size'          => 5,
-
             ],
         ],
         'organizer' => [

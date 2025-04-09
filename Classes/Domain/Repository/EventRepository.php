@@ -272,14 +272,21 @@ class EventRepository extends AbstractRepository
         $geoData = null;
 
         $categoryList = [];
-        if ($filter['category']) {
-            // get category first level childs
+
+        if ($filterCategoriesList = GeneralUtility::trimExplode(',', $filter['category'])) {
+            // get category first level children
             /** @var CategoryRepository $categoryRepository */
             $categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
-            $categoryList = $categoryRepository->findChildrenByParent(intval($filter['category']))->toArray();
-            // add parent itself as object
-            $categoryList[] = $categoryRepository->findByUid(intval($filter['category']));
+
+            foreach ($filterCategoriesList as $categoryUid) {
+                $categoryList[] = $categoryRepository->findChildrenByParent((int)$categoryUid)->toArray();
+                // add parent itself as object
+                $categoryList[] = $categoryRepository->findByUid((int)$categoryUid);
+            }
+
         }
+
+        $categoryList = array_values(array_filter($categoryList));
 
         // a) Either: SQL statement
         // if: filter option "address" is filled (for proximity search)
