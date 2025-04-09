@@ -176,6 +176,10 @@
 				<source>Last name</source>
 				<target>Nachname</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.companyRole" approved="yes">
+				<source>Role in company</source>
+				<target>Funktion im Unternehmen</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.company" approved="yes">
 				<source>Company</source>
 				<target>Firma</target>
@@ -195,6 +199,10 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.zip" approved="yes">
 				<source>ZIP</source>
 				<target>PLZ</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.zip.accessible" approved="yes">
+				<source>Postal code</source>
+				<target>Postleitzahl</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.city" approved="yes">
 				<source>city</source>
@@ -965,7 +973,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.presentations" approved="yes">
 				<source>Presentations</source>
-				<target>Vortragsfolien</target>
+				<target>Materialien zur Veranstaltung</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_events_additionalData.slideshare" approved="yes">
 				<source>See all Slideshare-Sheets</source>
@@ -1329,6 +1337,14 @@
 				<source>Survey after: "%s"</source>
 				<target>Abschluss-Umfrage: "%s"</target>
 			</trans-unit>
+			<trans-unit id="rkwMailService.cancellationReservationUser.subject" approved="yes">
+				<source>Your reservation has been canceled</source>
+				<target>Ihre Anmeldung wurde storniert</target>
+			</trans-unit>
+			<trans-unit id="rkwMailService.cancellationReservationAdmin.subject" approved="yes">
+				<source>Reservations for an appointment have been deleted</source>
+				<target>Reservierungen zu einem Termin wurden gelöscht</target>
+			</trans-unit>
 
 
 
@@ -1353,7 +1369,7 @@
 			</trans-unit>
 			<trans-unit id="templates_email_optInReservationUser.textOptOut">
 				<source>Click here to cancel your request:</source>
-				<target>Sie haben es sich anders überlegt oder haben die Anmeldung gar nicht selbst angefragt? Klicken Sie einfach hier, um alle Daten zu löschen:</target>
+				<target>Sie haben es sich anders überlegt oder haben die Anmeldung gar nicht selbst angefragt? In Kürze werden die Daten Ihrer Anfrage automatisch gelöscht. Sie brauchen nichts weiter zu tun.</target>
 			</trans-unit>
 			<trans-unit id="templates_email_optInReservationUser.textOptInLinkLabel">
 				<source>Yes, I want to attend</source>
@@ -1409,6 +1425,10 @@
 			<trans-unit id="partials_email_details.eventCostsFree">
 				<source>Free</source>
 				<target>Kostenlos</target>
+			</trans-unit>
+			<trans-unit id="partials_email_details.costsUnknown">
+				<source>Costs unknown</source>
+				<target>Preis steht noch nicht fest</target>
 			</trans-unit>
 			<trans-unit id="partials_email_details.code">
                 <source>Code</source>
@@ -1492,6 +1512,32 @@
             </trans-unit>
 
 
+			<!-- Templates/Email/CancellationReservationUser.html -->
+			<trans-unit id="templates_email_cancellationReservationUser.headline">
+				<source>Hello %s %s,</source>
+				<target>Hallo %s %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_cancellationReservationUser.text1">
+				<source>unfortunately we have to inform you that one event has been canceled.</source>
+				<target>leider müssen wir Ihnen mitteilen, dass eine Veranstaltung abgesagt wurde. Daher wurde Ihre Reservierung storniert.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_cancellationReservationUser.text2">
+				<source>Below you can see the information about the canceled event.</source>
+				<target>Untenstehend finden Sie die Informationen zur abgesagten Veranstaltung. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
+			</trans-unit>
+
+
+			<!-- Templates/Email/CancellationReservationAdmin.html -->
+			<trans-unit id="templates_email_cancellationReservationAdmin.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_cancellationReservationAdmin.text1" approved="no">
+				<source>a reservation has been canceled.</source>
+				<target>eine Veranstaltung wurde in TYPO3 gelöscht. Dadurch wurden auch die insgesamt %s zugehörigen Reservierungen gelöscht. Die jeweiligen Teilnehmenden wurden separat per E-Mail über die Stornierung informiert.</target>
+			</trans-unit>
+
+
             <!-- Templates/Email/ConfirmationReservationUser.html -->
 			<trans-unit id="templates_email_confirmationReservationUser.headline">
 				<source>Hello %s %s,</source>
@@ -1530,7 +1576,7 @@
 			</trans-unit>
             <trans-unit id="templates_email_confirmationReservationAdmin.text2" approved="no">
                 <source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
-                <target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. Sofern es sich nicht um eine Online-Veranstaltung handelt, wird er darüber hinaus kurz vor der Veranstaltung eine automatische Erinnerungsmail mit Anfahrtsskizze erhalten.</target>
+                <target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. 48 Stunden vor Beginn der Veranstaltung wird automatisch eine Erinnerungsmail mit Anfahrtskizze oder im Falle einer Online-Veranstaltung mit dem zusätzlich hinterlegten Teilnahmelink versendet.</target>
             </trans-unit>
 
 

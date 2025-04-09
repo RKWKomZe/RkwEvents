@@ -119,6 +119,13 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $backendUserExclusive = false;
 
     /**
+     * disableReminderMail
+     *
+     * @var bool
+     */
+    protected $disableReminderMail = false;
+
+    /**
      * Holds recommendedLinks
      *
      * @var string
@@ -496,6 +503,22 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @return bool
+     */
+    public function getDisableReminderMail(): bool
+    {
+        return $this->disableReminderMail;
+    }
+
+    /**
+     * @param bool $disableReminderMail
+     */
+    public function setDisableReminderMail(bool $disableReminderMail): void
+    {
+        $this->disableReminderMail = $disableReminderMail;
+    }
+
+    /**
      * @return string
      */
     public function getRecommendedLinks(): string
@@ -531,6 +554,7 @@ class EventSeries extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->eventStartDate = $eventStartDate;
     }
+
 
     /**
      * Returns the headerImage

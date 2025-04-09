@@ -44,7 +44,7 @@
         />
 	</div>
 
-	<div class="form__field width50">
+	<div class="form__field width50 break-after">
 		<label class="form-label" for="tx_rkwevents_pi1_email">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.email" />
             <f:render partial="LabelSuffix" arguments="{field: 'email', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
@@ -74,7 +74,20 @@
 	</div>
 
 
-	<div class="form__field width50">
+    <div class="form__field width50">
+        <label class="form-label" for="tx_rkwevents_pi1_lastName">
+            <f:translate key="tx_rkwevents_domain_model_eventreservation.companyRole" />
+            <f:render partial="LabelSuffix" arguments="{field: 'companyRole', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+        </label>
+        <f:form.textfield
+            id="tx_rkwevents_pi1_companyRole"
+            property="companyRole"
+            value="{f:if(condition:'{newEventReservation.companyRole} || {editMode}',then:'{newEventReservation.companyRole}',else:'{frontendUser.companyRole}')}"
+        />
+    </div>
+
+
+    <div class="form__field width50">
 		<label class="form-label" for="tx_rkwevents_pi1_company">
 			<f:translate key="tx_rkwevents_domain_model_eventreservation.company" />
             <f:render partial="LabelSuffix" arguments="{field: 'company', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
@@ -138,7 +151,7 @@
                 id="tx_rkwevents_pi1_zip"
                 property="zip"
                 value="{f:if(condition:'{newEventReservation.zip} || {editMode}',then:'{newEventReservation.zip}',else:'{frontendUser.zip}')}"
-                additionalAttributes="{autocomplete:'postal-code'}"
+                additionalAttributes="{aria-label: '{f:translate(key:\'LLL:EXT:rkw_events/Resources/Private/Language/locallang.xlf:tx_rkwevents_domain_model_eventreservation.zip.accessible\')}', autocomplete:'postal-code'}"
             />
         </div>
 
@@ -174,7 +187,7 @@
             />
         </div>
     </f:if>
-    
+
     <f:comment>
         <!--
         <div class="v320-1">
@@ -212,8 +225,45 @@
     </f:if>
 
 
+    <f:comment><!-- custom field --></f:comment>
+    <f:if condition="{event.customFieldShow}">
+        <div class="form__field flex {f:if(condition: '{event.customFieldFullWidth}', then: 'width100', else: 'width50')}">
+            <label class="form-label" for="tx_rkwevents_pi1_customField">
+                {event.customFieldLabel}
+                <f:if condition="{event.customFieldMandatory}">
+                    <f:then>
+                        <span class="is-required"><f:translate key="tx_rkwevents_fluid.label_required" /></span>
+                    </f:then>
+                    <f:else>
+                        <span class="is-optional"><f:translate key="tx_rkwevents_fluid.label_optional" /></span>
+                    </f:else>
+                </f:if>
+            </label>
+            <f:if condition="{event.customFieldType}">
+                <f:then>
+                    <f:comment><!-- textarea --></f:comment>
+                    <f:form.textarea
+                        id="tx_rkwevents_pi1_customField"
+                        property="customField"
+                        placeholder="{event.customFieldPlaceholder}"
+                        rows="3"
+                    />
+                </f:then>
+                <f:else>
+                    <f:comment><!-- input field --></f:comment>
+                    <f:form.textfield
+                        id="tx_rkwevents_pi1_customField"
+                        property="customField"
+                        placeholder="{event.customFieldPlaceholder}"
+                    />
+                </f:else>
+            </f:if>
 
-    <!-- remark and questions -->
+        </div>
+    </f:if>
+
+
+    <f:comment><!-- remark and questions --></f:comment>
     <div class="form__field width100">
         <label class="form-label" for="tx_rkwevents_pi1_remark">
             <f:translate key="tx_rkwevents_domain_model_eventreservation.remark" />
@@ -253,18 +303,27 @@
     <f:if condition="{editMode}">
         <f:else>
             <feRegister:consent type="terms" key="events" />
-            <f:if condition="{event.regSingle}">
+            <f:if condition="{event.customPrivacyConsentShow}">
                 <f:then>
-                    <feRegister:consent type="privacy" key="eventsSingle" subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}" />
+                    <feRegister:consent
+                        type="privacy"
+                        key="{f:if(condition: '{event.regSingle}', then: 'eventsSingle', else: 'events')}"
+                        subType="custom"
+                        consentText="{event.customPrivacyConsent}"
+                    />
                 </f:then>
                 <f:else>
-                    <feRegister:consent type="privacy" key="events" subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}" />
+                    <feRegister:consent
+                        type="privacy"
+                        key="{f:if(condition: '{event.regSingle}', then: 'eventsSingle', else: 'events')}"
+                        subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}"
+                    />
                 </f:else>
             </f:if>
             <feRegister:consent type="marketing" />
         </f:else>
     </f:if>
-    
+
     <f:render partial="CaptchaElement" />
 
     <!-- Button Set -->

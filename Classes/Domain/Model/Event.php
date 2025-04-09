@@ -229,6 +229,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $extendedNetwork = false;
 
     /**
+     * customPrivacyConsentShow
+     *
+     * @var bool
+     */
+    protected $customPrivacyConsentShow;
+
+    /**
+     * customPrivacyConsent
+     *
+     * @var string
+     */
+    protected $customPrivacyConsent;
+
+    /**
      * onlineEventAccessLink
      *
      * @var string
@@ -255,6 +269,48 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var boolean
      */
     protected $workshopSelectReq = false;
+
+    /**
+     * customFieldShow
+     *
+     * @var bool
+     */
+    protected $customFieldShow;
+
+    /**
+     * customFieldMandatory
+     *
+     * @var bool
+     */
+    protected $customFieldMandatory;
+
+    /**
+     * customFieldLabel
+     *
+     * @var string
+     */
+    protected $customFieldLabel;
+
+    /**
+     * customFieldPlaceholder
+     *
+     * @var string
+     */
+    protected $customFieldPlaceholder;
+
+    /**
+     * customFieldType
+     *
+     * @var bool
+     */
+    protected $customFieldType;
+
+    /**
+     * customFieldFullWidth
+     *
+     * @var bool
+     */
+    protected $customFieldFullWidth;
 
     /**
      * type
@@ -1125,6 +1181,39 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @return bool
+     */
+    public function getCustomPrivacyConsentShow(): bool
+    {
+        return $this->customPrivacyConsentShow;
+    }
+
+    /**
+     * @param bool $customPrivacyConsentShow
+     * @return void
+     */
+    public function setCustomPrivacyConsentShow(bool $customPrivacyConsentShow): void
+    {
+        $this->customPrivacyConsentShow = $customPrivacyConsentShow;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomPrivacyConsent(): string
+    {
+        return $this->customPrivacyConsent;
+    }
+
+    /**
+     * @param string $customPrivacyConsent
+     */
+    public function setCustomPrivacyConsent(string $customPrivacyConsent): void
+    {
+        $this->customPrivacyConsent = $customPrivacyConsent;
+    }
+
+    /**
      * @return int
      */
     public function getWorkshopSelectType(): int
@@ -1164,6 +1253,108 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setWorkshopSelectReq(bool $workshopSelectReq): void
     {
         $this->workshopSelectReq = $workshopSelectReq;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCustomFieldShow(): bool
+    {
+        return $this->customFieldShow;
+    }
+
+    /**
+     * @param bool $customFieldShow
+     * @return void
+     */
+    public function setCustomFieldShow(bool $customFieldShow): void
+    {
+        $this->customFieldShow = $customFieldShow;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCustomFieldMandatory(): bool
+    {
+        return $this->customFieldMandatory;
+    }
+
+    /**
+     * @param bool $customFieldMandatory
+     * @return void
+     */
+    public function setCustomFieldMandatory(bool $customFieldMandatory): void
+    {
+        $this->customFieldMandatory = $customFieldMandatory;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomFieldLabel(): string
+    {
+        return $this->customFieldLabel;
+    }
+
+    /**
+     * @param string $customFieldLabel
+     * @return void
+     */
+    public function setCustomFieldLabel(string $customFieldLabel): void
+    {
+        $this->customFieldLabel = $customFieldLabel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomFieldPlaceholder(): string
+    {
+        return $this->customFieldPlaceholder;
+    }
+
+    /**
+     * @param string $customFieldPlaceholder
+     * @return void
+     */
+    public function setCustomFieldPlaceholder(string $customFieldPlaceholder): void
+    {
+        $this->customFieldPlaceholder = $customFieldPlaceholder;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCustomFieldType(): bool
+    {
+        return $this->customFieldType;
+    }
+
+    /**
+     * @param bool $customFieldType
+     * @return void
+     */
+    public function setCustomFieldType(bool $customFieldType): void
+    {
+        $this->customFieldType = $customFieldType;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCustomFieldFullWidth(): bool
+    {
+        return $this->customFieldFullWidth;
+    }
+
+    /**
+     * @param bool $customFieldFullWidth
+     * @return void
+     */
+    public function setCustomFieldFullWidth(bool $customFieldFullWidth): void
+    {
+        $this->customFieldFullWidth = $customFieldFullWidth;
     }
 
     /**

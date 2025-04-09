@@ -30,7 +30,8 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     categories_displayed    varchar(255) DEFAULT '' NOT NULL,
     reg_inhouse             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     backend_user_exclusive  tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	  event_start_date				int(11) unsigned DEFAULT '0' NOT NULL,
+    disable_reminder_mail   tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	event_start_date		int(11) unsigned DEFAULT '0' NOT NULL,
 
     event                   varchar(255) DEFAULT '' NOT NULL,
 
@@ -115,6 +116,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
     currency                 int(11) unsigned DEFAULT '0',
     eligibility              tinyint(1) unsigned DEFAULT '0' NOT NULL,
     eligibility_link         varchar(255) DEFAULT '' NOT NULL,
+    extended_network		 		 tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     online_event_access_link varchar(255) DEFAULT '' NOT NULL,
     register_add_information text NOT NULL,
@@ -139,6 +141,14 @@ CREATE TABLE tx_rkwevents_domain_model_event
 
     trainer                  varchar(255) DEFAULT '' NOT NULL,
     additional_tile_flag     varchar(255) DEFAULT '' NOT NULL,
+    custom_privacy_consent_show	int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_privacy_consent   text,
+    custom_field_show		     int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_mandatory	 int(11) unsigned DEFAULT '0' NOT NULL,
+    custom_field_label       varchar(255) DEFAULT '' NOT NULL,
+    custom_field_placeholder varchar(255) DEFAULT '' NOT NULL,
+    custom_field_type        tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    custom_field_full_width  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
     tstamp                   int(11) unsigned DEFAULT '0' NOT NULL,
     crdate                   int(11) unsigned DEFAULT '0' NOT NULL,
@@ -314,7 +324,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 
 	event               int(11) unsigned DEFAULT '0' NOT NULL,
 
-	remark              text                    NOT NULL,
+	remark              text NOT NULL,
 	valid_until         int(11) unsigned DEFAULT '0' NOT NULL,
 	add_person          varchar(255) DEFAULT '' NOT NULL,
 	fe_user             varchar(255) DEFAULT '' NOT NULL,
@@ -322,6 +332,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	first_name          varchar(255) DEFAULT '' NOT NULL,
 	last_name           varchar(255) DEFAULT '' NOT NULL,
 	company             varchar(255) DEFAULT '' NOT NULL,
+	company_role        varchar(255) DEFAULT '' NOT NULL,
 	address             varchar(255) DEFAULT '' NOT NULL,
 	zip                 varchar(255) DEFAULT '' NOT NULL,
 	city                varchar(255) DEFAULT '' NOT NULL,
@@ -334,6 +345,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	target_group        varchar(255) DEFAULT '' NOT NULL,
+	custom_field        text NOT NULL,
 	workshop_register   varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
@@ -342,7 +354,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	deleted             tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
-	KEY                 parent (pid),
+	KEY                 parent (pid)
 
 );
 
@@ -367,7 +379,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservationaddperson
 	deleted           tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
-	KEY               parent (pid),
+	KEY               parent (pid)
 
 );
 
