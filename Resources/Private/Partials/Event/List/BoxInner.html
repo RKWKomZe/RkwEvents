@@ -3,150 +3,291 @@
     data-namespace-typo3-fluid="true">
 
     <div class="tile tile--no-img">
-        <f:link.action
-            action="show"
-            controller="Event"
-            pluginName="Pi1"
-            extensionName="RkwEvents"
-            pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
-            arguments="{event : event}"
-            title="{event.series.title}"
-            target="{f:if(condition: '{settings.list.detailLinkTargetBlank} == 1', then: '_blank')}"
-        >
-            <div class="tile__header">
-                <div class="tile__label-wrapper">
+        <f:if condition="{event.extShowLink}">
+            <f:then>
+                <f:link.external uri="{event.extShowLink}" target="_blank" rel="nofollow">
+                    <div class="tile__header">
+                        <div class="tile__label-wrapper">
                     <span class="tile__label">
                         {event.series.documentType.name}
                     </span>
-                    <f:if condition="{event.additionalTileFlag}">
+                            <f:if condition="{event.additionalTileFlag}">
                         <span class="tile__label tile__label--primary">
                             {event.additionalTileFlag}
                         </span>
-                    </f:if>
-                </div>
-            </div>
-            <div class="tile__content">
-                <h3 class="tile__title icon">
+                            </f:if>
+                        </div>
+                    </div>
+                    <div class="tile__content">
+                        <h3 class="tile__title icon">
                     <span class="tile__title-icon">
                         <svg class="icon icon--36" aria-hidden="true"><use xlink:href="#ic-events"></use></svg>
                     </span>
-                    <span class="tile__title-text">
+                            <span class="tile__title-text">
                         {event.series.title}
                     </span>
-                </h3>
-                <div class="tile__text tile__text--no-img">
-                    <p>
-                        <f:if condition="{settings.list.filter.showDepartment}">
-                            <f:then>
-                                {event.series.department.name}
-                            </f:then>
-                            <f:else>
-                                <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.series.categories}</f:count>">
-                                    <f:if condition="{event.series.categoriesDisplayed}">
-                                        <f:then>
-                                            <f:for each="{event.series.categoriesDisplayed}" as="category" iteration="iter">
-                                                <f:if condition="{iter.isFirst}">
-                                                    {category.title}
-                                                </f:if>
-                                            </f:for>
-                                        </f:then>
-                                        <f:else>
-                                            <f:for each="{event.series.categories}" as="category" iteration="iter">
-                                                <f:if condition="{iter.isFirst}">
-                                                    {category.title}
-                                                </f:if>
-                                            </f:for>
-                                        </f:else>
-                                    </f:if>
+                        </h3>
+                        <div class="tile__text tile__text--no-img">
+                            <p>
+                                <f:if condition="{settings.list.filter.showDepartment}">
+                                    <f:then>
+                                        {event.series.department.name}
+                                    </f:then>
+                                    <f:else>
+                                        <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.series.categories}</f:count>">
+                                            <f:if condition="{event.series.categoriesDisplayed}">
+                                                <f:then>
+                                                    <f:for each="{event.series.categoriesDisplayed}" as="category" iteration="iter">
+                                                        <f:if condition="{iter.isFirst}">
+                                                            {category.title}
+                                                        </f:if>
+                                                    </f:for>
+                                                </f:then>
+                                                <f:else>
+                                                    <f:for each="{event.series.categories}" as="category" iteration="iter">
+                                                        <f:if condition="{iter.isFirst}">
+                                                            {category.title}
+                                                        </f:if>
+                                                    </f:for>
+                                                </f:else>
+                                            </f:if>
+                                        </f:if>
+                                    </f:else>
                                 </f:if>
-                            </f:else>
-                        </f:if>
 
-                    </p>
-                </div>
-            </div>
-            <div class="tile__footer tile__contact">
-                <div class="tile__contact-text">
-                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
-                        <f:then>
-                            <svg class="icon icon--16" aria-hidden="true">                                     
-                                <use xlink:href="#ic-date-alarm"></use>
-                            </svg>
-                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkwEvents' />
-                        </f:then>
-                        <f:else>
-                            <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tile__footer tile__contact">
+                        <div class="tile__contact-text">
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
                                 <f:then>
-                                    <f:if condition="{settings.list.filter.showTime}">
-                                        <f:then>
-                                            {event.start -> f:format.date(format:"d.m.Y H:i")}
-                                        </f:then>
-                                        <f:else>
-                                            {event.start -> f:format.date(format:"d.m.Y")}
-                                        </f:else>
-                                    </f:if>
+                                    <svg class="icon icon--16" aria-hidden="true">
+                                        <use xlink:href="#ic-date-alarm"></use>
+                                    </svg>
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkwEvents' />
                                 </f:then>
-                                <f:else>
-                                    <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
-                                        <f:else>
-                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkwEvents' />
-                                        </f:else>
-                                    </f:if>
-                                    {event.start -> f:format.date(format:"d.m.Y")}
-                                </f:else>
-                            </f:if>
-                        </f:else>
-                    </f:if>
-
-                    <f:comment>
-                        <f:if condition="{event.end}">
-                            <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
                                 <f:else>
                                     <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
                                         <f:then>
-                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                            <f:if condition="{settings.list.filter.showTime}">
+                                                <f:then>
+                                                    {event.start -> f:format.date(format:"d.m.Y H:i")}
+                                                </f:then>
+                                                <f:else>
+                                                    {event.start -> f:format.date(format:"d.m.Y")}
+                                                </f:else>
+                                            </f:if>
                                         </f:then>
                                         <f:else>
-                                            &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                            <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
+                                                <f:else>
+                                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkwEvents' />
+                                                </f:else>
+                                            </f:if>
+                                            {event.start -> f:format.date(format:"d.m.Y")}
                                         </f:else>
                                     </f:if>
                                 </f:else>
                             </f:if>
-                        </f:if>
-                    </f:comment>
-                </div>
-                <div class="tile__contact-location"                                  
-                     title="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
-                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
-                        <f:else>
-                            <svg class="icon icon--16"
-                                 aria-label="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
-                                <use xlink:href="#ic-location"></use>
-                            </svg>
-                        </f:else>
-                    </f:if>
-                    <f:if condition="{event.place}">
-                        <f:then>
-                            {event.place.city}
-                        </f:then>
-                        <f:else>
-                            <f:if condition="{event.placeUnknown}">
+
+                            <f:comment>
+                                <f:if condition="{event.end}">
+                                    <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+                                        <f:else>
+                                            <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                                <f:then>
+                                                    &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                                </f:then>
+                                                <f:else>
+                                                    &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                                </f:else>
+                                            </f:if>
+                                        </f:else>
+                                    </f:if>
+                                </f:if>
+                            </f:comment>
+                        </div>
+                        <div class="tile__contact-location"
+                            title="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:else>
+                                    <svg class="icon icon--16"
+                                        aria-label="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
+                                        <use xlink:href="#ic-location"></use>
+                                    </svg>
+                                </f:else>
+                            </f:if>
+                            <f:if condition="{event.place}">
                                 <f:then>
-                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown' extensionName='rkwEvents' />
+                                    {event.place.city}
                                 </f:then>
                                 <f:else>
-                                    <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                    <f:if condition="{event.placeUnknown}">
+                                        <f:then>
+                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown' extensionName='rkwEvents' />
+                                        </f:then>
                                         <f:else>
-                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkwEvents' />
+                                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                                <f:else>
+                                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkwEvents' />
+                                                </f:else>
+                                            </f:if>
                                         </f:else>
                                     </f:if>
                                 </f:else>
                             </f:if>
-                        </f:else>
-                    </f:if>
-                </div>
-            </div>
-        </f:link.action>
+                        </div>
+                    </div>
+                </f:link.external>
+            </f:then>
+            <f:else>
+                <f:link.action
+                    action="show"
+                    controller="Event"
+                    pluginName="Pi1"
+                    extensionName="RkwEvents"
+                    pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
+                    arguments="{event : event}"
+                    title="{event.series.title}"
+                    target="{f:if(condition: '{settings.list.detailLinkTargetBlank} == 1', then: '_blank')}"
+                >
+                    <div class="tile__header">
+                        <div class="tile__label-wrapper">
+                    <span class="tile__label">
+                        {event.series.documentType.name}
+                    </span>
+                            <f:if condition="{event.additionalTileFlag}">
+                        <span class="tile__label tile__label--primary">
+                            {event.additionalTileFlag}
+                        </span>
+                            </f:if>
+                        </div>
+                    </div>
+                    <div class="tile__content">
+                        <h3 class="tile__title icon">
+                    <span class="tile__title-icon">
+                        <svg class="icon icon--36" aria-hidden="true"><use xlink:href="#ic-events"></use></svg>
+                    </span>
+                            <span class="tile__title-text">
+                        {event.series.title}
+                    </span>
+                        </h3>
+                        <div class="tile__text tile__text--no-img">
+                            <p>
+                                <f:if condition="{settings.list.filter.showDepartment}">
+                                    <f:then>
+                                        {event.series.department.name}
+                                    </f:then>
+                                    <f:else>
+                                        <f:if condition="{settings.list.filter.showCategory} && <f:count>{event.series.categories}</f:count>">
+                                            <f:if condition="{event.series.categoriesDisplayed}">
+                                                <f:then>
+                                                    <f:for each="{event.series.categoriesDisplayed}" as="category" iteration="iter">
+                                                        <f:if condition="{iter.isFirst}">
+                                                            {category.title}
+                                                        </f:if>
+                                                    </f:for>
+                                                </f:then>
+                                                <f:else>
+                                                    <f:for each="{event.series.categories}" as="category" iteration="iter">
+                                                        <f:if condition="{iter.isFirst}">
+                                                            {category.title}
+                                                        </f:if>
+                                                    </f:for>
+                                                </f:else>
+                                            </f:if>
+                                        </f:if>
+                                    </f:else>
+                                </f:if>
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tile__footer tile__contact">
+                        <div class="tile__contact-text">
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:then>
+                                    <svg class="icon icon--16" aria-hidden="true">
+                                        <use xlink:href="#ic-date-alarm"></use>
+                                    </svg>
+                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.announcement' extensionName='rkwEvents' />
+                                </f:then>
+                                <f:else>
+                                    <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                        <f:then>
+                                            <f:if condition="{settings.list.filter.showTime}">
+                                                <f:then>
+                                                    {event.start -> f:format.date(format:"d.m.Y H:i")}
+                                                </f:then>
+                                                <f:else>
+                                                    {event.start -> f:format.date(format:"d.m.Y")}
+                                                </f:else>
+                                            </f:if>
+                                        </f:then>
+                                        <f:else>
+                                            <f:if condition="{f:format.date(date: event.start, format: 'd')} == {f:format.date(date: event.end, format: 'd')}">
+                                                <f:else>
+                                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.from' extensionName='rkwEvents' />
+                                                </f:else>
+                                            </f:if>
+                                            {event.start -> f:format.date(format:"d.m.Y")}
+                                        </f:else>
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+
+                            <f:comment>
+                                <f:if condition="{event.end}">
+                                    <f:if condition="{event.start -> f:format.date(format:'d.m.Y')} == {event.end -> f:format.date(format:'d.m.Y')}">
+                                        <f:else>
+                                            <f:if condition="<rkw:pastEvents event='{event}' /> == 1">
+                                                <f:then>
+                                                    &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                                </f:then>
+                                                <f:else>
+                                                    &nbsp;- {event.end -> f:format.date(format:"d.m.Y")}
+                                                </f:else>
+                                            </f:if>
+                                        </f:else>
+                                    </f:if>
+                                </f:if>
+                            </f:comment>
+                        </div>
+                        <div class="tile__contact-location"
+                            title="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
+                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                <f:else>
+                                    <svg class="icon icon--16"
+                                        aria-label="{f:translate(key:'tx_rkwevents_fluid.partials_event_list_boxInner.locationAriaLabel', extensionName:'rkwEvents')}">
+                                        <use xlink:href="#ic-location"></use>
+                                    </svg>
+                                </f:else>
+                            </f:if>
+                            <f:if condition="{event.place}">
+                                <f:then>
+                                    {event.place.city}
+                                </f:then>
+                                <f:else>
+                                    <f:if condition="{event.placeUnknown}">
+                                        <f:then>
+                                            <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.placeUnknown' extensionName='rkwEvents' />
+                                        </f:then>
+                                        <f:else>
+                                            <f:if condition="{event.recordType} == '\RKW\RkwEvents\Domain\Model\EventAnnouncement'">
+                                                <f:else>
+                                                    <f:translate key='tx_rkwevents_fluid.partials_event_list_boxInner.online' extensionName='rkwEvents' />
+                                                </f:else>
+                                            </f:if>
+                                        </f:else>
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+                        </div>
+                    </div>
+                </f:link.action>
+            </f:else>
+        </f:if>
     </div>
 
 </html>
