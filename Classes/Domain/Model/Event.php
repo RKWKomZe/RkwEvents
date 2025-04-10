@@ -215,6 +215,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $eligibilityLink = '';
 
     /**
+     * extShowLink
+     *
+     * @var string
+     */
+    protected $extShowLink;
+
+    /**
      * additionalTileFlag
      *
      * @var string
@@ -1077,6 +1084,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRegisterAddInformation(string $registerAddInformation): void
     {
         $this->registerAddInformation = $registerAddInformation;
+    }
+
+    /**
+     * Returns the extShowLink
+     *
+     * @return string $extShowLink
+     */
+    public function getExtShowLink()
+    {
+        return $this->extShowLink;
+    }
+
+    /**
+     * Sets the extShowLink
+     *
+     * @param string $extShowLink
+     * @return void
+     */
+    public function setExtShowLink($extShowLink)
+    {
+        $this->extShowLink = $extShowLink;
     }
 
     /**
