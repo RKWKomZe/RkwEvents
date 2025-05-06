@@ -18,6 +18,9 @@
             <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation" />
         </th>
         <th>
+            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.beUser" />
+        </th>
+        <th>
             <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv" />
         </th>
     </tr>
@@ -63,9 +66,20 @@
                     </td>
                     <td><f:count>{event.reservation}</f:count></td>
                     <td>
-                        <f:link.action action="createCsv" target="_blank" arguments="{event:event}">
-                            <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export" />
-                        </f:link.action>
+                        <f:for each="{event.beUser}" as="adminUser" iteration="iter">
+                            {adminUser.username}<f:if condition="{iter.isLast}"><f:else>, </f:else></f:if>
+                        </f:for>
+                    </td>
+                    <td>
+                        <f:for each="{event.beUser}" as="adminUser">
+                            <f:if condition="{adminUser.uid} == {currentBackendUser.uid}">
+
+                                <f:link.action action="createCsv" target="_blank" arguments="{event:event}">
+                                    <f:translate key="tx_rkwevents_fluid.partials_backend_csvexporteventlist.export" />
+                                </f:link.action>
+
+                            </f:if>
+                        </f:for>
                     </td>
                 </tr>
             </f:else>
