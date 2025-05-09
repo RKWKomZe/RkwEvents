@@ -19,15 +19,24 @@
 
         <h1><f:translate key="tx_rkwevents_fluid.templates_backend_csvexport.headline" /></h1>
 
+		<p>
+			<b>
+				<f:translate key="tx_rkwevents_fluid.templates_backend_csvexport.hint" />
+			</b>
+		</p>
+		<p>
+			<f:translate key="tx_rkwevents_fluid.templates_backend_csvexport.loggedInAs" /> <b>"{currentBackendUser.username}"</b>
+		</p>
+
         <f:render partial="Backend/FlashMessages" arguments="{_all}" />
 
 		<h2><f:translate key="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents" /></h2>
 
-        <f:render partial="Backend/CsvExportEventList" arguments="{eventList: eventListNotFinished}" />
+        <f:render partial="Backend/CsvExportEventList" arguments="{eventList: eventListNotFinished, currentBackendUser: currentBackendUser}" />
 
         <h2><f:translate key="tx_rkwevents_fluid.templates_backend_csvexport.pastEvents" /></h2>
 
-        <f:render partial="Backend/CsvExportEventList" arguments="{eventList: eventListFinished}" />
+        <f:render partial="Backend/CsvExportEventList" arguments="{eventList: eventListFinished, currentBackendUser: currentBackendUser}" />
 
 	</f:section>
 

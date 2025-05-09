@@ -436,6 +436,14 @@
                 <source>CSV export for reservations</source>
                 <target>CSV Export für Reservierungen</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.hint">
+                <source>You can only export the data of an event if you are entered as a “Backend user (e-mail notification only)” for the respective event.</source>
+                <target>Sie können die Daten einer Veranstaltung nur exportieren, wenn Sie bei der jeweiligen Veranstaltung als "Backend-User (nur E-Mailbenachrichtigung)" eingetragen sind.</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.loggedInAs">
+                <source>Logged in as</source>
+                <target>Sie sind eingeloggt als</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents">
                 <source>Running events</source>
                 <target>Laufende und zukünftige Veranstaltungen</target>
@@ -466,6 +474,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation">
                 <source>Reservation</source>
                 <target>Reservierungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.beUser">
+                <source>Backend-User</source>
+                <target>Backend-User</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
                 <source>Export (CSV)</source>
