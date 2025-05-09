@@ -368,7 +368,7 @@
                 <source>Reservation</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.beUser">
-                <source>BeUser</source>
+                <source>Backend-User</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
                 <source>Export (CSV)</source>
