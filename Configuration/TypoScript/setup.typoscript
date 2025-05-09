@@ -270,6 +270,7 @@ plugin.tx_rkwevents {
         sheetsForEventPid = {$plugin.tx_rkwevents.settings.sheetsForEventPid}
         archivePid = {$plugin.tx_rkwevents.settings.archivePid}
 		surveyPid = {$plugin.tx_rkwevents.settings.surveyPid}
+        cancelRegPid = {$plugin.tx_rkwevents.settings.cancelRegPid}
 
         itemsPerPage = {$plugin.tx_rkwevents.settings.itemsPerPage}
         // @todo @deprecated (typeNum is only needed for OLD Ajax API)
