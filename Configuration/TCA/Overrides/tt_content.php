@@ -84,7 +84,7 @@ call_user_func(
         ExtensionUtility::registerPlugin(
             $extKey,
             'Cancelreg',
-            'RKW Events: Von VA abmelden (via Link)'
+            'RKW Events: Von Veranstaltung abmelden (via Link)'
         );
 
 
