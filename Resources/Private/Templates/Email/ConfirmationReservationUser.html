@@ -18,8 +18,9 @@
 =============================================================
 <postmaster:email.translate key="templates_email_confirmationReservationUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <postmaster:email.uri.page absolute="true" pageUid="{loginPid}" />
+
 <postmaster:email.translate key="templates_email_confirmationReservationUser.cancelQuestion" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
-<postmaster:email.uri.page absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_cancelreg: {cancelRegHash: reservation.cancelRegHash}}' />
+<postmaster:email.uri.action action='removeByHash' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_pi1: {cancelRegHash: reservation.cancelRegHash}}' />
 </f:section>
 
 <!-- HTML -->
@@ -42,7 +43,9 @@
 		<a href="<postmaster:email.uri.page absolute='true' pageUid='{loginPid}' />" target="_blank"><postmaster:email.translate key="templates_email_confirmationReservationUser.text3" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></a>
 	</p>
 	<p><postmaster:email.translate key="templates_email_confirmationReservationUser.cancelQuestion" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></p>
-	<a href="<postmaster:email.uri.page absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_cancelreg: {cancelRegHash: reservation.cancelRegHash}}' />" target="_blank"><postmaster:email.translate key="templates_email_confirmationReservationUser.cancelButton" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></a>
+    <a href="<postmaster:email.uri.action action='removeByHash' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='true' pageUid='{cancelRegPid}' additionalParams='{tx_rkwevents_pi1: {cancelRegHash: reservation.cancelRegHash}}' />">
+        <postmaster:email.translate key="templates_email_confirmationReservationUser.cancelButton" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+    </a>
 </f:section>
 
 

@@ -1031,6 +1031,10 @@
 				<source>New Registration</source>
 				<target>Anmeldung</target>
 			</trans-unit>
+			<trans-unit id="flexform.event.removeByHash">
+				<source>Cancel participitation by link</source>
+				<target>Abmeldung via Link</target>
+			</trans-unit>
 			<trans-unit id="flexform.event.myEvents">
 				<source>My event reservation</source>
 				<target>Mein RKW: Liste Reservierungen</target>

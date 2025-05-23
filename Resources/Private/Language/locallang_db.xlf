@@ -771,6 +771,9 @@
 			<trans-unit id="flexform.event.register">
 				<source>New Registration</source>
 			</trans-unit>
+			<trans-unit id="flexform.event.removeByHash">
+				<source>Cancel participitation by link</source>
+			</trans-unit>
 			<trans-unit id="flexform.event.myEvents">
 				<source>My events</source>
 			</trans-unit>

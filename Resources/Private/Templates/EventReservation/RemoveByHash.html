@@ -4,10 +4,6 @@
 
     <f:layout name="Default" />
 
-    <f:comment>
-        https://rkw-kompetenzzentrum.ddev.site:8443/rkw-mediapool/rkw-events-abmeldelink/?tx_rkwevents_cancelreg%5BcancelRegHash%5D=3899a8c170003ef11bf101af0cafb1fe&cHash=0d626a258b89e02df3d943034bfe2062
-    </f:comment>
-
     <f:section name="main">
         <h2 class="no-hide"><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.headline" /></h2>
 
@@ -46,7 +42,13 @@
         <div class="btn-list btn-list--footer">
             <f:if condition="{eventReservation}">
                 <f:then>
-                    <f:link.action class="btn btn--secondary" arguments="{confirmedByUser : 1, cancelRegHash: eventReservation.cancelRegHash}">
+                    <f:link.action class="btn btn--secondary"
+                                   action="removeByHash"
+                                   controller="EventReservation"
+                                   extensionName="RkwEvents"
+                                   pluginName="pi1"
+                                   arguments="{confirmedByUser : 1, cancelRegHash: eventReservation.cancelRegHash}"
+                    >
                         <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel" />
                     </f:link.action>
                     <f:link.action class="btn btn--primary"

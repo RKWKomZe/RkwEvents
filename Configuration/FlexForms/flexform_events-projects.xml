@@ -50,6 +50,10 @@
                                         <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.register</numIndex>
                                         <numIndex index="1">EventReservation->new;EventReservation->create;EventReservation->optIn</numIndex>
                                     </numIndex>
+                                    <numIndex index="7" type="array">
+                                        <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.removeByHash</numIndex>
+                                        <numIndex index="1">EventReservation->removeByHash</numIndex>
+                                    </numIndex>
                                     <numIndex index="11" type="array">
                                         <numIndex index="0">LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:flexform.event.myEvents</numIndex>
                                         <numIndex index="1">Event->myEvents;EventReservation->show;EventReservation->edit;EventReservation->update;EventReservation->delete;EventReservation->remove</numIndex>

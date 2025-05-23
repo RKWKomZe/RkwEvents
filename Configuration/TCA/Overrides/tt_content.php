@@ -81,13 +81,6 @@ call_user_func(
             'RKW Events: Registrierung (standalone)'
         );
 
-        ExtensionUtility::registerPlugin(
-            $extKey,
-            'Cancelreg',
-            'RKW Events: Von Veranstaltung abmelden (via Link)'
-        );
-
-
         //=================================================================
         // Add Flexforms
         //=================================================================
