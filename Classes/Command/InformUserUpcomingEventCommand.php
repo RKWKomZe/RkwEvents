@@ -63,7 +63,7 @@ class InformUserUpcomingEventCommand extends Command
 
 
     /**
-     * @var \TYPO3\CMS\Core\Log\Logger
+     * @var Logger|null
      */
     protected ?Logger $logger = null;
 
@@ -152,13 +152,29 @@ class InformUserUpcomingEventCommand extends Command
                         $this->eventRepository->update($event);
                         $this->persistenceManager->persistAll();
 
-                        $this->getLogger()->log(LogLevel::INFO, sprintf('Successfully sent %s reminder mails for upcoming event %s.', count($eventReservationList), $event->getUid()));
+                        $this->getLogger()->log(
+                            LogLevel::INFO,
+                            sprintf(
+                                'Successfully sent %s reminder mails for upcoming event %s.',
+                                count($eventReservationList),
+                                $event->getUid()
+                            )
+                        );
                     } else {
-                        $this->getLogger()->log(LogLevel::INFO, sprintf('No reservations found for upcoming event %s. No reminder mail sent.', $event->getUid()));
+                        $this->getLogger()->log(
+                            LogLevel::INFO,
+                            sprintf(
+                                'No reservations found for upcoming event %s. No reminder mail sent.',
+                                $event->getUid()
+                            )
+                        );
                     }
                 }
             } else {
-                $this->getLogger()->log(LogLevel::INFO, sprintf('No relevant events found for reminder mail.'));
+                $this->getLogger()->log(
+                    LogLevel::INFO,
+                    sprintf('No relevant events found for reminder mail.')
+                );
             }
 
         } catch (\Exception $e) {
@@ -169,7 +185,10 @@ class InformUserUpcomingEventCommand extends Command
 
             // @extensionScannerIgnoreLine
             $io->error($message);
-            $this->getLogger()->log(LogLevel::ERROR, $message);
+            $this->getLogger()->log(
+                LogLevel::ERROR,
+                $message
+            );
             $result = 1;
         }
 
@@ -184,10 +203,10 @@ class InformUserUpcomingEventCommand extends Command
      *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
-    protected function getLogger(): \TYPO3\CMS\Core\Log\Logger
+    protected function getLogger(): Logger
     {
-        if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+        if (!$this->logger instanceof Logger) {
+            $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
         }
 
         return $this->logger;
