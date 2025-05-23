@@ -1,0 +1,82 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <f:layout name="Default" />
+
+    <f:section name="main">
+        <h2 class="no-hide"><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.headline" /></h2>
+
+        <f:render partial="FlashMessages" arguments="{_all}" />
+
+        <f:comment>
+            <p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.question" /></p>
+        </f:comment>
+
+        <f:if condition="{eventReservation}">
+            <table class="flex-basis-12 responsive-table responsive-table--background">
+                <tr>
+                    <td>
+                        <f:link.action
+                                action="show"
+                                controller="Event"
+                                pluginName="Pi1"
+                                extensionName="RkwEvents"
+                                pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
+                                arguments="{event : event}"
+                                title="{event.series.title}"
+                                target="_blank"
+                        >
+                            {event.series.title}
+                        </f:link.action>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <rkw:ComposeDateTimeParts event='{event}' onlyDate="1" />
+                    </td>
+                </tr>
+            </table>
+        </f:if>
+
+        <div class="btn-list btn-list--footer">
+            <f:if condition="{eventReservation}">
+                <f:then>
+                    <f:link.action class="btn btn--secondary"
+                                   action="removeByHash"
+                                   controller="EventReservation"
+                                   extensionName="RkwEvents"
+                                   pluginName="pi1"
+                                   arguments="{confirmedByUser : 1, cancelRegHash: eventReservation.cancelRegHash}"
+                    >
+                        <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel" />
+                    </f:link.action>
+                    <f:link.action class="btn btn--primary"
+                                   action="show"
+                                   controller="Event"
+                                   pluginName="Pi1"
+                                   extensionName="RkwEvents"
+                                   pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
+                                   arguments="{event : event}"
+                                   title="{event.series.title}"
+                    >
+                        <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.avoidCancel" />
+                    </f:link.action>
+                </f:then>
+                <f:else>
+                    <div class="system-message" role="alert">
+                        <div class="system-message__item system-message__item--severity0">
+                            <f:link.page pageUid="{settings.listPid}" target="_blank">
+                                <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.showOther" />
+                            </f:link.page>
+                        </div>
+                    </div>
+
+                </f:else>
+            </f:if>
+        </div>
+
+
+    </f:section>
+
+</html>

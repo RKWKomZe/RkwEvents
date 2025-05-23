@@ -766,6 +766,10 @@
 				<source>Custom field</source>
 				<target>Individuelles Feld</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.cancel_reg_hash" approved="yes">
+				<source>Cancel register hash</source>
+				<target>Hash für Abmeldelink</target>
+			</trans-unit>
 
 
 			<!--tx_rkwevents_domain_model_eventreservationaddperson -->
@@ -1030,6 +1034,10 @@
 			<trans-unit id="flexform.event.register">
 				<source>New Registration</source>
 				<target>Anmeldung</target>
+			</trans-unit>
+			<trans-unit id="flexform.event.removeByHash">
+				<source>Cancel participitation by link</source>
+				<target>Abmeldung via Link</target>
 			</trans-unit>
 			<trans-unit id="flexform.event.myEvents">
 				<source>My event reservation</source>

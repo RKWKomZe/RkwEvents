@@ -201,6 +201,13 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $customField = '';
 
     /**
+     * cancelRegHash
+     *
+     * @var string
+     */
+    protected $cancelRegHash = '';
+
+    /**
      * @var string
      */
     protected $captchaResponse;
@@ -794,6 +801,23 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCustomField(string $customField): void
     {
         $this->customField = $customField;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCancelRegHash(): string
+    {
+        return $this->cancelRegHash;
+    }
+
+    /**
+     * @param string $cancelRegHash
+     * @return void
+     */
+    public function setCancelRegHash(string $cancelRegHash): void
+    {
+        $this->cancelRegHash = $cancelRegHash;
     }
 
     /**
