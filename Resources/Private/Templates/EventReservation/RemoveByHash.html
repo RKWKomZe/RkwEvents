@@ -9,34 +9,34 @@
 
         <f:render partial="FlashMessages" arguments="{_all}" />
 
-        <f:comment>
-            <p><f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.question" /></p>
-        </f:comment>
-
         <f:if condition="{eventReservation}">
-            <table class="flex-basis-12 responsive-table responsive-table--background">
-                <tr>
-                    <td>
-                        <f:link.action
-                                action="show"
-                                controller="Event"
-                                pluginName="Pi1"
-                                extensionName="RkwEvents"
-                                pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
-                                arguments="{event : event}"
-                                title="{event.series.title}"
-                                target="_blank"
-                        >
-                            {event.series.title}
-                        </f:link.action>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <rkw:ComposeDateTimeParts event='{event}' onlyDate="1" />
-                    </td>
-                </tr>
-            </table>
+            <p>
+                <f:link.action
+                    action="show"
+                    controller="Event"
+                    pluginName="Pi1"
+                    extensionName="RkwEvents"
+                    pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
+                    arguments="{event : event}"
+                    title="{event.series.title}"
+                    target="_blank"
+                >
+                    {event.series.title}
+                </f:link.action><BR>
+                <!-- Time -->
+                <f:if condition="{eventReservation.event.recordType} == '\RKW\RkwEvents\Domain\Model\EventScheduled'">
+                    <rkw:ComposeDateTimeParts event='{eventReservation.event}' /><br>
+                </f:if>
+                <f:if condition="{eventReservation.event.onlineEvent}">
+                    <f:then>
+                        <f:translate key="tx_rkwevents_fluid.partials_event_myListing.webinar" />
+                    </f:then>
+                    <f:else>
+                        {eventReservation.event.place.address},
+                        {eventReservation.event.place.zip} {eventReservation.event.place.city}
+                    </f:else>
+                </f:if>
+            </p>
         </f:if>
 
         <div class="btn-list btn-list--footer">
@@ -71,7 +71,6 @@
                             </f:link.page>
                         </div>
                     </div>
-
                 </f:else>
             </f:if>
         </div>
