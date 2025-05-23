@@ -13,12 +13,12 @@ call_user_func(
             'Pi1',
             [
                 'Event' => 'myEvents, archive, list, listSimple, show, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
-                'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
+                'EventReservation' => 'new, create, update, delete, remove, optIn, edit, removeByHash',
             ],
             // non-cacheable actions
             [
                 'Event' => 'myEvents, show, list, listSimple, showAddInfo, showSheet, showGalleryOne, showGalleryTwo',
-                'EventReservation' => 'new, create, update, delete, remove, optIn, edit',
+                'EventReservation' => 'new, create, update, delete, remove, optIn, edit, removeByHash',
             ]
         );
 
@@ -145,7 +145,6 @@ call_user_func(
                 'EventReservation' => 'newStandalone, create, optIn',
             ]
         );
-
 
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesUpdate'] = \RKW\RkwEvents\Install\EventSeriesUpdate::class;
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['eventSeriesTitleUpdate'] = \RKW\RkwEvents\Install\EventSeriesTitleUpdate::class;

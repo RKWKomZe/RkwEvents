@@ -62,6 +62,9 @@ plugin.tx_rkwevents {
 		# cat=plugin.tx_rkwevents; type=integer; label=PID for survey
 		surveyPid =
 
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for cancel reservation via link
+        cancelRegPid =
+
 		# cat=plugin.tx_rkwevents; type=integer; label=Number of items in list view (default 10)
         itemsPerPage = 10
 

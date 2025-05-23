@@ -143,6 +143,8 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         /** @var BackendUser $currentBackendUser */
         $currentBackendUser = $this->backendUserRepository->findByUid(intval($GLOBALS['BE_USER']->user['uid']));
 
+        $this->view->assign('currentBackendUser', $currentBackendUser);
+
         // if user is not an admin, set specific page uids which are related to the users groups
         $querySettings = $this->eventRepository->createQuery()->getQuerySettings();
         if ($currentBackendUser->getIsAdministrator()) {

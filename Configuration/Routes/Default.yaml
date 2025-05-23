@@ -21,6 +21,8 @@ routeEnhancers:
         _controller: 'EventReservation::myEvents'
       - routePath: '/rkw-eventreservation/optin/{event}/{tokenUser}/{token}'
         _controller: 'EventReservation::optIn'
+      - routePath: '/rkw-eventreservation/cancel/{cancelRegHash}'
+        _controller: 'EventReservation::removeByHash'
     defaultController: 'Event::list'
     requirements:
       page: '[0-9]{1,10}'

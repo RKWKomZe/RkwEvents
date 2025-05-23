@@ -320,6 +320,14 @@
 				<source>The given E-mail is already used by another user.</source>
 				<target phase-name="approval-1" state="final">Hm, die gewünschte E-Mailadresse wird bereits von einem anderen Nutzenden verwendet. Bitte geben Sie eine andere E-Mailadresse an.</target>
 			</trans-unit>
+			<trans-unit id="eventReservationController.message.nothingFoundByHash">
+				<source>Reservation not found</source>
+				<target><![CDATA[Es konnte keine zugehörige Reservierung gefunden werden. Haben Sie sich womöglich bereits von der Veranstaltung abgemeldet? Im Zweifel steht Ihnen unser <a href="mailto:service@rkw.de">Support</a> jederzeit gerne zur Verfügung.]]></target>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.question">
+				<source>Are you sure?</source>
+				<target>Sind Sie sicher, dass Sie sich von dieser Veranstaltung abmelden wollen? </target>
+			</trans-unit>
 
 			<!-- BackendController -->
 			<trans-unit id="backendController.error.wrongFileType">
@@ -436,6 +444,14 @@
                 <source>CSV export for reservations</source>
                 <target>CSV Export für Reservierungen</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.hint">
+                <source>You can only export the data of an event if you are entered as a “Backend user (e-mail notification only)” for the respective event.</source>
+                <target>Sie können die Daten einer Veranstaltung nur exportieren, wenn Sie bei der jeweiligen Veranstaltung als "Backend-User (nur E-Mailbenachrichtigung)" eingetragen sind.</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.loggedInAs">
+                <source>Logged in as</source>
+                <target>Sie sind eingeloggt als</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents">
                 <source>Running events</source>
                 <target>Laufende und zukünftige Veranstaltungen</target>
@@ -466,6 +482,10 @@
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation">
                 <source>Reservation</source>
                 <target>Reservierungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.beUser">
+                <source>Backend-User</source>
+                <target>Backend-User</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
                 <source>Export (CSV)</source>
@@ -1171,6 +1191,29 @@
 			</trans-unit>
 
 
+			<!-- Templates/EventReservation/RemoveByHash.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.headline">
+				<source>Delete Reservation</source>
+				<target>Von Veranstaltung abmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.question">
+				<source>Are you sure?</source>
+				<target>Sind Sie sicher?</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel">
+				<source>Yes</source>
+				<target>Ja, abmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.avoidCancel">
+				<source>Back to event</source>
+				<target>Zurück zur Veranstaltung</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.showOther">
+				<source>Show other events</source>
+				<target>Interessante Veranstaltungen gesucht? Klicken Sie hier!</target>
+			</trans-unit>
+
+
 			<!-- Templates/EventReservation/Show.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.headline">
 				<source>Details of your reservation</source>
@@ -1563,6 +1606,14 @@
                 <source>Click here to join</source>
                 <target>Ab ca. 10 Minuten vor Beginn der Veranstaltung können Sie sich über diesen Link direkt in die Veranstaltung einwählen:</target>
             </trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.cancelQuestion">
+				<source>Have you registered for the wrong event or has something else come up?</source>
+				<target>Sie haben sich bei der falschen Veranstaltung angemeldet oder etwas anderes ist Ihnen dazwischengekommen?</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.cancelButton">
+				<source>Deregister from an event</source>
+				<target>Von Veranstaltung abmelden</target>
+			</trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->

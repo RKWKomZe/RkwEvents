@@ -249,6 +249,9 @@
 			<trans-unit id="eventReservationController.error.email_already_in_use">
 				<source>The given E-mail is already used by another user.</source>
 			</trans-unit>
+			<trans-unit id="eventReservationController.message.nothingFoundByHash">
+				<source>Reservation not found</source>
+			</trans-unit>
 
 
 			<!-- BackendController -->
@@ -337,6 +340,12 @@
             <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.headline">
                 <source>CSV export for reservations</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.hint">
+                <source>You can only export the data of an event if you are entered as a “Backend user (e-mail notification only)” for the respective event.</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.loggedInAs">
+                <source>Logged in as</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.templates_backend_csvexport.runningEvents">
                 <source>Running events</source>
             </trans-unit>
@@ -360,6 +369,9 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.reservation">
                 <source>Reservation</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.beUser">
+                <source>Backend-User</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_backend_csvexporteventlist.exportCsv">
                 <source>Export (CSV)</source>
@@ -893,6 +905,24 @@
 			</trans-unit>
 
 
+			<!-- Templates/EventReservation/RemoveByHash.html -->
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.headline">
+				<source>Delete Reservation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.question">
+				<source>Are you sure?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel">
+				<source>Yes</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.avoidCancel">
+				<source>Back to event</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.showOther">
+				<source>Show other events</source>
+			</trans-unit>
+
+
 			<!-- Templates/EventReservation/Show.html -->
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.headline">
 				<source>Details of your reservation</source>
@@ -1204,6 +1234,12 @@
             <trans-unit id="templates_email_confirmationReservationUser.onlineEventAccessLink">
 				<source>Click here to join</source>
             </trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.cancelQuestion">
+				<source>Have you registered for the wrong event or has something else come up?</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.cancelButton">
+				<source>Deregister from an event</source>
+			</trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
