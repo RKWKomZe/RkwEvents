@@ -194,6 +194,11 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $participateMeeting = 0;
 
     /**
+     * @var bool
+     */
+    protected $subscribeNewsletter = false;
+
+    /**
      * customField
      *
      * @var string
@@ -784,6 +789,23 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setParticipateMeeting($participateMeeting)
     {
         $this->participateMeeting = $participateMeeting;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSubscribeNewsletter(): bool
+    {
+        return $this->subscribeNewsletter;
+    }
+
+
+    /**
+     * @param bool $subscribeNewsletter
+     */
+    public function setSubscribeNewsletter(bool $subscribeNewsletter): void
+    {
+        $this->subscribeNewsletter = $subscribeNewsletter;
     }
 
     /**

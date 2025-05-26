@@ -299,7 +299,6 @@
         </div>
     </f:if>
 
-
     <f:if condition="{editMode}">
         <f:else>
             <feRegister:consent type="terms" key="events" />
@@ -319,6 +318,16 @@
                         subType="{f:if(condition: '{event.extendedNetwork}', then: 'extended_network')}"
                     />
                 </f:else>
+            </f:if>
+            <f:if condition="{settings.showNewsletterCheckbox}">
+                <div class="form__field width100">
+                    <div class="form__field">
+                        <f:form.checkbox class="checkbox" id="subscribe_newsletter" property="subscribeNewsletter" value="1" />
+                        <label for="subscribe_newsletter" class="checkbox-label">
+                            <f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.subscribeNewsletter" />
+                        </label>
+                    </div>
+                </div>
             </f:if>
             <feRegister:consent type="marketing" />
         </f:else>

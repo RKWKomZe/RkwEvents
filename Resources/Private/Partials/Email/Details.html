@@ -52,7 +52,8 @@
 {reservation.remark}</f:if><f:if condition="<f:count>{reservation.workshopRegister}</f:count>"><f:for each="{reservation.workshopRegister}" as="workshop">
 {workshop.title} <f:if condition="{workshop.speaker}">({workshop.speaker})</f:if> <rkwEvents:ComposeWorkshopDateTimeParts startDate='{workshop.start}' endDate='{workshop.end}' languageKey="{language}" /> {workshop.description}</f:for></f:if>
 <f:if condition="{reservation.participateDinner}"><postmaster:email.translate key="partials_email_details.participateDinner" languageKey="{language}" extensionName="rkwEvents" />: <postmaster:email.translate key="partials_email_details.participateDinner.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if>
-<f:if condition="{reservation.participateMeeting}"><postmaster:email.translate key="partials_email_details.participateMeeting" languageKey="{language}" extensionName="rkwEvents" />: <postmaster:email.translate key="partials_email_details.participateMeeting.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="<rkwEvents:ifAddPersonExists eventReservation='{reservation}' />">
+<f:if condition="{reservation.participateMeeting}"><postmaster:email.translate key="partials_email_details.participateMeeting" languageKey="{language}" extensionName="rkwEvents" />: <postmaster:email.translate key="partials_email_details.participateMeeting.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if>
+<f:if condition="{showNewsletterCheckbox} && {reservation.subscribeNewsletter}"><postmaster:email.translate key="partials_email_details.subscribeNewsletter" languageKey="{language}" extensionName="rkwEvents" />: <postmaster:email.translate key="partials_email_details.subscribeNewsletter.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if><f:if condition="<rkwEvents:ifAddPersonExists eventReservation='{reservation}' />">
 
 <postmaster:email.translate key="partials_email_details.reservationOthers" languageKey="{language}" extensionName="rkwEvents" />:
 <f:for each="{reservation.addPerson}" as="person" iteration="iterator"><f:if condition="{person.lastName}">{person.firstName} {person.lastName}<f:if condition="{iterator.isLast}"><f:else>
@@ -137,7 +138,7 @@
         </f:if>
     </f:if>
 
-    <f:if condition="<<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
+    <f:if condition="<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
         <f:if condition="{reservation.event.internalContact}">
             <h2><postmaster:email.translate key="partials_email_details.reservationEventContact" languageKey="{language}" extensionName="rkwEvents" /></h2>
             <p><postmaster:email.translate key="partials_email_details.reservationEventContact.text" languageKey="{language}" extensionName="rkwEvents" /></p>
@@ -216,6 +217,11 @@
             <f:if condition="{reservation.participateMeeting}">
                 <p>
                     <strong><postmaster:email.translate key="partials_email_details.participateMeeting" languageKey="{language}" extensionName="rkwEvents" /></strong>: <postmaster:email.translate key="partials_email_details.participateMeeting.yes" languageKey="{language}" extensionName="rkwEvents" />
+                </p>
+            </f:if>
+            <f:if condition="{showNewsletterCheckbox} && {reservation.subscribeNewsletter}">
+                <p>
+                    <strong><postmaster:email.translate key="partials_email_details.subscribeNewsletter" languageKey="{language}" extensionName="rkwEvents" /></strong>: <postmaster:email.translate key="partials_email_details.subscribeNewsletter.yes" languageKey="{language}" extensionName="rkwEvents" />
                 </p>
             </f:if>
 			<f:if condition="<rkwEvents:ifAddPersonExists eventReservation='{reservation}' />">

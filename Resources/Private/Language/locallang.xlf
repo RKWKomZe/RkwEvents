@@ -992,6 +992,9 @@
             <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.participateMeeting">
                 <source>Participate in meeting</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.subscribeNewsletter">
+                <source>Subscribe newsletter</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
 				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
 			</trans-unit>
@@ -1199,6 +1202,12 @@
                 <source>Participate in meeting</source>
             </trans-unit>
             <trans-unit id="partials_email_details.participateMeeting.yes">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.subscribeNewsletter">
+                <source>Subscribe newsletter</source>
+            </trans-unit>
+            <trans-unit id="partials_email_details.subscribeNewsletter.yes">
                 <source>Yes</source>
             </trans-unit>
 

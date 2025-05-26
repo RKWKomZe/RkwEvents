@@ -280,6 +280,7 @@ plugin.tx_rkwevents {
         attachCalendarEvent = {$plugin.tx_rkwevents.settings.attachCalendarEvent}
         defaultLanguageKey = {$plugin.tx_rkwevents.settings.defaultLanguageKey}
         hideMap = {$plugin.tx_rkwevents.settings.hideMap}
+        showNewsletterCheckbox = {$plugin.tx_rkwevents.settings.showNewsletterCheckbox}
 
         disableInternalRegistration = {$plugin.tx_rkwevents.settings.disableInternalRegistration}
 

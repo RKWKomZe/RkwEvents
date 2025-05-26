@@ -90,6 +90,9 @@ plugin.tx_rkwevents {
         # cat=plugin.tx_rkwevents; type=boolean; label=Hide GoogleMaps
         hideMap = 0
 
+        # cat=plugin.tx_rkwevents; type=boolean; label=Register show newsletter checkbox
+        showNewsletterCheckbox = 0
+
         costs {
             red {
                 hint {

@@ -568,7 +568,9 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.participate_meeting" approved="yes">
                 <source>Participate in meeting</source>
-                <target>Ich nehme an der Mitgliederversammlung teil</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.subscribe_newsletter" approved="yes">
+                <source>Subscribe newsletter</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
                 <source>Workshop register</source>
