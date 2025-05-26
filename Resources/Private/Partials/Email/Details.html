@@ -138,7 +138,7 @@
         </f:if>
     </f:if>
 
-    <f:if condition="<<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
+    <f:if condition="<rkwEvents:extensionIsLoaded extensionName='rkw_authors' />">
         <f:if condition="{reservation.event.internalContact}">
             <h2><postmaster:email.translate key="partials_email_details.reservationEventContact" languageKey="{language}" extensionName="rkwEvents" /></h2>
             <p><postmaster:email.translate key="partials_email_details.reservationEventContact.text" languageKey="{language}" extensionName="rkwEvents" /></p>
