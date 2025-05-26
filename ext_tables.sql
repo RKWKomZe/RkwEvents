@@ -345,6 +345,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	show_pid            int(11) unsigned DEFAULT '0' NOT NULL,
 	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
+    subscribe_newsletter tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	target_group        varchar(255) DEFAULT '' NOT NULL,
 	custom_field        text NOT NULL,
     cancel_reg_hash     varchar(255) DEFAULT '' NOT NULL,
