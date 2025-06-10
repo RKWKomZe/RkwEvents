@@ -758,6 +758,10 @@
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.subscribe_newsletter" approved="yes">
+                <source>Subscribe newsletter</source>
+                <target>Ich möchte den Newsletter abonnieren</target>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
                 <source>Workshop register</source>
                 <target>Registrierte Workshops</target>
