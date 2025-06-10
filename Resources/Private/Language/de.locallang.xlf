@@ -1559,7 +1559,7 @@
             </trans-unit>
             <trans-unit id="partials_email_details.subscribeNewsletter">
                 <source>Subscribe newsletter</source>
-                <target>Newsletterbestätigung</target>
+                <target>Newsletterabonnement</target>
             </trans-unit>
             <trans-unit id="partials_email_details.subscribeNewsletter.yes">
                 <source>Yes</source>
