@@ -1282,6 +1282,10 @@
                 <source>Participate in meeting</source>
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.subscribeNewsletter">
+                <source>Yes, I want to subscribe to the newsletter of RKW Kompetenzzentrum to stay informed about events, support options and news from the RKW network. I can cancel this subscription at any time.</source>
+                <target>Ja, ich möchte den Newsletter des RKW Kompetenzzentrum abonnieren, um über über Veranstaltungen, Fördermöglichkeiten und Neuigkeiten aus dem Netzwerk des RKW Kompetenzzentrum informiert zu bleiben. Ich kann mich jederzeit wieder abmelden.</target>
+            </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
 				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
 				<target>Wichtiger Hinweis: Das RKW Kompetenzzentrum ist bestrebt, seine Produkte weiterzuentwickeln. Mit Ausfüllen des Feldes 'Zielgruppe' willige ich ausdrücklich ein, vom RKW Kompetenzzentrum nach Erhalt der Bestellung Zufriedenheitsanfragen bezüglich seiner Produkte per E-Mail zu erhalten. Meine Einwilligung ist freiwillig und kann jederzeit mit Wirkung für die Zukunft per E-Mail an </target>
@@ -1550,6 +1554,14 @@
                 <target>Teilnahme an Mitgliederversammlung</target>
             </trans-unit>
             <trans-unit id="partials_email_details.participateMeeting.yes">
+                <source>Yes</source>
+                <target>Ja</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.subscribeNewsletter">
+                <source>Subscribe newsletter</source>
+                <target>Newsletterabonnement</target>
+            </trans-unit>
+            <trans-unit id="partials_email_details.subscribeNewsletter.yes">
                 <source>Yes</source>
                 <target>Ja</target>
             </trans-unit>

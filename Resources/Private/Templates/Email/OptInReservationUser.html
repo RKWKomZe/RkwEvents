@@ -9,7 +9,7 @@
 <postmaster:email.translate key="templates_email_optInReservationUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"  />
 <postmaster:email.translate key="templates_email_optInReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"  />
 
-<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
+<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin, showNewsletterCheckbox: showNewsletterCheckbox}"/>
 
 =============================================================
 <postmaster:email.translate key="templates_email_optInReservationUser.confirmHeadline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/>
@@ -37,7 +37,7 @@
 		<strong><postmaster:email.translate key="templates_email_optInReservationUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></strong>
 	</p>
 
-	<f:render partial="Email/Details" section="Html" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin}"/>
+	<f:render partial="Email/Details" section="Html" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin, showNewsletterCheckbox: showNewsletterCheckbox}"/>
 
 	<h2><postmaster:email.translate key="templates_email_optInReservationUser.confirmHeadline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/></h2>
 	<p>

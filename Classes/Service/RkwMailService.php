@@ -99,6 +99,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'pageUid'      => intval($GLOBALS['TSFE']->id),
                     'loginPid'     => intval($settingsDefault['loginPid']),
                     'showPid'      => $showPid,
+                    'showNewsletterCheckbox'        => intval($settingsDefault['showNewsletterCheckbox']),
                     'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                 ],
             ]);
@@ -734,6 +735,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'uniqueKey'    => uniqid(),
                     'currentTime'  => time(),
                     'surveyPid'    => intval($settingsDefault['surveyPid']),
+                    'showNewsletterCheckbox'        => intval($settingsDefault['showNewsletterCheckbox']),
                     'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                 ],
             ]);
@@ -867,6 +869,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                             'showPid'      => $showPid,
                             'fullName'     => $name,
                             'language'     => $language,
+                            'showNewsletterCheckbox'        => intval($settingsDefault['showNewsletterCheckbox']),
                             'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
                         ],
                         'subject' => LocalizationUtility::translate(
