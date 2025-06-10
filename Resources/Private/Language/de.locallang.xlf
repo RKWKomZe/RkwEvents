@@ -1283,8 +1283,8 @@
                 <target>Ich nehme an der Mitgliederversammlung teil</target>
             </trans-unit>
             <trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.subscribeNewsletter">
-                <source>Subscribe newsletter</source>
-                <target>Ja, ich möchte den Newsletter des RKW Kompetenzzentrum abonnieren. Bleiben Sie über Veranstaltungen, Fördermöglichkeiten und Neuigkeiten aus dem Netzwerk des RKW Kompetenzzentrum informiert. Sie können sich jederzeit wieder abmelden.</target>
+                <source>Yes, I want to subscribe to the newsletter of RKW Kompetenzzentrum to stay informed about events, support options and news from the RKW network. I can cancel this subscription at any time.</source>
+                <target>Ja, ich möchte den Newsletter des RKW Kompetenzzentrum abonnieren, um über über Veranstaltungen, Fördermöglichkeiten und Neuigkeiten aus dem Netzwerk des RKW Kompetenzzentrum informiert zu bleiben. Ich kann mich jederzeit wieder abmelden.</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.firstPart">
 				<source>Important hint: By setting the field targetGroup you agree to receive a survey regarding this product some time after your order. This agreement can be revoked by email to </source>
