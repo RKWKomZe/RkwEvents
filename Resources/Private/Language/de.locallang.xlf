@@ -336,7 +336,7 @@
 			</trans-unit>
             <trans-unit id="backendController.warning.noRecordsImported">
                 <source>No records imported. Please contact the admin if you suspect a technical error.</source>
-                <target>Es wurden keine Datensätze importiert. Falls sie einen technischen Fehler als Ursache vermuten, wenden Sie sich bitte an den zuständigen Admin.</target>
+                <target>Es wurden keine Datensätze importiert. Falls Sie einen technischen Fehler als Ursache vermuten, wenden Sie sich bitte an den zuständigen Admin.</target>
             </trans-unit>
 			<trans-unit id="backendController.error.importFailed">
 				<source>Unfortunately, the import failed: %s</source>
@@ -1487,7 +1487,7 @@
 			</trans-unit>
 			<trans-unit id="partials_email_details.reservationEventContact.text">
 				<source>If you have questions or want to give some feedback, please use the following contact data.</source>
-				<target>Falls sie Fragen haben oder Rückmeldung zur Veranstaltung geben wollen, nutzen Sie bitte die folgenden Kontaktmöglichkeiten.</target>
+				<target>Falls Sie Fragen haben oder Rückmeldung zur Veranstaltung geben wollen, nutzen Sie bitte die folgenden Kontaktmöglichkeiten.</target>
 			</trans-unit>
 			<trans-unit id="partials_email_details.reservationDetails">
 				<source>Details Reservation</source>
