@@ -15,6 +15,8 @@ namespace RKW\RkwEvents\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+use ApacheSolrForTypo3\Solr\Domain\Index\Queue\UpdateHandler\DataUpdateHandler;
+use ApacheSolrForTypo3\Solr\Domain\Index\Queue\UpdateHandler\GarbageHandler;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository;
@@ -29,6 +31,7 @@ use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class TceMainHooks
@@ -439,6 +442,50 @@ class TceMainHooks
 
                 }
 
+            }
+
+
+            // Check if the EventSeries is set to "hidden". If so, also hide all child events to avoid inconsistencies in the SOLR EventList.
+            if (isset($eventSeriesRaw['hidden']) && (int)$eventSeriesRaw['hidden'] === 1) {
+
+                // Determine UID (only resolved for new data records)
+                $uid = ($status === 'new') ? (int)$tceMain->substNEWwithIDs[$uid] : (int)$uid;
+
+                // Get all child event UIDs
+                $childConnection = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+                    ->getConnectionForTable('tx_rkwevents_domain_model_event');
+
+                $childRecords = $childConnection->select(
+                    ['uid'],
+                    'tx_rkwevents_domain_model_event',
+                    [
+                        'series' => $uid,
+                        'deleted' => 0
+                    ]
+                )->fetchAllAssociative();
+
+
+                // remove child events of eventSeries from SOLR-Index (does nothing if the data record is not present in the index)
+                if (!empty($childRecords)) {
+
+                    $garbageCollector = GeneralUtility::makeInstance(GarbageHandler::class);
+                    foreach ($childRecords as $child) {
+                        $garbageCollector->collectGarbage(
+                            'tx_rkwevents_domain_model_event',
+                            (int)$child['uid']
+                        );
+                    }
+                }
+
+                // Deactivate all child events of given eventSeries
+                $connection = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+                    ->getConnectionForTable('tx_rkwevents_domain_model_event');
+
+                $connection->update(
+                    'tx_rkwevents_domain_model_event',
+                    ['hidden' => 1],
+                    ['series' => $uid]
+                );
             }
         }
     }
