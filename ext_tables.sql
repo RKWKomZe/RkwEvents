@@ -405,6 +405,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventworkshop
 	speaker                   varchar(255) DEFAULT '' NOT NULL,
 	available_seats           int(11) DEFAULT '0' NOT NULL,
 	reg_required              tinyint(1) unsigned DEFAULT '0' NOT NULL,
+	fully_booked              tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	costs                     varchar(255) DEFAULT '' NOT NULL,
 	registered_frontend_users varchar(255) DEFAULT '' NOT NULL,
 
