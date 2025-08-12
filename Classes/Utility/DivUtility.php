@@ -74,6 +74,45 @@ class DivUtility
 
 
     /**
+     * check available seats without new reservation
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @return boolean
+     */
+    public static function hasFreeSeatsStrict(\RKW\RkwEvents\Domain\Model\Event $event)
+    {
+
+        $reservations = $event->getReservation();
+        $confirmedReservations = 0;
+
+        if (count($reservations) > 0) {
+
+            /** @var \RKW\RkwEvents\Domain\Model\EventReservation $reservation */
+            foreach ($reservations as $reservation) {
+                $confirmedReservations++;
+                $addPerson = $reservation->getAddPerson();
+                $confirmedReservations = $confirmedReservations + count($addPerson);
+            }
+
+            if ($confirmedReservations < $event->getSeats()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            if ($event->getSeats() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+    }
+
+
+    /**
      * count confirmed reservations
      *
      * @param \RKW\RkwEvents\Domain\Model\Event $event

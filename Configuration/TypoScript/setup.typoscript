@@ -217,6 +217,26 @@ config.tx_extbase.persistence {
 
             // storage for new records in cross-extension-context
             newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservation.newRecordStoragePid}
+
+            mapping {
+
+                recordType = \RKW\RkwEvents\Domain\Model\EventReservation
+                tableName = tx_rkwevents_domain_model_eventreservation
+            }
+        }
+
+        #===============================================
+
+        RKW\RkwEvents\Domain\Model\EventReservationWaitlist {
+
+            // storage for new records in cross-extension-context
+            newRecordStoragePid = {$plugin.tx_rkwevents.persistence.eventReservation.newRecordStoragePid}
+
+            mapping {
+
+                recordType = \RKW\RkwEvents\Domain\Model\EventReservationWaitlist
+                tableName = tx_rkwevents_domain_model_eventreservation
+            }
         }
 
         #===============================================

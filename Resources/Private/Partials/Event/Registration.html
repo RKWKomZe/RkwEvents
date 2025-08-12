@@ -48,9 +48,24 @@
 
                                                             </f:then>
                                                             <f:else>
+                                                                <!--
                                                                 <div class="btn {additionalCssClass} btn btn--disabled">
                                                                     <f:translate key="tx_rkwevents_fluid.partials_event_registration.noSeats" />
                                                                 </div>
+                                                                -->
+
+                                                                <f:link.action
+                                                                    action="new"
+                                                                    controller="EventReservation"
+                                                                    arguments="{event : event}"
+                                                                    section="tx-rkwevents-reservation"
+                                                                    pageUid="{settings.reservationPid}"
+                                                                    class="btn {additionalCssClass}"
+                                                                    rel="nofollow"
+                                                                >
+                                                                    <f:translate key="tx_rkwevents_fluid.partials_event_registration.noSeatsWaitlist" />
+                                                                </f:link.action>
+
                                                             </f:else>
                                                         </f:if>
                                                     </f:then>

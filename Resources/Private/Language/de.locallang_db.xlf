@@ -347,6 +347,14 @@
 				<source>Reservations</source>
 				<target>Reservierungen</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reservations_default" approved="yes">
+				<source>Reservations</source>
+				<target>Reservierungen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_event.reservations_waitlist" approved="yes">
+				<source>Reservations waitlist</source>
+				<target>Reservierungen (WARTELISTE)</target>
+			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.workshop" approved="yes">
                 <source>Workshop</source>
                 <target>Workshops</target>
@@ -718,6 +726,18 @@
 
 
 			<!-- tx_rkwevents_domain_model_eventreservation -->
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.recordType">
+				<source>Reservation-Type</source>
+				<target>Anmelde-Typ</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.recordType.default">
+				<source>Default</source>
+				<target>Standard</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.recordType.waitlist">
+				<source>Waitlist</source>
+				<target>Warteliste</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation" approved="yes">
 				<source>RKW Events: Reservation</source>
 				<target>RKW Events: Reservierung</target>

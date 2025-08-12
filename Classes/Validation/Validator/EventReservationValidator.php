@@ -15,6 +15,8 @@ namespace RKW\RkwEvents\Validation\Validator;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
+use RKW\RkwEvents\Utility\DivUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class EventReservationValidator
@@ -45,13 +47,20 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
      */
     public function isValid($newEventReservation): bool
     {
-
         // initialize typoscript settings
         $this->getSettings();
 
         // get mandatory fields
         $mandatoryFieldsMainPerson = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(",", $this->settings['mandatoryFields']['eventReservationMainPerson']);
         $mandatoryFieldsAdditionalPersons = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(",", $this->settings['mandatoryFields']['eventReservationAdditionalPersons']);
+
+        // if this event is fullyBooked we're working with waitlist here. In this case "phone" is mandatory
+        if (!DivUtility::hasFreeSeatsStrict($newEventReservation->getEvent())) {
+            if (!in_array('phone', $mandatoryFieldsMainPerson, true)) {
+                $mandatoryFieldsMainPerson[] = 'phone';
+            }
+        };
+
 
         $isValid = true;
 

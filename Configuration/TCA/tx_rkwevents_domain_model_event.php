@@ -55,7 +55,7 @@ return [
                 presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
-                reservation,
+                reservation, reservation_default, reservation_waitlist,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 ext_show_link, additional_tile_flag, title,
@@ -87,7 +87,7 @@ return [
                 presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
-                reservation,
+                reservation, reservation_default, reservation_waitlist,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 ext_show_link, additional_tile_flag, title,
@@ -690,6 +690,7 @@ return [
                 'jpg, png, gif'
             ),
         ],
+        /*
         'reservation' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reservations',
@@ -697,6 +698,77 @@ return [
             	'type' => 'inline',
                 'foreign_table' => 'tx_rkwevents_domain_model_eventreservation',
                 'foreign_field' => 'event',
+                'maxitems'      => 9999,
+                'size'          => 5,
+                'appearance' => [
+                    'elementBrowserType' => 'db',
+                    'collapseAll' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1,
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => false,
+                        'dragdrop' => false,
+                        'sort' => false,
+                        'hide' => false,
+                        'delete' => true,
+                        'localize' => false
+                    ],
+                ],
+            ],
+        ],
+        */
+        'reservation_default' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reservations_default',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventreservation',
+                'foreign_field' => 'event',
+                'foreign_match_fields' => [
+                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservation',
+                ],
+                // New children created via this IRRE get this type by default
+                'foreign_record_defaults' => [
+                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservation',
+                ],
+                'maxitems'      => 9999,
+                'size'          => 5,
+                'appearance' => [
+                    'elementBrowserType' => 'db',
+                    'collapseAll' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1,
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => false,
+                        'dragdrop' => false,
+                        'sort' => false,
+                        'hide' => false,
+                        'delete' => true,
+                        'localize' => false
+                    ],
+                ],
+            ],
+        ],
+        'reservation_waitlist' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reservations_waitlist',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_rkwevents_domain_model_eventreservation',
+                'foreign_field' => 'event',
+                'foreign_match_fields' => [
+                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist',
+                ],
+                // New children created via this IRRE get this type by default
+                'foreign_record_defaults' => [
+                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist',
+                ],
                 'maxitems'      => 9999,
                 'size'          => 5,
                 'appearance' => [

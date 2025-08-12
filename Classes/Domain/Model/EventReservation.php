@@ -26,7 +26,10 @@ namespace RKW\RkwEvents\Domain\Model;
  */
 class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
+    /**
+     * @var string
+     */
+    protected $recordType;
 
     /**
      * event
@@ -247,6 +250,29 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->addPerson = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->targetGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->workshopRegister = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Returns the recordType value
+     *
+     * @return string
+     * @api
+     */
+    public function getRecordType()
+    {
+        return $this->recordType;
+    }
+
+    /**
+     * Sets the recordType value
+     *
+     * @param $recordType
+     * @return string
+     * @api
+     */
+    public function setRecordType($recordType)
+    {
+        return $this->recordType = $recordType;
     }
 
     /**

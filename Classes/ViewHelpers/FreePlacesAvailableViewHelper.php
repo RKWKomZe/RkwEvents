@@ -14,6 +14,8 @@ namespace RKW\RkwEvents\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEvents\Utility\DivUtility;
+
 /**
  * Class FreePlacesAvailableViewHelper
  *
@@ -48,31 +50,7 @@ class FreePlacesAvailableViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Ab
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $event = $this->arguments['event'];
 
-        $reservations = $event->getReservation();
-        $confirmedReservations = 0;
-
-        if (count($reservations) > 0) {
-
-            /** @var \RKW\RkwEvents\Domain\Model\EventReservation $reservation */
-            foreach ($reservations as $reservation) {
-                $confirmedReservations++;
-                $addPerson = $reservation->getAddPerson();
-                $confirmedReservations = $confirmedReservations + count($addPerson);
-            }
-
-            if ($confirmedReservations < $event->getSeats()) {
-                return true;
-            } else {
-                return false;
-            }
-
-        } else {
-            if ($event->getSeats() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+        return DivUtility::hasFreeSeatsStrict($event);
     }
 }
 

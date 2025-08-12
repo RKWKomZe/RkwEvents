@@ -828,6 +828,9 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noSeats" approved="yes">
 				<source>Unfortunately no free seats left</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noSeatsWaitlist" approved="yes">
+				<source>Unfortunately there are no free seats left</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.registrationExpired" approved="yes">
 				<source>Registration period is over</source>
 			</trans-unit>
@@ -869,7 +872,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_new.hint_reservation" approved="yes">
 				<source>Only logged user can register immediately!</source>
-				<target><![CDATA[<strong>Bitte beachten Sie:</strong> Anmeldungen zu Veranstaltungen werden erst nach erfolgter Bestätigung per E-Mail verbindlich vorgenommen. Loggen Sie sich ein, um sich direkt anzumelden.]]></target>
 			</trans-unit>
 
 
@@ -879,7 +881,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_edit.introduction">
 				<source>Please find the details of your reservation for the event "%s" below.</source>
-				<target><![CDATA[Bearbeiten Sie hier die Details zu Ihrer Anmeldung für die Veranstaltung "%s".]]></target>
 			</trans-unit>
 
 
@@ -889,7 +890,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.description">
 				<source>Do you really want to delete your reservation for "%s"?</source>
-				<target><![CDATA[Sind Sie sicher, dass Sie Ihre Anmeldung zur Veranstaltung "%s" löschen möchten?]]></target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_event_eventReservation_delete.note">
 				<source>Note that all additional participants are deleted, too.</source>
@@ -929,7 +929,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.introduction">
 				<source>Please find the details of your reservation for the event "%s" below.</source>
-				<target><![CDATA[Sehen Sie hier die Details zu Ihrer Anmeldung für die Veranstaltung "%s" ein.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_show.backButton">
 				<source>back to list</source>
@@ -1425,7 +1424,13 @@
 				<source>City</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.telephone">
-				<source>City</source>
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.mobile">
+				<source>Mobile</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.additional_salutation_0">
 				<source>Salutation (person 2)</source>

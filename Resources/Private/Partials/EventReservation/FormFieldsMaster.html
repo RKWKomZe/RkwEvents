@@ -104,7 +104,12 @@
     <div class="form__field width50">
         <label class="form-label" for="tx_rkwevents_pi1_phone">
             <f:translate key="tx_rkwevents_domain_model_eventreservation.phone" />
-            <f:render partial="LabelSuffix" arguments="{field: 'phone', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+            <f:if condition="{isWaitlist}">
+                <f:else>
+                    <f:render partial="LabelSuffix" arguments="{field: 'phone', mandatoryFields: settings.mandatoryFields.eventReservationMainPerson}" />
+                </f:else>
+            </f:if>
+
         </label>
         <f:form.textfield
             id="tx_rkwevents_pi1_phone"

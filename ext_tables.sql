@@ -31,7 +31,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventseries
     reg_inhouse             tinyint(1) unsigned DEFAULT '0' NOT NULL,
     backend_user_exclusive  tinyint(1) unsigned DEFAULT '0' NOT NULL,
     disable_reminder_mail   tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	event_start_date		int(11) unsigned DEFAULT '0' NOT NULL,
+		event_start_date		int(11) unsigned DEFAULT '0' NOT NULL,
 
     event                   varchar(255) DEFAULT '' NOT NULL,
 
@@ -132,6 +132,8 @@ CREATE TABLE tx_rkwevents_domain_model_event
     gallery1                 int(11) unsigned DEFAULT '0',
     gallery2                 int(11) unsigned DEFAULT '0',
     reservation              varchar(255) DEFAULT '' NOT NULL,
+		reservation_default      varchar(255) DEFAULT '' NOT NULL,
+		reservation_waitlist     varchar(255) DEFAULT '' NOT NULL,
     workshop                 varchar(255) DEFAULT '' NOT NULL,
     workshop_select_type     tinyint(1) unsigned DEFAULT '0' NOT NULL,
     workshop_select_req      int(11) unsigned DEFAULT '0' NOT NULL,
@@ -178,32 +180,32 @@ CREATE TABLE tx_rkwevents_domain_model_event
 CREATE TABLE tx_rkwevents_domain_model_eventplace
 (
 
-	uid                     int(11) NOT NULL auto_increment,
-	pid                     int(11) DEFAULT '0' NOT NULL,
+		uid                     int(11) NOT NULL auto_increment,
+		pid                     int(11) DEFAULT '0' NOT NULL,
 
-	name                    varchar(255) DEFAULT '' NOT NULL,
-	short                   text                    NOT NULL,
-	address                 varchar(255) DEFAULT '' NOT NULL,
-	zip                     varchar(255) DEFAULT '' NOT NULL,
-	city                    varchar(255) DEFAULT '' NOT NULL,
-	country                 int(11) unsigned DEFAULT '0',
-	driving_directions_link varchar(255) DEFAULT '' NOT NULL,
-	longitude               varchar(255) DEFAULT '' NOT NULL,
-	latitude                varchar(255) DEFAULT '' NOT NULL,
+		name                    varchar(255) DEFAULT '' NOT NULL,
+		short                   text                    NOT NULL,
+		address                 varchar(255) DEFAULT '' NOT NULL,
+		zip                     varchar(255) DEFAULT '' NOT NULL,
+		city                    varchar(255) DEFAULT '' NOT NULL,
+		country                 int(11) unsigned DEFAULT '0',
+		driving_directions_link varchar(255) DEFAULT '' NOT NULL,
+		longitude               varchar(255) DEFAULT '' NOT NULL,
+		latitude                varchar(255) DEFAULT '' NOT NULL,
 
-	tstamp                  int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate                  int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id               int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted                 tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden                  tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		tstamp                  int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate                  int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id               int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted                 tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		hidden                  tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-	sys_language_uid        int(11) DEFAULT '0' NOT NULL,
-	l10n_parent             int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource         mediumblob,
+		sys_language_uid        int(11) DEFAULT '0' NOT NULL,
+		l10n_parent             int(11) DEFAULT '0' NOT NULL,
+		l10n_diffsource         mediumblob,
 
-	PRIMARY KEY (uid),
-	KEY                     parent (pid),
-	KEY language (l10n_parent,sys_language_uid)
+		PRIMARY KEY (uid),
+		KEY                     parent (pid),
+		KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -213,35 +215,35 @@ CREATE TABLE tx_rkwevents_domain_model_eventplace
 CREATE TABLE tx_rkwevents_domain_model_eventcontact
 (
 
-	uid                        int(11) NOT NULL auto_increment,
-	pid                        int(11) DEFAULT '0' NOT NULL,
+		uid                        int(11) NOT NULL auto_increment,
+		pid                        int(11) DEFAULT '0' NOT NULL,
 
-	salutation                 int(11) DEFAULT '99' NOT NULL,
-	first_name                 varchar(255) DEFAULT '' NOT NULL,
-	last_name                  varchar(255) DEFAULT '' NOT NULL,
-	company                    varchar(255) DEFAULT '' NOT NULL,
-	address                    varchar(255) DEFAULT '' NOT NULL,
-	zip                        varchar(255) DEFAULT '' NOT NULL,
-	city                       varchar(255) DEFAULT '' NOT NULL,
-	telephone                  varchar(255) DEFAULT '' NOT NULL,
-	fax                        varchar(255) DEFAULT '' NOT NULL,
-	email                      varchar(255) DEFAULT '' NOT NULL,
-	lang                       int(11) unsigned DEFAULT '0',
-	recipient_of_personal_data tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		salutation                 int(11) DEFAULT '99' NOT NULL,
+		first_name                 varchar(255) DEFAULT '' NOT NULL,
+		last_name                  varchar(255) DEFAULT '' NOT NULL,
+		company                    varchar(255) DEFAULT '' NOT NULL,
+		address                    varchar(255) DEFAULT '' NOT NULL,
+		zip                        varchar(255) DEFAULT '' NOT NULL,
+		city                       varchar(255) DEFAULT '' NOT NULL,
+		telephone                  varchar(255) DEFAULT '' NOT NULL,
+		fax                        varchar(255) DEFAULT '' NOT NULL,
+		email                      varchar(255) DEFAULT '' NOT NULL,
+		lang                       int(11) unsigned DEFAULT '0',
+		recipient_of_personal_data tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-	tstamp                     int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate                     int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id                  int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted                    tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden                     tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		tstamp                     int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate                     int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id                  int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted                    tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		hidden                     tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-	sys_language_uid           int(11) DEFAULT '0' NOT NULL,
-	l10n_parent                int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource            mediumblob,
+		sys_language_uid           int(11) DEFAULT '0' NOT NULL,
+		l10n_parent                int(11) DEFAULT '0' NOT NULL,
+		l10n_diffsource            mediumblob,
 
-	PRIMARY KEY (uid),
-	KEY                        parent (pid),
-	KEY language (l10n_parent,sys_language_uid)
+		PRIMARY KEY (uid),
+		KEY                        parent (pid),
+		KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -253,34 +255,34 @@ CREATE TABLE tx_rkwevents_domain_model_eventcontact
 CREATE TABLE tx_rkwevents_domain_model_eventorganizer
 (
 
-	uid              int(11) NOT NULL auto_increment,
-	pid              int(11) DEFAULT '0' NOT NULL,
+		uid              int(11) NOT NULL auto_increment,
+		pid              int(11) DEFAULT '0' NOT NULL,
 
-	salutation       int(11) DEFAULT '99' NOT NULL,
-	first_name       varchar(255) DEFAULT '' NOT NULL,
-	last_name        varchar(255) DEFAULT '' NOT NULL,
-	company          varchar(255) DEFAULT '' NOT NULL,
-	address          varchar(255) DEFAULT '' NOT NULL,
-	zip              varchar(255) DEFAULT '' NOT NULL,
-	city             varchar(255) DEFAULT '' NOT NULL,
-	phone            varchar(255) DEFAULT '' NOT NULL,
-	fax              varchar(255) DEFAULT '' NOT NULL,
-	email            varchar(255) DEFAULT '' NOT NULL,
-	show_pid         int(11) DEFAULT '0' NOT NULL,
+		salutation       int(11) DEFAULT '99' NOT NULL,
+		first_name       varchar(255) DEFAULT '' NOT NULL,
+		last_name        varchar(255) DEFAULT '' NOT NULL,
+		company          varchar(255) DEFAULT '' NOT NULL,
+		address          varchar(255) DEFAULT '' NOT NULL,
+		zip              varchar(255) DEFAULT '' NOT NULL,
+		city             varchar(255) DEFAULT '' NOT NULL,
+		phone            varchar(255) DEFAULT '' NOT NULL,
+		fax              varchar(255) DEFAULT '' NOT NULL,
+		email            varchar(255) DEFAULT '' NOT NULL,
+		show_pid         int(11) DEFAULT '0' NOT NULL,
 
-	tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate           int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id        int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted          tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden           tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate           int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id        int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted          tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		hidden           tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l10n_parent      int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource  mediumblob,
+		sys_language_uid int(11) DEFAULT '0' NOT NULL,
+		l10n_parent      int(11) DEFAULT '0' NOT NULL,
+		l10n_diffsource  mediumblob,
 
-	PRIMARY KEY (uid),
-	KEY              parent (pid),
-	KEY language (l10n_parent,sys_language_uid)
+		PRIMARY KEY (uid),
+		KEY              parent (pid),
+		KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -290,27 +292,27 @@ CREATE TABLE tx_rkwevents_domain_model_eventorganizer
 CREATE TABLE tx_rkwevents_domain_model_eventsheet
 (
 
-	uid              int(11) NOT NULL auto_increment,
-	pid              int(11) DEFAULT '0' NOT NULL,
-	event            int(11) unsigned DEFAULT '0' NOT NULL,
+		uid              int(11) NOT NULL auto_increment,
+		pid              int(11) DEFAULT '0' NOT NULL,
+		event            int(11) unsigned DEFAULT '0' NOT NULL,
 
-	title            varchar(255) DEFAULT '' NOT NULL,
-	html             text                    NOT NULL,
+		title            varchar(255) DEFAULT '' NOT NULL,
+		html             text                    NOT NULL,
 
-	tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate           int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id        int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted          tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden           tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	sorting          int(11) unsigned DEFAULT '0' NOT NULL,
+		tstamp           int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate           int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id        int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted          tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		hidden           tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		sorting          int(11) unsigned DEFAULT '0' NOT NULL,
 
-	sys_language_uid int(11) DEFAULT '0' NOT NULL,
-	l10n_parent      int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource  mediumblob,
+		sys_language_uid int(11) DEFAULT '0' NOT NULL,
+		l10n_parent      int(11) DEFAULT '0' NOT NULL,
+		l10n_diffsource  mediumblob,
 
-	PRIMARY KEY (uid),
-	KEY              parent (pid),
-	KEY language (l10n_parent,sys_language_uid)
+		PRIMARY KEY (uid),
+		KEY              parent (pid),
+		KEY language (l10n_parent,sys_language_uid)
 
 );
 
@@ -320,44 +322,45 @@ CREATE TABLE tx_rkwevents_domain_model_eventsheet
 CREATE TABLE tx_rkwevents_domain_model_eventreservation
 (
 
-	uid                 int(11) NOT NULL auto_increment,
-	pid                 int(11) DEFAULT '0' NOT NULL,
+		uid                 int(11) NOT NULL auto_increment,
+		pid                 int(11) DEFAULT '0' NOT NULL,
 
-	event               int(11) unsigned DEFAULT '0' NOT NULL,
+		event               int(11) unsigned DEFAULT '0' NOT NULL,
+		record_type         varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventReservation' NOT NULL,
 
-	remark              text NOT NULL,
-	valid_until         int(11) unsigned DEFAULT '0' NOT NULL,
-	add_person          varchar(255) DEFAULT '' NOT NULL,
-	fe_user             varchar(255) DEFAULT '' NOT NULL,
-	salutation          int(11) DEFAULT '99' NOT NULL,
-	first_name          varchar(255) DEFAULT '' NOT NULL,
-	last_name           varchar(255) DEFAULT '' NOT NULL,
-	company             varchar(255) DEFAULT '' NOT NULL,
-	company_role        varchar(255) DEFAULT '' NOT NULL,
-	address             varchar(255) DEFAULT '' NOT NULL,
-	zip                 varchar(255) DEFAULT '' NOT NULL,
-	city                varchar(255) DEFAULT '' NOT NULL,
-	phone               varchar(255) DEFAULT '' NOT NULL,
-	mobile              varchar(255) DEFAULT '' NOT NULL,
-	fax                 varchar(255) DEFAULT '' NOT NULL,
-	email               varchar(255) DEFAULT '' NOT NULL,
-	server_host         varchar(255) DEFAULT '' NOT NULL,
-	show_pid            int(11) unsigned DEFAULT '0' NOT NULL,
-	participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    subscribe_newsletter tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	target_group        varchar(255) DEFAULT '' NOT NULL,
-	custom_field        text NOT NULL,
-    cancel_reg_hash     varchar(255) DEFAULT '' NOT NULL,
-	workshop_register   varchar(255) DEFAULT '' NOT NULL,
+		remark              text NOT NULL,
+		valid_until         int(11) unsigned DEFAULT '0' NOT NULL,
+		add_person          varchar(255) DEFAULT '' NOT NULL,
+		fe_user             varchar(255) DEFAULT '' NOT NULL,
+		salutation          int(11) DEFAULT '99' NOT NULL,
+		first_name          varchar(255) DEFAULT '' NOT NULL,
+		last_name           varchar(255) DEFAULT '' NOT NULL,
+		company             varchar(255) DEFAULT '' NOT NULL,
+		company_role        varchar(255) DEFAULT '' NOT NULL,
+		address             varchar(255) DEFAULT '' NOT NULL,
+		zip                 varchar(255) DEFAULT '' NOT NULL,
+		city                varchar(255) DEFAULT '' NOT NULL,
+		phone               varchar(255) DEFAULT '' NOT NULL,
+		mobile              varchar(255) DEFAULT '' NOT NULL,
+		fax                 varchar(255) DEFAULT '' NOT NULL,
+		email               varchar(255) DEFAULT '' NOT NULL,
+		server_host         varchar(255) DEFAULT '' NOT NULL,
+		show_pid            int(11) unsigned DEFAULT '0' NOT NULL,
+		participate_dinner  tinyint(1) unsigned DEFAULT '0' NOT NULL,
+		participate_meeting tinyint(1) unsigned DEFAULT '0' NOT NULL,
+		subscribe_newsletter tinyint(1) unsigned DEFAULT '0' NOT NULL,
+		target_group        varchar(255) DEFAULT '' NOT NULL,
+		custom_field        text NOT NULL,
+		cancel_reg_hash     varchar(255) DEFAULT '' NOT NULL,
+		workshop_register   varchar(255) DEFAULT '' NOT NULL,
 
-	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate              int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id           int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted             tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate              int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id           int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted             tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-	PRIMARY KEY (uid),
-	KEY                 parent (pid)
+		PRIMARY KEY (uid),
+		KEY                 parent (pid)
 
 );
 
@@ -367,22 +370,22 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 CREATE TABLE tx_rkwevents_domain_model_eventreservationaddperson
 (
 
-	uid               int(11) NOT NULL auto_increment,
-	pid               int(11) DEFAULT '0' NOT NULL,
+		uid               int(11) NOT NULL auto_increment,
+		pid               int(11) DEFAULT '0' NOT NULL,
 
-	event_reservation int(11) unsigned DEFAULT '0' NOT NULL,
+		event_reservation int(11) unsigned DEFAULT '0' NOT NULL,
 
-	salutation        int(11) DEFAULT '99' NOT NULL,
-	first_name        varchar(255) DEFAULT '' NOT NULL,
-	last_name         varchar(255) DEFAULT '' NOT NULL,
+		salutation        int(11) DEFAULT '99' NOT NULL,
+		first_name        varchar(255) DEFAULT '' NOT NULL,
+		last_name         varchar(255) DEFAULT '' NOT NULL,
 
-	tstamp            int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate            int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id         int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted           tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		tstamp            int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate            int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id         int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted           tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-	PRIMARY KEY (uid),
-	KEY               parent (pid)
+		PRIMARY KEY (uid),
+		KEY               parent (pid)
 
 );
 
@@ -392,37 +395,37 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservationaddperson
 CREATE TABLE tx_rkwevents_domain_model_eventworkshop
 (
 
-	uid                       int(11) NOT NULL auto_increment,
-	pid                       int(11) DEFAULT '0' NOT NULL,
+		uid                       int(11) NOT NULL auto_increment,
+		pid                       int(11) DEFAULT '0' NOT NULL,
 
-	title                     varchar(255) DEFAULT '' NOT NULL,
-	start                     int(11) unsigned DEFAULT '0' NOT NULL,
-	end                       int(11) unsigned DEFAULT '0' NOT NULL,
-	description               text                    NOT NULL,
-	type                      varchar(255) DEFAULT '' NOT NULL,
-	previous_experience       varchar(255) DEFAULT '' NOT NULL,
-	objective                 varchar(255) DEFAULT '' NOT NULL,
-	speaker                   varchar(255) DEFAULT '' NOT NULL,
-	available_seats           int(11) DEFAULT '0' NOT NULL,
-	reg_required              tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	costs                     varchar(255) DEFAULT '' NOT NULL,
-	registered_frontend_users varchar(255) DEFAULT '' NOT NULL,
+		title                     varchar(255) DEFAULT '' NOT NULL,
+		start                     int(11) unsigned DEFAULT '0' NOT NULL,
+		end                       int(11) unsigned DEFAULT '0' NOT NULL,
+		description               text                    NOT NULL,
+		type                      varchar(255) DEFAULT '' NOT NULL,
+		previous_experience       varchar(255) DEFAULT '' NOT NULL,
+		objective                 varchar(255) DEFAULT '' NOT NULL,
+		speaker                   varchar(255) DEFAULT '' NOT NULL,
+		available_seats           int(11) DEFAULT '0' NOT NULL,
+		reg_required              tinyint(1) unsigned DEFAULT '0' NOT NULL,
+		costs                     varchar(255) DEFAULT '' NOT NULL,
+		registered_frontend_users varchar(255) DEFAULT '' NOT NULL,
 
-	tstamp                    int(11) unsigned DEFAULT '0' NOT NULL,
-	crdate                    int(11) unsigned DEFAULT '0' NOT NULL,
-	cruser_id                 int(11) unsigned DEFAULT '0' NOT NULL,
-	deleted                   tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	hidden                    tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	starttime                 int(11) unsigned DEFAULT '0' NOT NULL,
-	endtime                   int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting                   int(11) unsigned DEFAULT '0' NOT NULL,
-	sys_language_uid          int(11) DEFAULT '0' NOT NULL,
-	l10n_parent               int(11) DEFAULT '0' NOT NULL,
-	l10n_diffsource           mediumblob,
+		tstamp                    int(11) unsigned DEFAULT '0' NOT NULL,
+		crdate                    int(11) unsigned DEFAULT '0' NOT NULL,
+		cruser_id                 int(11) unsigned DEFAULT '0' NOT NULL,
+		deleted                   tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		hidden                    tinyint(4) unsigned DEFAULT '0' NOT NULL,
+		starttime                 int(11) unsigned DEFAULT '0' NOT NULL,
+		endtime                   int(11) unsigned DEFAULT '0' NOT NULL,
+		sorting                   int(11) unsigned DEFAULT '0' NOT NULL,
+		sys_language_uid          int(11) DEFAULT '0' NOT NULL,
+		l10n_parent               int(11) DEFAULT '0' NOT NULL,
+		l10n_diffsource           mediumblob,
 
-	PRIMARY KEY (uid),
-	KEY                       parent (pid),
-	KEY language (l10n_parent,sys_language_uid)
+		PRIMARY KEY (uid),
+		KEY                       parent (pid),
+		KEY language (l10n_parent,sys_language_uid)
 
 );
 

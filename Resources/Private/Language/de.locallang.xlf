@@ -1096,6 +1096,10 @@
 				<source>Unfortunately there are no free seats left</source>
 				<target>Leider sind bereits alle Plätze vergeben</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.noSeatsWaitlist" approved="yes">
+				<source>Fully booked - Register now for the waiting list</source>
+				<target>Ausgebucht - Jetzt für Warteliste anmelden</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_event_registration.registrationExpired" approved="yes">
 				<source>Registration period is over</source>
 				<target>Eine Anmeldung ist leider nicht mehr möglich</target>
@@ -1149,6 +1153,10 @@
 			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_new.hint_reservation" approved="yes">
 				<source>Only logged user can register immediately!</source>
 				<target><![CDATA[<strong>Bitte beachten Sie:</strong> Anmeldungen zu Veranstaltungen werden erst nach erfolgter Bestätigung per E-Mail verbindlich vorgenommen. Loggen Sie sich ein, um sich direkt anzumelden.]]></target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.templates_eventReservation_new.hintWaitlist" approved="yes">
+				<source>This event is fully booked, but you can register for the waiting list. Please note: A telephone number is required for the waiting list procedure.</source>
+				<target>Diese Veranstaltung ist ausgebucht, Sie können sich jedoch für die Warteliste anmelden. Für das Nachrückverfahren benötigen wir Ihre Telefonnummer – nachrücken ist nur möglich, wenn wir Sie telefonisch erreichen.</target>
 			</trans-unit>
 
 
@@ -1852,8 +1860,16 @@
 				<target>Ort</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.telephone">
-				<source>City</source>
-				<target>Ort</target>
+				<source>Telephone</source>
+				<target>Telefon</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.phone">
+				<source>Phone</source>
+				<target>Telefon</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.mobile">
+				<source>Mobile</source>
+				<target>Mobil</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.additional_salutation_0" approved="no">
 				<source>Salutation (person 2)</source>

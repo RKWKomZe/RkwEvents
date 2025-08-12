@@ -32,6 +32,8 @@ use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Domain\Repository\EventWorkshopRepository;
 use RKW\RkwEvents\Domain\Repository\FrontendUserRepository;
 use RKW\RkwEvents\Utility\DivUtility;
+use RKW\RkwEvents\ViewHelpers\FreePlacesAvailableViewHelper;
+use RKW\RkwFeecalculator\ViewHelpers\ZeroPlaceholderViewHelper;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,6 +41,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
@@ -218,7 +221,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
     /**
      * action new
-     * Hint: Set default $event-Param to null for possibility to lead users,if event link is not longer available
+     * Hint: Set default $event-Param to null for the possibility to lead users if an event link is no longer available
      *
      * @param Event|null $event
      * @param EventReservation|null $newEventReservation
@@ -267,7 +270,15 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         }
 
         if (!$newEventReservation) {
-            $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
+
+            if (!(DivUtility::hasFreeSeatsStrict($event))) {
+
+                $this->view->assign('isWaitlist', true);
+
+                $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservationWaitlist');
+            } else {
+                $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
+            }
         }
 
         $newEventReservation->setEvent($event);
@@ -455,20 +466,28 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         }
 
         // 2. Check available seats
+        // HINT new behavior: WAITLIST!
         if (!DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation)) {
 
-            $this->addFlashMessage(
-                LocalizationUtility::translate(
-                    'eventReservationController.error.seats', 'rkw_events'
-                ),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
 
-            if ($this->request->getPluginName() === 'Standalonereg') {
-                $this->forward($showAction, $controller, null, ['newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
-            }
-            $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
+            $newEventReservation->setRecordType('\RKW\RkwEvents\Domain\Model\EventReservationWaitlist');
+
+            // @todo: Handling for Standalone! What we do here? Same procedure with waitlist?
+
+            /*
+                $this->addFlashMessage(
+                    LocalizationUtility::translate(
+                        'eventReservationController.error.seats', 'rkw_events'
+                    ),
+                    '',
+                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                );
+
+                if ($this->request->getPluginName() === 'Standalonereg') {
+                    $this->forward($showAction, $controller, null, ['newEventReservation' => $newEventReservation, 'event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
+                }
+                $this->redirect($showAction, $controller, null, ['event' => $newEventReservation->getEvent()], (int)$this->settings['showPid']);
+            */
         }
 
         // 3. Check if registration-time is over since the user may have been waiting too long
@@ -706,7 +725,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 }
 
                 // 3. Check available places
-                if (!DivUtility::hasFreeSeats($event, $newEventReservation)) {
+                if (
+                    !DivUtility::hasFreeSeats($event, $newEventReservation)
+                    && $newEventReservation->getRecordType() != '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist'
+                ) {
 
                     $this->addFlashMessage(
                         LocalizationUtility::translate('eventReservationController.error.seats', 'rkw_events'),
