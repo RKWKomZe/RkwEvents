@@ -8,17 +8,37 @@
         <f:if condition="{event.workshopSelectType} == 1">
             <f:then>
                 <f:comment><!-- RADIO --></f:comment>
-                <f:form.radio id="workshop-radio{iter.index}" class="radio" value="{workshop.uid}" property="workshopRegister.0" />
-                <label class="radio-label" for="workshop-radio{iter.index}">
-                    <f:render section="labelContent" arguments="{_all}" />
-                </label>
+                <f:if condition="{workshop.fullyBooked}">
+                    <f:then>
+                        <f:form.radio disabled="{workshop.fullyBooked}" id="workshop-radio{iter.index}" class="radio" value="{workshop.uid}" property="workshopRegister.0" />
+                        <label class="radio-label" for="workshop-radio{iter.index}">
+                            <f:render section="labelContent" arguments="{_all}" />
+                        </label>
+                    </f:then>
+                    <f:else>
+                        <f:form.radio id="workshop-radio{iter.index}" class="radio" value="{workshop.uid}" property="workshopRegister.0" />
+                        <label class="radio-label" for="workshop-radio{iter.index}">
+                            <f:render section="labelContent" arguments="{_all}" />
+                        </label>
+                    </f:else>
+                </f:if>
             </f:then>
             <f:else>
                 <f:comment><!-- CHECKBOX --></f:comment>
-                <f:form.checkbox id="workshop-check{workshop.uid}" class="checkbox" value="{workshop.uid}" property="workshopRegister.{iter.index}" />
-                <label class="checkbox-label" for="workshop-check{workshop.uid}">
-                    <f:render section="labelContent" arguments="{_all}" />
-                </label>
+                <f:if condition="{workshop.fullyBooked}">
+                    <f:then>
+                        <f:form.checkbox disabled="{workshop.fullyBooked}" id="workshop-check{workshop.uid}" class="checkbox" value="{workshop.uid}" property="workshopRegister.{iter.index}" />
+                        <label class="checkbox-label" for="workshop-check{workshop.uid}">
+                            <f:render section="labelContent" arguments="{_all}" />
+                        </label>
+                    </f:then>
+                    <f:else>
+                        <f:form.checkbox id="workshop-check{workshop.uid}" class="checkbox" value="{workshop.uid}" property="workshopRegister.{iter.index}" />
+                        <label class="checkbox-label" for="workshop-check{workshop.uid}">
+                            <f:render section="labelContent" arguments="{_all}" />
+                        </label>
+                    </f:else>
+                </f:if>
             </f:else>
         </f:if>
 
@@ -29,9 +49,14 @@
 
 <f:section name="labelContent">
     <span class="text-smaller">
+        <f:if condition="{workshop.fullyBooked}">
+            <span class="badge badge--danger">
+                <f:translate key="tx_rkwevents_fluid.partials_eventreservation_workshop.full" />
+            </span><br>
+        </f:if>
         {workshop.title}
-        <f:if condition="{workshop.speaker}">({workshop.speaker})</f:if>
         <br>
+        <f:if condition="{workshop.speaker}">({workshop.speaker})<br></f:if>
         <strong><rkw:ComposeWorkshopDateTimeParts startDate='{workshop.start}' endDate='{workshop.end}' /></strong>
         <br>
         {workshop.description}

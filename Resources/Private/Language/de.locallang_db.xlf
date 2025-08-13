@@ -928,6 +928,10 @@
 				<source>Registration Required</source>
 				<target>Anmeldung erforderlich</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.fully_booked" approved="yes">
+				<source>Fully booked</source>
+				<target>Ausgebucht (Anmeldungen im Formular stoppen)</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.costs" approved="yes">
 				<source>Price (per Person)</source>
 				<target>Preis (pro Person)</target>
