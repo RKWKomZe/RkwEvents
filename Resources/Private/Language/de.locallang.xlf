@@ -1336,8 +1336,8 @@
 
 			<!-- Partials/EventReservation/Workshop.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_eventreservation_workshop.full">
-				<source>Workshop is full!</source>
-				<target>Ausgebucht!</target>
+				<source>Fully booked</source>
+				<target>Ausgebucht</target>
 			</trans-unit>
 
 

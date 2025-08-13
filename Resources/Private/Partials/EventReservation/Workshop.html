@@ -49,24 +49,14 @@
 
 <f:section name="labelContent">
     <span class="text-smaller">
-        {workshop.title}
         <f:if condition="{workshop.fullyBooked}">
-            <span style="
-                display: inline-block;
-                background-color: #d63f11;
-                color: #fff;
-                padding: 0.25em 0.6em;
-                font-size: 0.85rem;
-                font-weight: 600;
-                line-height: 1;
-                border-radius: 0.25rem;
-                text-transform: uppercase;
-            ">
+            <span class="badge badge--danger">
                 <f:translate key="tx_rkwevents_fluid.partials_eventreservation_workshop.full" />
-            </span>
+            </span><br>
         </f:if>
-        <f:if condition="{workshop.speaker}">({workshop.speaker})</f:if>
+        {workshop.title}
         <br>
+        <f:if condition="{workshop.speaker}">({workshop.speaker})<br></f:if>
         <strong><rkw:ComposeWorkshopDateTimeParts startDate='{workshop.start}' endDate='{workshop.end}' /></strong>
         <br>
         {workshop.description}
