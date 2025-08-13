@@ -695,6 +695,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.reg_required" approved="yes">
 				<source>Registration Required</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.fully_booked" approved="yes">
+				<source>Fully booked</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.costs" approved="yes">
 				<source>Price (per Person)</source>
 			</trans-unit>

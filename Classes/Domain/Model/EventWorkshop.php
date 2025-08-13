@@ -98,6 +98,13 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $regRequired = true;
 
     /**
+     * fullyBooked
+     *
+     * @var boolean
+     */
+    protected $fullyBooked = true;
+
+    /**
      * costs
      *
      * @var float
@@ -351,6 +358,33 @@ class EventWorkshop extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function isRegRequired()
     {
         return $this->regRequired;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFullyBooked(): bool
+    {
+        return $this->fullyBooked;
+    }
+
+    /**
+     * Returns the fullyBooked
+     *
+     * @return boolean $fullyBooked
+     */
+    public function getFullyBooked()
+    {
+        return $this->fullyBooked;
+    }
+
+    /**
+     * @param bool $fullyBooked
+     * @return void
+     */
+    public function setFullyBooked(bool $fullyBooked): void
+    {
+        $this->fullyBooked = $fullyBooked;
     }
 
     /**
