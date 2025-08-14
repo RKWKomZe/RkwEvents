@@ -62,6 +62,18 @@ return [
                 'fieldName' => 'deleted'
             ],
         ],
+        'subclasses' => [
+            '\RKW\RkwEvents\Domain\Model\EventReservationBooked' => \RKW\RkwEvents\Domain\Model\EventReservationBooked::class,
+            '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist' => \RKW\RkwEvents\Domain\Model\EventReservationWaitlist::class
+        ]
+    ],
+    \RKW\RkwEvents\Domain\Model\EventReservationBooked::class => [
+        'tableName' => 'tx_rkwevents_domain_model_eventreservation',
+        'recordType' => '\RKW\RkwEvents\Domain\Model\EventReservationBooked'
+    ],
+    \RKW\RkwEvents\Domain\Model\EventReservationWaitlist::class => [
+        'tableName' => 'tx_rkwevents_domain_model_eventreservation',
+        'recordType' => '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist'
     ],
     \RKW\RkwEvents\Domain\Model\EventReservationAddPerson::class => [
         'properties' => [

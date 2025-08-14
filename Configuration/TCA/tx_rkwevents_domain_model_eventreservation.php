@@ -32,10 +32,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.recordType.default', '\RKW\RkwEvents\Domain\Model\EventReservation'],
+                    ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.recordType.default', '\RKW\RkwEvents\Domain\Model\EventReservationBooked'],
                     ['LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.recordType.waitlist', '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist'],
                 ],
-                'default' => '\RKW\RkwEvents\Domain\Model\EventReservation'
+                'default' => '\RKW\RkwEvents\Domain\Model\EventReservationBooked'
             ],
         ],
 

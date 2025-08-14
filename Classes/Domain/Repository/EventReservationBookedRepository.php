@@ -20,15 +20,15 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 
 /**
- * Class EventReservationWaitlistRepository
- * The repository for EventReservationWaitlist
+ * Class EventReservationBookedRepository
+ * The repository for EventReservationBooked
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventReservationWaitlistRepository extends EventReservationRepository
+class EventReservationBookedRepository extends EventReservationRepository
 {
 
 

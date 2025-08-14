@@ -134,7 +134,7 @@ class SendSurveyForPastEventCommand extends Command
                     /** @var \RKW\RkwEvents\Domain\Model\Event $event */
                     foreach ($eventList as $event) {
 
-                        if ($eventReservationList = $event->getReservation()) {
+                        if ($eventReservationList = $event->getReservationBooked()) {
 
                             /** @var RkwMailService $mailService */
                             $mailService = GeneralUtility::makeInstance(RkwMailService::class);

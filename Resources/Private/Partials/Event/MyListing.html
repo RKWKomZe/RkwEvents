@@ -5,8 +5,54 @@
     <!-- upcoming events -->
     <f:if condition="{myReservations}">
         <f:then>
+            <h4>Gebuchte Veranstaltungen</h4>
             <table class="responsive-table responsive-table--background" >
                 <f:for each="{myReservations}" as="eventReservation">
+                    <f:if condition="{eventReservation.event}">
+                        <tr>
+                            <td>
+                                <h3 class="h4">{eventReservation.event.series.title}</h3>
+                                <p>
+                                    <!-- Time -->
+                                    <f:if condition="{eventReservation.event.recordType} == '\RKW\RkwEvents\Domain\Model\EventScheduled'">
+                                        <rkw:ComposeDateTimeParts event='{eventReservation.event}' /><br>                                    </f:if>
+
+                                    <f:if condition="{eventReservation.event.onlineEvent}">
+                                        <f:then>
+                                            <f:translate key="tx_rkwevents_fluid.partials_event_myListing.webinar" />
+                                        </f:then>
+                                        <f:else>
+                                            {eventReservation.event.place.address},
+                                            {eventReservation.event.place.zip} {eventReservation.event.place.city}
+                                        </f:else>
+                                    </f:if>
+                                </p>
+                                <f:render partial="Event/Options" arguments="{_all}" />
+                            </td>
+                        </tr>
+                    </f:if>
+                </f:for>
+            </table>
+        </f:then>
+        <f:else>
+            <div class="system-message" role="alert">
+                <div class="system-message__item system-message__item--severity0">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_myListing.noEventPlanned" />
+                    <br/><f:link.page pageUid="{settings.listPid}" target="_blank">
+                    <f:translate key="tx_rkwevents_fluid.partials_event_myListing.findMore" />
+                </f:link.page>
+                </div>
+            </div>
+        </f:else>
+    </f:if>
+
+
+    <!-- WAITLIST for upcoming events -->
+    <f:if condition="{myWaitlist}">
+        <f:then>
+            <h4>Warteliste</h4>
+            <table class="responsive-table responsive-table--background" >
+                <f:for each="{myWaitlist}" as="eventReservation">
                     <f:if condition="{eventReservation.event}">
                         <tr>
                             <td>

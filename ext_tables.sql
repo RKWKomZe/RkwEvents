@@ -132,7 +132,7 @@ CREATE TABLE tx_rkwevents_domain_model_event
     gallery1                 int(11) unsigned DEFAULT '0',
     gallery2                 int(11) unsigned DEFAULT '0',
     reservation              varchar(255) DEFAULT '' NOT NULL,
-		reservation_default      varchar(255) DEFAULT '' NOT NULL,
+	  reservation_booked    	 varchar(255) DEFAULT '' NOT NULL,
 		reservation_waitlist     varchar(255) DEFAULT '' NOT NULL,
     workshop                 varchar(255) DEFAULT '' NOT NULL,
     workshop_select_type     tinyint(1) unsigned DEFAULT '0' NOT NULL,
@@ -326,7 +326,7 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 		pid                 int(11) DEFAULT '0' NOT NULL,
 
 		event               int(11) unsigned DEFAULT '0' NOT NULL,
-		record_type         varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventReservation' NOT NULL,
+		record_type         varchar(255) DEFAULT '\RKW\RkwEvents\Domain\Model\EventReservationBooked' NOT NULL,
 
 		remark              text NOT NULL,
 		valid_until         int(11) unsigned DEFAULT '0' NOT NULL,

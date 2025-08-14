@@ -43,7 +43,6 @@ class FreePlacesAvailableViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Ab
      * Returns true if free places are available
      *
      * @return boolean
-     * @author Carlos Meyer <cm@davitec.de>
      */
     public function render()
     {

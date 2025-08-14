@@ -9,12 +9,13 @@ use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventContact;
 use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
-use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
+use RKW\RkwEvents\Domain\Repository\EventReservationBookedRepository;
 use SJBR\StaticInfoTables\Domain\Model\Language;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -122,20 +123,36 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 }
             }
 
-            $mailService->getQueueMail()->setSubject(
-                LocalizationUtility::translate(
-                    'rkwMailService.optInReservationUser.subject',
-                    'rkw_events',
-                    null,
-                    $frontendUser->getTxFeregisterLanguageKey()
-                )
-            );
+            if ($optIn->getData()->getRecordType() == '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist') {
+                $mailService->getQueueMail()->setSubject(
+                    LocalizationUtility::translate(
+                        'rkwMailService.optInReservationUser.subjectWaitlist',
+                        'rkw_events',
+                        null,
+                        $frontendUser->getTxFeregisterLanguageKey()
+                    )
+                );
+            } else {
+                $mailService->getQueueMail()->setSubject(
+                    LocalizationUtility::translate(
+                        'rkwMailService.optInReservationUser.subject',
+                        'rkw_events',
+                        null,
+                        $frontendUser->getTxFeregisterLanguageKey()
+                    )
+                );
+            }
 
             $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
             $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
 
-            $mailService->getQueueMail()->setPlaintextTemplate('Email/OptInReservationUser');
-            $mailService->getQueueMail()->setHtmlTemplate('Email/OptInReservationUser');
+            if ($optIn->getData()->getRecordType() == '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist') {
+                $mailService->getQueueMail()->setPlaintextTemplate('Email/OptInWaitlistUser');
+                $mailService->getQueueMail()->setHtmlTemplate('Email/OptInWaitlistUser');
+            } else {
+                $mailService->getQueueMail()->setPlaintextTemplate('Email/OptInReservationUser');
+                $mailService->getQueueMail()->setHtmlTemplate('Email/OptInReservationUser');
+            }
 
             $mailService->send();
         }
@@ -163,13 +180,20 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
     )
     {
-        // send confirmation
-        $this->userMail($frontendUser, $eventReservation, 'confirmation', true);
 
-        if (ExtensionManagementUtility::isLoaded('rkw_survey')) {
-            // send additional mail for survey (is some "surveyBefore" ist set in event)
-            if ($eventReservation->getEvent()->getSurveyBefore()) {
-                $this->userMail($frontendUser, $eventReservation, 'survey');
+        if ($eventReservation->getRecordType() == '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist') {
+            // send confirmation WAITLIST
+            // Hint: survey and calendar are sent in "convertReservationUser"-Mail
+            $this->userMail($frontendUser, $eventReservation, 'confirmwaitlist');
+        } else {
+            // send confirmation
+            $this->userMail($frontendUser, $eventReservation, 'confirmation', true);
+
+            if (ExtensionManagementUtility::isLoaded('rkw_survey')) {
+                // send additional mail for survey (is some "surveyBefore" ist set in event)
+                if ($eventReservation->getEvent()->getSurveyBefore()) {
+                    $this->userMail($frontendUser, $eventReservation, 'survey');
+                }
             }
         }
     }
@@ -195,8 +219,15 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
     )
     {
-        $this->adminMail($backendUser, $eventReservation, 'confirmation');
+        if ($eventReservation->getRecordType() == '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist') {
+            $this->adminMail($backendUser, $eventReservation, 'confirmwaitlist');
+        } else {
+            $this->adminMail($backendUser, $eventReservation, 'confirmation');
+        }
+
     }
+
+
 
     /**
      * Handles update mail for user
@@ -220,6 +251,7 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     {
         $this->userMail($frontendUser, $eventReservation, 'update');
     }
+
 
 
     /**
@@ -316,9 +348,9 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
         $action = "cancellation";
 
         // fetch reservation object
-        $eventReservationRepository = GeneralUtility::makeInstance(EventReservationRepository::class);
+        $eventReservationBookedRepository = GeneralUtility::makeInstance(EventReservationBookedRepository::class);
         /** @var EventReservation $eventReservation */
-        $eventReservation = $eventReservationRepository->findByUid($eventReservation['uid']);
+        $eventReservation = $eventReservationBookedRepository->findByUid($eventReservation['uid']);
 
 
         // get settings
@@ -495,6 +527,66 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 $mailService->send();
             }
         }
+    }
+
+
+    /**
+     * Handles upgrade from waitlist to regular reservation
+     * Called via hook
+     *
+     * @param array $eventReservation
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function convertReservationUser(array $eventReservation)
+    {
+
+        // fetch reservation object
+        $eventReservationBookedRepository = GeneralUtility::makeInstance(EventReservationBookedRepository::class);
+        /** @var EventReservation $eventReservation */
+        $eventReservation = $eventReservationBookedRepository->findByUid($eventReservation['uid']);
+
+        $this->userMail($eventReservation->getFeUser(), $eventReservation, 'convert', true);
+
+        if (ExtensionManagementUtility::isLoaded('rkw_survey')) {
+            // send additional mail for survey (is some "surveyBefore" ist set in event)
+            if ($eventReservation->getEvent()->getSurveyBefore()) {
+                $this->userMail($eventReservation->getFeUser(), $eventReservation, 'survey');
+            }
+        }
+    }
+
+
+    /**
+     * Handles upgrade from waitlist to regular reservation
+     *
+     * @param array $eventReservation
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function convertReservationAdmin(array $eventReservation)
+    {
+
+        // fetch reservation object
+        $eventReservationBookedRepository = GeneralUtility::makeInstance(EventReservationBookedRepository::class);
+        /** @var EventReservation $eventReservation */
+        $eventReservation = $eventReservationBookedRepository->findByUid($eventReservation['uid']);
+
+        $this->adminMail($eventReservation->getEvent()->getBeUser()->toArray(), $eventReservation, 'convert');
     }
 
 

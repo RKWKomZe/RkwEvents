@@ -234,6 +234,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     public function newAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0): void
     {
+
         // catch all people who are trying to visit a dead reservation link
         if (!$event instanceof Event) {
             $this->redirect('show', 'Event', null, [], $this->settings['showPid']);
@@ -243,6 +244,8 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
             $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($event, $this->getFrontendUser());
             if (count($eventReservationResult)) {
+
+                // @toDo: Maybe different message if person is only on waitlist?
 
                 // already registered!
                 $this->addFlashMessage(
@@ -269,16 +272,26 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             }
         }
 
+
         if (!$newEventReservation) {
+
 
             if (!(DivUtility::hasFreeSeatsStrict($event))) {
 
+                // needed for template phone "is mandatory" or not
                 $this->view->assign('isWaitlist', true);
 
-                $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservationWaitlist');
+                // @toDo: Ist das hier wichtig? Der Typ wird beim erstellen der Reservierung gesetzt
+                //$newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservationWaitlist');
             } else {
+
+                // create default reservation
                 $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
             }
+
+
+            // create default reservation
+            $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
         }
 
         $newEventReservation->setEvent($event);
@@ -467,7 +480,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         // 2. Check available seats
         // HINT new behavior: WAITLIST!
-        if (!DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation)) {
+        if (!DivUtility::hasFreeSeatsStrict($newEventReservation->getEvent(), $newEventReservation)) {
 
 
             $newEventReservation->setRecordType('\RKW\RkwEvents\Domain\Model\EventReservationWaitlist');
@@ -694,7 +707,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 $event = $this->eventRepository->findByIdentifier($newEventReservation->getEvent()->getUid());
                 $newEventReservation->setEvent($event);
 
-                // 2. Check for existing reservations based on email.
+                // 2. Check for existing reservations based on email (search overall in booked and waitlist).
                 $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($event, $feUser);
                 if (count($eventReservationResult)) {
 

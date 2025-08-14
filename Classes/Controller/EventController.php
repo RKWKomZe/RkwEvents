@@ -25,10 +25,12 @@ use RKW\RkwEvents\Domain\Repository\CategoryRepository;
 use RKW\RkwEvents\Domain\Repository\DepartmentRepository;
 use RKW\RkwEvents\Domain\Repository\DocumentTypeRepository;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
+use RKW\RkwEvents\Domain\Repository\EventReservationBookedRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Domain\Repository\FrontendUserRepository;
 use RKW\RkwEvents\Utility\DivUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * EventController
@@ -54,6 +56,12 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
      * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
      */
     protected ?EventReservationRepository $eventReservationRepository = null;
+
+
+    /**
+     * @var \RKW\RkwEvents\Domain\Repository\EventReservationBookedRepository
+     */
+    protected ?EventReservationBookedRepository $eventReservationBookedRepository = null;
 
 
     /**
@@ -90,6 +98,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     /**
      * @param EventRepository $eventRepository
      * @param EventReservationRepository $eventReservationRepository
+     * @param EventReservationBookedRepository $eventReservationBookedRepository
      * @param CategoryRepository $categoryRepository
      * @param DepartmentRepository $departmentRepository
      * @param DocumentTypeRepository $documentTypeRepository
@@ -98,6 +107,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     public function __construct(
         EventRepository $eventRepository,
         EventReservationRepository $eventReservationRepository,
+        EventReservationBookedRepository $eventReservationBookedRepository,
         CategoryRepository $categoryRepository,
         DepartmentRepository $departmentRepository,
         DocumentTypeRepository $documentTypeRepository,
@@ -105,6 +115,7 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
     ) {
         $this->eventRepository = $eventRepository;
         $this->eventReservationRepository = $eventReservationRepository;
+        $this->eventReservationBookedRepository = $eventReservationBookedRepository;
         $this->categoryRepository = $categoryRepository;
         $this->departmentRepository = $departmentRepository;
         $this->documentTypeRepository = $documentTypeRepository;
@@ -131,8 +142,11 @@ class EventController extends \Madj2k\AjaxApi\Controller\AjaxAbstractController
             );
         } else {
 
-            $myReservations = $this->eventReservationRepository->findByFeUser($this->getFrontendUser());
+            $myReservations = $this->eventReservationBookedRepository->findByFeUser($this->getFrontendUser());
+            $myWaitlist = $this->eventReservationBookedRepository->findByFeUser($this->getFrontendUser());
+
             $this->view->assign('myReservations', $myReservations);
+            $this->view->assign('myWaitlist', $myWaitlist);
         }
     }
 

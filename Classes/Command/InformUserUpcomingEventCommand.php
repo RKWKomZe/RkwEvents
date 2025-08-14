@@ -15,7 +15,7 @@ namespace RKW\RkwEvents\Command;
  */
 
 use RKW\RkwEvents\Domain\Repository\EventRepository;
-use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
+use RKW\RkwEvents\Domain\Repository\EventReservationBookedRepository;
 use RKW\RkwEvents\Service\RkwMailService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -51,9 +51,9 @@ class InformUserUpcomingEventCommand extends Command
 
 
     /**
-     * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
+     * @var \RKW\RkwEvents\Domain\Repository\EventReservationBookedRepository
      */
-    protected ?EventReservationRepository $eventReservationRepository = null;
+    protected ?EventReservationBookedRepository $eventReservationBookedRepository = null;
 
 
     /**
@@ -76,17 +76,17 @@ class InformUserUpcomingEventCommand extends Command
 
     /**
      * @param EventRepository $eventRepository,
-     * @param EventReservationRepository $eventReservationRepository,
+     * @param EventReservationBookedRepository $eventReservationBookedRepository,
      * @param PersistenceManager $persistenceManager
      */
     public function __construct(
         EventRepository $eventRepository,
-        EventReservationRepository $eventReservationRepository,
+        EventReservationBookedRepository $eventReservationBookedRepository,
         PersistenceManager $persistenceManager
     ) {
 
         $this->eventRepository = $eventRepository;
-        $this->eventReservationRepository = $eventReservationRepository;
+        $this->eventReservationBookedRepository = $eventReservationBookedRepository;
         $this->persistenceManager = $persistenceManager;
 
         parent::__construct();
@@ -138,7 +138,7 @@ class InformUserUpcomingEventCommand extends Command
 
                 /** @var \RKW\RkwEvents\Domain\Model\Event $event */
                 foreach ($eventList as $event) {
-                    if ($eventReservationList = $event->getReservation()) {
+                    if ($eventReservationList = $event->getReservationBooked()) {
 
                         // send mails
                         /** @var RkwMailService $mailService */

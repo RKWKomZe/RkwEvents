@@ -347,13 +347,13 @@
 				<source>Reservations</source>
 				<target>Reservierungen</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.reservations_default" approved="yes">
-				<source>Reservations</source>
-				<target>Reservierungen</target>
+			<trans-unit id="tx_rkwevents_domain_model_event.reservations_booked" approved="yes">
+				<source>Reservations booked</source>
+				<target>Reservierungen gebucht</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reservations_waitlist" approved="yes">
 				<source>Reservations waitlist</source>
-				<target>Reservierungen (WARTELISTE)</target>
+				<target>Warteliste (über das Feld "Anmelde-Typ" kann ein Wartelisten-Element zur regulären Reservierung umgewandelt werden)</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_event.workshop" approved="yes">
                 <source>Workshop</source>

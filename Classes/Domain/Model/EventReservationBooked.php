@@ -1,11 +1,6 @@
 <?php
 
-namespace RKW\RkwEvents\Domain\Repository;
-
-use RKW\RkwEvents\Domain\Model\Event;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-
+namespace RKW\RkwEvents\Domain\Model;
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -20,17 +15,15 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 
 /**
- * Class EventReservationWaitlistRepository
- * The repository for EventReservationWaitlist
+ * Class EventReservationBooked
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEvents
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EventReservationWaitlistRepository extends EventReservationRepository
+class EventReservationBooked extends EventReservation
 {
-
 
 
 }

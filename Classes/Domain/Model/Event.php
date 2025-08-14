@@ -430,6 +430,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $reservation = null;
 
     /**
+     * Holds reservationBooked
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationBooked>
+     */
+    protected $reservationBooked = null;
+
+    /**
+     * Holds reservationWaitlist
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationWaitlist>
+     */
+    protected $reservationWaitlist = null;
+
+    /**
      * Holds workshops
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventWorkshop>
@@ -531,6 +545,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->logos = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->reservation = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->reservationBooked = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->reservationWaitlist = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->sheet = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->externalContact = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->internalContact = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -1839,7 +1855,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds a EventReservation
+     * Adds a EventReservation BOOKED + WAITLIST
      *
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $reservation
      * @return void
@@ -1850,7 +1866,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Removes a EventReservation
+     * Removes a EventReservation BOOKED + WAITLIST
      *
      * @param \RKW\RkwEvents\Domain\Model\EventReservation $reservationToRemove The EventReservation to be removed
      * @return void
@@ -1861,7 +1877,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the reservations
+     * Returns the reservations BOOKED + WAITLIST
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservation> $reservation
      */
@@ -1871,7 +1887,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Sets the reservation
+     * Sets the reservation BOOKED + WAITLIST
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservation> $reservation
      * @return void
@@ -1879,6 +1895,92 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setReservation(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $reservation)
     {
         $this->reservation = $reservation;
+    }
+
+    /**
+     * Adds an EventReservation BOOKED
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventReservationBooked $reservation
+     * @return void
+     */
+    public function addReservationBooked(\RKW\RkwEvents\Domain\Model\EventReservationBooked $reservation)
+    {
+        $this->reservationBooked->attach($reservation);
+    }
+
+    /**
+     * Removes an EventReservation BOOKED
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventReservationBooked $reservationToRemove The EventReservation to be removed
+     * @return void
+     */
+    public function removeReservationBooked(\RKW\RkwEvents\Domain\Model\EventReservationBooked $reservationToRemove)
+    {
+        $this->reservationBooked->detach($reservationToRemove);
+    }
+
+    /**
+     * Returns the reservations BOOKED
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationBooked> $reservation
+     */
+    public function getReservationBooked()
+    {
+        return $this->reservationBooked;
+    }
+
+    /**
+     * Sets the reservation BOOKED
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationBooked> $reservation
+     * @return void
+     */
+    public function setReservationBooked(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $reservation)
+    {
+        $this->reservationBooked = $reservation;
+    }
+
+    /**
+     * Adds an EventReservation WAITLIST
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventReservationWaitlist $reservation
+     * @return void
+     */
+    public function addReservationWaitlist(\RKW\RkwEvents\Domain\Model\EventReservationWaitlist $reservation)
+    {
+        $this->reservationWaitlist->attach($reservation);
+    }
+
+    /**
+     * Removes a EventReservation WAITLIST
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventReservationWaitlist $reservationToRemove The EventReservation to be removed
+     * @return void
+     */
+    public function removeReservationWaitlist(\RKW\RkwEvents\Domain\Model\EventReservationWaitlist $reservationToRemove)
+    {
+        $this->reservationWaitlist->detach($reservationToRemove);
+    }
+
+    /**
+     * Returns the reservations WAITLIST
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationWaitlist> $reservation
+     */
+    public function getReservationWaitlist()
+    {
+        return $this->reservationWaitlist;
+    }
+
+    /**
+     * Sets the reservation WAITLIST
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEvents\Domain\Model\EventReservationWaitlist> $reservation
+     * @return void
+     */
+    public function setReservationWaitlist(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $reservation)
+    {
+        $this->reservationWaitlist = $reservation;
     }
 
     /**

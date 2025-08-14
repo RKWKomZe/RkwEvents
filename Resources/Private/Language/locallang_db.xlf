@@ -259,8 +259,8 @@
 			<trans-unit id="tx_rkwevents_domain_model_event.reservations">
 				<source>Reservations</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_event.reservations_default" approved="yes">
-				<source>Reservations</source>
+			<trans-unit id="tx_rkwevents_domain_model_event.reservations_booked" approved="yes">
+				<source>Reservations booked</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.reservations_waitlist" approved="yes">
 				<source>Reservations waitlist</source>

@@ -20,6 +20,7 @@ use ApacheSolrForTypo3\Solr\Domain\Index\Queue\UpdateHandler\GarbageHandler;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository;
+use RKW\RkwEvents\Domain\Repository\EventReservationBookedRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Service\RkwMailService;
 use RKW\RkwGeolocation\Service\Geolocation;
@@ -31,7 +32,6 @@ use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class TceMainHooks
@@ -230,6 +230,36 @@ class TceMainHooks
             }
         } catch (\Exception $e) {
             $this->getLogger()->log(LogLevel::ERROR, sprintf('Could not delete interfering data of an event record. Reason: %s.', $e->getMessage()));
+        }
+
+
+        if ($table == 'tx_rkwevents_domain_model_eventreservation') {
+            // on update record type (change from "waitlist" to regular reservation)
+            if (
+                $status == 'update'
+                && array_key_exists('record_type', $fieldArray)
+            ) {
+
+                $eventReservationDb = BackendUtility::getRecord('tx_rkwevents_domain_model_eventreservation', intval($id));
+
+                // check for change from waitlist to regular
+                if (
+                    $fieldArray['record_type'] == '\RKW\RkwEvents\Domain\Model\EventReservation'
+                    && $eventReservationDb['record_type'] == '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist'
+                )
+                {
+
+                    $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(RkwMailService::class);
+                    try {
+                        $mailService->convertReservationUser($eventReservationDb);
+                        $mailService->convertReservationAdmin($eventReservationDb);
+                    } catch (\Exception $e) {
+                        $this->getLogger()->log(LogLevel::ERROR, sprintf('Could not send mails after converting event reservation from waitlist to booked. Reason: %s.', $e->getMessage()));
+                    }
+
+                }
+
+            }
         }
 
 

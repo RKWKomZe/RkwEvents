@@ -112,7 +112,7 @@ class DivUtilityTest extends FunctionalTestCase
         /** @var Event $event */
         $event = $this->eventRepository->findByUid(1);
 
-        self::assertCount(1, $event->getReservation());
+        self::assertCount(1, $event->getReservationBooked());
         self::assertEquals(1, DivUtility::countConfirmedReservations($event));
 
     }
@@ -148,7 +148,7 @@ class DivUtilityTest extends FunctionalTestCase
             $newEventReservation->addAddPerson($person);
         }
 
-        self::assertCount(2, $event->getReservation());
+        self::assertCount(2, $event->getReservationBooked());
         self::assertTrue(DivUtility::hasFreeSeats($event, $newEventReservation));
 
     }
@@ -187,7 +187,7 @@ class DivUtilityTest extends FunctionalTestCase
 
         self::assertEquals(1, DivUtility::countEventReservationsWithAddPersons($newEventReservation));
 
-        self::assertCount(2, $event->getReservation());
+        self::assertCount(2, $event->getReservationBooked());
         self::assertTrue(DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation));
 
     }
@@ -232,7 +232,7 @@ class DivUtilityTest extends FunctionalTestCase
 
         self::assertEquals(2, DivUtility::countEventReservationsWithAddPersons($newEventReservation));
 
-        self::assertCount(2, $event->getReservation());
+        self::assertCount(2, $event->getReservationBooked());
         self::assertFalse(DivUtility::hasFreeSeats($newEventReservation->getEvent(), $newEventReservation));
 
     }

@@ -1,0 +1,63 @@
+{namespace postmaster=Madj2k\Postmaster\ViewHelpers}
+<f:layout name="Email/{mailType}" />
+
+
+<!-- PLAINTEXT -->
+<f:section name="Plaintext">
+<postmaster:email.translate key="templates_email_optInWaitlistUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+
+<postmaster:email.translate key="templates_email_optInWaitlistUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"  />
+<postmaster:email.translate key="templates_email_optInWaitlistUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"  />
+
+<f:render partial="Email/Details" section="Plaintext" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin, showNewsletterCheckbox: showNewsletterCheckbox}"/>
+
+=============================================================
+<postmaster:email.translate key="templates_email_optInWaitlistUser.confirmHeadline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/>
+=============================================================
+
+<postmaster:email.translate key="templates_email_optInWaitlistUser.textOptIn" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<f:if condition="{isStandaloneRegisterPlugin}">
+    <f:then>
+        <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="standalonereg" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_standalonereg: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
+    </f:then>
+    <f:else>
+        <postmaster:email.uri.action action="optIn" controller="EventReservation" extensionName="rkwEvents" pluginName="pi1" absolute="true" pageUid="{pageUid}" additionalParams="{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}" section="rkw-events" />
+    </f:else>
+</f:if>
+
+<postmaster:email.translate key="templates_email_optInWaitlistUser.textOptOut" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+</f:section>
+
+
+<!-- HTML -->
+<f:section name="Html">
+	<h1><postmaster:email.translate key="templates_email_optInWaitlistUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></h1>
+	<p>
+		<postmaster:email.translate key="templates_email_optInWaitlistUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
+		<strong><postmaster:email.translate key="templates_email_optInWaitlistUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></strong>
+	</p>
+
+	<f:render partial="Email/Details" section="Html" arguments="{reservation:optIn.data, frontendUser: frontendUser, language:frontendUser.txFeregisterLanguageKey, showPid: showPid, isStandaloneRegisterPlugin: isStandaloneRegisterPlugin, showNewsletterCheckbox: showNewsletterCheckbox}"/>
+
+	<h2><postmaster:email.translate key="templates_email_optInWaitlistUser.confirmHeadline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/></h2>
+	<p>
+		<postmaster:email.translate key="templates_email_optInWaitlistUser.textOptIn" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/><br>
+        <f:if condition="{isStandaloneRegisterPlugin}">
+            <f:then>
+                <a href="<postmaster:email.uri.action action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='standalonereg' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_standalonereg: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}' section='rkw-events' />">
+                    <postmaster:email.translate key="templates_email_optInWaitlistUser.textOptInLinkLabel" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/>
+                </a>
+            </f:then>
+            <f:else>
+                <a href="<postmaster:email.uri.action action='optIn' controller='EventReservation' extensionName='rkwEvents' pluginName='pi1' absolute='true' pageUid='{pageUid}' additionalParams='{tx_rkwevents_pi1: {token: optIn.tokenYes, tokenUser: optIn.tokenUser, event: optIn.data.event}}' section='rkw-events' />">
+                    <postmaster:email.translate key="templates_email_optInWaitlistUser.textOptInLinkLabel" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents"/>
+                </a>
+            </f:else>
+        </f:if>
+
+	</p>
+	<p>
+		<postmaster:email.translate key="templates_email_optInWaitlistUser.textOptOut" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /><br>
+	</p>
+
+</f:section>

@@ -82,12 +82,12 @@ class DivUtility
     public static function hasFreeSeatsStrict(\RKW\RkwEvents\Domain\Model\Event $event)
     {
 
-        $reservations = $event->getReservation();
+        $reservations = $event->getReservationBooked();
         $confirmedReservations = 0;
 
         if (count($reservations) > 0) {
 
-            /** @var \RKW\RkwEvents\Domain\Model\EventReservation $reservation */
+            /** @var \RKW\RkwEvents\Domain\Model\EventReservationBooked $reservation */
             foreach ($reservations as $reservation) {
                 $confirmedReservations++;
                 $addPerson = $reservation->getAddPerson();
@@ -121,7 +121,7 @@ class DivUtility
     public static function countConfirmedReservations($event)
     {
 
-        $reservations = $event->getReservation();
+        $reservations = $event->getReservationBooked();
         $confirmedReservations = 0;
         if (count($reservations) > 0) {
             foreach ($reservations as $reservation) {

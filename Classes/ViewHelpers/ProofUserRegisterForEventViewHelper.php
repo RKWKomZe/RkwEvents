@@ -49,7 +49,7 @@ class ProofUserRegisterForEventViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHel
         $frontendUser = $this->arguments['frontendUser'];
 
         /** @var \RKW\RkwEvents\Domain\Model\EventReservation $reservation */
-        foreach ($event->getReservation() as $reservation) {
+        foreach ($event->getReservationBooked() as $reservation) {
 
             if ($reservation->getFeUser()->getUid() == $frontendUser->getUid()) {
                 return true;

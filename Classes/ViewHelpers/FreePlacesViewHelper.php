@@ -53,7 +53,7 @@ class FreePlacesViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractVie
         $status = ['green', 'yellow', 'red'];
 
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
-        $reservations = $event->getReservation();
+        $reservations = $event->getReservationBooked();
         $confirmedReservations = 0;
         if (count($reservations) > 0) {
             /** @var \RKW\RkwEvents\Domain\Model\EventReservation $reservation */

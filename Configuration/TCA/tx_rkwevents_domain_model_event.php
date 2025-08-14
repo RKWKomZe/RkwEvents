@@ -28,7 +28,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_show_link,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,code,trainer,eligibility,eligibility_link,workshop_select_type,workshop_select_req,workshop,extended_network,custom_privacy_consent_show,custom_privacy_consent,custom_field_show,custom_field_mandatory,custom_field_label,custom_field_placeholder,custom_field_type,custom_field_full_width',
+		'searchFields' => 'title,start,end,show_time,longitude,latitude,seats,costs_unknown,costs_reg,costs_red,reg_required,reg_single,reg_end,cancel_end,ext_show_link,ext_reg_link,ext_cancel_info,ext_cancel_link,series,logos,currency,place_unknown,place,online_event,online_event_access_link,register_add_information,additional_tile_flag,external_contact,be_user,presentations,sheet,gallery1,gallery2,reservation,reservation_booked,reservation_waitlist,code,trainer,eligibility,eligibility_link,workshop_select_type,workshop_select_req,workshop,extended_network,custom_privacy_consent_show,custom_privacy_consent,custom_field_show,custom_field_mandatory,custom_field_label,custom_field_placeholder,custom_field_type,custom_field_full_width',
         'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_event.gif'
     ],
     'types' => [
@@ -55,7 +55,7 @@ return [
                 presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
-                reservation, reservation_default, reservation_waitlist,
+                reservation_booked, reservation_waitlist,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 ext_show_link, additional_tile_flag, title,
@@ -87,7 +87,7 @@ return [
                 presentations, sheet,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_reservation,
-                reservation, reservation_default, reservation_waitlist,
+                reservation_booked, reservation_waitlist,
 
                 --div--;LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.tab_other,
                 ext_show_link, additional_tile_flag, title,
@@ -690,7 +690,7 @@ return [
                 'jpg, png, gif'
             ),
         ],
-        /*
+
         'reservation' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reservations',
@@ -719,20 +719,19 @@ return [
                 ],
             ],
         ],
-        */
-        'reservation_default' => [
+        'reservation_booked' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reservations_default',
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event.reservations_booked',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_rkwevents_domain_model_eventreservation',
                 'foreign_field' => 'event',
                 'foreign_match_fields' => [
-                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservation',
+                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservationBooked',
                 ],
                 // New children created via this IRRE get this type by default
                 'foreign_record_defaults' => [
-                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservation',
+                    'record_type' => '\RKW\RkwEvents\Domain\Model\EventReservationBooked',
                 ],
                 'maxitems'      => 9999,
                 'size'          => 5,

@@ -1356,9 +1356,17 @@
 				<source>Please confirm your reservation</source>
 				<target>Bitte bestätigen Sie Ihre Teilnahme</target>
 			</trans-unit>
+			<trans-unit id="rkwMailService.optInReservationUser.subjectWaitlist" approved="yes">
+				<source>Please confirm your waiting list registration</source>
+				<target>Bitte bestätigen Sie Ihre Wartelisten-Anmeldung</target>
+			</trans-unit>
 			<trans-unit id="rkwMailService.confirmationReservationUser.subject" approved="yes">
 				<source>Thank you for your reservation</source>
 				<target>Danke für Ihre Anmeldung</target>
+			</trans-unit>
+			<trans-unit id="rkwMailService.confirmwaitlistReservationUser.subject" approved="yes">
+				<source>Thank you for your waitlist reservation</source>
+				<target>Danke für Ihre Anmeldung zur Warteliste</target>
 			</trans-unit>
 			<trans-unit id="rkwMailService.surveyReservationUser.subject" approved="yes">
 				<source>Survey for event</source>
@@ -1367,6 +1375,10 @@
 			<trans-unit id="rkwMailService.confirmationReservationAdmin.subject" approved="yes">
 				<source>New reservation</source>
 				<target>Neue Veranstaltungsanmeldung</target>
+			</trans-unit>
+			<trans-unit id="rkwMailService.confirmwaitlistReservationAdmin.subject" approved="yes">
+				<source>New reservation</source>
+				<target>Neue Wartelisten-Anmeldung</target>
 			</trans-unit>
 			<trans-unit id="rkwMailService.updateReservationUser.subject" approved="yes">
 				<source>Your reservation has been successfully updated</source>
@@ -1399,6 +1411,14 @@
 			<trans-unit id="rkwMailService.cancellationReservationAdmin.subject" approved="yes">
 				<source>Reservations for an appointment have been deleted</source>
 				<target>Reservierungen zu einem Termin wurden gelöscht</target>
+			</trans-unit>
+			<trans-unit id="rkwMailService.convertReservationUser.subject" approved="yes">
+				<source>Your reservation has been upgraded</source>
+				<target>Sie sind von der Warteliste nachgerückt</target>
+			</trans-unit>
+			<trans-unit id="rkwMailService.convertReservationAdmin.subject" approved="yes">
+				<source>A reservation has been upgraded</source>
+				<target>Jemand ist von der Warteliste nachgerückt</target>
 			</trans-unit>
 
 
@@ -1435,6 +1455,41 @@
 				<target>Nein, ich möchte an der Veranstaltung nicht teilnehmen</target>
 			</trans-unit>
 			<trans-unit id="templates_email_optInReservationUser.confirmHeadline">
+				<source>Please confirm your registration</source>
+				<target>Bitte bestätigen Sie Ihre Anmeldung</target>
+			</trans-unit>
+
+
+			<!-- Templates/Email/OptInWaitlistUser.html -->
+			<trans-unit id="templates_email_optInWaitlistUser.headline">
+				<source>Hello,</source>
+				<target>Hallo,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.text1">
+				<source>thank you for your interest.</source>
+				<target>vielen Dank für Ihr Interesse an der Teilnahme an einer Veranstaltung des RKW. Da alle Plätze derzeit vergeben sind, registrieren Sie sich für die Warteliste.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.text2">
+				<source>Please check and confirm your request below.</source>
+				<target>Bitte prüfen Sie Ihre Anmeldung auf Richtigkeit und bestätigen Sie sie über den untenstehenden Link. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.textOptIn" approved="no">
+				<source>Click here to confirm your request:</source>
+				<target phase-name="approval-1" state="final">Bitte klicken Sie hier, um Ihre Wartelisten-Anmeldung zu bestätigen. Um Ihnen zukünftige Veranstaltungsanmeldungen zu erleichtern, wird automatisch ein kostenloser Account erstellt, falls Sie nicht schon als Nutzender registriert sind. Das Passwort erhalten Sie in einer weiteren E-Mail.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.textOptOut">
+				<source>Click here to cancel your request:</source>
+				<target>Sie haben es sich anders überlegt oder haben die Anmeldung gar nicht selbst angefragt? In Kürze werden die Daten Ihrer Anfrage automatisch gelöscht. Sie brauchen nichts weiter zu tun.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.textOptInLinkLabel">
+				<source>Yes, I want to attend</source>
+				<target>Ja, ich möchte an der Veranstaltung teilnehmen</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.textOptOutLinkLabel">
+				<source>No, thank you</source>
+				<target>Nein, ich möchte an der Veranstaltung nicht teilnehmen</target>
+			</trans-unit>
+			<trans-unit id="templates_email_optInWaitlistUser.confirmHeadline">
 				<source>Please confirm your registration</source>
 				<target>Bitte bestätigen Sie Ihre Anmeldung</target>
 			</trans-unit>
@@ -1636,6 +1691,41 @@
 			</trans-unit>
 
 
+			<!-- Templates/Email/ConfirmwaitlistReservationUser.html -->
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.headline">
+				<source>Hello %s %s,</source>
+				<target>Hallo %s %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.text1">
+				<source>thank you for your reservation.</source>
+				<target>vielen Dank für Ihre Anmeldung zur Warteliste zu einer Veranstaltung des RKW. Sobald ein Platz frei wird, werden wir Sie unter der angegebenen Telefonnummer kontaktieren.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.text2">
+				<source>Please find below the details of your reservation.</source>
+				<target>Untenstehend finden Sie die Details Ihrer Anmeldung. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.changeDeleteHeadline">
+				<source>Change / Delete</source>
+				<target>Löschen / Ändern</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.text3">
+				<source>Login here to change or delete your reservation.</source>
+				<target>Loggen Sie sich hier ein, um Ihre Anmeldung zu löschen oder zu ändern.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.onlineEventAccessLink">
+				<source>Click here to join</source>
+				<target>Ab ca. 10 Minuten vor Beginn der Veranstaltung können Sie sich über diesen Link direkt in die Veranstaltung einwählen:</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.cancelQuestion">
+				<source>Have you registered for the wrong event or has something else come up?</source>
+				<target>Sie haben sich bei der falschen Veranstaltung angemeldet oder etwas anderes ist Ihnen dazwischengekommen?</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationUser.cancelButton">
+				<source>Deregister from an event</source>
+				<target>Von Veranstaltung abmelden</target>
+			</trans-unit>
+
+
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
 			<trans-unit id="templates_email_confirmationReservationAdmin.headline">
 				<source>Hello %s,</source>
@@ -1649,6 +1739,71 @@
                 <source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
                 <target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. 48 Stunden vor Beginn der Veranstaltung wird automatisch eine Erinnerungsmail mit Anfahrtskizze oder im Falle einer Online-Veranstaltung mit dem zusätzlich hinterlegten Teilnahmelink versendet.</target>
             </trans-unit>
+
+
+			<!-- Templates/Email/ConfirmwaitlistReservationAdmin.html -->
+			<trans-unit id="templates_email_confirmwaitlistReservationAdmin.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationAdmin.text1" approved="no">
+				<source>a waitlist reservation has been placed.</source>
+				<target phase-name="approval-1" state="final">jemand hat sich über die Website für eine ausgebuchten Veranstaltung in die Warteliste eingetragen. Sollten kurzfristig Plätze frei werden, können Sie Teilnehmer aus der Warteliste im TYPO3-Login-Bereich in reguläre Anmeldungen umwandeln. Wir empfehlen, vorher telefonisch mit dem jeweiligen Teilnehmer Kontakt aufzunehmen. Sie können dem oder der Nutzenden direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmwaitlistReservationAdmin.text2" approved="no">
+				<source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
+				<target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. 48 Stunden vor Beginn der Veranstaltung wird automatisch eine Erinnerungsmail mit Anfahrtskizze oder im Falle einer Online-Veranstaltung mit dem zusätzlich hinterlegten Teilnahmelink versendet.</target>
+			</trans-unit>
+
+
+			<!-- Templates/Email/ConvertReservationUser.html -->
+			<trans-unit id="templates_email_convertReservationUser.headline">
+				<source>Hello %s %s,</source>
+				<target>Hallo %s %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.text1">
+				<source>your reservation has been upgraded.</source>
+				<target>wir freuen uns, Ihnen mitteilen zu können, dass Sie von der Warteliste nachgerückt sind.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.text2">
+				<source>Please find below the details of your reservation.</source>
+				<target>Untenstehend finden Sie die Details Ihrer Anmeldung. Bei Rückfragen können Sie einfach direkt auf diese E-Mail antworten.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.changeDeleteHeadline">
+				<source>Change / Delete</source>
+				<target>Löschen / Ändern</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.text3">
+				<source>Login here to change or delete your reservation.</source>
+				<target>Loggen Sie sich hier ein, um Ihre Anmeldung zu löschen oder zu ändern.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.onlineEventAccessLink">
+				<source>Click here to join</source>
+				<target>Ab ca. 10 Minuten vor Beginn der Veranstaltung können Sie sich über diesen Link direkt in die Veranstaltung einwählen:</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.cancelQuestion">
+				<source>Have you registered for the wrong event or has something else come up?</source>
+				<target>Sie haben sich bei der falschen Veranstaltung angemeldet oder etwas anderes ist Ihnen dazwischengekommen?</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationUser.cancelButton">
+				<source>Deregister from an event</source>
+				<target>Von Veranstaltung abmelden</target>
+			</trans-unit>
+
+
+			<!-- Templates/Email/ConvertReservationAdmin.html -->
+			<trans-unit id="templates_email_convertReservationAdmin.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationAdmin.text1" approved="no">
+				<source>Someone has moved up from the waiting list and is now registered for an event..</source>
+				<target phase-name="approval-1" state="final">jemand ist über die Warteliste nachgerückt und nun an einer Veranstaltung angemeldet. Sie können dem oder der Nutzenden direkt auf diese E-Mail antworten, um etwaige Fragen zu klären.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_convertReservationAdmin.text2" approved="no">
+				<source>IMPORTANT: The user has already received a confirmation for his reservation. He will also automatically receive a reminder-mail a few days before the event.</source>
+				<target phase-name="approval-1" state="final">WICHTIG: Der oder die Nutzende haben bereits eine Bestätigungsemail für die Anmeldung erhalten. 48 Stunden vor Beginn der Veranstaltung wird automatisch eine Erinnerungsmail mit Anfahrtskizze oder im Falle einer Online-Veranstaltung mit dem zusätzlich hinterlegten Teilnahmelink versendet.</target>
+			</trans-unit>
 
 
 

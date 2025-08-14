@@ -97,7 +97,7 @@ class CsvUtility
 
         $headings = [];
         // create CSV columns
-        foreach ($event->getReservation() as $reservation) {
+        foreach ($event->getReservationBooked() as $reservation) {
             foreach ((array)$reservation as $name => $property) {
                 // remove starting sign "*"
                 if (in_array(substr(trim($name), 2), $reservationAllowedColumns)) {
@@ -124,7 +124,7 @@ class CsvUtility
         fputcsv(self::$csv, $headings, $separator);
 
         /** @var EventReservation $reservation */
-        foreach ($event->getReservation() as $reservation) {
+        foreach ($event->getReservationBooked() as $reservation) {
 
             $row = [];
 
