@@ -20,7 +20,24 @@ return [
 	],
 	'types' => [
 		'1' => ['showitem' => 'record_type, event, fe_user, salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, subscribe_newsletter, custom_field, cancel_reg_hash, workshop_register'],
-	],
+
+        '\RKW\RkwEvents\Domain\Model\EventReservationBooked' => [
+            'showitem' => '
+                event, fe_user,
+                salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person,
+                server_host, show_pid, participate_dinner, participate_meeting,
+                subscribe_newsletter, custom_field, cancel_reg_hash, workshop_register
+            ',
+        ],
+        '\RKW\RkwEvents\Domain\Model\EventReservationWaitlist' => [
+            'showitem' => '
+                record_type, event, fe_user,
+                salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person,
+                server_host, show_pid, participate_dinner, participate_meeting,
+                subscribe_newsletter, custom_field, cancel_reg_hash, workshop_register
+            ',
+        ],
+    ],
 	'palettes' => [
 		'1' => ['showitem' => ''],
 	],
