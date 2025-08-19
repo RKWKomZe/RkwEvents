@@ -7,6 +7,12 @@ services:
   RKW\RkwEvents\:
     resource: '../Classes/*'
 
+  RKW\RkwEvents\EventListener\CanonicalUrlListener:
+    tags:
+      - name: event.listener
+        identifier: 'rkw_events.canonical'
+        event: TYPO3\CMS\Seo\Event\ModifyUrlForCanonicalTagEvent
+
   RKW\RkwEvents\Command\InformUserUpcomingEventCommand:
     tags:
       - name: 'console.command'
