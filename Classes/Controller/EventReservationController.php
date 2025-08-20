@@ -23,6 +23,7 @@ use Madj2k\FeRegister\Utility\FrontendUserSessionUtility;
 use Madj2k\FeRegister\Utility\FrontendUserUtility;
 use RKW\RkwEvents\Domain\Model\Event;
 use RKW\RkwEvents\Domain\Model\EventReservation;
+use RKW\RkwEvents\Domain\Model\EventReservationWaitlist;
 use RKW\RkwEvents\Domain\Model\EventWorkshop;
 use RKW\RkwEvents\Domain\Repository\BackendUserRepository;
 use RKW\RkwEvents\Domain\Repository\CategoryRepository;
@@ -242,15 +243,27 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         if ($this->getFrontendUser()) {
 
+
+
             $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($event, $this->getFrontendUser());
+
             if (count($eventReservationResult)) {
 
-                // @toDo: Maybe different message if person is only on waitlist?
+                $eventReservation = $eventReservationResult[0];
 
                 // already registered!
-                $this->addFlashMessage(
-                    LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events')
-                );
+                if ($eventReservation instanceof EventReservationWaitlist) {
+                    // waitlist
+                    $this->addFlashMessage(
+                        LocalizationUtility::translate('eventReservationController.error.existsWaitlist', 'rkw_events')
+                    );
+                } else {
+                    // regular / already booked
+                    $this->addFlashMessage(
+                        LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events')
+                    );
+                }
+
 
                 $uri = $this->uriBuilder->reset()
                     ->setTargetPageUid($this->settings['myEventsPid'])
@@ -275,20 +288,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         if (!$newEventReservation) {
 
-
             if (!(DivUtility::hasFreeSeatsStrict($event))) {
-
                 // needed for template phone "is mandatory" or not
                 $this->view->assign('isWaitlist', true);
-
-                // @toDo: Ist das hier wichtig? Der Typ wird beim erstellen der Reservierung gesetzt
-                //$newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservationWaitlist');
-            } else {
-
-                // create default reservation
-                $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');
             }
-
 
             // create default reservation
             $newEventReservation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\EventReservation');

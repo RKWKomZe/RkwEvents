@@ -216,6 +216,9 @@
 			<trans-unit id="eventReservationController.error.exists" approved="yes">
 				<source>Reservation already exists!</source>
 			</trans-unit>
+			<trans-unit id="eventReservationController.error.existsWaitlist" approved="yes">
+				<source>Waitlist entry already exists!</source>
+			</trans-unit>
 			<trans-unit id="eventReservationController.error.workshop_full" approved="yes">
 				<source>Workshop full!</source>
 			</trans-unit>

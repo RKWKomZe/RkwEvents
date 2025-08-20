@@ -280,6 +280,10 @@
 				<source>Reservation already exists!</source>
 				<target>Sie haben sich bereits für diese Veranstaltung angemeldet.</target>
 			</trans-unit>
+			<trans-unit id="eventReservationController.error.existsWaitlist" approved="yes">
+				<source>Waitlist entry already exists!</source>
+				<target>Sie stehen bereits auf der Warteliste für diese Veranstaltung.</target>
+			</trans-unit>
 			<trans-unit id="eventReservationController.error.workshop_full" approved="yes">
 				<source>Workshop full!</source>
 				<target>Schade! Mindestens ein Workshop, zu dem Sie sich anmelden wollten, ist mittlerweile voll!</target>
