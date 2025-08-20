@@ -231,7 +231,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("newEventReservation")
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws AspectNotFoundException|InvalidQueryException
      */
     public function newAction(Event $event = null, EventReservation $newEventReservation = null, int $targetGroup = 0): void
     {
@@ -243,27 +243,31 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         if ($this->getFrontendUser()) {
 
-
-
             $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($event, $this->getFrontendUser());
 
             if (count($eventReservationResult)) {
 
                 $eventReservation = $eventReservationResult[0];
-
                 // already registered!
                 if ($eventReservation instanceof EventReservationWaitlist) {
                     // waitlist
                     $this->addFlashMessage(
-                        LocalizationUtility::translate('eventReservationController.error.existsWaitlist', 'rkw_events')
+                        LocalizationUtility::translate(
+                            'eventReservationController.error.existsWaitlist', 'rkw_events'
+                        ),
+                        '',
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
                 } else {
                     // regular / already booked
                     $this->addFlashMessage(
-                        LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events')
+                        LocalizationUtility::translate(
+                            'eventReservationController.error.exists', 'rkw_events'
+                        ),
+                        '',
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
                     );
                 }
-
 
                 $uri = $this->uriBuilder->reset()
                     ->setTargetPageUid($this->settings['myEventsPid'])
@@ -284,7 +288,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 $this->redirect('show', 'Event', null, ['event' => $event], (int)$this->settings['showPid']);
             }
         }
-
 
         if (!$newEventReservation) {
 
@@ -345,6 +348,12 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $event = $this->eventRepository->findByUid((int)$this->settings['eventRegisterStandalone']);
 
             if (!$newEventReservation) {
+
+                if (!(DivUtility::hasFreeSeatsStrict($event))) {
+                    // needed for template phone "is mandatory" or not
+                    $this->view->assign('isWaitlist', true);
+                }
+
                 $newEventReservation = GeneralUtility::makeInstance(\RKW\RkwEvents\Domain\Model\EventReservation::class);
             }
 
@@ -436,19 +445,34 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
 
         // 1. Check for existing reservations based on email.
         $frontendUser = $this->frontendUserRepository->findByUsername($newEventReservation->getEmail());
+
         if (count($frontendUser)) {
 
             $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($newEventReservation->getEvent(), $frontendUser);
+
             if (count($eventReservationResult)) {
 
+                $eventReservation = $eventReservationResult[0];
                 // already registered!
-                $this->addFlashMessage(
-                    LocalizationUtility::translate(
-                        'eventReservationController.error.exists', 'rkw_events'
-                    ),
-                    '',
-                    \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-                );
+                if ($eventReservation instanceof EventReservationWaitlist) {
+                    // waitlist
+                    $this->addFlashMessage(
+                        LocalizationUtility::translate(
+                            'eventReservationController.error.existsWaitlist', 'rkw_events'
+                        ),
+                        '',
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                    );
+                } else {
+                    // regular / already booked
+                    $this->addFlashMessage(
+                        LocalizationUtility::translate(
+                            'eventReservationController.error.exists', 'rkw_events'
+                        ),
+                        '',
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                    );
+                }
 
                 if ($this->getFrontendUser()) {
                     // if user is logged in, set direct link to feusers event list
@@ -714,11 +738,27 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 $eventReservationResult = $this->eventReservationRepository->findByEventAndFeUser($event, $feUser);
                 if (count($eventReservationResult)) {
 
-                    $this->addFlashMessage(
-                        LocalizationUtility::translate('eventReservationController.error.exists', 'rkw_events'),
-                        '',
-                        \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-                    );
+                    $eventReservation = $eventReservationResult[0];
+                    // already registered!
+                    if ($eventReservation instanceof EventReservationWaitlist) {
+                        // waitlist
+                        $this->addFlashMessage(
+                            LocalizationUtility::translate(
+                                'eventReservationController.error.existsWaitlist', 'rkw_events'
+                            ),
+                            '',
+                            \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                        );
+                    } else {
+                        // regular / already booked
+                        $this->addFlashMessage(
+                            LocalizationUtility::translate(
+                                'eventReservationController.error.exists', 'rkw_events'
+                            ),
+                            '',
+                            \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                        );
+                    }
 
                     $uri = $this->uriBuilder->reset()
                         ->setTargetPageUid($this->settings['loginPid'])
