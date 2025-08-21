@@ -925,6 +925,10 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             // override existing object storage
             $eventReservation->setAddPerson($tempObjectStorage);
 
+            /*
+            // !! This section does not make any sense !!
+            // -> Workshops do not yet have a fixed number of seats, and the function used does not return a value.
+            // #################
             // 2.2 Sub-operation: Register workshop reservations
             $workshopResult = DivUtility::workshopRegistration($eventReservation);
             // if there is no longer place in a workshop, set message. Don't break reservation! Just an info.
@@ -937,6 +941,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO
                 );
             }
+            */
 
             // 3. some merging of FE-user
             if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('fe_register')) {
