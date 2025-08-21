@@ -17,6 +17,7 @@ namespace RKW\RkwEvents\Hooks;
 
 use ApacheSolrForTypo3\Solr\Domain\Index\Queue\UpdateHandler\DataUpdateHandler;
 use ApacheSolrForTypo3\Solr\Domain\Index\Queue\UpdateHandler\GarbageHandler;
+use Doctrine\DBAL\Driver\Exception;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use RKW\RkwEvents\Domain\Repository\EventRepository;
 use RKW\RkwEvents\Domain\Repository\EventReservationAddPersonRepository;
@@ -99,6 +100,53 @@ class TceMainHooks
                 $mailService->cancellationReservationAdmin($id, $cancellationCounter);
             }
 
+        }
+    }
+
+
+
+    /**
+     * @param string $command
+     * @param string $table
+     * @param $id
+     * @param $value
+     * @param DataHandler $pObj
+     * @return void
+     * @throws Exception
+     */
+    public function processCmdmap_preProcess(string $command, string $table, $id, $value, DataHandler $pObj)
+    {
+
+        // on EventSeries toggle to DELETED = 1
+        // -> check if the EventSeries is set to "deleted". If so, remove all child events from SOLR index
+        // the children will also be set to deleted another way
+        if ($command === 'delete' && $table === 'tx_rkwevents_domain_model_eventseries') {
+
+            $seriesUid = (int)$id;
+
+            // Get all child event UIDs
+            $childConnection = GeneralUtility::makeInstance(ConnectionPool::class)
+                ->getConnectionForTable('tx_rkwevents_domain_model_event');
+
+            $childRecords = $childConnection->select(
+                ['uid'],
+                'tx_rkwevents_domain_model_event',
+                [
+                    'series' => $seriesUid,
+                    'deleted' => 0
+                ]
+            )->fetchAllAssociative();
+
+            if (!empty($childRecords)) {
+
+                $garbageCollector = GeneralUtility::makeInstance(GarbageHandler::class);
+                foreach ($childRecords as $child) {
+                    $garbageCollector->collectGarbage(
+                        'tx_rkwevents_domain_model_event',
+                        (int)$child['uid']
+                    );
+                }
+            }
         }
     }
 
@@ -445,6 +493,7 @@ class TceMainHooks
             }
 
 
+            // toggle EventSeries to HIDDEN = 1
             // Check if the EventSeries is set to "hidden". If so, also hide all child events to avoid inconsistencies in the SOLR EventList.
             if (isset($eventSeriesRaw['hidden']) && (int)$eventSeriesRaw['hidden'] === 1) {
 
@@ -452,7 +501,7 @@ class TceMainHooks
                 $uid = ($status === 'new') ? (int)$tceMain->substNEWwithIDs[$uid] : (int)$uid;
 
                 // Get all child event UIDs
-                $childConnection = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+                $childConnection = GeneralUtility::makeInstance(ConnectionPool::class)
                     ->getConnectionForTable('tx_rkwevents_domain_model_event');
 
                 $childRecords = $childConnection->select(
@@ -478,7 +527,7 @@ class TceMainHooks
                 }
 
                 // Deactivate all child events of given eventSeries
-                $connection = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\ConnectionPool::class)
+                $connection = GeneralUtility::makeInstance(ConnectionPool::class)
                     ->getConnectionForTable('tx_rkwevents_domain_model_event');
 
                 $connection->update(
