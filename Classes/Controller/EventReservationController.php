@@ -39,6 +39,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
@@ -835,6 +836,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     public function editAction(EventReservation $eventReservation): void
     {
+
         if ($this->getFrontendUser()) {
 
             //security check
@@ -856,6 +858,12 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
             $this->view->assign('editMode', 1);
 
             $this->view->assign('eventReservation', $eventReservation);
+
+            // Fix: Solves issue on reloading a globally used register-form which expects "newEventReservation" (from ...
+            // ... "createAction) object instead of "eventReservation"
+            // this fix does not affect validator issues in edit form
+            $this->view->assign('newEventReservation', $eventReservation);
+
             $this->view->assign('event', $eventReservation->getEvent());
 
         } else {
