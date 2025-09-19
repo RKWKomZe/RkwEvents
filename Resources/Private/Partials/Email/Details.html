@@ -49,7 +49,8 @@
 <f:if condition="{reservation.mobile}"><postmaster:email.translate key="partials_email_details.mobile" languageKey="{language}" extensionName="rkwEvents" />: {reservation.mobile}</f:if>
 <f:if condition="{reservation.remark}">
 <postmaster:email.translate key="partials_email_details.reservationRemarks" languageKey="{language}" extensionName="rkwEvents" />:
-{reservation.remark}</f:if><f:if condition="<f:count>{reservation.workshopRegister}</f:count>"><f:for each="{reservation.workshopRegister}" as="workshop">
+{reservation.remark}</f:if><f:if condition="{reservation.event.customFieldShow} && {reservation.customField}">{reservation.event.customFieldLabel}: {reservation.customField}</f:if>
+<f:if condition="<f:count>{reservation.workshopRegister}</f:count>"><f:for each="{reservation.workshopRegister}" as="workshop">
 {workshop.title} <f:if condition="{workshop.speaker}">({workshop.speaker})</f:if> <rkwEvents:ComposeWorkshopDateTimeParts startDate='{workshop.start}' endDate='{workshop.end}' languageKey="{language}" /> {workshop.description}</f:for></f:if>
 <f:if condition="{reservation.participateDinner}"><postmaster:email.translate key="partials_email_details.participateDinner" languageKey="{language}" extensionName="rkwEvents" />: <postmaster:email.translate key="partials_email_details.participateDinner.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if>
 <f:if condition="{reservation.participateMeeting}"><postmaster:email.translate key="partials_email_details.participateMeeting" languageKey="{language}" extensionName="rkwEvents" />: <postmaster:email.translate key="partials_email_details.participateMeeting.yes" languageKey="{language}" extensionName="rkwEvents" /></f:if>
@@ -200,6 +201,12 @@
 					<br>{reservation.remark}
 				</p>
 			</f:if>
+            <f:if condition="{reservation.event.customFieldShow} && {reservation.customField}">
+                <p>
+                    <strong>{reservation.event.customFieldLabel}</strong>:
+                    <br>{reservation.customField}
+                </p>
+            </f:if>
             <f:if condition="<f:count>{reservation.workshopRegister}</f:count>">
                 <f:for each="{reservation.workshopRegister}" as="workshop">
                     <p>

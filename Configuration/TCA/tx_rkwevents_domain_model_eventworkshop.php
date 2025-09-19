@@ -17,12 +17,12 @@ return [
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		],
-		'searchFields' => 'title,start,end,description,type,previous_experience,objective,speaker,available_seats,reg_required,costs,registered_frontend_users,',
+		'searchFields' => 'title,start,end,description,type,previous_experience,objective,speaker,available_seats,reg_required,costs,fully_booked,registered_frontend_users,',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventworkshop.gif'
 	],
 	'types' => [
         // '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, description, type, previous_experience, objective, speaker, available_seats, reg_required, costs, registered_frontend_users'],
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, speaker, description, registered_frontend_users'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden,--palette--;;1, title, start, end, speaker, description, fully_booked, registered_frontend_users'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -212,6 +212,13 @@ return [
 				'eval' => 'trim, double2'
 			],
 		],
+        'fully_booked' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventworkshop.fully_booked',
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
 		'registered_frontend_users' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventworkshop.registered_frontend_users',
