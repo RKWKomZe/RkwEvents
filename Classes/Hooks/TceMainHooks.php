@@ -104,6 +104,44 @@ class TceMainHooks
     }
 
 
+    /**
+     * @param string $command
+     * @param string $table
+     * @param $id
+     * @param $value
+     * @param DataHandler $pObj
+     * @return void
+     * @throws Exception
+     */
+    public function processCmdmap_postProcess(string $command, string $table, $id, $value, DataHandler $pObj): void
+    {
+
+        if ($command === 'copy' && $table === 'tx_rkwevents_domain_model_eventseries') {
+
+            $newTitleSuffix = " (KOPIE)";
+
+            $sourceUid = (int)$id;
+            // Get the new UID of the copy from the mapping
+            $newUid = (int)($pObj->copyMappingArray[$table][$sourceUid] ?? 0);
+            if ($newUid <= 0) {
+                $newUid = (int)($pObj->copyMappingArray_merged[$table][$sourceUid] ?? 0);
+            }
+            if ($newUid > 0) {
+                // add suffix to title
+                $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
+                $connection->executeStatement(
+                    'UPDATE ' . $table . ' SET title = CONCAT(title, ? ) WHERE uid = ?',
+                    [
+                        $newTitleSuffix,
+                        $newUid
+                    ]
+                );
+            }
+
+        }
+    }
+
+
 
     /**
      * @param string $command
