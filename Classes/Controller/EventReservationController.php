@@ -1382,7 +1382,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         $newEventReservation->setFeUser($feUser);
 
         // 1.1 set hash for cancel-link
-        $newEventReservation->setCancelRegHash(md5($newEventReservation->getCrdate() . $feUser->getEmail()));
+        $newEventReservation->setCancelRegHash(md5(time() . $feUser->getEmail()));
 
         // 2. save reservation
         // only add additional persons that have at least one relevant field set
