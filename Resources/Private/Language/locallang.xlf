@@ -252,6 +252,12 @@
 			<trans-unit id="eventReservationController.message.nothingFoundByHash">
 				<source>Reservation not found</source>
 			</trans-unit>
+			<trans-unit id="eventReservationController.message.question">
+				<source>Cancellation not longer possible.</source>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.hintCancellationNotPossible">
+				<source>Are you sure?</source>
+			</trans-unit>
 
 
 			<!-- BackendController -->

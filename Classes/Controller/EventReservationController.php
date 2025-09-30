@@ -39,7 +39,6 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
@@ -1137,7 +1136,7 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      */
     public function removeByHashAction(string $cancelRegHash, bool $confirmedByUser = false): void
     {
-        // @toDo: Check hash
+        // Check hash
         $eventReservation = $this->eventReservationRepository->findOneByCancelRegHash($cancelRegHash);
 
         if ($eventReservation instanceof EventReservation) {
@@ -1148,20 +1147,32 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 $this->finalRemoveReservation($eventReservation);
 
             } else {
-                // really want to delete?
-                $this->addFlashMessage(
-                    LocalizationUtility::translate(
-                        'eventReservationController.message.question', 'rkw_events'
-                    ),
-                    '',
-                    \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
-                );
+
+                if (DivUtility::hasCancellationTimeEnded($eventReservation->getEvent())) {
+
+                    $this->addFlashMessage(
+                        LocalizationUtility::translate(
+                            'eventReservationController.message.hintCancellationNotPossible', 'rkw_events'
+                        ),
+                        '',
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                    );
+                } else {
+                    // really want to delete?
+                    $this->addFlashMessage(
+                        LocalizationUtility::translate(
+                            'eventReservationController.message.question', 'rkw_events'
+                        ),
+                        '',
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
+                    );
+                }
+
                 $this->view->assign('event', $eventReservation->getEvent());
                 $this->view->assign('eventReservation', $eventReservation);
             }
 
         } else {
-            // @toDo: Nichts gefunden, sind sie ggf schon abgemeldet?
 
             $this->addFlashMessage(
                 LocalizationUtility::translate(
@@ -1171,8 +1182,6 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                 \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
             );
         }
-
-
     }
 
 
