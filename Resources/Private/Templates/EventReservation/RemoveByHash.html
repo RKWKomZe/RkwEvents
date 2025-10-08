@@ -39,42 +39,45 @@
             </p>
         </f:if>
 
-        <div class="btn-list btn-list--footer">
-            <f:if condition="{eventReservation}">
-                <f:then>
-                    <f:link.action class="btn btn--secondary"
-                                   action="removeByHash"
-                                   controller="EventReservation"
-                                   extensionName="RkwEvents"
-                                   pluginName="pi1"
-                                   arguments="{confirmedByUser : 1, cancelRegHash: eventReservation.cancelRegHash}"
-                    >
-                        <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel" />
-                    </f:link.action>
-                    <f:link.action class="btn btn--primary"
-                                   action="show"
-                                   controller="Event"
-                                   pluginName="Pi1"
-                                   extensionName="RkwEvents"
-                                   pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
-                                   arguments="{event : event}"
-                                   title="{event.series.title}"
-                    >
-                        <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.avoidCancel" />
-                    </f:link.action>
-                </f:then>
-                <f:else>
-                    <div class="system-message" role="alert">
-                        <div class="system-message__item system-message__item--severity0">
-                            <f:link.page pageUid="{settings.listPid}" target="_blank">
-                                <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.showOther" />
-                            </f:link.page>
-                        </div>
-                    </div>
-                </f:else>
+        <f:if condition="<rkw:notFinishedEvents event='{eventReservation.event}' />">
+            <f:if condition="<rkw:cancelTimeEndEvent event='{eventReservation.event}' />">
+                <div class="btn-list btn-list--footer">
+                    <f:if condition="{eventReservation}">
+                        <f:then>
+                            <f:link.action class="btn btn--secondary"
+                                           action="removeByHash"
+                                           controller="EventReservation"
+                                           extensionName="RkwEvents"
+                                           pluginName="pi1"
+                                           arguments="{confirmedByUser : 1, cancelRegHash: eventReservation.cancelRegHash}"
+                            >
+                                <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.cancel" />
+                            </f:link.action>
+                            <f:link.action class="btn btn--primary"
+                                           action="show"
+                                           controller="Event"
+                                           pluginName="Pi1"
+                                           extensionName="RkwEvents"
+                                           pageUid="{f:if(condition: '{event.series.organizer.0.showPid}', then: '{event.series.organizer.0.showPid}', else: '{showPid}')}"
+                                           arguments="{event : event}"
+                                           title="{event.series.title}"
+                            >
+                                <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.avoidCancel" />
+                            </f:link.action>
+                        </f:then>
+                        <f:else>
+                            <div class="system-message" role="alert">
+                                <div class="system-message__item system-message__item--severity0">
+                                    <f:link.page pageUid="{settings.listPid}" target="_blank">
+                                        <f:translate key="tx_rkwevents_fluid.templates_event_eventReservation_removeByHash.showOther" />
+                                    </f:link.page>
+                                </div>
+                            </div>
+                        </f:else>
+                    </f:if>
+                </div>
             </f:if>
-        </div>
-
+        </f:if>
 
     </f:section>
 

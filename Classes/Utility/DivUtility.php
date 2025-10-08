@@ -37,15 +37,41 @@ class DivUtility
      * @param \RKW\RkwEvents\Domain\Model\Event $event
      * @return boolean
      */
-    public static function hasRegTimeEnded(\RKW\RkwEvents\Domain\Model\Event $event)
+    public static function hasRegTimeEnded(\RKW\RkwEvents\Domain\Model\Event $event): bool
     {
         // check if regEnd-time or start-time is in the past
-        $date = $event->getRegEnd() ? $event->getRegEnd() : $event->getStart();
+        $date = $event->getRegEnd() ?: $event->getStart();
         if ($date < time()) {
             return true;
         }
 
         return false;
+    }
+
+
+    /**
+     * Returns true if cancel end for event has reached
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Event $event
+     * @return boolean
+     */
+    public static function hasCancellationTimeEnded(\RKW\RkwEvents\Domain\Model\Event $event): bool
+    {
+        $cancelEnd = $event->getCancelEnd();
+        $now = time();
+
+        // if event already started, cancellation is no longer possible
+        if ($event->getStart() <= $now) {
+            return true;
+        }
+
+        // if no cancelEnd is set, cancellation stays possible
+        if (empty($cancelEnd)) {
+            return false;
+        }
+
+        // if cancelEnd is in the past, cancellation is no longer possible
+        return $cancelEnd < $now;
     }
 
 
@@ -65,11 +91,9 @@ class DivUtility
         $availableSeats = $event->getSeats() - $countConfirmedReservations;
         if ($availableSeats >= $countEventReservationsWithAddPersons) {
             return true;
-            //===
         }
 
         return false;
-        //===
     }
 
 
