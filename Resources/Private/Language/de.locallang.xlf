@@ -325,8 +325,12 @@
 				<target><![CDATA[Es konnte keine zugehörige Reservierung gefunden werden. Haben Sie sich womöglich bereits von der Veranstaltung abgemeldet? Im Zweifel steht Ihnen unser <a href="mailto:service@rkw.de">Support</a> jederzeit gerne zur Verfügung.]]></target>
 			</trans-unit>
 			<trans-unit id="eventReservationController.message.question">
+				<source>Cancellation not longer possible.</source>
+				<target>Sind Sie sicher, dass Sie sich von dieser Veranstaltung abmelden wollen?</target>
+			</trans-unit>
+			<trans-unit id="eventReservationController.message.hintCancellationNotPossible">
 				<source>Are you sure?</source>
-				<target>Sind Sie sicher, dass Sie sich von dieser Veranstaltung abmelden wollen? </target>
+				<target>Eine Abmeldung von dieser Veranstaltung ist nicht mehr möglich. Bei Fragen wenden Sie sich bitte an die jeweilige Ansprechperson.</target>
 			</trans-unit>
 
 			<!-- BackendController -->

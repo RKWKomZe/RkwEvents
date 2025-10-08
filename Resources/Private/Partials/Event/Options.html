@@ -32,7 +32,7 @@
                 </f:link.action>
             </f:if>
 
-            <f:if condition="<rkw:notFinishedEvents event='{eventReservation.event}' />">
+            <f:if condition="<rkw:cancelTimeEndEvent event='{eventReservation.event}' />">
                 <f:link.action class="btn btn--secondary" controller="EventReservation" action="delete" arguments="{eventReservation : eventReservation}">
                     <f:translate key="tx_rkwevents_fluid.partials_event_options.reservationDelete" />
                 </f:link.action>
