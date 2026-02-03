@@ -333,6 +333,12 @@
         </f:else>
     </f:if>
 
+    <f:if condition="! {editMode}">
+        <f:if condition="! <rkw:IsFreeOfCharge event='{event}' />">
+            <f:render partial="EventReservation/RevocationInfo" arguments="{_all}"/>
+        </f:if>
+    </f:if>
+
     <f:render partial="CaptchaElement" />
 
     <!-- Button Set -->

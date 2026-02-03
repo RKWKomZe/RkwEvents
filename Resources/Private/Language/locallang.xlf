@@ -942,6 +942,17 @@
 			</trans-unit>
 
 
+			<!-- Partials/EventReservation/RevocationInfo.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partOne">
+				<source><![CDATA[Please pay attention to our]]></source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partTwo">
+				<source>revocation information</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partThree">
+				<source>.</source>
+			</trans-unit>
+
 
 			<!-- Partials/EventReservation/ButtonSet.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back">

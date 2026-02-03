@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkw="http://typo3.org/ns/RKW/RkwEvents/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <f:if condition="{settings.revocationPid}">
+        <div class="mb-1">
+            <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partOne" arguments="{0: companyName, 1: companyEmail}" /></f:format.raw>
+            <f:link.page pageUid="{settings.revocationPid}" target="_blank">
+                <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partTwo" /></f:format.raw>
+            </f:link.page>
+            <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partThree"/></f:format.raw>
+        </div>
+    </f:if>
+
+</html>

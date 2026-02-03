@@ -47,6 +47,9 @@ plugin.tx_rkwevents {
         # cat=plugin.tx_rkwevents; type=integer; label=PID for terms and conditions (AGB)
         terms2Pid =
 
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for revocation information
+        revocationPid =
+
         # cat=plugin.tx_rkwevents; type=integer; label=PID for list of events the user has registered for
         myEventsPid =
 

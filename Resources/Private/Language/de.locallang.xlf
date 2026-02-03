@@ -1232,7 +1232,19 @@
 				<target>Zurück zur Liste</target>
 			</trans-unit>
 
-
+			<!-- Partials/EventReservation/RevocationInfo.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partOne">
+				<source><![CDATA[Please pay attention to our]]></source>
+				<target><![CDATA[Bitte beachten Sie auch unsere]]></target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partTwo">
+				<source>revocation information</source>
+				<target>Widerrufsbelehrung</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partThree">
+				<source>.</source>
+				<target>.</target>
+			</trans-unit>
 
 			<!-- Partials/EventReservation/ButtonSet.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back">

@@ -264,6 +264,7 @@ plugin.tx_rkwevents {
         reservationPid = {$plugin.tx_rkwevents.settings.reservationPid}
         termsPid = {$plugin.tx_rkwevents.settings.termsPid}
         terms2Pid = {$plugin.tx_rkwevents.settings.terms2Pid}
+        revocationPid = {$plugin.tx_rkwevents.settings.revocationPid}
         myEventsPid =  {$plugin.tx_rkwevents.settings.myEventsPid}
         parentCategoryForFilter =  {$plugin.tx_rkwevents.settings.parentCategoryForFilter}
 
