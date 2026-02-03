@@ -953,6 +953,12 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register">
 				<source>Register now</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.free">
+				<source>Order now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.paid">
+				<source>Order now</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit">
 				<source>Edit now</source>
 			</trans-unit>

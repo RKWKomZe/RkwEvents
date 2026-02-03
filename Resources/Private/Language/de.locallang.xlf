@@ -1247,6 +1247,14 @@
 				<source>Register now</source>
 				<target>Jetzt anmelden</target>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.free">
+				<source>Order now</source>
+				<target>Kostenlos anmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.paid">
+				<source>Order now</source>
+				<target>Kostenpflichtig anmelden</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit">
 				<source>Edit now</source>
 				<target>Anmeldung ändern</target>
