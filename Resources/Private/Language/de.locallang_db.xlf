@@ -301,7 +301,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.register_add_information">
                 <source>Registration additional information (added to email)</source>
-                <target>E-Mail: Zusätzliche Informationen zur Anmeldung (wird der Bestätigungsmail hinzugefügt)</target>
+                <target>E-Mail: Zusätzliche Informationen zur Anmeldung (wird der Bestätigungs- und Erinnerungsmail hinzugefügt)</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.external_contact" approved="no">
 				<source>External Contact (Display and E-Mail)</source>
