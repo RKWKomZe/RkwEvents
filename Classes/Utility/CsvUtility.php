@@ -104,8 +104,16 @@ class CsvUtility
                     $headings[] = substr(trim($name), 2);
                 }
             }
+            // add marketing consent
+            /* @var \RKW\RkwEvents\Domain\Model\FrontendUser $feUser */
+            $feUser = $reservation->getFeUser();
+            if ($feUser && $feUser->getTxFeRegisterConsentMarketing()) {
+                $headings[] = 'tx_feregister_consent_marketing';
+            }
+
             break;
         }
+
 
         // extended headings for optional workshops
         /** @var EventWorkshop $workshop */
@@ -133,9 +141,15 @@ class CsvUtility
                 $getter = 'get' . ucfirst($property);
                 if (method_exists($reservation, $getter)) {
                     $row[] = self::propertyValueConverter($property, $reservation->$getter());
+                } else {
+                    $getter = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($getter);
+                    /* @var \RKW\RkwEvents\Domain\Model\FrontendUser $feUser */
+                    $feUser = $reservation->getFeUser();
+                    if (method_exists($feUser, $getter)) {
+                        $row[] = $feUser->$getter();
+                    }
                 }
             }
-
 
             // mark as participant (if he is one)
             /** @var EventWorkshop $workshop */
