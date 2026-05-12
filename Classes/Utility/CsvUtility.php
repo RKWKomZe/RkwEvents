@@ -105,11 +105,7 @@ class CsvUtility
                 }
             }
             // add marketing consent
-            /* @var \RKW\RkwEvents\Domain\Model\FrontendUser $feUser */
-            $feUser = $reservation->getFeUser();
-            if ($feUser && $feUser->getTxFeRegisterConsentMarketing()) {
-                $headings[] = 'tx_feregister_consent_marketing';
-            }
+            $headings[] = 'tx_feregister_consent_marketing';
 
             break;
         }
@@ -145,8 +141,10 @@ class CsvUtility
                     $getter = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($getter);
                     /* @var \RKW\RkwEvents\Domain\Model\FrontendUser $feUser */
                     $feUser = $reservation->getFeUser();
-                    if (method_exists($feUser, $getter)) {
+                    if ($feUser && method_exists($feUser, $getter)) {
                         $row[] = $feUser->$getter();
+                    } else {
+                        $row[] = '';
                     }
                 }
             }
