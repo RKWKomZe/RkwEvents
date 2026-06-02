@@ -38,9 +38,8 @@ class IsFreeOfChargeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstrac
     }
 
     /**
-     * return true, if the given contact is an external contact
+     * return true, if the event is free of charge
      *
-     * @param mixed $contact
      * @return bool
      */
     public function render()

@@ -767,6 +767,15 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                 )
             );
 
+            //  Attach revocation policy pdf
+            if ($eventReservation->getEvent()->getCostsReg() > 0) {
+                $filePath = GeneralUtility::getFileAbsFileName($settings['settings']['revocationPolicyFilepath']);
+
+                if ($filePath && file_exists($filePath)) {
+                    $mailService->getQueueMail()->addAttachmentPath($filePath);
+                }
+            }
+
             $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
             $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
 

@@ -1024,6 +1024,16 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
 				<source>taking effect for the future.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne">
+				<source><![CDATA[I have read and understood the ]]></source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo">
+				<source>revocation policy</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree">
+				<source>.</source>
+			</trans-unit>
+
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1272,6 +1282,12 @@
 			<trans-unit id="templates_email_confirmationReservationUser.cancelButton">
 				<source>Deregister from an event</source>
 			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyHeadline">
+				<source>Revocation policy</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyText">
+				<source>You may revoke this registration within 14 days after receiving this information. The relevant revocation policy can be found in the attached document.</source>
+			</trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
@@ -1325,7 +1341,7 @@
 				<source>Please find below the details of your canceled reservation.</source>
 			</trans-unit>
 			<trans-unit id="templates_email_deleteReservationUser.billing">
-				<source>Please note that a cancelation my involve further costs.</source>
+				<source>Please note that a cancelation might involve further costs.</source>
 			</trans-unit>
 
 
@@ -1417,6 +1433,9 @@
             <trans-unit id="tx_rkwevents_validator.workshop_required">
                 <source>Please choose at least one workshop.</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation_consent_required">
+				<source>Please confirm that you have read and understood our revocation policy.</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.remark">
 				<source>Remark</source>
 			</trans-unit>

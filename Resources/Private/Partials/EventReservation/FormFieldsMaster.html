@@ -330,13 +330,31 @@
                 </div>
             </f:if>
             <feRegister:consent type="marketing" />
-        </f:else>
-    </f:if>
+            <f:if condition="! <rkw:IsFreeOfCharge event='{event}' />">
+                <div class="form__field width100">
+                    <div class="form__field">
+                        <f:form.checkbox
+                            class="checkbox"
+                            id="revocation-consent"
+                            property="revocationConsent"
+                            value="1"
+                        />
 
-    <f:if condition="! {editMode}">
-        <f:if condition="! <rkw:IsFreeOfCharge event='{event}' />">
-            <f:render partial="EventReservation/RevocationInfo" arguments="{_all}"/>
-        </f:if>
+                        <label for="revocation-consent"
+                            class="checkbox-label">
+                            <span class="text-smaller">
+                                <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne" /></f:format.raw>
+                                <f:link.page pageUid="{settings.revocationPid}" target="_blank">
+                                    <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo" /></f:format.raw>
+                                </f:link.page>
+                                <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree"/></f:format.raw>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+            </f:if>
+        </f:else>
     </f:if>
 
     <f:render partial="CaptchaElement" />

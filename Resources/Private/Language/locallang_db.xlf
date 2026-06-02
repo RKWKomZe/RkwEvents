@@ -572,6 +572,9 @@
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.subscribe_newsletter" approved="yes">
                 <source>Subscribe newsletter</source>
             </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.revocation_consent" approved="yes">
+                <source>I have read and understood the revocation policy</source>
+            </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
                 <source>Workshop register</source>
             </trans-unit>

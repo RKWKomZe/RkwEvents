@@ -224,6 +224,10 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $targetGroup = null;
 
+    /**
+     * @var bool
+     */
+    protected $revocationConsent = false;
 
     /**
      * __construct
@@ -883,5 +887,22 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setWorkshopRegister(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $workshopRegister)
     {
         $this->workshopRegister = $workshopRegister;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRevocationConsent(): bool
+    {
+        return $this->revocationConsent;
+    }
+
+    /**
+     * @param bool $revocationConsent
+     * @return void
+     */
+    public function setRevocationConsent(bool $revocationConsent): void
+    {
+        $this->revocationConsent = $revocationConsent;
     }
 }

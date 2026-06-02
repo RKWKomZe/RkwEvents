@@ -193,6 +193,24 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
             }
         }
 
+        // 5. Check mandatory revocation consent
+        if (
+            ! $newEventReservation->getRevocationConsent()
+            && $newEventReservation->getEvent()->getCostsReg() > 0
+        ) {
+
+            $this->result->forProperty('revocationConsent')->addError(
+                new \TYPO3\CMS\Extbase\Error\Error(
+                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'tx_rkwevents_validator.revocation_consent_required',
+                        'rkw_events'
+                    ), 1741668976
+                )
+            );
+            $isValid = false;
+
+        }
+
         return $isValid;
     }
 
