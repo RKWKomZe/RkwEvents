@@ -351,6 +351,8 @@ CREATE TABLE tx_rkwevents_domain_model_eventreservation
 	custom_field        text NOT NULL,
   cancel_reg_hash     varchar(255) DEFAULT '' NOT NULL,
 	workshop_register   varchar(255) DEFAULT '' NOT NULL,
+	reservation_reference          varchar(255) DEFAULT '' NOT NULL,
+	revoked_at          int(10) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp              int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate              int(11) unsigned DEFAULT '0' NOT NULL,

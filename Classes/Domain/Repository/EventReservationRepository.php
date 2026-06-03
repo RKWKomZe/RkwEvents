@@ -127,5 +127,18 @@ class EventReservationRepository extends AbstractRepository
         //===
     }
 
+    /**
+     * @param string $prefix
+     * @return string
+     */
+    public function generateBookingReference(string $prefix = ''): string {
+        $randomString = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Crypto\Random::class
+        )->generateRandomHexString(8);
+
+        $randomString = strtoupper($randomString);
+        return $prefix . $randomString;
+    }
+
 
 }

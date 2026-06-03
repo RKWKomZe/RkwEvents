@@ -1459,6 +1459,10 @@
 				<source>Event Details</source>
 				<target>Details zur Veranstaltung</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.reservationReference">
+				<source>Reference</source>
+				<target>Referenz</target>
+			</trans-unit>
 			<trans-unit id="partials_email_details.eventDate">
 				<source>When</source>
 				<target>Wann</target>

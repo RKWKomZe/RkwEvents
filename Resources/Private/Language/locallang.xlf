@@ -1147,6 +1147,9 @@
 			<trans-unit id="partials_email_details.eventDetails">
 				<source>Event Details</source>
 			</trans-unit>
+			<trans-unit id="partials_email_details.reservationReference">
+				<source>Reference</source>
+			</trans-unit>
 			<trans-unit id="partials_email_details.eventDate">
 				<source>When</source>
 			</trans-unit>
