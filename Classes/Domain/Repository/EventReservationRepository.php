@@ -103,6 +103,25 @@ class EventReservationRepository extends AbstractRepository
 
 
     /**
+     * @param string $bookingReference
+     * @param string $email
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findByBookingReferenceAndEmail(string $bookingReference, string $email): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
+        return $query->matching(
+            $query->logicalAnd(
+                $query->equals('reservationReference', $bookingReference),
+                $query->equals('email', $email)
+            )
+        )->execute();
+    }
+
+
+    /**
      * Find all events that have been updated recently
      *
      * @api Used by SOAP-API

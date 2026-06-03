@@ -1,0 +1,36 @@
+{namespace postmaster=Madj2k\Postmaster\ViewHelpers}
+<f:layout name="Email/{mailType}" />
+
+<!-- PLAINTEXT -->
+<f:section name="Plaintext">
+<postmaster:email.translate key="revocation.email.text" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+
+<f:translate key="revocation.show.event" />: {reservation.event.title}
+<f:translate key="revocation.show.date" />: <f:format.date format="d.m.Y">{reservation.event.start}</f:format.date>
+<f:translate key="revocation.show.participant" />: {reservation.firstName} {reservation.lastName}
+<f:translate key="revocation.show.bookingReference" />: {reservation.reservationReference}
+</f:section>
+
+<!-- HTML -->
+<f:section name="Html">
+    <p><postmaster:email.translate key="revocation.email.text" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></p>
+
+    <table>
+        <tr>
+            <td><strong><f:translate key="revocation.show.event" />:</strong></td>
+            <td>{reservation.event.title}</td>
+        </tr>
+        <tr>
+            <td><strong><f:translate key="revocation.show.date" />:</strong></td>
+            <td><f:format.date format="d.m.Y">{reservation.event.start}</f:format.date></td>
+        </tr>
+        <tr>
+            <td><strong><f:translate key="revocation.show.participant" />:</strong></td>
+            <td>{reservation.firstName} {reservation.lastName}</td>
+        </tr>
+        <tr>
+            <td><strong><f:translate key="revocation.show.bookingReference" />:</strong></td>
+            <td>{reservation.reservationReference}</td>
+        </tr>
+    </table>
+</f:section>

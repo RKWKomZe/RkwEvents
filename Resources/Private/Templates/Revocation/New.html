@@ -1,0 +1,27 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+    <h1><f:translate key="revocation.new.header" /></h1>
+
+    <f:flashMessages />
+
+    <f:form action="show" method="post" name="revocation">
+        <div class="v-form__element">
+            <label for="email">
+                <f:translate key="revocation.new.email" /> *
+            </label>
+            <f:form.textfield name="email" id="email" required="required" />
+        </div>
+
+        <div class="v-form__element">
+            <label for="bookingReference">
+                <f:translate key="revocation.new.bookingReference" /> *
+            </label>
+            <f:form.textfield name="bookingReference" id="bookingReference" required="required" />
+        </div>
+
+        <div class="v-form__element">
+            <f:form.submit value="{f:translate(key: 'revocation.new.submit')}" class="btn btn--primary" />
+        </div>
+    </f:form>
+</f:section>

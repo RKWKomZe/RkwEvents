@@ -1,0 +1,37 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+    <h1><f:translate key="revocation.show.header" /></h1>
+
+    <f:flashMessages />
+
+    <div class="revocation-summary">
+        <p>
+            <strong><f:translate key="revocation.show.event" />:</strong><br />
+            {eventReservation.event.title}
+        </p>
+        <p>
+            <strong><f:translate key="revocation.show.date" />:</strong><br />
+            <f:format.date format="d.m.Y">{eventReservation.event.start}</f:format.date>
+        </p>
+        <p>
+            <strong><f:translate key="revocation.show.participant" />:</strong><br />
+            {eventReservation.firstName} {eventReservation.lastName}
+        </p>
+        <p>
+            <strong><f:translate key="revocation.show.bookingReference" />:</strong><br />
+            {eventReservation.reservationReference}
+        </p>
+    </div>
+
+    <div class="revocation-confirm">
+        <p><strong><f:translate key="revocation.show.question" /></strong></p>
+
+        <f:form action="create" method="post" name="revocation">
+            <f:form.hidden name="eventReservation" value="{eventReservation}" />
+            <div class="v-form__element">
+                <f:form.submit value="{f:translate(key: 'revocation.show.submit')}" class="btn btn--primary" />
+            </div>
+        </f:form>
+    </div>
+</f:section>

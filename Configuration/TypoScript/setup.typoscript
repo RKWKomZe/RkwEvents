@@ -230,6 +230,17 @@ config.tx_extbase.persistence {
 }
 
 
+#===============================================
+# Plugins
+#===============================================
+tt_content.list.20.rkwevents_revocation < plugin.tx_rkwevents_revocation
+
+plugin.tx_rkwevents_revocation {
+    view < plugin.tx_rkwevents.view
+    persistence < plugin.tx_rkwevents.persistence
+    settings < plugin.tx_rkwevents.settings
+}
+
 plugin.tx_rkwevents {
     view {
         layoutRootPaths {

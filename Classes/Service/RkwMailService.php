@@ -247,6 +247,61 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
 
 
     /**
+     * Handles revocation mail for user
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function revocationReservationUser(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    {
+        // try to get frontend user from reservation
+        $frontendUser = $eventReservation->getFeUser();
+
+        // if no frontend user is assigned (e.g. anonymous reservation), create a dummy one for the mail service
+        // because userMail() expects a FrontendUser object
+        if (!$frontendUser instanceof \Madj2k\FeRegister\Domain\Model\FrontendUser) {
+            $frontendUser = GeneralUtility::makeInstance(\RKW\RkwEvents\Domain\Model\FrontendUser::class);
+            $frontendUser->setEmail($eventReservation->getEmail());
+            $frontendUser->setFirstName($eventReservation->getFirstName());
+            $frontendUser->setLastName($eventReservation->getLastName());
+        }
+
+        $this->userMail($frontendUser, $eventReservation, 'revocation');
+    }
+
+
+    /**
+     * Handles revocation mail for admin
+     *
+     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function revocationReservationAdmin(\RKW\RkwEvents\Domain\Model\EventReservation $eventReservation)
+    {
+        $backendUsers = $eventReservation->getEvent()->getBeUser();
+        if ($backendUsers && count($backendUsers)) {
+            $this->adminMail($backendUsers->toArray(), $eventReservation, 'revocation');
+        }
+    }
+
+
+    /**
      * Handles delete mail for user
      *
      * @param \Madj2k\FeRegister\Domain\Model\FrontendUser $frontendUser
@@ -764,6 +819,9 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'rkw_events',
                     null,
                     $frontendUser->getTxFeregisterLanguageKey()
+                ) ?? LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
+                    'rkw_events'
                 )
             );
 
@@ -904,6 +962,9 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'rkw_events',
                     null,
                     'de'
+                ) ?? LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
+                    'rkw_events'
                 )
             );
 

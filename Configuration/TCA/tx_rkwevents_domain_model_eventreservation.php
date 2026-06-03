@@ -3,9 +3,9 @@ return [
 	'ctrl' => [
         //'adminOnly' => 1,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation',
-        'label' => 'last_name',
-        'label_alt' => 'first_name, revoked_at',
-        'label_alt_force' => true,
+      		'label' => 'last_name',
+		'label_alt' => 'first_name, event, revoked_at',
+		'label_alt_force' => true,
         'label_userFunc' => \RKW\RkwEvents\UserFunctions\TcaLabel::class . '->reservationLabel',
         'default_sortby' => 'ORDER BY last_name ASC',
         'tstamp' => 'tstamp',
