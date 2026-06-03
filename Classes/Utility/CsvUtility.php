@@ -80,6 +80,7 @@ class CsvUtility
     protected static function addReservationDataToCsv(Event $event, string $separator, int $maxAddPersons)
     {
         $reservationAllowedColumns = [
+            'reservationReference',
             'salutation',
             'firstName',
             'lastName',
@@ -93,6 +94,7 @@ class CsvUtility
             'fax',
             'email',
             'remark',
+            'revokedAt'
         ];
 
         $headings = [];
@@ -247,7 +249,11 @@ class CsvUtility
                 'tx_rkwevents_domain_model_eventreservation.salutation.I.' . $value,
                 'RkwEvents'
             );
+        } elseif ($key === "revokedAt" && (int)$value > 0) {
+            // NEU: Umwandlung des Timestamps in ein lesbares Datum
+            $value = date('d.m.Y H:i', (int)$value);
         }
+
         return $value;
     }
 
