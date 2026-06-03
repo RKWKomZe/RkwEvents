@@ -243,7 +243,7 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer
      */
-    protected $revoked_at = 0;
+    protected $revokedAt = 0;
 
 
     /**
@@ -950,15 +950,15 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRevokedAt(): int
     {
-        return $this->revoked_at;
+        return $this->revokedAt;
     }
 
     /**
-     * @param int $revoked_at
+     * @param int $revokedAt
      */
-    public function setRevokedAt(int $revoked_at): void
+    public function setRevokedAt(int $revokedAt): void
     {
-        $this->revoked_at = $revoked_at;
+        $this->revokedAt = $revokedAt;
     }
 
 }

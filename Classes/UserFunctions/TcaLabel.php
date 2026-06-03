@@ -275,4 +275,21 @@ class TcaLabel
 
     }
 
+    /**
+     * Returns the label for a reservation, including revocation status
+     *
+     * @param array $parameters
+     * @param object $parentObject
+     */
+    public function reservationLabel(array &$parameters, $parentObject): void
+    {
+        $row = $parameters['row'];
+        $label = $row['last_name'] . ', ' . $row['first_name'];
+
+        if (!empty($row['revoked_at']) && (int)$row['revoked_at'] > 0) {
+            $label .= ' [WIDERRUFEN]';
+        }
+
+        $parameters['title'] = $label;
+    }
 }
