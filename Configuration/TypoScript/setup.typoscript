@@ -277,6 +277,7 @@ plugin.tx_rkwevents {
         terms2Pid = {$plugin.tx_rkwevents.settings.terms2Pid}
         revocationPid = {$plugin.tx_rkwevents.settings.revocationPid}
         revocationPolicyFilepath = {$plugin.tx_rkwevents.settings.revocationPolicyFilepath}
+        revocationEmail = {$plugin.tx_rkwevents.settings.revocationEmail}
         myEventsPid =  {$plugin.tx_rkwevents.settings.myEventsPid}
         parentCategoryForFilter =  {$plugin.tx_rkwevents.settings.parentCategoryForFilter}
 

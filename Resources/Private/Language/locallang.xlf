@@ -109,67 +109,37 @@
 			</trans-unit>
 
 
-            <!-- Revocation -->
-            <trans-unit id="revocation.new.header">
-                <source>Identify your reservation</source>
-            </trans-unit>
-            <trans-unit id="revocation.new.email">
-                <source>E-mail address</source>
-            </trans-unit>
-            <trans-unit id="revocation.new.bookingReference">
-                <source>Booking reference</source>
-            </trans-unit>
-            <trans-unit id="revocation.new.submit">
-                <source>Find reservation</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.header">
-                <source>Confirm revocation</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.event">
-                <source>Event</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.date">
-                <source>Date</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.participant">
-                <source>Participant</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.bookingReference">
-                <source>Booking reference</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.question">
-                <source>Do you really want to revoke this reservation?</source>
-            </trans-unit>
-            <trans-unit id="revocation.show.submit">
-                <source>Confirm revocation</source>
-            </trans-unit>
-            <trans-unit id="revocation.create.header">
-                <source>Revocation successful</source>
-            </trans-unit>
-            <trans-unit id="revocation.create.message">
-                <source>Your reservation has been revoked successfully. You will receive a confirmation via e-mail.</source>
-            </trans-unit>
-            <trans-unit id="revocation.error.notFound">
-                <source>No matching reservation found for the given e-mail and booking reference.</source>
-            </trans-unit>
-            <trans-unit id="revocation.error.alreadyRevoked">
-                <source>This reservation has already been revoked.</source>
-            </trans-unit>
-            <trans-unit id="revocation.error.tooLate">
-                <source>Revocation is no longer possible for this event or the 14-day period has expired.</source>
-            </trans-unit>
-            <trans-unit id="rkwMailService.revocationReservationUser.subject">
-                <source>Revocation confirmation</source>
-            </trans-unit>
-            <trans-unit id="rkwMailService.revocationReservationAdmin.subject">
-                <source>Revocation of an event registration</source>
-            </trans-unit>
-            <trans-unit id="revocation.email.subject">
-                <source>Revocation confirmation</source>
-            </trans-unit>
-            <trans-unit id="revocation.email.text">
-                <source>You have successfully revoked your reservation for the following event:</source>
-            </trans-unit>
+			<!-- Revocation -->
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.header">
+				<source>Submit revocation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.intro">
+				<source>Revocate your contract</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.firstName">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.lastName">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.email">
+				<source>E-mail address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message">
+				<source>What do you want withdraw?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message.placeholder">
+				<source>What do you want withdraw?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.submit">
+				<source>Submit revocation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.header">
+				<source>Revocation successfully successful</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.message">
+				<source>Your revocation has been submitted successfully. You will receive a confirmation of your submission via e-mail.</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventreservation.-->
@@ -1420,7 +1390,34 @@
 			</trans-unit>
 
 
+			<!-- Templates/Email/RevocationReservationUser.html -->
+			<trans-unit id="rkwMailService.revocationReservationUser.subject">
+				<source>Submission of your revocation confirmed</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.headline">
+				<source>Hello %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.intro">
+				<source>You have successfully submitted your revocation as follows:</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.email">
+				<source>Email-address</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.message">
+				<source>Subject of revocation</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.outro">
+				<source>We will check your revocation and will get back to you as soon as possible.</source>
+			</trans-unit>
+
+
 			<!-- Templates/Email/RevocationReservationAdmin.html -->
+			<trans-unit id="rkwMailService.revocationReservationAdmin.subject">
+				<source>Revocation of an event reservation</source>
+			</trans-unit>
 			<trans-unit id="templates_email_revocationReservationAdmin.headline">
 				<source>Hello %s,</source>
 			</trans-unit>
@@ -1593,10 +1590,23 @@
 				<source>Last name (person 5)</source>
 			</trans-unit>
 
+			<!-- RevocationValidator -->
+			<trans-unit id="tx_rkwevents_validator.revocation.firstName">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.lastName">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.email">
+				<source>Email address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.message">
+				<source>Message</source>
+			</trans-unit>
+
 			<trans-unit id="tx_rkwevents_fluid.survey">
 				<source>Survey</source>
 			</trans-unit>
-
 
             <trans-unit id="evaluation.oops">
                 <source>Oops!</source>

@@ -109,63 +109,6 @@
 				<source>Series</source>
 				<target>Reihe</target>
 			</trans-unit>
-
-
-            <!-- Revocation -->
-            <trans-unit id="tx_rkwevents_fluid.revocation.new.header">
-                <source>Submit revocation</source>
-                <target>Widerruf einreichen</target>
-            </trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.revocation.new.intro">
-				<source>Revocate your contract</source>
-				<target>Mit diesem Formular können Sie innerhalb von 14 Tagen nach Vertragsschluss Ihren Widerruf ohne Angabe von Gründen einreichen. Nach dem Absenden des Formulars erhalten Sie umgehend eine E-Mail mit Bestätigung des Eingangs, anschließend wird Ihr Anliegen von uns geprüft und nach Abschluss der Prüfung erhalten Sie eine Nachricht mit dem Ergebnis.</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.revocation.new.firstName">
-				<source>First name</source>
-				<target>Vorname</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.revocation.new.lastName">
-				<source>Last name</source>
-				<target>Name</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.revocation.new.email">
-                <source>E-mail address</source>
-                <target>E-Mail-Adresse</target>
-            </trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.revocation.new.message">
-				<source>What do you want withdraw?</source>
-				<target>Was möchten Sie widerrufen?</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwevents_fluid.revocation.new.message.placeholder">
-				<source>What do you want withdraw?</source>
-				<target>Bitte geben Sie die Reservierungsreferenz, den Veranstaltungstitel oder eine Beschreibung der Veranstaltung an ...</target>
-			</trans-unit>
-            <trans-unit id="tx_rkwevents_fluid.revocation.new.submit">
-                <source>Submit revocation</source>
-                <target>Widerruf einreichen</target>
-            </trans-unit>
-            <trans-unit id="revocation.create.header">
-                <source>Revocation successful</source>
-                <target>Widerruf erfolgreich</target>
-            </trans-unit>
-            <trans-unit id="revocation.create.message">
-                <source>Your reservation has been revoked successfully. You will receive a confirmation via e-mail.</source>
-                <target>Ihre Anmeldung wurde erfolgreich widerrufen. Sie erhalten in Kürze eine Bestätigung per E-Mail.</target>
-            </trans-unit>
-            <trans-unit id="rkwMailService.revocationReservationUser.subject">
-                <source>Widerrufsbestätigung</source>
-            </trans-unit>
-            <trans-unit id="rkwMailService.revocationReservationAdmin.subject">
-                <source>Widerruf einer Event-Anmeldung</source>
-            </trans-unit>
-            <trans-unit id="revocation.email.subject">
-                <source>Revocation confirmation</source>
-                <target>Bestätigung Ihres Widerrufs</target>
-            </trans-unit>
-            <trans-unit id="revocation.email.text">
-                <source>You have successfully revoked your reservation for the following event:</source>
-                <target>Sie haben Ihre Anmeldung für die folgende Veranstaltung erfolgreich widerrufen:</target>
-            </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_event.logos" approved="no">
 				<source>Logos</source>
 				<target phase-name="approval-1" state="final">Kooperationsbeteiligte</target>
@@ -1799,14 +1742,106 @@
 			</trans-unit>
 
 
+			<!-- Revocation -->
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.header">
+				<source>Submit revocation</source>
+				<target>Widerruf einreichen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.intro">
+				<source>Revocate your contract</source>
+				<target>Mit diesem Formular können Sie innerhalb von 14 Tagen nach Vertragsschluss Ihren Widerruf ohne Angabe von Gründen einreichen. Nach dem erfolgreichen Absenden des Formulars erhalten Sie umgehend eine E-Mail mit einer Empfangsbestätigung. Anschließend wird Ihr Anliegen von uns geprüft und nach Abschluss der Prüfung senden wir Ihnen eine Nachricht mit dem Ergebnis.</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.firstName">
+				<source>First name</source>
+				<target>Vorname</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.lastName">
+				<source>Last name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.email">
+				<source>E-mail address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message">
+				<source>What do you want withdraw?</source>
+				<target>Was möchten Sie widerrufen?</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message.placeholder">
+				<source>What do you want withdraw?</source>
+				<target>Bitte geben Sie die Reservierungsreferenz, den Veranstaltungstitel oder eine Beschreibung der Veranstaltung an ...</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.submit">
+				<source>Submit revocation</source>
+				<target>Widerruf einreichen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.header">
+				<source>Revocation successfully submitted</source>
+				<target>Widerruf erfolgreich eingereicht</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.message">
+				<source>Your revocation has been submitted successfully. You will receive a confirmation of your submission via e-mail.</source>
+				<target>Ihr Widerruf wurde erfolgreich eingereicht. Sie erhalten in Kürze eine Eingangsbestätigung per E-Mail.</target>
+			</trans-unit>
+
+			<!-- Templates/Email/RevocationReservationUser.html -->
+			<trans-unit id="rkwMailService.revocationReservationUser.subject">
+				<source>Submission of your revocation confirmed</source>
+				<target>Eingangsbestätigung Ihres Widerrufs</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.intro">
+				<source>You have successfully submitted your revocation as follows:</source>
+				<target>Sie haben Ihren Widerruf mit den folgenden Angaben erfolgreich übermittelt:</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.email">
+				<source>Email-address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.message">
+				<source>Subject of revocation</source>
+				<target>Gegenstand des Widerrrufs</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.outro">
+				<source>We will check your revocation and will get back to you as soon as possible.</source>
+				<target>Wir prüfen Ihren Widerruf und nach Abschluss der Prüfung erhalten Sie eine Nachricht mit dem Ergebnis.</target>
+			</trans-unit>
+
 			<!-- Templates/Email/RevocationReservationAdmin.html -->
+			<trans-unit id="rkwMailService.revocationReservationAdmin.subject">
+				<source>Revocation of an event reservation</source>
+				<target>Widerruf einer Veranstaltungsanmeldung</target>
+			</trans-unit>
 			<trans-unit id="templates_email_revocationReservationAdmin.headline">
 				<source>Hello %s,</source>
 				<target>Hallo %s,</target>
 			</trans-unit>
-			<trans-unit id="templates_email_revocationReservationAdmin.text1">
+			<trans-unit id="templates_email_revocationRevocationAdmin.intro">
 				<source>a reservation has been revoked.</source>
 				<target>jemand hat seine Anmeldung an einer Veranstaltung widerrufen.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.email">
+				<source>Email-address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.message">
+				<source>Subject of revocation</source>
+				<target>Gegenstand des Widerrrufs</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.outro">
+				<source>Please check this revocation and get back to the user as soon as possible.</source>
+				<target>Bitte prüfen Sie den Widerruf und senden Sie der widerrufenden Person nach Abschluss der Prüfung eine Nachricht mit dem Ergebnis.</target>
 			</trans-unit>
 
 
@@ -2024,6 +2059,25 @@
 			<trans-unit id="tx_rkwevents_validator.additional_lastName_3" approved="no">
 				<source>Last name (person 5)</source>
 				<target phase-name="approval-1" state="final">Nachname (Teilnehmende 5)</target>
+			</trans-unit>
+
+
+			<!-- RevocationValidator -->
+			<trans-unit id="tx_rkwevents_validator.revocation.firstName">
+				<source>First name</source>
+				<target>Vorname</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.lastName">
+				<source>Last name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.email">
+				<source>Email address</source>
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.message">
+				<source>Message</source>
+				<target>Was möchten Sie widerrufen?</target>
 			</trans-unit>
 
 

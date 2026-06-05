@@ -3,34 +3,38 @@
 
 <!-- PLAINTEXT -->
 <f:section name="Plaintext">
-<postmaster:email.translate key="revocation.email.text" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_revocationReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : fullName}" />
 
-<f:translate key="revocation.show.event" />: {reservation.event.title}
-<f:translate key="revocation.show.date" />: <f:format.date format="d.m.Y">{reservation.event.start}</f:format.date>
-<f:translate key="revocation.show.participant" />: {reservation.firstName} {reservation.lastName}
-<f:translate key="revocation.show.bookingReference" />: {reservation.reservationReference}
+<postmaster:email.translate key="templates_email_revocationReservationUser.intro" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
+
+<postmaster:email.translate key="templates_email_revocationReservationUser.name" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />: {revocation.firstName} {revocation.lastName}
+<postmaster:email.translate key="templates_email_revocationReservationUser.email" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />: {revocation.email}
+<postmaster:email.translate key="templates_email_revocationReservationUser.message" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />: {revocation.message}
+
+<postmaster:email.translate key="templates_email_revocationReservationUser.outro" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 </f:section>
 
 <!-- HTML -->
 <f:section name="Html">
-    <p><postmaster:email.translate key="revocation.email.text" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></p>
+    <h1><postmaster:email.translate key="templates_email_revocationReservationUser.headline" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" arguments="{0 : fullName}" /></h1>
+
+    <p><postmaster:email.translate key="templates_email_revocationReservationUser.intro" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></p>
 
     <table>
         <tr>
-            <td><strong><f:translate key="revocation.show.event" />:</strong></td>
-            <td>{reservation.event.title}</td>
+            <td><strong><postmaster:email.translate key="templates_email_revocationReservationUser.name" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />:</strong></td>
+            <td>{revocation.firstName} {revocation.lastName}</td>
         </tr>
         <tr>
-            <td><strong><f:translate key="revocation.show.date" />:</strong></td>
-            <td><f:format.date format="d.m.Y">{reservation.event.start}</f:format.date></td>
+            <td><strong><postmaster:email.translate key="templates_email_revocationReservationUser.email" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />:</strong></td>
+            <td>{revocation.email}</td>
         </tr>
         <tr>
-            <td><strong><f:translate key="revocation.show.participant" />:</strong></td>
-            <td>{reservation.firstName} {reservation.lastName}</td>
-        </tr>
-        <tr>
-            <td><strong><f:translate key="revocation.show.bookingReference" />:</strong></td>
-            <td>{reservation.reservationReference}</td>
+            <td><strong><postmaster:email.translate key="templates_email_revocationReservationUser.message" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />:</strong></td>
+            <td>{revocation.message}</td>
         </tr>
     </table>
+
+    <p><postmaster:email.translate key="templates_email_revocationReservationUser.outro" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></p>
+
 </f:section>

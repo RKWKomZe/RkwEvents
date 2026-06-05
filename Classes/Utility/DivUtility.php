@@ -111,10 +111,6 @@ class DivUtility
         if (count($reservations) > 0) {
             foreach ($reservations as $reservation) {
 
-                if ($reservation->getRevokedAt()) {
-                    continue;
-                }
-
                 $confirmedReservations++;
                 $addPerson = $reservation->getAddPerson();
                 $confirmedReservations = $confirmedReservations + count($addPerson);

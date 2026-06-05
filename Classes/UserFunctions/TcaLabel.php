@@ -286,8 +286,8 @@ class TcaLabel
         $row = $parameters['row'];
         $label = $row['last_name'] . ', ' . $row['first_name'];
 
-        if (!empty($row['revoked_at']) && (int)$row['revoked_at'] > 0) {
-            $label .= ' [WIDERRUFEN]';
+        if (!empty($row['reservation_reference'])) {
+            $label .= ' [' . $row['reservation_reference'] . ']';
         }
 
         $parameters['title'] = $label;

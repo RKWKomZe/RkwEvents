@@ -3,8 +3,8 @@ return [
 	'ctrl' => [
         //'adminOnly' => 1,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation',
-      		'label' => 'last_name',
-		'label_alt' => 'first_name, event, revoked_at',
+        'label' => 'last_name',
+		'label_alt' => 'first_name, event',
 		'label_alt_force' => true,
         'label_userFunc' => \RKW\RkwEvents\UserFunctions\TcaLabel::class . '->reservationLabel',
         'default_sortby' => 'ORDER BY last_name ASC',
@@ -16,11 +16,11 @@ return [
 		'delete' => 'deleted',
 		'enablecolumns' => [
 		],
-		'searchFields' => 'event,remark,add_person,fe_user,reservation_reference, salutation,first_name,last_name,company,company_role,address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner,participate_meeting,subscribe_newsletter,revocation_consent,custom_field,cancel_reg_hash,revoked_at',
+		'searchFields' => 'event,remark,add_person,fe_user,reservation_reference, salutation,first_name,last_name,company,company_role,address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner,participate_meeting,subscribe_newsletter,revocation_consent,custom_field,cancel_reg_hash',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservation.gif'
 	],
 	'types' => [
-		'1' => ['showitem' => 'event, fe_user, reservation_reference, salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, subscribe_newsletter, revocation_consent, custom_field, cancel_reg_hash, workshop_register, revoked_at'],
+		'1' => ['showitem' => 'event, fe_user, reservation_reference, salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, subscribe_newsletter, revocation_consent, custom_field, cancel_reg_hash, workshop_register'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -298,19 +298,6 @@ return [
                 'minitems'      => 0,
                 'size'          => 5,
                 'readOnly'      => true,
-            ],
-        ],
-        'revoked_at' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.revoked_at',
-            'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime',
-                'checkbox' => 0,
-                'default' => 0,
-                'readOnly' => 1,
             ],
         ],
 	],

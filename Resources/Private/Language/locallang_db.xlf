@@ -587,9 +587,6 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.cancel_reg_hash" approved="yes">
 				<source>Cancel register hash</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwevents_domain_model_eventreservation.revoked_at" approved="yes">
-				<source>Revoked at</source>
-			</trans-unit>
 
 
 			<!-- tx_rkwevents_domain_model_eventreservationaddperson -->
@@ -712,6 +709,9 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.registered_frontend_users" approved="yes">
 				<source>Registered FrontendUsers</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.workshop_register" approved="yes">
+				<source>Registered workshops</source>
 			</trans-unit>
 
 

@@ -239,14 +239,6 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
-     * date of withdrawal
-     *
-     * @var integer
-     */
-    protected $revokedAt = 0;
-
-
-    /**
      * prefix for reservation reference
      */
     public const EVENTRESERVATION_PREFIX = 'EVT';
@@ -945,20 +937,5 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->reservationReference = $reservationReference;
     }
 
-    /**
-     * @return int
-     */
-    public function getRevokedAt(): int
-    {
-        return $this->revokedAt;
-    }
-
-    /**
-     * @param int $revokedAt
-     */
-    public function setRevokedAt(int $revokedAt): void
-    {
-        $this->revokedAt = $revokedAt;
-    }
 
 }

@@ -114,11 +114,11 @@ call_user_func(
             'RKW.' . $extKey,
             'Revocation',
             [
-                'Revocation' => 'new, show, create'
+                'Revocation' => 'new, create'
             ],
             // non-cacheable actions
             [
-                'Revocation' => 'new, show, create'
+                'Revocation' => 'new, create'
             ]
         );
 

@@ -4,9 +4,10 @@
     <h2><f:translate key='tx_rkwevents_fluid.revocation.new.header' /></h2>
     <p><f:translate key="tx_rkwevents_fluid.revocation.new.intro" /></p>
 
-    <f:flashMessages />
+    <f:render partial="FlashMessages" arguments="{_all}" />
+    <f:render partial="FormErrors" arguments="{object:Event}" />
 
-    <f:form enctype="multipart/form-data" action="create" name="revocation" id="revocation">
+    <f:form enctype="multipart/form-data" action="create" name="newRevocation" object="{newRevocation}">
         <div class="flex-container">
             <div class="form flex flex-basis-8 full-width-medium space-between">
                 <div class="form__field width50">
@@ -14,7 +15,10 @@
                         <f:translate key="tx_rkwevents_fluid.revocation.new.firstName" />
                         <f:render partial="LabelSuffix" arguments="{field: 'firstName', mandatoryFields: settings.mandatoryFields.revocation}" />
                     </label>
-                    <f:form.textfield name="firstName" id="firstName" />
+                    <f:form.textfield
+                        id="firstName"
+                        property="firstName"
+                    />
                 </div>
 
                 <div class="form__field width50">
@@ -22,7 +26,10 @@
                         <f:translate key="tx_rkwevents_fluid.revocation.new.lastName" />
                         <f:render partial="LabelSuffix" arguments="{field: 'lastName', mandatoryFields: settings.mandatoryFields.revocation}" />
                     </label>
-                    <f:form.textfield name="lastName" id="lastName" />
+                    <f:form.textfield
+                        id="lastName"
+                        property="lastName"
+                    />
                 </div>
 
                 <div class="form__field width50 break-after">
@@ -30,7 +37,10 @@
                         <f:translate key="tx_rkwevents_fluid.revocation.new.email" />
                         <f:render partial="LabelSuffix" arguments="{field: 'email', mandatoryFields: settings.mandatoryFields.revocation}" />
                     </label>
-                    <f:form.textfield name="email" id="email" />
+                    <f:form.textfield
+                        id="email"
+                        property="email"
+                    />
                 </div>
 
                 <div class="form__field width100">
@@ -39,8 +49,8 @@
                         <f:render partial="LabelSuffix" arguments="{field: 'message', mandatoryFields: settings.mandatoryFields.revocation}" />
                     </label>
                     <f:form.textarea
-                        name="message"
                         id="message"
+                        property="message"
                         placeholder="<f:translate key='tx_rkwevents_fluid.revocation.new.message.placeholder' />"
                     />
                 </div>

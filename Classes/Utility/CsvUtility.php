@@ -93,8 +93,7 @@ class CsvUtility
             'mobile',
             'fax',
             'email',
-            'remark',
-            'revokedAt'
+            'remark'
         ];
 
         $headings = [];
@@ -249,9 +248,6 @@ class CsvUtility
                 'tx_rkwevents_domain_model_eventreservation.salutation.I.' . $value,
                 'RkwEvents'
             );
-        } elseif ($key === "revokedAt" && (int)$value > 0) {
-            // NEU: Umwandlung des Timestamps in ein lesbares Datum
-            $value = date('d.m.Y H:i', (int)$value);
         }
 
         return $value;

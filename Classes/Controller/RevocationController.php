@@ -14,13 +14,11 @@ namespace RKW\RkwEvents\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwEvents\Domain\Model\EventReservation;
-use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
+use RKW\RkwEvents\Domain\Model\Revocation;
 use RKW\RkwEvents\Service\RkwMailService;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * RevocationController
@@ -34,22 +32,9 @@ class RevocationController extends ActionController
 {
 
     /**
-     * @var \RKW\RkwEvents\Domain\Repository\EventReservationRepository
-     */
-    protected $eventReservationRepository;
-
-    /**
      * @var \RKW\RkwEvents\Service\RkwMailService
      */
     protected $rkwMailService;
-
-    /**
-     * @param \RKW\RkwEvents\Domain\Repository\EventReservationRepository $eventReservationRepository
-     */
-    public function injectEventReservationRepository(EventReservationRepository $eventReservationRepository)
-    {
-        $this->eventReservationRepository = $eventReservationRepository;
-    }
 
     /**
      * @param \RKW\RkwEvents\Service\RkwMailService $rkwMailService
@@ -62,47 +47,60 @@ class RevocationController extends ActionController
     /**
      * action new
      *
+     * @param \RKW\RkwEvents\Domain\Model\Revocation|null $newRevocation
+     *
      * @return void
      */
-    public function newAction()
+    public function newAction(Revocation $newRevocation = null)
     {
+        if (!$newRevocation) {
+            $newRevocation = GeneralUtility::makeInstance('RKW\\RkwEvents\\Domain\\Model\\Revocation');
+        }
+
+        $this->view->assign('newRevocation', $newRevocation);
+
     }
 
 
     /**
      * action create
      *
-     * @param string $email
-     * @param string $message
+     * @param \RKW\RkwEvents\Domain\Model\Revocation $newRevocation
+ *
+     * @TYPO3\CMS\Extbase\Annotation\Validate("RKW\RkwEvents\Validation\Validator\RevocationValidator", param="newRevocation")
      *
      * @return void
      */
-    public function createAction(string $email, string $message)
+    public function createAction(Revocation $newRevocation)
     {
-        $email = trim($email);
-        $message = trim($message);
-
-        DebuggerUtility::var_dump($message);
-        exit();
-
-
         // Send Email
-        $this->sendRevocationEmail($eventReservation);
+        $this->sendRevocationEmail($newRevocation);
 
         $this->addFlashMessage(
-            LocalizationUtility::translate('revocation.create.message', 'rkw_events'),
+            LocalizationUtility::translate('tx_rkwevents_fluid.revocation.create.message', 'rkw_events'),
             '',
             \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
         );
     }
 
     /**
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param \RKW\RkwEvents\Domain\Model\Revocation $revocation
      * @return void
      */
-    protected function sendRevocationEmail(EventReservation $eventReservation)
+    protected function sendRevocationEmail(Revocation $revocation)
     {
-        $this->rkwMailService->revocationReservationUser($eventReservation);
-        $this->rkwMailService->revocationReservationAdmin($eventReservation);
+        $this->rkwMailService->sendRevocationUserMail($revocation);
+        $this->rkwMailService->sendRevocationAdminMail($revocation);
+    }
+
+    /**
+     * Remove ErrorFlashMessage
+     *
+     * @see \TYPO3\CMS\Extbase\Mvc\Controller\ActionController::getErrorFlashMessage()
+     */
+    protected function getErrorFlashMessage(): bool
+    {
+        return false;
+        //===
     }
 }
