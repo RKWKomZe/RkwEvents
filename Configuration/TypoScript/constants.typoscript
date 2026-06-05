@@ -224,6 +224,9 @@ plugin.tx_rkwevents {
 
 			# cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of additional persons. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
 			eventReservationAdditionalPersons =
+
+            # cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for revocation. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
+            revocation = firstName,lastName,email,message
 		}
 
 		mail {

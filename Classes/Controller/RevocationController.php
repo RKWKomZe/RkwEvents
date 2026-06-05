@@ -18,6 +18,7 @@ use RKW\RkwEvents\Domain\Model\EventReservation;
 use RKW\RkwEvents\Domain\Repository\EventReservationRepository;
 use RKW\RkwEvents\Service\RkwMailService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -67,80 +68,23 @@ class RevocationController extends ActionController
     {
     }
 
-    /**
-     * action show
-     *
-     * @param string $email
-     * @param string $bookingReference
-     * @return void
-     */
-    public function showAction(string $email, string $bookingReference)
-    {
-        $email = trim($email);
-        $bookingReference = trim($bookingReference);
-
-        $reservations = $this->eventReservationRepository->findByBookingReferenceAndEmail($bookingReference, $email);
-        /** @var \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation */
-        $eventReservation = $reservations->getFirst();
-
-        if (!$eventReservation) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('revocation.error.notFound', 'rkw_events'),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
-            $this->redirect('new');
-        }
-
-        if ($eventReservation->getRevokedAt()) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('revocation.error.alreadyRevoked', 'rkw_events'),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING
-            );
-            $this->redirect('new');
-        }
-
-        // Check if event already took place
-        if ($eventReservation->getEvent()->getStart() < new \DateTime()) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('revocation.error.tooLate', 'rkw_events'),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
-            $this->redirect('new');
-        }
-
-        // Check 14 days period
-        $crdate = $eventReservation->getCrdate();
-        $now = new \DateTime();
-        $diff = $now->diff($crdate);
-        if ($diff->invert === 0 && $diff->days > 14) {
-             $this->addFlashMessage(
-                LocalizationUtility::translate('revocation.error.tooLate', 'rkw_events'),
-                '',
-                \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
-            );
-            $this->redirect('new');
-        }
-
-        $this->view->assign('eventReservation', $eventReservation);
-    }
 
     /**
      * action create
      *
-     * @param \RKW\RkwEvents\Domain\Model\EventReservation $eventReservation
+     * @param string $email
+     * @param string $message
+     *
      * @return void
      */
-    public function createAction(EventReservation $eventReservation)
+    public function createAction(string $email, string $message)
     {
-        if ($eventReservation->getRevokedAt()) {
-             $this->redirect('new');
-        }
+        $email = trim($email);
+        $message = trim($message);
 
-        $eventReservation->setRevokedAt(time());
-        $this->eventReservationRepository->update($eventReservation);
+        DebuggerUtility::var_dump($message);
+        exit();
+
 
         // Send Email
         $this->sendRevocationEmail($eventReservation);
