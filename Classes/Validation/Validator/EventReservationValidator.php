@@ -196,7 +196,6 @@ class EventReservationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\
         // 5. Check mandatory revocation consent
         if (
             ! $newEventReservation->getRevocationConsent()
-            && $newEventReservation->getEvent()->getCostsReg() > 0
         ) {
 
             $this->result->forProperty('revocationConsent')->addError(

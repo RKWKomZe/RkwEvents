@@ -1314,7 +1314,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree">
 				<source>.</source>
-				<target>gelesen und verstanden.</target>
+				<target>zur Kenntnis genommen. Diese gilt ausschließlich für Verbraucher im Sinne des § 13 BGB.</target>
 			</trans-unit>
 
 
@@ -1658,7 +1658,7 @@
 			</trans-unit>
 			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyText">
 				<source>You may revoke this registration within 14 days after receiving this information. The relevant revocation policy can be found in the attached document.</source>
-				<target>Diese Anmeldung können Sie innerhalb von 14 Tagen ab Erhalt dieser Belehrung in Textform widerrufen. Die entsprechende Widerrufsbelehrung finden Sie im beigefügten Dokument.</target>
+				<target>Die beigefügte Widerrufsbelehrung gilt ausschließlich für Verbraucher im Sinne des § 13 BGB. Soweit Ihnen als Verbraucher ein gesetzliches Widerrufsrecht zusteht, finden Sie die Einzelheiten im beigefügten Dokument. Unternehmern im Sinne des § 14 BGB steht kein gesetzliches Widerrufsrecht zu.</target>
 			</trans-unit>
 
 

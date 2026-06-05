@@ -330,30 +330,27 @@
                 </div>
             </f:if>
             <feRegister:consent type="marketing" />
-            <f:if condition="! <rkw:IsFreeOfCharge event='{event}' />">
-                <div class="form__field width100">
-                    <div class="form__field">
-                        <f:form.checkbox
-                            class="checkbox"
-                            id="revocation-consent"
-                            property="revocationConsent"
-                            value="1"
-                        />
+            <div class="form__field width100">
+                <div class="form__field">
+                    <f:form.checkbox
+                        class="checkbox"
+                        id="revocation-consent"
+                        property="revocationConsent"
+                        value="1"
+                    />
 
-                        <label for="revocation-consent"
-                            class="checkbox-label">
-                            <span class="text-smaller">
-                                <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne" /></f:format.raw>
-                                <f:link.page pageUid="{settings.revocationPid}" target="_blank">
-                                    <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo" /></f:format.raw>
-                                </f:link.page>
-                                <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree"/></f:format.raw>
-                            </span>
-                        </label>
-                    </div>
+                    <label for="revocation-consent"
+                        class="checkbox-label">
+                        <span class="text-smaller">
+                            <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne" /></f:format.raw>
+                            <f:link.page pageUid="{settings.revocationPid}" target="_blank">
+                                <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo" /></f:format.raw>
+                            </f:link.page>
+                            <f:format.raw><f:translate key="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree"/></f:format.raw>
+                        </span>
+                    </label>
                 </div>
-
-            </f:if>
+            </div>
         </f:else>
     </f:if>
 
