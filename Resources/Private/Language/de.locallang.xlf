@@ -1305,8 +1305,8 @@
 				<target>widerrufen werden.</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne">
-				<source><![CDATA[I have read and understood the ]]></source>
-				<target><![CDATA[Ich habe die]]></target>
+				<source>I have noticed the</source>
+				<target>Ich habe die</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo">
 				<source>revocation policy</source>

@@ -767,8 +767,8 @@
                 <target>Ich möchte den Newsletter abonnieren</target>
             </trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.revocation_consent" approved="yes">
-				<source>I have read and understood the revocation policy</source>
-				<target>Ich habe die Widerrufsbelehrung gelesen und verstanden</target>
+				<source>I have noticed the revocation policy</source>
+				<target>Ich habe die Widerrufsbelehrung zur Kenntnis genommen.</target>
 			</trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
                 <source>Workshop register</source>
