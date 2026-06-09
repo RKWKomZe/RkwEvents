@@ -92,31 +92,29 @@ class EventRepository extends AbstractRepository
      * Return reservations of upcoming event
      *
      * @param int $timeFrame
+     * @param int $eventUid
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findUpcomingEventsForReminder(int $timeFrame = 86400): QueryResultInterface
+    public function findUpcomingEventsForReminder(int $timeFrame = 86400, int $eventUid = 0): QueryResultInterface
     {
         $query = $this->createQuery();
 
         $query->getQuerySettings()->setRespectStoragePage(false);
 
-        return $query->matching(
-            $query->logicalAnd(
-                $query->logicalAnd(
-                    $query->logicalAnd(
-                        $query->logicalAnd(
-                            $query->lessThanOrEqual('start', time() + $timeFrame),
-                            $query->greaterThanOrEqual('start', time())
-                        ),
-                        $query->greaterThan('end', time())
-                    )
-                ),
-                $query->equals('reminderMailTstamp', 0),
-                $query->equals('series.disableReminderMail', 0)
-            )
+        $constraints = [
+            $query->lessThanOrEqual('start', time() + $timeFrame),
+            $query->greaterThanOrEqual('start', time()),
+            $query->greaterThan('end', time()),
+            $query->equals('reminderMailTstamp', 0),
+            $query->equals('series.disableReminderMail', 0)
+        ];
 
-        )->execute();
+        if ($eventUid > 0) {
+            $constraints[] = $query->equals('uid', $eventUid);
+        }
+
+        return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
 
