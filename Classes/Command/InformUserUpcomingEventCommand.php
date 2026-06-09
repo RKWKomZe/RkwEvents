@@ -105,6 +105,12 @@ class InformUserUpcomingEventCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Defines when we start to send e-mails as reminder for the user before the event starts in seconds.',
                 86400
+            )
+            ->addOption(
+                'eventUid',
+                'e',
+                InputOption::VALUE_OPTIONAL,
+                'Limit reminder to a specific event UID'
             );
     }
 
@@ -125,12 +131,13 @@ class InformUserUpcomingEventCommand extends Command
         $io->title($this->getDescription());
         $io->newLine();
 
-        $timeFrame = $input->getOption('timeFrame');
+        $timeFrame = (int)$input->getOption('timeFrame');
+        $eventUid = (int)$input->getOption('eventUid');
 
         $result = 0;
         try {
 
-            $eventList = $this->eventRepository->findUpcomingEventsForReminder($timeFrame);
+            $eventList = $this->eventRepository->findUpcomingEventsForReminder($timeFrame, $eventUid);
 
             if (count($eventList)) {
 
