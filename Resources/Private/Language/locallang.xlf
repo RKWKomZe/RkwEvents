@@ -1184,7 +1184,7 @@
 				<source>p.P.</source>
 			</trans-unit>
             <trans-unit id="partials_email_details.eventAccessLink">
-                <source>Direct Link</source>
+                <source>Link to join online meeting</source>
             </trans-unit>
             <trans-unit id="partials_email_details.privacyHint">
 				<source>For reasons of data protection, we are unfortunately not allowed to send you any details about the event participant.</source>
@@ -1350,7 +1350,7 @@
 				<source>Login here to change or delete your reservation.</source>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.eventAccessLink">
-                <source>Direct Link</source>
+                <source>Link to join online meeting</source>
             </trans-unit>
 
 

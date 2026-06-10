@@ -9,7 +9,7 @@
 
 <postmaster:email.translate key="templates_email_informUpcomingEventUser.text1" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <f:if condition="{reservation.event.onlineEvent}"><f:then><f:if condition="{reservation.event.onlineEventAccessLink}">
-<postmaster:email.translate key="templates_email_informUpcomingEventUser.eventAccessLink" languageKey="{language}" extensionName="rkwEvents" />
+<postmaster:email.translate key="templates_email_informUpcomingEventUser.eventAccessLink" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 <postmaster:email.uri.typolink parameter="{reservation.event.onlineEventAccessLink}" />
 </f:if></f:then><f:else><postmaster:email.translate key="templates_email_informUpcomingEventUser.text2" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" />
 
@@ -35,7 +35,7 @@
         <f:if condition="{reservation.event.onlineEvent}">
             <f:then>
                 <f:if condition="{reservation.event.onlineEventAccessLink}">
-                    <br/><strong><postmaster:email.translate key="templates_email_informUpcomingEventUser.eventAccessLink" languageKey="{language}" extensionName="rkwEvents" /></strong>
+                    <br/><strong><postmaster:email.translate key="templates_email_informUpcomingEventUser.eventAccessLink" languageKey="{queueRecipient.languageCode}" extensionName="rkwEvents" /></strong>
                     <br/><a href='<postmaster:email.uri.typolink parameter="{reservation.event.onlineEventAccessLink}"/>' target="_blank"><postmaster:email.uri.typolink parameter="{reservation.event.onlineEventAccessLink}" /></a>
                 </f:if>
             </f:then>
