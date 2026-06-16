@@ -2,7 +2,7 @@
 
 <f:section name="main">
     <h2><f:translate key='tx_rkwevents_fluid.revocation.new.header' /></h2>
-    <p><f:translate key="tx_rkwevents_fluid.revocation.new.intro" /></p>
+    <p><f:format.raw><f:translate key="tx_rkwevents_fluid.revocation.new.intro" /></f:format.raw></p>
 
     <f:render partial="FlashMessages" arguments="{_all}" />
     <f:render partial="FormErrors" arguments="{object:Event}" />
