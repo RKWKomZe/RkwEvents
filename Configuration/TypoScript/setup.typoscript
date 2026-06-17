@@ -230,6 +230,17 @@ config.tx_extbase.persistence {
 }
 
 
+#===============================================
+# Plugins
+#===============================================
+tt_content.list.20.rkwevents_revocation < plugin.tx_rkwevents_revocation
+
+plugin.tx_rkwevents_revocation {
+    view < plugin.tx_rkwevents.view
+    persistence < plugin.tx_rkwevents.persistence
+    settings < plugin.tx_rkwevents.settings
+}
+
 plugin.tx_rkwevents {
     view {
         layoutRootPaths {
@@ -264,6 +275,10 @@ plugin.tx_rkwevents {
         reservationPid = {$plugin.tx_rkwevents.settings.reservationPid}
         termsPid = {$plugin.tx_rkwevents.settings.termsPid}
         terms2Pid = {$plugin.tx_rkwevents.settings.terms2Pid}
+        revocationPid = {$plugin.tx_rkwevents.settings.revocationPid}
+        revocationButtonPid = {$plugin.tx_rkwevents.settings.revocationButtonPid}
+        revocationPolicyFilepath = {$plugin.tx_rkwevents.settings.revocationPolicyFilepath}
+        revocationEmail = {$plugin.tx_rkwevents.settings.revocationEmail}
         myEventsPid =  {$plugin.tx_rkwevents.settings.myEventsPid}
         parentCategoryForFilter =  {$plugin.tx_rkwevents.settings.parentCategoryForFilter}
 
@@ -345,7 +360,8 @@ plugin.tx_rkwevents {
 			# comma separated lists with property names - Example: salutation, firstName, lastName, address, zip, city, email
 			eventReservationMainPerson = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationMainPerson}
 			eventReservationAdditionalPersons = {$plugin.tx_rkwevents.settings.mandatoryFields.eventReservationAdditionalPersons}
-           captcha = {$plugin.tx_rkwevents.settings.mandatoryFields.captcha}
+			revocation = {$plugin.tx_rkwevents.settings.mandatoryFields.revocation}
+            captcha = {$plugin.tx_rkwevents.settings.mandatoryFields.captcha}
 		}
 
 		mail {

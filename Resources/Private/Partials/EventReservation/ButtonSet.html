@@ -33,7 +33,14 @@
                             <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.registerLoggedIn" />
                         </f:then>
                         <f:else>
-                            <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register" />
+                            <f:if condition="<rkw:IsFreeOfCharge event='{event}' />">
+                                <f:then>
+                                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.free" />
+                                </f:then>
+                                <f:else>
+                                    <f:translate key="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.paid" />
+                                </f:else>
+                            </f:if>
                         </f:else>
                     </f:security.ifAuthenticated>
                 </f:else>

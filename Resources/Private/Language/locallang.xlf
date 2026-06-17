@@ -109,6 +109,39 @@
 			</trans-unit>
 
 
+			<!-- Revocation -->
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.header">
+				<source>Submit revocation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.intro">
+				<source>Revocate your contract</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.firstName">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.lastName">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.email">
+				<source>E-mail address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message">
+				<source>What do you want withdraw?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message.placeholder">
+				<source>What do you want withdraw?</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.submit">
+				<source>Submit revocation</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.header">
+				<source>Revocation successfully successful</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.message">
+				<source>Your revocation has been submitted successfully. You will receive a confirmation of your submission via e-mail.</source>
+			</trans-unit>
+
+
 			<!-- tx_rkwevents_domain_model_eventreservation.-->
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.salutation" approved="yes">
 				<source>Salutation</source>
@@ -942,6 +975,17 @@
 			</trans-unit>
 
 
+			<!-- Partials/EventReservation/RevocationInfo.html -->
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partOne">
+				<source><![CDATA[Please pay attention to our]]></source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partTwo">
+				<source>revocation information</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_revocationInfo.partThree">
+				<source>.</source>
+			</trans-unit>
+
 
 			<!-- Partials/EventReservation/ButtonSet.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back">
@@ -952,6 +996,12 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register">
 				<source>Register now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.free">
+				<source>Order now</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.paid">
+				<source>Order now</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit">
 				<source>Edit now</source>
@@ -1007,6 +1057,16 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
 				<source>taking effect for the future.</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne">
+				<source>I have noticed the</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo">
+				<source>revocation policy</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree">
+				<source>.</source>
+			</trans-unit>
+
 
 
 			<!-- Partials/EventReservation/FormFieldsSub.html -->
@@ -1119,6 +1179,9 @@
 			<!-- Partials/Email/EventDetails.html -->
 			<trans-unit id="partials_email_details.eventDetails">
 				<source>Event Details</source>
+			</trans-unit>
+			<trans-unit id="partials_email_details.reservationReference">
+				<source>Reference</source>
 			</trans-unit>
 			<trans-unit id="partials_email_details.eventDate">
 				<source>When</source>
@@ -1255,6 +1318,12 @@
 			<trans-unit id="templates_email_confirmationReservationUser.cancelButton">
 				<source>Deregister from an event</source>
 			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyHeadline">
+				<source>Revocation policy</source>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyText">
+				<source>You may revoke this registration within 14 days after receiving this information. The relevant revocation policy can be found in the attached document.</source>
+			</trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
@@ -1308,7 +1377,7 @@
 				<source>Please find below the details of your canceled reservation.</source>
 			</trans-unit>
 			<trans-unit id="templates_email_deleteReservationUser.billing">
-				<source>Please note that a cancelation my involve further costs.</source>
+				<source>Please note that a cancelation might involve further costs.</source>
 			</trans-unit>
 
 
@@ -1318,6 +1387,42 @@
 			</trans-unit>
 			<trans-unit id="templates_email_deleteReservationAdmin.text1">
 				<source>a reservation has been canceled.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/RevocationReservationUser.html -->
+			<trans-unit id="rkwMailService.revocationReservationUser.subject">
+				<source>Submission of your revocation confirmed</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.headline">
+				<source>Hello %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.intro">
+				<source>You have successfully submitted your revocation as follows:</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.email">
+				<source>Email-address</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.message">
+				<source>Subject of revocation</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.outro">
+				<source>We will check your revocation and will get back to you as soon as possible.</source>
+			</trans-unit>
+
+
+			<!-- Templates/Email/RevocationReservationAdmin.html -->
+			<trans-unit id="rkwMailService.revocationReservationAdmin.subject">
+				<source>Revocation of an event reservation</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationAdmin.headline">
+				<source>Hello %s,</source>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationAdmin.text1">
+				<source>a reservation has been revoked.</source>
 			</trans-unit>
 
 
@@ -1400,6 +1505,9 @@
             <trans-unit id="tx_rkwevents_validator.workshop_required">
                 <source>Please choose at least one workshop.</source>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation_consent_required">
+				<source>Please confirm that you have read and understood our revocation policy.</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.remark">
 				<source>Remark</source>
 			</trans-unit>
@@ -1482,10 +1590,23 @@
 				<source>Last name (person 5)</source>
 			</trans-unit>
 
+			<!-- RevocationValidator -->
+			<trans-unit id="tx_rkwevents_validator.revocation.firstName">
+				<source>First name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.lastName">
+				<source>Last name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.email">
+				<source>Email address</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.message">
+				<source>Message</source>
+			</trans-unit>
+
 			<trans-unit id="tx_rkwevents_fluid.survey">
 				<source>Survey</source>
 			</trans-unit>
-
 
             <trans-unit id="evaluation.oops">
                 <source>Oops!</source>

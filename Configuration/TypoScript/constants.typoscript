@@ -47,6 +47,18 @@ plugin.tx_rkwevents {
         # cat=plugin.tx_rkwevents; type=integer; label=PID for terms and conditions (AGB)
         terms2Pid =
 
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for revocation information
+        revocationPid =
+
+        # cat=plugin.tx_rkwevents; type=integer; label=PID for revocation button
+        revocationButtonPid =
+
+        # cat=plugin.tx_rkwevents; type=string; label=Path to file with revocation policy
+        revocationPolicyFilepath =
+
+        # cat=plugin.tx_rkwevents; type=string; label=Email for revocation submissions.
+        revocationEmail =
+
         # cat=plugin.tx_rkwevents; type=integer; label=PID for list of events the user has registered for
         myEventsPid =
 
@@ -218,6 +230,10 @@ plugin.tx_rkwevents {
 
 			# cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for registration of additional persons. Comma separated lists with property names (e.g. salutation, firstName, lastName, address, zip, city, email)
 			eventReservationAdditionalPersons =
+
+            # cat=plugin.tx_rkwevents; type=string; label=Mandatory fields for revocation. Comma separated lists with property names (e.g. firstName,lastName,email,message)
+            revocation = firstName,lastName,email,message
+
 		}
 
 		mail {

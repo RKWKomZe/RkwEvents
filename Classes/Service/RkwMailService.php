@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -243,6 +244,161 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
     )
     {
         $this->adminMail($backendUser, $eventReservation, 'update');
+    }
+
+
+    /**
+     * Handles revocation mail for user
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Revocation $revocation
+     * @param string $action
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function sendRevocationUserMail(
+        \RKW\RkwEvents\Domain\Model\Revocation $revocation,
+        string $action = 'revocation'
+    )
+    {
+
+        // get settings
+        $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $settingsDefault = $this->getSettings();
+
+        $frontendUser = null;
+
+        // if no frontend user is assigned (e.g. anonymous reservation), create a dummy one for the mail service
+        // because userMail() expects a FrontendUser object
+        if (!$frontendUser instanceof \Madj2k\FeRegister\Domain\Model\FrontendUser) {
+            $frontendUser = GeneralUtility::makeInstance(\RKW\RkwEvents\Domain\Model\FrontendUser::class);
+            $frontendUser->setEmail($revocation->getEmail());
+            $frontendUser->setFirstName($revocation->getFirstName());
+            $frontendUser->setLastName($revocation->getLastName());
+            $frontendUser->setTxFeregisterLanguageKey('de');
+        }
+
+        if ($settings['view']['templateRootPaths']) {
+
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
+
+            $fullName = $revocation->getFirstName() . ' ' . $revocation->getLastName();
+
+            // send new user an email with token
+            $mailService->setTo($frontendUser, [
+                'marker' => [
+                    'revocation'                 => $revocation,
+                    'fullName'                   => $fullName,
+                ],
+            ]);
+
+            // set reply address
+            if ($settingsDefault['revocationEmail']) {
+                $mailService->getQueueMail()->setReplyToAddress($settingsDefault['revocationEmail']);
+            }
+
+            $mailService->getQueueMail()->setSubject(
+                LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
+                    'rkw_events',
+                    null,
+                    $frontendUser->getTxFeregisterLanguageKey()
+                ) ?? LocalizationUtility::translate(
+                'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
+                'rkw_events'
+            )
+            );
+
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationUser');
+
+            $mailService->send();
+
+        }
+
+    }
+
+
+    /**
+     * Handles revocation mail for admin
+     *
+     * @param \RKW\RkwEvents\Domain\Model\Revocation $revocation
+     * @param string $action
+     * @return void
+     * @throws \Madj2k\Postmaster\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function sendRevocationAdminMail(
+        \RKW\RkwEvents\Domain\Model\Revocation $revocation,
+        string $action = 'revocation'
+    )
+    {
+        // get settings
+        $settings = $this->getSettings(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $settingsDefault = $this->getSettings();
+
+        $revocationUser = null;
+
+        // if no frontend user is assigned (e.g. anonymous reservation), create a dummy one for the mail service
+        // because userMail() expects a FrontendUser object
+        if (!$revocationUser instanceof \RKW\RkwEvents\Domain\Model\BackendUser) {
+            $revocationUser = GeneralUtility::makeInstance(\RKW\RkwEvents\Domain\Model\BackendUser::class);
+            $revocationUser->setEmail($settingsDefault['revocationEmail']);
+        }
+
+        if ($settings['view']['templateRootPaths']) {
+
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+            $mailService = GeneralUtility::makeInstance(MailMessage::class);
+
+            // send new user an email with token
+            $mailService->setTo($revocationUser, [
+                'marker' => [
+                    'revocation'                 => $revocation,
+                    'language'                   => 'de'
+                ],
+            ]);
+
+            // set reply address
+            $mailService->getQueueMail()->setReplyToAddress($revocation->getEmail());
+
+            $mailService->getQueueMail()->setSubject(
+                LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
+                    'rkw_events',
+                    null,
+                    'de'
+                ) ?? LocalizationUtility::translate(
+                'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
+                'rkw_events'
+            )
+            );
+
+            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
+
+            $mailService->getQueueMail()->setPlaintextTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationAdmin');
+            $mailService->getQueueMail()->setHtmlTemplate('Email/' . ucfirst(strtolower($action)) . 'ReservationAdmin');
+
+            $mailService->send();
+
+        }
     }
 
 
@@ -764,8 +920,17 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'rkw_events',
                     null,
                     $frontendUser->getTxFeregisterLanguageKey()
+                ) ?? LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationUser.subject',
+                    'rkw_events'
                 )
             );
+
+            //  Attach revocation policy pdf
+            $filePath = GeneralUtility::getFileAbsFileName($settings['settings']['revocationPolicyFilepath']);
+            if ($filePath && file_exists($filePath)) {
+                $mailService->getQueueMail()->addAttachmentPath($filePath);
+            }
 
             $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
             $mailService->getQueueMail()->addPartialPaths($settings['view']['partialRootPaths']);
@@ -895,6 +1060,9 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'rkw_events',
                     null,
                     'de'
+                ) ?? LocalizationUtility::translate(
+                    'rkwMailService.' . strtolower($action) . 'ReservationAdmin.subject',
+                    'rkw_events'
                 )
             );
 

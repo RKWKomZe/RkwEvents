@@ -65,6 +65,12 @@ call_user_func(
 
         ExtensionUtility::registerPlugin(
             $extKey,
+            'Revocation',
+            'RKW Events: Widerruf'
+        );
+
+        ExtensionUtility::registerPlugin(
+            $extKey,
             'Myeventreservation',
             'RKW Events: Meine RKW Veranstaltungen'
         );

@@ -224,6 +224,25 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $targetGroup = null;
 
+    /**
+     * @var bool
+     */
+    protected $revocationConsent = false;
+
+
+    /**
+     * unique reservation reference number
+     *
+     * @var string
+     */
+    protected $reservationReference = '';
+
+
+    /**
+     * prefix for reservation reference
+     */
+    public const EVENTRESERVATION_PREFIX = 'EVT';
+
 
     /**
      * __construct
@@ -884,4 +903,39 @@ class EventReservation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->workshopRegister = $workshopRegister;
     }
+
+    /**
+     * @return bool
+     */
+    public function getRevocationConsent(): bool
+    {
+        return $this->revocationConsent;
+    }
+
+    /**
+     * @param bool $revocationConsent
+     * @return void
+     */
+    public function setRevocationConsent(bool $revocationConsent): void
+    {
+        $this->revocationConsent = $revocationConsent;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReservationReference(): string
+    {
+        return $this->reservationReference;
+    }
+
+    /**
+     * @param string $reservationReference
+     */
+    public function setReservationReference(string $reservationReference): void
+    {
+        $this->reservationReference = $reservationReference;
+    }
+
+
 }

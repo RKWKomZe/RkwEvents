@@ -103,6 +103,25 @@ class EventReservationRepository extends AbstractRepository
 
 
     /**
+     * @param string $bookingReference
+     * @param string $email
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findByBookingReferenceAndEmail(string $bookingReference, string $email): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
+        return $query->matching(
+            $query->logicalAnd(
+                $query->equals('reservationReference', $bookingReference),
+                $query->equals('email', $email)
+            )
+        )->execute();
+    }
+
+
+    /**
      * Find all events that have been updated recently
      *
      * @api Used by SOAP-API
@@ -125,6 +144,19 @@ class EventReservationRepository extends AbstractRepository
 
         return $query->execute();
         //===
+    }
+
+    /**
+     * @param string $prefix
+     * @return string
+     */
+    public function generateBookingReference(string $prefix = ''): string {
+        $randomString = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Crypto\Random::class
+        )->generateRandomHexString(8);
+
+        $randomString = strtoupper($randomString);
+        return $prefix . $randomString;
     }
 
 

@@ -542,6 +542,9 @@
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation">
 				<source>RKW Events: Reservation</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventreservation.reservation_reference" approved="yes">
+				<source>Reservation refernce</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventreservation.remark">
 				<source>Remark</source>
 			</trans-unit>
@@ -571,6 +574,9 @@
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.subscribe_newsletter" approved="yes">
                 <source>Subscribe newsletter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwevents_domain_model_eventreservation.revocation_consent" approved="yes">
+                <source>I have noticed the revocation policy</source>
             </trans-unit>
             <trans-unit id="tx_rkwevents_domain_model_eventreservation.workshop_register" approved="yes">
                 <source>Workshop register</source>
@@ -703,6 +709,9 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.registered_frontend_users" approved="yes">
 				<source>Registered FrontendUsers</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_domain_model_eventworkshop.workshop_register" approved="yes">
+				<source>Registered workshops</source>
 			</trans-unit>
 
 
