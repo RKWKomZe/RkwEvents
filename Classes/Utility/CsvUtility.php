@@ -80,6 +80,7 @@ class CsvUtility
     protected static function addReservationDataToCsv(Event $event, string $separator, int $maxAddPersons)
     {
         $reservationAllowedColumns = [
+            'reservationReference',
             'salutation',
             'firstName',
             'lastName',
@@ -92,7 +93,7 @@ class CsvUtility
             'mobile',
             'fax',
             'email',
-            'remark',
+            'remark'
         ];
 
         $headings = [];
@@ -260,6 +261,7 @@ class CsvUtility
                 'RkwEvents'
             );
         }
+
         return $value;
     }
 

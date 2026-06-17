@@ -112,6 +112,18 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
+            'Revocation',
+            [
+                'Revocation' => 'new, create'
+            ],
+            // non-cacheable actions
+            [
+                'Revocation' => 'new, create'
+            ]
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
             'Myeventreservation',
             [
                 'Event' => 'myEvents'

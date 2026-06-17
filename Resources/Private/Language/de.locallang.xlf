@@ -1232,8 +1232,6 @@
 				<target>Zurück zur Liste</target>
 			</trans-unit>
 
-
-
 			<!-- Partials/EventReservation/ButtonSet.html -->
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.back">
 				<source>Back</source>
@@ -1246,6 +1244,14 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register">
 				<source>Register now</source>
 				<target>Jetzt anmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.free">
+				<source>Order now</source>
+				<target>Kostenlos anmelden</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.register.paid">
+				<source>Order now</source>
+				<target>Kostenpflichtig anmelden</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_buttonSet.edit">
 				<source>Edit now</source>
@@ -1297,6 +1303,18 @@
 			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.marketingHint.thirdPart">
 				<source>taking effect for the future.</source>
 				<target>widerrufen werden.</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partOne">
+				<source>I have noticed the</source>
+				<target>Ich habe die</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partTwo">
+				<source>revocation policy</source>
+				<target>Widerrufsbelehrung</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.partials_eventReservation_formFieldsMaster.revocationConsent.partThree">
+				<source>.</source>
+				<target>zur Kenntnis genommen. Diese gilt ausschließlich für Verbraucher im Sinne des § 13 BGB.</target>
 			</trans-unit>
 
 
@@ -1441,6 +1459,10 @@
 				<source>Event Details</source>
 				<target>Details zur Veranstaltung</target>
 			</trans-unit>
+			<trans-unit id="partials_email_details.reservationReference">
+				<source>Reference</source>
+				<target>Referenz</target>
+			</trans-unit>
 			<trans-unit id="partials_email_details.eventDate">
 				<source>When</source>
 				<target>Wann</target>
@@ -1526,7 +1548,7 @@
 				<target>p.P.</target>
 			</trans-unit>
             <trans-unit id="partials_email_details.eventAccessLink">
-                <source>Direct Link</source>
+                <source>Link to join online meeting</source>
                 <target>Direktlink für Teilnahme an der Veranstaltung</target>
             </trans-unit>
             <trans-unit id="partials_email_details.privacyHint" approved="no">
@@ -1630,6 +1652,14 @@
 				<source>Deregister from an event</source>
 				<target>Von Veranstaltung abmelden</target>
 			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyHeadline">
+				<source>Revocation policy</source>
+				<target>Widerruf</target>
+			</trans-unit>
+			<trans-unit id="templates_email_confirmationReservationUser.revocationPolicyText">
+				<source>You may revoke this registration within 14 days after receiving this information. The relevant revocation policy can be found in the attached document.</source>
+				<target>Die beigefügte Widerrufsbelehrung gilt ausschließlich für Verbraucher im Sinne des § 13 BGB. Soweit Ihnen als Verbraucher ein gesetzliches Widerrufsrecht zusteht, finden Sie die Einzelheiten im beigefügten Dokument. Unternehmern im Sinne des § 14 BGB steht kein gesetzliches Widerrufsrecht zu.</target>
+			</trans-unit>
 
 
 			<!-- Templates/Email/ConfirmationReservationAdmin.html -->
@@ -1712,6 +1742,109 @@
 			</trans-unit>
 
 
+			<!-- Revocation -->
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.header">
+				<source>Submit revocation</source>
+				<target>Vertrag widerrufen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.intro">
+				<source>Revocate your contract</source>
+				<target><![CDATA[Sie möchten Ihre Buchung widerrufen? Dann füllen Sie bitte das nachfolgende Formular aus. Diese Angaben helfen uns, den Vorgang schnell und korrekt zu prüfen. Mit Absenden des Formulars erhalten Sie umgehend eine E-Mail mit einer Empfangsbestätigung. Nach Abschluss unserer Prüfung senden wir Ihnen eine Nachricht mit dem Ergebnis.<br/><br/>Bitte fügen Sie im Feld "Was möchte ich widerrufen?" weitere Informationen wie zum Beispiel die Reservierungsreferenz, Titel, Ort und Datum der Veranstaltung ein, so dass wir den Vertragsgegenstand zuordnen können. Bitte geben Sie aber aus Gründen des Datenschutzes keine besonderen Kategorien personenbezogener Daten oder sonstige nicht erforderliche Informationen ein.]]></target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.firstName">
+				<source>First name</source>
+				<target>Vorname</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.lastName">
+				<source>Last name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.email">
+				<source>E-mail address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message">
+				<source>What do you want withdraw?</source>
+				<target>Was möchten Sie widerrufen?</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.message.placeholder">
+				<source>What do you want withdraw?</source>
+				<target>Bitte geben Sie die Reservierungsreferenz, den Veranstaltungstitel oder eine Beschreibung der Veranstaltung an ...</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.new.submit">
+				<source>Submit revocation</source>
+				<target>Widerruf bestätigen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.header">
+				<source>Revocation successfully submitted</source>
+				<target>Widerruf erfolgreich eingereicht</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_fluid.revocation.create.message">
+				<source>Your revocation has been submitted successfully. You will receive a confirmation of your submission via e-mail.</source>
+				<target>Ihr Widerruf wurde erfolgreich eingereicht und wird von uns bearbeitet. Sie erhalten in Kürze eine Eingangsbestätigung per E-Mail.</target>
+			</trans-unit>
+
+			<!-- Templates/Email/RevocationReservationUser.html -->
+			<trans-unit id="rkwMailService.revocationReservationUser.subject">
+				<source>Submission of your revocation confirmed</source>
+				<target>Eingangsbestätigung Ihres Widerrufs</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.intro">
+				<source>You have successfully submitted your revocation as follows:</source>
+				<target>Sie haben Ihren Widerruf mit den folgenden Angaben erfolgreich übermittelt:</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.email">
+				<source>Email-address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.message">
+				<source>Subject of revocation</source>
+				<target>Gegenstand des Widerrrufs</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationUser.outro">
+				<source>We will check your revocation and will get back to you as soon as possible.</source>
+				<target>Wir prüfen Ihren Widerruf und nach Abschluss der Prüfung erhalten Sie eine Nachricht mit dem Ergebnis.</target>
+			</trans-unit>
+
+			<!-- Templates/Email/RevocationReservationAdmin.html -->
+			<trans-unit id="rkwMailService.revocationReservationAdmin.subject">
+				<source>Revocation of an event reservation</source>
+				<target>Widerruf einer Veranstaltungsanmeldung</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationReservationAdmin.headline">
+				<source>Hello %s,</source>
+				<target>Hallo %s,</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.intro">
+				<source>a reservation has been revoked.</source>
+				<target>jemand hat seine Anmeldung an einer Veranstaltung widerrufen.</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.email">
+				<source>Email-address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.message">
+				<source>Subject of revocation</source>
+				<target>Gegenstand des Widerrrufs</target>
+			</trans-unit>
+			<trans-unit id="templates_email_revocationRevocationAdmin.outro">
+				<source>Please check this revocation and get back to the user as soon as possible.</source>
+				<target>Bitte prüfen Sie den Widerruf und senden Sie der widerrufenden Person nach Abschluss der Prüfung eine Nachricht mit dem Ergebnis.</target>
+			</trans-unit>
+
+
 			<!-- Templates/Email/InformUpcomingEventUser.html -->
 			<trans-unit id="templates_email_informUpcomingEventUser.headline">
 				<source>Hello %s %s,</source>
@@ -1750,7 +1883,7 @@
 				<target>Loggen Sie sich hier ein, um Ihre Anmeldung zu löschen oder zu ändern.</target>
 			</trans-unit>
 			<trans-unit id="templates_email_informUpcomingEventUser.eventAccessLink">
-                <source>Direct Link</source>
+                <source>Link to join online meeting</source>
                 <target>Direktlink für Teilnahme an der Veranstaltung</target>
             </trans-unit>
 
@@ -1815,6 +1948,10 @@
                 <source>Please choose at least one workshop.</source>
                 <target>Es muss mindestens ein Workshop ausgewählt werden.</target>
             </trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation_consent_required">
+				<source>Please confirm that you have read and understood our revocation policy.</source>
+				<target>Bitte bestätigen Sie, dass Sie unsere Widerrufsbelehrung gelesen und verstanden haben.</target>
+			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.remark">
 				<source>Remark</source>
 				<target>Anmerkung</target>
@@ -1922,6 +2059,25 @@
 			<trans-unit id="tx_rkwevents_validator.additional_lastName_3" approved="no">
 				<source>Last name (person 5)</source>
 				<target phase-name="approval-1" state="final">Nachname (Teilnehmende 5)</target>
+			</trans-unit>
+
+
+			<!-- RevocationValidator -->
+			<trans-unit id="tx_rkwevents_validator.revocation.firstName">
+				<source>First name</source>
+				<target>Vorname</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.lastName">
+				<source>Last name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.email">
+				<source>Email address</source>
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwevents_validator.revocation.message">
+				<source>Message</source>
+				<target>Was möchten Sie widerrufen?</target>
 			</trans-unit>
 
 

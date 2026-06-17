@@ -1,0 +1,66 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+    <h2><f:translate key='tx_rkwevents_fluid.revocation.new.header' /></h2>
+    <p><f:format.raw><f:translate key="tx_rkwevents_fluid.revocation.new.intro" /></f:format.raw></p>
+
+    <f:render partial="FlashMessages" arguments="{_all}" />
+    <f:render partial="FormErrors" arguments="{object:Event}" />
+
+    <f:form enctype="multipart/form-data" action="create" name="newRevocation" object="{newRevocation}">
+        <div class="flex-container">
+            <div class="form flex flex-basis-8 full-width-medium space-between">
+                <div class="form__field width50">
+                    <label class="form-label" for="firstName">
+                        <f:translate key="tx_rkwevents_fluid.revocation.new.firstName" />
+                        <f:render partial="LabelSuffix" arguments="{field: 'firstName', mandatoryFields: settings.mandatoryFields.revocation}" />
+                    </label>
+                    <f:form.textfield
+                        id="firstName"
+                        property="firstName"
+                    />
+                </div>
+
+                <div class="form__field width50">
+                    <label class="form-label" for="lastName">
+                        <f:translate key="tx_rkwevents_fluid.revocation.new.lastName" />
+                        <f:render partial="LabelSuffix" arguments="{field: 'lastName', mandatoryFields: settings.mandatoryFields.revocation}" />
+                    </label>
+                    <f:form.textfield
+                        id="lastName"
+                        property="lastName"
+                    />
+                </div>
+
+                <div class="form__field width50 break-after">
+                    <label class="form-label" for="email">
+                        <f:translate key="tx_rkwevents_fluid.revocation.new.email" />
+                        <f:render partial="LabelSuffix" arguments="{field: 'email', mandatoryFields: settings.mandatoryFields.revocation}" />
+                    </label>
+                    <f:form.textfield
+                        id="email"
+                        property="email"
+                    />
+                </div>
+
+                <div class="form__field width100">
+                    <label class="form-label" for="message">
+                        <f:translate key="tx_rkwevents_fluid.revocation.new.message" />
+                        <f:render partial="LabelSuffix" arguments="{field: 'message', mandatoryFields: settings.mandatoryFields.revocation}" />
+                    </label>
+                    <f:form.textarea
+                        id="message"
+                        property="message"
+                        placeholder="<f:translate key='tx_rkwevents_fluid.revocation.new.message.placeholder' />"
+                    />
+                </div>
+
+                <div class="btn-list btn-list--footer">
+                    <button type="submit" class="btn btn--primary">
+                        <f:translate key="tx_rkwevents_fluid.revocation.new.submit" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </f:form>
+</f:section>

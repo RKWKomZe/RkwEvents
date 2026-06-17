@@ -4,8 +4,9 @@ return [
         //'adminOnly' => 1,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation',
         'label' => 'last_name',
-        'label_alt' => 'first_name',
-        'label_alt_force' => true,
+		'label_alt' => 'first_name, event',
+		'label_alt_force' => true,
+        'label_userFunc' => \RKW\RkwEvents\UserFunctions\TcaLabel::class . '->reservationLabel',
         'default_sortby' => 'ORDER BY last_name ASC',
         'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -15,11 +16,11 @@ return [
 		'delete' => 'deleted',
 		'enablecolumns' => [
 		],
-		'searchFields' => 'event,remark,add_person,fe_user,salutation,first_name,last_name,company,company_role,address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner,participate_meeting,subscribe_newsletter,custom_field,cancel_reg_hash',
+		'searchFields' => 'event,remark,add_person,fe_user,reservation_reference, salutation,first_name,last_name,company,company_role,address,zip,city,phone,mobile,email,server_host,show_pid,participate_dinner,participate_meeting,subscribe_newsletter,revocation_consent,custom_field,cancel_reg_hash',
 		'iconfile' => 'EXT:rkw_events/Resources/Public/Icons/tx_rkwevents_domain_model_eventreservation.gif'
 	],
 	'types' => [
-		'1' => ['showitem' => 'event, fe_user, salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, subscribe_newsletter, custom_field, cancel_reg_hash, workshop_register'],
+		'1' => ['showitem' => 'event, fe_user, reservation_reference, salutation, first_name, last_name, company, company_role, address, zip, city, phone, mobile, email, remark, add_person, server_host, show_pid, participate_dinner, participate_meeting, subscribe_newsletter, revocation_consent, custom_field, cancel_reg_hash, workshop_register'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -88,7 +89,17 @@ return [
                 'readOnly' => true
             ],
         ],
-		'salutation' => [
+        'reservation_reference' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.reservation_reference',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim, required',
+				'readOnly' => 1,
+            ],
+        ],
+        'salutation' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservationaddress.salutation',
 			'config' => [
@@ -238,6 +249,14 @@ return [
             'config' => [
                 'type' => 'check',
                 'default' => 0
+            ],
+        ],
+        'revocation_consent' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_eventreservation.revocation_consent',
+            'config' => [
+                'type' => 'check',
+                'default' => 0,
             ],
         ],
         'subscribe_newsletter' => [
