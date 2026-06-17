@@ -1749,7 +1749,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.revocation.new.intro">
 				<source>Revocate your contract</source>
-				<target><![CDATA[Mit diesem Formular können Sie innerhalb von 14 Tagen nach Vertragsschluss Ihren Widerruf ohne Angabe von Gründen einreichen. Nach dem erfolgreichen Absenden des Formulars erhalten Sie umgehend eine E-Mail mit einer Empfangsbestätigung. Anschließend wird Ihr Anliegen von uns geprüft und nach Abschluss der Prüfung senden wir Ihnen eine Nachricht mit dem Ergebnis.<br/><br/>Bitte fügen Sie im Feld "Was möchte ich widerrufen?" weitere Informationen wie die Reservierungsreferenz, Ort und Datum der Veranstaltung ein, so dass wir den Vertragsgegenstand zuordnen können. Bitte geben Sie aber aus Gründen des Datenschutzes keine besonderen Kategorien personenbezogener Daten oder sonstige nicht erforderliche Informationen ein.]]></target>
+				<target><![CDATA[Sie möchten Ihre Buchung widerrufen? Dann füllen Sie bitte das nachfolgende Formular aus. Diese Angaben helfen uns, den Vorgang schnell und korrekt zu prüfen. Mit Absenden des Formulars erhalten Sie umgehend eine E-Mail mit einer Empfangsbestätigung. Nach Abschluss unserer Prüfung senden wir Ihnen eine Nachricht mit dem Ergebnis.<br/><br/>Bitte fügen Sie im Feld "Was möchte ich widerrufen?" weitere Informationen wie zum Beispiel die Reservierungsreferenz, Titel, Ort und Datum der Veranstaltung ein, so dass wir den Vertragsgegenstand zuordnen können. Bitte geben Sie aber aus Gründen des Datenschutzes keine besonderen Kategorien personenbezogener Daten oder sonstige nicht erforderliche Informationen ein.]]></target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.revocation.new.firstName">
 				<source>First name</source>
@@ -1773,7 +1773,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.revocation.new.submit">
 				<source>Submit revocation</source>
-				<target>Vertrag widerrufen</target>
+				<target>Widerruf bestätigen</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.revocation.create.header">
 				<source>Revocation successfully submitted</source>
@@ -1781,7 +1781,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_fluid.revocation.create.message">
 				<source>Your revocation has been submitted successfully. You will receive a confirmation of your submission via e-mail.</source>
-				<target>Ihr Widerruf wurde erfolgreich eingereicht. Sie erhalten in Kürze eine Eingangsbestätigung per E-Mail.</target>
+				<target>Ihr Widerruf wurde erfolgreich eingereicht und wird von uns bearbeitet. Sie erhalten in Kürze eine Eingangsbestätigung per E-Mail.</target>
 			</trans-unit>
 
 			<!-- Templates/Email/RevocationReservationUser.html -->
