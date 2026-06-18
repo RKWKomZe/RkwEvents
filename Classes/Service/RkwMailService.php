@@ -892,7 +892,8 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
                     'currentTime'  => time(),
                     'surveyPid'    => intval($settingsDefault['surveyPid']),
                     'showNewsletterCheckbox'        => intval($settingsDefault['showNewsletterCheckbox']),
-                    'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin
+                    'isStandaloneRegisterPlugin'    => $isStandaloneRegisterPlugin,
+                    'revocationPid'    => intval($settingsDefault['revocationPid']),
                 ],
             ]);
 
@@ -927,9 +928,11 @@ class RkwMailService implements \TYPO3\CMS\Core\SingletonInterface
             );
 
             //  Attach revocation policy pdf
-            $filePath = GeneralUtility::getFileAbsFileName($settings['settings']['revocationPolicyFilepath']);
-            if ($filePath && file_exists($filePath)) {
-                $mailService->getQueueMail()->addAttachmentPath($filePath);
+            if ($settings['settings']['revocationPid'] && $settings['settings']['revocationPolicyFilepath']) {
+                $filePath = GeneralUtility::getFileAbsFileName($settings['settings']['revocationPolicyFilepath']);
+                if ($filePath && file_exists($filePath)) {
+                    $mailService->getQueueMail()->addAttachmentPath($filePath);
+                }
             }
 
             $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
