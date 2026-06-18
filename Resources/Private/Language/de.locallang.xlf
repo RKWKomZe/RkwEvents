@@ -1950,7 +1950,7 @@
             </trans-unit>
 			<trans-unit id="tx_rkwevents_validator.revocation_consent_required">
 				<source>Please confirm that you have read and understood our revocation policy.</source>
-				<target>Bitte bestätigen Sie, dass Sie unsere Widerrufsbelehrung gelesen und verstanden haben.</target>
+				<target>Bitte bestätigen Sie, dass Sie unsere Widerrufsbelehrung zur Kenntnis genommen haben.</target>
 			</trans-unit>
 			<trans-unit id="tx_rkwevents_validator.remark">
 				<source>Remark</source>
