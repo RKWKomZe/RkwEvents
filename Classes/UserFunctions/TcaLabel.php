@@ -137,159 +137,56 @@ class TcaLabel
      */
     public function eventTitle(&$parameters, $parentObject): void
     {
-        $eventUid = $parameters['row']['uid'];
 
-        /*
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $eventRepository = $objectManager->get(EventRepository::class);
+        $row = $parameters['row'];
+        $eventUid = $row['uid'];
 
-        $event = $eventRepository->findByIdentifier($eventUid);
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_rkwevents_domain_model_event');
 
-        if ($event instanceof Event) {
+        $eventData = $queryBuilder
+            ->select('e.start', 'p.city', 's.title')
+            ->from('tx_rkwevents_domain_model_event', 'e')
+            ->leftJoin(
+                'e',
+                'tx_rkwevents_domain_model_eventplace',
+                'p',
+                $queryBuilder->expr()->eq('e.place', $queryBuilder->quoteIdentifier('p.uid'))
+            )
+            ->leftJoin(
+                'e',
+                'tx_rkwevents_domain_model_eventseries',
+                's',
+                $queryBuilder->expr()->eq('e.series', $queryBuilder->quoteIdentifier('s.uid'))
+            )
+            ->where(
+                $queryBuilder->expr()->eq('e.uid', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT))
+            )
+            ->execute()
+            ->fetchAssociative();
 
+        if ($eventData) {
             $eventTitle = [];
 
-            // if startDate is set? (be aware of announcements)
-            if ($event->getStart() > 0) {
-                $eventTitle[] = date("Y-m-d H:i", $event->getStart());
+            // Datum hinzufügen
+            if ($eventData['start'] > 0) {
+                $eventTitle[] = date("d.m.Y H:i", (int)$eventData['start']);
             }
 
-            // is place already set, unknown, or an online event?
-            if (
-                $event->getPlace() instanceof EventPlace
-                && $event->getPlace()->getName()
-                && $event->getPlace()->getCity()
-            ) {
-                //$eventTitle[] = $event->getPlace()->getName() . ', ' . $event->getPlace()->getCity();
-                $eventTitle[] = $event->getPlace()->getCity();
-            } elseif ($event->getOnlineEvent()) {
-                // @toDo: Does we need this?
-                //$eventTitle[] = 'Online Event';
+            // Ort (Stadt) hinzufügen
+            if (!empty($eventData['city'])) {
+                $eventTitle[] = $eventData['city'];
             }
 
-            // Set title
-            // prevent issues for new records (which are not persistent and having no EventSeries relation yet)
-            if ($event->getSeries() instanceof EventSeries) {
-                $eventTitle[] = $event->getSeries()->getTitle();
+            // Serientitel hinzufügen
+            if (!empty($eventData['title'])) {
+                $eventTitle[] = $eventData['title'];
             }
 
-
-
-            // assemble title only if there is something inside the array. Otherwise, do nothing.
             if (count($eventTitle)) {
                 $parameters['title'] = implode('; ', $eventTitle);
             }
         }
-        */
-
-
-        // Alternative solution: Three DB-Queries with minimalistic output
-        // (seems to be faster)
-        $eventRecord = [];
-        $placeRecord = [];
-        $seriesRecord = [];
-
-        // 1. Get event
-        $tableName = 'tx_rkwevents_domain_model_event';
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
-        $result = $queryBuilder
-            ->select('uid', 'place', 'series', 'start')
-            ->from($tableName)
-            ->where(
-                $queryBuilder->expr()->eq(
-                    'uid',
-                    $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT)
-                ),
-            )
-            ->execute();
-
-        while ($event = $result->fetchAssociative()) {
-            $eventRecord = $event;
-        }
-
-        // 2. Get place
-        if (key_exists('place', $eventRecord)) {
-
-            $tableName = 'tx_rkwevents_domain_model_eventplace';
-            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
-            $result = $queryBuilder
-                ->select('uid', 'name', 'city')
-                ->from($tableName)
-                ->where(
-                    $queryBuilder->expr()->eq(
-                        'uid',
-                        $queryBuilder->createNamedParameter($eventRecord['place'], \PDO::PARAM_INT)
-                    ),
-                )
-                ->execute();
-
-            while ($eventPlace = $result->fetchAssociative()) {
-                $placeRecord = $eventPlace;
-            }
-        }
-
-        // 3. Get series (for title)
-        if (key_exists('series', $eventRecord)) {
-
-            $tableName = 'tx_rkwevents_domain_model_eventseries';
-            $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($tableName);
-            $result = $queryBuilder
-                ->select('uid', 'title')
-                ->from($tableName)
-                ->where(
-                    $queryBuilder->expr()->eq(
-                        'uid',
-                        $queryBuilder->createNamedParameter($eventRecord['series'], \PDO::PARAM_INT)
-                    ),
-                )
-                ->execute();
-
-            while ($eventSeries = $result->fetchAssociative()) {
-                $seriesRecord = $eventSeries;
-            }
-        }
-
-
-        $eventTitle = [];
-
-        // if startDate is set? (be aware of announcements)
-        if ($eventRecord['start'] > 0) {
-            $eventTitle[] = date("Y-m-d H:i", $eventRecord['start']);
-        }
-
-        // is place already set, unknown, or an online event?
-        if (!empty($placeRecord['city'])) {
-            $eventTitle[] = $placeRecord['city'];
-        }
-
-        // Set title
-        // prevent issues for new records (which are not persistent and having no EventSeries relation yet)
-        if (!empty($seriesRecord['title'])) {
-            $eventTitle[] = $seriesRecord['title'];
-        }
-
-        // assemble title only if there is something inside the array. Otherwise, do nothing.
-        if (count($eventTitle)) {
-            $parameters['title'] = implode('; ', $eventTitle);
-        }
-
     }
 
-    /**
-     * Returns the label for a reservation, including revocation status
-     *
-     * @param array $parameters
-     * @param object $parentObject
-     */
-    public function reservationLabel(array &$parameters, $parentObject): void
-    {
-        $row = $parameters['row'];
-        $label = $row['last_name'] . ', ' . $row['first_name'];
-
-        if (!empty($row['reservation_reference'])) {
-            $label .= ' [' . $row['reservation_reference'] . ']';
-        }
-
-        $parameters['title'] = $label;
-    }
 }
