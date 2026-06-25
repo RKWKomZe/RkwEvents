@@ -5,10 +5,6 @@ return [
         'hideTable' => 1,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event',
         'label' => 'start',
-        'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventTitle',
-        // "label_alt" with "title" is also possible instead of using "label_userFunc" (but shows only the "slug")
-        //'label_alt' => 'title, place',
-        //'label_alt_force' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
