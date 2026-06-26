@@ -47,6 +47,10 @@ class NotFinishedEventsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
         /** @var \RKW\RkwEvents\Domain\Model\Event $event */
         $event = $this->arguments['event'];
 
+        if (!$event instanceof \RKW\RkwEvents\Domain\Model\Event) {
+            return false;
+        }
+
         // by Fäßler: Use startdate, if there is no end date set
         $date = $event->getEnd() ? $event->getEnd() : $event->getStart();
 
