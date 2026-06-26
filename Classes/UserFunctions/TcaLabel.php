@@ -173,14 +173,14 @@ class TcaLabel
                 $eventTitle[] = date("d.m.Y H:i", (int)$eventData['start']);
             }
 
-            // Ort (Stadt) hinzufügen
-            if (!empty($eventData['city'])) {
-                $eventTitle[] = $eventData['city'];
-            }
-
             // Serientitel hinzufügen
             if (!empty($eventData['title'])) {
                 $eventTitle[] = $eventData['title'];
+            }
+
+            // Ort (Stadt) hinzufügen
+            if (!empty($eventData['city'])) {
+                $eventTitle[] = $eventData['city'];
             }
 
             if (count($eventTitle)) {
