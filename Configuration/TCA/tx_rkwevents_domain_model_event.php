@@ -5,6 +5,7 @@ return [
         'hideTable' => 1,
         'title'	=> 'LLL:EXT:rkw_events/Resources/Private/Language/locallang_db.xlf:tx_rkwevents_domain_model_event',
         'label' => 'start',
+        'label_userFunc' => RKW\RkwEvents\UserFunctions\TcaLabel::class . '->eventTitle',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
