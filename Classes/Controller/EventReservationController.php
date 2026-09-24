@@ -1216,12 +1216,16 @@ class EventReservationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
                     $this->eventReservationRepository->remove($eventReservation);
                     $this->persistenceManager->persistAll();
 
-                    // 2.2 send final confirmation mail to user
-                    $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, [$feUser, $eventReservation]);
+                    // Check, if event exists and is in the future
+                    if (
+                        $eventReservation->getEvent()
+                        && ($eventReservation->getEvent()->getStart() > time())
+                    ) {
+                        // 2.2 send final confirmation mail to user
+                        $this->signalSlotDispatcher->dispatch(__CLASS__, self::SIGNAL_AFTER_RESERVATION_DELETE_USER, [$feUser, $eventReservation]);
 
-                    // 3. send information mail to be-users
-                    $adminMails = [];
-                    if ($eventReservation->getEvent()) {
+                        // 3. send information mail to be-users
+                        $adminMails = [];
                         if ($beUsers = $eventReservation->getEvent()->getBeUser()) {
                             /** @var \RKW\RkwEvents\Domain\Model\BackendUser $beUser */
                             foreach ($beUsers as $beUser) {
